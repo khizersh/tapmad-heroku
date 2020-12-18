@@ -13,7 +13,6 @@ export default function Home(props) {
     <div>
     <Head>
       <title>Tapmad</title>
-      <link rel="icon" href="/favicon.ico" />
     </Head>
     <HomePage {...props} />
   </div>
