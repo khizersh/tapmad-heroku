@@ -1,0 +1,42 @@
+@import "../theming.scss";
+
+body {
+  background: black;
+  color: white;
+}
+.logo {
+  position: fixed;
+  padding: 0.5rem 0rem;
+  z-index: 2;
+  box-shadow: inset 22px 64px 40px -29px black;
+}
+.movies-images img {
+  border-radius: 6px;
+}
+.slick-next {
+  right: 1.125rem;
+  z-index: 5;
+}
+.slick-prev {
+  left: 5px;
+  z-index: 5;
+}
+.slick-disabled {
+  display: none !important;
+}
+.slick-next::before {
+  font-family: "fontAwesome";
+  content: "\f105";
+  border-radius: 30px;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #fff;
+  padding: 6px 13px;
+  background: #121117;
+}
+.slick-prev:before {
+  font-family: "fontAwesome";
+  content: "\f104";
+  border-radius: 30px;
+}
