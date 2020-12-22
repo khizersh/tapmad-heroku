@@ -1,8 +1,11 @@
-const withPwa = require('next-pwa')
+const withPWA = require('next-pwa')
 
-module.exports = withPwa({
-    pwa:{
-        dest:'public',
-        register:true
-    }
+module.exports = withPWA({
+  pwa: {
+    disable: false,
+    register: true,
+    scope: '/',
+    sw: '/sw.js',
+
+  }
 })
