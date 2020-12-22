@@ -11,27 +11,27 @@
 	"orientation": "any",
 	"icons": [
 	 {
-	  "src": "./icons/android-icon-192x192-dunplab-manifest-24222.png",
+	  "src": "/android-icon-192x192-dunplab-manifest-24222.png",
 	  "type": "image/png",
 	  "sizes": "192x192"
 	 },
 	 {
-	  "src": "./icons/apple-icon-180x180-dunplab-manifest-24222.png",
+	  "src": "/apple-icon-180x180-dunplab-manifest-24222.png",
 	  "type": "image/png",
 	  "sizes": "180x180"
 	 },
 	 {
-	  "src": "./icons/apple-icon-152x152-dunplab-manifest-24222.png",
+	  "src": "/apple-icon-152x152-dunplab-manifest-24222.png",
 	  "type": "image/png",
 	  "sizes": "152x152"
 	 },
 	 {
-	  "src": "./icons/apple-icon-144x144-dunplab-manifest-24222.png",
+	  "src": "/apple-icon-144x144-dunplab-manifest-24222.png",
 	  "type": "image/png",
 	  "sizes": "144x144"
 	 },
 	 {
-	  "src": "./icons/apple-icon-120x120-dunplab-manifest-24222.png",
+	  "src": "/apple-icon-120x120-dunplab-manifest-24222.png",
 	  "type": "image/png",
 	  "sizes": "120x120"
 	 },
