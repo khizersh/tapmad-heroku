@@ -1,8 +1,21 @@
 import "../styles/globals.scss";
 import Head from "next/head";
 import Header from "../components/Header";
+import React from "react";
+import { Workbox } from "workbox-window";
 
 function MyApp({ Component, pageProps }) {
+  React.useEffect(() => {
+    if (
+      !("serviceWorker" in navigator) ||
+      process.env.NODE_ENV !== "production"
+    ) {
+      console.warn("Progressive Web App support is disabled");
+      return;
+    }
+    const wb = new Workbox("sw.js", { scope: "/" });
+    wb.register();
+  }, []);
   return (
     <>
       <Head>
@@ -18,7 +31,6 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <>
         <Header />
-      
         <Component {...pageProps} />
       </>
     </>

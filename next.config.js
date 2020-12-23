@@ -1,10 +1,11 @@
-const isProd = process.env.NODE_ENV === "production";
+const withWorkbox = require("next-with-workbox");
 
-const withPWA = require("next-pwa");
-
-module.exports = withPWA({
-  pwa: {
-    disable: !isProd,
-    dest: "public"
+module.exports = withWorkbox({
+  workbox: {
+    dest: "public",
+    swDest: "sw.js",
+    swSrc: "worker.js",
+    force: true,
+    maximumFileSizeToCacheInBytes: 50000000
   }
 });
