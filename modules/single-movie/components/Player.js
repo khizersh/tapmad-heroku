@@ -5,7 +5,7 @@ import ReactJWPlayer from "react-jw-player";
 
 export default function Player({ movie }) {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [adDuration, setAdDuration] = useState(300000);
+  const [adDuration, setAdDuration] = useState(30000);
   function onRestartAd() {
     setIsAutoPlay(false);
     setTimeout(() => {
@@ -40,7 +40,7 @@ export default function Player({ movie }) {
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
                   generatePrerollUrl={() =>
-                    "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Tapmad_320x50_HP_Android_App/MastHead_Video_Andoid&description_url=%5Bplaceholder%5D&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=1"
+                    "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
                   }
                   customProps={{
                     controls: true,
@@ -98,14 +98,9 @@ export default function Player({ movie }) {
                       ? movie.Video.VideoStreamUrlLQ
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
-                  // file={
-                  //   movie && movie.Video
-                  //     ? movie.Video.VideoStreamUrlLQ
-                  //     : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
-                  // }
                   onAdComplete={onRestartAd}
                   generatePrerollUrl={() =>
-                    "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/MREC_Video_Popup&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com&vpos=preroll"
+                    "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
                   }
                   customProps={{
                     controls: true,

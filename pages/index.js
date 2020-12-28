@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
 import HomePage from "../modules/home/components/HomePage";
+import { get } from "../services/http-service";
 
 export default function Home(props) {
   return (
@@ -16,17 +17,18 @@ export default function Home(props) {
   );
 }
 export async function getStaticProps() {
-  var movieList = await fetch(
-    "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16",
-    {
-      credentials: "include",
-      redirect: "follow",
-    }
+  var movieList = await get(
+    "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16"
   );
-  var movie = await movieList.json();
+  var bannersList = await get(
+    "https://api.tapmad.com/api/getFeaturedBannerDetail"
+  );
+  var movie = await movieList.data;
+  var banner = await bannersList.data;
   return {
     props: {
       movies: movie.Tabs[0].Sections,
+      banner: banner,
     },
   };
 }

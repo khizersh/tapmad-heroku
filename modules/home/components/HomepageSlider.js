@@ -1,61 +1,22 @@
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
+import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
-  var settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 8,
-    slidesToScroll: 8,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 8,
-          slidesToScroll: 8
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          arrows: false
-        }
-      }
-    ]
-  };
-  function handleClick(event) {
-    let cleanName = event.VideoName.split(" ")
-      .join("-")
-      .toLowerCase();
-    let slug = `/watch/live/${cleanName}/${event.VideoEntityId}${
-      event.IsVideoChannel ? "1" : "0"
-    }`;
-    return slug;
-  }
+  var settings = basicSliderConfig(8);
   return (
     <div>
       {movies &&
         movies.map((movieSection, index) => {
           return (
             <div className="col-12 p-lg-1 p-0" key={index}>
-              <h5 className="my-3">{movieSection.SectionName}</h5>
+              <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
               <div>
                 <Slider {...settings}>
                   {movieSection && !movieSection.IsCategories
                     ? movieSection.Videos.map((e, index) => {
-                        let slug = handleClick(e);
+                        let slug = SEOFriendlySlugs(e, "live");
                         return (
                           <div className="pr-2" key={index}>
                             <Link href={slug} key={index}>
@@ -70,7 +31,7 @@ const HomepageSlider = ({ movies }) => {
                         );
                       })
                     : movieSection.Categories.map((e, index) => {
-                        let slug = handleClick(e);
+                        let slug = SEOFriendlySlugs(e, "season");
                         return (
                           <div className="pr-2" key={index}>
                             <Link href={slug} key={index}>

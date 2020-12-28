@@ -6,6 +6,6 @@ module.exports = withWorkbox({
     swDest: "sw.js",
     swSrc: "worker.js",
     force: true,
-    maximumFileSizeToCacheInBytes: 50000000
-  }
+    maximumFileSizeToCacheInBytes: 50000000,
+  },
 });
