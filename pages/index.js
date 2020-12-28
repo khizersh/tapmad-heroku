@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
-import HomePage from "../components/HomePage";
+import HomePage from "../modules/home/components/HomePage";
 
 export default function Home(props) {
   return (
@@ -20,13 +20,13 @@ export async function getStaticProps() {
     "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16",
     {
       credentials: "include",
-      redirect: "follow"
+      redirect: "follow",
     }
   );
   var movie = await movieList.json();
   return {
     props: {
-      movies: movie.Tabs[0].Sections
-    }
+      movies: movie.Tabs[0].Sections,
+    },
   };
 }

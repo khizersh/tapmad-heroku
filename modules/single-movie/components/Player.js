@@ -4,11 +4,9 @@ import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
 
 export default function Player({ movie }) {
-  
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(300000);
   function onRestartAd() {
-    console.log("Ad Complete");
     setIsAutoPlay(false);
     setTimeout(() => {
       setIsAutoPlay(true);
@@ -92,7 +90,7 @@ export default function Player({ movie }) {
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
                   isAutoPlay={true}
                   isMuted={true}
-                  isSkipable = {false}
+                  isSkipable={false}
                   onOneHundredPercent={onRestartAd}
                   onAdSkipped={onRestartAd}
                   file={
@@ -105,7 +103,7 @@ export default function Player({ movie }) {
                   //     ? movie.Video.VideoStreamUrlLQ
                   //     : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   // }
-                  onAdComplete = {onRestartAd}
+                  onAdComplete={onRestartAd}
                   generatePrerollUrl={() =>
                     "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/MREC_Video_Popup&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com&vpos=preroll"
                   }

@@ -1,8 +1,8 @@
 import "../styles/globals.scss";
 import Head from "next/head";
-import Header from "../components/Header";
 import React from "react";
 import { Workbox } from "workbox-window";
+import Header from "../components/App/Header";
 
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {

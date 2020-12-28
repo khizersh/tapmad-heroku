@@ -1,38 +1,36 @@
 import { useRouter } from "next/router";
-import Player from "../../components/Player";
+import Player from "../../modules/single-movie/components/Player";
 import React from "react";
+import { post } from "../../services/http-service";
+import { manipulateUrls } from "../../services/utils";
+
 export default function watch() {
   const router = useRouter();
   const [singleMovie, setSingleMovie] = React.useState({});
+
   async function getSingleMovie(query) {
     if (query && query.slug) {
-      var movieId = [...router.query.slug].pop();
-      let isChannel = movieId.charAt(movieId.length-1);
-      let OriginalMovieId = movieId.substring(0, movieId.length-1)
-      var result = await fetch(
+      const chanelDetail = manipulateUrls(query);
+      const result = await post(
         "https://api.tapmad.com/api/getEventPredicationGameChannel",
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Version: "V2",
-            Language: "en",
-            Platform: "web",
-            ChannelOrVODId: OriginalMovieId,
-            UserId: "0",
-            IsChannel: isChannel,
-          }),
+          Version: "V2",
+          Language: "en",
+          Platform: "web",
+          ChannelOrVODId: chanelDetail.OriginalMovieId,
+          UserId: "0",
+          IsChannel: chanelDetail.isChannel,
         }
       );
-      var response = await result.json();
-      return response;
+      return result;
     }
   }
+
   React.useEffect(async () => {
     let movieData = await getSingleMovie(router.query);
-    setSingleMovie(movieData);
+    if (movieData) {
+      setSingleMovie(movieData.data);
+    }
   }, [router.query]);
 
   return (
@@ -41,4 +39,3 @@ export default function watch() {
     </div>
   );
 }
-
