@@ -5,7 +5,6 @@ import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Movies({ movies }) {
   var bannerSettings = basicSliderConfig(1);
-  console.log(movies);
   return (
     <div>
       <Slider {...bannerSettings}>
