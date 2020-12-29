@@ -46,8 +46,33 @@ function SEOFriendlySlugs(event, prefix) {
   }`;
   return slug;
 }
+function calculateRowsToFetch(currentRow, movies) {
+  let rowFrom = currentRow;
+  let rowsTo = 0;
+  var noOfRowsToFetch = movies.Sections.totalSections - rowFrom;
+  if (noOfRowsToFetch > 4) {
+    rowsTo = rowFrom + 5;
+    return { rowsTo: rowsTo, rowFrom: currentRow };
+  } else {
+    rowsTo = rowFrom + noOfRowsToFetch;
+    return { rowsTo: rowsTo, rowFrom: currentRow };
+  }
+}
+function pushNewMoviesIntoList(localMovies, newMovies) {
+  let movieClone = localMovies;
+  movieClone = {
+    ...movieClone,
+    Sections: {
+      Movies: [...localMovies.Sections.Movies, ...newMovies.Sections.Movies],
+    },
+  };
+  return movieClone;
+}
+
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
   SEOFriendlySlugs,
+  calculateRowsToFetch,
+  pushNewMoviesIntoList,
 };

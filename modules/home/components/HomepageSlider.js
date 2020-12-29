@@ -15,9 +15,7 @@ const HomepageSlider = ({ movies }) => {
               <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
               <div>
                 <Slider {...settings}>
-                  {movieSection &&
-                  !movieSection.IsCategories &&
-                  movieSection.Videos
+                  {movieSection && !movieSection.IsCategories
                     ? movieSection.Videos.map((e, index) => {
                         let slug = SEOFriendlySlugs(e, "live");
                         return (

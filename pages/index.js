@@ -27,7 +27,7 @@ export async function getStaticProps() {
   var banner = await bannersList.data;
   return {
     props: {
-      movies: movie.Tabs[0].Sections,
+      movies: movie.Tabs[0],
       banner: banner,
     },
   };
