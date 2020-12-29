@@ -5,7 +5,6 @@ import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function LiveChannels({ channel }) {
   var bannerSettings = basicSliderConfig(1);
-  console.log(channel);
   return (
     <div>
       <Slider {...bannerSettings}>

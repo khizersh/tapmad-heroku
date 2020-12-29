@@ -20,7 +20,6 @@ export default function HomePage({ movies, banner }) {
       return;
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
-    console.log(rowData);
     setCurrentRow(rowData.rowsTo);
     var moviesList = await get(
       `https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/${
@@ -35,8 +34,6 @@ export default function HomePage({ movies, banner }) {
         localMovies,
         modifiedNewMovies
       );
-      console.log(updatedListOfMovies);
-
       setLocalMovies(updatedListOfMovies);
     }
   }

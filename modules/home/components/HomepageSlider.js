@@ -5,7 +5,6 @@ import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
   var settings = basicSliderConfig(8);
-  console.log(movies);
   return (
     <div>
       {movies &&
