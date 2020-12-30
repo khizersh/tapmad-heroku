@@ -1,21 +1,9 @@
 import "../styles/globals.scss";
 import Head from "next/head";
 import React from "react";
-import { Workbox } from "workbox-window";
 import Header from "../components/App/Header";
 
 function MyApp({ Component, pageProps }) {
-  React.useEffect(() => {
-    if (
-      !("serviceWorker" in navigator) ||
-      process.env.NODE_ENV !== "production"
-    ) {
-      console.warn("Progressive Web App support is disabled");
-      return;
-    }
-    const wb = new Workbox("sw.js", { scope: "/" });
-    wb.register();
-  }, []);
   return (
     <>
       <Head>

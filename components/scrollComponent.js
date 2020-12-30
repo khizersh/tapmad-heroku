@@ -31,7 +31,7 @@ export default function ScrollComponent({ loadMore }) {
 
   return (
     <div className="loading" ref={loader}>
-      <div class="loader-5 center">
+      <div className="loader-5 center">
         <span></span>
       </div>
     </div>
