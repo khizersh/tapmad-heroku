@@ -17,9 +17,9 @@ export default function Header() {
             </div>
             <div className="col-4">
               <div className="d-flex tp-menu justify-content-center">
-                <Link href="live">Live</Link>
-                <Link href="movies">Movies</Link>
-                <Link href="shows">Shows</Link>
+                <Link href="/live">Live</Link>
+                <Link href="/movies">Movies</Link>
+                <Link href="/shows">Shows</Link>
               </div>
             </div>
           </div>

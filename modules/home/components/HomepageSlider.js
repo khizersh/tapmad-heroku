@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
 
@@ -19,7 +19,7 @@ const HomepageSlider = ({ movies }) => {
                         let slug = SEOFriendlySlugs(e, "live");
                         return (
                           <Link href={slug} key={index}>
-                            <a>
+                            <a onClick={(e) => dragging && e.preventDefault()}>
                               <div className="tm-mv-bx" key={index}>
                                 <div className="movies-images">
                                   <img

@@ -665,6 +665,57 @@ input#menu[type="checkbox"] {
   transform: translate3d(150px, 0, 0);
   transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
 }
+.hamburger:before {
+  content: "\2630";
+  display: block;
+  color: #fff !important;
+  line-height: 32px;
+  font-size: 16px;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 576px) {
+  .menu {
+    left: -210px;
+    width: 140px;
+    border-right: 0;
+  }
+
+  .openNav .menu {
+    left: -150px;
+  }
+
+  .hamburger {
+    background: transparent;
+    width: 40px;
+    color: #fff;
+  }
+
+  .hamburger {
+    margin-left: 5px;
+  }
+
+  .hamburger:before {
+    font-size: 24px;
+  }
+
+  .logotype img {
+    width: 110px;
+    padding-right: 5px;
+  }
+
+  .menu a.logotype {
+    left: 36px;
+  }
+  .menu a {
+    padding: 1em;
+  }
+  .new-wrapper {
+    left: 0px;
+    width: calc(100% - 0px) !important;
+    overflow-x: hidden;
+  }
+}
 @-webkit-keyframes grow {
   0% {
     display: none;

@@ -3,9 +3,9 @@ import SideBar from "./SideBar";
 
 export default function Skeleton({ children }) {
   return (
-    <div class="pages_header">
+    <div className="pages_header">
       <SideBar />
-      <div class="new-wrapper">{children}</div>
+      <div className="new-wrapper">{children}</div>
     </div>
   );
 }
