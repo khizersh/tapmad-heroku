@@ -9,6 +9,7 @@ function basicSliderConfig(slidesToShow) {
   return {
     dots: false,
     infinite: false,
+    draggable: true,
     speed: 500,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToShow,

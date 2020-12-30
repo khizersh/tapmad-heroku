@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import Head from "next/head";
 import React from "react";
 import Header from "../components/App/Header";
+import Skeleton from "../components/MainSkeleton";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -19,8 +20,10 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <>
-        <Header />
-        <Component {...pageProps} />
+        <Skeleton>
+          <Header />
+          <Component {...pageProps} />
+        </Skeleton>
       </>
     </>
   );

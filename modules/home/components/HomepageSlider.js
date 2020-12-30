@@ -18,45 +18,54 @@ const HomepageSlider = ({ movies }) => {
                     ? movieSection.Videos.map((e, index) => {
                         let slug = SEOFriendlySlugs(e, "live");
                         return (
-                          <div className="tm-mv-bx" key={index}>
-                            <Link href={slug} key={index}>
-                              <a className="movies-images">
-                                <img
-                                  src={e.NewChannelThumbnailPath}
-                                  style={{ width: "100%" }}
-                                />
-                              </a>
-                            </Link>
-                            <div className="tm-mv-items">
-                              <div className="tm-mv-name">
-                                <div style={{ fontSize: "10px" }}>
-                                  {e.VideoName}
+                          <Link href={slug} key={index}>
+                            <a>
+                              <div className="tm-mv-bx" key={index}>
+                                <div className="movies-images">
+                                  <img
+                                    src={e.NewChannelThumbnailPath}
+                                    style={{ width: "100%" }}
+                                  />
+                                </div>
+                                <div className="tm-mv-items">
+                                  <div className="tm-mv-name">
+                                    <div style={{ fontSize: "10px" }}>
+                                      {e.VideoName}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
+                            </a>
+                          </Link>
                         );
                       })
                     : movieSection.Categories.map((e, index) => {
                         let slug = SEOFriendlySlugs(e, "season");
                         return (
-                          <div className="tm-mv-bx" key={index}>
-                            <Link href={slug} key={index}>
-                              <a className="movies-images">
-                                <img
-                                  src={e.NewCategoryImage}
-                                  style={{ width: "100%" }}
-                                />
-                              </a>
-                            </Link>
-                            <div className="tm-mv-items">
-                              <div className="tm-mv-name">
-                                <div style={{ fontSize: "10px" }}>
-                                  {e.CategoryName}
+                          <Link href={slug} key={index}>
+                            <a>
+                              <div className="tm-mv-bx" key={index}>
+                                <div className="movies-images">
+                                  <img
+                                    src={e.NewCategoryImage}
+                                    style={{ width: "100%" }}
+                                  />
+                                </div>
+                                <div className="tm-mv-items">
+                                  <div className="tm-mv-name">
+                                    <div
+                                      style={{
+                                        fontSize: "10px",
+                                        color: "white",
+                                      }}
+                                    >
+                                      {e.CategoryName}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
+                            </a>
+                          </Link>
                         );
                       })}
                 </Slider>
