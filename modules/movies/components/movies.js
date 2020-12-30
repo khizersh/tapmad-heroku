@@ -20,6 +20,7 @@ export default function Movies({ movies }) {
     }
     let rowData = calculateRowsToFetch(currentRow, movies);
     setCurrentRow(rowData.rowsTo);
+    console.log(currentRow);
     var moviesList = await get(
       `https://api.tapmad.com/api/getMoviesWithPagination/${rowData.rowFrom}/${
         rowData.rowsTo - rowData.rowFrom
@@ -44,7 +45,9 @@ export default function Movies({ movies }) {
         })}
       </Slider>
       <HomepageSlider movies={localMovies.Sections.Movies} />
-      <ScrollComponent loadMore={fetchNewMovies} />
+      {currentRow !== movies.Sections.totalSections && (
+        <ScrollComponent loadMore={fetchNewMovies} />
+      )}
     </div>
   );
 }

@@ -57,7 +57,9 @@ export default function HomePage({ movies, banner }) {
               />
             </div>
             <HomepageSlider movies={localMovies.Sections.Movies} />
-            <ScrollComponent loadMore={fetchNewMovies} />
+            {currentRow !== movies.totalSections && (
+              <ScrollComponent loadMore={fetchNewMovies} />
+            )}
           </div>
         </div>
       </div>

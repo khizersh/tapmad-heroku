@@ -50,8 +50,8 @@ function calculateRowsToFetch(currentRow, movies) {
   let rowFrom = currentRow;
   let rowsTo = 0;
   var noOfRowsToFetch = movies.Sections.totalSections - rowFrom;
-  if (noOfRowsToFetch > 4) {
-    rowsTo = rowFrom + 5;
+  if (noOfRowsToFetch > 1) {
+    rowsTo = rowFrom + 2;
     return { rowsTo: rowsTo, rowFrom: currentRow };
   } else {
     rowsTo = rowFrom + noOfRowsToFetch;
