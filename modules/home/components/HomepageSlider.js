@@ -5,12 +5,22 @@ import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
   var settings = basicSliderConfig(8);
+  function handleMouseOver(index) {
+    document.getElementsByClassName("slick-list")[index].style.overflow =
+      "visible";
+    document.getElementsByTagName("body")[0].style.overflowX = "hidden";
+  }
+  function handleMouseOut(index) {
+    document.getElementsByClassName("slick-list")[index].style.overflow =
+      "hidden";
+    document.getElementsByTagName("body")[0].style.overflowX = "visible";
+  }
   return (
     <div>
       {movies &&
-        movies.map((movieSection, index) => {
+        movies.map((movieSection, row) => {
           return (
-            <div className="col-12 p-lg-1 p-0" key={index}>
+            <div className="col-12 p-lg-1 p-0" key={row}>
               <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
               <div>
                 <Slider {...settings}>
@@ -19,8 +29,13 @@ const HomepageSlider = ({ movies }) => {
                         let slug = SEOFriendlySlugs(e, "live");
                         return (
                           <Link href={slug} key={index}>
-                            <a onClick={(e) => dragging && e.preventDefault()}>
-                              <div className="tm-mv-bx" key={index}>
+                            <a>
+                              <div
+                                className="tm-mv-bx"
+                                key={index}
+                                onMouseOver={() => handleMouseOver(row)}
+                                onMouseOut={() => handleMouseOut(row)}
+                              >
                                 <div className="movies-images">
                                   <img
                                     src={e.NewChannelThumbnailPath}
@@ -49,7 +64,12 @@ const HomepageSlider = ({ movies }) => {
                         return (
                           <Link href={slug} key={index}>
                             <a>
-                              <div className="tm-mv-bx" key={index}>
+                              <div
+                                className="tm-mv-bx"
+                                onMouseOver={() => handleMouseOver(row)}
+                                onMouseOut={() => handleMouseOut(row)}
+                                key={index}
+                              >
                                 <div className="movies-images">
                                   <img
                                     src={e.NewCategoryImage}
