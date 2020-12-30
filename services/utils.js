@@ -12,6 +12,7 @@ function basicSliderConfig(slidesToShow) {
     speed: 500,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToShow,
+    centerMode: false,
     arrows: true,
     responsive: [
       {
@@ -19,6 +20,7 @@ function basicSliderConfig(slidesToShow) {
         settings: {
           slidesToShow: slidesToShow,
           slidesToScroll: slidesToShow,
+          centerMode: false,
         },
       },
       {

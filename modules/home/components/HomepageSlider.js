@@ -18,7 +18,7 @@ const HomepageSlider = ({ movies }) => {
                     ? movieSection.Videos.map((e, index) => {
                         let slug = SEOFriendlySlugs(e, "live");
                         return (
-                          <div className="pr-2" key={index}>
+                          <div className="tm-mv-bx" key={index}>
                             <Link href={slug} key={index}>
                               <a className="movies-images">
                                 <img
@@ -27,13 +27,20 @@ const HomepageSlider = ({ movies }) => {
                                 />
                               </a>
                             </Link>
+                            <div className="tm-mv-items">
+                              <div className="tm-mv-name">
+                                <div style={{ fontSize: "10px" }}>
+                                  {e.VideoName}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         );
                       })
                     : movieSection.Categories.map((e, index) => {
                         let slug = SEOFriendlySlugs(e, "season");
                         return (
-                          <div className="pr-2" key={index}>
+                          <div className="tm-mv-bx" key={index}>
                             <Link href={slug} key={index}>
                               <a className="movies-images">
                                 <img
@@ -42,6 +49,13 @@ const HomepageSlider = ({ movies }) => {
                                 />
                               </a>
                             </Link>
+                            <div className="tm-mv-items">
+                              <div className="tm-mv-name">
+                                <div style={{ fontSize: "10px" }}>
+                                  {e.CategoryName}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         );
                       })}
