@@ -29,7 +29,12 @@ const HomepageSlider = ({ movies }) => {
                                 </div>
                                 <div className="tm-mv-items">
                                   <div className="tm-mv-name">
-                                    <div style={{ fontSize: "10px" }}>
+                                    <div
+                                      style={{
+                                        fontSize: "10px",
+                                        color: "white",
+                                      }}
+                                    >
                                       {e.VideoName}
                                     </div>
                                   </div>

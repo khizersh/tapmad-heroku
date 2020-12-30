@@ -716,6 +716,9 @@ input#menu[type="checkbox"] {
     overflow-x: hidden;
   }
 }
+button:focus {
+  outline: 0px dotted;
+}
 @-webkit-keyframes grow {
   0% {
     display: none;
