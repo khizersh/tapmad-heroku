@@ -5,6 +5,9 @@ import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
   var settings = basicSliderConfig(8);
+  const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
+  const [clientYonMouseDown, setClientYonMouseDown] = React.useState(null);
+
   function handleMouseOver(index) {
     document.getElementsByClassName("slick-list")[index].style.overflow =
       "visible";
@@ -15,6 +18,23 @@ const HomepageSlider = ({ movies }) => {
       "hidden";
     document.getElementsByTagName("body")[0].style.overflowX = "visible";
   }
+
+  function handleOnMouseDown(e) {
+    setClientXonMouseDown(e.clientX);
+    setClientYonMouseDown(e.clientY);
+    e.preventDefault(); // stops weird link dragging effect
+  }
+
+  function handleOnClick(e) {
+    console.log(e);
+    e.stopPropagation();
+    if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
+      // prevent link click if the element was dragged
+      e.preventDefault();
+      console.log(e);
+    }
+  }
+
   return (
     <div>
       {movies &&
@@ -29,7 +49,10 @@ const HomepageSlider = ({ movies }) => {
                         let slug = SEOFriendlySlugs(e, "live");
                         return (
                           <Link href={slug} key={index}>
-                            <a>
+                            <a
+                              onMouseDown={(e) => handleOnMouseDown(e)}
+                              onClick={(e) => handleOnClick(e)}
+                            >
                               <div
                                 className="tm-mv-bx"
                                 key={index}
@@ -63,7 +86,10 @@ const HomepageSlider = ({ movies }) => {
                         let slug = SEOFriendlySlugs(e, "season");
                         return (
                           <Link href={slug} key={index}>
-                            <a>
+                            <a
+                              onMouseDown={(e) => handleOnMouseDown(e)}
+                              onClick={(e) => handleOnClick(e)}
+                            >
                               <div
                                 className="tm-mv-bx"
                                 onMouseOver={() => handleMouseOver(row)}

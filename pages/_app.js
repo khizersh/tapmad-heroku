@@ -3,6 +3,7 @@ import Head from "next/head";
 import React from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }) {
         <Skeleton>
           <Header />
           <Component {...pageProps} />
+          <Footer />
         </Skeleton>
       </>
     </>

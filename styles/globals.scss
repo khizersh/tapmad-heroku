@@ -745,3 +745,148 @@ button:focus {
     opacity: 1;
   }
 }
+
+.tm_top_navi {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: calc(100% - 50px);
+}
+
+.tm_top_navi li a {
+  font-size: 13px;
+  color: #fff;
+  text-transform: uppercase !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+  transition: 0.3s;
+  cursor: pointer;
+  padding: 18px 1.125rem;
+}
+
+.navbar-light {
+  list-style: none;
+}
+
+.pages_header .tm_top_navi {
+  background: #121117;
+  overflow: hidden;
+}
+
+.tm_logo_grn {
+  padding: 0.5rem 0rem;
+  display: inline-block;
+}
+
+.usr_btns li a {
+  letter-spacing: 1px !important;
+  text-transform: none !important;
+  padding: 0 10px !important;
+  margin-top: 18px;
+}
+
+.usr_btns li a > i {
+  color: #fff;
+  font-size: 18px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  .new-wrapper {
+    left: 0;
+    width: calc(100% - 0px);
+    overflow-x: hidden;
+  }
+
+  .tm_top_navi {
+    width: 100%;
+  }
+
+  .tm_logo_grn img {
+    width: 110px;
+    margin-top: 2px;
+    margin-left: 15px;
+  }
+
+  .d-xs-none {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .tm_logo_grn img {
+    width: 100px;
+    margin-top: 5px;
+  }
+  .main_menu {
+    display: none !important;
+  }
+
+  .tm_logo_grn {
+    margin-left: 15px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main_menu {
+    display: none !important;
+  }
+
+  .tm_top_navi li a {
+    padding: 16px 0.5rem;
+    letter-spacing: 2px;
+  }
+}
+
+/* Footer */
+
+footer {
+  background-color: #121117;
+  color: #fff;
+  margin-top: 20px;
+}
+
+footer .list-group-item {
+  background: none;
+  border: none;
+  padding-left: 0;
+}
+
+footer .list-group-item a {
+  color: #fff;
+  font-size: 13px;
+}
+
+.tm_socl_lnks .list-group-item a {
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+#pauseplay,
+#mute-video,
+.tm_stre_lnk {
+  display: none;
+}
+.tm_stre_lnk {
+  color: #87c242;
+}
+.tm_stre_lnk {
+  display: none;
+}
+p,
+li,
+a,
+span,
+label {
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 576px) {
+  .footer_links {
+    display: block;
+  }
+}
