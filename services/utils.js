@@ -43,7 +43,7 @@ function basicSliderConfig(slidesToShow) {
   };
 }
 function SEOFriendlySlugs(event, prefix) {
-  let cleanName = event.VideoName.split(" ").join("-").toLowerCase();
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/watch/${prefix}/${cleanName}/${event.VideoEntityId}${
     event.IsVideoChannel ? "1" : "0"
   }`;
