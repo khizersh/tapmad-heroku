@@ -17,9 +17,9 @@ export default function Player({ movie }) {
       <div className="container-fluid">
         <div className="row mt-5">
           <div className="col-lg-9">
-            <div className="col-12">
+            <div className="col-12 p-0">
               {/* Top Ad */}
-              <div className="mt-5 text-center">
+              <div className="text-center my-3">
                 <DFPSlotsProvider dfpNetworkId="28379801">
                   <div className="desktop-ads">
                     <AdSlot
@@ -29,11 +29,11 @@ export default function Player({ movie }) {
                   </div>
                 </DFPSlotsProvider>
               </div>
-              <div style={{ border: "1px solid white", marginTop: "65px" }}>
+              <div style={{ border: "1px solid white" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id"
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                  isAutoPlay={false}
+                  isAutoPlay={true}
                   file={
                     movie && movie.Video
                       ? movie.Video.VideoStreamUrlLQ
@@ -48,9 +48,17 @@ export default function Player({ movie }) {
                 />
               </div>
             </div>
-            <div className="col-lg-12">
+            <div className="col-lg-12 p-0">
               {movie && movie.Video ? (
-                <h5 className="mt-3">{movie.Video.VideoName}</h5>
+                <>
+                  <h5 className="mt-3">{movie.Video.VideoName}</h5>
+                  <span className="text-secondary">
+                    {movie.Video.VideoTotalViews} views
+                  </span>
+                  <p style={{ color: "#aaa" }}>
+                    {movie.Video.VideoDescription}
+                  </p>
+                </>
               ) : null}
             </div>
             {/* Banner Add */}

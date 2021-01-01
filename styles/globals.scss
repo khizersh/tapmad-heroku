@@ -747,10 +747,10 @@ button:focus {
 }
 
 .tm_top_navi {
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 9999;
-  width: calc(100% - 50px);
+  width: 100%;
 }
 
 .tm_top_navi li a {
@@ -889,4 +889,11 @@ label {
   .footer_links {
     display: block;
   }
+}
+
+.tm-upcmng {
+  position: relative;
+  bottom: 260px;
+  z-index: 10;
+  height: 0;
 }

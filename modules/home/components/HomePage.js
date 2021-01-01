@@ -7,7 +7,9 @@ import {
   pushNewMoviesIntoList,
 } from "../../../services/utils";
 import { get } from "../../../services/http-service";
-export default function HomePage({ movies, banner }) {
+import HomepageFeatured from "./FeaturedSlider";
+
+export default function HomePage({ movies, banner, featured }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
   const modifiedResponse = modifyHomePageResponse(movies);
@@ -55,6 +57,13 @@ export default function HomePage({ movies, banner }) {
                 src={banner.Video[0].bannerPoster}
                 style={{ width: "100%" }}
               />
+            </div>
+            <div className="tm-upcmng">
+              <div className="row w-100">
+                <div className="col-10 offset-1">
+                  <HomepageFeatured featured={featured} />
+                </div>
+              </div>
             </div>
             <HomepageSlider movies={localMovies.Sections.Movies} />
             {currentRow !== movies.totalSections && (

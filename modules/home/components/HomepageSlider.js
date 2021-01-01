@@ -9,12 +9,12 @@ const HomepageSlider = ({ movies }) => {
   const [clientYonMouseDown, setClientYonMouseDown] = React.useState(null);
 
   function handleMouseOver(index) {
-    document.getElementsByClassName("slick-list")[index].style.overflow =
+    document.getElementsByClassName("slick-list")[index + 1].style.overflow =
       "visible";
     document.getElementsByTagName("body")[0].style.overflowX = "hidden";
   }
   function handleMouseOut(index) {
-    document.getElementsByClassName("slick-list")[index].style.overflow =
+    document.getElementsByClassName("slick-list")[index + 1].style.overflow =
       "hidden";
     document.getElementsByTagName("body")[0].style.overflowX = "visible";
   }
@@ -26,12 +26,10 @@ const HomepageSlider = ({ movies }) => {
   }
 
   function handleOnClick(e) {
-    console.log(e);
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
       // prevent link click if the element was dragged
       e.preventDefault();
-      console.log(e);
     }
   }
 

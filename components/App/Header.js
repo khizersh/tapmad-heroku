@@ -3,7 +3,7 @@ import React from "react";
 export default function Header() {
   return (
     <>
-      <div className="container-fluid navbar-light scrolling-navbar tm_top_navi">
+      <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
             <a href="/" className="tm_logo_grn">

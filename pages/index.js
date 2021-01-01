@@ -23,12 +23,17 @@ export async function getStaticProps() {
   var bannersList = await get(
     "https://api.tapmad.com/api/getFeaturedBannerDetail"
   );
+  var featuredContent = await get(
+    "https://api.tapmad.com/api/getWebTabBanners/V1/en/Web"
+  );
   var movie = await movieList.data;
   var banner = await bannersList.data;
+  var featured = await featuredContent.data;
   return {
     props: {
       movies: movie.Tabs[0],
       banner: banner,
+      featured: featured,
     },
   };
 }

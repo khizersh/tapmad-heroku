@@ -20,7 +20,6 @@ export default function Movies({ movies }) {
     }
     let rowData = calculateRowsToFetch(currentRow, movies);
     setCurrentRow(rowData.rowsTo);
-    console.log(currentRow);
     var moviesList = await get(
       `https://api.tapmad.com/api/getMoviesWithPagination/${rowData.rowFrom}/${
         rowData.rowsTo - rowData.rowFrom
