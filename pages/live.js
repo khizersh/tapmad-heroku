@@ -1,6 +1,8 @@
 import Head from "next/head";
 import LiveChannels from "../modules/live/components/liveChannels";
 import { get } from "../services/http-service";
+import requestIp from "request-ip";
+
 export default function Live(props) {
   return (
     <div>
@@ -18,7 +20,9 @@ export default function Live(props) {
     </div>
   );
 }
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  console.log(ip);
   var channelList = await get(
     "https://api.tapmad.com/api/getChannelWithPagination/0/5/0/16"
   );

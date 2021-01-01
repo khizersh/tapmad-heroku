@@ -83,7 +83,7 @@ export default function SideBar() {
               </span>
             </li>
             <li id="loginAva5" className="hidden">
-              <a href="javascript:void(0)">Signout</a>
+              <a href="#">Signout</a>
               <span className="icon">
                 <i className="fa fa-sign-in"></i>
               </span>

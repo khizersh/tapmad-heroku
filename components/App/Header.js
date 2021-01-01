@@ -85,7 +85,7 @@ export default function Header() {
               </li>
 
               <li id="loginAva2" className="nav-item hidden">
-                <a href="javascript:void(0)" className="pull-right d-xs-none">
+                <a href="#" className="pull-right d-xs-none">
                   Signout
                 </a>
               </li>
