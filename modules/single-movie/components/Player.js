@@ -5,7 +5,7 @@ import ReactJWPlayer from "react-jw-player";
 
 export default function Player({ movie }) {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [adDuration, setAdDuration] = useState(30000);
+  const [adDuration, setAdDuration] = useState(200000);
   function onRestartAd() {
     setIsAutoPlay(false);
     setTimeout(() => {
@@ -21,10 +21,16 @@ export default function Player({ movie }) {
               {/* Top Ad */}
               <div className="text-center my-3">
                 <DFPSlotsProvider dfpNetworkId="28379801">
-                  <div className="desktop-ads">
+                  <div className="desktop-ads d-none d-lg-block d-md-block">
                     <AdSlot
                       sizes={[[728, 90]]}
-                      adUnit={"Tapmad_LB_Desktop_HP_3"}
+                      adUnit={"Bluekai_Leaderboard_Player"}
+                    />
+                  </div>
+                  <div className="desktops-ads text-center d-lg-none d-md-none">
+                    <AdSlot
+                      sizes={[[320, 100]]}
+                      adUnit={"Testing_Dev_MW_320x100_Player"}
                     />
                   </div>
                 </DFPSlotsProvider>
@@ -40,7 +46,7 @@ export default function Player({ movie }) {
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
                   generatePrerollUrl={() =>
-                    "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
+                    "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Testing_Dev_Desktop_MREC_Video&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com%2F&vpos=preroll"
                   }
                   customProps={{
                     controls: true,
@@ -64,15 +70,11 @@ export default function Player({ movie }) {
             {/* Banner Add */}
             <div className="col-lg-12">
               <DFPSlotsProvider dfpNetworkId="28379801">
-                <div className="desktops-ads">
+                <div className="desktops-ads text-center d-none d-lg-block d-md-block">
                   <AdSlot
                     sizes={[[970, 250]]}
-                    adUnit={"Tapmad_SLB_Desktop_PP"}
+                    adUnit={"Testing_Dev_Player_Superleaderboard"}
                   />
-                  {/* <AdSlot
-                    sizes={[[300, 250]]}
-                    adUnit={"Tapmad_MREC_2_Desktop"}
-                  /> */}
                 </div>
               </DFPSlotsProvider>
               {/* <DFPSlotsProvider dfpNetworkId="28379801">
@@ -87,7 +89,7 @@ export default function Player({ movie }) {
             <DFPSlotsProvider dfpNetworkId="28379801">
               <div className="desktop-ads">
                 {/* <AdSlot sizes={[[728, 90]]} adUnit={"Tapmad_LB_Desktop_HP_3"} /> */}
-                <AdSlot sizes={[[300, 250]]} adUnit={"Tapmad_MREC_2_Desktop"} />
+                <AdSlot sizes={[[300, 250]]} adUnit={"BlueKai_MREC_Banner"} />
               </div>
             </DFPSlotsProvider>
 
@@ -108,7 +110,7 @@ export default function Player({ movie }) {
                   }
                   onAdComplete={onRestartAd}
                   generatePrerollUrl={() =>
-                    "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
+                    "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Testing_Dev_Desktop_MREC_Video&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com%2F&vpos=preroll"
                   }
                   customProps={{
                     controls: true,
