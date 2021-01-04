@@ -9,35 +9,32 @@ export default function Footer() {
             <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
               <ul className="list-group list-group-horizontal footer_links">
                 <li className="list-group-item pt-0">
-                  <a href="https://www.tapmad.com/copyright" target="_blank">
+                  <a href="/copyright" target="_blank">
                     Copyright
                   </a>
                 </li>
                 <li className="list-group-item pt-0">
-                  <a href="https://www.tapmad.com/terms" target="_blank">
+                  <a href="/terms" target="_blank">
                     Terms of use
                   </a>
                 </li>
                 <li className="list-group-item pt-0">
-                  <a href="https://www.tapmad.com/about" target="_blank">
+                  <a href="/about" target="_blank">
                     About
                   </a>
                 </li>
                 <li className="list-group-item pt-0">
-                  <a href="https://www.tapmad.com/contact" target="_blank">
+                  <a href="/contact" target="_blank">
                     Contact
                   </a>
                 </li>
                 <li className="list-group-item pt-0">
-                  <a
-                    href="https://www.tapmad.com/privacyPolicy"
-                    target="_blank"
-                  >
+                  <a href="/privacyPolicy" target="_blank">
                     Privacy Policy
                   </a>
                 </li>
                 <li className="list-group-item pt-0">
-                  <a href="https://www.tapmad.com/faqs" target="_blank">
+                  <a href="/faqs" target="_blank">
                     FAQs
                   </a>
                 </li>
