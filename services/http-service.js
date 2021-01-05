@@ -1,7 +1,11 @@
 const { default: axios } = require("axios");
 
-function get(url) {
-  return axios.get(url);
+function get(url, ip = "") {
+  return axios.get(url, {
+    headers: {
+      "x-forwarded-for": ip,
+    },
+  });
 }
 
 function post(url, body) {
