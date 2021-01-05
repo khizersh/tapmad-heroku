@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
+import Image from "next/image";
 
 const HomepageSlider = ({ movies }) => {
   var settings = basicSliderConfig(8);
@@ -58,9 +59,11 @@ const HomepageSlider = ({ movies }) => {
                                 onMouseOut={() => handleMouseOut(row)}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  <Image
                                     src={e.NewChannelThumbnailPath}
-                                    style={{ width: "100%" }}
+                                    width={500}
+                                    height={700}
+                                    layout={"responsive"}
                                   />
                                 </div>
                                 <div className="tm-mv-items">
@@ -95,9 +98,11 @@ const HomepageSlider = ({ movies }) => {
                                 key={index}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  <Image
                                     src={e.NewCategoryImage}
-                                    style={{ width: "100%" }}
+                                    width={500}
+                                    height={700}
+                                    layout={"responsive"}
                                   />
                                 </div>
                                 <div className="tm-mv-items">
