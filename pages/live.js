@@ -22,9 +22,9 @@ export default function Live(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
-  console.log(ip);
   var channelList = await get(
-    "https://api.tapmad.com/api/getChannelWithPagination/0/5/0/16"
+    "https://api.tapmad.com/api/getChannelWithPagination/0/5/0/16",
+    ip
   );
   var channel = await channelList.data;
   return {
