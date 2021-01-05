@@ -43,12 +43,15 @@ function basicSliderConfig(slidesToShow) {
   };
 }
 function SEOFriendlySlugs(event, prefix) {
+  // console.log("event: ",event);
+  // console.log("prefix: ",prefix);
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/watch/${prefix}/${cleanName}/${event.VideoEntityId}${
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
     event.IsVideoChannel ? "1" : "0"
   }`;
   return slug;
 }
+
 function calculateRowsToFetch(currentRow, movies) {
   let rowFrom = currentRow;
   let rowsTo = 0;
@@ -61,6 +64,10 @@ function calculateRowsToFetch(currentRow, movies) {
     return { rowsTo: rowsTo, rowFrom: currentRow };
   }
 }
+
+
+
+
 function pushNewMoviesIntoList(localMovies, newMovies) {
   let movieClone = localMovies;
   movieClone = {

@@ -17,6 +17,7 @@ export default function HomePage({ movies, banner, featured }) {
   React.useEffect(() => {
     setLocalMovies(modifiedResponse);
   }, []);
+  
   async function fetchNewMovies() {
     if (currentRow == movies.totalSections) {
       return;

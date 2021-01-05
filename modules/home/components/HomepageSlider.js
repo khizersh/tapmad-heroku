@@ -33,6 +33,8 @@ const HomepageSlider = ({ movies }) => {
     }
   }
 
+  console.log("Movies: ", movies);
+
   return (
     <div>
       {movies &&
@@ -44,7 +46,7 @@ const HomepageSlider = ({ movies }) => {
                 <Slider {...settings}>
                   {movieSection && !movieSection.IsCategories
                     ? movieSection.Videos.map((e, index) => {
-                        let slug = SEOFriendlySlugs(e, "live");
+                        let slug = SEOFriendlySlugs(e, "watch/live");
                         return (
                           <Link href={slug} key={index}>
                             <a
@@ -81,7 +83,7 @@ const HomepageSlider = ({ movies }) => {
                         );
                       })
                     : movieSection.Categories.map((e, index) => {
-                        let slug = SEOFriendlySlugs(e, "season");
+                        let slug = SEOFriendlySlugs(e, "category/season");
                         return (
                           <Link href={slug} key={index}>
                             <a

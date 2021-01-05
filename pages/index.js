@@ -16,6 +16,7 @@ export default function Home(props) {
     </div>
   );
 }
+
 export async function getStaticProps() {
   var movieList = await get(
     "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16"
