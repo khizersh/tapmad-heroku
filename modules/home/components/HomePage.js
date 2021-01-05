@@ -9,12 +9,13 @@ import {
 import { get } from "../../../services/http-service";
 import HomepageFeatured from "./FeaturedSlider";
 
-export default function HomePage({ movies, banner, featured }) {
+export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
   const modifiedResponse = modifyHomePageResponse(movies);
 
   React.useEffect(() => {
+    console.log("Movies ", movies);
     setLocalMovies(modifiedResponse);
   }, []);
   async function fetchNewMovies() {
@@ -26,7 +27,8 @@ export default function HomePage({ movies, banner, featured }) {
     var moviesList = await get(
       `https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/${
         rowData.rowFrom
-      }/${rowData.rowsTo - rowData.rowFrom}/0/16`
+      }/${rowData.rowsTo - rowData.rowFrom}/0/16`,
+      ip
     );
     var newMovies = await moviesList.data;
     if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {

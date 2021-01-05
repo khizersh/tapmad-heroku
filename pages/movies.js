@@ -20,8 +20,7 @@ export default function MoviesPage(props) {
 }
 export async function getStaticProps() {
   var moviesList = await get(
-    "https://api.tapmad.com/api/getChannelWithPaginationForIp/0/5/0/16",
-    ip
+    "https://api.tapmad.com/api/getMoviesWithPagination/0/5/0/16"
   );
   var movies = await moviesList.data;
   return {
