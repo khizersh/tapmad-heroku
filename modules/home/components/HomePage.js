@@ -43,8 +43,8 @@ export default function HomePage({ movies, banner, featured }) {
   function modifyHomePageResponse(movies) {
     return {
       Sections: {
-        Movies: movies.Sections,
-        totalSections: movies.totalSections,
+        Movies: movies?.Sections,
+        totalSections: movies?.totalSections,
       },
     };
   }
@@ -55,7 +55,7 @@ export default function HomePage({ movies, banner, featured }) {
           <div className="col-12">
             <div>
               <img
-                src={banner.Video[0].bannerPoster}
+                src={banner?.Video[0]?.bannerPoster}
                 style={{ width: "100%" }}
               />
             </div>
@@ -66,7 +66,7 @@ export default function HomePage({ movies, banner, featured }) {
                 </div>
               </div>
             </div>
-            <HomepageSlider movies={localMovies.Sections.Movies} />
+            <HomepageSlider movies={localMovies?.Sections?.Movies} />
             {currentRow !== movies.totalSections && (
               <ScrollComponent loadMore={fetchNewMovies} />
             )}
