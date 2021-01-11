@@ -1,8 +1,17 @@
 function manipulateUrls(router) {
+
+  console.log("Router url: ",router);
   var movieId = [...router.slug].pop();
   let isChannel = movieId.charAt(movieId.length - 1);
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
   return { isChannel: isChannel, OriginalMovieId: OriginalMovieId };
+}
+
+function manipulateUrlsForCatgeory(router) {
+
+  console.log("Router url: ",router);
+  var categoryId = [...router.slug].pop();
+  return { categoryId: categoryId};
 }
 
 function basicSliderConfig(slidesToShow) {
@@ -42,13 +51,39 @@ function basicSliderConfig(slidesToShow) {
     ],
   };
 }
-function SEOFriendlySlugs(event, prefix) {
+
+function SEOFriendlySlugsForVideo(event, prefix){
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/watch/${prefix}/${cleanName}/${event.VideoEntityId}${
-    event.IsVideoChannel ? "1" : "0"
-  }`;
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+   event.IsVideoChannel ? "1" : "0"
+ }`;
+
+ return slug;
+}
+
+function SEOFriendlySlugsIsCategoryFalse(event, prefix) {
+  let slug;
+  if (event.IsVideoChannel) {
+    let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+     slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+      event.IsVideoChannel ? "1" : "0"
+    }`;
+  }else{
+    prefix = "syno/season";
+    let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+     slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  }
+
   return slug;
 }
+function SEOFriendlySlugsIsCategoryTrue(event, prefix) {
+
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
+  return slug;
+ 
+}
+
 function calculateRowsToFetch(currentRow, movies) {
   let rowFrom = currentRow;
   let rowsTo = 0;
@@ -61,6 +96,7 @@ function calculateRowsToFetch(currentRow, movies) {
     return { rowsTo: rowsTo, rowFrom: currentRow };
   }
 }
+
 function pushNewMoviesIntoList(localMovies, newMovies) {
   let movieClone = localMovies;
   movieClone = {
@@ -75,7 +111,10 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
-  SEOFriendlySlugs,
   calculateRowsToFetch,
   pushNewMoviesIntoList,
+  SEOFriendlySlugsIsCategoryFalse,
+  SEOFriendlySlugsIsCategoryTrue,
+  manipulateUrlsForCatgeory,
+  SEOFriendlySlugsForVideo
 };

@@ -16,7 +16,7 @@ export default function Shows({ shows }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={shows.Sections.Shows} />
+      {/* <HomepageSlider movies={shows.Sections.Shows} /> */}
     </div>
   );
 }

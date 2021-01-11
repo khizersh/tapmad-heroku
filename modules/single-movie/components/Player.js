@@ -12,6 +12,7 @@ export default function Player({ movie }) {
       setIsAutoPlay(true);
     }, adDuration);
   }
+
   return (
     <div>
       <div className="container-fluid">

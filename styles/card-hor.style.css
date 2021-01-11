@@ -1,0 +1,103 @@
+.synopsis_card .img-square-wrapper img {
+  display: block;
+  position: relative;
+  max-width: none;
+  width: calc(100% + 40px);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
+  transition: opacity 0.35s, transform 0.45s;
+  -webkit-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+}
+
+.synopsis_card .card-body {
+  position: absolute;
+  bottom: 0px;
+  top: 0;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  opacity: 0;
+  transition: linear 0.3s;
+}
+
+/* .horizontal-card {
+  width: "210";
+  height: "176";
+} */
+
+.synopsis_card {
+  overflow: hidden;
+}
+
+.rounded-0 {
+  border-radius: 0 !important;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.synopsis_card .card-horizontal {
+  display: block;
+}
+
+.synopsis_card:hover .card-body {
+  opacity: 1;
+  padding-left: 10px !important;
+  bottom: 0;
+  padding-top: 100px !important;
+}
+.synopsis_card:hover .img-square-wrapper > img {
+  transform: translate3d(-00px, 0, 0);
+}
+
+.banner-text {
+  font-size: 2rem;
+  font-family: "montserratbold";
+  line-height: 1.5;
+}
+.banner-text-pos{
+    position: relative;
+    top: 100px;
+}
+.play_icon{
+    /* background-color: $fff; */
+}
+.txt-grey {
+    margin-top: 4rem;
+  font-size: 19px !important;
+  color: #aaa;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.banner-img {
+  position: absolute;
+  left: 61% !important;
+  height: 21rem;
+}
+
+.height{
+    height: 21rem !important;
+}
+.bg-color {background: rgb(0,0,0);
+    background: linear-gradient(93deg, rgba(0,0,0,0) 36%, rgba(0,0,0,1) 82%);
+    
+    position: absolute;
+    bottom: 0;
+  z-index: 3;
+}
+
+
+.banner-btn{
+    margin-top: 10px;
+    background: #87c242;
+    padding: 12px 25px ;
+    font-size: 15px;
+    transition: linear 0.3s;
+    font-weight: 500;
+    font-family: "montserratbold";
+    color: #000 !important;
+}

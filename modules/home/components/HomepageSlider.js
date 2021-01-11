@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Slider from "react-slick";
-import { basicSliderConfig, SEOFriendlySlugs } from "../../../services/utils";
+import { basicSliderConfig, SEOFriendlySlugsIsCategoryTrue , SEOFriendlySlugsIsCategoryFalse } from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
   var settings = basicSliderConfig(8);
@@ -25,13 +25,17 @@ const HomepageSlider = ({ movies }) => {
     e.preventDefault(); // stops weird link dragging effect
   }
 
-  function handleOnClick(e) {
-    e.stopPropagation();
-    if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
-      // prevent link click if the element was dragged
-      e.preventDefault();
-    }
+  function handleOnClick(mov) {
+    console.log("OnCLick: ",mov);
+    // e.stopPropagation();
+    // if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
+    //   // prevent link click if the element was dragged
+    //   e.preventDefault();
+    // }
   }
+  
+
+  console.log("Movies: ", movies);
 
   return (
     <div>
@@ -43,13 +47,14 @@ const HomepageSlider = ({ movies }) => {
               <div>
                 <Slider {...settings}>
                   {movieSection && !movieSection.IsCategories
-                    ? movieSection.Videos.map((e, index) => {
-                        let slug = SEOFriendlySlugs(e, "live");
+                    ? movieSection.Videos.map((mov, index) => {
+                        let slug = SEOFriendlySlugsIsCategoryFalse(mov, "watch/live");
                         return (
                           <Link href={slug} key={index}>
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
                               onClick={(e) => handleOnClick(e)}
+                              // onClick={(e) => SEOFriendlySlugsIsCategoryFalse(mov, "watch/live")}
                             >
                               <div
                                 className="tm-mv-bx"
@@ -59,7 +64,7 @@ const HomepageSlider = ({ movies }) => {
                               >
                                 <div className="movies-images">
                                   <img
-                                    src={e.NewChannelThumbnailPath}
+                                    src={mov.NewChannelThumbnailPath}
                                     style={{ width: "100%" }}
                                   />
                                 </div>
@@ -71,22 +76,23 @@ const HomepageSlider = ({ movies }) => {
                                         color: "white",
                                       }}
                                     >
-                                      {e.VideoName}
+                                      {mov.VideoName}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </a>
-                          </Link>
+                           </Link>
                         );
                       })
-                    : movieSection.Categories.map((e, index) => {
-                        let slug = SEOFriendlySlugs(e, "season");
+                    : movieSection.Categories.map((mov, index) => {
+                        let slug = SEOFriendlySlugsIsCategoryTrue(mov, "category/season");
                         return (
                           <Link href={slug} key={index}>
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
                               onClick={(e) => handleOnClick(e)}
+                              // onClick={(e) => SEOFriendlySlugsIsCategoryTrue(mov, "category/season")}
                             >
                               <div
                                 className="tm-mv-bx"
@@ -96,7 +102,7 @@ const HomepageSlider = ({ movies }) => {
                               >
                                 <div className="movies-images">
                                   <img
-                                    src={e.NewCategoryImage}
+                                    src={mov.NewCategoryImage}
                                     style={{ width: "100%" }}
                                   />
                                 </div>
@@ -108,13 +114,13 @@ const HomepageSlider = ({ movies }) => {
                                         color: "white",
                                       }}
                                     >
-                                      {e.CategoryName}
+                                      {mov.CategoryName}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </a>
-                          </Link>
+                           </Link>
                         );
                       })}
                 </Slider>
