@@ -15,7 +15,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const modifiedResponse = modifyHomePageResponse(movies);
 
   React.useEffect(() => {
-    console.log("Movies ", movies);
+    console.log("Movies ", ip);
     setLocalMovies(modifiedResponse);
   }, []);
   async function fetchNewMovies() {

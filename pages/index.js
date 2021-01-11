@@ -19,7 +19,7 @@ export default function Home(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
-
+  ip = "119.160.116.240";
   var movieList = await get(
     "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16",
     ip
