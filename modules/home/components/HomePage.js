@@ -18,7 +18,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     console.log("Movies ", ip);
     setLocalMovies(modifiedResponse);
   }, []);
-  
+
   async function fetchNewMovies() {
     if (currentRow == movies.totalSections) {
       return;
@@ -43,10 +43,18 @@ export default function HomePage({ movies, banner, featured, ip }) {
     }
   }
   function modifyHomePageResponse(movies) {
+    if (movies.Sections && movies.Sections.length > 0) {
+      return {
+        Sections: {
+          Movies: movies.Sections,
+          totalSections: movies.totalSections,
+        },
+      };
+    }
     return {
       Sections: {
-        Movies: movies?.Sections,
-        totalSections: movies?.totalSections,
+        Movies: [],
+        totalSections: 0,
       },
     };
   }
