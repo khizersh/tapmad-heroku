@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
   var movie = await movieList.data;
   var banner = await bannersList.data;
   var featured = await featuredContent.data;
-  console.log(movie);
+  // console.log(movie);
   return {
     props: {
       movies: movie.Tabs[0],
