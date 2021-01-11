@@ -61,7 +61,7 @@ function MyApp({ Component, pageProps }) {
         <>
           <Skeleton>
             {/* {loading ? <Loader /> : null} */}
-            <Loader />
+            {/* <Loader /> */}
             <Header />
             <Component {...pageProps} />
             <Footer />
