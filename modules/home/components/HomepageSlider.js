@@ -29,7 +29,7 @@ const HomepageSlider = ({ movies }) => {
     e.preventDefault(); // stops weird link dragging effect
   }
 
-  function handleOnClick(mov) {
+  function handleOnClick(e) {
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
       // prevent link click if the element was dragged

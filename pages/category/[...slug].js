@@ -1,46 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, withRouter } from "next/router";
 import { get } from "../../services/http-service";
-import { manipulateUrls , manipulateUrlsForCatgeory } from "../../services/utils";
+import {
+  manipulateUrls,
+  manipulateUrlsForCatgeory,
+} from "../../services/utils";
 import Image from "next/image";
 import CardHorizontal from "../../modules/home/CardHorizontal";
 import CategoryDetail from "../../modules/category/CategoryDetail";
 
-const Category = () => {
+const Category = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
-  const router = useRouter();
+  const [mount, setMount] = useState(false);
 
-  useEffect(() => {
-    if (router && router.query) {
-      getChannelData(router.query);
-    }
-  }, [router.query]);
-
-  async function getChannelData(query) {
-    if (query && query.slug) {
-      let seriesDetail = manipulateUrlsForCatgeory(router.query);
-      getVideosByCategory(seriesDetail.categoryId);
+  if (!mount) {
+    if (!video) {
+      let vid = {
+        VideoName: props?.data?.CategoryName,
+        VideoDescription: props?.data?.CategoryDescription,
+        NewVideoImageThumbnail: props?.data?.NewCategoryImage,
+      };
+      setVideo(vid);
+      setVideoList([{ Videos: props?.data?.Videos }]);
     }
   }
 
-  const getVideosByCategory = async (id) => {
-    const data = await get(
-      `https://api.tapmad.com/api/getSeasonVodByCategoryId/V1/en/web/${id}`
-    );
+  useEffect(() => {
+    setMount(true);
+  }, [props]);
 
-    if(data?.data?.Response?.responseCode){
-      let vid = {
-        VideoName : data?.data?.CategoryName,
-        VideoDescription: data?.data?.CategoryDescription,
-        NewVideoImageThumbnail : data?.data?.NewCategoryImage
-      }
-
-          setVideo(vid)
-          setVideoList([{Videos: data.data.Videos}])
-    }
-
-  };
   return (
     <div className="container-fluid">
       <CategoryDetail video={video} videoList={videoList} />
@@ -48,4 +37,13 @@ const Category = () => {
   );
 };
 
-export default withRouter(Category);
+export default Category;
+
+export async function getServerSideProps(context) {
+  let { categoryId } = manipulateUrlsForCatgeory(context.query);
+  const data = await get(
+    `https://api.tapmad.com/api/getSeasonVodByCategoryId/V1/en/web/${categoryId}`
+  );
+
+  return { props: { data: data.data } };
+}

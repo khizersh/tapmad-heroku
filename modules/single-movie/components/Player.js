@@ -1,17 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
+import { post } from "../../../services/http-service";
 
-export default function Player({ movie }) {
+export default function Player({ movies }) {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [adDuration, setAdDuration] = useState(200000);
+  const adDuration = 200000;
+  const [mounted, setMounted] = useState(false);
+  const [movie, setMovie] = useState(null);
+
+  if (!mounted) {
+    if (!movie) {
+      setMovie(movies);
+    }
+  }
   function onRestartAd() {
     setIsAutoPlay(false);
     setTimeout(() => {
       setIsAutoPlay(true);
     }, adDuration);
   }
+
+  useEffect(async () => {
+    setMounted(true);
+
+    let userId = localStorage.getItem("userId");
+    if (userId) {
+      const res = await post(
+        `https://api.tapmad.com/api/getEventPredicationGameChannel`,
+        {
+          Version: "V2",
+          Language: "en",
+          Platform: "web",
+          ChannelOrVODId: movie.Video.VideoEntityId,
+          UserId: userId,
+          IsChannel: movie.Video.IsVideoChannel,
+        }
+      );
+
+      setMovie(res.data);
+    }
+  }, []);
 
   return (
     <div>
