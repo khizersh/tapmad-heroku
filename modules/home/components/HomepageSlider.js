@@ -55,11 +55,15 @@ const HomepageSlider = ({ movies }) => {
                           IsLiveChannel
                         );
                         return (
-                          <Link href={slug} key={index}>
+                          <Link
+                            href={slug}
+                            key={index}
+                            passHref={true}
+                            shallow={true}
+                          >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
                               onClick={(e) => handleOnClick(e)}
-                              // onClick={(e) => SEOFriendlySlugsIsCategoryFalse(mov, "watch/live")}
                             >
                               <div
                                 className="tm-mv-bx"
@@ -93,7 +97,12 @@ const HomepageSlider = ({ movies }) => {
                     : movieSection.Categories.map((mov, index) => {
                         let slug = setUrlAccordingToVideoType(mov, IsCategory);
                         return (
-                          <Link href={slug} key={index}>
+                          <Link
+                            href={slug}
+                            key={index}
+                            passHref={true}
+                            shallow={true}
+                          >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
                               onClick={(e) => handleOnClick(e)}

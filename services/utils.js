@@ -117,4 +117,5 @@ module.exports = {
   pushNewMoviesIntoList,
   manipulateUrlsForCatgeory,
   setUrlAccordingToVideoType,
+  SEOFriendlySlugsForVideo,
 };

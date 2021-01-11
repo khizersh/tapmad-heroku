@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <title>
           Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
           Free
