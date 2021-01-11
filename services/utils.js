@@ -1,6 +1,6 @@
-function manipulateUrls(router) {
+const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
 
-  console.log("Router url: ",router);
+function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
   let isChannel = movieId.charAt(movieId.length - 1);
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
@@ -8,10 +8,8 @@ function manipulateUrls(router) {
 }
 
 function manipulateUrlsForCatgeory(router) {
-
-  console.log("Router url: ",router);
   var categoryId = [...router.slug].pop();
-  return { categoryId: categoryId};
+  return { categoryId: categoryId };
 }
 
 function basicSliderConfig(slidesToShow) {
@@ -52,38 +50,42 @@ function basicSliderConfig(slidesToShow) {
   };
 }
 
-function SEOFriendlySlugsForVideo(event, prefix){
+function SEOFriendlySlugsForVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
-   event.IsVideoChannel ? "1" : "0"
- }`;
-
- return slug;
-}
-
-function SEOFriendlySlugsIsCategoryFalse(event, prefix) {
-  let slug;
-  if (event.IsVideoChannel) {
-    let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-     slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
-      event.IsVideoChannel ? "1" : "0"
-    }`;
-  }else{
-    prefix = "syno/season";
-    let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-     slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
-  }
+  let slug = `/watch/live/${cleanName}/${event.VideoEntityId}${
+    event.IsVideoChannel ? "1" : "0"
+  }`;
 
   return slug;
 }
-function SEOFriendlySlugsIsCategoryTrue(event, prefix) {
 
+function SEOFriendlySlugsIsCategoryFalse(event) {
+  let prefix = "syno/season";
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+    event.IsVideoChannel ? "1" : "0"
+  }`;
+  return slug;
+}
+function SEOFriendlySlugsIsCategoryTrue(event) {
+  let prefix = "category/season";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
   return slug;
- 
 }
-
+function setUrlAccordingToVideoType(movie, type) {
+  let slug = "";
+  if (type == IsLiveChannel) {
+    if (!movie.IsVideoChannel) {
+      slug = SEOFriendlySlugsIsCategoryFalse(movie);
+    } else {
+      slug = SEOFriendlySlugsForVideo(movie);
+    }
+  } else if (type == IsCategory) {
+    slug = SEOFriendlySlugsIsCategoryTrue(movie);
+  }
+  return slug;
+}
 function calculateRowsToFetch(currentRow, movies) {
   let rowFrom = currentRow;
   let rowsTo = 0;
@@ -113,8 +115,6 @@ module.exports = {
   basicSliderConfig,
   calculateRowsToFetch,
   pushNewMoviesIntoList,
-  SEOFriendlySlugsIsCategoryFalse,
-  SEOFriendlySlugsIsCategoryTrue,
   manipulateUrlsForCatgeory,
-  SEOFriendlySlugsForVideo
+  setUrlAccordingToVideoType,
 };

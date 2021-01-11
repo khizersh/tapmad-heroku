@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Slider from "react-slick";
+import { IsCategory, IsLiveChannel } from "../../../services/constants";
 import {
   basicSliderConfig,
-  SEOFriendlySlugsIsCategoryTrue,
-  SEOFriendlySlugsIsCategoryFalse,
+  setUrlAccordingToVideoType,
 } from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
@@ -50,9 +50,9 @@ const HomepageSlider = ({ movies }) => {
                 <Slider {...settings}>
                   {movieSection && !movieSection.IsCategories
                     ? movieSection.Videos.map((mov, index) => {
-                        let slug = SEOFriendlySlugsIsCategoryFalse(
+                        let slug = setUrlAccordingToVideoType(
                           mov,
-                          "watch/live"
+                          IsLiveChannel
                         );
                         return (
                           <Link href={slug} key={index}>
@@ -91,10 +91,7 @@ const HomepageSlider = ({ movies }) => {
                         );
                       })
                     : movieSection.Categories.map((mov, index) => {
-                        let slug = SEOFriendlySlugsIsCategoryTrue(
-                          mov,
-                          "category/season"
-                        );
+                        let slug = setUrlAccordingToVideoType(mov, IsCategory);
                         return (
                           <Link href={slug} key={index}>
                             <a
