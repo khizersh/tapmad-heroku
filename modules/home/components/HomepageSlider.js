@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Slider from "react-slick";
-import { basicSliderConfig, SEOFriendlySlugsIsCategoryTrue , SEOFriendlySlugsIsCategoryFalse } from "../../../services/utils";
+import {
+  basicSliderConfig,
+  SEOFriendlySlugsIsCategoryTrue,
+  SEOFriendlySlugsIsCategoryFalse,
+} from "../../../services/utils";
 
 const HomepageSlider = ({ movies }) => {
   var settings = basicSliderConfig(8);
@@ -26,14 +30,12 @@ const HomepageSlider = ({ movies }) => {
   }
 
   function handleOnClick(mov) {
-    console.log("OnCLick: ",mov);
-    // e.stopPropagation();
-    // if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
-    //   // prevent link click if the element was dragged
-    //   e.preventDefault();
-    // }
+    e.stopPropagation();
+    if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
+      // prevent link click if the element was dragged
+      e.preventDefault();
+    }
   }
-  
 
   console.log("Movies: ", movies);
 
@@ -48,7 +50,10 @@ const HomepageSlider = ({ movies }) => {
                 <Slider {...settings}>
                   {movieSection && !movieSection.IsCategories
                     ? movieSection.Videos.map((mov, index) => {
-                        let slug = SEOFriendlySlugsIsCategoryFalse(mov, "watch/live");
+                        let slug = SEOFriendlySlugsIsCategoryFalse(
+                          mov,
+                          "watch/live"
+                        );
                         return (
                           <Link href={slug} key={index}>
                             <a
@@ -82,11 +87,14 @@ const HomepageSlider = ({ movies }) => {
                                 </div>
                               </div>
                             </a>
-                           </Link>
+                          </Link>
                         );
                       })
                     : movieSection.Categories.map((mov, index) => {
-                        let slug = SEOFriendlySlugsIsCategoryTrue(mov, "category/season");
+                        let slug = SEOFriendlySlugsIsCategoryTrue(
+                          mov,
+                          "category/season"
+                        );
                         return (
                           <Link href={slug} key={index}>
                             <a
@@ -120,7 +128,7 @@ const HomepageSlider = ({ movies }) => {
                                 </div>
                               </div>
                             </a>
-                           </Link>
+                          </Link>
                         );
                       })}
                 </Slider>
