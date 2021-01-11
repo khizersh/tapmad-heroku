@@ -1,12 +1,29 @@
 import "../styles/globals.scss";
 import "../styles/card-hor.style.css";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
+import Router from "next/router";
 
 function MyApp({ Component, pageProps }) {
+  const [loading, setLoading] = useState(false);
+  Router.onRouteChangeStart = (url) => {
+    // NProgress.start()
+    setLoading(true);
+    console.log("Route Change start");
+  };
+
+  Router.onRouteChangeComplete = () => {
+    setLoading(false);
+    console.log("Route Change Complete");
+  };
+
+  Router.onRouteChangeError = () => {
+    setLoading(false);
+    console.log("Route Change Failed");
+  };
   return (
     <>
       <Head>
@@ -43,6 +60,8 @@ function MyApp({ Component, pageProps }) {
       ) : (
         <>
           <Skeleton>
+            {/* {loading ? <Loader /> : null} */}
+            <Loader />
             <Header />
             <Component {...pageProps} />
             <Footer />
