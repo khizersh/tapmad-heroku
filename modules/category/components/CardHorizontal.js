@@ -1,7 +1,7 @@
 import React from "react";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import Link from "next/link";
-import "css/card-hor.style.css";
+import "../css/card-hor.style.css";
 const CardHorizontal = ({ video }) => {
   let slug = SEOFriendlySlugsForVideo(video);
 
