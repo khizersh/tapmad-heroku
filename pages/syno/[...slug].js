@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import CategoryDetail from "../../modules/category/CategoryDetail";
 import { manipulateUrls } from "../../services/utils";
 import { get } from "../../services/http-service";
+import CategoryDetail from "../../modules/category/components/CategoryDetail";
 
 const Syno = (props) => {
   const [videoList, setVideoList] = useState([]);
