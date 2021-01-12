@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useRouter, withRouter } from "next/router";
 import { get } from "../../services/http-service";
-import {
-  manipulateUrls,
-  manipulateUrlsForCatgeory,
-} from "../../services/utils";
-import Image from "next/image";
-import CardHorizontal from "../../modules/home/CardHorizontal";
-import CategoryDetail from "../../modules/category/CategoryDetail";
+import { manipulateUrlsForCatgeory } from "../../services/utils";
+import CategoryDetail from "../../modules/category/components/CategoryDetail";
 
 const Category = (props) => {
   const [videoList, setVideoList] = useState([]);

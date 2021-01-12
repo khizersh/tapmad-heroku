@@ -7,3 +7,6 @@ module.exports = {
     ],
   },
 };
+const withCSS = require("@zeit/next-css");
+const withSCSS = require("@zeit/next-sass");
+module.exports = withCSS(withSCSS({}));

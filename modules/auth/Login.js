@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./auth.module.css";
 export default function Login() {
   return (
     <div className="bg_dark">
@@ -15,67 +15,10 @@ export default function Login() {
                 <h4>Enter your Mobile Number</h4>
                 <p>Please Enter your Mobile Number to login</p>
                 <div className="input-group">
-                  <div className="mm-dropdown form-control">
-                    <div className="textfirst">
-                      Select
-                      <img
-                        src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png"
-                        width="10"
-                        height="10"
-                        className="down"
-                      />
-                    </div>
-                    <ul>
-                      <li className="input-option" style={{ display: "none" }}>
-                        <img
-                          src="https://images.tapmad.com/images/mobileOperator/jazz-logo.jpg"
-                          alt=""
-                          width="20"
-                          height="20"
-                        />{" "}
-                        <span className="ng-binding">Jazz/Warid</span>
-                      </li>
-
-                      <li
-                        className="input-option ng-scope"
-                        style={{ display: "none" }}
-                      >
-                        <img
-                          src="https://images.tapmad.com/images/mobileOperator/telenor-logo.jpg"
-                          alt=""
-                          width="20"
-                          height="20"
-                        />{" "}
-                        <span className="ng-binding">Telenor</span>
-                      </li>
-
-                      <li
-                        className="input-option ng-scope"
-                        style={{ display: "none" }}
-                      >
-                        <img
-                          src="https://images.tapmad.com/images/mobileOperator/zong-logo.jpg"
-                          alt=""
-                          width="20"
-                          height="20"
-                        />{" "}
-                        <span className="ng-binding">Zong</span>
-                      </li>
-
-                      <li
-                        className="input-option ng-scope"
-                        style={{ display: "none" }}
-                      >
-                        <img
-                          src="https://images.tapmad.com/images/mobileOperator/ufone-logo.jpg"
-                          alt=""
-                          width="20"
-                          height="20"
-                        />{" "}
-                        <span className="ng-binding">Ufone</span>
-                      </li>
-                    </ul>
-                  </div>
+                  <select>
+                    <option>Select</option>
+                    <option>Jazz</option>
+                  </select>
 
                   <input type="hidden" id="CountryMobileCode" value="+92" />
 
@@ -91,8 +34,8 @@ export default function Login() {
                   <input
                     type="text"
                     id="input_msisdn12"
-                    maxlength="10"
-                    minlength="10"
+                    maxLength="10"
+                    minLength="10"
                     className="form-control"
                     placeholder="3xxxxxxxxxx"
                   />

@@ -1,8 +1,8 @@
 import React from "react";
-import CardHorizontal from "../home/CardHorizontal";
+import CardHorizontal from "./CardHorizontal";
 
-const CategoryDetail = ({video , videoList}) => {
-    console.log("Video List: ");
+const CategoryDetail = ({ video, videoList }) => {
+  console.log("Video List: ");
   return (
     <div className="container-fluid">
       <div className="row">

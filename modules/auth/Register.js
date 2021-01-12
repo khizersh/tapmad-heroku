@@ -204,7 +204,7 @@ export default function Register() {
                           type="text"
                           id="input_msisdn12"
                           required=""
-                          minlength="10"
+                          minLength="10"
                           className="form-control"
                           placeholder="3xxxxxxxxx"
                         />

@@ -1,5 +1,4 @@
 import "../styles/globals.scss";
-import "../styles/card-hor.style.css";
 import Head from "next/head";
 import React, { useState } from "react";
 import Header from "../components/App/Header";

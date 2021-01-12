@@ -1,0 +1,157 @@
+.bg_dark {
+  background: url("//d1s7wg2ne64q87.cloudfront.net/web/images/sign-bg.jpg");
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.tm_login_pg {
+  display: table;
+  width: 100%;
+}
+
+.login_slct_oprtr {
+  /* padding-top: 50px; */
+  transition: 0.3s;
+  color: #fff;
+  display: table-cell;
+  width: 100%;
+  height: 100vh;
+  vertical-align: middle;
+}
+
+.req_pin_cde_btn {
+  background-color: #4d8305;
+  padding: 12px 6px;
+  font-size: 18px;
+  text-transform: uppercase;
+  height: 50px;
+  margin-top: 15px;
+  color: #fff;
+  border: 0;
+}
+
+.req_pin_cde_btn:hover {
+  background-color: #4d8305 !important;
+}
+
+.req_pin_cde_btn:focus {
+  background-color: #4d8305 !important;
+}
+
+.req_pin_cde_btn:active {
+  background-color: #4d8305 !important;
+}
+
+.login_slct_oprtr .form-control {
+  border-left: 1px solid #ccc !important;
+  border-radius: 0;
+  border: 0;
+  background: #f1f1f1;
+  height: 45px;
+  padding: 13px 6px;
+  box-shadow: none;
+  font-weight: bold;
+  /* margin-top: -2% */
+}
+
+.login_slct_oprtr h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.login_slct_oprtr p {
+  margin-bottom: 20px;
+}
+
+.login_slct_oprtr1 {
+  display: none;
+}
+
+.login_pin_card,
+.login_set_pin_card,
+.forget_pin_card {
+  display: none;
+}
+
+.telenor_verify_otp,
+.login_slct_oprtr2 {
+  display: none;
+  transition: 0.3s;
+}
+
+.login_slct_oprtr_active {
+  display: table-cell;
+  transition: 0.3s;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .bg_dark,
+  .tm_login_pg {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width: 321px) {
+  .bg_dark,
+  .tm_login_pg {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 320px) {
+  .bg_dark,
+  .tm_login_pg {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+}
+
+/* iPhone 5 (portrait &amp; landscape)----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .bg_dark,
+  .tm_login_pg {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+}
+
+/* iPhone 5 (landscape)----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
+  .bg_dark,
+  .tm_login_pg {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+}
+
+/* iPhone 5 (portrait)----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+  .bg_dark,
+  .tm_login_pg {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 1224px) {
+  .bg_dark {
+    margin-left: -4%;
+  }
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width: 1824px) {
+  .bg_dark {
+    margin-left: -4%;
+  }
+}
