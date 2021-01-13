@@ -6,13 +6,13 @@ export default function Header() {
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
-            <a href="/" className="tm_logo_grn">
+            <Link href="/">
               <img
                 src="https://www.tapmad.com/images/tm-logo.png"
                 width="130"
                 alt=""
               />
-            </a>
+            </Link>
           </div>
           <div className="col-6 col-sm-6 col-md-6 .col-lg-6 d-none d-sm-block main_menu">
             <ul className="nav justify-content-center">
@@ -79,9 +79,9 @@ export default function Header() {
               </li>
 
               <li id="loginAva1" className="nav-item">
-                <a href="sign-in" className="pull-right d-xs-none">
-                  Sign in
-                </a>
+                <Link href="sign-in">
+                  <a className="pull-right d-xs-none">Sign in</a>
+                </Link>
               </li>
 
               <li id="loginAva2" className="nav-item hidden">

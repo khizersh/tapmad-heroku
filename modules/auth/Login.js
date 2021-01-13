@@ -1,11 +1,17 @@
 import React from "react";
+import { MainContext } from "../../contexts/MainContext";
 import "./auth.module.css";
 export default function Login() {
+  const { AuthDetails } = React.useContext(MainContext);
+  React.useEffect(() => {
+    console.log("state is", AuthDetails);
+  }, [AuthDetails]);
+
   return (
     <div className="bg_dark">
       <div className="container">
         <div className="row">
-          <div className="col-sm-12 col-md-4 ">
+          <div className="col-sm-12 col-md-4">
             <div className="tm_login_pg">
               <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
                 <img
@@ -14,32 +20,40 @@ export default function Login() {
                 />
                 <h4>Enter your Mobile Number</h4>
                 <p>Please Enter your Mobile Number to login</p>
-                <div className="input-group">
-                  <select>
-                    <option>Select</option>
-                    <option>Jazz</option>
-                  </select>
+                {AuthDetails && (
+                  <div className="input-group">
+                    <select>
+                      <option>Select</option>
+                      {AuthDetails.LoginOperators.map((e, index) => {
+                        return (
+                          <option key={index} value={e.OperatorId}>
+                            {e.OperatorName}
+                          </option>
+                        );
+                      })}
+                    </select>
 
-                  <input type="hidden" id="CountryMobileCode" value="+92" />
+                    <input type="hidden" id="CountryMobileCode" value="+92" />
 
-                  <span>
-                    <label
+                    <span>
+                      <label
+                        className="form-control"
+                        style={{ fontSize: "14px" }}
+                      >
+                        {AuthDetails.MobileCode}
+                      </label>
+                    </span>
+
+                    <input
+                      type="text"
+                      id="input_msisdn12"
+                      maxLength="10"
+                      minLength="10"
                       className="form-control"
-                      style={{ fontSize: "14px" }}
-                    >
-                      +92
-                    </label>
-                  </span>
-
-                  <input
-                    type="text"
-                    id="input_msisdn12"
-                    maxLength="10"
-                    minLength="10"
-                    className="form-control"
-                    placeholder="3xxxxxxxxxx"
-                  />
-                </div>
+                      placeholder="3xxxxxxxxxx"
+                    />
+                  </div>
+                )}
                 <div className="form-group">
                   <button
                     type="button"

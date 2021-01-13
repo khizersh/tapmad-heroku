@@ -5,6 +5,7 @@ import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
 import Router from "next/router";
+import MainProvider from "../contexts/MainContext";
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
@@ -55,14 +56,18 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       {pageProps.noSideBar ? (
-        <Component {...pageProps} />
+        <MainProvider>
+          <Component {...pageProps} />
+        </MainProvider>
       ) : (
         <>
           <Skeleton>
             {/* {loading ? <Loader /> : null} */}
             {/* <Loader /> */}
             <Header />
-            <Component {...pageProps} />
+            <MainProvider>
+              <Component {...pageProps} />
+            </MainProvider>
             <Footer />
           </Skeleton>
         </>
