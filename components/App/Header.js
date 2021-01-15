@@ -1,6 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import { MainContext } from "../../contexts/MainContext";
 export default function Header() {
+  const { initialState } = useContext(MainContext);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -77,18 +79,19 @@ export default function Header() {
                   />
                 </a>
               </li>
-
-              <li id="loginAva1" className="nav-item">
-                <Link href="sign-in">
-                  <a className="pull-right d-xs-none">Sign in</a>
-                </Link>
-              </li>
-
-              <li id="loginAva2" className="nav-item hidden">
-                <a href="#" className="pull-right d-xs-none">
-                  Signout
-                </a>
-              </li>
+              {initialState.isAuthenticated ? (
+                <li id="loginAva2" className="nav-item">
+                  <a href="#" className="pull-right d-xs-none">
+                    Signout
+                  </a>
+                </li>
+              ) : (
+                <li id="loginAva1" className="nav-item">
+                  <Link href="sign-in">
+                    <a className="pull-right d-xs-none">Sign in</a>
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
