@@ -87,7 +87,7 @@ export default function Header() {
                 </li>
               ) : (
                 <li id="loginAva1" className="nav-item">
-                  <Link href="sign-in">
+                  <Link href="/sign-in">
                     <a className="pull-right d-xs-none">Sign in</a>
                   </Link>
                 </li>

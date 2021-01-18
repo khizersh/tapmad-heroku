@@ -1,0 +1,27 @@
+.nav-item {
+  flex: 1;
+  text-align: center;
+}
+.nav-tabs .nav-link {
+  border: 0px;
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  border-bottom: 3px solid white;
+}
+.nav-link:hover,
+.nav-link:focus {
+  border-bottom: 3px solid white;
+}
+.nav-tabs {
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+}
+.product-images {
+  overflow: hidden;
+  padding: 1px;
+}
+.product-images img {
+  border-radius: 4px;
+  width: 100%;
+}

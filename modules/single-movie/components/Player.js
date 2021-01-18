@@ -3,6 +3,7 @@ import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
 import { post } from "../../../services/http-service";
+import PlayerShop from "../../player-shop/player-shop";
 
 export default function Player({ movies }) {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
@@ -99,7 +100,12 @@ export default function Player({ movies }) {
               ) : null}
             </div>
             {/* Banner Add */}
+
             <div className="col-lg-12">
+              <div>
+                <PlayerShop />
+                <br />
+              </div>
               <DFPSlotsProvider dfpNetworkId="28379801">
                 <div className="desktops-ads text-center d-none d-lg-block d-md-block">
                   <AdSlot
@@ -108,18 +114,12 @@ export default function Player({ movies }) {
                   />
                 </div>
               </DFPSlotsProvider>
-              {/* <DFPSlotsProvider dfpNetworkId="28379801">
-                <div className="desktop-ads">
-                  <AdSlot sizes={[[300, 250]]} adUnit={"Desktop_MREC"} />
-                </div>
-              </DFPSlotsProvider> */}
             </div>
           </div>
           {/* Side Add */}
           <div className="col-lg-3 text-center pt-5 ">
             <DFPSlotsProvider dfpNetworkId="28379801">
               <div className="desktop-ads">
-                {/* <AdSlot sizes={[[728, 90]]} adUnit={"Tapmad_LB_Desktop_HP_3"} /> */}
                 <AdSlot sizes={[[300, 250]]} adUnit={"BlueKai_MREC_Banner"} />
               </div>
             </DFPSlotsProvider>
