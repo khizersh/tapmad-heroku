@@ -56,15 +56,38 @@
   font-family: "montserratbold";
   line-height: 1.5;
 }
-.banner-text-pos{
-    position: relative;
-    top: 100px;
+.banner-text-pos {
+  position: relative;
+  top: 100px;
 }
-.play_icon{
-    /* background-color: $fff; */
+.card-desc {
+  font-size: 13px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #6c757d;
+}
+
+.img-thumb {
+  width: 134px;
+  transform: translate3d(0px, 0, 0);
+}
+.card-desc-div {
+  padding-left: 0.5rem;
+}
+
+.card-desc-div h5 {
+  margin-bottom: 0.25rem !important;
+}
+
+.card-title {
+  font-size: 16px;
+  font-family: "Aktiv Grotesk W01 Regular";
 }
 .txt-grey {
-    margin-top: 4rem;
+  margin-top: 4rem;
   font-size: 19px !important;
   color: #aaa;
   display: -webkit-box;
@@ -79,25 +102,44 @@
   height: 21rem;
 }
 
-.height{
-    height: 21rem !important;
+.height {
+  height: 21rem !important;
 }
-.bg-color {background: rgb(0,0,0);
-    background: linear-gradient(93deg, rgba(0,0,0,0) 36%, rgba(0,0,0,1) 82%);
-    
-    position: absolute;
-    bottom: 0;
+.bg-color {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    93deg,
+    rgba(0, 0, 0, 0) 36%,
+    rgba(0, 0, 0, 1) 82%
+  );
+
+  position: absolute;
+  bottom: 0;
   z-index: 3;
 }
 
+.banner-btn {
+  margin-top: 10px;
+  background: #87c242;
+  padding: 12px 25px;
+  font-size: 15px;
+  transition: linear 0.3s;
+  font-weight: 500;
+  font-family: "montserratbold";
+  color: #000 !important;
+}
+.mbl-hide {
+  display: none;
+}
 
-.banner-btn{
-    margin-top: 10px;
-    background: #87c242;
-    padding: 12px 25px ;
-    font-size: 15px;
-    transition: linear 0.3s;
-    font-weight: 500;
-    font-family: "montserratbold";
-    color: #000 !important;
+.desktop-show {
+  display: block;
+}
+@media screen and (max-width: 576px) {
+  .mbl-hide {
+    display: block !important;
+  }
+  .desktop-show {
+    display: none !important;
+  }
 }
