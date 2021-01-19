@@ -1,5 +1,6 @@
 import React from "react";
-import CardHorizontal from "./CardHorizontal";
+import Card from "./card/card";
+import CategoryVerticalCard from "./CategoryVerticalCard";
 
 const CategoryDetail = ({ video, videoList }) => {
   console.log("Video List: ");
@@ -33,9 +34,7 @@ const CategoryDetail = ({ video, videoList }) => {
       </div>
       <div className="row mt-4">
         {videoList && videoList.length > 0 && videoList[0].Videos
-          ? videoList[0].Videos.map((vid, i) => (
-              <CardHorizontal key={i} video={vid} />
-            ))
+          ? videoList[0].Videos.map((vid, i) => <Card key={i} video={vid} />)
           : null}
       </div>
     </div>
