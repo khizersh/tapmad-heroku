@@ -8,7 +8,7 @@ function validateUser(data) {
       if (user.IsPinSet) {
         return "enter-pin";
       } else {
-        return "set-pin";
+        return "send-otp";
       }
     } else {
       return "sign-up";

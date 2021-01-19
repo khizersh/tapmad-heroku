@@ -7,6 +7,10 @@ export const MainContext = React.createContext(null);
 export default function MainProvider({ children }) {
   const [initialState, setInitialState] = React.useState({
     isAuthenticated: false,
+    User: {
+      MobileNo: "",
+      OperatorId: "",
+    },
   });
   React.useEffect(async () => {
     var operators = await get(
@@ -16,17 +20,34 @@ export default function MainProvider({ children }) {
     setInitialState({ ...stateClone, AuthDetails: operators.data });
     checkUserAuthentication();
   }, []);
+
+  function updateUserNumber(number) {
+    let stateClone = { ...initialState };
+    setInitialState({
+      ...stateClone,
+      User: { ...stateClone.User, MobileNo: number },
+    });
+  }
+  function updateUserOperator(operator) {
+    let stateClone = { ...initialState };
+    setInitialState({
+      ...stateClone,
+      User: { ...stateClone.User, OperatorId: operator },
+    });
+  }
   function checkUserAuthentication() {
     const userId = Cookie.getCookies("userId");
     const isAuthenticated = Cookie.getCookies("isAuth");
     if (userId && isAuthenticated == 1) {
-      let stateClone = initialState;
-      setInitialState({ ...stateClone, isAuthenticated: true });
+      let stateClone = { ...initialState };
+      setInitialState({ stateClone, isAuthenticated: true });
     }
   }
   let data = {
     initialState,
     checkUserAuthentication,
+    updateUserNumber,
+    updateUserOperator,
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }

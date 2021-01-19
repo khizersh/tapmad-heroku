@@ -1,6 +1,31 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import { MainContext } from "../../contexts/MainContext";
+import { Cookie } from "../../services/cookies";
+import { post } from "../../services/http-service";
 
 export default function SetPin() {
+  const [pin, setPin] = useState("");
+  const { checkUserAuthentication } = useContext(MainContext);
+  const router = useRouter();
+
+  async function setUserPin() {
+    var resp = await post("https://api.tapmad.com/api/setUserPinCode", {
+      Version: "V1",
+      Language: "en",
+      Platform: "Web",
+      UserId: Cookie.getCookies("userId"),
+      UserPinCode: pin,
+    });
+    if (resp.data.Response.responseCode == 1) {
+      Cookie.setCookies("isAuth", 1);
+      checkUserAuthentication();
+      router.push("/");
+    } else {
+      Cookie.setCookies("isAuth", 0);
+    }
+  }
+  const { initialState } = useContext(MainContext);
   return (
     <div className="login_slct_oprtr login_set_pin_card login_slct_oprtr_active">
       <img
@@ -16,6 +41,7 @@ export default function SetPin() {
           className="text-center form-control numeric"
           readonly=""
           placeholder="Enter mobile number"
+          value={0 + initialState?.User?.MobileNo}
         />
       </div>
       <div className="form-group" style={{ marginBottom: "0.3rem" }}>
@@ -27,9 +53,9 @@ export default function SetPin() {
           className="text-center form-control numeric"
           minLength="4"
           maxLength="4"
-          id="newCardPin1"
           placeholder="4 digit PIN"
-          name=""
+          name="pin"
+          onChange={(e) => setPin(e.target.value)}
         />
       </div>
       <div className="form-group" style={{ marginBottom: "0.3rem" }}>
@@ -41,13 +67,15 @@ export default function SetPin() {
           className="text-center form-control numeric"
           minlength="4"
           maxlength="4"
-          id="newCardPin2"
           placeholder="4 digit PIN"
-          name=""
+          name="pin"
         />
       </div>
       <div className="form-group text-center mb-0">
-        <button className="btn btn-block btn-success req_pin_cde_btn req_pin_cde_btn2">
+        <button
+          className="btn btn-block btn-success req_pin_cde_btn req_pin_cde_btn2"
+          onClick={setUserPin}
+        >
           Set Your Pin
         </button>
       </div>

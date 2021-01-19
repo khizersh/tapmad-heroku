@@ -27,6 +27,8 @@ export default function AuthViews() {
       return <SetPin />;
     } else if (viewToShow == "login") {
       return <Login loginResponse={processResponse} />;
+    } else if (viewToShow == "send-otp") {
+      return <ForgetPin updateView={() => setViewToShow("set-pin")} />;
     } else if (viewToShow == "sign-up") {
       router.push("sign-up");
       return <div></div>;
