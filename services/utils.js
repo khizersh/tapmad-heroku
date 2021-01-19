@@ -12,7 +12,7 @@ function manipulateUrlsForCatgeory(router) {
   return { categoryId: categoryId };
 }
 
-function basicSliderConfig(slidesToShow) {
+function basicSliderConfig(slidesToShow, mobileView) {
   return {
     dots: false,
     infinite: false,
@@ -34,15 +34,15 @@ function basicSliderConfig(slidesToShow) {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
+          slidesToShow: mobileView ? mobileView : 5,
+          slidesToScroll: mobileView ? mobileView : 5,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: mobileView ? mobileView : 3,
+          slidesToScroll: mobileView ? mobileView : 3,
           arrows: false,
         },
       },
