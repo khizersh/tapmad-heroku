@@ -1,6 +1,5 @@
 import React from "react";
-import Card from "./card/card";
-import CategoryVerticalCard from "./CategoryVerticalCard";
+import Card from "./card/Card";
 
 const CategoryDetail = ({ video, videoList }) => {
   console.log("Video List: ");
