@@ -8,6 +8,7 @@ import {
 } from "../../../services/utils";
 import { get } from "../../../services/http-service";
 import HomepageFeatured from "./FeaturedSlider";
+import Link from "next/link";
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
@@ -15,7 +16,6 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const modifiedResponse = modifyHomePageResponse(movies);
 
   React.useEffect(() => {
-    console.log("Movies ", ip);
     setLocalMovies(modifiedResponse);
   }, []);
 
@@ -69,9 +69,19 @@ export default function HomePage({ movies, banner, featured, ip }) {
                 style={{ width: "100%" }}
               />
             </div>
-            <div className="tm-upcmng">
-              <div className="row w-100">
-                <div className="col-10 offset-1">
+
+            <div className="row width-100">
+              <div className="col-12">
+                <div className="home-banner-btn">
+                  <Link href="/" passHref={true} shallow={true}>
+                    <a className="tm_wishlst_btn_active tm_wishlst_btn">
+                      Watch Now
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-10 col-md-10 col-sm-12  col-xs-12 offset-lg-1 offset-md-1">
+                <div className="tm-upcmng">
                   <HomepageFeatured featured={featured} />
                 </div>
               </div>
