@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { MainContext } from "../../contexts/MainContext";
+import { post } from "../../services/http-service";
 
-export default function ForgetPin() {
+export default function ForgetPin(props) {
+  const [userOtp, setUserOtp] = useState("");
+  const { initialState } = React.useContext(MainContext);
+
+  let userDetails = props;
+
+  React.useEffect(async () => {
+    var resp = await post("https://api.tapmad.com/api/sendOTP/V1/en/web", {
+      MobileNo: initialState.User.MobileNo,
+      OperatorId: initialState.User.OperatorId,
+    });
+    console.log(resp.data);
+  }, []);
+
+  async function verifyOTP() {
+    var resp = await post(
+      "https://api.tapmad.com/api/verifyOTP/V1/en/android",
+      { MobileNo: 0 + initialState.User.MobileNo, otpCode: userOtp }
+    );
+    console.log(resp.data);
+    if (resp.data.responseCode == 1) {
+      userDetails.updateView(true);
+    }
+  }
   return (
     <div className="login_slct_oprtr login_slct_oprtr2 login_slct_oprtr_active">
       <img
@@ -12,18 +37,18 @@ export default function ForgetPin() {
       <div className="form-group">
         <input
           type="text"
-          id="verify_otp_input"
           maxLength="4"
           minLength="4"
           className="text-center form-control"
           placeholder="Enter your OTP"
+          onChange={(e) => setUserOtp(e.target.value)}
         />
       </div>
       <div className="form-group" style={{ marginBottom: "10px" }}>
         <button
           type="button"
-          id="submit_msisdn_verify"
           className="btn btn-block btn-success req_pin_cde_btn"
+          onClick={async () => await verifyOTP()}
         >
           Verify OTP Code
         </button>

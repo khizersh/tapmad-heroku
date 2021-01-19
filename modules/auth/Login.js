@@ -4,11 +4,16 @@ import { post } from "../../services/http-service";
 import "./auth.module.css";
 
 export default function Login({ loginResponse }) {
-  const { initialState } = React.useContext(MainContext);
+  const {
+    initialState,
+    updateUserNumber,
+    updateUserOperator,
+  } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
+
   React.useEffect(() => {
-    console.log("state is", initialState.AuthDetails);
-  }, [initialState.AuthDetails]);
+    console.log("state is", initialState);
+  }, [initialState]);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
@@ -22,6 +27,7 @@ export default function Login({ loginResponse }) {
         Language: "en",
         MobileNo: mobileNo,
       });
+      updateUserNumber(mobileNo);
       loginResponse(response.data);
     }
   }
@@ -33,7 +39,10 @@ export default function Login({ loginResponse }) {
       <p>Please Enter your Mobile Number to login</p>
       {initialState.AuthDetails && (
         <div className="input-group">
-          <select>
+          <select
+            value={initialState.User.OperatorId}
+            onChange={(e) => updateUserOperator(e.target.value)}
+          >
             <option>Select</option>
             {initialState.AuthDetails.LoginOperators.map((e, index) => {
               return (
