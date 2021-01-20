@@ -74,9 +74,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
               <div className="col-12">
                 <div className="home-banner-btn">
                   <Link href="/" passHref={true} shallow={true}>
-                    <a className="tm_wishlst_btn_active tm_wishlst_btn">
-                      Watch Now
-                    </a>
+                    <a className="btn btn-primary">Watch Now</a>
                   </Link>
                 </div>
               </div>

@@ -2,20 +2,21 @@ import React from "react";
 import Card from "./card/Card";
 
 const CategoryDetail = ({ video, videoList }) => {
-  console.log("Video List: ");
   return (
-    <div className="container-fluid">
+    <>
       <div className="row">
         <div className="col-sm-12">
           <div className="row">
-            <div className="col-6">
-              <h1>{video && video.VideoName}</h1>
-              <div className="txt-grey">{video && video.VideoDescription}</div>
+            <div className="col-lg-6 col-md-6 col-12 col-sm-12">
+              <h2>{video && video.VideoName}</h2>
+              <div className="text-white">
+                {video && video.VideoDescription}
+              </div>
               <div>
-                <button className="btn  banner-btn">Play</button>
+                <button className="btn btn-primary">Play</button>
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-lg-6 col-md-6 col-12 col-sm-12 d-none d-sm-none d-lg-block d-md-block">
               {video && video["NewVideoImageThumbnail"] ? (
                 <div>
                   <img src={video["NewVideoImageThumbnail"]} />
@@ -31,12 +32,12 @@ const CategoryDetail = ({ video, videoList }) => {
           </div>
         </div>
       </div>
-      <div className="row mt-4">
+      <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => <Card key={i} video={vid} />)
           : null}
       </div>
-    </div>
+    </>
   );
 };
 

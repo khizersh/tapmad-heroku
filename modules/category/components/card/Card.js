@@ -10,13 +10,9 @@ const Card = ({ video }) => {
 
   return (
     <>
-      <div className="desktop-show col-12 col-sm-4 col-md-3 col-lg-2 p-1">
-        <CategoryVerticalCard video={video} />
-      </div>
+      <CategoryHorizontalCard video={video} />
 
-      <div className="mbl-hide col-12">
-        <CategoryHorizontalCard video={video} />
-      </div>
+      <CategoryVerticalCard video={video} />
     </>
   );
 };
