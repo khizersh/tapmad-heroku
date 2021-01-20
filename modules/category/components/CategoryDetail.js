@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "./card/Card";
 
-const CategoryDetail = ({ video, videoList }) => {
-  console.log(video);
+export default function CategoryDetail({ video, videoList }) {
   return (
     <>
       <div className="row">
@@ -12,7 +11,7 @@ const CategoryDetail = ({ video, videoList }) => {
               {video && video["NewVideoImageThumbnail"] ? (
                 <div
                   style={{
-                    background: `url(${video["VideoImagePathLarge"]})`,
+                    background: `url('${video["NewVideoImageThumbnail"]}')`,
                     height: "400px",
                     border: "1px solid black",
                   }}
@@ -23,14 +22,18 @@ const CategoryDetail = ({ video, videoList }) => {
                 style={{ width: "100%", height: "600px" }}
               ></div>
               <div className="video-syno-text">
-                <h2>{video && video.VideoName}</h2>
-                <div>{video && video.VideoCategoryName}</div>
-                <div className="text-white">
-                  {video && video.VideoDescription}
-                </div>
-                <br />
-                <div>
-                  <button className="btn btn-primary">Play</button>
+                <div className="row">
+                  <div className="col-lg-4 col-md-4 col-12">
+                    <h2>{video && video.VideoName}</h2>
+                    <div>{video && video.VideoCategoryName}</div>
+                    <div className="text-dark">
+                      {video && video.VideoDescription}
+                    </div>
+                    <br />
+                    <div>
+                      <button className="btn btn-primary">Play</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -44,6 +47,4 @@ const CategoryDetail = ({ video, videoList }) => {
       </div>
     </>
   );
-};
-
-export default CategoryDetail;
+}

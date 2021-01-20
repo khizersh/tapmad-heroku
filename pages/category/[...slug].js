@@ -11,9 +11,9 @@ const Category = (props) => {
   if (!mount) {
     if (!video) {
       let vid = {
-        VideoName: props?.data?.CategoryName,
-        VideoDescription: props?.data?.CategoryDescription,
-        NewVideoImageThumbnail: props?.data?.NewCategoryImage,
+        VideoName: props.data.CategoryName,
+        VideoDescription: props.data.CategoryDescription,
+        NewVideoImageThumbnail: props.data.CategoryMobileLargeImage,
       };
       setVideo(vid);
       setVideoList([{ Videos: props?.data?.Videos }]);

@@ -37,8 +37,6 @@ const HomepageSlider = ({ movies }) => {
     }
   }
 
-  console.log("Movies: ", movies);
-
   return (
     <div>
       {movies &&
