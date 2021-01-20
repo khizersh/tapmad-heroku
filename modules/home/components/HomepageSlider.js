@@ -38,7 +38,7 @@ const HomepageSlider = ({ movies }) => {
   }
 
   return (
-    <div>
+    <div className="mt-lg-5 pt-lg-5 pt-md-5 mt-md-5 pt-5">
       {movies &&
         movies.map((movieSection, row) => {
           return (
