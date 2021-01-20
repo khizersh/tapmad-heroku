@@ -94,9 +94,9 @@
 .bg-color {
   background: rgb(0, 0, 0);
   background: linear-gradient(
-    93deg,
-    rgba(0, 0, 0, 0) 36%,
-    rgba(0, 0, 0, 1) 82%
+    268deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 53%
   );
 
   position: absolute;
@@ -110,4 +110,9 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.video-syno-text {
+  position: absolute;
+  top: 0;
+  z-index: 3;
 }
