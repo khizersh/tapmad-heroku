@@ -4,7 +4,7 @@ function get(url, ip = null) {
   console.log(ip);
   return axios.get(url, {
     headers: {
-      "x-forwarded-for": ip,
+      "X-Forwarded-For": ip,
     },
   });
 }
