@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
-import { post } from "../../../services/http-service";
+import { get, post } from "../../../services/http-service";
 import PlayerShop from "../../player-shop/player-shop";
 
 export default function Player({ movies }) {
@@ -22,8 +22,15 @@ export default function Player({ movies }) {
       setIsAutoPlay(true);
     }, adDuration);
   }
-
+  function testApi() {
+    let res = get("https://api.tapmad.com/api/portScanForAli/V1/en/web").then(
+      (e) => {
+        console.log(e);
+      }
+    );
+  }
   useEffect(async () => {
+    testApi();
     setMounted(true);
 
     let userId = localStorage.getItem("userId");
@@ -101,8 +108,8 @@ export default function Player({ movies }) {
             </div>
             {/* Banner Add */}
 
-            <div className="col-lg-12">
-              <div>
+            <div className="col-lg-12 p-0">
+              <div className="the-shop">
                 <PlayerShop />
                 <br />
               </div>

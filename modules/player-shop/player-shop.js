@@ -42,11 +42,7 @@ export default function PlayerShop() {
   }
   return (
     <>
-      <Tabs
-        defaultActiveKey={defaultTab}
-        id="tshop-tabs"
-        onSelect={(e) => handleSelect(e)}
-      >
+      <Tabs defaultActiveKey={defaultTab} onSelect={(e) => handleSelect(e)}>
         {shopTabs.length > 0 &&
           shopTabs.map((tabs, index) => {
             return (
@@ -54,7 +50,9 @@ export default function PlayerShop() {
                 key={index}
                 eventKey={tabs.MerchantTabId}
                 tabClassName={
-                  tabs.MerchantTabId == RELATED ? "d-lg-none d-md-none" : ""
+                  tabs.MerchantTabId == RELATED
+                    ? "d-lg-none d-md-none tshop-tabs"
+                    : "tshop-tabs"
                 }
                 title={
                   <div>

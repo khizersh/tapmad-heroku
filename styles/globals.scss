@@ -913,6 +913,14 @@ label {
 }
 
 @media screen and (max-width: 570px) {
+  .the-shop nav {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+  .the-shop nav::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
   .footer_links {
     display: block;
   }

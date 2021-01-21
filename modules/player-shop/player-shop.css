@@ -1,16 +1,15 @@
-.nav-item {
-  flex: 1;
-  text-align: center;
-}
-.nav-tabs .nav-link {
+.nav-tabs .tshop-tabs {
   border: 0px;
 }
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
+.tshop-tabs {
   border-bottom: 3px solid white;
 }
-.nav-link:hover,
-.nav-link:focus {
+.tshop-tabs {
+  border-bottom: 3px solid white;
+}
+
+.tshop-tabs:hover,
+.tshop-tabs:focus {
   border-bottom: 3px solid white;
 }
 .nav-tabs {
@@ -24,4 +23,8 @@
 .product-images img {
   border-radius: 4px;
   width: 100%;
+}
+.tshop-tabs {
+  flex: 1;
+  text-align: center;
 }
