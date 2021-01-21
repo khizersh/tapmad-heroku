@@ -23,7 +23,7 @@ export default function CategoryDetail({ video, videoList }) {
               ></div>
               <div className="video-syno-text">
                 <div className="row">
-                  <div className="col-lg-4 col-md-4 col-12">
+                  <div className="col-lg-4 col-md-4 col-11">
                     <h2>{video && video.VideoName}</h2>
                     <div>{video && video.VideoCategoryName}</div>
                     <div className="text-dark">
