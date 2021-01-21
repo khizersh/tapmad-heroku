@@ -1,10 +1,10 @@
 const { default: axios } = require("axios");
 
 function get(url, ip = null) {
-  console.log(ip);
   return axios.get(url, {
     headers: {
-      "X-Forwarded-For": ip,
+      "Content-Type": "application/json",
+      "X-Forwarded-For": "43.245.204.44",
     },
   });
 }

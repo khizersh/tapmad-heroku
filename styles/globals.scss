@@ -599,7 +599,7 @@ input#menu[type="checkbox"] {
 .openNav .new-wrapper {
   position: absolute;
   transform: translate3d(0, 0, 0);
-  width: calc(100% - 50px);
+  width: 100%;
   transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
 }
 .downarrow {
@@ -720,8 +720,7 @@ input#menu[type="checkbox"] {
   }
   .new-wrapper {
     left: 0px;
-    width: calc(100% - 0px) !important;
-    overflow-x: hidden;
+    width: 100%;
   }
 }
 button:focus {
@@ -806,8 +805,7 @@ button:focus {
 @media screen and (max-width: 576px) {
   .new-wrapper {
     left: 0;
-    width: calc(100% - 0px);
-    overflow-x: hidden;
+    width: 100%;
   }
 
   .tm_top_navi {
