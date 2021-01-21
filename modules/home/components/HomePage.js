@@ -69,8 +69,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
                 style={{ width: "100%" }}
               />
             </div>
-
-            <div className="row width-100">
+            <div className="width-100">
               <div className="col-12">
                 <div className="home-banner-btn">
                   <Link href="/" passHref={true} shallow={true}>
