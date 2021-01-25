@@ -1,3 +1,9 @@
 .tp-menu a {
   padding: 15px;
 }
+
+@media screen and (max-width: 576px) {
+  .m-logo {
+    margin: 5px 0px 0px 30px;
+  }
+}

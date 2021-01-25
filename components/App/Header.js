@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
+import "../../components/App/Header.css";
+
 export default function Header() {
   const { initialState } = useContext(MainContext);
   return (
@@ -10,6 +12,7 @@ export default function Header() {
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
             <Link href="/">
               <img
+                className="m-logo"
                 src="https://www.tapmad.com/images/tm-logo.png"
                 width="130"
                 alt=""
