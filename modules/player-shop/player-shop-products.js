@@ -8,9 +8,9 @@ export default function PlayerShopProducts({ MerchantProducts }) {
     <div>
       <Slider {...settings}>
         {MerchantProducts &&
-          MerchantProducts.map((product) => {
+          MerchantProducts.map((product, i) => {
             return (
-              <div>
+              <div key={i}>
                 <div className="product-images">
                   <img src={product.MerchantProductImage} />
                 </div>

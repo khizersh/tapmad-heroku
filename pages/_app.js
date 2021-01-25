@@ -6,23 +6,20 @@ import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
 import Router from "next/router";
 import MainProvider from "../contexts/MainContext";
+import Loader from "../components/Loader";
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   Router.onRouteChangeStart = (url) => {
-    // NProgress.start()
     setLoading(true);
-    console.log("Route Change start");
   };
 
   Router.onRouteChangeComplete = () => {
     setLoading(false);
-    console.log("Route Change Complete");
   };
 
   Router.onRouteChangeError = () => {
     setLoading(false);
-    console.log("Route Change Failed");
   };
   return (
     <>
@@ -55,6 +52,7 @@ function MyApp({ Component, pageProps }) {
         ></link>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      {loading ? <Loader /> : null}
       {pageProps.noSideBar ? (
         <MainProvider>
           <Component {...pageProps} />
@@ -62,8 +60,6 @@ function MyApp({ Component, pageProps }) {
       ) : (
         <>
           <Skeleton>
-            {/* {loading ? <Loader /> : null} */}
-            {/* <Loader /> */}
             <MainProvider>
               <Header />
               <Component {...pageProps} />
