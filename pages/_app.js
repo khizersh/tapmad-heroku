@@ -21,6 +21,10 @@ function MyApp({ Component, pageProps }) {
   Router.onRouteChangeError = () => {
     setLoading(false);
   };
+
+  const changeLoading = (value) => {
+    setLoading(value);
+  };
   return (
     <>
       <Head>
@@ -55,14 +59,14 @@ function MyApp({ Component, pageProps }) {
       {loading ? <Loader /> : null}
       {pageProps.noSideBar ? (
         <MainProvider>
-          <Component {...pageProps} />
+          <Component {...pageProps} loading={changeLoading} />
         </MainProvider>
       ) : (
         <>
           <Skeleton>
             <MainProvider>
               <Header />
-              <Component {...pageProps} />
+              <Component {...pageProps} loading={changeLoading} />
             </MainProvider>
             <Footer />
           </Skeleton>

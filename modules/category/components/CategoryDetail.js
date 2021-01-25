@@ -14,6 +14,8 @@ export default function CategoryDetail({ video, videoList }) {
                     background: `url('${video["NewVideoImageThumbnail"]}')`,
                     height: "400px",
                     border: "1px solid black",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
                   }}
                 ></div>
               ) : null}
