@@ -52,7 +52,7 @@ function basicSliderConfig(slidesToShow, mobileView) {
 
 function SEOFriendlySlugsForVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/watch/live/${cleanName}/${event.VideoEntityId}${
+  let slug = `/watch/${cleanName}/${event.VideoEntityId}${
     event.IsVideoChannel ? "1" : "0"
   }`;
 

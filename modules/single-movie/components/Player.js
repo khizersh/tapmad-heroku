@@ -3,6 +3,7 @@ import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
 import { get, post } from "../../../services/http-service";
+import CategoryHorizontalCard from "../../category/components/CategoryHorizontalCard";
 import PlayerShop from "../../player-shop/player-shop";
 
 export default function Player({ movies }) {
@@ -10,6 +11,7 @@ export default function Player({ movies }) {
   const adDuration = 200000;
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
+  const [relatedVideo, setRelatedVideos] = useState([]);
 
   if (!mounted) {
     if (!movie) {
@@ -22,17 +24,17 @@ export default function Player({ movies }) {
       setIsAutoPlay(true);
     }, adDuration);
   }
-  function testApi() {
-    let res = get("https://api.tapmad.com/api/portScanForAli/V1/en/web").then(
-      (e) => {
-        console.log(e);
-      }
-    );
-  }
-  useEffect(async () => {
-    testApi();
-    setMounted(true);
 
+  async function getRelatedChannels() {
+    const res = await get(
+      `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${movie.Video.VideoEntityId}/${movie.Video.IsVideoChannel}`
+    );
+    setRelatedVideos(res.data.Sections[0].Videos);
+    console.log("Hey sss ", res.data.Sections[0].Videos);
+  }
+
+  useEffect(async () => {
+    setMounted(true);
     let userId = localStorage.getItem("userId");
     if (userId) {
       const res = await post(
@@ -46,11 +48,14 @@ export default function Player({ movies }) {
           IsChannel: movie.Video.IsVideoChannel,
         }
       );
-
       setMovie(res.data);
     }
   }, []);
-
+  useEffect(async () => {
+    await getRelatedChannels();
+    console.log("Hey ", relatedVideo);
+    console.log("Memon");
+  }, []);
   return (
     <div>
       <div className="container-fluid">
@@ -156,12 +161,45 @@ export default function Player({ movies }) {
                 />
               </div>
             ) : null}
-            {/* 
-            <DFPSlotsProvider dfpNetworkId="108346865">
-              <div className="desktop-ads">
-                <AdSlot sizes={[[300, 250]]} adUnit={"Sdemo_HK01_campaign"} />
+            <div
+              className="text-left mt-3"
+              style={{ height: "100vh", overflow: "scroll" }}
+            >
+              <h5>Related Videos</h5>
+              <div>
+                {relatedVideo.map((video) => {
+                  return (
+                    <div className="col-12 p-1">
+                      <div className="d-flex ">
+                        <div>
+                          <img
+                            src={video.VideoImagePath}
+                            alt={video.VideoName}
+                            width="130px"
+                          />
+                        </div>
+                        <div>
+                          <div className="pl-2">
+                            <h5
+                              className="card-title mb-1"
+                              style={{ fontSize: "13px" }}
+                            >
+                              {video.VideoName}
+                            </h5>
+                            <p
+                              className="card-desc synopsis-card-text m-0"
+                              style={{ fontSize: "12px", color: "#6c757d" }}
+                            >
+                              {video.VideoDescription}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </DFPSlotsProvider> */}
+            </div>
           </div>
         </div>
       </div>
