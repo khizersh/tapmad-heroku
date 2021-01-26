@@ -3,7 +3,6 @@ import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
 import { get, post } from "../../../services/http-service";
-import CategoryHorizontalCard from "../../category/components/CategoryHorizontalCard";
 import PlayerShop from "../../player-shop/player-shop";
 
 export default function Player({ movies }) {
@@ -30,7 +29,6 @@ export default function Player({ movies }) {
       `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${movie.Video.VideoEntityId}/${movie.Video.IsVideoChannel}`
     );
     setRelatedVideos(res.data.Sections[0].Videos);
-    console.log("Hey sss ", res.data.Sections[0].Videos);
   }
 
   useEffect(async () => {
@@ -53,8 +51,6 @@ export default function Player({ movies }) {
   }, []);
   useEffect(async () => {
     await getRelatedChannels();
-    console.log("Hey ", relatedVideo);
-    console.log("Memon");
   }, []);
   return (
     <div>
@@ -114,10 +110,13 @@ export default function Player({ movies }) {
             {/* Banner Add */}
 
             <div className="col-lg-12 p-0">
-              <div className="the-shop">
-                <PlayerShop />
-                <br />
-              </div>
+              {movie && movie.CookFeed ? (
+                <div className="the-shop">
+                  <PlayerShop />
+                  <br />
+                </div>
+              ) : null}
+
               <DFPSlotsProvider dfpNetworkId="28379801">
                 <div className="desktops-ads text-center d-none d-lg-block d-md-block">
                   <AdSlot
