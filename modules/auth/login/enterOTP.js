@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export default function EnterOTP({ forgetPin }) {
   const [userPin, seUserPin] = useState();
   const router = useRouter();
-  const { checkUserAuthentication } = useContext(MainContext);
+  const { checkUserAuthentication, setLoader } = useContext(MainContext);
   function handleNumber(e) {
     const pin = e.target.value;
     if (+pin === +pin) {
@@ -16,6 +16,7 @@ export default function EnterOTP({ forgetPin }) {
 
   async function verifyPin() {
     if (userPin.length > 2) {
+      setLoader(true);
       var response = await post(
         "https://api.tapmad.com/api/verifyUserPinCode",
         {
@@ -31,6 +32,8 @@ export default function EnterOTP({ forgetPin }) {
         checkUserAuthentication();
         router.push("/");
       } else {
+        setLoader(false);
+
         alert("Invalid OTP");
         Cookie.setCookies("isAuth", 0);
       }
