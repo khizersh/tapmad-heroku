@@ -1,7 +1,11 @@
 import React from "react";
 import PlayerShopProducts from "./player-shop-products";
 
-export default function PlayerShopRows({ MerchantTabs }) {
+export default function PlayerShopRows({
+  MerchantTabs,
+  selectTab,
+  defaultTab,
+}) {
   return (
     <>
       {MerchantTabs.map((merchant, index) => {
@@ -10,6 +14,13 @@ export default function PlayerShopRows({ MerchantTabs }) {
             className="row"
             key={index}
             style={{ borderBottom: "1px solid" }}
+            onClick={() => {
+              console.log(merchant);
+              console.log(defaultTab);
+              if (defaultTab == 8) {
+                selectTab(merchant.MerchantTabId);
+              }
+            }}
           >
             <div className="col-12">
               <div className="pt-2">

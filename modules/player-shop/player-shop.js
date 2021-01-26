@@ -19,6 +19,7 @@ export default function PlayerShop() {
     setShopTabs(transformedResponse);
   }, []);
   function handleSelect(e) {
+    setDefaultTab(e);
     let index = shopTabs.findIndex((tabs) => tabs.MerchantTabId == e);
     let currentSelectedTab = shopTabs[index];
     if (currentSelectedTab.MerchantTabs) {
@@ -26,6 +27,10 @@ export default function PlayerShop() {
     } else {
       fetchMerchantTabs(index, e);
     }
+  }
+  function changeTabs(e) {
+    handleSelect(e);
+    console.log(defaultTab);
   }
   async function fetchMerchantTabs(index, tabId) {
     console.log("Fetching Merhchant Tabs......");
@@ -37,12 +42,15 @@ export default function PlayerShop() {
       let tabClone = [...shopTabs];
       tabClone[index].MerchantTabs = response.data.MerchantTabs;
       setShopTabs(tabClone);
-      console.log(shopTabs);
     }
   }
   return (
     <>
-      <Tabs defaultActiveKey={defaultTab} onSelect={(e) => handleSelect(e)}>
+      <Tabs
+        defaultActiveKey={defaultTab}
+        activeKey={defaultTab}
+        onSelect={(e) => handleSelect(e)}
+      >
         {shopTabs.length > 0 &&
           shopTabs.map((tabs, index) => {
             return (
@@ -52,7 +60,9 @@ export default function PlayerShop() {
                 tabClassName={
                   tabs.MerchantTabId == RELATED
                     ? "d-lg-none d-md-none tshop-tabs"
-                    : "tshop-tabs"
+                    : `tshop-tabs ${
+                        tabs.MerchantTabId == defaultTab ? "shop-active" : ""
+                      }`
                 }
                 title={
                   <div>
@@ -63,7 +73,11 @@ export default function PlayerShop() {
               >
                 {tabs.MerchantTabs && (
                   <>
-                    <PlayerShopRows MerchantTabs={tabs.MerchantTabs} />
+                    <PlayerShopRows
+                      MerchantTabs={tabs.MerchantTabs}
+                      selectTab={(e) => changeTabs(e)}
+                      defaultTab={defaultTab}
+                    />
                   </>
                 )}
               </Tab>

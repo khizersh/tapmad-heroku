@@ -8,9 +8,11 @@
   border-bottom: 3px solid white;
 }
 
-.tshop-tabs:hover,
-.tshop-tabs:focus {
+.tshop-tabs:hover {
   border-bottom: 3px solid white;
+}
+.shop-active {
+  border-bottom: 3px solid white !important;
 }
 .nav-tabs {
   border-bottom: 1px solid grey;
