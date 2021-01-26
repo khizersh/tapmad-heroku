@@ -3,7 +3,7 @@ import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
 import { MainContext } from "../../../contexts/MainContext";
 
-const PaymentInfo = ({ type, data }) => {
+const PaymentInfo = ({ selectedId, data }) => {
   const [selectedNetwork, setSelectedNetwork] = useState(null);
   const [loginOperators, setLoginOperators] = useState([]);
 
@@ -58,7 +58,7 @@ const PaymentInfo = ({ type, data }) => {
             </div>
           </div>
         </div>
-        {/* <SignMessage type={type} /> */}
+        <SignMessage />
       </div>
     </div>
   );
