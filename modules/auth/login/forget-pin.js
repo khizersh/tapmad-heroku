@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { MainContext } from "../../contexts/MainContext";
-import { post } from "../../services/http-service";
+import { MainContext } from "../../../contexts/MainContext";
+import { post } from "../../../services/http-service";
 
 export default function ForgetPin(props) {
   const [userOtp, setUserOtp] = useState("");
-  const { initialState } = React.useContext(MainContext);
+  const { initialState, setLoader } = React.useContext(MainContext);
 
   let userDetails = props;
 
@@ -17,6 +17,8 @@ export default function ForgetPin(props) {
   }, []);
 
   async function verifyOTP() {
+    setLoader(true);
+
     var resp = await post(
       "https://api.tapmad.com/api/verifyOTP/V1/en/android",
       { MobileNo: 0 + initialState.User.MobileNo, otpCode: userOtp }

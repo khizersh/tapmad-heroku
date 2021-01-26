@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { MainContext } from "../../contexts/MainContext";
-import { Cookie } from "../../services/cookies";
-import { post } from "../../services/http-service";
+import { MainContext } from "../../../contexts/MainContext";
+import { Cookie } from "../../../services/cookies";
+import { post } from "../../../services/http-service";
 
 export default function SetPin() {
   const [pin, setPin] = useState("");

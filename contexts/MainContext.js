@@ -7,6 +7,7 @@ export const MainContext = React.createContext(null);
 export default function MainProvider({ children }) {
   const [initialState, setInitialState] = React.useState({
     isAuthenticated: false,
+    loading: false,
     User: {
       MobileNo: "",
       OperatorId: "",
@@ -22,14 +23,14 @@ export default function MainProvider({ children }) {
   }, []);
 
   function updateUserNumber(number) {
-    let stateClone = { ...initialState };
+    let stateClone = initialState;
     setInitialState({
       ...stateClone,
       User: { ...stateClone.User, MobileNo: number },
     });
   }
   function updateUserOperator(operator) {
-    let stateClone = { ...initialState };
+    let stateClone = initialState;
     setInitialState({
       ...stateClone,
       User: { ...stateClone.User, OperatorId: operator },
@@ -40,14 +41,19 @@ export default function MainProvider({ children }) {
     const isAuthenticated = Cookie.getCookies("isAuth");
     if (userId && isAuthenticated == 1) {
       let stateClone = { ...initialState };
-      setInitialState({ stateClone, isAuthenticated: true });
+      setInitialState({ ...stateClone, isAuthenticated: true });
     }
+  }
+  function setLoader(bool) {
+    let stateClone = initialState;
+    setInitialState({ ...stateClone, loading: bool });
   }
   let data = {
     initialState,
     checkUserAuthentication,
     updateUserNumber,
     updateUserOperator,
+    setLoader,
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }
