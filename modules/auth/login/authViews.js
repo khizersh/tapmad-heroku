@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AuthService } from "./auth.service";
+import { AuthService } from "../auth.service";
 import EnterPin from "./enterPin";
 import ForgetPin from "./forget-pin";
 import Login from "./Login";

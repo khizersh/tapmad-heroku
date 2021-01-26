@@ -1,19 +1,16 @@
 import React from "react";
-import { MainContext } from "../../contexts/MainContext";
-import { post } from "../../services/http-service";
-import "./auth.module.css";
+import { MainContext } from "../../../contexts/MainContext";
+import { post } from "../../../services/http-service";
+import "../auth.module.css";
 
 export default function Login({ loginResponse }) {
   const {
     initialState,
     updateUserNumber,
     updateUserOperator,
+    setLoader,
   } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
-
-  React.useEffect(() => {
-    console.log("state is", initialState);
-  }, [initialState]);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
@@ -23,12 +20,14 @@ export default function Login({ loginResponse }) {
   }
   async function loginUser() {
     if (mobileNo.length == 10) {
+      setLoader(true);
       var response = await post("https://api.tapmad.com/api/getCardUser", {
         Language: "en",
         MobileNo: mobileNo,
       });
       updateUserNumber(mobileNo);
       loginResponse(response.data);
+      setLoader(false);
     }
   }
 

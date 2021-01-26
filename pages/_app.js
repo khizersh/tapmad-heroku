@@ -1,30 +1,13 @@
 import "../styles/globals.scss";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
-import Router from "next/router";
-import MainProvider from "../contexts/MainContext";
+import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 
 function MyApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
-  Router.onRouteChangeStart = (url) => {
-    setLoading(true);
-  };
-
-  Router.onRouteChangeComplete = () => {
-    setLoading(false);
-  };
-
-  Router.onRouteChangeError = () => {
-    setLoading(false);
-  };
-
-  const changeLoading = (value) => {
-    setLoading(value);
-  };
   return (
     <>
       <Head>
@@ -56,20 +39,21 @@ function MyApp({ Component, pageProps }) {
         ></link>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      {loading ? <Loader /> : null}
       {pageProps.noSideBar ? (
         <MainProvider>
-          <Component {...pageProps} loading={changeLoading} />
+          <NoSideBarSkeleton>
+            <Component {...pageProps} />
+          </NoSideBarSkeleton>
         </MainProvider>
       ) : (
         <>
-          <Skeleton>
-            <MainProvider>
+          <MainProvider>
+            <Skeleton>
               <Header />
-              <Component {...pageProps} loading={changeLoading} />
-            </MainProvider>
-            <Footer />
-          </Skeleton>
+              <Component {...pageProps} />
+              <Footer />
+            </Skeleton>
+          </MainProvider>
         </>
       )}
     </>
@@ -77,3 +61,13 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+export const NoSideBarSkeleton = ({ children }) => {
+  const { initialState } = React.useContext(MainContext);
+  return (
+    <div>
+      {initialState.loading ? <Loader /> : null}
+      {children}
+    </div>
+  );
+};

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { MainContext } from "../../contexts/MainContext";
-import { post } from "../../services/http-service";
+import { MainContext } from "../../../contexts/MainContext";
+import { post } from "../../../services/http-service";
 
 export default function ForgetPin(props) {
   const [userOtp, setUserOtp] = useState("");

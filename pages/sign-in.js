@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { MainContext } from "../contexts/MainContext";
-import AuthViews from "../modules/auth/authViews";
 import { useRouter } from "next/router";
+import AuthViews from "../modules/auth/login/authViews";
 export default function LoginPage() {
   const { initialState } = useContext(MainContext);
   const router = useRouter();
