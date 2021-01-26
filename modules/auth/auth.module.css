@@ -91,6 +91,10 @@
 .clr-green {
   color: #87c242;
 }
+.bg-green {
+  background-color: #87c242;
+  border-radius: 0;
+}
 .text-white {
   color: white !important;
 }

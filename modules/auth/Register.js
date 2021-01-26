@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import TaxView from "./components/TaxView";
 import "./auth.module.css";
 import PaymentMethodComponent from "./components/PaymentMethod";
 import PaymentInfo from "./components/PaymentInfo";
+import { MainContext } from "../../contexts/MainContext";
 
 export default function Register() {
-  const [type, setType] = useState("simCard");
+  const [paymentId, setPaymentId] = useState(null);
+  const [loginOperators, setLoginOperators] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState([]);
 
-  const onClickPaymentMethod = (type) => {
-    setType(type);
+  const { initialState } = useContext(MainContext);
+  console.log("initialState: ", initialState);
+
+  useEffect(() => {
+    if (initialState?.AuthDetails?.LoginOperators) {
+      let array = initialState.AuthDetails.LoginOperators.map((m) => {
+        let obj = {
+          id: m.OperatorId,
+          label: m.OperatorName,
+          src: m.OperatorImage,
+        };
+        return obj;
+      });
+
+      setLoginOperators(array);
+      setPaymentMethods(initialState?.AuthDetails?.PaymentMethods);
+      setPaymentId(initialState?.AuthDetails?.PaymentMethods[0]?.PaymentId);
+    }
+  }, [initialState]);
+
+  const onClickPaymentMethod = (id) => {
+    setPaymentId(id);
+    console.log("paymentId: ", paymentId);
   };
 
   return (
@@ -45,7 +69,7 @@ export default function Register() {
                 </a>
 
                 <img
-                  className="img-fluid mb-0"
+                  className="w-100 mb-0"
                   src="https://d34080pnh6e62j.cloudfront.net/images/SignUpNewImage.jpg"
                 />
                 <button
@@ -65,16 +89,17 @@ export default function Register() {
                 </button>
 
                 <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
-                  <TaxView type={type} />
+                  <TaxView selectedId={paymentId} data={paymentMethods} />
                 </ul>
 
                 <div className="row w-100">
                   <PaymentMethodComponent
                     onClickPaymentMethod={onClickPaymentMethod}
-                    type={type}
+                    selectedId={paymentId}
+                    data={paymentMethods}
                   />
                 </div>
-                <PaymentInfo type={type} />
+                <PaymentInfo selectedId={paymentId} data={loginOperators} />
               </div>
             </div>
           </div>

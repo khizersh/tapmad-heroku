@@ -1,36 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
+import { MainContext } from "../../../contexts/MainContext";
 
-const PaymentInfo = ({ type }) => {
+const PaymentInfo = ({ type, data }) => {
   const [selectedNetwork, setSelectedNetwork] = useState(null);
+  const [loginOperators, setLoginOperators] = useState([]);
 
-  const data = [
-    {
-      id: 1,
-      label: "Jazz/Warid",
-      src: "https://images.tapmad.com/images/mobileOperator/jazz-logo.jpg",
-    },
-    {
-      id: 2,
-      label: "Telenor",
-      src: "https://images.tapmad.com/images/mobileOperator/telenor-logo.jpg",
-    },
-    {
-      id: 3,
-      label: "Zong",
-      src: "https://images.tapmad.com/images/mobileOperator/zong-logo.jpg",
-    },
-    {
-      id: 4,
-      label: "Ufone",
-      src: "https://images.tapmad.com/images/mobileOperator/ufone-logo.jpg",
-    },
-  ];
+  useEffect(() => {
+    setLoginOperators(data);
+  }, [data]);
 
   const onChangePaymentMethod = (data) => {
     setSelectedNetwork(data);
-    console.log("Data in parent: ", data);
   };
   return (
     <div>
@@ -40,7 +22,7 @@ const PaymentInfo = ({ type }) => {
             <div className="input-group ng-scope">
               {type == "simCard" ? (
                 <DropdownWithImage
-                  data={data}
+                  data={loginOperators}
                   onChange={onChangePaymentMethod}
                 />
               ) : type == "easyPaisa" ? (
@@ -62,7 +44,7 @@ const PaymentInfo = ({ type }) => {
               )}
 
               <span>
-                <label className="form-control cntry_cde">+92</label>
+                <label className="form-control cntry_cde border-0">+92</label>
               </span>
 
               <input
@@ -76,7 +58,7 @@ const PaymentInfo = ({ type }) => {
             </div>
           </div>
         </div>
-        <SignMessage type={type} />
+        {/* <SignMessage type={type} /> */}
       </div>
     </div>
   );

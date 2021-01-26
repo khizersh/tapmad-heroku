@@ -1,36 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const paymentMethod = ({ onClickPaymentMethod, type }) => {
+const paymentMethod = ({ onClickPaymentMethod, selectedId, data }) => {
+  const [paymentMethod, setPaymentMethod] = useState([]);
+
+  useEffect(() => {
+    setPaymentMethod(data);
+  }, [data]);
+
   return (
     <div className="col-12 col-sm-12 pt-3">
       <div className="row pt-3 pb-3 pl-3">
-        <div className="col-4">
-          <div
-            onClick={() => onClickPaymentMethod("simCard")}
-            className="btn payment-method list-group-item text-center border-0 bg-transparent pr-0 pl-0 pr-sm-3 pl-sm-3 pymnt_pge_pkgs_active"
-          >
-            <span className="mbl-check-icon">
-              {type == "simCard" ? (
-                <i className="fa fa-check-circle clr-green"></i>
-              ) : (
-                ""
-              )}
-            </span>
-            <img
-              src="https://images.tapmad.com/images/Payments/mobile-icon128.png"
-              className="img-fluid mb-2 "
-              style={{ minWidth: "50px", height: "60px" }}
-            />
-            <i
-              className={`text-center text-muted d-block  ${
-                type == "simCard" ? "text-white" : ""
-              }`}
-            >
-              Sim Card
-            </i>
-          </div>
-        </div>
-        <div className="col-4">
+        {paymentMethod.length
+          ? paymentMethod.map((m, i) => (
+              <div className="col-4" key={i}>
+                <div
+                  onClick={() => onClickPaymentMethod(m.PaymentId)}
+                  className="btn payment-method list-group-item text-center border-0 bg-transparent pr-0 pl-0 pr-sm-3 pl-sm-3 pymnt_pge_pkgs_active"
+                >
+                  <span className="mbl-check-icon">
+                    {selectedId == m.PaymentId ? (
+                      <i className="fa fa-check-circle clr-green"></i>
+                    ) : (
+                      ""
+                    )}
+                  </span>
+                  <img
+                    src={m.PaymentImage}
+                    alt={m.PaymentMethodName}
+                    className="img-fluid mb-2 "
+                    style={{ minWidth: "50px", height: "60px" }}
+                  />
+                  <i
+                    className={`text-center text-muted d-block  ${
+                      selectedId == m.PaymentId ? "text-white" : ""
+                    }`}
+                  >
+                    {m.PaymentMethodName}
+                  </i>
+                </div>
+              </div>
+            ))
+          : null}
+
+        {/* <div className="col-4">
           <div
             onClick={() => onClickPaymentMethod("easyPaisa")}
             className="btn payment-method list-group-item text-center border-0 bg-transparent pr-0 pl-0 pr-sm-3 pl-sm-3"
@@ -55,8 +67,8 @@ const paymentMethod = ({ onClickPaymentMethod, type }) => {
               Easypaisa
             </i>
           </div>
-        </div>
-        <div className="col-4">
+        </div> */}
+        {/* <div className="col-4">
           <div
             onClick={() => onClickPaymentMethod("jazzCash")}
             className="btn payment-method list-group-item text-center border-0 bg-transparent pr-0 pl-0 pr-sm-3 pl-sm-3"
@@ -81,7 +93,7 @@ const paymentMethod = ({ onClickPaymentMethod, type }) => {
               JazzCash
             </i>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
