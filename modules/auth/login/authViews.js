@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AuthService } from "../auth.service";
 import EnterPin from "./enterPin";
 import ForgetPin from "./forget-pin";
-import Login from "./Login";
+import Login from "./login";
 import SetPin from "./setPin";
 import { useRouter } from "next/router";
 
