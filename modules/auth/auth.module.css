@@ -91,40 +91,68 @@
 .clr-green {
   color: #87c242;
 }
+.bg-green {
+  background-color: #87c242;
+  border-radius: 0;
+}
 .text-white {
   color: white !important;
 }
 .mbl-check-icon {
   position: absolute;
   top: -14px;
-  left: 50px;
+  left: 73px;
 }
 
-.dropdown-toggle,
-.dropdown-menu {
-  width: 300px !important;
+.clr-black {
+  color: black;
 }
-.btn-group img {
-  margin-right: 10px !important;
+
+.border-bottom {
+  border-bottom: 1px solid #ddd;
 }
-.dropdown-toggle {
-  padding-right: 50px;
+.width-11rem {
+  width: 11rem;
 }
-.dropdown-toggle .glyphicon {
-  margin-left: 20px !important;
-  margin-right: -40px !important;
+.dropdown-width {
+  width: 11rem;
 }
-.dropdown-menu > li > a:hover {
-  background: #f1f9fd;
-} /* $search-blue */
-.dropdown-header {
-  background: #ccc !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
-  margin-top: 10px !important;
-  margin-bottom: 5px !important;
+
+.padding-left-bottom {
+  /* display: none; */
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+.caret-down {
+  float: right;
+  margin-top: 5px;
+}
+.translate-100 {
+  background: white;
+  height: 120px;
+  transition: all 0.5s;
+}
+
+.translate-0 {
+  background: white;
+  height: 0%;
+  transition: all 0.5s;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  background-color: #a9a9a9b0;
+}
+.font-weight {
+  font-weight: 700;
+}
+
+.pymnt_pge_bx {
+  background-color: #121117;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -133,6 +161,14 @@
     position: absolute;
     top: -14px;
     left: 29px;
+  }
+
+  .width-11rem {
+    width: 8rem;
+  }
+
+  .dropdown-width {
+    width: 8rem;
   }
   .bg_dark,
   .tm_login_pg {
