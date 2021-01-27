@@ -1,4 +1,6 @@
 import "../styles/globals.scss";
+import "../styles/game.css";
+
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Header from "../components/App/Header";
@@ -8,6 +10,11 @@ import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 
 function MyApp({ Component, pageProps }) {
+  let styles =
+    "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
+  let message = "tapmad ";
+  console.log("%c %s", styles, message);
+
   return (
     <>
       <Head>
