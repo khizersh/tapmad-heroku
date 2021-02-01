@@ -1,23 +1,15 @@
-import React, { useEffect, useState , useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import paymentMethod from "./PaymentMethod";
 
-const TaxView = () => {
-  const [selectedPaymentMethods, setPaymentMethods] = useState(null);
-
+export default function TaxView() {
   const { authState } = useContext(Authcontext);
-
-  useEffect(() => {
-    if (authState && authState.selectedPaymentMethod) {
-      setPaymentMethods(authState.selectedPaymentMethod);
-    }
-  }, [authState.selectedPaymentMethod]);
 
   return (
     <>
-      {selectedPaymentMethods &&
-        selectedPaymentMethods.Packages.length > 0 &&
-        selectedPaymentMethods.Packages.map((m, i) => {
+      {authState.selectedPaymentMethod &&
+        authState.selectedPaymentMethod.Packages.length > 0 &&
+        authState.selectedPaymentMethod.Packages.map((m, i) => {
           return (
             <li
               key={i}
@@ -30,6 +22,4 @@ const TaxView = () => {
         })}
     </>
   );
-};
-
-export default TaxView;
+}

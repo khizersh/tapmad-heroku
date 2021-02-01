@@ -1,44 +1,38 @@
 import React, { useState, useContext, useEffect } from "react";
 import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
-import { MainContext } from "../../../contexts/MainContext";
 import { Authcontext } from "../../../contexts/AuthContext";
 
-const PaymentInfo = () => {
-  const [loginOperators, setLoginOperators] = useState([]);
-  const [type, setType] = useState(null);
-  
-  const { authState , updateSelectedOperator} = useContext(Authcontext);
-
-  useEffect(() => {
-    if (authState && authState.selectedPaymentMethod) {
-      setLoginOperators(authState.loginOperators);
-      setType(authState.selectedPaymentMethod)
-
-    }
-  }, [authState.selectedPaymentMethod]);
+export default function PaymentInfo() {
+  const { authState, updateSelectedOperator } = useContext(Authcontext);
 
   const onChangeNetwork = (data) => {
     updateSelectedOperator(data);
+    console.log(authState);
   };
+
   return (
     <div>
       <div className="pymnt_pge_phne pr-3 pl-3 pb-3 pt-0 mthd_active">
         <div className="form-group mb-0">
           <div className="">
             <div className="input-group ng-scope">
-              {type && type.PaymentMethodName == "Sim Card" ? (
+              {authState.selectedPaymentMethod &&
+              authState.selectedPaymentMethod.PaymentId == 1 ? (
                 <DropdownWithImage
-                  data={loginOperators}
+                  data={authState.loginOperators}
                   onChange={onChangeNetwork}
                 />
-              ) : type && type.PaymentMethodName == "Easypaisa"? (
+              ) : authState.selectedPaymentMethod &&
+                authState.selectedPaymentMethod.PaymentId == 3 ? (
                 <div className="form-control text-center">
                   <img
                     src="https://images.tapmad.com/images/EasypaisaE.png"
                     width="20"
                   />{" "}
-                  <span className="font-weight">{type.PaymentMethodName}</span>
+                  <span className="font-weight">
+                    {authState.selectedPaymentMethod.PaymentMethodName}
+                  </span>
                 </div>
               ) : (
                 <div className="form-control text-center">
@@ -51,7 +45,9 @@ const PaymentInfo = () => {
               )}
 
               <span>
-                <label className="form-control cntry_cde border-0">+92</label>
+                <label className="form-control cntry_cde border-0">
+                  {authState.MobileCode}
+                </label>
               </span>
 
               <input
@@ -69,6 +65,4 @@ const PaymentInfo = () => {
       </div>
     </div>
   );
-};
-
-export default PaymentInfo;
+}

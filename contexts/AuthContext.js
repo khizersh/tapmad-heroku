@@ -1,4 +1,4 @@
-import React  , {useContext} from "react";
+import React, { useContext } from "react";
 import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
 import { MainContext } from "./MainContext";
@@ -6,23 +6,28 @@ import { MainContext } from "./MainContext";
 export const Authcontext = React.createContext(null);
 
 export default function AuthProvider({ children }) {
+  const { initialState } = useContext(MainContext);
+
   const [authState, setAuthState] = React.useState({
     loginOperators: [],
     paymentMethods: [],
     selectedLoginOperator: null,
     selectedPaymentMethod: null,
+    MobileCode: "",
+    PackageImage: "",
   });
 
-  const { initialState } = useContext(MainContext);
   React.useEffect(() => {
-      
-      if (initialState && initialState.AuthDetails) {
-          console.log("initialState: in oc ", initialState);
-      setAuthState({
+    if (initialState && initialState.AuthDetails) {
+      console.log("initialState: in oc ", initialState);
+      let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
         paymentMethods: initialState.AuthDetails.PaymentMethods,
         selectedPaymentMethod: initialState.AuthDetails.PaymentMethods[0],
-      });
+        MobileCode: initialState.AuthDetails.MobileCode,
+        PackageImage: initialState.AuthDetails.PackageImage,
+      };
+      setAuthState(AuthStateWithData);
     }
   }, [initialState.AuthDetails]);
 
@@ -30,14 +35,14 @@ export default function AuthProvider({ children }) {
     let stateClone = authState;
     setAuthState({
       ...stateClone,
-      selectedLoginOperator: operator
+      selectedLoginOperator: operator,
     });
   }
   function updateSelectedPaymentMethod(method) {
     let stateClone = authState;
     setAuthState({
       ...stateClone,
-      selectedPaymentMethod: method
+      selectedPaymentMethod: method,
     });
   }
 

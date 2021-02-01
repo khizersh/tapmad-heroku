@@ -3,13 +3,10 @@ import TaxView from "./components/TaxView";
 import "./auth.module.css";
 import PaymentMethodComponent from "./components/PaymentMethod";
 import PaymentInfo from "./components/PaymentInfo";
-import { MainContext } from "../../contexts/MainContext";
+import { Authcontext } from "../../contexts/AuthContext";
 
 export default function Register() {
-  const [paymentId, setPaymentId] = useState(null);
-  const [loginOperators, setLoginOperators] = useState([]);
-  const [paymentMethods, setPaymentMethods] = useState([]);
-
+  const { authState } = useContext(Authcontext);
 
   return (
     <div>
@@ -44,10 +41,7 @@ export default function Register() {
                   <i className="fa fa-arrow-left"></i> Back
                 </a>
 
-                <img
-                  className="w-100 mb-0"
-                  src="https://d34080pnh6e62j.cloudfront.net/images/SignUpNewImage.jpg"
-                />
+                <img className="w-100 mb-0" src={authState.PackageImage} />
                 <button
                   type="button"
                   className="btn pull-right"
@@ -65,13 +59,11 @@ export default function Register() {
                 </button>
 
                 <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
-                  <TaxView  />
+                  <TaxView />
                 </ul>
 
                 <div className="row w-100">{<PaymentMethodComponent />}</div>
-                {
-                  <PaymentInfo selectedId={paymentId} data={loginOperators} />
-                }
+                {<PaymentInfo />}
               </div>
             </div>
           </div>

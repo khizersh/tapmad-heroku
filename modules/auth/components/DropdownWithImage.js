@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DropdownWithImage = ({ data, onChange }) => {
+export default function DropdownWithImage({ data, onChange }) {
   const [selected, setSelected] = useState(null);
   const [isCaretOpen, setIsCaretOpen] = useState(false);
 
@@ -15,8 +15,8 @@ const DropdownWithImage = ({ data, onChange }) => {
         <div onClick={() => setIsCaretOpen(!isCaretOpen)} className="textfirst">
           {selected ? (
             <div className="">
-              <img src={selected.src} width="20" />{" "}
-              <span className="pl-1">{selected.label}</span>
+              <img src={selected.OperatorImage} width="20" />{" "}
+              <span className="pl-1">{selected.OperatorName}</span>
               <img
                 src={
                   isCaretOpen
@@ -59,8 +59,8 @@ const DropdownWithImage = ({ data, onChange }) => {
                   onClick={() => onSelectItem(d)}
                   className="cursor-pointer border-bottom padding-left-bottom"
                 >
-                  <img src={d.src} width="20" />{" "}
-                  <span className="pl-1">{d.label}</span>
+                  <img src={d.OperatorImage} width="20" />{" "}
+                  <span className="pl-1">{d.OperatorName}</span>
                 </div>
               ))
             : null}
@@ -68,6 +68,4 @@ const DropdownWithImage = ({ data, onChange }) => {
       </div>
     </div>
   );
-};
-
-export default DropdownWithImage;
+}
