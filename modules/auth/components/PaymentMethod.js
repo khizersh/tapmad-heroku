@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
+import { MainContext } from "../../../contexts/MainContext";
 
 export default function PaymentMethod() {
   const { authState, updateSelectedPaymentMethod } = useContext(Authcontext);
-
+  const { updateUserOperator } = useContext(MainContext);
+  function UpdatePaymenthMethod(m) {
+    console.log(m);
+    updateSelectedPaymentMethod(m);
+    updateUserOperator(m.MobileNetworks[0].OperatorId);
+  }
   return (
     <div className="col-12 col-sm-12 pt-3">
       <div className="row pt-3 pb-3 pl-3">
@@ -11,7 +17,7 @@ export default function PaymentMethod() {
           ? authState.paymentMethods.map((m, i) => (
               <div className="col-4" key={i}>
                 <div
-                  onClick={() => updateSelectedPaymentMethod(m)}
+                  onClick={() => UpdatePaymenthMethod(m)}
                   className="btn payment-method list-group-item text-center border-0 bg-transparent pr-0 pl-0 pr-sm-3 pl-sm-3 pymnt_pge_pkgs_active"
                 >
                   <span className="mbl-check-icon">

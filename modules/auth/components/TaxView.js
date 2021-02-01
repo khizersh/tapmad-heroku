@@ -15,8 +15,8 @@ export default function TaxView() {
               key={i}
               className="list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted pr_active"
             >
-              <span className="font-weight-bold">{m.PackagePrice}</span>
-              Rs + Tax Per Week
+              <span className="font-weight-bold">{m.PackagePrice} </span>
+              {m.PackageDescription}
             </li>
           );
         })}

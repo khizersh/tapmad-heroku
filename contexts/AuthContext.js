@@ -31,13 +31,6 @@ export default function AuthProvider({ children }) {
     }
   }, [initialState.AuthDetails]);
 
-  function updateSelectedOperator(operator) {
-    let stateClone = authState;
-    setAuthState({
-      ...stateClone,
-      selectedLoginOperator: operator,
-    });
-  }
   function updateSelectedPaymentMethod(method) {
     let stateClone = authState;
     setAuthState({
@@ -48,7 +41,6 @@ export default function AuthProvider({ children }) {
 
   let data = {
     authState,
-    updateSelectedOperator,
     updateSelectedPaymentMethod,
   };
   return <Authcontext.Provider value={data}>{children}</Authcontext.Provider>;
