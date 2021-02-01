@@ -10,30 +10,6 @@ export default function Register() {
   const [loginOperators, setLoginOperators] = useState([]);
   const [paymentMethods, setPaymentMethods] = useState([]);
 
-  const { initialState } = useContext(MainContext);
-  console.log("initialState: ", initialState);
-
-  useEffect(() => {
-    if (initialState?.AuthDetails?.LoginOperators) {
-      let array = initialState.AuthDetails.LoginOperators.map((m) => {
-        let obj = {
-          id: m.OperatorId,
-          label: m.OperatorName,
-          src: m.OperatorImage,
-        };
-        return obj;
-      });
-
-      setLoginOperators(array);
-      setPaymentMethods(initialState?.AuthDetails?.PaymentMethods);
-      setPaymentId(initialState?.AuthDetails?.PaymentMethods[0]?.PaymentId);
-    }
-  }, [initialState]);
-
-  const onClickPaymentMethod = (id) => {
-    setPaymentId(id);
-    console.log("paymentId: ", paymentId);
-  };
 
   return (
     <div>
@@ -89,17 +65,13 @@ export default function Register() {
                 </button>
 
                 <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
-                  <TaxView selectedId={paymentId} data={paymentMethods} />
+                  <TaxView  />
                 </ul>
 
-                <div className="row w-100">
-                  <PaymentMethodComponent
-                    onClickPaymentMethod={onClickPaymentMethod}
-                    selectedId={paymentId}
-                    data={paymentMethods}
-                  />
-                </div>
-                <PaymentInfo selectedId={paymentId} data={loginOperators} />
+                <div className="row w-100">{<PaymentMethodComponent />}</div>
+                {
+                  <PaymentInfo selectedId={paymentId} data={loginOperators} />
+                }
               </div>
             </div>
           </div>

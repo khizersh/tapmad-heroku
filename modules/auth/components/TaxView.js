@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useContext} from "react";
+import { Authcontext } from "../../../contexts/AuthContext";
 import paymentMethod from "./PaymentMethod";
 
-const TaxView = ({ selectedId, data }) => {
-  const [paymentMethods, setPaymentMethods] = useState([]);
+const TaxView = () => {
+  const [selectedPaymentMethods, setPaymentMethods] = useState(null);
+
+  const { authState } = useContext(Authcontext);
 
   useEffect(() => {
-    if (data) {
-      let selectedMethod = data.find((f) => f.PaymentId == selectedId);
-      if (selectedMethod) {
-        setPaymentMethods(selectedMethod.Packages);
-
-        console.log(paymentMethods);
-      }
+    if (authState && authState.selectedPaymentMethod) {
+      setPaymentMethods(authState.selectedPaymentMethod);
     }
-  }, [selectedId]);
+  }, [authState.selectedPaymentMethod]);
 
   return (
     <>
-      {paymentMethods.length > 0 &&
-        paymentMethods.map((m, i) => {
+      {selectedPaymentMethods &&
+        selectedPaymentMethods.Packages.length > 0 &&
+        selectedPaymentMethods.Packages.map((m, i) => {
           return (
             <li
               key={i}

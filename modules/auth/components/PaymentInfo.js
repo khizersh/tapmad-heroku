@@ -2,17 +2,24 @@ import React, { useState, useContext, useEffect } from "react";
 import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
 import { MainContext } from "../../../contexts/MainContext";
+import { Authcontext } from "../../../contexts/AuthContext";
 
-const PaymentInfo = ({ selectedId, data }) => {
-  const [selectedNetwork, setSelectedNetwork] = useState(null);
+const PaymentInfo = () => {
   const [loginOperators, setLoginOperators] = useState([]);
+  const [type, setType] = useState(null);
+  
+  const { authState , updateSelectedOperator} = useContext(Authcontext);
 
   useEffect(() => {
-    setLoginOperators(data);
-  }, [data]);
+    if (authState && authState.selectedPaymentMethod) {
+      setLoginOperators(authState.loginOperators);
+      setType(authState.selectedPaymentMethod)
 
-  const onChangePaymentMethod = (data) => {
-    setSelectedNetwork(data);
+    }
+  }, [authState.selectedPaymentMethod]);
+
+  const onChangeNetwork = (data) => {
+    updateSelectedOperator(data);
   };
   return (
     <div>
@@ -20,18 +27,18 @@ const PaymentInfo = ({ selectedId, data }) => {
         <div className="form-group mb-0">
           <div className="">
             <div className="input-group ng-scope">
-              {type == "simCard" ? (
+              {type && type.PaymentMethodName == "Sim Card" ? (
                 <DropdownWithImage
                   data={loginOperators}
-                  onChange={onChangePaymentMethod}
+                  onChange={onChangeNetwork}
                 />
-              ) : type == "easyPaisa" ? (
+              ) : type && type.PaymentMethodName == "Easypaisa"? (
                 <div className="form-control text-center">
                   <img
                     src="https://images.tapmad.com/images/EasypaisaE.png"
                     width="20"
                   />{" "}
-                  <span className="font-weight">Easypaisa</span>
+                  <span className="font-weight">{type.PaymentMethodName}</span>
                 </div>
               ) : (
                 <div className="form-control text-center">

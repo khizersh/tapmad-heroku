@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   let styles =
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
   let message = "tapmad ";
-  console.log("%c %s", styles, message);
+
 
   return (
     <>
