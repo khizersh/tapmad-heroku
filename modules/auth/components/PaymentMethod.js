@@ -6,7 +6,6 @@ export default function PaymentMethod() {
   const { authState, updateSelectedPaymentMethod } = useContext(Authcontext);
   const { updateUserOperator } = useContext(MainContext);
   function UpdatePaymenthMethod(m) {
-    console.log(m);
     updateSelectedPaymentMethod(m);
     updateUserOperator(m.MobileNetworks[0].OperatorId);
   }

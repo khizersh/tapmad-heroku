@@ -2,12 +2,17 @@ import React, { useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { post } from "../../../services/http-service";
+import router from 'next/router';
 
 export default function SubscribeButton() {
-  const { authState } = useContext(Authcontext);
+
+  // let { authState } = useContext(Authcontext);
   const { initialState } = useContext(MainContext);
+  const { authState } = useContext(Authcontext);
+
+
   async function SubscribeUser() {
-    if (authState.selectedPaymentMethod) {
+    if (authState && authState.selectedPaymentMethod) {
       let details = {
         Version: "V1",
         Language: "en",
@@ -20,8 +25,21 @@ export default function SubscribeButton() {
         "https://api.tapmad.com/api/initiatePaymentTransaction",
         details
       );
+      console.log(resp);
+      if(resp.data.Response.responseCode == 11){
+        swal({
+          title: resp.data.Response.message,
+          icon: "warning",
+        });
+
+      }else if(resp.data.Response.responseCode == 0){
+        swal({
+          title: resp.data.Response.message,
+          icon: "error",
+        });
+      }
     }
-    console.log(resp);
+
   }
   return (
     <div>

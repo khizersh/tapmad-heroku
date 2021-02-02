@@ -19,7 +19,6 @@ export default function AuthProvider({ children }) {
 
   React.useEffect(() => {
     if (initialState && initialState.AuthDetails) {
-      console.log("initialState: in oc ", initialState);
       let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
         paymentMethods: initialState.AuthDetails.PaymentMethods,
