@@ -1,26 +1,28 @@
 import React, { useState, useContext, useEffect } from "react";
-import TaxView from "./components/TaxView";
+import TaxView from "./sign-up/TaxView";
 import "./auth.module.css";
-import PaymentMethodComponent from "./components/PaymentMethod";
-import PaymentInfo from "./components/PaymentInfo";
+import PaymentMethodComponent from "./sign-up/PaymentMethod";
+import PaymentInfo from "./sign-up/PaymentInfo";
 import { Authcontext } from "../../contexts/AuthContext";
-import SignUpLayout from "./components/SignUpLayout";
+import SignUpComponent from "./sign-up/SignUpComponent";
 
 export default function Register() {
   const { authState } = useContext(Authcontext);
+  const [component, setComponent] = useState(null);
 
-  return (
-    <div>
-      <SignUpLayout>
-        <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
-          <TaxView />
-        </ul>
+  useEffect(() => {
+    if (authState && authState.signUpComponent) {
+      setComponent(authState.signUpComponent);
+    }
+  }, [authState.signUpComponent]);
 
-        <div className="row w-100">
-          <PaymentMethodComponent />
-        </div>
-        <PaymentInfo />
-      </SignUpLayout>
-    </div>
-  );
+  if (component && component == "signUp") {
+    return (
+      <div>
+        <SignUpComponent></SignUpComponent>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 }
