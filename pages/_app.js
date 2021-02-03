@@ -14,11 +14,17 @@ function MyApp({ Component, pageProps }) {
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
   let message = "tapmad ";
 
-
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
+        />
+
         <title>
           Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
           Free

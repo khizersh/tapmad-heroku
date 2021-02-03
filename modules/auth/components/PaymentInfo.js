@@ -1,14 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, memo } from "react";
 import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 
-export default function PaymentInfo() {
+function PaymentInfo() {
   const { authState } = useContext(Authcontext);
   const { updateUserOperator, updateUserNumber } = useContext(MainContext);
   const onChangeNetwork = (data) => {
-    console.log(data.OperatorId);
     updateUserOperator(data.OperatorId);
   };
   function handleNumber(e) {
@@ -73,3 +72,5 @@ export default function PaymentInfo() {
     </div>
   );
 }
+
+export default memo(PaymentInfo);

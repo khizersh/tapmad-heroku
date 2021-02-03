@@ -15,6 +15,7 @@ export default function AuthProvider({ children }) {
     selectedPaymentMethod: null,
     MobileCode: "",
     PackageImage: "",
+    subscribeResponseCode: null,
   });
 
   React.useEffect(() => {
@@ -37,10 +38,17 @@ export default function AuthProvider({ children }) {
       selectedPaymentMethod: method,
     });
   }
-
+  function updateResponseCode(code) {
+    let stateClone = authState;
+    setAuthState({
+      ...stateClone,
+      subscribeResponseCode: code,
+    });
+  }
   let data = {
     authState,
     updateSelectedPaymentMethod,
+    updateResponseCode,
   };
   return <Authcontext.Provider value={data}>{children}</Authcontext.Provider>;
 }

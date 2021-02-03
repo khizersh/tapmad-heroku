@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, memo, useEffect } from "react";
 
-export default function DropdownWithImage({ data, onChange }) {
+function DropdownWithImage({ data, onChange }) {
   const [selected, setSelected] = useState(null);
   const [isCaretOpen, setIsCaretOpen] = useState(false);
-
   const onSelectItem = (data) => {
     onChange(data);
     setSelected(data);
     setIsCaretOpen(false);
   };
+  useEffect(() => {
+    console.log("----------- Rerender ---------");
+  }, []);
   return (
     <div>
       <div className=" form-control width-11rem">
@@ -69,3 +71,4 @@ export default function DropdownWithImage({ data, onChange }) {
     </div>
   );
 }
+export default memo(DropdownWithImage);
