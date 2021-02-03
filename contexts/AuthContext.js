@@ -27,7 +27,7 @@ export default function AuthProvider({ children }) {
         selectedPaymentMethod: initialState.AuthDetails.PaymentMethods[0],
         MobileCode: initialState.AuthDetails.MobileCode,
         PackageImage: initialState.AuthDetails.PackageImage,
-        signUpComponent:"signUp"
+        signUpComponent: "signUp",
       };
       setAuthState(AuthStateWithData);
     }
@@ -52,7 +52,7 @@ export default function AuthProvider({ children }) {
     let stateClone = authState;
     setAuthState({
       ...stateClone,
-      signUpComponent: name
+      signUpComponent: name,
     });
   }
 
@@ -60,7 +60,7 @@ export default function AuthProvider({ children }) {
     authState,
     updateSelectedPaymentMethod,
     updateSignUpComponent,
-    updateSelectedOperator
+    updateSelectedOperator,
   };
   return <Authcontext.Provider value={data}>{children}</Authcontext.Provider>;
 }

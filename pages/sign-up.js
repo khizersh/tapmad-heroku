@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import AuthProvider from "../contexts/AuthContext";
 import Register from "../modules/auth/Register";
 

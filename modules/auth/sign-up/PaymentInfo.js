@@ -1,33 +1,44 @@
-import React, { useState, useContext, useEffect, memo } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  memo,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 
 function PaymentInfo() {
-
-
-  const [number , setNumber] = useState("");
-  const { authState , updateSelectedOperator} = useContext(Authcontext);
-  const { updateUserOperator, updateUserNumber , initialState} = useContext(MainContext);
-
+  const [number, setNumber] = useState("");
+  const { authState, updateSelectedOperator } = useContext(Authcontext);
+  const { updateUserOperator, updateUserNumber, initialState } = useContext(
+    MainContext
+  );
   useEffect(() => {
-    setNumber(initialState.User.MobileNo)
-  }, [initialState , initialState.User.MobileNo])
-  const onChangeNetwork = (data) => {
-    updateUserOperator(data.OperatorId);
-    updateSelectedOperator(data)
-  };
+    setNumber(initialState.User.MobileNo);
+  }, [initialState, initialState.User.MobileNo]);
+
+  const onChangeNetwork = useCallback(
+    (data) => {
+      updateUserOperator(data.OperatorId);
+      updateSelectedOperator(data);
+    },
+    [updateSelectedOperator]
+  );
+  const operators = useMemo(() => authState.loginOperators);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-    
-      setNumber(mobileNum)
+      setNumber(mobileNum);
     }
-    if(mobileNum.length  == 10){
+    if (mobileNum.length == 10) {
       updateUserNumber(number);
-      console.log("Length: ",number );
+      console.log("Length: ", number);
     }
   }
   return (
@@ -39,9 +50,8 @@ function PaymentInfo() {
               {authState.selectedPaymentMethod &&
               authState.selectedPaymentMethod.PaymentId == 1 ? (
                 <DropdownWithImage
-                  data={authState.loginOperators}
+                  data={operators}
                   onChange={onChangeNetwork}
-                  selected={authState.selectedLoginOperator}
                 />
               ) : authState.selectedPaymentMethod &&
                 authState.selectedPaymentMethod.PaymentId == 3 ? (
@@ -89,4 +99,4 @@ function PaymentInfo() {
   );
 }
 
-export default (PaymentInfo);
+export default PaymentInfo;

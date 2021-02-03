@@ -1,22 +1,13 @@
-import React, { useState, memo, useEffect, useContext } from "react";
-import { Authcontext } from "../../../contexts/AuthContext";
+import React, { useState, memo, useEffect, useRef } from "react";
 
-function DropdownWithImage({ data, onChange, selected }) {
-
-
+function DropdownWithImage({ data, onChange }) {
   const [isCaretOpen, setIsCaretOpen] = useState(false);
-  const {  updateSelectedOperator } = useContext(Authcontext);
   const [selectedData, setSelectedData] = useState(null);
-
-  useEffect(() => {
-    setSelectedData(selected);
-  }, [selected]);
-
   const onSelectItem = (data) => {
     onChange(data);
-    updateSelectedOperator(data);
     setIsCaretOpen(false);
-};
+    setSelectedData(data);
+  };
   return (
     <div>
       <div className=" form-control width-11rem">
@@ -77,4 +68,4 @@ function DropdownWithImage({ data, onChange, selected }) {
     </div>
   );
 }
-export default DropdownWithImage;
+export default memo(DropdownWithImage);
