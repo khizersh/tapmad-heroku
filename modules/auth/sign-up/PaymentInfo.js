@@ -1,20 +1,33 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, memo } from "react";
 import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 
-export default function PaymentInfo() {
-  const { authState } = useContext(Authcontext);
-  const { updateUserOperator, updateUserNumber } = useContext(MainContext);
+function PaymentInfo() {
+
+
+  const [number , setNumber] = useState("");
+  const { authState , updateSelectedOperator} = useContext(Authcontext);
+  const { updateUserOperator, updateUserNumber , initialState} = useContext(MainContext);
+
+  useEffect(() => {
+    setNumber(initialState.User.MobileNo)
+  }, [initialState , initialState.User.MobileNo])
   const onChangeNetwork = (data) => {
-    console.log(data.OperatorId);
     updateUserOperator(data.OperatorId);
+    updateSelectedOperator(data)
   };
+
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      updateUserNumber(mobileNum.trim());
+    
+      setNumber(mobileNum)
+    }
+    if(mobileNum.length  == 10){
+      updateUserNumber(number);
+      console.log("Length: ",number );
     }
   }
   return (
@@ -28,6 +41,7 @@ export default function PaymentInfo() {
                 <DropdownWithImage
                   data={authState.loginOperators}
                   onChange={onChangeNetwork}
+                  selected={authState.selectedLoginOperator}
                 />
               ) : authState.selectedPaymentMethod &&
                 authState.selectedPaymentMethod.PaymentId == 3 ? (
@@ -63,6 +77,7 @@ export default function PaymentInfo() {
                 className="form-control"
                 placeholder="3xxxxxxxxxx"
                 inputMode="numeric"
+                value={number}
                 onChange={(e) => handleNumber(e)}
               />
             </div>
@@ -73,3 +88,5 @@ export default function PaymentInfo() {
     </div>
   );
 }
+
+export default (PaymentInfo);

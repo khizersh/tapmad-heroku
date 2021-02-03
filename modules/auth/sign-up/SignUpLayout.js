@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignUpLayout = ({ children }) => {
+export default function SignUpLayout({ children }) {
   return (
     <div className="mt-0 mt-sm-2">
       <div className="container-fluid p-0 p-sm-2 p-md-3 p-lg-3">
@@ -60,6 +60,4 @@ const SignUpLayout = ({ children }) => {
       </div>
     </div>
   );
-};
-
-export default SignUpLayout;
+}

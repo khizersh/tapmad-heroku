@@ -16,6 +16,7 @@ export default function AuthProvider({ children }) {
     signUpComponent: null,
     MobileCode: "",
     PackageImage: "",
+    subscribeResponseCode: null,
   });
 
   React.useEffect(() => {
@@ -39,6 +40,13 @@ export default function AuthProvider({ children }) {
       selectedPaymentMethod: method,
     });
   }
+  function updateSelectedOperator(operator) {
+    let stateClone = authState;
+    setAuthState({
+      ...stateClone,
+      selectedLoginOperator: operator,
+    });
+  }
 
   function updateSignUpComponent(name) {
     let stateClone = authState;
@@ -51,7 +59,8 @@ export default function AuthProvider({ children }) {
   let data = {
     authState,
     updateSelectedPaymentMethod,
-    updateSignUpComponent
+    updateSignUpComponent,
+    updateSelectedOperator
   };
   return <Authcontext.Provider value={data}>{children}</Authcontext.Provider>;
 }
