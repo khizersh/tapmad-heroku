@@ -13,14 +13,10 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 
 function PaymentInfo() {
-  const [number, setNumber] = useState("");
   const { authState, updateSelectedOperator } = useContext(Authcontext);
   const { updateUserOperator, updateUserNumber, initialState } = useContext(
     MainContext
   );
-  useEffect(() => {
-    setNumber(initialState.User.MobileNo);
-  }, [initialState, initialState.User.MobileNo]);
 
   const onChangeNetwork = useCallback(
     (data) => {
@@ -34,11 +30,9 @@ function PaymentInfo() {
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      setNumber(mobileNum);
-    }
-    if (mobileNum.length == 10) {
-      updateUserNumber(number);
-      console.log("Length: ", number);
+      if (mobileNum.length == 10) {
+        updateUserNumber(mobileNum);
+      }
     }
   }
   return (
@@ -87,7 +81,6 @@ function PaymentInfo() {
                 className="form-control"
                 placeholder="3xxxxxxxxxx"
                 inputMode="numeric"
-                value={number}
                 onChange={(e) => handleNumber(e)}
               />
             </div>

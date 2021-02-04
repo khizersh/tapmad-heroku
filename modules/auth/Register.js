@@ -7,21 +7,24 @@ import Pin from "./sign-up/Pin";
 
 export default memo(function Register() {
   const { authState } = useContext(Authcontext);
-  const RenderViews = useCallback(function () {
-    if (authState.subscribeResponseCode == 1) {
-      return (
-        <>
-          <Pin />
-        </>
-      );
-    } else if (!authState.subscribeResponseCode) {
-      return (
-        <>
-          <SignUpComponent />
-        </>
-      );
-    }
-  }, []);
+  const RenderViews = useCallback(
+    function () {
+      if (authState.subscribeResponseCode == 1) {
+        return (
+          <>
+            <Pin />
+          </>
+        );
+      } else if (!authState.subscribeResponseCode) {
+        return (
+          <>
+            <SignUpComponent />
+          </>
+        );
+      }
+    },
+    [authState.subscribeResponseCode]
+  );
 
   return (
     <div>

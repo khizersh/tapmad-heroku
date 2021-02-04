@@ -55,12 +55,19 @@ export default function AuthProvider({ children }) {
       signUpComponent: name,
     });
   }
-
+  function updateResponseCode(code) {
+    let stateClone = authState;
+    setAuthState({
+      ...stateClone,
+      subscribeResponseCode: code,
+    });
+  }
   let data = {
     authState,
     updateSelectedPaymentMethod,
     updateSignUpComponent,
     updateSelectedOperator,
+    updateResponseCode,
   };
   return <Authcontext.Provider value={data}>{children}</Authcontext.Provider>;
 }

@@ -6,10 +6,11 @@ import router from "next/router";
 
 export default function SubscribeButton() {
   // let { authState } = useContext(Authcontext);
-  const { initialState } = useContext(MainContext);
+  const { initialState, setLoader } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   async function SubscribeUser() {
+    setLoader(true);
     if (authState && authState.selectedPaymentMethod) {
       let details = {
         Version: "V1",
@@ -23,6 +24,8 @@ export default function SubscribeButton() {
         "https://api.tapmad.com/api/initiatePaymentTransaction",
         details
       );
+      setLoader(false);
+
       let responseCode = resp.data.Response.responseCode;
       if (responseCode == 11) {
         swal({
