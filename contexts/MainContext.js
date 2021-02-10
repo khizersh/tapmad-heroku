@@ -1,6 +1,7 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
+import { useRouter } from "next/router";
 
 export const MainContext = React.createContext(null);
 
@@ -22,6 +23,7 @@ function reducer(state, action) {
   }
 }
 export default function MainProvider({ children }) {
+  const router = useRouter();
   const [initialState, dispatch] = useReducer(reducer, {
     isAuthenticated: false,
     loading: false,
@@ -30,7 +32,7 @@ export default function MainProvider({ children }) {
       OperatorId: "",
     },
   });
-  React.useEffect(async () => {
+  useEffect(async () => {
     var operators = await get(
       "https://api.tapmad.com/api/getAllPaymentMethodsPackages/V1/en/web"
     );
@@ -50,6 +52,7 @@ export default function MainProvider({ children }) {
     const isAuthenticated = Cookie.getCookies("isAuth");
     if (userId && isAuthenticated == 1) {
       dispatch({ type: "SET_AUTHENTICATION", data: true });
+      router.push("/");
     }
   }
   function setLoader(bool) {

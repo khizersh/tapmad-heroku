@@ -3,6 +3,8 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { post } from "../../../services/http-service";
 import router from "next/router";
+import { Cookie } from "../../../services/cookies";
+import swal from "sweetalert";
 
 export default function SubscribeButton() {
   // let { authState } = useContext(Authcontext);
@@ -29,9 +31,13 @@ export default function SubscribeButton() {
       let responseCode = resp.data.Response.responseCode;
       if (responseCode == 11) {
         swal({
-          title: resp.data.Response.message,
-          icon: "warning",
+          timer: 3000,
+          text:
+            "You are already subscribed user, please enter your PIN for login",
+          icon: "info",
         });
+        updateResponseCode(responseCode);
+        Cookie.setCookies("userId", resp.data.User.UserId);
       } else if (responseCode == 0) {
         swal({
           title: resp.data.Response.message,
@@ -40,6 +46,11 @@ export default function SubscribeButton() {
       } else if (responseCode == 1) {
         // Mutate response code in state
         updateResponseCode(responseCode);
+      } else if (responseCode == 13) {
+        swal({
+          title: resp.data.Response.message,
+          icon: "error",
+        });
       }
     }
   }

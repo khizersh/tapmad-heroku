@@ -85,7 +85,7 @@ export default function Login({ loginResponse }) {
         <span className="mt-2 mr-2 text-muted">
           | &nbsp;&nbsp;Not Registered?
         </span>
-        <a className="text-light" href="signup.html">
+        <a className="text-light" href="sign-up">
           Sign Up
         </a>
       </div>
