@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { AuthService } from "../auth.service";
 import EnterPin from "./enterPin";
 import ForgetPin from "./forget-pin";
@@ -18,7 +18,7 @@ export default function AuthViews() {
     setViewToShow("forget-pin");
   }
 
-  const RenderViews = () => {
+  const RenderViews = useCallback(() => {
     if (viewToShow == "enter-pin") {
       return <EnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
@@ -26,14 +26,14 @@ export default function AuthViews() {
     } else if (viewToShow == "set-pin") {
       return <SetPin />;
     } else if (viewToShow == "login") {
-      return <Login loginResponse={processResponse} />;
+      return <Login loginResponse={() => processResponse()} />;
     } else if (viewToShow == "send-otp") {
       return <ForgetPin updateView={() => setViewToShow("set-pin")} />;
     } else if (viewToShow == "sign-up") {
       router.push("sign-up");
       return <div></div>;
     }
-  };
+  }, []);
   return (
     <div>
       <div className="bg_dark">

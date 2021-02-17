@@ -3,7 +3,7 @@ import "./auth.module.css";
 import { Authcontext } from "../../contexts/AuthContext";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";
-import Pin from "./sign-up/Pin";
+import Pin from "./sign-up/VerifyOTP";
 import EnterPinToVerify from "./sign-up/EnterPinToVerify";
 import SetYourNewPin from "./sign-up/SetYourNewPin";
 

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useCallback, useMemo, memo } from "react";
+import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { post } from "../../../services/http-service";
 import "../auth.module.css";
+import DropdownWithImage from "../sign-up/DropdownWithImage";
 
-export default function Login({ loginResponse }) {
+function Login({ loginResponse }) {
   const {
     initialState,
     updateUserNumber,
@@ -30,7 +32,13 @@ export default function Login({ loginResponse }) {
       setLoader(false);
     }
   }
-
+  const onChangeNetwork = useCallback(
+    (data) => {
+      updateUserOperator(() => data.OperatorId);
+    },
+    [updateUserOperator]
+  );
+  const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
       <img src="https://www.tapmad.com/images/tm-logo.png" width="200" />
@@ -38,7 +46,7 @@ export default function Login({ loginResponse }) {
       <p>Please Enter your Mobile Number to login</p>
       {initialState.AuthDetails && (
         <div className="input-group">
-          <select
+          {/* <select
             value={initialState.User.OperatorId}
             onChange={(e) => updateUserOperator(e.target.value)}
           >
@@ -50,7 +58,8 @@ export default function Login({ loginResponse }) {
                 </option>
               );
             })}
-          </select>
+          </select> */}
+          <DropdownWithImage data={operators} onChange={onChangeNetwork} />
 
           <input type="hidden" id="CountryMobileCode" value="+92" />
 
@@ -92,3 +101,5 @@ export default function Login({ loginResponse }) {
     </div>
   );
 }
+
+export default memo(Login);

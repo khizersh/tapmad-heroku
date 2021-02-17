@@ -46,9 +46,10 @@ function DropdownWithImage({ data, onChange }) {
         </div>
       </div>
       <div
-        className={`overflow-hidden position-absolute dropdown-width ${
+        className={`overflow-hidden position-absolute dropdown-width  ${
           isCaretOpen ? "translate-100" : "translate-0"
         } `}
+        style={{ zIndex: 100 }}
       >
         <div className={`clr-black`}>
           {data.length

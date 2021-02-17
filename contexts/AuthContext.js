@@ -16,6 +16,7 @@ export default function AuthProvider({ children }) {
     signUpComponent: null,
     MobileCode: "",
     PackageImage: "",
+    selectedPackageId: null,
     subscribeResponseCode: null,
   });
 
@@ -28,6 +29,8 @@ export default function AuthProvider({ children }) {
         MobileCode: initialState.AuthDetails.MobileCode,
         PackageImage: initialState.AuthDetails.PackageImage,
         signUpComponent: "signUp",
+        selectedPackageId:
+          initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]?.ProductId,
       };
       setAuthState(AuthStateWithData);
     }
@@ -38,6 +41,14 @@ export default function AuthProvider({ children }) {
     setAuthState({
       ...stateClone,
       selectedPaymentMethod: method,
+    });
+  }
+
+  function updateSelectedPackageId(id) {
+    let stateClone = authState;
+    setAuthState({
+      ...stateClone,
+      selectedPackageId: id,
     });
   }
   function updateSelectedOperator(operator) {
@@ -68,6 +79,7 @@ export default function AuthProvider({ children }) {
     updateSignUpComponent,
     updateSelectedOperator,
     updateResponseCode,
+    updateSelectedPackageId,
   };
   return <Authcontext.Provider value={data}>{children}</Authcontext.Provider>;
 }

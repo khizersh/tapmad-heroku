@@ -9,6 +9,12 @@ function reducer(state, action) {
   switch (action.type) {
     case "UPDATE_OPERATOR":
       return { ...state, User: { ...state.User, OperatorId: action.data } };
+    case "UPDATE_FULLNAME":
+      return { ...state, User: { ...state.User, FullName: action.data } };
+    case "UPDATE_EMAIL":
+      return { ...state, User: { ...state.User, Email: action.data } };
+    case "UPDATE_CNIC":
+      return { ...state, User: { ...state.User, Cnic: action.data } };
     case "SET_PAYMENT_PACKAGES":
       return { ...state, AuthDetails: action.data };
     case "SET_AUTHENTICATION":
@@ -28,8 +34,11 @@ export default function MainProvider({ children }) {
     isAuthenticated: false,
     loading: false,
     User: {
+      FullName: "",
       MobileNo: "",
+      Cnic: "",
       OperatorId: "",
+      Email: "",
     },
   });
   useEffect(async () => {
@@ -41,11 +50,20 @@ export default function MainProvider({ children }) {
   }, []);
 
   function updateUserNumber(number) {
-    console.log("DISPATCH NUMBER");
     dispatch({ type: "SET_USER_NUMBER", data: number });
   }
   function updateUserOperator(operator) {
     dispatch({ type: "UPDATE_OPERATOR", data: operator });
+  }
+
+  function updateUserCnic(cnic) {
+    dispatch({ type: "UPDATE_CNIC", data: cnic });
+  }
+  function updateUserFullName(name) {
+    dispatch({ type: "UPDATE_FULLNAME", data: name });
+  }
+  function updateUserEmail(email) {
+    dispatch({ type: "UPDATE_EMAIL", data: email });
   }
   function checkUserAuthentication() {
     const userId = Cookie.getCookies("userId");
@@ -55,6 +73,10 @@ export default function MainProvider({ children }) {
       router.push("/");
     }
   }
+
+  function setisAuthenticateFalse() {
+    dispatch({ type: "SET_AUTHENTICATION", data: false });
+  }
   function setLoader(bool) {
     dispatch({ type: "SET_LOADER", data: bool });
   }
@@ -63,7 +85,11 @@ export default function MainProvider({ children }) {
     checkUserAuthentication,
     updateUserNumber,
     updateUserOperator,
+    updateUserCnic,
+    updateUserFullName,
+    updateUserEmail,
     setLoader,
+    setisAuthenticateFalse,
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }

@@ -11,7 +11,7 @@ const SignUpComponent = () => {
         <TaxView />
       </ul>
 
-      <div className="row w-100">
+      <div className="">
         <PaymentMethodComponent />
       </div>
       <PaymentInfo />

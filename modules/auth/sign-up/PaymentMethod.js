@@ -10,15 +10,12 @@ export default function PaymentMethod() {
     updateUserOperator(m.MobileNetworks[0].OperatorId);
   }
   return (
-    <div className="col-12 col-sm-12 pt-3">
-      <div className="row pt-3 pb-3 pl-3">
+    <div className="col-md-12 col-sm-12 pt-3">
+      <div className="row py-3">
         {authState.paymentMethods.length
           ? authState.paymentMethods.map((m, i) => (
-              <div className="col-4" key={i}>
-                <div
-                  onClick={() => UpdatePaymenthMethod(m)}
-                  className="btn payment-method list-group-item text-center border-0 bg-transparent pr-0 pl-0 pr-sm-3 pl-sm-3 pymnt_pge_pkgs_active"
-                >
+              <div className="col-3 btn bg-transparent " key={i}>
+                <div onClick={() => UpdatePaymenthMethod(m)} className="">
                   <span className="mbl-check-icon">
                     {authState.selectedPaymentMethod.PaymentId ==
                     m.PaymentId ? (
@@ -34,11 +31,12 @@ export default function PaymentMethod() {
                     style={{ minWidth: "50px", height: "60px" }}
                   />
                   <i
-                    className={`text-center text-muted d-block  ${
+                    className={`text-center text-muted d-block mbl-14px  ${
                       authState.selectedPaymentMethod.PaymentId == m.PaymentId
                         ? "text-white"
                         : ""
                     }`}
+                    style={{ fontStyle: "normal" }}
                   >
                     {m.PaymentMethodName}
                   </i>

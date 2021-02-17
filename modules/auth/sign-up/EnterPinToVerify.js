@@ -6,9 +6,28 @@ import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
 
 const EnterPinToVerify = () => {
-  const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  const { checkUserAuthentication, setLoader, initialState } = useContext(
+    MainContext
+  );
   const { updateResponseCode } = useContext(Authcontext);
   const pinCode = useRef("");
+
+  async function forgetPin() {
+    setLoader(true);
+    let body = {
+      MobileNo: initialState.User.MobileNo,
+      OperatorId: initialState.User.OperatorId,
+    };
+    let resp = await post("https://api.tapmad.com/api/sendOTP/V1/en/web", body);
+    if (resp.data && resp.data.Response) {
+      let responseCode = resp.data.Response.responseCode;
+      if (responseCode == 1) {
+        updateResponseCode(responseCode);
+      }
+    }
+    setLoader(false);
+  }
+
   async function verifyPinCode() {
     setLoader(true);
     var body = {
@@ -67,7 +86,9 @@ const EnterPinToVerify = () => {
           </button>
         </div>
         <div className="text-center pb-3">
-          <a href="/">Forgot PIN?</a>
+          <span onClick={forgetPin} className="btn text-white">
+            Forgot PIN?
+          </span>
         </div>
       </div>
     </>

@@ -1,10 +1,34 @@
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import "../../components/App/Header.css";
+import { Cookie } from "../../services/cookies";
+import swal from "sweetalert";
+import { useRouter } from "next/router";
 
 export default function Header() {
-  const { initialState } = useContext(MainContext);
+  const { initialState, setLoader, setisAuthenticateFalse } = useContext(
+    MainContext
+  );
+
+  const router = useRouter();
+  const onClickSignout = () => {
+    setLoader(true);
+    console.log("in");
+    swal({
+      title: "You have logged out!",
+      text: "Redirecting you ...",
+      timer: 3000,
+    }).then((res) => {
+      console.log("under then");
+      Cookie.setCookies("isAuth", 0);
+      setisAuthenticateFalse();
+      router.push("/");
+      setLoader(false);
+    });
+  };
+
+  useEffect(() => {}, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -84,7 +108,10 @@ export default function Header() {
               </li>
               {initialState.isAuthenticated ? (
                 <li id="loginAva2" className="nav-item">
-                  <a href="#" className="pull-right d-xs-none">
+                  <a
+                    onClick={onClickSignout}
+                    className="pull-right d-xs-none btn nav-link"
+                  >
                     Signout
                   </a>
                 </li>

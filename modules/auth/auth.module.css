@@ -30,6 +30,40 @@
   border: 0;
 }
 
+.list-group-horizontal .list-group-item {
+  margin-right: -1px;
+  margin-bottom: 0;
+}
+
+.pymnt_pge_pr_list li > span {
+  font-size: 36px;
+  color: #87c242;
+}
+.pymnt_pge_pr_list li {
+  font-size: 14px;
+  color: #fff;
+  border-radius: 0 !important;
+  background-color: #222;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pr_active {
+  background-color: #fff !important;
+  color: #000 !important;
+  background-image: url(//d1s7wg2ne64q87.cloudfront.net/web/images/payment/check.png);
+  background-position: 100% -15px;
+  background-size: 5rem;
+  background-repeat: no-repeat;
+}
+.list-group-item-action:focus,
+.list-group-item-action:hover {
+  z-index: 1;
+  color: black !important;
+  text-decoration: none;
+  background-color: #f8f9fa;
+}
+
 .req_pin_cde_btn:hover {
   background-color: #4d8305 !important;
 }
@@ -100,8 +134,8 @@
 }
 .mbl-check-icon {
   position: absolute;
-  top: -14px;
-  left: 73px;
+  top: -23px;
+  left: 56px;
 }
 
 .clr-black {
@@ -159,10 +193,21 @@
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .mbl-check-icon {
     position: absolute;
-    top: -14px;
-    left: 29px;
+    top: -22px;
+    left: 2.5rem;
   }
 
+  .pr_active {
+    background-color: #fff !important;
+    color: #000 !important;
+    background-image: url(//d1s7wg2ne64q87.cloudfront.net/web/images/payment/check.png);
+    background-position: 100% -15px;
+    background-size: 4rem !important;
+    background-repeat: no-repeat;
+  }
+  .mbl-14px {
+    font-size: 14px;
+  }
   .width-11rem {
     width: 8rem;
   }
