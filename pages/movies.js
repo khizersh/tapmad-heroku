@@ -2,7 +2,6 @@ import Head from "next/head";
 import Movies from "../modules/movies/components/movies";
 import { get } from "../services/http-service";
 export default function MoviesPage(props) {
-  console.log("Render in movies");
   return (
     <div>
       <Head>

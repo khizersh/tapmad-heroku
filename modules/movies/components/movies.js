@@ -7,6 +7,7 @@ import {
   calculateRowsToFetch,
   pushNewMoviesIntoList,
 } from "../../../services/utils";
+import { GolobalService } from "../../global-service";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Movies({ movies }) {
@@ -32,7 +33,25 @@ export default function Movies({ movies }) {
     }
   }
 
-  console.log("localMovies.Sections.Movies: ", localMovies.Sections.Movies);
+  useEffect(() => {
+    let list = [];
+    if (localMovies && localMovies.Sections && localMovies.Sections.Movies) {
+      list = GolobalService.customizingData(localMovies.Sections.Movies);
+    }
+    let obj = {
+      ...localMovies,
+      Sections: { Movies: list },
+    };
+    setLocalMovies({
+      ...localMovies,
+      Sections: {
+        Movies: list,
+      },
+    });
+
+    console.log("check: ", obj);
+  }, [movies]);
+
   return (
     <div>
       <Slider {...bannerSettings}>
@@ -43,7 +62,7 @@ export default function Movies({ movies }) {
             </div>
           );
         })}
-      </Slider>
+      </Slider>{" "}
       <HomepageSlider movies={localMovies.Sections.Movies} />
       {currentRow !== movies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />

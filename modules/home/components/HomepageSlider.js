@@ -1,13 +1,15 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
 import {
   basicSliderConfig,
   setUrlAccordingToVideoType,
 } from "../../../services/utils";
+import { GolobalService } from "../../global-service";
 
 const HomepageSlider = ({ movies }) => {
+  // const [render, setRender] = useState(false);
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
   const [clientYonMouseDown, setClientYonMouseDown] = React.useState(null);
@@ -40,7 +42,6 @@ const HomepageSlider = ({ movies }) => {
   console.log("movies in slider: ", movies);
   return (
     <div className="mt-lg-5 pt-lg-5 pt-md-5 mt-md-5 pt-5">
-      {console.log("All Movies ", JSON.stringify(movies))}
       {movies &&
         movies.length > 0 &&
         movies.map((movieSection, row) => {
@@ -102,7 +103,9 @@ const HomepageSlider = ({ movies }) => {
                           </Link>
                         );
                       })
-                    : movieSection.Categories.map((mov, index) => {
+                    : movieSection &&
+                      movieSection.Categories &&
+                      movieSection.Categories.map((mov, index) => {
                         let slug = setUrlAccordingToVideoType(mov, IsCategory);
                         return (
                           <Link
