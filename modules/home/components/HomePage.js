@@ -16,7 +16,6 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const modifiedResponse = modifyHomePageResponse(movies);
 
   React.useEffect(() => {
-    console.log("modifiedResponse: ", modifiedResponse);
     setLocalMovies(modifiedResponse);
   }, [movies]);
 
@@ -31,7 +30,6 @@ export default function HomePage({ movies, banner, featured, ip }) {
         rowData.rowFrom
       }/${rowData.rowsTo - rowData.rowFrom}/0/16`
     );
-    console.log("moviesList: ", moviesList);
     var newMovies = await moviesList.data;
     if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {
       let modifiedNewMovies = modifyHomePageResponse(newMovies.Tabs[0]);

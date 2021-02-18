@@ -18,6 +18,7 @@ export default function Home(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
+  console.log("IP:   ", ip);
   var movieList = await get(
     "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16",
     ip
@@ -31,7 +32,6 @@ export async function getServerSideProps(context) {
   var movie = await movieList.data;
   var banner = await bannersList.data;
   var featured = await featuredContent.data;
-  // console.log(movie);
   return {
     props: {
       movies: movie.Tabs[0],
