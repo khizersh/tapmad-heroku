@@ -40,6 +40,7 @@ const HomepageSlider = ({ movies }) => {
   console.log("movies in slider: ", movies);
   return (
     <div className="mt-lg-5 pt-lg-5 pt-md-5 mt-md-5 pt-5">
+      {console.log("All Movies ", movies)}
       {movies &&
         movies.length > 0 &&
         movies.map((movieSection, row) => {
