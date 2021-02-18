@@ -46,7 +46,9 @@ const HomepageSlider = ({ movies }) => {
               <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
               <div>
                 <Slider {...settings}>
-                  {movieSection && !movieSection.IsCategories
+                  {movieSection &&
+                  !movieSection.IsCategories &&
+                  movieSection.Videos
                     ? movieSection.Videos.map((mov, index) => {
                         let slug = setUrlAccordingToVideoType(
                           mov,
