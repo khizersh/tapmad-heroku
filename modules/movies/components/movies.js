@@ -32,6 +32,7 @@ export default function Movies({ movies }) {
     }
   }
 
+  console.log("localMovies.Sections.Movies: ", localMovies.Sections.Movies);
   return (
     <div>
       <Slider {...bannerSettings}>
