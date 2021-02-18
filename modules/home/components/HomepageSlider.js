@@ -50,7 +50,8 @@ const HomepageSlider = ({ movies }) => {
                 <Slider {...settings}>
                   {movieSection &&
                   !movieSection.IsCategories &&
-                  movieSection.Videos
+                  movieSection.Videos &&
+                  movieSection.Videos.length > 0
                     ? movieSection.Videos.map((mov, index) => {
                         let slug = setUrlAccordingToVideoType(
                           mov,
