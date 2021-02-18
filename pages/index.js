@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
   var banner = await bannersList.data;
   var featured = await featuredContent.data;
   if (ip == "::1") {
-    ip = "39.44.245.125";
+    ip = "162.210.194.35";
   }
   return {
     props: {
