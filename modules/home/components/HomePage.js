@@ -16,8 +16,9 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const modifiedResponse = modifyHomePageResponse(movies);
 
   React.useEffect(() => {
+    console.log("modifiedResponse: ", modifiedResponse);
     setLocalMovies(modifiedResponse);
-  }, []);
+  }, [movies]);
 
   async function fetchNewMovies() {
     if (currentRow == movies.totalSections) {
@@ -28,8 +29,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     var moviesList = await get(
       `https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/${
         rowData.rowFrom
-      }/${rowData.rowsTo - rowData.rowFrom}/0/16`,
-      ip
+      }/${rowData.rowsTo - rowData.rowFrom}/0/16`
     );
     var newMovies = await moviesList.data;
     if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {
@@ -83,7 +83,9 @@ export default function HomePage({ movies, banner, featured, ip }) {
                 </div>
               </div>
             </div>
-            <HomepageSlider movies={localMovies.Sections.Movies} />
+            {localMovies && localMovies.Sections && (
+              <HomepageSlider movies={localMovies.Sections.Movies} />
+            )}
             {currentRow !== movies.totalSections && (
               <ScrollComponent loadMore={fetchNewMovies} />
             )}

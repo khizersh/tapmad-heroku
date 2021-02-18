@@ -10,20 +10,28 @@ export default function PaymentMethod() {
     updateUserOperator(m.MobileNetworks[0].OperatorId);
   }
   return (
-    <div className="col-md-12 col-sm-12 pt-3">
-      <div className="row py-3">
+    <div className="col-md-12 col-sm-12 pt-2">
+      <div className="row py-3" style={{ flexWrap: "nowrap" }}>
         {authState.paymentMethods.length
           ? authState.paymentMethods.map((m, i) => (
-              <div className="col-3 btn bg-transparent " key={i}>
-                <div onClick={() => UpdatePaymenthMethod(m)} className="">
-                  <span className="mbl-check-icon">
-                    {authState.selectedPaymentMethod.PaymentId ==
-                    m.PaymentId ? (
-                      <i className="fa fa-check-circle clr-green"></i>
-                    ) : (
-                      ""
-                    )}
-                  </span>
+              <div
+                className="btn bg-transparent"
+                style={{ margin: "auto" }}
+                key={i}
+              >
+                <div className="row">
+                  <div className="col-12" style={{ height: 25 }}>
+                    <span>
+                      {authState.selectedPaymentMethod.PaymentId ==
+                      m.PaymentId ? (
+                        <i className="fa fa-check-circle clr-green"></i>
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <div onClick={() => UpdatePaymenthMethod(m)}>
                   <img
                     src={m.PaymentImage}
                     alt={m.PaymentMethodName}
@@ -31,7 +39,7 @@ export default function PaymentMethod() {
                     style={{ minWidth: "50px", height: "60px" }}
                   />
                   <i
-                    className={`text-center text-muted d-block mbl-14px  ${
+                    className={`text-center text-muted d-block mbl-13px  ${
                       authState.selectedPaymentMethod.PaymentId == m.PaymentId
                         ? "text-white"
                         : ""

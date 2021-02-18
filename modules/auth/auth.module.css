@@ -133,7 +133,7 @@
   color: white !important;
 }
 .mbl-check-icon {
-  position: absolute;
+  position: relative;
   top: -23px;
   left: 56px;
 }
@@ -192,7 +192,7 @@
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .mbl-check-icon {
-    position: absolute;
+    position: relative;
     top: -22px;
     left: 2.5rem;
   }
@@ -205,8 +205,8 @@
     background-size: 4rem !important;
     background-repeat: no-repeat;
   }
-  .mbl-14px {
-    font-size: 14px;
+  .mbl-13px {
+    font-size: 13px;
   }
   .width-11rem {
     width: 8rem;
