@@ -5,7 +5,7 @@ import "../styles/globals.css";
 const Loader = () => {
   return (
     <div className="wrapper">
-      <div id="overlay2" style={{ zIndex: 99999, display: "block" }}>
+      <div id="overlay2" style={{ zIndex: 9999999, display: "block" }}>
         <div id="loader" className="nfLoader">
           <img
             src="/icons/logo_white.png"

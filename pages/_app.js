@@ -8,7 +8,6 @@ import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
-import AuthProvider from "../contexts/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   let styles =

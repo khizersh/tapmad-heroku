@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideBar from "./SideBar";
 import Router from "next/router";
 import Loader from "./Loader";
 import { MainContext } from "../contexts/MainContext";
+import Search from "../modules/search/Search";
 
 export default function Skeleton({ children }) {
   const { initialState, setLoader } = React.useContext(MainContext);
@@ -17,11 +18,20 @@ export default function Skeleton({ children }) {
   Router.onRouteChangeError = () => {
     setLoader(false);
   };
+
+  useEffect(() => {}, [initialState.isSearch]);
+
   return (
     <div className="pages_header">
       {initialState.loading ? <Loader /> : null}
-      <SideBar />
-      <div className="new-wrapper">{children}</div>
+      {initialState.isSearch ? (
+        <Search />
+      ) : (
+        <>
+          <SideBar />
+          <div className="new-wrapper">{children}</div>
+        </>
+      )}
     </div>
   );
 }

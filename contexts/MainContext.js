@@ -9,6 +9,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "UPDATE_OPERATOR":
       return { ...state, User: { ...state.User, OperatorId: action.data } };
+    case "SET_SEARCH":
+      return { ...state, isSearch: action.data };
     case "UPDATE_FULLNAME":
       return { ...state, User: { ...state.User, FullName: action.data } };
     case "UPDATE_EMAIL":
@@ -33,6 +35,7 @@ export default function MainProvider({ children }) {
   const [initialState, dispatch] = useReducer(reducer, {
     isAuthenticated: false,
     loading: false,
+    isSearch: false,
     User: {
       FullName: "",
       MobileNo: "",
@@ -80,8 +83,13 @@ export default function MainProvider({ children }) {
   function setLoader(bool) {
     dispatch({ type: "SET_LOADER", data: bool });
   }
+
+  function setSearch(bool) {
+    dispatch({ type: "SET_SEARCH", data: bool });
+  }
   let data = {
     initialState,
+    setSearch,
     checkUserAuthentication,
     updateUserNumber,
     updateUserOperator,

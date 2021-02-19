@@ -485,7 +485,8 @@ div#nav-tab {
 }
 .primary-nav {
   position: fixed !important;
-  z-index: 9999999;
+  // z-index: 9999999;
+  z-index: 999;
 }
 .menu {
   position: relative;
@@ -771,7 +772,8 @@ button:focus {
 .tm_top_navi {
   position: sticky;
   top: 0;
-  z-index: 9999;
+  // z-index: 9999;
+  z-index: 999;
   width: 100%;
 }
 

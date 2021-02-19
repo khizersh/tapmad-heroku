@@ -7,9 +7,12 @@ import swal from "sweetalert";
 import { useRouter } from "next/router";
 
 export default function Header() {
-  const { initialState, setLoader, setisAuthenticateFalse } = useContext(
-    MainContext
-  );
+  const {
+    initialState,
+    setLoader,
+    setisAuthenticateFalse,
+    setSearch,
+  } = useContext(MainContext);
 
   const router = useRouter();
   const onClickSignout = () => {
@@ -26,6 +29,11 @@ export default function Header() {
       router.push("/");
       setLoader(false);
     });
+  };
+
+  const onClick = () => {
+    console.log("Search");
+    setSearch(true);
   };
 
   useEffect(() => {}, [initialState.isAuthenticated]);
@@ -65,7 +73,10 @@ export default function Header() {
           <div className="col-6 col-sm-10 col-md-9 col-lg-3 additnl_menu">
             <ul className="nav usr_btns justify-content-end">
               <li className="nav-item">
-                <a className="btn btn-default search-btn btn-sm">
+                <a
+                  className="btn btn-default search-btn btn-sm"
+                  onClick={onClick}
+                >
                   <i className="fa fa-search"></i>
                 </a>
               </li>

@@ -9,6 +9,7 @@ const CreditCardForm = ({
   onChangeNumber,
   onChangeEmail,
 }) => {
+  console.log("data: ", data);
   return (
     <>
       <input
@@ -17,7 +18,9 @@ const CreditCardForm = ({
         placeholder="Full Name"
         onChange={(e) => onChangeName(e)}
       />
-      <DropdownWithImage data={data} onChange={onChangeNetwork} />
+      {data && data.length ? (
+        <DropdownWithImage data={data} onChange={onChangeNetwork} />
+      ) : null}
       <span>
         <label className="form-control cntry_cde border-0">{mobileCode}</label>
       </span>
