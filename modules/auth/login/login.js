@@ -7,8 +7,6 @@ import "../auth.module.css";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
 function Login({ loginResponse }) {
-
-
   const {
     initialState,
     updateUserNumber,
@@ -21,10 +19,10 @@ function Login({ loginResponse }) {
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      if(mobileNum.length > 4){
-        setbtnDisabled(false)
-      }else{
-        setbtnDisabled(true)
+      if (mobileNum.length > 4) {
+        setbtnDisabled(false);
+      } else {
+        setbtnDisabled(true);
       }
       setMobileNo(mobileNum.trim());
     }
@@ -36,16 +34,16 @@ function Login({ loginResponse }) {
         Language: "en",
         MobileNo: mobileNo,
       });
-      
+
       updateUserNumber(mobileNo);
       loginResponse(response.data);
       setLoader(false);
-    }else{
+    } else {
       swal({
-        title:"Invalid number!",
-        timer:3000,
-        icon:"error"
-      })
+        title: "Invalid number!",
+        timer: 3000,
+        icon: "error",
+      });
       setLoader(false);
     }
   }
@@ -61,28 +59,29 @@ function Login({ loginResponse }) {
       <img src="https://www.tapmad.com/images/tm-logo.png" width="200" />
       <h4>Enter your Mobile Number</h4>
       <p>Please Enter your Mobile Number to login</p>
-      {initialState.AuthDetails && (
-        <div className="input-group">
-          <DropdownWithImage data={operators} onChange={onChangeNetwork} />
-          <input type="hidden" id="CountryMobileCode" value="+92" />
-          <span>
-            <label className="form-control" style={{ fontSize: "14px" }}>
-              {initialState.AuthDetails.MobileCode}
-            </label>
-          </span>
-
-          <input
-            type="text"
-            maxLength="10"
-            minLength="10"
-            className="form-control"
-            placeholder="3xxxxxxxxxx"
-            inputMode="numeric"
-            value={mobileNo}
-            onChange={(e) => handleNumber(e)}
-          />
-        </div>
-      )}
+      <div className="input-group">
+        {initialState.AuthDetails && (
+          <>
+            <DropdownWithImage data={operators} onChange={onChangeNetwork} />
+            <input type="hidden" id="CountryMobileCode" value="+92" />
+            <span>
+              <label className="form-control" style={{ fontSize: "14px" }}>
+                {initialState.AuthDetails.MobileCode}
+              </label>
+            </span>
+          </>
+        )}
+        <input
+          type="text"
+          maxLength="10"
+          minLength="10"
+          className="form-control"
+          placeholder="3xxxxxxxxxx"
+          inputMode="numeric"
+          value={mobileNo}
+          onChange={(e) => handleNumber(e)}
+        />
+      </div>
       <div className="form-group">
         <button
           type="button"
