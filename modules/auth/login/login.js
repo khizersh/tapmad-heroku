@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, memo } from "react";
+import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { post } from "../../../services/http-service";
@@ -6,6 +7,8 @@ import "../auth.module.css";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
 function Login({ loginResponse }) {
+
+
   const {
     initialState,
     updateUserNumber,
@@ -27,14 +30,22 @@ function Login({ loginResponse }) {
         Language: "en",
         MobileNo: mobileNo,
       });
+      
       updateUserNumber(mobileNo);
       loginResponse(response.data);
+      setLoader(false);
+    }else{
+      swal({
+        title:"Invalid number!",
+        timer:3000,
+        icon:"error"
+      })
       setLoader(false);
     }
   }
   const onChangeNetwork = useCallback(
     (data) => {
-      updateUserOperator(() => data.OperatorId);
+      updateUserOperator(data.OperatorId);
     },
     [updateUserOperator]
   );
@@ -46,23 +57,8 @@ function Login({ loginResponse }) {
       <p>Please Enter your Mobile Number to login</p>
       {initialState.AuthDetails && (
         <div className="input-group">
-          {/* <select
-            value={initialState.User.OperatorId}
-            onChange={(e) => updateUserOperator(e.target.value)}
-          >
-            <option>Select</option>
-            {initialState.AuthDetails.LoginOperators.map((e, index) => {
-              return (
-                <option key={index} value={e.OperatorId}>
-                  {e.OperatorName}
-                </option>
-              );
-            })}
-          </select> */}
           <DropdownWithImage data={operators} onChange={onChangeNetwork} />
-
           <input type="hidden" id="CountryMobileCode" value="+92" />
-
           <span>
             <label className="form-control" style={{ fontSize: "14px" }}>
               {initialState.AuthDetails.MobileCode}

@@ -1,15 +1,25 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
+import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
 export default function SetPin() {
   const [pin, setPin] = useState("");
-  const { checkUserAuthentication } = useContext(MainContext);
+  const [cpin, setCPin] = useState("");
+  const { checkUserAuthentication , setLoader } = useContext(MainContext);
   const router = useRouter();
 
   async function setUserPin() {
+    if (pin != cpin) {
+      return swal({
+        title: "Pin does not match",
+        timer: 3000,
+        icon: "error",
+      });
+    }
+    setLoader(true)
     var resp = await post("https://api.tapmad.com/api/setUserPinCode", {
       Version: "V1",
       Language: "en",
@@ -17,12 +27,44 @@ export default function SetPin() {
       UserId: Cookie.getCookies("userId"),
       UserPinCode: pin,
     });
-    if (resp.data.Response.responseCode == 1) {
-      Cookie.setCookies("isAuth", 1);
-      checkUserAuthentication();
-      router.push("/");
-    } else {
-      Cookie.setCookies("isAuth", 0);
+    console.log("resp: ", resp);
+    if (resp && resp.data) {
+      if (resp.data.Response.responseCode == 1) {
+        Cookie.setCookies("isAuth", 1);
+        swal({
+          title: resp.data.Response.message,
+          timer: 2000,
+          icon: "success",
+        });
+        setTimeout(() => {
+          swal({
+            title: "Signin successfully!",
+            text: "Redirecting you now..",
+            timer: 2000,
+            icon: "success",
+          });
+          checkUserAuthentication();
+          setLoader(false)
+        }, 2000);
+      } else {
+        Cookie.setCookies("isAuth", 0);
+        setLoader(false)
+      }
+    }
+    setLoader(false)
+  }
+
+  function onChangePin(e) {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setPin(mobileNum.trim());
+    }
+  }
+
+  function onChangeCPin(e) {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setCPin(mobileNum.trim());
     }
   }
   const { initialState } = useContext(MainContext);
@@ -55,7 +97,7 @@ export default function SetPin() {
           maxLength="4"
           placeholder="4 digit PIN"
           name="pin"
-          onChange={(e) => setPin(e.target.value)}
+          onChange={onChangePin}
         />
       </div>
       <div className="form-group" style={{ marginBottom: "0.3rem" }}>
@@ -65,10 +107,11 @@ export default function SetPin() {
         <input
           type="password"
           className="text-center form-control numeric"
-          minlength="4"
-          maxlength="4"
+          minLength="4"
+          maxLength="4"
           placeholder="4 digit PIN"
           name="pin"
+          onChange={onChangeCPin}
         />
       </div>
       <div className="form-group text-center mb-0">

@@ -3,12 +3,14 @@ import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 import { useRouter } from "next/router";
+import swal from "sweetalert";
 
 
 export default function EnterPin({ forgetPin }) {
   const [userPin, seUserPin] = useState();
   const router = useRouter();
   const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  
   function handleNumber(e) {
     const pin = e.target.value;
     if (+pin === +pin) {
@@ -19,7 +21,6 @@ export default function EnterPin({ forgetPin }) {
   async function verifyPin() {
     if (userPin.length > 2) {
       setLoader(true);
-
       var response = await post(
         "https://api.tapmad.com/api/verifyUserPinCode",
         {
@@ -32,11 +33,21 @@ export default function EnterPin({ forgetPin }) {
       );
       if (response.data.Response && response.data.Response.responseCode == 1) {
         Cookie.setCookies("isAuth", 1);
+        swal({
+          title:"Sign in successfully!",
+          text:"Redirecting you now...",
+          timer:3000,
+          icon:"success"
+        })
         checkUserAuthentication();
-        router.push("/");
+       
       } else {
         setLoader(false);
-        alert("Invalid OTP");
+        swal({
+          title:response.data.Response.message,
+          timer:3000,
+          icon:"error"
+        })
         Cookie.setCookies("isAuth", 0);
       }
     } else {
@@ -54,6 +65,7 @@ export default function EnterPin({ forgetPin }) {
           type="password"
           maxLength="4"
           minLength="4"
+          value={userPin}
           className="text-center form-control"
           placeholder="Enter your PIN"
           onChange={handleNumber}

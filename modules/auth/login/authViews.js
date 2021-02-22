@@ -22,18 +22,18 @@ export default function AuthViews() {
     if (viewToShow == "enter-pin") {
       return <EnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
-      return <ForgetPin />;
+      return <ForgetPin updateView={setViewToShow}/>;
     } else if (viewToShow == "set-pin") {
       return <SetPin />;
     } else if (viewToShow == "login") {
-      return <Login loginResponse={() => processResponse()} />;
+      return <Login loginResponse={processResponse} />;
     } else if (viewToShow == "send-otp") {
-      return <ForgetPin updateView={() => setViewToShow("set-pin")} />;
+      return <ForgetPin updateView={setViewToShow} />;
     } else if (viewToShow == "sign-up") {
       router.push("sign-up");
       return <div></div>;
     }
-  }, []);
+  }, [viewToShow]);
   return (
     <div>
       <div className="bg_dark">
