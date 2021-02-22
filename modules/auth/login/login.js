@@ -16,10 +16,16 @@ function Login({ loginResponse }) {
     setLoader,
   } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
+  const [btnDisabled, setbtnDisabled] = React.useState(true);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
+      if(mobileNum.length > 4){
+        setbtnDisabled(false)
+      }else{
+        setbtnDisabled(true)
+      }
       setMobileNo(mobileNum.trim());
     }
   }
@@ -80,10 +86,11 @@ function Login({ loginResponse }) {
       <div className="form-group">
         <button
           type="button"
+          disabled={btnDisabled ? true : false}
           className="btn btn-block btn-success req_pin_cde_btn"
           onClick={async () => await loginUser()}
         >
-          Request PIN Code
+          LOGIN
         </button>
         <br />
         <a className=" mt-2 text-muted">Back</a>
