@@ -44,7 +44,7 @@ export default function Header() {
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
             <Link href="/">
               <img
-                className="m-logo"
+                className="m-logo btn"
                 src="https://www.tapmad.com/images/tm-logo.png"
                 width="130"
                 alt=""
@@ -77,7 +77,7 @@ export default function Header() {
                   className="btn btn-default search-btn btn-sm"
                   onClick={onClick}
                 >
-                  <i className="fa fa-search"></i>
+                  <i className="fa fa-search hov-green"></i>
                 </a>
               </li>
               <li className="nav-item">
@@ -121,7 +121,7 @@ export default function Header() {
                 <li id="loginAva2" className="nav-item">
                   <a
                     onClick={onClickSignout}
-                    className="pull-right d-xs-none btn nav-link"
+                    className="pull-right d-xs-none btn nav-link hov-green"
                   >
                     Signout
                   </a>
@@ -129,7 +129,7 @@ export default function Header() {
               ) : (
                 <li id="loginAva1" className="nav-item">
                   <Link href="/sign-in">
-                    <a className="pull-right d-xs-none">Sign in</a>
+                    <a className="pull-right d-xs-none hov-green">Sign in</a>
                   </Link>
                 </li>
               )}

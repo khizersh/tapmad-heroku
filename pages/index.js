@@ -5,6 +5,7 @@ import { get } from "../services/http-service";
 import requestIp from "request-ip";
 
 export default function Home(props) {
+  console.log("home: ", props);
   return (
     <div>
       <Head>
@@ -18,6 +19,9 @@ export default function Home(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
+  if (ip == "::1") {
+    ip = "43.245.204.44";
+  }
 
   var movieList = await get(
     "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16",

@@ -2,6 +2,23 @@
   padding: 15px;
 }
 
+.nav-link:hover,
+.hov-green:hover {
+  color: #87c242;
+}
+
+.tm_top_navi li a {
+  font-size: 13px;
+  color: #fff;
+  text-transform: uppercase !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+  transition: 0.3s;
+  cursor: pointer;
+  padding: 18px 1.125rem;
+}
+
 @media screen and (max-width: 576px) {
   .m-logo {
     margin: 5px 0px 0px 30px;
