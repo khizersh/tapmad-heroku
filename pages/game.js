@@ -1,10 +1,21 @@
 import React from "react";
+import { withAuth } from "../components/withAuth";
+
 import Game from "../modules/game/components";
 
-export default function Games() {
+function Games() {
   return (
     <div>
       <Game />
     </div>
   );
+}
+export default Games;
+
+export function getStaticProps() {
+  return {
+    props: {
+      protected: true,
+    },
+  };
 }

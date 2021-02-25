@@ -2,6 +2,10 @@ import React from "react";
 import Card from "./card/Card";
 
 export default function CategoryDetail({ video, videoList }) {
+  console.log("videoList: ", video);
+  const onClickPlay = () => {
+    console.log("on play: ");
+  };
   return (
     <>
       <div className="row">
@@ -10,12 +14,9 @@ export default function CategoryDetail({ video, videoList }) {
             <div className="col-lg-12 col-md-12 col-12 col-sm-12">
               {video && video["NewVideoImageThumbnail"] ? (
                 <div
+                  className="category-bg-img"
                   style={{
-                    background: `url('${video["NewVideoImageThumbnail"]}')`,
-                    height: "400px",
-                    border: "1px solid black",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
+                    backgroundImage: `url('${video["NewVideoImageThumbnail"]}')`,
                   }}
                 ></div>
               ) : null}
@@ -29,11 +30,21 @@ export default function CategoryDetail({ video, videoList }) {
                     <h2>{video && video.VideoName}</h2>
                     <div>{video && video.VideoCategoryName}</div>
                     <div className="text-dark">
-                      {video && video.VideoDescription}
+                      {video &&
+                      video.VideoDescription &&
+                      video.VideoDescription.length > 200
+                        ? video.VideoDescription.slice(0, 220) + "..."
+                        : video.VideoDescription}
                     </div>
                     <br />
                     <div>
-                      <button className="btn btn-primary">Play</button>
+                      <button
+                        className="btn tm_wishlst_btn"
+                        onClick={onClickPlay}
+                      >
+                        <i className="fa fa-play rounded-circle pr-2"></i>
+                        Play
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -44,7 +55,13 @@ export default function CategoryDetail({ video, videoList }) {
       </div>
       <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
-          ? videoList[0].Videos.map((vid, i) => <Card key={i} video={vid} />)
+          ? videoList[0].Videos.map((vid, i) => {
+              let type = "";
+              if (!vid.IsVideoFree) {
+                type = vid.PackageName ? vid.PackageName : "";
+              }
+              return <Card key={i} video={vid} type={type} />;
+            })
           : null}
       </div>
     </>

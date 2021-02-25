@@ -5,13 +5,16 @@ import { get } from "../services/http-service";
 import requestIp from "request-ip";
 
 export default function Home(props) {
-  console.log("home: ", props);
   return (
     <div>
       <Head>
         <title>Tapmad</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <script
+          type="text/javascript"
+          src="http://p.jwpcdn.com/6/10/jwplayer.js"
+        ></script>
       </Head>
       <HomePage {...props} />
     </div>

@@ -1,6 +1,17 @@
 import React from "react";
+import { Cookie } from "../../../services/cookies";
+import { useRouter } from "next/router";
 
 export default function SignUpLayout({ children }) {
+  const router = useRouter();
+  const onClickBack = () => {
+    console.log("back url: ", Cookie.getCookies("backUrl"));
+    if (!Cookie.getCookies("backUrl")) {
+      router.push("/");
+    } else {
+      router.push(Cookie.getCookies("backUrl"));
+    }
+  };
   return (
     <div className="mt-0 mt-sm-2">
       <div className="container-fluid p-0 p-sm-2 p-md-3 p-lg-3">
@@ -15,7 +26,8 @@ export default function SignUpLayout({ children }) {
                   left: "10px",
                   color: "#fff",
                 }}
-                className="mt-2 text-light"
+                onClick={onClickBack}
+                className="mt-2 text-light btn"
               >
                 <i className="fa fa-arrow-left"></i> Back
               </a>

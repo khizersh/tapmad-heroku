@@ -130,9 +130,13 @@ const HomepageSlider = ({ movies }) => {
                                     style={{ width: "100%" }}
                                     loading="lazy"
                                   />
-                                  {mov.IsVideoFree ? null : (
-                                    <div className="live_side">PREMIUM</div>
-                                  )}
+                                  {mov.IsVideoFree
+                                    ? null
+                                    : mov.PackageName && (
+                                        <div className="live_side">
+                                          {mov.PackageName}
+                                        </div>
+                                      )}
                                 </div>
                                 <div className="tm-mv-items">
                                   <div className="tm-mv-name">

@@ -17,13 +17,11 @@ export default function Header() {
   const router = useRouter();
   const onClickSignout = () => {
     setLoader(true);
-    console.log("in");
     swal({
       title: "You have logged out!",
       text: "Redirecting you ...",
       timer: 3000,
     }).then((res) => {
-      console.log("under then");
       Cookie.setCookies("isAuth", 0);
       setisAuthenticateFalse();
       router.push("/");
@@ -32,7 +30,6 @@ export default function Header() {
   };
 
   const onClick = () => {
-    console.log("Search");
     setSearch(true);
   };
 
@@ -54,9 +51,9 @@ export default function Header() {
           <div className="col-6 col-sm-6 col-md-6 .col-lg-6 d-none d-sm-block main_menu">
             <ul className="nav justify-content-center">
               <li className="nav-item topBarLive">
-                <a className="nav-link" href="/live">
-                  Live
-                </a>
+                <Link href="/live" passHref={true} shallow={true}>
+                  <a className="nav-link">Live</a>
+                </Link>
               </li>
               <li className="nav-item topBarMovies">
                 <a className="nav-link" href="/movies">
@@ -64,9 +61,9 @@ export default function Header() {
                 </a>
               </li>
               <li className="nav-item topBarShows">
-                <a className="nav-link" href="/shows">
-                  Shows
-                </a>
+                <Link href="/live" passHref={true} shallow={true}>
+                  <a className="nav-link">Shows</a>
+                </Link>
               </li>
             </ul>
           </div>

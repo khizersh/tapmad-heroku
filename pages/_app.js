@@ -2,14 +2,37 @@ import "../styles/globals.scss";
 import "../styles/game.css";
 
 import Head from "next/head";
+import { useRouter, withRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
+import { Cookie } from "../services/cookies";
+import { func } from "joi";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, test }) {
+  const router = useRouter();
+
+  function checkUserAuthentication() {
+    if (pageProps.protected) {
+      const userId = Cookie.getCookies("userId");
+      const isAuthenticated = Cookie.getCookies("isAuth");
+      console.log("userId: ", userId);
+      console.log("isAuthenticated: ", isAuthenticated);
+      if (userId && isAuthenticated && isAuthenticated == 1) {
+        return true;
+      } else {
+        router.push("/sign-in");
+        return false;
+      }
+    }
+  }
+
+  useEffect(() => {
+    checkUserAuthentication();
+  }, []);
   let styles =
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
   let message = "tapmad ";

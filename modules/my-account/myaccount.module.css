@@ -1,0 +1,87 @@
+.user-img {
+  border-radius: 100px !important;
+  width: 80px;
+}
+
+.bg-grey {
+  background: #eeeeee;
+}
+
+.tm_btng_tble {
+  border-left: 1px solid #222;
+  border-right: 1px solid #222;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #343a40;
+}
+
+.tm_btng_tble tbody {
+  background: #121117;
+  height: 300px;
+  overflow: hidden;
+}
+
+.btn-click {
+  pointer-events: none;
+}
+
+.btn-red {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+.btn-red:hover {
+  color: white;
+  background-color: #dc3545;
+}
+.image-preview-input input[type="file"] {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.image-preview-input {
+  position: relative;
+  overflow: hidden;
+  margin: 0px;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.left-profile {
+  border: 1px solid #222;
+  padding: 20px;
+  background-color: #121117;
+}
+.res-width {
+  width: 63%;
+}
+
+.profile-btn {
+  background: #66aa33;
+  padding: 8px;
+  font-size: 17px;
+}
+@media screen and (max-width: 700px) {
+  .res-width {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .res-width {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 710px) {
+  .res-width {
+    width: 84%;
+  }
+}

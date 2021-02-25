@@ -1,4 +1,5 @@
 const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
+const { Cookie } = require("./cookies");
 
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
@@ -111,6 +112,23 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
   return movieClone;
 }
 
+function setUrlToCookies(key, url) {
+  console.log("key: ", key);
+  if (key != "watch" && url != "/sign-up") {
+    Cookie.setCookies("backUrl", url);
+  }
+}
+
+function isAuthentictedUser() {
+  let userId = Cookie.parseCookies("userId");
+  let isAuth = Cookie.getCookies("isAuth");
+  if (userId && isAuth == 1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -119,4 +137,6 @@ module.exports = {
   manipulateUrlsForCatgeory,
   setUrlAccordingToVideoType,
   SEOFriendlySlugsForVideo,
+  isAuthentictedUser,
+  setUrlToCookies,
 };

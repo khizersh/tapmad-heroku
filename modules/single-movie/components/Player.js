@@ -28,7 +28,9 @@ export default function Player({ movies }) {
     const res = await get(
       `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${movie.Video.VideoEntityId}/${movie.Video.IsVideoChannel}`
     );
-    setRelatedVideos(res.data.Sections[0].Videos);
+    if (res.data && res.data.Response && res.data.Response.responseCode == 1) {
+      setRelatedVideos(res.data.Sections[0].Videos);
+    }
   }
 
   useEffect(async () => {
@@ -166,37 +168,39 @@ export default function Player({ movies }) {
             >
               <h5>Related Videos</h5>
               <div>
-                {relatedVideo.map((video) => {
-                  return (
-                    <div className="col-12 p-1">
-                      <div className="d-flex ">
-                        <div>
-                          <img
-                            src={video.VideoImagePath}
-                            alt={video.VideoName}
-                            width="130px"
-                          />
-                        </div>
-                        <div>
-                          <div className="pl-2">
-                            <h5
-                              className="card-title mb-1"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {video.VideoName}
-                            </h5>
-                            <p
-                              className="card-desc synopsis-card-text m-0"
-                              style={{ fontSize: "12px", color: "#6c757d" }}
-                            >
-                              {video.VideoDescription}
-                            </p>
+                {relatedVideo.length
+                  ? relatedVideo.map((video, i) => {
+                      return (
+                        <div className="col-12 p-1" key={i}>
+                          <div className="d-flex ">
+                            <div>
+                              <img
+                                src={video.VideoImagePath}
+                                alt={video.VideoName}
+                                width="130px"
+                              />
+                            </div>
+                            <div>
+                              <div className="pl-2">
+                                <h5
+                                  className="card-title mb-1"
+                                  style={{ fontSize: "13px" }}
+                                >
+                                  {video.VideoName}
+                                </h5>
+                                <p
+                                  className="card-desc synopsis-card-text m-0"
+                                  style={{ fontSize: "12px", color: "#6c757d" }}
+                                >
+                                  {video.VideoDescription}
+                                </p>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>

@@ -64,7 +64,7 @@ export default function SideBar() {
                 <i className="fa fa-user-plus"></i>
               </span>
             </li>
-            <li className="logouts_contain hidden">
+            <li className="logouts_contain">
               <a href="/myaccount">Profile</a>
               <span className="icon">
                 <i className="fa fa-user-plus"></i>

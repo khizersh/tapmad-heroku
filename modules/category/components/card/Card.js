@@ -5,14 +5,13 @@ import { SEOFriendlySlugsForVideo } from "../../../../services/utils";
 import CategoryVerticalCard from "../CategoryVerticalCard";
 import CategoryHorizontalCard from "../CategoryHorizontalCard";
 
-const Card = ({ video }) => {
+const Card = ({ video, type }) => {
   let slug = SEOFriendlySlugsForVideo(video);
-
   return (
     <>
-      <CategoryHorizontalCard video={video} />
+      <CategoryHorizontalCard video={video} type={type} />
 
-      <CategoryVerticalCard video={video} />
+      <CategoryVerticalCard video={video} type={type} />
     </>
   );
 };

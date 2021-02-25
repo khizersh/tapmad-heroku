@@ -9,4 +9,6 @@ module.exports = {
 };
 const withCSS = require("@zeit/next-css");
 const withSCSS = require("@zeit/next-sass");
+const withImages = require("next-images");
+module.exports = withImages();
 module.exports = withCSS(withSCSS({}));

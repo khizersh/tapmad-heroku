@@ -111,6 +111,24 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.category-bg-img {
+  height: 300px;
+  width: 100%;
+  border: 1px solid black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+}
+.tm_wishlst_btn {
+  padding: 12px 25px !important;
+  font-size: 15px;
+  font-weight: bold;
+  background: #87c242 !important;
+  color: #000 !important;
+  border: none !important;
+}
+
 .video-syno-text {
   position: absolute;
   top: 0;

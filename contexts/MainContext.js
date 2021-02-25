@@ -71,9 +71,10 @@ export default function MainProvider({ children }) {
   function checkUserAuthentication() {
     const userId = Cookie.getCookies("userId");
     const isAuthenticated = Cookie.getCookies("isAuth");
-    if (userId && isAuthenticated == 1) {
+    if (userId && isAuthenticated && isAuthenticated == 1) {
       dispatch({ type: "SET_AUTHENTICATION", data: true });
-      router.push("/");
+      console.log("isAuthenticated: ", isAuthenticated);
+      // router.push("/");
     }
   }
 

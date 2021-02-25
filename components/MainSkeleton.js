@@ -4,10 +4,13 @@ import Router from "next/router";
 import Loader from "./Loader";
 import { MainContext } from "../contexts/MainContext";
 import Search from "../modules/search/Search";
+import { setUrlToCookies } from "../services/utils";
 
 export default function Skeleton({ children }) {
   const { initialState, setLoader } = React.useContext(MainContext);
   Router.onRouteChangeStart = (url) => {
+    let key = url.split("/")[1];
+    setUrlToCookies(key, url);
     setLoader(true);
   };
 
