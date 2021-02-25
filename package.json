@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "export $(cat .env) && TAPENV=production && next start -p $PORT",
+    "prod": "export $(cat .env) && TAPENV=production && npm run dev",
+    "staging": "export $(cat .env) && TAPENV=staging && npm run dev",
+    "local": "export $(cat .env) && TAPENV=local && npm run dev",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
@@ -29,5 +32,8 @@
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0"
+  }
 }
