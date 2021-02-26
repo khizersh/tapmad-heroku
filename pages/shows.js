@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Shows from "../modules/shows/components/shows";
-import { getShowsWithPagination } from "../services/apilinks";
 import { get } from "../services/http-service";
+import { getShowsWithPagination } from "../services/apilinks";
 export default function ShowsPage(props) {
   return (
     <div>

@@ -2,7 +2,7 @@ import Head from "next/head";
 import LiveChannels from "../modules/live/components/liveChannels";
 import { get } from "../services/http-service";
 import requestIp from "request-ip";
-import { getFeaturedHomePage } from "../services/apilinks";
+import { getChannelWithPaginationInitial } from "../services/apilinks";
 
 export default function Live(props) {
   return (
@@ -23,7 +23,7 @@ export default function Live(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
-  var channelList = await get(getFeaturedHomePage, ip);
+  var channelList = await get(getChannelWithPaginationInitial, ip);
   var channel = await channelList.data;
   return {
     props: {

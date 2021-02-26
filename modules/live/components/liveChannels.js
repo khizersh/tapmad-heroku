@@ -8,6 +8,7 @@ import {
 } from "../../../services/utils";
 import HomepageSlider from "../../home/components/HomepageSlider";
 import { get } from "../../../services/http-service";
+import { getChannelsWithPagination } from "../../../services/apilinks";
 
 export default function LiveChannels({ channel }) {
   var bannerSettings = basicSliderConfig(1);
@@ -21,23 +22,24 @@ export default function LiveChannels({ channel }) {
 
   async function fetchNewMovies() {
     if (currentRow == channel.totalSections) {
+      console.log("loading match");
       return;
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
     setCurrentRow(rowData.rowsTo);
     var moviesList = await get(
-      `https://api.tapmad.com/api/getChannelWithPagination/${rowData.rowFrom}/${
-        rowData.rowsTo - rowData.rowFrom
-      }/0/16`
+      getChannelsWithPagination(rowData.rowFrom, rowData.rowsTo)
     );
     var newMovies = await moviesList.data;
-    if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {
+    if (
+      localMovies.Sections.Channels &&
+      localMovies.Sections.Channels.length > 0
+    ) {
       let modifiedNewMovies = modifyLivePageResponse(newMovies);
       let updatedListOfMovies = pushNewMoviesIntoList(
         localMovies,
         modifiedNewMovies
       );
-      console.log("channels updated", updatedListOfMovies);
       setLocalMovies(updatedListOfMovies);
     }
   }

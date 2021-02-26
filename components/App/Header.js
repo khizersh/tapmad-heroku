@@ -61,7 +61,7 @@ export default function Header() {
                 </a>
               </li>
               <li className="nav-item topBarShows">
-                <Link href="/live" passHref={true} shallow={true}>
+                <Link href="/shows" passHref={true} shallow={true}>
                   <a className="nav-link">Shows</a>
                 </Link>
               </li>

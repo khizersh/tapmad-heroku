@@ -16,13 +16,23 @@ export const verifyOtp = BaseURl + "api/verifyOTP/V1/en/android";
 export const setUserPinCode = BaseURl + "api/setUserPinCode";
 export const verifyUserPinCode = BaseURl + "api/verifyUserPinCode";
 export const getShowsWithPagination =
-  BaseURl + "api/getShowsWithPagination/5/2/0/16";
+  BaseURl + "api/getShowsWithPagination/0/5/0/16";
 export const updateUserProfile = BaseURl + "api/updateUserProfile";
 
 export const getMoviesWithPagination = (from, to) => {
   return `https://api.tapmad.com/api/getMoviesWithPagination/${from}/${
-    to - form
+    to - from
   }/0/16`;
 };
+
+export const getChannelsWithPagination = (from, to) => {
+  return `https://api.tapmad.com/api/getChannelWithPagination/${from}/${
+    to - from
+  }/0/16`;
+};
+
 export const getMoviesWithPaginationInitial =
   BaseURl + "api/getMoviesWithPagination/0/5/0/16";
+
+export const getChannelWithPaginationInitial =
+  BaseURl + "api/getChannelWithPagination/0/5/0/16";
