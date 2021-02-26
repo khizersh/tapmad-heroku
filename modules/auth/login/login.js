@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useCallback, useMemo, memo } from "react";
 import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
@@ -98,9 +99,9 @@ function Login({ loginResponse }) {
         <span className="mt-2 mr-2 text-muted">
           | &nbsp;&nbsp;Not Registered?
         </span>
-        <a className="text-light" href="sign-up">
-          Sign Up
-        </a>
+        <Link href="/sign-up" shallow={true} passHref={true}>
+          <a className="text-light">Sign Up</a>
+        </Link>
       </div>
     </div>
   );

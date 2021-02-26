@@ -3,6 +3,7 @@ import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { post } from "../../../services/http-service";
+import { setUserPinCode } from "../../../services/apilinks";
 
 export default function SetYourNewPin() {
   const { initialState, checkUserAuthentication, setLoader } = useContext(
@@ -29,7 +30,7 @@ export default function SetYourNewPin() {
       UserPinCode: pin,
       Version: "V1",
     };
-    const res = await post("https://api.tapmad.com/api/setUserPinCode", body);
+    const res = await post(setUserPinCode, body);
 
     if (res.data && res.data.Response) {
       if (res.data.Response.responseCode == 0) {
@@ -47,6 +48,7 @@ export default function SetYourNewPin() {
         }).then((result) => {
           Cookie.setCookies("isAuth", 1);
           checkUserAuthentication();
+          router.push("/");
           setLoader(false);
         });
       }

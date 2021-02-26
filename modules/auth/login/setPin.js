@@ -45,6 +45,7 @@ export default function SetPin() {
             icon: "success",
           });
           checkUserAuthentication();
+          router.push("/");
           setLoader(false);
         }, 2000);
       } else {

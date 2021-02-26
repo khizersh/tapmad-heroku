@@ -38,6 +38,7 @@ export default function EnterPin({ forgetPin }) {
           icon: "success",
         });
         checkUserAuthentication();
+        router.push("/");
       } else {
         setLoader(false);
         swal({

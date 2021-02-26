@@ -2,10 +2,13 @@ import React, { useContext, useRef } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
+import { sendOTP, verifyUserPinCode } from "../../../services/apilinks";
 import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
+import { useRouter } from "next/router";
 
 const EnterPinToVerify = () => {
+  const router = useRouter();
   const { checkUserAuthentication, setLoader, initialState } = useContext(
     MainContext
   );
@@ -18,7 +21,7 @@ const EnterPinToVerify = () => {
       MobileNo: initialState.User.MobileNo,
       OperatorId: initialState.User.OperatorId,
     };
-    let resp = await post("https://api.tapmad.com/api/sendOTP/V1/en/web", body);
+    let resp = await post(sendOTP, body);
     if (resp.data && resp.data.Response) {
       let responseCode = resp.data.Response.responseCode;
       if (responseCode == 1) {
@@ -37,7 +40,7 @@ const EnterPinToVerify = () => {
       UserId: Cookie.getCookies("userId"),
       UserPinCode: pinCode.current.value,
     };
-    var resp = await post("https://api.tapmad.com/api/verifyUserPinCode", body);
+    var resp = await post(verifyUserPinCode, body);
     if (resp.data.Response.responseCode == 1) {
       swal({
         timer: 3000,
@@ -47,6 +50,7 @@ const EnterPinToVerify = () => {
       }).then((result) => {
         Cookie.setCookies("isAuth", 1);
         checkUserAuthentication();
+        router.push("/");
         setLoader(false);
       });
     } else if (resp.data.Response.responseCode == 0) {
