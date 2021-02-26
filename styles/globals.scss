@@ -511,7 +511,7 @@ div#nav-tab {
   height: 53px;
   left: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 10000 !important;
   cursor: pointer;
 }
 .hamburger:before {
@@ -710,8 +710,10 @@ input#menu[type="checkbox"] {
   }
 
   .hamburger {
+    display: block !important;
     background: transparent;
     width: 40px;
+    z-index: 100000 !important;
     color: #fff;
   }
 
@@ -773,7 +775,7 @@ button:focus {
   position: sticky;
   top: 0;
   // z-index: 9999;
-  z-index: 999;
+  z-index: 998;
   width: 100%;
 }
 

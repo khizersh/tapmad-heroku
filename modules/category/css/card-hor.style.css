@@ -112,13 +112,18 @@
   text-overflow: ellipsis;
 }
 
+.pad-mbl {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
 .category-bg-img {
   height: 300px;
   width: 100%;
-  border: 1px solid black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
+  border: 1px solid black !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: right !important;
 }
 .tm_wishlst_btn {
   padding: 12px 25px !important;

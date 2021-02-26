@@ -7,7 +7,7 @@ const CategoryVerticalCard = ({ video, type }) => {
 
   return (
     <div className="col-2 p-1 d-none d-sm-none d-md-block d-lg-block">
-      <div className="">
+      <div>
         <Link href={slug} passHref={true} shallow={true}>
           <a>
             <div className="synopsis_card rounded-0 bg-transparent card">

@@ -9,14 +9,14 @@ export default function CategoryDetail({ video, videoList }) {
   return (
     <>
       <div className="row">
-        <div className="col-sm-12 mt-5">
-          <div className="row">
+        <div className="col-12 mt-5">
+          <div className="row mr-0">
             <div className="col-lg-12 col-md-12 col-12 col-sm-12">
               {video && video["NewVideoImageThumbnail"] ? (
                 <div
                   className="category-bg-img"
                   style={{
-                    backgroundImage: `url('${video["NewVideoImageThumbnail"]}')`,
+                    background: `url('${video["NewVideoImageThumbnail"]}')`,
                   }}
                 ></div>
               ) : null}
@@ -25,8 +25,8 @@ export default function CategoryDetail({ video, videoList }) {
                 style={{ width: "100%", height: "600px" }}
               ></div>
               <div className="video-syno-text">
-                <div className="row">
-                  <div className="col-lg-4 col-md-4 col-11">
+                <div className="row m-0">
+                  <div className="col-lg-4 col-md-4 col-11 pad-mbl">
                     <h2>{video && video.VideoName}</h2>
                     <div>{video && video.VideoCategoryName}</div>
                     <div className="text-dark">

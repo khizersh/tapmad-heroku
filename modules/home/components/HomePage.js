@@ -59,7 +59,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
   }
   return (
     <div>
-      <div className="container-fluid p-0">
+      <div className="container-fluid p-1">
         <div className="row no-gutters">
           <div className="col-12">
             <div>
