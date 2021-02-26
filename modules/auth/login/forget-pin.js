@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
-import { sendOTP } from "../../../services/apilinks";
+import { sendOTP, verifyOtp } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
-import { tapmadLogo, verifyOtp } from "../../../services/imagesLink";
+import { tapmadLogo } from "../../../services/imagesLink";
 // updateView
 export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
