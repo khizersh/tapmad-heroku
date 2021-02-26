@@ -16,10 +16,10 @@ export default function Home(props) {
         <title>Tapmad</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <script
+        {/* <script
           type="text/javascript"
           src="http://p.jwpcdn.com/6/10/jwplayer.js"
-        ></script>
+        ></script> */}
       </Head>
       <HomePage {...props} />
     </div>
