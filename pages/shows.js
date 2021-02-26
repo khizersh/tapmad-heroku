@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Shows from "../modules/shows/components/shows";
+import { getShowsWithPagination } from "../services/apilinks";
 import { get } from "../services/http-service";
 export default function ShowsPage(props) {
   return (
@@ -19,9 +20,7 @@ export default function ShowsPage(props) {
   );
 }
 export async function getStaticProps() {
-  var moviesList = await get(
-    "https://api.tapmad.com/api/getShowsWithPagination/5/2/0/16"
-  );
+  var moviesList = await get(getShowsWithPagination);
   var movies = await moviesList.data;
   return {
     props: {

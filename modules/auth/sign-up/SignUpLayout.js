@@ -1,6 +1,7 @@
 import React from "react";
 import { Cookie } from "../../../services/cookies";
 import { useRouter } from "next/router";
+import { signUpImage } from "../../../services/imagesLink";
 
 export default function SignUpLayout({ children }) {
   const router = useRouter();
@@ -45,10 +46,7 @@ export default function SignUpLayout({ children }) {
                 <i className="fa fa-arrow-left"></i> Back
               </a>
 
-              <img
-                className="w-100 mb-0"
-                src="https://d34080pnh6e62j.cloudfront.net/images/SignUpNewImage.jpg"
-              />
+              <img className="w-100 mb-0" src={signUpImage} />
               <button
                 type="button"
                 className="btn pull-right"

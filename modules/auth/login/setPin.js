@@ -2,13 +2,14 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
+import { setUserPinCode } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
 export default function SetPin() {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
-  const { checkUserAuthentication , setLoader } = useContext(MainContext);
+  const { checkUserAuthentication, setLoader } = useContext(MainContext);
   const router = useRouter();
 
   async function setUserPin() {
@@ -19,8 +20,8 @@ export default function SetPin() {
         icon: "error",
       });
     }
-    setLoader(true)
-    var resp = await post("https://api.tapmad.com/api/setUserPinCode", {
+    setLoader(true);
+    var resp = await post(setUserPinCode, {
       Version: "V1",
       Language: "en",
       Platform: "Web",
@@ -44,14 +45,14 @@ export default function SetPin() {
             icon: "success",
           });
           checkUserAuthentication();
-          setLoader(false)
+          setLoader(false);
         }, 2000);
       } else {
         Cookie.setCookies("isAuth", 0);
-        setLoader(false)
+        setLoader(false);
       }
     }
-    setLoader(false)
+    setLoader(false);
   }
 
   function onChangePin(e) {

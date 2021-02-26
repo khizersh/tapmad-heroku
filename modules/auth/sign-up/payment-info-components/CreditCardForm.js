@@ -9,7 +9,6 @@ const CreditCardForm = ({
   onChangeNumber,
   onChangeEmail,
 }) => {
-  console.log("data: ", data);
   return (
     <>
       <input

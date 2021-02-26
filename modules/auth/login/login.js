@@ -2,7 +2,9 @@ import React, { useCallback, useMemo, memo } from "react";
 import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
+import { getCardUser } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
+import { tapmadLogo } from "../../../services/imagesLink";
 import "../auth.module.css";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
@@ -30,7 +32,7 @@ function Login({ loginResponse }) {
   async function loginUser() {
     if (mobileNo.length == 10) {
       setLoader(true);
-      var response = await post("https://api.tapmad.com/api/getCardUser", {
+      var response = await post(getCardUser, {
         Language: "en",
         MobileNo: mobileNo,
       });
@@ -56,7 +58,7 @@ function Login({ loginResponse }) {
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
-      <img src="https://www.tapmad.com/images/tm-logo.png" width="200" />
+      <img src={tapmadLogo} width="200" />
       <h4>Enter your Mobile Number</h4>
       <p>Please Enter your Mobile Number to login</p>
       <div className="input-group">

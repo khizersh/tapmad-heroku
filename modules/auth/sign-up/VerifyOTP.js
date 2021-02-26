@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { post } from "../../../services/http-service";
+import { verifyOtp } from "../../../services/apilinks";
 import { MainContext } from "../../../contexts/MainContext";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { useRef } from "react";
@@ -18,10 +19,7 @@ const Pin = () => {
         otpCode: otp.current.value,
       };
 
-      var resp = await post(
-        "https://api.tapmad.com/api/verifyOTP/V1/en/android",
-        body
-      );
+      var resp = await post({ verifyOtp }, body);
 
       if (resp.data) {
         let responseCode = "",

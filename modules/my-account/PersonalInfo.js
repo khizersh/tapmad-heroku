@@ -5,6 +5,12 @@ import { FormControl, InputGroup, Button } from "react-bootstrap";
 import { post } from "../../services/http-service";
 import { updateUserProfile } from "../../services/apilinks";
 import swal from "sweetalert";
+import {
+  usernameIcon,
+  phoneIcon,
+  calenderIcon,
+  mailIcon,
+} from "../../services/imagesLink";
 
 const PersonalInfo = ({ data }) => {
   const [userImage, setUserImage] = useState(null);
@@ -105,11 +111,7 @@ const PersonalInfo = ({ data }) => {
         <h5 className="text-left">Personal Information</h5>
         <div className="form-group">
           <label className="float-left">Full name</label>
-          <img
-            src="http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/UserName.png"
-            width="24"
-            className="float-right"
-          />
+          <img src={usernameIcon} width="24" className="float-right" />
           <input
             type="text"
             className="form-control"
@@ -121,11 +123,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Mobile Number</label>
-          <img
-            src="http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/phone.png"
-            width="24"
-            className="float-right"
-          />
+          <img src={phoneIcon} width="24" className="float-right" />
           <input
             type="text"
             className="form-control"
@@ -137,11 +135,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Date of Birth</label>
-          <img
-            src="http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/calendar.png"
-            width="24"
-            className="float-right"
-          />
+          <img src={calenderIcon} width="24" className="float-right" />
           <input
             type="date"
             className="form-control"
@@ -153,11 +147,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Email Address</label>
-          <img
-            src="http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/mail.png"
-            width="24"
-            className="float-right"
-          />
+          <img src={mailIcon} width="24" className="float-right" />
           <input
             type="email"
             required
@@ -174,7 +164,6 @@ const PersonalInfo = ({ data }) => {
               btnEnable ? "" : "btn-click"
             }`}
             onClick={onSubmit}
-            // disabled={btnEnable}
           >
             Update Profile
           </button>

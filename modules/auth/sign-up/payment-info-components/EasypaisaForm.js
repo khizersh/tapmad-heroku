@@ -1,10 +1,11 @@
 import React from "react";
+import { easyPaisaIcon } from "../../../../services/imagesLink";
 
 const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
   return (
     <>
       <div className="form-control text-center">
-        <img src="https://images.tapmad.com/images/EasypaisaE.png" width="20" />{" "}
+        <img src={easyPaisaIcon} width="20" />{" "}
         <span className="font-weight">{methodName}</span>
       </div>
       <span>

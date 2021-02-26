@@ -4,13 +4,14 @@ import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
-
+import { verifyUserPinCode } from "../../../services/apilinks";
+import { tapmadLogo } from "../../../services/imagesLink";
 
 export default function EnterPin({ forgetPin }) {
   const [userPin, seUserPin] = useState();
   const router = useRouter();
   const { checkUserAuthentication, setLoader } = useContext(MainContext);
-  
+
   function handleNumber(e) {
     const pin = e.target.value;
     if (+pin === +pin) {
@@ -21,33 +22,29 @@ export default function EnterPin({ forgetPin }) {
   async function verifyPin() {
     if (userPin.length > 2) {
       setLoader(true);
-      var response = await post(
-        "https://api.tapmad.com/api/verifyUserPinCode",
-        {
-          Version: "V1",
-          Language: "en",
-          Platform: "Web",
-          UserId: Cookie.getCookies("userId"),
-          UserPinCode: userPin,
-        }
-      );
+      var response = await post(verifyUserPinCode, {
+        Version: "V1",
+        Language: "en",
+        Platform: "Web",
+        UserId: Cookie.getCookies("userId"),
+        UserPinCode: userPin,
+      });
       if (response.data.Response && response.data.Response.responseCode == 1) {
         Cookie.setCookies("isAuth", 1);
         swal({
-          title:"Sign in successfully!",
-          text:"Redirecting you now...",
-          timer:3000,
-          icon:"success"
-        })
+          title: "Sign in successfully!",
+          text: "Redirecting you now...",
+          timer: 3000,
+          icon: "success",
+        });
         checkUserAuthentication();
-       
       } else {
         setLoader(false);
         swal({
-          title:response.data.Response.message,
-          timer:3000,
-          icon:"error"
-        })
+          title: response.data.Response.message,
+          timer: 3000,
+          icon: "error",
+        });
         Cookie.setCookies("isAuth", 0);
       }
     } else {
@@ -57,7 +54,7 @@ export default function EnterPin({ forgetPin }) {
 
   return (
     <div className="login_slct_oprtr login_pin_card login_slct_oprtr_active">
-      <img src="https://www.tapmad.com/images/tm-logo.png" width="200" />
+      <img src={tapmadLogo} width="200" />
       <h4>Enter your PIN</h4>
       <p>Enter four digit PIN for login</p>
       <div className="form-group">

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
+import { sendOTP } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
+import { tapmadLogo, verifyOtp } from "../../../services/imagesLink";
 // updateView
 export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
   const { initialState, setLoader } = React.useContext(MainContext);
 
   React.useEffect(async () => {
-    var resp = await post("https://api.tapmad.com/api/sendOTP/V1/en/web", {
+    var resp = await post(sendOTP, {
       MobileNo: initialState.User.MobileNo,
       OperatorId: initialState.User.OperatorId,
     });
@@ -17,10 +19,10 @@ export default function ForgetPin({ updateView }) {
   async function verifyOTP() {
     setLoader(true);
 
-    var resp = await post(
-      "https://api.tapmad.com/api/verifyOTP/V1/en/android",
-      { MobileNo: 0 + initialState.User.MobileNo, otpCode: userOtp }
-    );
+    var resp = await post(verifyOtp, {
+      MobileNo: 0 + initialState.User.MobileNo,
+      otpCode: userOtp,
+    });
 
     if (resp.data) {
       let responseCode = resp.data.responseCode;
@@ -44,10 +46,7 @@ export default function ForgetPin({ updateView }) {
   }
   return (
     <div className="login_slct_oprtr login_slct_oprtr2 login_slct_oprtr_active">
-      <img
-        src="https://d1s7wg2ne64q87.cloudfront.net/web/images/tm-logo.png"
-        width="200"
-      />
+      <img src={tapmadLogo} width="200" />
       <h4>Enter your code</h4>
       <p>We have sent a 4-digits code</p>
       <div className="form-group">

@@ -3,6 +3,11 @@ import React, { useEffect, useState } from "react";
 import HomePage from "../modules/home/components/HomePage";
 import { get } from "../services/http-service";
 import requestIp from "request-ip";
+import {
+  getFeaturedBannerDetail,
+  getFeaturedHomePage,
+  getWebTabBanners,
+} from "../services/apilinks";
 
 export default function Home(props) {
   return (
@@ -28,16 +33,9 @@ export async function getServerSideProps(context) {
     ip = "43.245.204.44";
   }
 
-  var movieList = await get(
-    "https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/0/5/0/16",
-    ip
-  );
-  var bannersList = await get(
-    "https://api.tapmad.com/api/getFeaturedBannerDetail"
-  );
-  var featuredContent = await get(
-    "https://api.tapmad.com/api/getWebTabBanners/V1/en/Web"
-  );
+  var movieList = await get(getFeaturedHomePage, ip);
+  var bannersList = await get(getFeaturedBannerDetail);
+  var featuredContent = await get(getWebTabBanners);
   var movie = await movieList.data;
   var banner = await bannersList.data;
   var featured = await featuredContent.data;

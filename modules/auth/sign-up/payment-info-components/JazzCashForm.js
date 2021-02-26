@@ -1,13 +1,11 @@
 import React from "react";
+import { jazzIcon } from "../../../../services/imagesLink";
 
 const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
   return (
     <>
       <div className="form-control text-center">
-        <img
-          src="https://images.tapmad.com/images/mobileOperator/jazz-cash-logo.jpg"
-          width="20"
-        />{" "}
+        <img src={jazzIcon} width="20" />{" "}
         <span className="font-weight">JazzCash</span>
       </div>
       <span>
