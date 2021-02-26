@@ -18,4 +18,11 @@ export const verifyUserPinCode = BaseURl + "api/verifyUserPinCode";
 export const getShowsWithPagination =
   BaseURl + "api/getShowsWithPagination/5/2/0/16";
 export const updateUserProfile = BaseURl + "api/updateUserProfile";
-// export const updateUserProfile = BaseURl + "api/updateUserProfile";
+
+export const getMoviesWithPagination = (from, to) => {
+  return `https://api.tapmad.com/api/getMoviesWithPagination/${from}/${
+    to - form
+  }/0/16`;
+};
+export const getMoviesWithPaginationInitial =
+  BaseURl + "api/getMoviesWithPagination/0/5/0/16";

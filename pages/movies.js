@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Movies from "../modules/movies/components/movies";
-import { getFeaturedHomePage } from "../services/apilinks";
+import { getMoviesWithPaginationInitial } from "../services/apilinks";
 import { get } from "../services/http-service";
 export default function MoviesPage(props) {
   return (
@@ -20,7 +20,7 @@ export default function MoviesPage(props) {
   );
 }
 export async function getStaticProps() {
-  var moviesList = await get(getFeaturedHomePage);
+  var moviesList = await get(getMoviesWithPaginationInitial);
   var movies = await moviesList.data;
   return {
     props: {
