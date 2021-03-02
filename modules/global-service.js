@@ -9,8 +9,6 @@ function checkIsArray(obj) {
 function convertInArray(obj) {
   obj = Object.values(obj);
 
-  // console.log("test: ", obj);
-
   return obj;
 }
 

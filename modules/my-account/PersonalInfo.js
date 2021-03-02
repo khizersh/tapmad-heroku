@@ -11,6 +11,7 @@ import {
   calenderIcon,
   mailIcon,
 } from "../../services/imagesLink";
+import { MyAccountService } from "./myaccount.service";
 
 const PersonalInfo = ({ data }) => {
   const [userImage, setUserImage] = useState(null);
@@ -31,7 +32,7 @@ const PersonalInfo = ({ data }) => {
     setBtnEnable(true);
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
-  const onSubmit = () => {
+  const onSubmit = async () => {
     var formData = new FormData();
     for (var property in profileData) {
       if (profileData.hasOwnProperty(property)) {
@@ -39,22 +40,25 @@ const PersonalInfo = ({ data }) => {
       }
     }
 
-    post(updateUserProfile, formData).then((res) => {
-      if (
-        res.data &&
-        res.data.Response &&
-        res.data.Response.responseCode == 1
-      ) {
-        if (res.data.UserProfile.UserProfilePicture != userImage) {
-          setUserImage(res.data.UserProfile.UserProfilePicture);
-        }
-        swal({
-          title: res.data.Response.message,
-          timer: 2000,
-          icon: "success",
-        });
+    const data = await MyAccountService.updateUserProfileData(formData);
+
+    if (data != null) {
+      if (data.data.UserProfile.UserProfilePicture != userImage) {
+        setUserImage(data.data.UserProfile.UserProfilePicture);
       }
-    });
+      swal({
+        title: data.data.Response.message,
+        timer: 2000,
+        icon: "success",
+      });
+      setBtnEnable(false);
+    } else {
+      swal({
+        title: "Something went wrong!",
+        timer: 2000,
+        icon: "error",
+      });
+    }
   };
   const onChangeFile = (files) => {
     setBtnEnable(true);

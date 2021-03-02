@@ -6,7 +6,6 @@ import { signUpImage } from "../../../services/imagesLink";
 export default function SignUpLayout({ children }) {
   const router = useRouter();
   const onClickBack = () => {
-    console.log("back url: ", Cookie.getCookies("backUrl"));
     if (!Cookie.getCookies("backUrl")) {
       router.push("/");
     } else {

@@ -4,8 +4,11 @@ import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { post } from "../../../services/http-service";
 import { setUserPinCode } from "../../../services/apilinks";
+import { useRouter } from "next/router";
+import { AuthService } from "../auth.service";
 
 export default function SetYourNewPin() {
+  const router = useRouter();
   const { initialState, checkUserAuthentication, setLoader } = useContext(
     MainContext
   );
@@ -13,8 +16,6 @@ export default function SetYourNewPin() {
   const [confirmPin, setConfirmPin] = useState("");
 
   const onClick = async () => {
-    setLoader(true);
-    const userId = Cookie.getCookies("userId");
     if (pin != confirmPin) {
       return swal({
         timer: 3000,
@@ -22,24 +23,17 @@ export default function SetYourNewPin() {
         icon: "error",
       });
     }
+    setLoader(true);
+    const response = await AuthService.setNewPin(pin);
 
-    let body = {
-      Language: "en",
-      Platform: "web",
-      UserId: userId,
-      UserPinCode: pin,
-      Version: "V1",
-    };
-    const res = await post(setUserPinCode, body);
-
-    if (res.data && res.data.Response) {
-      if (res.data.Response.responseCode == 0) {
-        return swal({
+    if (response != null) {
+      if (response.responseCode == 0) {
+        swal({
           timer: 3000,
-          title: res.data.Response.message,
-          icon: "error",
+          title: response.message,
+          icon: "success",
         });
-      } else if (res.data.Response.responseCode == 1) {
+      } else if (response.responseCode == 1) {
         swal({
           timer: 3000,
           title: "Signed In Successfully",
@@ -52,6 +46,12 @@ export default function SetYourNewPin() {
           setLoader(false);
         });
       }
+    } else {
+      return swal({
+        timer: 2000,
+        title: "Something went wrong",
+        icon: "error",
+      });
     }
   };
   return (

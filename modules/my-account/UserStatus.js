@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { MyAccountService } from "./myaccount.service";
 import { post } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
 import {
@@ -15,22 +16,23 @@ const UserStatus = ({ pdata, userId }) => {
     Platform: "web",
     UserId: null,
   });
-  useEffect(() => {
+  useEffect(async () => {
     if (pdata.UserActiveSubscription) {
       setSubscritionData(pdata);
     }
     if (userId) {
       setForm({ ...form, UserId: userId });
 
-      post(getUserPaymentHistory, { ...form, UserId: userId }).then((res) => {
-        if (
-          res.data &&
-          res.data.Response &&
-          res.data.Response.responseCode == 1
-        ) {
-          setSubscritionHistory(res.data.Transaction);
-        }
+      const data = await MyAccountService.getUserPaymentHistoryData({
+        ...form,
+        UserId: userId,
       });
+
+      if (data != null) {
+        if (data.responseCode == 1) {
+          setSubscritionHistory(data.data.Transaction);
+        }
+      }
     }
   }, [pdata, userId]);
 

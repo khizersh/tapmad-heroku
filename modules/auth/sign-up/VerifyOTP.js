@@ -5,6 +5,7 @@ import { MainContext } from "../../../contexts/MainContext";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { useRef } from "react";
 import swal from "sweetalert";
+import { AuthService } from "../auth.service";
 
 const Pin = () => {
   const { initialState, setLoader } = useContext(MainContext);
@@ -18,30 +19,19 @@ const Pin = () => {
         MobileNo: "0" + initialState.User.MobileNo,
         otpCode: otp.current.value,
       };
+      const data = await AuthService.verifyOTP(body);
 
-      var resp = await post({ verifyOtp }, body);
-
-      if (resp.data) {
-        let responseCode = "",
-          message = "";
-
-        if (
-          resp.data.responseCode != undefined ||
-          resp.data.responseCode != null
-        ) {
-          responseCode = resp.data.responseCode;
-          message = resp.data.message;
-        }
-        if (responseCode == 0) {
+      if (data != null) {
+        if (data.responseCode == 0) {
           swal({
             timer: 3000,
-            title: message,
+            title: data.message,
             icon: "error",
           });
-        } else if (responseCode == 1) {
+        } else if (data.responseCode == 1) {
           swal({
             timer: 3000,
-            title: message,
+            title: data.message,
             text: "Enter new PIN code",
             icon: "success",
           }).then((result) => {
@@ -51,10 +41,16 @@ const Pin = () => {
         } else {
           swal({
             timer: 3000,
-            title: message,
+            title: data.message,
             icon: "error",
           });
         }
+      } else {
+        swal({
+          timer: 3000,
+          title: "Something went wrong",
+          icon: "error",
+        });
       }
     }
 
@@ -63,7 +59,7 @@ const Pin = () => {
   return (
     <div className="text-center">
       <div className="py-3">
-        <label class="text-muted">Please verify your OTP Code</label>
+        <label className="text-muted">Please verify your OTP Code</label>
       </div>
       <div className="px-3 pb-4">
         <input

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import swal from "sweetalert";
 import { verifyUserPinCode } from "../../../services/apilinks";
 import { tapmadLogo } from "../../../services/imagesLink";
+import { AuthService } from "../auth.service";
 
 export default function EnterPin({ forgetPin }) {
   const [userPin, seUserPin] = useState();
@@ -22,6 +23,8 @@ export default function EnterPin({ forgetPin }) {
   async function verifyPin() {
     if (userPin.length > 2) {
       setLoader(true);
+
+      const data = await AuthService.verifyPinCode(userPin);
       var response = await post(verifyUserPinCode, {
         Version: "V1",
         Language: "en",
@@ -29,24 +32,32 @@ export default function EnterPin({ forgetPin }) {
         UserId: Cookie.getCookies("userId"),
         UserPinCode: userPin,
       });
-      if (response.data.Response && response.data.Response.responseCode == 1) {
-        Cookie.setCookies("isAuth", 1);
-        swal({
-          title: "Sign in successfully!",
-          text: "Redirecting you now...",
-          timer: 3000,
-          icon: "success",
-        });
-        checkUserAuthentication();
-        router.push("/");
+      if (data != null) {
+        if (data.responseCode == 1) {
+          Cookie.setCookies("isAuth", 1);
+          swal({
+            title: "Sign in successfully!",
+            text: "Redirecting you now...",
+            timer: 3000,
+            icon: "success",
+          });
+          checkUserAuthentication();
+          router.push("/");
+        } else {
+          setLoader(false);
+          swal({
+            title: response.data.Response.message,
+            timer: 3000,
+            icon: "error",
+          });
+          Cookie.setCookies("isAuth", 0);
+        }
       } else {
-        setLoader(false);
         swal({
-          title: response.data.Response.message,
+          title: "Something went wrong!",
           timer: 3000,
           icon: "error",
         });
-        Cookie.setCookies("isAuth", 0);
       }
     } else {
       return;

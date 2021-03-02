@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { MyAccountService } from "../modules/my-account/myaccount.service";
 import PersonalInfo from "../modules/my-account/PersonalInfo";
 import UserStatus from "../modules/my-account/UserStatus";
 import { getUserByUserId } from "../services/apilinks";
 import { Cookie } from "../services/cookies";
-import { post } from "../services/http-service";
 
 const MyAccount = () => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
@@ -26,23 +26,24 @@ const MyAccount = () => {
     Email: "",
   });
 
-  useEffect(() => {
+  useEffect(async () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
-      post(getUserByUserId, formData).then((res) => {
-        if (res.data && res.data.Response.responseCode == 1) {
-          setAllData(res.data);
+      const data = await MyAccountService.getUserData(formData);
+      if (data != null) {
+        if (data.responseCode == 1) {
+          setAllData(data.data);
           setProfileData({
             ...profileData,
             UserId: userId,
-            Email: res.data.User.UserEmail,
-            UserMobileNumebr: res.data.UserProfile.MobileNumber,
-            FullName: res.data.UserProfile.UserProfileFullName,
-            BirthDate: res.data.UserProfile.UserProfileDOB,
-            ProfilePicture: res.data.UserProfile.UserProfilePicture,
+            Email: data.data.User.UserEmail,
+            UserMobileNumebr: data.data.UserProfile.MobileNumber,
+            FullName: data.data.UserProfile.UserProfileFullName,
+            BirthDate: data.data.UserProfile.UserProfileDOB,
+            ProfilePicture: data.data.UserProfile.UserProfilePicture,
           });
         }
-      });
+      }
     }
   }, []);
 

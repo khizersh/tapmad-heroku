@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
-import { APILinks } from "../../services/apilinks";
 import { get } from "../../services/http-service";
 import "./search.module.css";
 import ItemCard from "./ItemCard";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Debounce from "../../services/Debounce";
+import { getItemsByKeyword } from "../../services/apilinks";
+import { SearchService } from "./Search.service";
 
 const Search = () => {
   const { setSearch, setLoader } = useContext(MainContext);
@@ -38,21 +39,27 @@ const Search = () => {
   }, [debouncedSearchKeyWord]);
 
   const searchHandler = async (keyword) => {
-    const res = await get(APILinks.getItemsByKeyword + keyword + "/1");
-    if (res.data && res.data.Response) {
-      return res.data.Videos;
-    } else {
-      return [];
+    const data = await SearchService.getItemByKeyrwords(keyword);
+    if (data != null) {
+      if (data.responseCode == 1) {
+        return data.data.Videos;
+      } else {
+        return [];
+      }
     }
   };
 
   const onClickSearch = async () => {
-    const res = await get(APILinks.getItemsByKeyword + keyword + "/1");
-    if (res.data && res.data.Response) {
-      setSearchedItem(res.data.Videos);
-    } else {
-      setSearchedItem([]);
+    setLoader(true);
+    const data = await SearchService.getItemByKeyrwords(keyword);
+    if (data != null) {
+      if (data.responseCode == 1) {
+        setSearchedItem(data.data.Videos);
+      } else {
+        setSearchedItem([]);
+      }
     }
+    setLoader(false);
   };
 
   return (

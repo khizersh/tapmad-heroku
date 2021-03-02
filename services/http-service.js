@@ -17,7 +17,24 @@ function post(url, body) {
   });
 }
 
+function handleResponse(resp) {
+  let responseCode, message;
+  if (resp && resp.data) {
+    responseCode = resp.data.responseCode || resp.data.Response.responseCode;
+    message = resp.data.message || resp.data.Response.message;
+    if (responseCode != null || responseCode != undefined) {
+      return {
+        ...resp.data,
+        responseCode: responseCode,
+        message: message ? message : "Something went wrong!",
+      };
+    }
+  } else {
+    return null;
+  }
+}
 module.exports = {
   get,
   post,
+  handleResponse,
 };

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Contact(params) {
   return (
-    <div class="container">
+    <div className="container">
       <p style={{ clear: "both", color: "#fff" }}>
         {" "}
         <br />{" "}
@@ -12,7 +12,7 @@ export default function Contact(params) {
           <address>
             <h3 style={{ color: "#fff" }}>PAKISTAN OFFICE LOCATION:</h3>
             <br />
-            <p class="lead" style={{ color: "#fff" }}>
+            <p className="lead" style={{ color: "#fff" }}>
               Zamzama, Phase 5, DHA
               <br />
               Karachi, Pakistan
@@ -29,7 +29,7 @@ export default function Contact(params) {
             <br />
             <h3 style={{ color: "#fff" }}>SINGAPORE OFFICE LOCATION:</h3>
             <br />
-            <p class="lead" style={{ color: "#fff" }}>
+            <p className="lead" style={{ color: "#fff" }}>
               531A Upper cross street #04-98,
               <br />
               Hong Lim Complex singapore (051531)

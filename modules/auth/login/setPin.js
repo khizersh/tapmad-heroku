@@ -19,40 +19,33 @@ export default function SetPin() {
         timer: 3000,
         icon: "error",
       });
+    } else {
+      setLoader(true);
     }
-    setLoader(true);
-    var resp = await post(setUserPinCode, {
-      Version: "V1",
-      Language: "en",
-      Platform: "Web",
-      UserId: Cookie.getCookies("userId"),
-      UserPinCode: pin,
-    });
-    console.log("resp: ", resp);
-    if (resp && resp.data) {
-      if (resp.data.Response.responseCode == 1) {
-        Cookie.setCookies("isAuth", 1);
+    const responseCode = await AuthService.setUserPin(pin);
+    if (responseCode == 1) {
+      Cookie.setCookies("isAuth", 1);
+      swal({
+        title: resp.data.Response.message,
+        timer: 2000,
+        icon: "success",
+      });
+      setTimeout(() => {
         swal({
-          title: resp.data.Response.message,
+          title: "Signin successfully!",
+          text: "Redirecting you now..",
           timer: 2000,
           icon: "success",
         });
-        setTimeout(() => {
-          swal({
-            title: "Signin successfully!",
-            text: "Redirecting you now..",
-            timer: 2000,
-            icon: "success",
-          });
-          checkUserAuthentication();
-          router.push("/");
-          setLoader(false);
-        }, 2000);
-      } else {
-        Cookie.setCookies("isAuth", 0);
+        checkUserAuthentication();
+        router.push("/");
         setLoader(false);
-      }
+      }, 2000);
+    } else {
+      Cookie.setCookies("isAuth", 0);
+      setLoader(false);
     }
+
     setLoader(false);
   }
 

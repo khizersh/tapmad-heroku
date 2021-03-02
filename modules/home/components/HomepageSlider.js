@@ -6,7 +6,6 @@ import {
   basicSliderConfig,
   setUrlAccordingToVideoType,
 } from "../../../services/utils";
-import { GolobalService } from "../../global-service";
 
 const HomepageSlider = ({ movies }) => {
   // const [render, setRender] = useState(false);

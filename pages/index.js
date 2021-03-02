@@ -8,8 +8,10 @@ import {
   getFeaturedHomePage,
   getWebTabBanners,
 } from "../services/apilinks";
+import { HomeService } from "../modules/home/components/home.service";
 
 export default function Home(props) {
+  console.log("Props in index: ", props);
   return (
     <div>
       <Head>
@@ -29,12 +31,20 @@ export async function getServerSideProps(context) {
     ip = "43.245.204.44";
   }
 
-  var movieList = await get(getFeaturedHomePage, ip);
-  var bannersList = await get(getFeaturedBannerDetail);
-  var featuredContent = await get(getWebTabBanners);
-  var movie = await movieList.data;
-  var banner = await bannersList.data;
-  var featured = await featuredContent.data;
+  let movie, banner, featured;
+
+  var movieList = await HomeService.getFeaturedHomePageData(ip);
+  if (movieList != null) movie = await movieList.data;
+  else movie = {};
+
+  var bannersList = await HomeService.getFeaturedBannerDetailData();
+  if (bannersList != null) banner = await bannersList.data;
+  else banner = {};
+
+  var featuredContent = await HomeService.getWebTabBannersData();
+  if (featuredContent != null) featured = await featuredContent.data;
+  else featured = {};
+
   return {
     props: {
       movies: movie.Tabs[0],

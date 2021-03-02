@@ -4,6 +4,7 @@ import { MainContext } from "../../../contexts/MainContext";
 import { sendOTP, verifyOtp } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
 import { tapmadLogo } from "../../../services/imagesLink";
+import { AuthService } from "../auth.service";
 // updateView
 export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
@@ -19,15 +20,18 @@ export default function ForgetPin({ updateView }) {
   async function verifyOTP() {
     setLoader(true);
 
-    var resp = await post(verifyOtp, {
+    let body = {
       MobileNo: 0 + initialState.User.MobileNo,
       otpCode: userOtp,
-    });
+    };
+    const data = await AuthService.verifyOTP(body);
+    // var resp = await post(verifyOtp, {
+    //   MobileNo: 0 + initialState.User.MobileNo,
+    //   otpCode: userOtp,
+    // });
 
-    if (resp.data) {
-      let responseCode = resp.data.responseCode;
-      let message = resp.data.message;
-      if (responseCode == 1) {
+    if (data != null) {
+      if (data.responseCode == 1) {
         updateView("set-pin");
         swal({
           title: "Verified",
@@ -36,12 +40,17 @@ export default function ForgetPin({ updateView }) {
         });
       } else {
         swal({
-          title: message,
+          title: data.message,
           timer: 3000,
-          icon: "danger",
+          icon: "error",
         });
       }
     }
+    swal({
+      title: "Something went wrong!",
+      timer: 3000,
+      icon: "error",
+    });
     setLoader(false);
   }
   return (

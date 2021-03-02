@@ -7,6 +7,7 @@ import { getCardUser } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
 import { tapmadLogo } from "../../../services/imagesLink";
 import "../auth.module.css";
+import { AuthService } from "../auth.service";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
 function Login({ loginResponse }) {
@@ -33,14 +34,23 @@ function Login({ loginResponse }) {
   async function loginUser() {
     if (mobileNo.length == 10) {
       setLoader(true);
-      var response = await post(getCardUser, {
+      let body = {
         Language: "en",
         MobileNo: mobileNo,
-      });
-
-      updateUserNumber(mobileNo);
-      loginResponse(response.data);
-      setLoader(false);
+      };
+      const data = await AuthService.loginUser(body);
+      if (data != null) {
+        updateUserNumber(mobileNo);
+        loginResponse(data.data);
+        setLoader(false);
+      } else {
+        swal({
+          title: "Something went wrong!",
+          timer: 3000,
+          icon: "error",
+        });
+        setLoader(false);
+      }
     } else {
       swal({
         title: "Invalid number!",

@@ -13,3 +13,6 @@ export const signUpImage =
 export const easyPaisaIcon = "https://images.tapmad.com/images/EasypaisaE.png";
 export const jazzIcon =
   "https://images.tapmad.com/images/mobileOperator/jazz-cash-logo.jpg";
+
+export const tapmadCoin = "https://www.tapmad.com/images/coint.png";
+export const tapmadNews = "https://www.tapmad.com/images/news-btn.png";

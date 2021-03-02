@@ -5,6 +5,8 @@ import { post } from "../../../services/http-service";
 import router from "next/router";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
+import { AuthService } from "../auth.service";
+import { initialPaymentTransaction } from "../../../services/apilinks";
 
 export default function SubscribeButton() {
   const { initialState, setLoader } = useContext(MainContext);
@@ -66,76 +68,53 @@ export default function SubscribeButton() {
 
       var resp;
       if (authState.selectedPaymentMethod.PaymentType == 2) {
-        // for credit card specific only for different api call
-        resp = await post(
-          "https://app.tapmad.com/api/CardUserOrderTest",
-          details
-        );
-        console.log("resp: ", resp);
-        setLoader(false);
-        // if (
-        //   resp.data &&
-        //   resp.data.Response &&
-        //   resp.data.Response.responseCode
-        // ) {
-        //   let responseCode = resp.data.Response.responseCode;
-        //   window.location.href = resp.data.CardPaymentUrl;
-        // }
+        // for credit card specific only
+        AuthService.creditCardOrder(details);
       } else {
         // other api call
-        resp = await post(
-          "https://api.tapmad.com/api/initiatePaymentTransaction",
-          details
-        );
+        const data = await AuthService.initialTransaction(details);
+        // resp = await post(initialPaymentTransaction, details);
 
         setLoader(false);
-        if (resp.data) {
-          let responseCode = "",
-            message = "";
-          if (
-            resp.data.responseCode != undefined ||
-            resp.data.responseCode != null
-          ) {
-            responseCode = resp.data.responseCode;
-            message = resp.data.message;
-          } else {
-            responseCode = resp.data.Response.responseCode;
-            message = resp.data.Response.message;
-          }
-          console.log("resp: ", responseCode);
-          if (responseCode == 11) {
+        if (data != null) {
+          if (data.responseCode == 11) {
             swal({
               timer: 3000,
               text:
                 "You are already subscribed user, please enter your PIN for login",
               icon: "info",
             });
-            updateResponseCode(responseCode);
-            Cookie.setCookies("userId", resp.data.User.UserId);
-          } else if (responseCode == 0) {
+            updateResponseCode(data.responseCode);
+            Cookie.setCookies("userId", data.data.User.UserId);
+          } else if (data.responseCode == 0) {
             swal({
-              title: message,
+              title: data.message,
               icon: "error",
             });
-          } else if (responseCode == 1) {
+          } else if (data.responseCode == 1) {
             swal({
               title: "OTP code send successfully, please enter your code!",
               icon: "success",
             });
             // Mutate response code in state
-            updateResponseCode(responseCode);
-          } else if (responseCode == 13) {
+            updateResponseCode(data.responseCode);
+          } else if (data.responseCode == 13) {
             swal({
-              title: message,
+              title: data.message,
               icon: "error",
             });
           } else {
-            console.log("responseCode");
             swal({
-              title: message,
+              title: data.message,
               icon: "error",
             });
           }
+        } else {
+          swal({
+            title: "Something went wrong!",
+            icon: "error",
+          });
+          setLoader(false);
         }
       }
     }

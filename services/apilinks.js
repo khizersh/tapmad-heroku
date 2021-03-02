@@ -1,38 +1,40 @@
-export const APILinks = {
-  baseUrlApi: "",
-  getItemsByKeyword:
-    "https://api.tapmad.com/api/searchInAllContent/V1/en/android/",
-};
-export const BaseURl = "https://api.tapmad.com/";
-export const getUserByUserId = BaseURl + "api/CheckUserByUserId";
-export const getUserPaymentHistory = BaseURl + "api/getUserPaymentHistory";
+export const BASEURL = "https://api.tapmad.com/";
+export const BASEURLAPP = "https://app.tapmad.com/";
+
+export const getItemsByKeyword =
+  BASEURL + "api/searchInAllContent/V1/en/android/";
+export const getUserByUserId = BASEURL + "api/CheckUserByUserId";
+export const getUserPaymentHistory = BASEURL + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
-  BaseURl + "api/getFeaturedHomePageWithRE/5/0/5/0/16";
-export const getFeaturedBannerDetail = BaseURl + "api/getFeaturedBannerDetail";
-export const getWebTabBanners = BaseURl + "api/getWebTabBanners/V1/en/Web";
-export const getCardUser = BaseURl + "api/getCardUser";
-export const sendOTP = BaseURl + "api/sendOTP/V1/en/web";
-export const verifyOtp = BaseURl + "api/verifyOTP/V1/en/android";
-export const setUserPinCode = BaseURl + "api/setUserPinCode";
-export const verifyUserPinCode = BaseURl + "api/verifyUserPinCode";
+  BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/16";
+export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
+export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
+export const getCardUser = BASEURL + "api/getCardUser";
+export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
+export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
+export const setUserPinCode = BASEURL + "api/setUserPinCode";
+export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const getShowsWithPagination =
-  BaseURl + "api/getShowsWithPagination/0/5/0/16";
-export const updateUserProfile = BaseURl + "api/updateUserProfile";
+  BASEURL + "api/getShowsWithPagination/0/5/0/16";
+export const updateUserProfile = BASEURL + "api/updateUserProfile";
+export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
+export const initialPaymentTransaction =
+  BASEURL + "api/initiatePaymentTransaction";
 
 export const getMoviesWithPagination = (from, to) => {
-  return `https://api.tapmad.com/api/getMoviesWithPagination/${from}/${
-    to - from
-  }/0/16`;
+  return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
+};
+
+export const getFeaturedHomepageWithRE = (from, to) => {
+  return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/16`;
 };
 
 export const getChannelsWithPagination = (from, to) => {
-  return `https://api.tapmad.com/api/getChannelWithPagination/${from}/${
-    to - from
-  }/0/16`;
+  return BASEURL + `api/getChannelWithPagination/${from}/${to - from}/0/16`;
 };
 
 export const getMoviesWithPaginationInitial =
-  BaseURl + "api/getMoviesWithPagination/0/5/0/16";
+  BASEURL + "api/getMoviesWithPagination/0/5/0/16";
 
 export const getChannelWithPaginationInitial =
-  BaseURl + "api/getChannelWithPagination/0/5/0/16";
+  BASEURL + "api/getChannelWithPagination/0/5/0/16";

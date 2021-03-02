@@ -5,6 +5,7 @@ import "../../components/App/Header.css";
 import { Cookie } from "../../services/cookies";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
+import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 
 export default function Header() {
   const {
@@ -40,12 +41,7 @@ export default function Header() {
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
             <Link href="/">
-              <img
-                className="m-logo btn"
-                src="https://www.tapmad.com/images/tm-logo.png"
-                width="130"
-                alt=""
-              />
+              <img className="m-logo btn" src={tapmadLogo} width="130" alt="" />
             </Link>
           </div>
           <div className="col-6 col-sm-6 col-md-6 .col-lg-6 d-none d-sm-block main_menu">
@@ -56,9 +52,9 @@ export default function Header() {
                 </Link>
               </li>
               <li className="nav-item topBarMovies">
-                <a className="nav-link" href="/movies">
-                  Movies
-                </a>
+                <Link href="/movies" passHref={true} shallow={true}>
+                  <a className="nav-link">Movies</a>
+                </Link>
               </li>
               <li className="nav-item topBarShows">
                 <Link href="/shows" passHref={true} shallow={true}>
@@ -89,7 +85,7 @@ export default function Header() {
                   }}
                 >
                   <img
-                    src="https://www.tapmad.com/images/coint.png"
+                    src={tapmadCoin}
                     style={{
                       width: "20px",
                       marginTop: "17px",
@@ -102,7 +98,7 @@ export default function Header() {
                 </p>
                 <a href="/news">
                   <img
-                    src="https://www.tapmad.com/images/news-btn.png"
+                    src={tapmadNews}
                     style={{
                       width: "20px",
                       marginTop: "17px",

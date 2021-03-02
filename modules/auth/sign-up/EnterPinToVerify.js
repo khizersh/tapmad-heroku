@@ -6,6 +6,7 @@ import { sendOTP, verifyUserPinCode } from "../../../services/apilinks";
 import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
+import { AuthService } from "../auth.service";
 
 const EnterPinToVerify = () => {
   const router = useRouter();
@@ -17,47 +18,62 @@ const EnterPinToVerify = () => {
 
   async function forgetPin() {
     setLoader(true);
-    let body = {
-      MobileNo: initialState.User.MobileNo,
-      OperatorId: initialState.User.OperatorId,
-    };
-    let resp = await post(sendOTP, body);
-    if (resp.data && resp.data.Response) {
-      let responseCode = resp.data.Response.responseCode;
-      if (responseCode == 1) {
-        updateResponseCode(responseCode);
+    let mobileNo = initialState.User.MobileNo,
+      opId = initialState.User.OperatorId;
+
+    const data = await AuthService.forgetPin(mobileNo, opId);
+
+    if (data != null) {
+      if (data.responseCode == 1) {
+        updateResponseCode(data.responseCode);
+      } else {
+        swal({
+          timer: 3000,
+          title: data.message,
+          icon: "error",
+        });
+        setLoader(false);
       }
+    } else {
+      setLoader(false);
+      swal({
+        timer: 3000,
+        title: "Something Went Wrong",
+        icon: "error",
+      });
     }
     setLoader(false);
   }
 
   async function verifyPinCode() {
     setLoader(true);
-    var body = {
-      Version: "V1",
-      Language: "en",
-      Platform: "Web",
-      UserId: Cookie.getCookies("userId"),
-      UserPinCode: pinCode.current.value,
-    };
-    var resp = await post(verifyUserPinCode, body);
-    if (resp.data.Response.responseCode == 1) {
-      swal({
-        timer: 3000,
-        title: "Signed In Successfully",
-        text: "Redirecting you...",
-        icon: "success",
-      }).then((result) => {
-        Cookie.setCookies("isAuth", 1);
-        checkUserAuthentication();
-        router.push("/");
+    const data = await AuthService.verifyPinCode(pinCode.current.value);
+    if (data != null) {
+      if (data.responseCode == 1) {
+        swal({
+          timer: 3000,
+          title: "Signed In Successfully",
+          text: "Redirecting you...",
+          icon: "success",
+        }).then((result) => {
+          Cookie.setCookies("isAuth", 1);
+          checkUserAuthentication();
+          router.push("/");
+          setLoader(false);
+        });
+      } else {
         setLoader(false);
-      });
-    } else if (resp.data.Response.responseCode == 0) {
+        swal({
+          timer: 3000,
+          title: data.message,
+          icon: "error",
+        });
+      }
+    } else {
       setLoader(false);
       swal({
         timer: 3000,
-        title: resp.data.Response.message,
+        title: "Something Went Wrong",
         icon: "error",
       });
     }

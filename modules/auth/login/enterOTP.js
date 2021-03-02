@@ -3,8 +3,8 @@ import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 import { useRouter } from "next/router";
-
-
+import { AuthService } from "../auth.service";
+import swal from "sweetalert";
 
 export default function EnterOTP({ forgetPin }) {
   const [userPin, seUserPin] = useState();
@@ -20,25 +20,23 @@ export default function EnterOTP({ forgetPin }) {
   async function verifyPin() {
     if (userPin.length > 2) {
       setLoader(true);
-      var response = await post(
-        "https://api.tapmad.com/api/verifyUserPinCode",
-        {
-          Version: "V1",
-          Language: "en",
-          Platform: "Web",
-          UserId: Cookie.getCookies("userId"),
-          UserPinCode: userPin,
+      const data = await AuthService.verifyPinCode(userPin);
+      if (data != null) {
+        if (data.responseCode == 1) {
+          Cookie.setCookies("isAuth", 1);
+          checkUserAuthentication();
+          router.push("/");
+        } else {
+          setLoader(false);
+          alert("Invalid OTP");
+          Cookie.setCookies("isAuth", 0);
         }
-      );
-      if (response.data.Response && response.data.Response.responseCode == 1) {
-        Cookie.setCookies("isAuth", 1);
-        checkUserAuthentication();
-        router.push("/");
       } else {
-        setLoader(false);
-
-        alert("Invalid OTP");
-        Cookie.setCookies("isAuth", 0);
+        swal({
+          title: "Something went wrong!",
+          timer: 3000,
+          icon: "error",
+        });
       }
     } else {
       return;

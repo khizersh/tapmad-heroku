@@ -9,11 +9,12 @@ import {
 import { get } from "../../../services/http-service";
 import HomepageFeatured from "./FeaturedSlider";
 import Link from "next/link";
+import { HomeService } from "./home.service";
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
-  const modifiedResponse = modifyHomePageResponse(movies);
+  const modifiedResponse = HomeService.modifyHomePageResponse(movies);
   React.useEffect(() => {
     setLocalMovies(modifiedResponse);
   }, [movies]);
@@ -24,39 +25,28 @@ export default function HomePage({ movies, banner, featured, ip }) {
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
     setCurrentRow(rowData.rowsTo);
-    var moviesList = await get(
-      `https://api.tapmad.com/api/getFeaturedHomePageWithRE/5/${
-        rowData.rowFrom
-      }/${rowData.rowsTo - rowData.rowFrom}/0/16`
+    let moviesList = await HomeService.getFeaturedHomepageWithRe(
+      rowData.rowFrom,
+      rowData.rowsTo
     );
-    console.log("moviesList: ", moviesList);
-    var newMovies = await moviesList.data;
-    if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {
-      let modifiedNewMovies = modifyHomePageResponse(newMovies.Tabs[0]);
+    if (moviesList != null) {
+      var newMovies = await moviesList.data;
+      if (
+        localMovies.Sections.Movies &&
+        localMovies.Sections.Movies.length > 0
+      ) {
+        let modifiedNewMovies = HomeService.modifyHomePageResponse(
+          newMovies.Tabs[0]
+        );
+        let updatedListOfMovies = pushNewMoviesIntoList(
+          localMovies,
+          modifiedNewMovies
+        );
+        setLocalMovies(updatedListOfMovies);
+      }
+    }
+  }
 
-      let updatedListOfMovies = pushNewMoviesIntoList(
-        localMovies,
-        modifiedNewMovies
-      );
-      setLocalMovies(updatedListOfMovies);
-    }
-  }
-  function modifyHomePageResponse(movies) {
-    if (movies.Sections && movies.Sections.length > 0) {
-      return {
-        Sections: {
-          Movies: movies.Sections,
-          totalSections: movies.totalSections,
-        },
-      };
-    }
-    return {
-      Sections: {
-        Movies: [],
-        totalSections: 0,
-      },
-    };
-  }
   return (
     <div>
       <div className="container-fluid p-1">
