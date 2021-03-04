@@ -10,12 +10,16 @@ const CategoryHorizontalCard = ({ video, type }) => {
         <div className="col-12 p-1 d-lg-none d-md-none">
           <div className="d-flex">
             <div>
+              {type && (
+                <span className="live_side" style={{ top: 4, left: 4 }}>
+                  {type}
+                </span>
+              )}
               <img
                 src={video.VideoImagePath}
                 alt={video.VideoName}
                 width="130px"
               />
-              {type && <div className="live_side">{type}</div>}
             </div>
             <div>
               <div className="card-desc-div">

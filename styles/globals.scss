@@ -565,13 +565,16 @@ div#nav-tab {
 .menu a:hover {
   color: #8bbb4b;
 }
+.menu a:hover .icon {
+  color: #8bbb4b;
+}
 .menu {
   margin-bottom: 3em;
 }
 .menu-dropdown li .icon {
   color: #fff;
 }
-.menu-dropdown li:hover .icon {
+.menu-dropdown li:hover a {
   color: #8bbb4b;
 }
 .menu label {

@@ -2,10 +2,13 @@ import React from "react";
 import { Cookie } from "../../../services/cookies";
 import { useRouter } from "next/router";
 import { signUpImage } from "../../../services/imagesLink";
+import { MainContext } from "../../../contexts/MainContext";
 
 export default function SignUpLayout({ children }) {
+  const { setLoader } = React.useContext(MainContext);
   const router = useRouter();
   const onClickBack = () => {
+    setLoader(true);
     if (!Cookie.getCookies("backUrl")) {
       router.push("/");
     } else {

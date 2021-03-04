@@ -20,7 +20,7 @@ export default function Header() {
     setLoader(true);
     swal({
       title: "You have logged out!",
-      text: "Redirecting you ...",
+      text: "Redirecting you in 2s...",
       timer: 3000,
     }).then((res) => {
       Cookie.setCookies("isAuth", 0);
@@ -96,7 +96,7 @@ export default function Header() {
                     alt=""
                   />
                 </p>
-                <a href="/news">
+                <a href="news">
                   <img
                     src={tapmadNews}
                     style={{

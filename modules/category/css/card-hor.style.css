@@ -132,6 +132,7 @@
   background: #87c242 !important;
   color: #000 !important;
   border: none !important;
+  border-radius: 0px;
 }
 
 .video-syno-text {

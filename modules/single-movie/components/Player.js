@@ -2,16 +2,25 @@ import React, { useState, useEffect } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
+import { getAdDetails } from "../../../services/apilinks";
 import { get, post } from "../../../services/http-service";
 import PlayerShop from "../../player-shop/player-shop";
+import { PlayerService } from "../Player.service";
 
 export default function Player({ movies }) {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const adDuration = 200000;
+  const [adDuration, setAdDuration] = useState(200000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
   const [relatedVideo, setRelatedVideos] = useState([]);
-
+  const [ads, setAds] = useState({
+    allow: false,
+    topAd: "",
+    onVideo: "",
+    rightAd: "",
+    bottomBannerAd: "",
+    rightVideoAd: "",
+  });
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
@@ -25,10 +34,12 @@ export default function Player({ movies }) {
   }
 
   async function getRelatedChannels() {
-    const res = await get(
-      `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${movie.Video.VideoEntityId}/${movie.Video.IsVideoChannel}`
+    const res = await PlayerService.getRelatedChannelsOrVODData(
+      movie.Video.VideoEntityId,
+      movie.Video.IsVideoChannel
     );
-    if (res.data && res.data.Response && res.data.Response.responseCode == 1) {
+
+    if (res.data && res.responseCode == 1) {
       setRelatedVideos(res.data.Sections[0].Videos);
     }
   }
@@ -36,23 +47,35 @@ export default function Player({ movies }) {
   useEffect(async () => {
     setMounted(true);
     let userId = localStorage.getItem("userId");
+    let body = {
+      Version: "V2",
+      Language: "en",
+      Platform: "web",
+      ChannelOrVODId: movie.Video.VideoEntityId,
+      UserId: userId,
+      IsChannel: movie.Video.IsVideoChannel,
+    };
     if (userId) {
-      const res = await post(
-        `https://api.tapmad.com/api/getEventPredicationGameChannel`,
-        {
-          Version: "V2",
-          Language: "en",
-          Platform: "web",
-          ChannelOrVODId: movie.Video.VideoEntityId,
-          UserId: userId,
-          IsChannel: movie.Video.IsVideoChannel,
-        }
-      );
+      const res = await PlayerService.getVideoData(body);
       setMovie(res.data);
     }
   }, []);
   useEffect(async () => {
     await getRelatedChannels();
+    const resp = await get("http://localhost:3000/" + getAdDetails);
+    const data = PlayerService.checkAds(resp.data.data, "local");
+    if (data != null) {
+      setAdDuration(data.videoAdDuration);
+      setAds({
+        allow: data.allow,
+        onVideo: data.onVideo,
+        topAdDesktop: data.topAdDesktop,
+        topAdMobile: data.topAdMobile,
+        rightAd: data.rightAd,
+        bottomBannerAd: data.bottomBannerAd,
+        rightVideoAd: data.rightVideoAd,
+      });
+    }
   }, []);
   return (
     <div>
@@ -61,22 +84,18 @@ export default function Player({ movies }) {
           <div className="col-lg-9">
             <div className="col-12 p-0">
               {/* Top Ad */}
-              <div className="text-center my-3">
-                <DFPSlotsProvider dfpNetworkId="28379801">
-                  <div className="desktop-ads d-none d-lg-block d-md-block">
-                    <AdSlot
-                      sizes={[[728, 90]]}
-                      adUnit={"Bluekai_Leaderboard_Player"}
-                    />
-                  </div>
-                  <div className="desktops-ads text-center d-lg-none d-md-none">
-                    <AdSlot
-                      sizes={[[320, 100]]}
-                      adUnit={"Testing_Dev_MW_320x100_Player"}
-                    />
-                  </div>
-                </DFPSlotsProvider>
-              </div>
+              {ads.allow && ads.topAdDesktop && (
+                <div className="text-center my-3">
+                  <DFPSlotsProvider dfpNetworkId="28379801">
+                    <div className="desktop-ads d-none d-lg-block d-md-block">
+                      <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
+                    </div>
+                    <div className="desktops-ads text-center d-lg-none d-md-none">
+                      <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
+                    </div>
+                  </DFPSlotsProvider>
+                </div>
+              )}
               <div style={{ border: "1px solid white" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id"
@@ -88,7 +107,7 @@ export default function Player({ movies }) {
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
                   generatePrerollUrl={() =>
-                    "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Testing_Dev_Desktop_MREC_Video&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com%2F&vpos=preroll"
+                    ads.onVideo && ads.allow ? ads.onVideo : ""
                   }
                   customProps={{
                     controls: true,
@@ -109,7 +128,6 @@ export default function Player({ movies }) {
                 </>
               ) : null}
             </div>
-            {/* Banner Add */}
 
             <div className="col-lg-12 p-0">
               {movie && movie.CookFeed ? (
@@ -119,25 +137,27 @@ export default function Player({ movies }) {
                 </div>
               ) : null}
 
-              <DFPSlotsProvider dfpNetworkId="28379801">
-                <div className="desktops-ads text-center d-none d-lg-block d-md-block">
-                  <AdSlot
-                    sizes={[[970, 250]]}
-                    adUnit={"Testing_Dev_Player_Superleaderboard"}
-                  />
-                </div>
-              </DFPSlotsProvider>
+              {/* Banner Add */}
+              {ads.allow && ads.bottomBannerAd && (
+                <DFPSlotsProvider dfpNetworkId="28379801">
+                  <div className="desktops-ads text-center d-none d-lg-block d-md-block">
+                    <AdSlot sizes={[[970, 250]]} adUnit={ads.bottomBannerAd} />
+                  </div>
+                </DFPSlotsProvider>
+              )}
             </div>
           </div>
           {/* Side Add */}
           <div className="col-lg-3 text-center pt-5 ">
-            <DFPSlotsProvider dfpNetworkId="28379801">
-              <div className="desktop-ads">
-                <AdSlot sizes={[[300, 250]]} adUnit={"BlueKai_MREC_Banner"} />
-              </div>
-            </DFPSlotsProvider>
+            {ads.allow && ads.rightAd && (
+              <DFPSlotsProvider dfpNetworkId="28379801">
+                <div className="desktop-ads">
+                  <AdSlot sizes={[[300, 250]]} adUnit={"BlueKai_MREC_Banner"} />
+                </div>
+              </DFPSlotsProvider>
+            )}
 
-            {isAutoPlay ? (
+            {ads.allow && isAutoPlay && ads.rightVideoAd ? (
               <div style={{ border: "1px solid white", marginTop: "65px" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id1"
@@ -154,7 +174,7 @@ export default function Player({ movies }) {
                   }
                   onAdComplete={onRestartAd}
                   generatePrerollUrl={() =>
-                    "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Testing_Dev_Desktop_MREC_Video&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com%2F&vpos=preroll"
+                    ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
                   }
                   customProps={{
                     controls: true,

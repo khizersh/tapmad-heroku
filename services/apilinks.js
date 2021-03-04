@@ -16,6 +16,9 @@ export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";
+export const getEventPredicationGameChannel =
+  BASEURL + "api/getEventPredicationGameChannel";
+
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
@@ -23,6 +26,10 @@ export const initialPaymentTransaction =
 
 export const getMoviesWithPagination = (from, to) => {
   return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
+};
+
+export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
+  return `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 
 export const getFeaturedHomepageWithRE = (from, to) => {
@@ -38,3 +45,7 @@ export const getMoviesWithPaginationInitial =
 
 export const getChannelWithPaginationInitial =
   BASEURL + "api/getChannelWithPagination/0/5/0/16";
+
+export const getFaqs = "api/faq";
+export const getAboutus = "api/about-us";
+export const getAdDetails = "api/ads";

@@ -11,7 +11,6 @@ import {
 import { HomeService } from "../modules/home/components/home.service";
 
 export default function Home(props) {
-  console.log("Props in index: ", props);
   return (
     <div>
       <Head>

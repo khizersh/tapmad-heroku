@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getFaqs } from "../services/apilinks";
+import { get } from "../services/http-service";
 
 export default function FAQ() {
+  const [data, setData] = useState([]);
+  useEffect(async () => {
+    const resp = await get(getFaqs);
+    if (resp.data) {
+      if (resp.data.data.length > 0) {
+        setData(resp.data.data);
+      }
+    }
+  }, []);
+
   return (
     <div>
       <div className="container ng-scope">
@@ -16,10 +28,37 @@ export default function FAQ() {
               about Tapmad TV subscription and our services.
             </p>
 
-            <div className="heading">
-              <h3>Subscription</h3>
-            </div>
-            <h5>What is Tapmad?</h5>
+            {data.length
+              ? data.map((m, i) => (
+                  <>
+                    <h5 key={i}>{m.question}</h5>
+                    {m.type == "heading" ? (
+                      <div className="heading">
+                        <h3>{m.answer}</h3>
+                      </div>
+                    ) : m.anchor != null ? (
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: m.answer.replace(m.changeFrom, m.changeTo),
+                        }}
+                      ></p>
+                    ) : (
+                      <>{m.answer}</>
+                    )}
+
+                    {m.type == "list" ? (
+                      <ul className="faqs-ul">
+                        {m.bullets.split(",").map((n, j) => (
+                          <li key={j}>{n}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                ))
+              : null}
+            {/* <h5>What is Tapmad?</h5>
             <p>
               {" "}
               TAPMAD is Pakistan's leading on-demand video streaming platform
@@ -144,7 +183,7 @@ export default function FAQ() {
               </a>
               . We will get back to you with the best possible solution as soon
               as possible.
-            </p>
+            </p> */}
 
             <br />
           </div>

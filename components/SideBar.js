@@ -1,10 +1,26 @@
-import React from "react";
+import Link from "next/link";
+import React, { useContext, useState, useEffect } from "react";
+import { MainContext } from "../contexts/MainContext";
+import AuthenticatedSidebar from "./AuthenticatedSidebar";
+import NotAuthenticatedSidebar from "./NotAuthenticatedSidebar";
 
 export default function SideBar() {
+  const [isAuth, setIsAuth] = useState(false);
   function toggleNavbar() {
     document.getElementsByTagName("html")[0].classList.toggle("openNav");
     document.getElementsByClassName("nav-toggle")[0].classList.toggle("active");
   }
+  const { initialState, setSearch } = React.useContext(MainContext);
+
+  const onClickSearch = () => {
+    setSearch(!initialState.isSearch);
+  };
+
+  useEffect(() => {
+    if (initialState) {
+      setIsAuth(initialState.isAuthenticated);
+    }
+  }, [initialState.isAuthenticated]);
   return (
     <div className="primary-nav">
       <button
@@ -12,95 +28,110 @@ export default function SideBar() {
         onClick={toggleNavbar}
       ></button>
       <nav className="menu">
-        <a href="/" className="logotype">
-          <img
-            src="https://www.tapmad.com/images/tm-logo.png"
-            width="115"
-            className="img-fluid img-responsive"
-            alt="tapmad logo"
-          />
-        </a>
+        <Link href="/" shallow={true} passHref={true}>
+          <a className="logotype">
+            <img
+              src="https://www.tapmad.com/images/tm-logo.png"
+              width="115"
+              className="img-fluid img-responsive"
+              alt="tapmad logo"
+            />
+          </a>
+        </Link>
         <div className="overflow-container">
           <ul className="menu-dropdown">
             <li>
-              <a href="/live">Live</a>
-              <span className="icon">
-                <i className="fa fa-video-camera"></i>
-              </span>
+              <Link href="/live" shallow={true} passHref={true}>
+                <a>
+                  Live
+                  <span className="icon">
+                    <i className="fa fa-video-camera"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
             <li>
-              <a href="/movies">Movies</a>
-              <span className="icon">
-                <i className="fa fa-film"></i>
-              </span>
+              <Link href="/movies" shallow={true} passHref={true}>
+                <a>
+                  Movies
+                  <span className="icon">
+                    <i className="fa fa-film"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
             <li>
-              <a href="/shows">Shows</a>
-              <span className="icon">
-                <i className="fa fa-ticket"></i>
-              </span>
+              <Link href="/shows" shallow={true} passHref={true}>
+                <a>
+                  Shows
+                  <span className="icon">
+                    <i className="fa fa-ticket"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
             <li>
-              <a href="/catchup">Catchup</a>
-              <span className="icon">
-                <i className="fa fa-circle-o"></i>
-              </span>
+              <Link href="/catchup" shallow={true} passHref={true}>
+                <a>
+                  Catchup
+                  <span className="icon">
+                    <i className="fa fa-circle-o"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
             <li>
-              <a href="news">News</a>
-              <span className="icon">
-                <i className="fa fa-newspaper-o"></i>
-              </span>
+              <Link href="news" shallow={true} passHref={true}>
+                <a>
+                  News
+                  <span className="icon">
+                    <i className="fa fa-newspaper-o"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
-            <li className="sideBarGame" style={{ display: "list-item" }}>
-              <a href="/game">Game</a>
-              <span className="icon">
-                <i className="fa fa-gamepad"></i>
-              </span>
-            </li>
-            <li className="subs_contain" id="signUpMenu">
-              <a href="/sign-up">Subscribe</a>
-              <span className="icon">
-                <i className="fa fa-user-plus"></i>
-              </span>
-            </li>
-            <li className="logouts_contain">
-              <a href="/myaccount">Profile</a>
-              <span className="icon">
-                <i className="fa fa-user-plus"></i>
-              </span>
-            </li>
+            {/* conditional menu */}
+            {isAuth ? <AuthenticatedSidebar /> : <NotAuthenticatedSidebar />}
+
             <li className="promoDiv" style={{ display: "list-item" }}>
-              <a href="/promo-code">Promo code</a>
-              <span className="icon">
-                <i className="fa fa-gift"></i>
-              </span>
+              <Link href="/promo-code" shallow={true} passHref={true}>
+                <a>
+                  Promo code
+                  <span className="icon">
+                    <i className="fa fa-gift"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
             <li>
-              <a className="search-btn">Search</a>
-              <span className="icon">
-                <i className="fa fa-search"></i>
-              </span>
-            </li>
-            <li id="loginAva5" className="hidden">
-              <a href="#">Signout</a>
-              <span className="icon">
-                <i className="fa fa-sign-in"></i>
-              </span>
-            </li>
-
-            <li id="loginAva3">
-              <a href="sign-in">Sign In</a>
-              <span className="icon">
-                <i className="fa fa-sign-in"></i>
-              </span>
+              <a onClick={onClickSearch} className="search-btn">
+                Search
+                <span className="icon">
+                  <i className="fa fa-search"></i>
+                </span>
+              </a>
             </li>
 
             <li>
-              <a href="/about">About Us</a>
-              <span className="icon">
-                <i className="fa fa-bookmark-o"></i>
-              </span>
+              <Link href="/about" shallow={true} passHref={true}>
+                <a>
+                  About Us
+                  <span className="icon">
+                    <i className="fa fa-bookmark-o"></i>
+                  </span>
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/faqs" shallow={true} passHref={true}>
+                <a>
+                  FAQ
+                  <span className="icon">
+                    {/* <i className="fa fa-bookmark-o"></i> */}
+                    <i class="fa fa-question-circle"></i>
+                  </span>
+                </a>
+              </Link>
             </li>
           </ul>
         </div>
