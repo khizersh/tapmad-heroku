@@ -25,13 +25,7 @@ export default function EnterPin({ forgetPin }) {
       setLoader(true);
 
       const data = await AuthService.verifyPinCode(userPin);
-      var response = await post(verifyUserPinCode, {
-        Version: "V1",
-        Language: "en",
-        Platform: "Web",
-        UserId: Cookie.getCookies("userId"),
-        UserPinCode: userPin,
-      });
+
       if (data != null) {
         if (data.responseCode == 1) {
           Cookie.setCookies("isAuth", 1);
@@ -46,7 +40,7 @@ export default function EnterPin({ forgetPin }) {
         } else {
           setLoader(false);
           swal({
-            title: response.data.Response.message,
+            title: data.message,
             timer: 3000,
             icon: "error",
           });

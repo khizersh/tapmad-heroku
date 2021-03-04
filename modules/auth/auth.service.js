@@ -71,6 +71,7 @@ async function verifyPinCode(pin) {
     UserPinCode: pin,
     Version: "V1",
   };
+  console.log("body: ", body);
   const resp = await post(verifyUserPinCode, body);
   const data = handleResponse(resp);
   if (data != null) {
