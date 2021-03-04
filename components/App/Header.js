@@ -40,8 +40,10 @@ export default function Header() {
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
-            <Link href="/">
-              <img className="m-logo btn" src={tapmadLogo} width="130" alt="" />
+            <Link href="/" passHref={true} shallow={true}>
+              <a className="m-logo btn">
+                <img src={tapmadLogo} width="130" alt="logo" />
+              </a>
             </Link>
           </div>
           <div className="col-6 col-sm-6 col-md-6 .col-lg-6 d-none d-sm-block main_menu">

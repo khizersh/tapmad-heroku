@@ -11,6 +11,7 @@ import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
 import { func } from "joi";
+import DashboardLayout from "../modules/dashboard/DashboardLayout";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -75,11 +76,19 @@ function MyApp({ Component, pageProps, test }) {
         ></link>
       </Head>
       {pageProps.noSideBar ? (
-        <MainProvider>
-          <NoSideBarSkeleton>
-            <Component {...pageProps} />
-          </NoSideBarSkeleton>
-        </MainProvider>
+        pageProps.dashboard ? (
+          <>
+            <DashboardLayout>
+              <Component {...pageProps} />
+            </DashboardLayout>
+          </>
+        ) : (
+          <MainProvider>
+            <NoSideBarSkeleton>
+              <Component {...pageProps} />
+            </NoSideBarSkeleton>
+          </MainProvider>
+        )
       ) : (
         <>
           <MainProvider>

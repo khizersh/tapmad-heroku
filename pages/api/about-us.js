@@ -1,4 +1,7 @@
 // const csv = require("csv-parser");
+
+import { aboutUsCsvFile } from "../../services/apilinks";
+
 // const fs = require("fs");
 const csvFilePath = "public/about-us.csv";
 const csv = require("csvtojson");
@@ -6,22 +9,8 @@ const csv = require("csvtojson");
 export default async (req, res) => {
   res.statusCode = 200;
   let data = [];
-  // await fs
-  //   .createReadStream("public/data.csv")
-  //   .pipe(csv())
-  //   .on("data", (row) => {
-  //     console.log(row);
-  //     data.push(row);
-  //   })
-  //   .on("end", () => {
-  //     console.log("CSV file successfully processed");
-  //     res.json({ name: "John Doe", data: data });
-  //   })
-  //   .on("error", () => {
-  //     res.json({ data: [] });
-  //   });
   await csv()
-    .fromFile(csvFilePath)
+    .fromFile(aboutUsCsvFile)
     .then((jsonObj) => {
       if (jsonObj != null || jsonObj.length > 0) {
         res.json({ data: jsonObj });
