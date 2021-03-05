@@ -12,7 +12,8 @@ export default async (req, res) => {
     path: adCsvFile,
     header: [
       { id: "type", title: "type" },
-      { id: "topAd", title: "topAd" },
+      { id: "topAdDesktop", title: "topAdDesktop" },
+      { id: "topAdMobile", title: "topAdMobile" },
       { id: "onVideo", title: "onVideo" },
       { id: "rightVideoAd", title: "rightVideoAd" },
       { id: "rightAd", title: "rightAd" },

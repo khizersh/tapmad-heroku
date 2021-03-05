@@ -127,7 +127,7 @@ export default function SideBar() {
                 <a>
                   FAQ
                   <span className="icon">
-                    <i class="fa fa-question-circle"></i>
+                    <i className="fa fa-question-circle"></i>
                   </span>
                 </a>
               </Link>

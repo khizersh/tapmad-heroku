@@ -4,6 +4,7 @@ import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
 import { getAdDetails } from "../../../services/apilinks";
 import { get, post } from "../../../services/http-service";
+import { DashboardService } from "../../dashboard/Dashboard.Service";
 import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 
@@ -30,7 +31,7 @@ export default function Player({ movies }) {
     setIsAutoPlay(false);
     setTimeout(() => {
       setIsAutoPlay(true);
-    }, adDuration);
+    }, adDuration * 1000);
   }
 
   async function getRelatedChannels() {
@@ -62,8 +63,8 @@ export default function Player({ movies }) {
   }, []);
   useEffect(async () => {
     await getRelatedChannels();
-    const resp = await get("http://localhost:3000/" + getAdDetails);
-    const data = PlayerService.checkAds(resp.data.data, "local");
+    const resp = await DashboardService.getAdData();
+    const data = PlayerService.checkAds(resp, "local");
     if (data != null) {
       setAdDuration(data.videoAdDuration);
       setAds({

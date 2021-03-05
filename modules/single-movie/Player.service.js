@@ -52,12 +52,12 @@ function checkAds(data, type) {
   if (type == "local") {
     const local = data.filter((f) => f.type == "local")[0];
     if (local != null) {
-      if (local.allow && local.allow == "TRUE") {
-        let splitTopAd = local.topAd.split("$");
+      if (local.allow && local.allow == "true") {
+      
         return {
           allow: true,
-          topAdDesktop: splitTopAd[0] ? splitTopAd[0] : null,
-          topAdMobile: splitTopAd[1] ? splitTopAd[1] : null,
+          topAdDesktop: local.topAdDesktop ? local.topAdDesktop : null,
+          topAdMobile: local.topAdMobile ? local.topAdMobile : null,
           onVideo: local.onVideo ? local.onVideo : null,
           rightAd: local.rightAd ? local.rightAd : null,
           rightVideoAd: local.rightVideoAd ? local.rightVideoAd : null,
@@ -73,12 +73,12 @@ function checkAds(data, type) {
   } else {
     const int = data.filter((f) => f.type == "international")[0];
     if (int != null) {
-      if (int.allow && int.allow == "TRUE") {
+      if (int.allow && int.allow == "true") {
         let splitTopAd = int.topAd.split("$");
         return {
           allow: true,
-          topAdDesktop: splitTopAd[0] ? splitTopAd[0] : null,
-          topAdMobile: int[1] ? int[1] : null,
+          topAdDesktop: int.topAdDesktop ? int.topAdDesktop : null,
+          topAdMobile: int.topAdMobile ? int.topAdMobile : null,
           onVideo: int.onVideo ? int.onVideo : null,
           rightAd: int.rightAd ? int.rightAd : null,
           rightVideoAd: int.rightVideoAd ? int.rightVideoAd : null,

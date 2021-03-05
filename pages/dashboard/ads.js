@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import swal from "sweetalert";
 import { DashboardService } from "../../modules/dashboard/Dashboard.Service";
 import { getAdDetails } from "../../services/apilinks";
 import { post } from "../../services/http-service";
@@ -28,50 +29,67 @@ export default function ads() {
       allow: true,
     },
   ]);
-  const [local, setLocal] = useState({});
-  const [international, setInternational] = useState({});
+  const [local, setLocal] = useState({
+    type: "",
+    topAdDesktop: "",
+    topAdMobile: "",
+    onVideo: "",
+    rightVideoAd: "",
+    rightAd: "",
+    bottomBannerAd: "",
+    videoAdDuration: 200000,
+    allow: true,
+  });
+  const [international, setInternational] = useState({
+    type: "",
+    topAdDesktop: "",
+    topAdMobile: "",
+    onVideo: "",
+    rightVideoAd: "",
+    rightAd: "",
+    bottomBannerAd: "",
+    videoAdDuration: 200000,
+    allow: true,
+  });
   useEffect(async () => {
     const data = await DashboardService.getAdData();
     if (data.length == 2) {
-      let local = data.filter((m) => m.type.toLower() == "local")[0];
-      let international = data.filter(
-        (m) => m.type.toLower() == "international"
-      )[0];
-      setData({ ...local }, { ...international });
-      setLocal({ ...local });
-      setInternational({ ...international });
+      const resp = DashboardService.customizeData(data);
+
+      setData(resp);
+      setLocal({ ...local, ...resp[0] });
+      setInternational({ ...international, ...resp[1] });
     }
   }, []);
 
-  const onClick = () => {
-    const data = [
-      {
-        type: "local",
-        topAd: "Bluekai_Leaderboard_Player$Testing_Dev_MW_320x100_Player",
-        onVideo:
-          "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Testing_Dev_Desktop_MREC_Video&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com%2F&vpos=preroll",
-        rightVideoAd: "safasgfasg",
-        rightAd: "BlueKai_MREC_Banner",
-        bottomBannerAd: "Testing_Dev_Player_Superleaderboard",
-        videoAdDuration: 200000,
-        allow: true,
-      },
-      {
-        type: "international",
-        topAd: "Bluekai_Leaderboard_Player$Testing_Dev_MW_320x100_Player",
-        onVideo:
-          "https://pubads.g.doubleclick.net/gampad/live/ads?iu=/28379801/Testing_Dev_Desktop_MREC_Video&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=[placeholder]&vpmute=1&vpa=auto&url=https%3A%2F%2Fwww.tapmad.com%2F&vpos=preroll",
-        rightVideoAd: "safasgfasg",
-        rightAd: "BlueKai_MREC_Banner",
-        bottomBannerAd: "Testing_Dev_Player_Superleaderboard",
-        videoAdDuration: 200000,
-        allow: true,
-      },
-    ];
-    DashboardService.editAdDetails(data);
+  const onClick = async () => {
+ 
+    let array = []
+    array.push(local)
+    array.push(international)
+    const resp = await DashboardService.editAdDetails(array);
+    console.log("resp: ", resp);
+    if (resp &&  resp.data && resp.data.statusCode == 200) {
+      swal({ title: "Update succesfully!", timer: 3000, icon: "success" });
+    }else{
+      swal({ title: "Something went wrong!", timer: 3000, icon: "error" });
+    }
   };
 
-  const onChangeHandler = () => {};
+  const onChangeLocal = (e) => {
+    setLocal({ ...local, [e.target.name]: e.target.value });
+  };
+  const onChangeLocalCheckbox = () => {
+    setLocal({ ...local, allow: !local.allow });
+  };
+
+  const onChangeInternatioanl = (e) => {
+    setInternational({ ...international, [e.target.name]: e.target.value });
+  };
+  const onChangeInternatioanlCheckbox = () => {
+    setInternational({ ...international, allow: !international.allow });
+  };
+
   return (
     <>
       <div className="row">
@@ -85,103 +103,141 @@ export default function ads() {
             </div>
             <div></div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Top Ad Desktop</label>
                 <input
-                  type="email"
-                  class="form-control"
+                  type="text"
+                  className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   value={local.topAdDesktop}
-                  placeholder="Enter email"
+                  onChange={onChangeLocal}
+                  name="topAdDesktop"
+                  placeholder="Enter Ad unit"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Ad unit for top ad Desktop view
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Top Ad Mobile</label>
                 <input
-                  type="email"
-                  class="form-control"
+                  type="text"
+                  className="form-control"
                   value={local.topAdMobile}
+                  onChange={onChangeLocal}
                   id="exampleInputEmail1"
+                  name="topAdMobile"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Ad unit for top ad Mobile view
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">On Video Ad</label>
                 <input
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
+                  type="text"
+                  className="form-control"
+                  name="onVideo"
                   aria-describedby="emailHelp"
                   value={local.onVideo}
-                  placeholder="Enter email"
+                  onChange={onChangeLocal}
+                  name="onVideo"
+                  placeholder="Pre roll url"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small id="emailHelp" className="form-text text-muted">
+                  Pre roll url on video player
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Right Ad</label>
                 <input
-                  type="email"
-                  class="form-control"
+                  type="text"
+                  value={local.rightAd}
+                  name="rightAd"
+                  onChange={onChangeLocal}
+                  className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="Enter email"
+                  placeholder="Enter Ad unit"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small id="emailHelp" className="form-text text-muted">
+                  Ad unit for right ad
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Right Video Ad</label>
                 <input
-                  type="email"
-                  class="form-control"
+                  type="text"
+                  className="form-control"
+                  value={local.rightVideoAd}
+                  name="rightVideoAd"
+                  onChange={onChangeLocal}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Pre roll url on right video player
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Bottom Banner Ad</label>
                 <input
-                  type="email"
-                  class="form-control"
+                  type="text"
+                  name="bottomBannerAd"
+                  className="form-control"
                   id="exampleInputEmail1"
+                  value={local.bottomBannerAd}
                   aria-describedby="emailHelp"
+                  onChange={onChangeLocal}
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+
+                <small id="emailHelp" className="form-text text-muted">
+                  Ad unit for bottom banner ad
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
-                <button className="btn btn-primary" onClick={onClick}>
-                  ADd
-                </button>
+              <div className="form-group">
+                <label for="exampleInputEmail1">Video Ad Duration</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  value={local.videoAdDuration}
+                  name="videoAdDuration"
+                  aria-describedby="emailHelp"
+                  onChange={onChangeLocal}
+                  der="Enter email"
+                />
+                <small id="emailHelp" className="form-text text-muted">
+                  Repeat right video ad duration in seconds
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-2 col-md-2 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label for="exampleInputEmail1"> Enable/Disable</label>
+                <input
+                  type="checkbox"
+                  className="form-control"
+                  onChange={onChangeLocalCheckbox}
+                  checked={local.allow}
+                />
               </div>
             </div>
           </div>
@@ -192,98 +248,158 @@ export default function ads() {
           <div className="row">
             <div className="col-12">
               <div className="title mb-5">
+                {" "}
                 <h3> International</h3>
               </div>
             </div>
             <div></div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Top Ad Desktop</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
+                  value={international.topAdDesktop}
+                  name="topAdDesktop"
+                  onChange={onChangeInternatioanl}
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Ad unit for top ad Desktop view
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Top Ad Mobile</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
+                  value={international.topAdMobile}
                   id="exampleInputEmail1"
+                  name="topAdMobile"
                   aria-describedby="emailHelp"
+                  onChange={onChangeInternatioanl}
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Ad unit for top ad Mobile view
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">On Video Ad</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
+                  value={international.onVideo}
+                  name="onVideo"
+                  onChange={onChangeInternatioanl}
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Pre roll url on video player
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Right Ad</label>
                 <input
                   type="email"
-                  class="form-control"
+                  value={international.rightAd}
+                  className="form-control"
                   id="exampleInputEmail1"
+                  name="rightAd"
                   aria-describedby="emailHelp"
+                  onChange={onChangeInternatioanl}
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Ad unit for right ad
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Right Video Ad</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
+                  value={international.rightVideoAd}
                   id="exampleInputEmail1"
+                  name="rightVideoAd"
+                  onChange={onChangeInternatioanl}
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+                <small className="form-text text-muted">
+                  Pre roll url on right video player
                 </small>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleInputEmail1">Bottom Banner Ad</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputEmail1"
+                  value={international.bottomBannerAd}
+                  name="bottomBannerAd"
+                  onChange={onChangeInternatioanl}
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
+
+                <small className="form-text text-muted">
+                  Ad unit for bottom banner ad
                 </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label for="exampleInputEmail1">Video Ad Duration</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  value={international.videoAdDuration}
+                  aria-describedby="emailHelp"
+                  name="videoAdDuration"
+                  onChange={onChangeInternatioanl}
+                  placeholder="Enter email"
+                />
+                <small className="form-text text-muted">
+                  Repeat right video ad duration in seconds
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-2 col-md-2 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label for="exampleInputEmail1">Enable/Disable</label>
+                <input
+                  type="checkbox"
+                  className="form-control"
+                  onChange={onChangeInternatioanlCheckbox}
+                  checked={international.allow}
+                />
+              </div>
+            </div>
+            <div
+              className="col-lg-12 col-md-12 col-sm-12 col-xm-12"
+              style={{ marginTop: "2rem" }}
+            >
+              <div className="form-group text-center">
+                <label for="exampleInputEmail1"></label>
+                <button className="btn btn-primary" onClick={onClick}>
+                  Update
+                </button>
               </div>
             </div>
           </div>
