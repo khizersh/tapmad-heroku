@@ -1,7 +1,13 @@
 import React from "react";
+import LoginComponent from "../../modules/dashboard/LoginComponent";
 
 const login = () => {
-  return <div></div>;
+  return (
+    <>
+      {" "}
+      <LoginComponent />
+    </>
+  );
 };
 
 export async function getStaticProps() {

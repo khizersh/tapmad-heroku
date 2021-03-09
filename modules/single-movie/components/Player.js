@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
+import { MainContext } from "../../../contexts/MainContext";
 import { getAdDetails } from "../../../services/apilinks";
 import { get, post } from "../../../services/http-service";
+import { AuthService } from "../../auth/auth.service";
 import { DashboardService } from "../../dashboard/Dashboard.Service";
 import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 
 export default function Player({ movies }) {
+  const { initialState } = useContext(MainContext);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
+  const [countryCode, setCountryCode] = useState(null);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -39,7 +43,6 @@ export default function Player({ movies }) {
       movie.Video.VideoEntityId,
       movie.Video.IsVideoChannel
     );
-
     if (res.data && res.responseCode == 1) {
       setRelatedVideos(res.data.Sections[0].Videos);
     }
@@ -63,8 +66,20 @@ export default function Player({ movies }) {
   }, []);
   useEffect(async () => {
     await getRelatedChannels();
+
     const resp = await DashboardService.getAdData();
-    const data = PlayerService.checkAds(resp, "local");
+    const country = await AuthService.getGeoInfo();
+    let data;
+
+    if (country) {
+      if (country.countryCode == "PK") {
+        data = PlayerService.checkAds(resp, "local");
+      } else {
+        data = PlayerService.checkAds(resp, "international");
+      }
+    } else {
+      data = PlayerService.checkAds(resp, "local");
+    }
     if (data != null) {
       setAdDuration(data.videoAdDuration);
       setAds({
@@ -78,6 +93,7 @@ export default function Player({ movies }) {
       });
     }
   }, []);
+
   return (
     <div>
       <div className="container-fluid">

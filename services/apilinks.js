@@ -50,17 +50,9 @@ export const localHost = "http://localhost:3000/";
 export const getFaqs = "api/faq";
 export const getAboutus = "api/about-us";
 export const getAdDetails = localHost + "api/ads";
+export const getCredentials = localHost + "api/credentials";
 
 export const adCsvFile = "public/ads.csv";
 export const faqCsvFile = "public/faq.csv";
 export const aboutUsCsvFile = "public/about-us.csv";
-// export const getAdDetails = (
-//   isEdit,
-//   type,
-//   topAdDesktop,
-//   topAdMobile,
-//   onVideo
-// ) => {
-//   body = {};
-//   return `api/ads?isEdit=${isEdit}&type=${type}`;
-// };
+export const credentialsCsvFile = "public/credentials.csv";

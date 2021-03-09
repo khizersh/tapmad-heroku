@@ -3,11 +3,11 @@ import DashboardLayout from "../../modules/dashboard/DashboardLayout";
 import DashboardSidebar from "../../modules/dashboard/DashboardSidebar";
 
 const index = () => {
-  return <DashboardLayout>gsafkjsafkjgsafjasgkjfgsa</DashboardLayout>;
+  return <></>;
 };
 
 export async function getStaticProps() {
-  return { props: { noSideBar: true } };
+  return { props: { noSideBar: true, dashboard: true } };
 }
 
 export default index;

@@ -43,8 +43,31 @@ function customizeData(data) {
   return array;
 }
 
+function getListOfUsers(data) {
+  let array = [];
+  if (data && data.data && data.data.data && data.data.data.length) {
+    let customData = data.data.data.map((m) => {
+      let obj = {};
+      if (m.active == "TRUE" || m.active == "true" || m.active == true) {
+        return (obj = {
+          ...m,
+          active: true,
+        });
+      } else {
+        return (obj = {
+          ...m,
+          active: false,
+        });
+      }
+    });
+
+    array = customData;
+  }
+  return array;
+}
 export const DashboardService = {
   editAdDetails,
   getAdData,
   customizeData,
+  getListOfUsers,
 };

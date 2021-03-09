@@ -49,6 +49,7 @@ export default function MainProvider({ children }) {
       "https://api.tapmad.com/api/getAllPaymentMethodsPackages/V1/en/web"
     );
     dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
+    console.log("ope: ", operators);
     checkUserAuthentication();
   }, []);
 
@@ -73,7 +74,6 @@ export default function MainProvider({ children }) {
     const isAuthenticated = Cookie.getCookies("isAuth");
     if (userId && isAuthenticated && isAuthenticated == 1) {
       dispatch({ type: "SET_AUTHENTICATION", data: true });
-      // router.push("/");
     }
   }
 

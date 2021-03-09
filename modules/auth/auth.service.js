@@ -225,6 +225,25 @@ function validateUser(data) {
   }
 }
 
+async function getGeoInfo() {
+  let obj = {};
+  const response = await get("http://ip-api.com/json/");
+  let data = response.data;
+
+  if (data) {
+    obj = {
+      countryName: data.country,
+      countryCode: data.countryCode,
+    };
+  } else {
+    obj = {
+      countryName: "Pakistan",
+      countryCode: "PK",
+    };
+  }
+
+  return obj;
+}
 export const AuthService = {
   validateUser,
   setUserPin,
@@ -235,4 +254,5 @@ export const AuthService = {
   initialTransaction,
   verifyOTP,
   loginUser,
+  getGeoInfo,
 };

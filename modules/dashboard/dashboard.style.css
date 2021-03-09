@@ -10,3 +10,12 @@
   position: relative;
   top: 3rem;
 }
+
+.pos {
+  position: relative;
+  top: 11rem;
+}
+.title-login {
+  background-color: #87c242;
+  color: black;
+}

@@ -53,7 +53,6 @@ function checkAds(data, type) {
     const local = data.filter((f) => f.type == "local")[0];
     if (local != null) {
       if (local.allow && local.allow == "true") {
-      
         return {
           allow: true,
           topAdDesktop: local.topAdDesktop ? local.topAdDesktop : null,
@@ -74,7 +73,6 @@ function checkAds(data, type) {
     const int = data.filter((f) => f.type == "international")[0];
     if (int != null) {
       if (int.allow && int.allow == "true") {
-        let splitTopAd = int.topAd.split("$");
         return {
           allow: true,
           topAdDesktop: int.topAdDesktop ? int.topAdDesktop : null,

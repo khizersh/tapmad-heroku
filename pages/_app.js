@@ -20,12 +20,21 @@ function MyApp({ Component, pageProps, test }) {
     if (pageProps.protected) {
       const userId = Cookie.getCookies("userId");
       const isAuthenticated = Cookie.getCookies("isAuth");
-      console.log("userId: ", userId);
-      console.log("isAuthenticated: ", isAuthenticated);
       if (userId && isAuthenticated && isAuthenticated == 1) {
         return true;
       } else {
         router.push("/sign-in");
+        return false;
+      }
+    }
+    if (pageProps.dashboard) {
+      console.log("Dashboard:");
+      const adminAuth = Cookie.getCookies("adminAuth");
+      const secret = Cookie.getCookies("secret");
+      if (adminAuth && secret && secret == "@@@@///") {
+        return true;
+      } else {
+        router.push("/dashboard/login");
         return false;
       }
     }
