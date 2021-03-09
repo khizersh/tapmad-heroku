@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function aboutus() {
-  return <div>sagfsagasgag</div>;
+  return <div></div>;
 }
 export async function getStaticProps() {
   return { props: { noSideBar: true, dashboard: true } };

@@ -28,7 +28,6 @@ function MyApp({ Component, pageProps, test }) {
       }
     }
     if (pageProps.dashboard) {
-      console.log("Dashboard:");
       const adminAuth = Cookie.getCookies("adminAuth");
       const secret = Cookie.getCookies("secret");
       if (adminAuth && secret && secret == "@@@@///") {
