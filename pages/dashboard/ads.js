@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import swal from "sweetalert";
+import { MainContext } from "../../contexts/MainContext";
 import { DashboardService } from "../../modules/dashboard/Dashboard.Service";
 import { getAdDetails } from "../../services/apilinks";
 import { post } from "../../services/http-service";
@@ -51,6 +52,7 @@ export default function ads() {
     videoAdDuration: 200000,
     allow: true,
   });
+  const { setLoader } = useContext(MainContext);
   useEffect(async () => {
     const data = await DashboardService.getAdData();
     if (data.length == 2) {
@@ -63,17 +65,18 @@ export default function ads() {
   }, []);
 
   const onClick = async () => {
- 
-    let array = []
-    array.push(local)
-    array.push(international)
+    setLoader(true);
+    let array = [];
+    array.push(local);
+    array.push(international);
     const resp = await DashboardService.editAdDetails(array);
-    console.log("resp: ", resp);
-    if (resp &&  resp.data && resp.data.statusCode == 200) {
+    if (resp && resp.data && resp.data.statusCode == 200) {
       swal({ title: "Update succesfully!", timer: 3000, icon: "success" });
-    }else{
+    } else {
       swal({ title: "Something went wrong!", timer: 3000, icon: "error" });
     }
+
+    setLoader(false);
   };
 
   const onChangeLocal = (e) => {
@@ -104,7 +107,7 @@ export default function ads() {
             <div></div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Top Ad Desktop</label>
+                <label>Top Ad Desktop</label>
                 <input
                   type="text"
                   className="form-control"
@@ -122,7 +125,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Top Ad Mobile</label>
+                <label>Top Ad Mobile</label>
                 <input
                   type="text"
                   className="form-control"
@@ -140,7 +143,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">On Video Ad</label>
+                <label>On Video Ad</label>
                 <input
                   type="text"
                   className="form-control"
@@ -158,7 +161,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Right Ad</label>
+                <label>Right Ad</label>
                 <input
                   type="text"
                   value={local.rightAd}
@@ -176,7 +179,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Right Video Ad</label>
+                <label>Right Video Ad</label>
                 <input
                   type="text"
                   className="form-control"
@@ -194,7 +197,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Bottom Banner Ad</label>
+                <label>Bottom Banner Ad</label>
                 <input
                   type="text"
                   name="bottomBannerAd"
@@ -213,7 +216,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Video Ad Duration</label>
+                <label>Video Ad Duration</label>
                 <input
                   type="number"
                   className="form-control"
@@ -231,7 +234,7 @@ export default function ads() {
             </div>
             <div className="col-lg-2 col-md-2 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1"> Enable/Disable</label>
+                <label> Enable/Disable</label>
                 <input
                   type="checkbox"
                   className="form-control"
@@ -255,7 +258,7 @@ export default function ads() {
             <div></div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Top Ad Desktop</label>
+                <label>Top Ad Desktop</label>
                 <input
                   type="email"
                   className="form-control"
@@ -273,7 +276,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Top Ad Mobile</label>
+                <label>Top Ad Mobile</label>
                 <input
                   type="email"
                   className="form-control"
@@ -291,7 +294,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">On Video Ad</label>
+                <label>On Video Ad</label>
                 <input
                   type="email"
                   className="form-control"
@@ -309,7 +312,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Right Ad</label>
+                <label>Right Ad</label>
                 <input
                   type="email"
                   value={international.rightAd}
@@ -327,7 +330,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Right Video Ad</label>
+                <label>Right Video Ad</label>
                 <input
                   type="email"
                   className="form-control"
@@ -345,7 +348,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Bottom Banner Ad</label>
+                <label>Bottom Banner Ad</label>
                 <input
                   type="email"
                   className="form-control"
@@ -364,7 +367,7 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Video Ad Duration</label>
+                <label>Video Ad Duration</label>
                 <input
                   type="number"
                   className="form-control"
@@ -382,7 +385,7 @@ export default function ads() {
             </div>
             <div className="col-lg-2 col-md-2 col-sm-12 col-xm-12">
               <div className="form-group">
-                <label for="exampleInputEmail1">Enable/Disable</label>
+                <label>Enable/Disable</label>
                 <input
                   type="checkbox"
                   className="form-control"
@@ -396,7 +399,7 @@ export default function ads() {
               style={{ marginTop: "2rem" }}
             >
               <div className="form-group text-center">
-                <label for="exampleInputEmail1"></label>
+                <label></label>
                 <button className="btn btn-primary" onClick={onClick}>
                   Update
                 </button>

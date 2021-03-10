@@ -5,6 +5,7 @@ import { MainContext } from "../../../contexts/MainContext";
 import { setUserPinCode } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
+import { AuthService } from "../auth.service";
 
 export default function SetPin() {
   const [pin, setPin] = useState("");

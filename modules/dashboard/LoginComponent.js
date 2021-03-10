@@ -5,15 +5,25 @@ import { getCredentials } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { get } from "../../services/http-service";
 import { DashboardService } from "./Dashboard.Service";
+import { useRouter } from "next/router";
 
 const LoginComponent = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [secret, setSecret] = useState("");
 
   const onCLick = async () => {
     const resp = await get(getCredentials);
     const data = DashboardService.getListOfUsers(resp);
     let isAuthenticated = false;
+    if (secret != "@@@///") {
+      return swal({
+        title: "Not Authtenticated Person!",
+        timer: 2000,
+        icon: "error",
+      });
+    }
     if (data.length) {
       data.map((m) => {
         if (m.username == username && m.password == password) {
@@ -27,13 +37,14 @@ const LoginComponent = () => {
 
     if (isAuthenticated) {
       Cookie.setCookies("adminAuth", 1);
-      Cookie.setCookies("secret", "@@@@///");
+      Cookie.setCookies("secret", "@@@///");
 
       swal({
         title: "Login Successfully!",
         timer: 2000,
         icon: "success",
       });
+      router.push("/dashboard");
     } else {
       swal({
         title: "Not Authtenticated Person!",
@@ -48,12 +59,13 @@ const LoginComponent = () => {
         <div className="col-md-4 col-12"></div>
         <div className="col-md-4 col-12">
           <div className="card shadow">
-            <div className="card-title title-login text-center">Login</div>
+            <div className="card-title title-login text-center text-white">
+              Login
+            </div>
             <div className="card-body">
               <div className="row">
                 <div className="col-12">
-                  <Form.Group className="m-0">
-                    <Form.Label>Email address</Form.Label>
+                  <Form.Group>
                     <Form.Control
                       type="email"
                       placeholder="Enter username"
@@ -63,7 +75,6 @@ const LoginComponent = () => {
                 </div>
                 <div className="col-12">
                   <Form.Group>
-                    <Form.Label>Email address</Form.Label>
                     <Form.Control
                       type="password"
                       placeholder="Enter password"
@@ -71,8 +82,22 @@ const LoginComponent = () => {
                     />
                   </Form.Group>
                 </div>
+                <div className="col-12">
+                  <Form.Group>
+                    <Form.Control
+                      type="password"
+                      placeholder="Enter Secret"
+                      onChange={(e) => setSecret(e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
                 <div className="col-12 text-center">
-                  <Button variant="primary" type="submit" onClick={onCLick}>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    onClick={onCLick}
+                    className="text-white"
+                  >
                     Submit
                   </Button>
                 </div>

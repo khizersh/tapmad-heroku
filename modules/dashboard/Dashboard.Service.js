@@ -1,4 +1,5 @@
 import { getAdDetails } from "../../services/apilinks";
+import { Cookie } from "../../services/cookies";
 import { get, post } from "../../services/http-service";
 
 async function editAdDetails(body) {
@@ -65,9 +66,20 @@ function getListOfUsers(data) {
   }
   return array;
 }
+
+function checkCredentials() {
+  const adminAuth = Cookie.getCookies("adminAuth");
+  const secret = Cookie.getCookies("secret");
+  if (adminAuth && secret && secret == "@@@///") {
+    return true;
+  } else {
+    return false;
+  }
+}
 export const DashboardService = {
   editAdDetails,
   getAdData,
   customizeData,
   getListOfUsers,
+  checkCredentials,
 };

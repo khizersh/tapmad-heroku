@@ -12,6 +12,7 @@ import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
 import { func } from "joi";
 import DashboardLayout from "../modules/dashboard/DashboardLayout";
+import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -28,9 +29,8 @@ function MyApp({ Component, pageProps, test }) {
       }
     }
     if (pageProps.dashboard) {
-      const adminAuth = Cookie.getCookies("adminAuth");
-      const secret = Cookie.getCookies("secret");
-      if (adminAuth && secret && secret == "@@@@///") {
+      let value = DashboardService.checkCredentials();
+      if (value) {
         return true;
       } else {
         router.push("/dashboard/login");
@@ -86,9 +86,11 @@ function MyApp({ Component, pageProps, test }) {
       {pageProps.noSideBar ? (
         pageProps.dashboard ? (
           <>
-            <DashboardLayout>
-              <Component {...pageProps} />
-            </DashboardLayout>
+            <MainProvider>
+              <DashboardLayout>
+                <Component {...pageProps} />
+              </DashboardLayout>
+            </MainProvider>
           </>
         ) : (
           <MainProvider>

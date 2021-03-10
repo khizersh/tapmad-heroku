@@ -13,7 +13,6 @@ export default function Skeleton({ children }) {
     setUrlToCookies(key, url);
     setLoader(true);
   };
-
   Router.onRouteChangeComplete = () => {
     setLoader(false);
   };

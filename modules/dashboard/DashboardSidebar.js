@@ -25,7 +25,7 @@ const DashboardSidebar = () => {
         </Link>
         <div className="overflow-container">
           <ul className="menu-dropdown">
-            <li>
+            {/* <li>
               <Link href="/dashboard/faq" shallow={true} passHref={true}>
                 <a>
                   Faq setting
@@ -34,8 +34,8 @@ const DashboardSidebar = () => {
                   </span>
                 </a>
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/dashboard/aboutus" shallow={true} passHref={true}>
                 <a>
                   About us setting
@@ -44,7 +44,7 @@ const DashboardSidebar = () => {
                   </span>
                 </a>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/dashboard/ads" shallow={true} passHref={true}>
                 <a>
