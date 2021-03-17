@@ -1,4 +1,5 @@
 module.exports = {
+  assetPrefix: "./",
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.csv$/,
