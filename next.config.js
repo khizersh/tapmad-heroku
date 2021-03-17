@@ -21,7 +21,15 @@ module.exports = {
   },
 };
 const withCSS = require("@zeit/next-css");
-const withSCSS = require("@zeit/next-sass");
+// const withSCSS = require("@zeit/next-sass");
 const withImages = require("next-images");
 module.exports = withImages();
-module.exports = withCSS(withSCSS({}));
+module.exports = withCSS();
+
+const path = require("path");
+
+module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+};

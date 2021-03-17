@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/globals.css";
 // import '../public/icons/logo_white.png'
 
 const Loader = () => {

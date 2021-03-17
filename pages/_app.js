@@ -1,5 +1,7 @@
 import "../styles/globals.scss";
 import "../styles/game.css";
+import "../components/App/Header.css";
+import "../modules/dashboard/dashboard.style.css";
 
 import Head from "next/head";
 import { useRouter, withRouter } from "next/router";
