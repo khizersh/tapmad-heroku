@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import "./player-shop.css";
 import { get } from "../../services/http-service";
 import { transformResponse } from "./player-shop-service";
 import PlayerShopRows from "./player-shop-rows";
