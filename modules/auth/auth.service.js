@@ -24,17 +24,25 @@ async function setUserPin(pin) {
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
-      return 1;
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
     } else {
-      return 0;
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
     }
   } else {
-    return 0;
+    return null;
   }
 }
 
 async function setNewPin(pin) {
-  // const userId = Cookie.getCookies("userId");
+  const userId = Cookie.getCookies("userId");
   let body = {
     Language: "en",
     Platform: "web",
@@ -64,6 +72,7 @@ async function setNewPin(pin) {
 }
 
 async function verifyPinCode(pin) {
+  var userId = Cookie.getCookies("userId");
   let body = {
     Language: "en",
     Platform: "web",

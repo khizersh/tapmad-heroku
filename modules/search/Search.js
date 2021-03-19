@@ -1,15 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
-import { get } from "../../services/http-service";
+import { actionsRequestContent, get } from "../../services/http-service";
 import "./search.module.css";
 import ItemCard from "./ItemCard";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Debounce from "../../services/Debounce";
-import { getItemsByKeyword } from "../../services/apilinks";
+import { getItemsByKeyword, loggingTags } from "../../services/apilinks";
 import { SearchService } from "./Search.service";
 
 const Search = () => {
-  const { setSearch, setLoader } = useContext(MainContext);
+  const { setSearch, setLoader, getCountryCode } = useContext(MainContext);
   const [keyword, setKeyword] = useState("");
   const [isSearched, setisSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -40,6 +40,12 @@ const Search = () => {
 
   const searchHandler = async (keyword) => {
     const data = await SearchService.getItemByKeyrwords(keyword);
+
+    let body = {
+      event: loggingTags.search,
+      searchString: keyword,
+    };
+    actionsRequestContent(body);
     if (data != null) {
       if (data.responseCode == 1) {
         return data.data.Videos;

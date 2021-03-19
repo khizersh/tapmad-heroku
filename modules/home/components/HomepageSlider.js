@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
+import { loggingTags } from "../../../services/apilinks";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
+import { actionsRequestContent } from "../../../services/http-service";
 import {
   basicSliderConfig,
   setUrlAccordingToVideoType,
@@ -30,11 +32,19 @@ const HomepageSlider = ({ movies }) => {
     e.preventDefault(); // stops weird link dragging effect
   }
 
-  function handleOnClick(e) {
+  function handleOnClick(e, mov) {
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
       // prevent link click if the element was dragged
       e.preventDefault();
+    } else {
+      console.log("onclick movie: ", mov);
+      let body = {
+        event: loggingTags.click,
+        clickedItemId: mov.VideoEntityId,
+        clickedItemName: mov.VideoName,
+      };
+      actionsRequestContent(body);
     }
   }
 
@@ -114,7 +124,7 @@ const HomepageSlider = ({ movies }) => {
                           >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => handleOnClick(e)}
+                              onClick={(e) => handleOnClick(e, mov)}
                               // onClick={(e) => SEOFriendlySlugsIsCategoryTrue(mov, "category/season")}
                             >
                               <div

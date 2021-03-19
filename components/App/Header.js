@@ -6,6 +6,8 @@ import { Cookie } from "../../services/cookies";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
+import { loggingTags } from "../../services/apilinks";
+import { actionsRequestContent } from "../../services/http-service";
 
 export default function Header() {
   const {
@@ -34,6 +36,13 @@ export default function Header() {
     setSearch(true);
   };
 
+  const onCLickContent = (event) => {
+    let body = {
+      event: loggingTags.fetch,
+      pageName: event,
+    };
+    actionsRequestContent(body);
+  };
   useEffect(() => {}, [initialState.isAuthenticated]);
   return (
     <>
@@ -48,17 +57,26 @@ export default function Header() {
           </div>
           <div className="col-6 col-sm-6 col-md-6 .col-lg-6 d-none d-sm-block main_menu">
             <ul className="nav justify-content-center">
-              <li className="nav-item topBarLive">
+              <li
+                className="nav-item topBarLive"
+                onClick={() => onCLickContent("live")}
+              >
                 <Link href="/live" passHref={true} shallow={true}>
                   <a className="nav-link">Live</a>
                 </Link>
               </li>
-              <li className="nav-item topBarMovies">
+              <li
+                className="nav-item topBarMovies"
+                onClick={() => onCLickContent("movies")}
+              >
                 <Link href="/movies" passHref={true} shallow={true}>
                   <a className="nav-link">Movies</a>
                 </Link>
               </li>
-              <li className="nav-item topBarShows">
+              <li
+                className="nav-item topBarShows"
+                onClick={() => onCLickContent("shows")}
+              >
                 <Link href="/shows" passHref={true} shallow={true}>
                   <a className="nav-link">Shows</a>
                 </Link>
@@ -122,7 +140,11 @@ export default function Header() {
                   </a>
                 </li>
               ) : (
-                <li id="loginAva1" className="nav-item">
+                <li
+                  id="loginAva1"
+                  className="nav-item"
+                  onClick={() => onCLickContent("sign-in")}
+                >
                   <Link href="/sign-in">
                     <a className="pull-right d-xs-none hov-green">Sign in</a>
                   </Link>

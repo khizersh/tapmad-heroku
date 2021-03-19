@@ -10,6 +10,7 @@ import { handleResponse } from "../../../services/http-service";
 async function getFeaturedHomePageData(ip) {
   const resp = await get(getFeaturedHomePage, ip);
   const data = handleResponse(resp);
+
   if (data != null) {
     if (data.responseCode == 1) {
       return {

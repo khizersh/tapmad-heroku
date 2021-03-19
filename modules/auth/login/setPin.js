@@ -2,15 +2,17 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
-import { setUserPinCode } from "../../../services/apilinks";
+import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
-import { post } from "../../../services/http-service";
+import { actionsRequestContent } from "../../../services/http-service";
 import { AuthService } from "../auth.service";
 
 export default function SetPin() {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
-  const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  const { checkUserAuthentication, setLoader, getCountryCode } = useContext(
+    MainContext
+  );
   const router = useRouter();
 
   async function setUserPin() {
@@ -23,11 +25,19 @@ export default function SetPin() {
     } else {
       setLoader(true);
     }
-    const responseCode = await AuthService.setUserPin(pin);
-    if (responseCode == 1) {
+
+    const resp = await AuthService.setUserPin(pin);
+    if (resp.responseCode == 1) {
+      // logging start
+      let body = {
+        event: loggingTags.login,
+        action: "set_pin",
+      };
+      actionsRequestContent(body);
+      // logging end
       Cookie.setCookies("isAuth", 1);
       swal({
-        title: resp.data.Response.message,
+        title: resp.message,
         timer: 2000,
         icon: "success",
       });

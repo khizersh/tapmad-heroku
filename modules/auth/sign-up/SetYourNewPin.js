@@ -2,16 +2,17 @@ import React, { useContext, useState } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
-import { post } from "../../../services/http-service";
-import { setUserPinCode } from "../../../services/apilinks";
+import { actionsRequestContent } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
+import { Authcontext } from "../../../contexts/AuthContext";
 
 export default function SetYourNewPin() {
   const router = useRouter();
   const { initialState, checkUserAuthentication, setLoader } = useContext(
     MainContext
   );
+  const { authState } = useContext(Authcontext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
 
@@ -34,6 +35,18 @@ export default function SetYourNewPin() {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
+        // logging start
+        if (authState && authState.selectedPackageId) {
+          let body = {
+            event: loggingTags.signup,
+            amount: authState.selectedPackageAmount,
+            operatorName: authState.selectedPackageName,
+            mobileNumber: initialState.User.MobileNo,
+          };
+          actionsRequestContent(body);
+        }
+        // logging end
+
         swal({
           timer: 3000,
           title: "Signed In Successfully",

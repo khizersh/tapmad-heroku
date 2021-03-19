@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import HomePage from "../modules/home/components/HomePage";
-import { get } from "../services/http-service";
+import { actionsRequest, get } from "../services/http-service";
 import requestIp from "request-ip";
 import {
   getFeaturedBannerDetail,
@@ -9,6 +9,7 @@ import {
   getWebTabBanners,
 } from "../services/apilinks";
 import { HomeService } from "../modules/home/components/home.service";
+import { Cookie } from "../services/cookies";
 
 export default function Home(props) {
   return (

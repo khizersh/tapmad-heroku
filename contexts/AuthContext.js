@@ -31,6 +31,11 @@ export default function AuthProvider({ children }) {
         signUpComponent: "signUp",
         selectedPackageId:
           initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]?.ProductId,
+        selectedPackageAmount:
+          initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]
+            ?.PackagePrice,
+        selectedPackageName:
+          initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]?.PackageName,
       };
       setAuthState(AuthStateWithData);
     }
@@ -44,11 +49,13 @@ export default function AuthProvider({ children }) {
     });
   }
 
-  function updateSelectedPackageId(id) {
+  function updateSelectedPackageId(id, amount, name) {
     let stateClone = authState;
     setAuthState({
       ...stateClone,
       selectedPackageId: id,
+      selectedPackageAmount: amount,
+      selectedPackageName: name,
     });
   }
   function updateSelectedOperator(operator) {

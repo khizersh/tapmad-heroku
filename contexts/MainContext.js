@@ -77,7 +77,16 @@ export default function MainProvider({ children }) {
     }
   }
 
+  function getCountryCode() {
+    if (initialState && initialState.AuthDetails) {
+      return initialState.AuthDetails.CountryCode;
+    } else {
+      return "PK";
+    }
+  }
   function setisAuthenticateFalse() {
+    Cookie.setCookies("isAuth", 0);
+    Cookie.setCookies("userId", "");
     dispatch({ type: "SET_AUTHENTICATION", data: false });
   }
   function setLoader(bool) {
@@ -98,6 +107,7 @@ export default function MainProvider({ children }) {
     updateUserEmail,
     setLoader,
     setisAuthenticateFalse,
+    getCountryCode,
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }

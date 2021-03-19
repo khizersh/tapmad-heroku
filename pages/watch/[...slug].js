@@ -1,18 +1,30 @@
 import React, { useEffect, useContext } from "react";
 import Player from "../../modules/single-movie/components/Player";
-import { post } from "../../services/http-service";
+import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
-import { isAuthentictedUser, manipulateUrls } from "../../services/utils";
+import { manipulateUrls } from "../../services/utils";
 import { useRouter } from "next/router";
-import { MainContext } from "../../contexts/MainContext";
+
 import { PlayerService } from "../../modules/single-movie/Player.service";
 
 const watch = (props) => {
   const router = useRouter();
+  // const
 
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
+    } else {
+      let cId = props.data.Video.VideoEntityId
+        ? props.data.Video.VideoEntityId
+        : "";
+      let cName = props.data.Video.VideoName ? props.data.Video.VideoName : "";
+      let body = {
+        event: "view",
+        contentId: cId,
+        contentName: cName,
+      };
+      actionsRequestContent(body);
     }
   }, [props.allowUser]);
 

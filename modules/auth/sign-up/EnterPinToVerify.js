@@ -1,8 +1,12 @@
 import React, { useContext, useRef } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
-import { post } from "../../../services/http-service";
-import { sendOTP, verifyUserPinCode } from "../../../services/apilinks";
+import { actionsRequestContent } from "../../../services/http-service";
+import {
+  loggingTags,
+  sendOTP,
+  verifyUserPinCode,
+} from "../../../services/apilinks";
 import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
@@ -13,7 +17,7 @@ const EnterPinToVerify = () => {
   const { checkUserAuthentication, setLoader, initialState } = useContext(
     MainContext
   );
-  const { updateResponseCode } = useContext(Authcontext);
+  const { updateResponseCode, authState } = useContext(Authcontext);
   const pinCode = useRef("");
 
   async function forgetPin() {
@@ -50,6 +54,17 @@ const EnterPinToVerify = () => {
     const data = await AuthService.verifyPinCode(pinCode.current.value);
     if (data != null) {
       if (data.responseCode == 1) {
+        // logging start
+        if (authState && authState.selectedPackageId) {
+          let body = {
+            event: loggingTags.signup,
+            amount: authState.selectedPackageAmount,
+            operatorName: authState.selectedPackageName,
+            mobileNumber: initialState.User.MobileNo,
+          };
+          actionsRequestContent(body);
+        }
+        // logging end
         swal({
           timer: 3000,
           title: "Signed In Successfully",

@@ -1,8 +1,10 @@
 import Link from "next/link";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MainContext } from "../contexts/MainContext";
+import { loggingTags } from "../services/apilinks";
 import AuthenticatedSidebar from "./AuthenticatedSidebar";
 import NotAuthenticatedSidebar from "./NotAuthenticatedSidebar";
+import { actionsRequestContent } from "../services/http-service";
 
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -16,6 +18,13 @@ export default function SideBar() {
     setSearch(!initialState.isSearch);
   };
 
+  const onCLickContent = (page) => {
+    let body = {
+      event: loggingTags.fetch,
+      pageName: page,
+    };
+    actionsRequestContent(body);
+  };
   useEffect(() => {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
@@ -29,7 +38,7 @@ export default function SideBar() {
       ></button>
       <nav className="menu">
         <Link href="/" shallow={true} passHref={true}>
-          <a className="logotype">
+          <a className="logotype" onClick={() => onCLickContent("homepage")}>
             <img
               src="https://www.tapmad.com/images/tm-logo.png"
               width="115"
@@ -40,7 +49,7 @@ export default function SideBar() {
         </Link>
         <div className="overflow-container">
           <ul className="menu-dropdown">
-            <li>
+            <li onClick={() => onCLickContent("live")}>
               <Link href="/live" shallow={true} passHref={true}>
                 <a>
                   Live
@@ -50,7 +59,7 @@ export default function SideBar() {
                 </a>
               </Link>
             </li>
-            <li>
+            <li onClick={() => onCLickContent("movies")}>
               <Link href="/movies" shallow={true} passHref={true}>
                 <a>
                   Movies
@@ -60,7 +69,7 @@ export default function SideBar() {
                 </a>
               </Link>
             </li>
-            <li>
+            <li onClick={() => onCLickContent("shows")}>
               <Link href="/shows" shallow={true} passHref={true}>
                 <a>
                   Shows
@@ -70,7 +79,7 @@ export default function SideBar() {
                 </a>
               </Link>
             </li>
-            <li>
+            <li onClick={() => onCLickContent("catchup")}>
               <Link href="/catchup" shallow={true} passHref={true}>
                 <a>
                   Catchup
@@ -80,7 +89,7 @@ export default function SideBar() {
                 </a>
               </Link>
             </li>
-            <li>
+            <li onClick={() => onCLickContent("news")}>
               <Link href="news" shallow={true} passHref={true}>
                 <a>
                   News
@@ -93,7 +102,11 @@ export default function SideBar() {
             {/* conditional menu */}
             {isAuth ? <AuthenticatedSidebar /> : <NotAuthenticatedSidebar />}
 
-            <li className="promoDiv" style={{ display: "list-item" }}>
+            <li
+              className="promoDiv"
+              style={{ display: "list-item" }}
+              onClick={() => onCLickContent("promo_code")}
+            >
               <Link href="/promo-code" shallow={true} passHref={true}>
                 <a>
                   Promo code
@@ -103,7 +116,7 @@ export default function SideBar() {
                 </a>
               </Link>
             </li>
-            <li>
+            <li onClick={() => onCLickContent("search")}>
               <a onClick={onClickSearch} className="search-btn">
                 Search
                 <span className="icon">
@@ -113,7 +126,12 @@ export default function SideBar() {
             </li>
 
             <li>
-              <Link href="/about" shallow={true} passHref={true}>
+              <Link
+                href="/about"
+                shallow={true}
+                passHref={true}
+                onClick={() => onCLickContent("about_us")}
+              >
                 <a>
                   About Us
                   <span className="icon">
@@ -123,7 +141,12 @@ export default function SideBar() {
               </Link>
             </li>
             <li>
-              <Link href="/faqs" shallow={true} passHref={true}>
+              <Link
+                href="/faqs"
+                shallow={true}
+                passHref={true}
+                onClick={() => onCLickContent("faq")}
+              >
                 <a>
                   FAQ
                   <span className="icon">

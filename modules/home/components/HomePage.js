@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ScrollComponent from "../../../components/scrollComponent";
 import HomepageSlider from "./HomepageSlider";
 import {
@@ -6,17 +6,25 @@ import {
   calculateRowsToFetch,
   pushNewMoviesIntoList,
 } from "../../../services/utils";
-import { get } from "../../../services/http-service";
+import { actionsRequestContent } from "../../../services/http-service";
 import HomepageFeatured from "./FeaturedSlider";
 import Link from "next/link";
 import { HomeService } from "./home.service";
+import { MainContext } from "../../../contexts/MainContext";
+import { loggingTags } from "../../../services/apilinks";
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
+  const { initialState, getCountryCode } = useContext(MainContext);
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
   React.useEffect(() => {
     setLocalMovies(modifiedResponse);
+    let body = {
+      event: loggingTags.fetch,
+      pageName: "homepage",
+    };
+    actionsRequestContent(body);
   }, [movies]);
 
   async function fetchNewMovies() {

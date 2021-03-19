@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { useCallback, useMemo, memo } from "react";
 import swal from "sweetalert";
-import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
-import { getCardUser } from "../../../services/apilinks";
-import { post } from "../../../services/http-service";
+import { loggingTags } from "../../../services/apilinks";
+import { Cookie } from "../../../services/cookies";
+import { actionsRequestContent } from "../../../services/http-service";
 import { tapmadLogo } from "../../../services/imagesLink";
 import "../auth.module.css";
 import { AuthService } from "../auth.service";
@@ -15,6 +15,7 @@ function Login({ loginResponse }) {
     initialState,
     updateUserNumber,
     updateUserOperator,
+    getCountryCode,
     setLoader,
   } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
@@ -32,6 +33,12 @@ function Login({ loginResponse }) {
     }
   }
   async function loginUser() {
+    let body = {
+      event: loggingTags.login,
+      action: "login_attempt",
+    };
+    actionsRequestContent(body);
+
     if (mobileNo.length == 10) {
       setLoader(true);
       let body = {
