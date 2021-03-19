@@ -29,10 +29,7 @@ export async function getServerSideProps(context) {
 
   let movie, banner, featured;
   console.log("Ip is ", ip);
-  if (ip == "127.0.0.1") {
-    ip = "39.44.217.70";
-  }
-  console.log("Ip converted ", ip);
+  console.log("Ip is ", context.req);
 
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
