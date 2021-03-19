@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
 import { basicSliderConfig } from "../../services/utils";
-import "./player-shop.css";
 export default function PlayerShopProducts({ MerchantProducts }) {
   var settings = basicSliderConfig(6);
   return (

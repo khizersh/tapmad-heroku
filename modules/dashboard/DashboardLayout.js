@@ -1,6 +1,5 @@
 import React from "react";
 import DashboardSidebar from "./DashboardSidebar";
-import "./dashboard.style.css";
 import Router, { useRouter } from "next/router";
 import { Cookie } from "../../services/cookies";
 import { MainContext } from "../../contexts/MainContext";

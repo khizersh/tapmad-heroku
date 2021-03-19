@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useContext, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
-import "../../components/App/Header.css";
+// import "./Header.css";
 import { Cookie } from "../../services/cookies";
 import swal from "sweetalert";
 import { useRouter } from "next/router";

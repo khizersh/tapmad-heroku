@@ -1,6 +1,9 @@
 import "../styles/globals.scss";
 import "../styles/game.css";
-
+import "../components/App/Header.css";
+import "../modules/dashboard/dashboard.style.css";
+import "../modules/category/css/card-hor.style.css";
+import "../modules/player-shop/player-shop.css";
 import Head from "next/head";
 import { useRouter, withRouter } from "next/router";
 import React, { useEffect, useState } from "react";

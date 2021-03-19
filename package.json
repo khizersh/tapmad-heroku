@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "export $(cat .env) && TAPENV=production && next start -p $PORT",
+    "start": "next start -p 3000",
     "prod": "export $(cat .env) && TAPENV=production && npm run dev",
     "staging": "export $(cat .env) && TAPENV=staging && npm run dev",
     "local": "export $(cat .env) && TAPENV=local && npm run dev",
@@ -23,7 +23,7 @@
     "fast-csv": "^4.3.6",
     "fs": "0.0.1-security",
     "joi": "^17.3.0",
-    "next": "10.0.3",
+    "next": "10.0.8",
     "next-images": "^1.7.0",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.3",
@@ -33,7 +33,7 @@
     "react-jw-player": "^1.19.1",
     "react-slick": "^0.28.0",
     "request-ip": "^2.1.3",
-    "sass": "^1.29.0",
+    "sass": "^1.32.8",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2"
   },

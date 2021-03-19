@@ -1,6 +1,5 @@
 import React from "react";
 
-import "../../css/card-hor.style.css";
 import { SEOFriendlySlugsForVideo } from "../../../../services/utils";
 import CategoryVerticalCard from "../CategoryVerticalCard";
 import CategoryHorizontalCard from "../CategoryHorizontalCard";
