@@ -1,5 +1,4 @@
 import React, { useContext, memo, useCallback, useRef } from "react";
-import "./auth.module.css";
 import { Authcontext } from "../../contexts/AuthContext";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";

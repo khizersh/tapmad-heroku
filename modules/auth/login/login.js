@@ -6,7 +6,6 @@ import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { actionsRequestContent } from "../../../services/http-service";
 import { tapmadLogo } from "../../../services/imagesLink";
-import "../auth.module.css";
 import { AuthService } from "../auth.service";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
