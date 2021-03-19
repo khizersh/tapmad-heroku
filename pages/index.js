@@ -26,13 +26,9 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
   console.log("Environment is " + process.env.TAPENV);
-  // if (process.env.TAPENV == "local") {
-  if (ip == "::1") {
-    ip = "39.44.217.70";
-  }
 
   let movie, banner, featured;
-
+  console.log("Ip is ", ip);
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
   else movie = {};

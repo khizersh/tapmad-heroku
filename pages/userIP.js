@@ -7,11 +7,10 @@ export default function userIP(props) {
 export async function getServerSideProps(context) {
   const isServer = !!context.req;
   var ip = requestIp.getClientIp(context.req);
-  console.log(ip);
   return {
     props: {
       isServer,
-      // clientIP: context.req ? context.req.clientIP : null
+      // clientIP: context.req ? context.req.clientIP : null,
     },
   };
 }
