@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
-import { post } from "../../../services/http-service";
+import { actionsRequestContent, post } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
-import { verifyUserPinCode } from "../../../services/apilinks";
+import { loggingTags, verifyUserPinCode } from "../../../services/apilinks";
 import { tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
 
@@ -36,6 +36,13 @@ export default function EnterPin({ forgetPin }) {
             icon: "success",
           });
           checkUserAuthentication();
+          // logging start
+          let body = {
+            event: loggingTags.login,
+            action: "login_success",
+          };
+          actionsRequestContent(body);
+          // logging end
           router.push("/");
         } else {
           setLoader(false);

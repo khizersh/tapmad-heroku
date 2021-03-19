@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
-import { post } from "../../../services/http-service";
+import { post, actionsRequestSignup } from "../../../services/http-service";
 import router from "next/router";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
@@ -9,7 +9,7 @@ import { AuthService } from "../auth.service";
 import { initialPaymentTransaction } from "../../../services/apilinks";
 
 export default function SubscribeButton() {
-  const { initialState, setLoader } = useContext(MainContext);
+  const { initialState, setLoader, getCountryCode } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   async function SubscribeUser() {
@@ -26,8 +26,8 @@ export default function SubscribeButton() {
           Version: "V1",
           Language: "en",
           Platform: "web",
-          ProductId: 1265,
-          // ProductId: authState.selectedPackageId,
+          // ProductId: 1265,
+          ProductId: authState.selectedPackageId,
           MobileNo: initialState.User.MobileNo,
           OperatorId: initialState.User.OperatorId,
         };
@@ -71,10 +71,18 @@ export default function SubscribeButton() {
         // for credit card specific only
         AuthService.creditCardOrder(details);
       } else {
+        // let body = {
+        //   productId: details.ProductId,
+        //   operatorId: details.OperatorId,
+        //   mobileNo: details.MobileNo,
+        //   countryCode,
+        // };
+
         // other api call
+        console.log("detail in signup: ", details);
         const data = await AuthService.initialTransaction(details);
         // resp = await post(initialPaymentTransaction, details);
-
+        // actionsRequestSignup(body);
         setLoader(false);
         if (data != null) {
           if (data.responseCode == 11) {

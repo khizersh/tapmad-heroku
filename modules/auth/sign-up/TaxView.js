@@ -10,14 +10,16 @@ export default function TaxView() {
   useEffect(() => {
     if (authState.selectedPaymentMethod) {
       updateSelectedPackageId(
-        authState.selectedPaymentMethod.Packages[0].ProductId
+        authState.selectedPaymentMethod.Packages[0].ProductId,
+        authState.selectedPaymentMethod.Packages[0].PackagePrice,
+        authState.selectedPaymentMethod.Packages[0].PackageName
       );
       setPackageId(authState.selectedPaymentMethod.Packages[0].ProductId);
     }
   }, [authState.selectedPaymentMethod]);
 
-  const onChangePackage = (id) => {
-    updateSelectedPackageId(id);
+  const onChangePackage = (id, amount, name) => {
+    updateSelectedPackageId(id, amount, name);
     setPackageId(id);
   };
 
@@ -32,7 +34,9 @@ export default function TaxView() {
               className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${
                 packageId ? (packageId == m.ProductId ? "pr_active" : "") : ""
               }`}
-              onClick={() => onChangePackage(m.ProductId)}
+              onClick={() =>
+                onChangePackage(m.ProductId, m.PackagePrice, m.PackageName)
+              }
             >
               <span className="font-weight-bold">{m.PackagePrice}</span>
               <span className="d-block d-md-none"></span>

@@ -56,3 +56,18 @@ export const adCsvFile = "public/ads.csv";
 export const faqCsvFile = "public/faq.csv";
 export const aboutUsCsvFile = "public/about-us.csv";
 export const credentialsCsvFile = "public/credentials.csv";
+
+// logging request
+export const loggingBaseURl = "http://staging.simpaisa.com:1234";
+export const actionRequest = "http://staging.simpaisa.com:1234/monitor";
+export const actionRequestView = "http://staging.simpaisa.com:1234/view";
+export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
+export const loggingRequest = loggingBaseURl + "/analytics";
+
+export const loggingTags = {
+  search: "search",
+  fetch: "fetch",
+  login: "login",
+  click: "click",
+  signup: "signup",
+};
