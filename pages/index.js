@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
   console.log("Environment is " + process.env.TAPENV);
   // if (process.env.TAPENV == "local") {
   if (ip == "::1") {
-    ip = "43.245.204.44";
+    ip = "39.44.217.70";
   }
 
   let movie, banner, featured;

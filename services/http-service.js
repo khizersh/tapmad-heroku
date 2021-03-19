@@ -7,11 +7,11 @@ const {
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
 
-function get(url, ip = "39.44.245.125") {
+function get(url, ip) {
   return axios.get(url, {
     headers: {
       "Content-Type": "application/json",
-      "X-Forwarded-For": ip,
+      "X-Forwarded-For": ip ? ip : "",
     },
   });
 }

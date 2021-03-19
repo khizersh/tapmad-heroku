@@ -8,6 +8,7 @@ import { get } from "../../../services/http-service";
 import { handleResponse } from "../../../services/http-service";
 
 async function getFeaturedHomePageData(ip) {
+  console.log("Ips ", ip);
   const resp = await get(getFeaturedHomePage, ip);
   const data = handleResponse(resp);
 
