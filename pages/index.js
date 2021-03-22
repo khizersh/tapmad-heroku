@@ -25,6 +25,9 @@ export default function Home(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   console.log("Environment is " + process.env.TAPENV);
 
   let movie, banner, featured;

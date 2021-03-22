@@ -9,7 +9,8 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 
 const watch = (props) => {
   const router = useRouter();
-  // const
+
+  console.log("props in watch: ", props);
 
   useEffect(() => {
     if (!props.allowUser) {
@@ -47,7 +48,9 @@ export async function getServerSideProps(context) {
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
   };
+  console.log("video data: ", body);
   const res = await PlayerService.getVideoData(body);
+  console.log("video data response: ", res);
   if (res != null) {
     if (res.data && res.data.Video) {
       if (res.data.Video.IsVideoFree == false) {

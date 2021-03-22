@@ -33,12 +33,12 @@ const HomepageSlider = ({ movies }) => {
   }
 
   function handleOnClick(e, mov) {
+    console.log("on click movie: ", mov);
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
       // prevent link click if the element was dragged
       e.preventDefault();
     } else {
-      console.log("onclick movie: ", mov);
       let body = {
         event: loggingTags.click,
         clickedItemId: mov.VideoEntityId,
@@ -76,7 +76,7 @@ const HomepageSlider = ({ movies }) => {
                           >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => handleOnClick(e)}
+                              onClick={(e) => handleOnClick(e, mov)}
                             >
                               <div
                                 className="tm-mv-bx"
