@@ -16,6 +16,7 @@ export default function Player({ movies }) {
   const [adDuration, setAdDuration] = useState(200000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
+  const [videoLink, setVideoLink] = useState(null);
   const [countryCode, setCountryCode] = useState(null);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
@@ -29,6 +30,19 @@ export default function Player({ movies }) {
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
+      if (movies.Video.IsVideoChannel) {
+        setVideoLink({
+          highQuality: movies.Video.ChannelStreamUrlWHQ,
+          mediumQuality: movies.Video.ChannelStreamUrlWMQ,
+          lowQuality: movies.Video.ChannelStreamUrlWLQ,
+        });
+      } else {
+        setVideoLink({
+          highQuality: movies.Video.VideoStreamUrlHQ,
+          mediumQuality: movies.Video.VideoStreamUrlMQ,
+          lowQuality: movies.Video.VideoStreamUrlLQ,
+        });
+      }
     }
   }
   function onRestartAd() {
@@ -39,9 +53,10 @@ export default function Player({ movies }) {
   }
 
   async function getRelatedChannels() {
+    console.log("getRelatedChannelsOrVODData: ", movie);
     const res = await PlayerService.getRelatedChannelsOrVODData(
       movie.Video.VideoEntityId,
-      movie.Video.IsVideoChannel
+      movie.Video.IsVideoChannel ? 1 : 0
     );
     if (res.data && res.responseCode == 1) {
       setRelatedVideos(res.data.Sections[0].Videos);
@@ -119,10 +134,24 @@ export default function Player({ movies }) {
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
                   isAutoPlay={true}
                   file={
-                    movie && movie.Video
-                      ? movie.Video.VideoStreamUrlLQ
+                    videoLink
+                      ? videoLink.lowQuality
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
+                  // playlist={[
+                  //   {
+                  //     file: videoLink ? videoLink.lowQuality : "",
+                  //     image: movie && movie.Video.VideoImagePath,
+                  //   },
+                  //   {
+                  //     file: videoLink ? videoLink.mediumQuality : "",
+                  //     image: movie && movie.Video.VideoImagePath,
+                  //   },
+                  //   {
+                  //     file: videoLink ? videoLink.highQuality : "",
+                  //     image: movie && movie.Video.VideoImagePath,
+                  //   },
+                  // ]}
                   generatePrerollUrl={() =>
                     ads.onVideo && ads.allow ? ads.onVideo : ""
                   }
@@ -185,8 +214,8 @@ export default function Player({ movies }) {
                   onOneHundredPercent={onRestartAd}
                   onAdSkipped={onRestartAd}
                   file={
-                    movie && movie.Video
-                      ? movie.Video.VideoStreamUrlLQ
+                    videoLink
+                      ? videoLink.lowQuality
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
                   onAdComplete={onRestartAd}
