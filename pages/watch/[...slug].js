@@ -53,7 +53,7 @@ export async function getServerSideProps(context) {
   };
   console.log(body);
 
-  const res = await PlayerService.getVideoData(body);
+  const res = await PlayerService.getVideoData(body, ip);
   if (res != null) {
     if (res.data && res.data.Video) {
       if (res.data.Video.IsVideoFree == false) {
