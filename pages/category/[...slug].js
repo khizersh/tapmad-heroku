@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { get } from "../../services/http-service";
 import { manipulateUrlsForCatgeory } from "../../services/utils";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
+import { getSeasonVodByCategoryId } from "../../services/apilinks";
 
 const Category = (props) => {
   const [videoList, setVideoList] = useState([]);
@@ -35,9 +36,7 @@ export default Category;
 
 export async function getServerSideProps(context) {
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
-  const data = await get(
-    `https://api.tapmad.com/api/getSeasonVodByCategoryId/V1/en/web/${categoryId}`
-  );
+  const data = await get(getSeasonVodByCategoryId + categoryId);
 
   return { props: { data: data.data } };
 }

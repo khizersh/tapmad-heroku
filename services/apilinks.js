@@ -24,6 +24,9 @@ export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
   BASEURL + "api/initiatePaymentTransaction";
 
+export const getSeasonVodByCategoryId =
+  BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";
+
 export const getMoviesWithPagination = (from, to) => {
   return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
 };
