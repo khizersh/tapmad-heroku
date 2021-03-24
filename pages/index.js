@@ -22,6 +22,8 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
+  console.log("Environment is " + process.env.TAPENV);
+
   let movie, banner, featured;
   console.log("Ip is ", ip);
   var movieList = await HomeService.getFeaturedHomePageData(ip);

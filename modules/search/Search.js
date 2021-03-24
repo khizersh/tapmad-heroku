@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { actionsRequestContent, get } from "../../services/http-service";
-import "./search.module.css";
 import ItemCard from "./ItemCard";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Debounce from "../../services/Debounce";
-import { getItemsByKeyword, loggingTags } from "../../services/apilinks";
+import { loggingTags } from "../../services/apilinks";
 import { SearchService } from "./Search.service";
 
 const Search = () => {

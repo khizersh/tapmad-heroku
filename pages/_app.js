@@ -5,17 +5,17 @@ import "../modules/dashboard/dashboard.style.css";
 import "../modules/category/css/card-hor.style.css";
 import "../modules/player-shop/player-shop.css";
 import "../modules/auth/auth.css";
+import "../modules/search/search.css";
 
 import Head from "next/head";
-import { useRouter, withRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
-import { func } from "joi";
 import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 
