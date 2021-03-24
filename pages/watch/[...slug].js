@@ -49,8 +49,8 @@ export async function getServerSideProps(context) {
   };
 
   var isFree = "1";
-  if (context.query) {
-    isFree = context.query.slug[1].slice(0, 1);
+  if (chanelDetail.isFree) {
+    isFree = chanelDetail.isFree;
   }
 
   if (isFree == "1") {

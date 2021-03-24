@@ -3,10 +3,14 @@ const { Cookie } = require("./cookies");
 
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
-  movieId = movieId.substring(1);
   let isChannel = movieId.charAt(movieId.length - 1);
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
-  return { isChannel: isChannel, OriginalMovieId: OriginalMovieId };
+  let isFree = OriginalMovieId.slice(0, 1);
+  return {
+    isChannel: isChannel,
+    OriginalMovieId: OriginalMovieId,
+    isFree: isFree,
+  };
 }
 
 function manipulateUrlsForCatgeory(router) {
