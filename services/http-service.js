@@ -16,10 +16,11 @@ function get(url, ip) {
   });
 }
 
-function post(url, body) {
+function post(url, body, ip) {
   return axios.post(url, body, {
     headers: {
       "Content-Type": "application/json",
+      "X-Forwarded-For": ip ? ip : "",
     },
   });
 }
