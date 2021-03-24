@@ -63,22 +63,22 @@ export default function Player({ movies }) {
     }
   }
 
-  useEffect(async () => {
-    setMounted(true);
-    let userId = localStorage.getItem("userId");
-    let body = {
-      Version: "V2",
-      Language: "en",
-      Platform: "web",
-      ChannelOrVODId: movie.Video.VideoEntityId,
-      UserId: userId,
-      IsChannel: movie.Video.IsVideoChannel,
-    };
-    if (userId) {
-      const res = await PlayerService.getVideoData(body);
-      setMovie(res.data);
-    }
-  }, []);
+  // useEffect(async () => {
+  //   setMounted(true);
+  //   let userId = localStorage.getItem("userId");
+  //   let body = {
+  //     Version: "V2",
+  //     Language: "en",
+  //     Platform: "web",
+  //     ChannelOrVODId: movie.Video.VideoEntityId,
+  //     UserId: userId,
+  //     IsChannel: movie.Video.IsVideoChannel,
+  //   };
+  //   if (userId) {
+  //     const res = await PlayerService.getVideoData(body);
+  //     setMovie(res.data);
+  //   }
+  // }, []);
   useEffect(async () => {
     await getRelatedChannels();
 
