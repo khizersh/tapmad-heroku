@@ -1,6 +1,7 @@
 import {
   getUserByUserId,
   getUserPaymentHistory,
+  unsubscribePaymentTransaction,
   updateUserProfile,
 } from "../../services/apilinks";
 import { handleResponse, post } from "../../services/http-service";
@@ -71,30 +72,31 @@ async function updateUserProfileData(body) {
   }
 }
 
-// async function verifyOTP(body) {
-//   const resp = await post(verifyOtp, body);
-//   const data = handleResponse(resp);
-//   if (data != null) {
-//     if (data.responseCode == 1) {
-//       return {
-//         data: data,
-//         responseCode: data.responseCode,
-//         message: data.message,
-//       };
-//     } else {
-//       return {
-//         data: data,
-//         responseCode: data.responseCode,
-//         message: data.message,
-//       };
-//     }
-//   } else {
-//     return null;
-//   }
-// }
+async function unsubcribeUser(body) {
+  const resp = await post(unsubscribePaymentTransaction, body);
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 
 export const MyAccountService = {
   getUserData,
   getUserPaymentHistoryData,
   updateUserProfileData,
+  unsubcribeUser,
 };

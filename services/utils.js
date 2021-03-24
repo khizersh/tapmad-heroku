@@ -3,6 +3,7 @@ const { Cookie } = require("./cookies");
 
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
+  movieId = movieId.substring(1);
   let isChannel = movieId.charAt(movieId.length - 1);
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
   return { isChannel: isChannel, OriginalMovieId: OriginalMovieId };
@@ -53,9 +54,9 @@ function basicSliderConfig(slidesToShow, mobileView) {
 
 function SEOFriendlySlugsForVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/watch/${cleanName}/${event.VideoEntityId}${
-    event.IsVideoChannel ? "1" : "0"
-  }`;
+  let slug = `/watch/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -113,14 +114,13 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  console.log("key: ", key);
   if (key != "watch" && url != "/sign-up") {
     Cookie.setCookies("backUrl", url);
   }
 }
 
 function isAuthentictedUser() {
-  let userId = Cookie.parseCookies("userId");
+  let userId = Cookie.getCookies("userId");
   let isAuth = Cookie.getCookies("isAuth");
   if (userId && isAuth == 1) {
     return true;

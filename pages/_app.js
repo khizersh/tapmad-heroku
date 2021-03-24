@@ -6,6 +6,7 @@ import "../modules/category/css/card-hor.style.css";
 import "../modules/player-shop/player-shop.css";
 import "../modules/auth/auth.css";
 import "../modules/search/search.css";
+import "../modules/my-account/myaccount.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";

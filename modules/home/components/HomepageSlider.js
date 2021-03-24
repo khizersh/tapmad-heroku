@@ -8,9 +8,10 @@ import {
   basicSliderConfig,
   setUrlAccordingToVideoType,
 } from "../../../services/utils";
+import { useRouter } from "next/router";
 
 const HomepageSlider = ({ movies }) => {
-  // const [render, setRender] = useState(false);
+  const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
   const [clientYonMouseDown, setClientYonMouseDown] = React.useState(null);
@@ -33,18 +34,22 @@ const HomepageSlider = ({ movies }) => {
   }
 
   function handleOnClick(e, mov) {
-    console.log("on click movie: ", mov);
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
       // prevent link click if the element was dragged
-      e.preventDefault();
     } else {
-      let body = {
-        event: loggingTags.click,
-        clickedItemId: mov.VideoEntityId,
-        clickedItemName: mov.VideoName,
-      };
-      actionsRequestContent(body);
+      if (!mov.IsVideoFree) {
+        e.preventDefault();
+        let body = {
+          event: loggingTags.click,
+          clickedItemId: mov.VideoEntityId,
+          clickedItemName: mov.VideoName,
+        };
+        console.log("mov:  ", mov);
+        actionsRequestContent(body);
+        console.log("not access:");
+        router.push("/sign-up");
+      }
     }
   }
 

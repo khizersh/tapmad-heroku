@@ -7,6 +7,8 @@ import {
   getUserPaymentHistory,
 } from "../../services/apilinks";
 import { Button } from "react-bootstrap";
+import swal from "sweetalert";
+
 const UserStatus = ({ pdata, userId }) => {
   const [subscritionData, setSubscritionData] = useState(null);
   const [subscritionHistory, setSubscritionHistory] = useState([]);
@@ -19,6 +21,7 @@ const UserStatus = ({ pdata, userId }) => {
   useEffect(async () => {
     if (pdata.UserActiveSubscription) {
       setSubscritionData(pdata);
+      console.log("pdata: ", pdata);
     }
     if (userId) {
       setForm({ ...form, UserId: userId });
@@ -36,8 +39,31 @@ const UserStatus = ({ pdata, userId }) => {
     }
   }, [pdata, userId]);
 
-  const unSubscribe = () => {
-    console.log("UunSubscribe");
+  const unSubscribe = (data) => {
+    let body = {
+      Language: "en",
+      Platform: "Web",
+      ProductId: data.UserPackageType,
+      UserId: userId,
+      Version: "V1",
+    };
+    MyAccountService.unsubcribeUser(body)
+      .then((res) => {
+        if (res.responseCode == 1) {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "success",
+          });
+        } else {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "error",
+          });
+        }
+      })
+      .catch((e) => console.log(e));
   };
   return (
     <div className="left-profile">
@@ -68,10 +94,13 @@ const UserStatus = ({ pdata, userId }) => {
                         : "Inactive"}
                     </td>
                     <td>
-                      {m.IsSubscribe == "1" ? (
+                      {m.IsSubscribe == "0" ? (
                         "Deactivated"
                       ) : (
-                        <button className="btn btn-red" onClick={unSubscribe}>
+                        <button
+                          className="btn btn-red"
+                          onClick={() => unSubscribe(m)}
+                        >
                           Unsubscribe
                         </button>
                       )}

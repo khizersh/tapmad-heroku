@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import "./myaccount.module.css";
 import { FormControl, InputGroup, Button } from "react-bootstrap";
 import { post } from "../../services/http-service";
 import { updateUserProfile } from "../../services/apilinks";

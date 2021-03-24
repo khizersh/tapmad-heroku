@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import Player from "../../modules/single-movie/components/Player";
 import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
-import { manipulateUrls } from "../../services/utils";
+import { manipulateUrls, isAuthentictedUser } from "../../services/utils";
 import { useRouter } from "next/router";
 import requestIp from "request-ip";
 
@@ -10,7 +10,7 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 
 const watch = (props) => {
   const router = useRouter();
-
+  console.log("props in watch: ", props);
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
@@ -28,11 +28,7 @@ const watch = (props) => {
     }
   }, [props.allowUser]);
 
-  return (
-    <div>
-      <Player movies={props.data} />{" "}
-    </div>
-  );
+  return <div>{props.allowUser && <Player movies={props.data} />}</div>;
 };
 
 export async function getServerSideProps(context) {
@@ -51,33 +47,45 @@ export async function getServerSideProps(context) {
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
   };
-  console.log(body);
 
-  const res = await PlayerService.getVideoData(body, ip);
-  if (res != null) {
-    if (res.data && res.data.Video) {
-      if (res.data.Video.IsVideoFree == false) {
-        if (cookies.isAuth && cookies.isAuth == 1) {
-          if (cookies.userId) {
-            allowUser = true;
-          } else {
-            allowUser = false;
-          }
-        } else {
-          allowUser = false;
-        }
+  var isFree = "1";
+  if (context.query) {
+    isFree = context.query.slug[1].slice(0, 1);
+  }
+
+  if (isFree == "1") {
+    const res = await PlayerService.getVideoData(body, ip);
+    if (res != null) {
+      return {
+        props: response(res.data, chanelDetail, allowUser),
+      };
+    }
+  } else {
+    if (isAuthentictedUser()) {
+      const res = await PlayerService.getVideoData(body, ip);
+      if (res && res.responseCode == 5) {
+        return {
+          props: response(res.data, chanelDetail, false),
+        };
+      } else {
+        return {
+          props: response(res.data, chanelDetail, false),
+        };
       }
+    } else {
+      return {
+        props: response(null, chanelDetail, false),
+      };
     }
   }
-  console.log(res.data);
-
-  return {
-    props: {
-      data: res.data,
-      ...chanelDetail,
-      allowUser: allowUser,
-    },
-  };
 }
 
 export default watch;
+
+const response = (data, channel, allowUser) => {
+  return {
+    data,
+    channel,
+    allowUser,
+  };
+};
