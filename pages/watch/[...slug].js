@@ -35,9 +35,8 @@ export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
   var ip = requestIp.getClientIp(context.req);
-  if (process.env.TAPENV == "local") {
-    ip = "39.44.217.70";
-  }
+
+  console.log("chanelDetail: ", chanelDetail);
   let allowUser = true;
   let body = {
     Version: "V2",
