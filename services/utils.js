@@ -6,11 +6,12 @@ function manipulateUrls(router) {
   let isChannel = movieId.charAt(movieId.length - 1);
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
   let isFree = OriginalMovieId.slice(0, 1);
-  OriginalMovieId = OriginalMovieId.slice(1, OriginalMovieId.length - 1);
+  let cleanVODId = OriginalMovieId.slice(1, OriginalMovieId.length - 1);
   return {
     isChannel: isChannel,
     OriginalMovieId: OriginalMovieId,
     isFree: isFree,
+    CleanVideoId: cleanVODId,
   };
 }
 

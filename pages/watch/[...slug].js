@@ -42,7 +42,7 @@ export async function getServerSideProps(context) {
     Version: "V2",
     Language: "en",
     Platform: "web",
-    ChannelOrVODId: chanelDetail.OriginalMovieId,
+    ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
   };
