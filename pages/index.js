@@ -1,15 +1,9 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HomePage from "../modules/home/components/HomePage";
-import { actionsRequest, get } from "../services/http-service";
 import requestIp from "request-ip";
-import {
-  getFeaturedBannerDetail,
-  getFeaturedHomePage,
-  getWebTabBanners,
-} from "../services/apilinks";
+
 import { HomeService } from "../modules/home/components/home.service";
-import { Cookie } from "../services/cookies";
 
 export default function Home(props) {
   return (
@@ -28,11 +22,13 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
+<<<<<<< HEAD
   console.log("Environment is " + process.env.TAPENV);
 
+=======
+>>>>>>> 121280577380e69e3f9fd65bda5c2cf4aafcb549
   let movie, banner, featured;
   console.log("Ip is ", ip);
-
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
   else movie = {};
