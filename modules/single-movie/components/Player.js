@@ -53,7 +53,6 @@ export default function Player({ movies }) {
   }
 
   async function getRelatedChannels() {
-    console.log("getRelatedChannelsOrVODData: ", movie);
     const res = await PlayerService.getRelatedChannelsOrVODData(
       movie.Video.VideoEntityId,
       movie.Video.IsVideoChannel ? 1 : 0
@@ -63,22 +62,6 @@ export default function Player({ movies }) {
     }
   }
 
-  // useEffect(async () => {
-  //   setMounted(true);
-  //   let userId = localStorage.getItem("userId");
-  //   let body = {
-  //     Version: "V2",
-  //     Language: "en",
-  //     Platform: "web",
-  //     ChannelOrVODId: movie.Video.VideoEntityId,
-  //     UserId: userId,
-  //     IsChannel: movie.Video.IsVideoChannel,
-  //   };
-  //   if (userId) {
-  //     const res = await PlayerService.getVideoData(body);
-  //     setMovie(res.data);
-  //   }
-  // }, []);
   useEffect(async () => {
     await getRelatedChannels();
 

@@ -4,6 +4,7 @@ import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
 import { manipulateUrls } from "../../services/utils";
 import { useRouter } from "next/router";
+import requestIp from "request-ip";
 
 import { PlayerService } from "../../modules/single-movie/Player.service";
 
@@ -37,6 +38,10 @@ const watch = (props) => {
 export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -46,9 +51,9 @@ export async function getServerSideProps(context) {
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
   };
+  console.log(body);
 
-  const res = await PlayerService.getVideoData(body);
-
+  const res = await PlayerService.getVideoData(body, ip);
   if (res != null) {
     if (res.data && res.data.Video) {
       if (res.data.Video.IsVideoFree == false) {
@@ -64,6 +69,7 @@ export async function getServerSideProps(context) {
       }
     }
   }
+  console.log(res.data);
 
   return {
     props: {
