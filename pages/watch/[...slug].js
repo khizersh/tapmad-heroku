@@ -48,7 +48,6 @@ export async function getServerSideProps(context) {
   };
   console.log(body);
   const res = await PlayerService.getVideoData(body);
-
   if (res != null) {
     if (res.data && res.data.Video) {
       if (res.data.Video.IsVideoFree == false) {
@@ -64,6 +63,7 @@ export async function getServerSideProps(context) {
       }
     }
   }
+  console.log(res.data);
 
   return {
     props: {
