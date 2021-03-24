@@ -46,6 +46,7 @@ export async function getServerSideProps(context) {
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
   };
+  console.log(body);
   const res = await PlayerService.getVideoData(body);
 
   if (res != null) {
