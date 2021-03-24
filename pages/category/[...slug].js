@@ -3,6 +3,7 @@ import { get } from "../../services/http-service";
 import { manipulateUrlsForCatgeory } from "../../services/utils";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
 import { getSeasonVodByCategoryId } from "../../services/apilinks";
+import requestIp from "request-ip";
 
 const Category = (props) => {
   const [videoList, setVideoList] = useState([]);
@@ -35,8 +36,12 @@ const Category = (props) => {
 export default Category;
 
 export async function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
-  const data = await get(getSeasonVodByCategoryId + categoryId);
+  const data = await get(getSeasonVodByCategoryId + categoryId, ip);
 
   return { props: { data: data.data } };
 }

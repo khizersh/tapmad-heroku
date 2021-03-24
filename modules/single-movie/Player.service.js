@@ -4,14 +4,8 @@ import {
 } from "../../services/apilinks";
 import { post, handleResponse, get } from "../../services/http-service";
 
-<<<<<<< HEAD
-async function getVideoData(body) {
-  const resp = await post(getEventPredicationGameChannel, body);
-  console.log("video data in http req: ", resp);
-=======
 async function getVideoData(body, ip) {
   const resp = await post(getEventPredicationGameChannel, body, ip);
->>>>>>> b3946333e44efb714ab2e51aea4540f5273db518
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
