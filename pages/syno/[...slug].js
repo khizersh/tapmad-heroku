@@ -39,10 +39,9 @@ export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
   console.log(" ip in syno: ", ip);
 
-  const data = await get(
-    getRelatedChannelsOrVODs(OriginalMovieId, isChannel),
-    ip
-  );
+  let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
+  console.log(" url in syno: ", url);
+  const data = await get(url, ip);
 
   // Pass data to the page via props
   return { props: { data: data.data } };
