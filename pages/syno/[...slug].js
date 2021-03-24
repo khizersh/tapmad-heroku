@@ -37,6 +37,7 @@ export default Syno;
 export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel } = manipulateUrls(context.query);
   var ip = requestIp.getClientIp(context.req);
+  console.log(" ip in syno: ", ip);
 
   const data = await get(
     getRelatedChannelsOrVODs(OriginalMovieId, isChannel),
