@@ -64,7 +64,6 @@ export async function getServerSideProps(context) {
       };
     }
   } else {
-    console.log("is", isAuthentictedServerSide(context.req));
     if (isAuthentictedServerSide(context.req)) {
       const res = await PlayerService.getVideoData(body, ip);
       if (res && res.responseCode == 5) {

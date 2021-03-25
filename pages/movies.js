@@ -2,6 +2,7 @@ import Head from "next/head";
 import Movies from "../modules/movies/components/movies";
 import { getMoviesWithPaginationInitial } from "../services/apilinks";
 import { get } from "../services/http-service";
+import requestIp from "request-ip";
 export default function MoviesPage(props) {
   return (
     <div>
@@ -19,8 +20,9 @@ export default function MoviesPage(props) {
     </div>
   );
 }
-export async function getStaticProps() {
-  var moviesList = await get(getMoviesWithPaginationInitial);
+export async function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  var moviesList = await get(getMoviesWithPaginationInitial, ip);
   var movies = await moviesList.data;
   return {
     props: {
