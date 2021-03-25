@@ -14,7 +14,7 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 
 const watch = (props) => {
   const router = useRouter();
-  console.log("props in watch: ", props);
+
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");

@@ -11,13 +11,11 @@ import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 
 export default function Player({ movies }) {
-  const { initialState } = useContext(MainContext);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
-  const [countryCode, setCountryCode] = useState(null);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -53,7 +51,6 @@ export default function Player({ movies }) {
   }
 
   async function getRelatedChannels() {
-    console.log("movie: ", movie);
     const res = await PlayerService.getRelatedChannelsOrVODData(
       movie.Video.VideoEntityId,
       movie.Video.IsVideoChannel ? 1 : 0
@@ -122,20 +119,6 @@ export default function Player({ movies }) {
                       ? videoLink.lowQuality
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
-                  // playlist={[
-                  //   {
-                  //     file: videoLink ? videoLink.lowQuality : "",
-                  //     image: movie && movie.Video.VideoImagePath,
-                  //   },
-                  //   {
-                  //     file: videoLink ? videoLink.mediumQuality : "",
-                  //     image: movie && movie.Video.VideoImagePath,
-                  //   },
-                  //   {
-                  //     file: videoLink ? videoLink.highQuality : "",
-                  //     image: movie && movie.Video.VideoImagePath,
-                  //   },
-                  // ]}
                   generatePrerollUrl={() =>
                     ads.onVideo && ads.allow ? ads.onVideo : ""
                   }

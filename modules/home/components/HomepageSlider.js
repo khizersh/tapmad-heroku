@@ -29,14 +29,15 @@ const HomepageSlider = ({ movies }) => {
   }
 
   function handleOnMouseDown(e) {
+    e.preventDefault(); // stops weird link dragging effect
     setClientXonMouseDown(e.clientX);
     setClientYonMouseDown(e.clientY);
-    e.preventDefault(); // stops weird link dragging effect
   }
 
   function handleOnClick(e, mov) {
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
+      e.preventDefault();
       // prevent link click if the element was dragged
     } else {
       let body = {
@@ -44,6 +45,7 @@ const HomepageSlider = ({ movies }) => {
         clickedItemId: mov.VideoEntityId,
         clickedItemName: mov.VideoName,
       };
+
       actionsRequestContent(body);
     }
   }
@@ -125,7 +127,6 @@ const HomepageSlider = ({ movies }) => {
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
                               onClick={(e) => handleOnClick(e, mov)}
-                              // onClick={(e) => SEOFriendlySlugsIsCategoryTrue(mov, "category/season")}
                             >
                               <div
                                 className="tm-mv-bx"

@@ -18,6 +18,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const [currentRow, setCurrentRow] = useState(5);
   const { initialState, getCountryCode } = useContext(MainContext);
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
+
   React.useEffect(() => {
     setLocalMovies(modifiedResponse);
     let body = {
