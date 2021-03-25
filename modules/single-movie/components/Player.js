@@ -53,6 +53,7 @@ export default function Player({ movies }) {
   }
 
   async function getRelatedChannels() {
+    console.log("movie: ", movie);
     const res = await PlayerService.getRelatedChannelsOrVODData(
       movie.Video.VideoEntityId,
       movie.Video.IsVideoChannel ? 1 : 0

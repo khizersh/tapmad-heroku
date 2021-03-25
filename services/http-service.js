@@ -1,6 +1,5 @@
 const { default: axios } = require("axios");
 const {
-  actionRequest,
   actionRequestView,
   actionRequestSignUp,
   loggingRequest,
@@ -8,6 +7,9 @@ const {
 const { Cookie } = require("./cookies");
 
 function get(url, ip) {
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   return axios.get(url, {
     headers: {
       "Content-Type": "application/json",

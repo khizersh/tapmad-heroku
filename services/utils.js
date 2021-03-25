@@ -75,6 +75,7 @@ function SEOFriendlySlugsIsCategoryFalse(event) {
   }`;
   return slug;
 }
+
 function SEOFriendlySlugsIsCategoryTrue(event) {
   let prefix = "category/season";
   let name = event.VideoName ? event.VideoName : event.CategoryName;
@@ -82,6 +83,7 @@ function SEOFriendlySlugsIsCategoryTrue(event) {
   let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
   return slug;
 }
+
 function setUrlAccordingToVideoType(movie, type) {
   let slug = "";
   if (type == IsLiveChannel) {
@@ -95,6 +97,7 @@ function setUrlAccordingToVideoType(movie, type) {
   }
   return slug;
 }
+
 function calculateRowsToFetch(currentRow, movies) {
   let rowFrom = currentRow;
   let rowsTo = 0;
@@ -135,6 +138,15 @@ function isAuthentictedUser() {
   }
 }
 
+function isAuthentictedServerSide(req) {
+  let cookie = Cookie.parseCookies(req);
+
+  if (cookie.userId && cookie.isAuth == 1) {
+    return true;
+  } else {
+    return false;
+  }
+}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -145,4 +157,5 @@ module.exports = {
   SEOFriendlySlugsForVideo,
   isAuthentictedUser,
   setUrlToCookies,
+  isAuthentictedServerSide,
 };

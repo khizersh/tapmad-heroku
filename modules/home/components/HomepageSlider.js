@@ -7,6 +7,7 @@ import { actionsRequestContent } from "../../../services/http-service";
 import {
   basicSliderConfig,
   setUrlAccordingToVideoType,
+  isAuthentictedUser,
 } from "../../../services/utils";
 import { useRouter } from "next/router";
 
@@ -38,18 +39,12 @@ const HomepageSlider = ({ movies }) => {
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
       // prevent link click if the element was dragged
     } else {
-      if (!mov.IsVideoFree) {
-        e.preventDefault();
-        let body = {
-          event: loggingTags.click,
-          clickedItemId: mov.VideoEntityId,
-          clickedItemName: mov.VideoName,
-        };
-        console.log("mov:  ", mov);
-        actionsRequestContent(body);
-        console.log("not access:");
-        router.push("/sign-up");
-      }
+      let body = {
+        event: loggingTags.click,
+        clickedItemId: mov.VideoEntityId,
+        clickedItemName: mov.VideoName,
+      };
+      actionsRequestContent(body);
     }
   }
 

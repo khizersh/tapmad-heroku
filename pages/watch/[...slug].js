@@ -2,7 +2,11 @@ import React, { useEffect, useContext } from "react";
 import Player from "../../modules/single-movie/components/Player";
 import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
-import { manipulateUrls, isAuthentictedUser } from "../../services/utils";
+import {
+  manipulateUrls,
+  isAuthentictedUser,
+  isAuthentictedServerSide,
+} from "../../services/utils";
 import { useRouter } from "next/router";
 import requestIp from "request-ip";
 
@@ -35,8 +39,10 @@ export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
   var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
 
-  console.log("chanelDetail: ", chanelDetail);
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -48,9 +54,7 @@ export async function getServerSideProps(context) {
   };
 
   var isFree = "1";
-  if (chanelDetail.isFree) {
-    isFree = chanelDetail.isFree;
-  }
+  isFree = chanelDetail.isFree;
 
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
@@ -60,18 +64,22 @@ export async function getServerSideProps(context) {
       };
     }
   } else {
-    if (isAuthentictedUser()) {
+    console.log("is", isAuthentictedServerSide(context.req));
+    if (isAuthentictedServerSide(context.req)) {
       const res = await PlayerService.getVideoData(body, ip);
       if (res && res.responseCode == 5) {
+        // expired subscription
         return {
           props: response(res.data, chanelDetail, false),
         };
       } else {
+        // authenticated
         return {
-          props: response(res.data, chanelDetail, false),
+          props: response(res.data, chanelDetail, true),
         };
       }
     } else {
+      // not logged in
       return {
         props: response(null, chanelDetail, false),
       };

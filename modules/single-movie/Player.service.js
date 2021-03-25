@@ -27,6 +27,8 @@ async function getVideoData(body, ip) {
 }
 
 async function getRelatedChannelsOrVODData(id, channel) {
+  console.log("id: " + id + " channel: " + channel);
+
   const resp = await get(getRelatedChannelsOrVODs(id, channel));
   const data = handleResponse(resp);
   if (data != null) {
