@@ -1,0 +1,6 @@
+.slick-list {
+}
+
+.list:hover {
+  overflow-x: visible !important;
+}

@@ -60,7 +60,7 @@
   background-color: #121117;
 }
 .res-width {
-  width: 63%;
+  width: 65%;
 }
 
 .profile-btn {
@@ -68,20 +68,25 @@
   padding: 8px;
   font-size: 17px;
 }
+@media screen and (max-width: 768px) {
+  .res-width {
+    width: 86%;
+  }
+}
 @media screen and (max-width: 700px) {
   .res-width {
-    width: 65%;
+    width: 72%;
   }
 }
 
 @media screen and (max-width: 400px) {
   .res-width {
-    width: 50%;
+    width: 67%;
   }
 }
 
-@media screen and (max-width: 900px) and (min-width: 710px) {
+@media screen and (max-width: 360px) {
   .res-width {
-    width: 84%;
+    width: 68%;
   }
 }

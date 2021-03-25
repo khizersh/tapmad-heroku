@@ -45,7 +45,6 @@ const HomepageSlider = ({ movies }) => {
         clickedItemId: mov.VideoEntityId,
         clickedItemName: mov.VideoName,
       };
-
       actionsRequestContent(body);
     }
   }

@@ -124,6 +124,20 @@ export default function Player({ movies }) {
                   }
                   customProps={{
                     controls: true,
+                    sources: [
+                      {
+                        file: videoLink && videoLink.lowQuality,
+                        label: "HD",
+                      },
+                      {
+                        file: videoLink && videoLink.lowQuality,
+                        label: "LQ",
+                      },
+                      {
+                        file: videoLink && videoLink.lowQuality,
+                        label: "MQ",
+                      },
+                    ],
                   }}
                 />
               </div>

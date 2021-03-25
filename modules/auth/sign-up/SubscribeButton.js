@@ -26,7 +26,6 @@ export default function SubscribeButton() {
           Version: "V1",
           Language: "en",
           Platform: "web",
-          // ProductId: 1265,
           ProductId: authState.selectedPackageId,
           MobileNo: initialState.User.MobileNo,
           OperatorId: initialState.User.OperatorId,
@@ -47,8 +46,8 @@ export default function SubscribeButton() {
           Version: "V1",
           Language: "en",
           Platform: "web",
-          ProductId: 1265,
-          // ProductId: authState.selectedPackageId,
+          // ProductId: 1265,
+          ProductId: authState.selectedPackageId,
           MobileNo: initialState.User.MobileNo,
           OperatorId: initialState.User.OperatorId,
         };
@@ -59,7 +58,7 @@ export default function SubscribeButton() {
           Language: "en",
           Platform: "web",
           ProductId: 1265,
-          // ProductId: authState.selectedPackageId,
+          ProductId: authState.selectedPackageId,
           MobileNo: initialState.User.MobileNo,
           OperatorId: initialState.User.OperatorId,
           cnic: initialState.User.Cnic,
@@ -71,18 +70,9 @@ export default function SubscribeButton() {
         // for credit card specific only
         AuthService.creditCardOrder(details);
       } else {
-        // let body = {
-        //   productId: details.ProductId,
-        //   operatorId: details.OperatorId,
-        //   mobileNo: details.MobileNo,
-        //   countryCode,
-        // };
-
-        // other api call
         console.log("detail in signup: ", details);
         const data = await AuthService.initialTransaction(details);
-        // resp = await post(initialPaymentTransaction, details);
-        // actionsRequestSignup(body);
+
         setLoader(false);
         if (data != null) {
           if (data.responseCode == 11) {

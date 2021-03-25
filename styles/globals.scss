@@ -250,7 +250,7 @@ body {
 .tm-mv-bx {
   transition: linear 0.2s;
   border-radius: 0px;
-  overflow: hidden !important;
+  overflow: hidden;
   // margin: 10px 0;
   padding: 0;
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.4);
@@ -292,6 +292,7 @@ body {
 .tm-mv-bx:hover ~ .slick-list {
   overflow: visible !important;
 }
+
 .slick-slide {
   padding: 0px 2px;
 }
