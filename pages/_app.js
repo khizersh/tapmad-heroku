@@ -22,7 +22,6 @@ import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
 import { setUrlToCookies } from "../services/utils";
-// import "../services/new-relic/Index"
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -67,7 +66,6 @@ function MyApp({ Component, pageProps, test }) {
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
         <script src="./static/newrelic.js"></script>
-
         <title>
           Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
           Free

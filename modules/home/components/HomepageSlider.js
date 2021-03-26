@@ -89,7 +89,6 @@ const HomepageSlider = ({ movies }) => {
                                   <img
                                     src={mov.NewChannelThumbnailPath}
                                     style={{ width: "100%" }}
-                                    loading="lazy"
                                   />
                                   {mov.IsVideoFree ? null : (
                                     <div className="live_side">Premium</div>
@@ -137,7 +136,6 @@ const HomepageSlider = ({ movies }) => {
                                   <img
                                     src={mov.NewCategoryImage}
                                     style={{ width: "100%" }}
-                                    loading="lazy"
                                   />
                                   {mov.IsVideoFree
                                     ? null
