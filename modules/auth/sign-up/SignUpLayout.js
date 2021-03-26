@@ -15,6 +15,13 @@ export default function SignUpLayout({ children }) {
       router.push(Cookie.getCookies("backUrl"));
     }
   };
+
+  const onClickLogin = () => {
+    setLoader(true);
+    router.push("/sign-in");
+    setLoader(false);
+  };
+
   return (
     <div className="mt-0 mt-sm-2">
       <div className="container-fluid p-0 p-sm-2 p-md-3 p-lg-3">
@@ -34,6 +41,7 @@ export default function SignUpLayout({ children }) {
               >
                 <i className="fa fa-arrow-left"></i> Back
               </a>
+
               <a
                 id="sign-up-screen-btn"
                 style={{
@@ -61,10 +69,10 @@ export default function SignUpLayout({ children }) {
                   right: 0,
                   background: "#ffffff",
                 }}
+                onClick={onClickLogin}
               >
                 Login
               </button>
-
               {children}
             </div>
           </div>

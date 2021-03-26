@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Player from "../../modules/single-movie/components/Player";
 import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
@@ -15,6 +15,7 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 const watch = (props) => {
   const router = useRouter();
 
+  const [url, setUrl] = useState(null);
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
@@ -30,9 +31,14 @@ const watch = (props) => {
       };
       actionsRequestContent(body);
     }
-  }, [props.allowUser]);
+    console.log("Rendered");
+  }, [props.allowUser, url]);
 
-  return <div>{props.allowUser && <Player movies={props.data} />}</div>;
+  return (
+    <div>
+      {props.allowUser && <Player movies={props.data} setUrl={setUrl} />}
+    </div>
+  );
 };
 
 export async function getServerSideProps(context) {

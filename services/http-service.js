@@ -28,7 +28,9 @@ function post(url, body, ip) {
 }
 
 async function actionsRequestContent(data) {
-  let userId = Cookie.getCookies("userId") ? Cookie.getCookies("userId") : "";
+  let userId = Cookie.getCookies("userId")
+    ? Cookie.getCookies("userId")
+    : "guest";
 
   let body = {
     userId: userId,

@@ -2,15 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
-import { MainContext } from "../../../contexts/MainContext";
-import { getAdDetails } from "../../../services/apilinks";
-import { get, post } from "../../../services/http-service";
+import Link from "next/link";
 import { AuthService } from "../../auth/auth.service";
 import { DashboardService } from "../../dashboard/Dashboard.Service";
+import RelatedProductCard from "../../movies/components/RelatedProductCard";
 import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
+import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { useRouter } from "next/router";
 
-export default function Player({ movies }) {
+export default function Player({ movies, setUrl }) {
+  const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
   const [mounted, setMounted] = useState(false);
@@ -25,9 +27,11 @@ export default function Player({ movies }) {
     bottomBannerAd: "",
     rightVideoAd: "",
   });
+
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
+
       if (movies.Video.IsVideoChannel) {
         setVideoLink({
           highQuality: movies.Video.ChannelStreamUrlWHQ,
@@ -88,7 +92,24 @@ export default function Player({ movies }) {
         rightVideoAd: data.rightVideoAd,
       });
     }
-  }, []);
+  }, [router]);
+
+  useEffect(() => {
+    setMovie(movies);
+    if (movies.Video.IsVideoChannel) {
+      setVideoLink({
+        highQuality: movies.Video.ChannelStreamUrlWHQ,
+        mediumQuality: movies.Video.ChannelStreamUrlWMQ,
+        lowQuality: movies.Video.ChannelStreamUrlWLQ,
+      });
+    } else {
+      setVideoLink({
+        highQuality: movies.Video.VideoStreamUrlHQ,
+        mediumQuality: movies.Video.VideoStreamUrlMQ,
+        lowQuality: movies.Video.VideoStreamUrlLQ,
+      });
+    }
+  }, [movies]);
 
   return (
     <div>
@@ -217,34 +238,13 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
+                      let slug = SEOFriendlySlugsForVideo(video);
                       return (
-                        <div className="col-12 p-1" key={i}>
-                          <div className="d-flex ">
-                            <div>
-                              <img
-                                src={video.VideoImagePath}
-                                alt={video.VideoName}
-                                width="130px"
-                              />
-                            </div>
-                            <div>
-                              <div className="pl-2">
-                                <h5
-                                  className="card-title mb-1"
-                                  style={{ fontSize: "13px" }}
-                                >
-                                  {video.VideoName}
-                                </h5>
-                                <p
-                                  className="card-desc synopsis-card-text m-0"
-                                  style={{ fontSize: "12px", color: "#6c757d" }}
-                                >
-                                  {video.VideoDescription}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <Link href={slug} replace={true} shallow={false}>
+                          <a>
+                            <RelatedProductCard key={i} video={video} />
+                          </a>
+                        </Link>
                       );
                     })
                   : null}

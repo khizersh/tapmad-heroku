@@ -1,0 +1,8 @@
+.txt-rel-card {
+  color: white !important;
+}
+
+.txt-rel-card:hover {
+  transition: all 0.3s;
+  color: #87c242 !important;
+}

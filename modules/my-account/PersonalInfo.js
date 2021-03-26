@@ -163,7 +163,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <button
-            className={`profile-btn w-100 form-control border-0 rounded-0 text-white ${
+            className={`profile-btn w-100  border-0 rounded-0 text-white ${
               btnEnable ? "" : "btn-click"
             }`}
             onClick={onSubmit}
