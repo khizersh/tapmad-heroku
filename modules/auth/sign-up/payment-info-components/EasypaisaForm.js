@@ -2,6 +2,15 @@ import React from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
 
 const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
+  const [num, setNum] = React.useState("");
+
+  const onChange = (e) => {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setNum(mobileNum);
+      onChangeNumber(e);
+    }
+  };
   return (
     <>
       <div className="form-control text-center">
@@ -19,7 +28,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
         className="form-control"
         placeholder="3xxxxxxxxxx"
         inputMode="numeric"
-        onChange={(e) => onChangeNumber(e)}
+        value={num}
+        onChange={(e) => onChange(e)}
       />
     </>
   );

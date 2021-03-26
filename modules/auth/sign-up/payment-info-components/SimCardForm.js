@@ -1,27 +1,35 @@
-import React from 'react'
-import DropdownWithImage from '../DropdownWithImage';
+import React from "react";
+import DropdownWithImage from "../DropdownWithImage";
 
-const SimCardForm = ({data , onChangeNetwork , onChangeNumber , mobileCode}) => {
-    return (
-        <>
-          <DropdownWithImage data={data} onChange={onChangeNetwork} />
-          <span>
-            <label className="form-control cntry_cde border-0">
-              {mobileCode}
-            </label>
-          </span>
+const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
+  const [num, setNum] = React.useState("");
 
-          <input
-            type="text"
-            maxLength="10"
-            minLength="10"
-            className="form-control"
-            placeholder="3xxxxxxxxxx"
-            inputMode="numeric"
-            onChange={(e) => onChangeNumber(e)}
-          />
-        </>
-      );
-}
+  const onChange = (e) => {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setNum(mobileNum);
+      onChangeNumber(e);
+    }
+  };
+  return (
+    <>
+      <DropdownWithImage data={data} onChange={onChangeNetwork} />
+      <span>
+        <label className="form-control cntry_cde border-0">{mobileCode}</label>
+      </span>
 
-export default SimCardForm
+      <input
+        type="text"
+        maxLength="10"
+        minLength="10"
+        className="form-control"
+        placeholder="3xxxxxxxxxx"
+        inputMode="numeric"
+        value={num}
+        onChange={(e) => onChange(e)}
+      />
+    </>
+  );
+};
+
+export default SimCardForm;

@@ -9,6 +9,15 @@ const CreditCardForm = ({
   onChangeNumber,
   onChangeEmail,
 }) => {
+  const [num, setNum] = React.useState("");
+
+  const onChange = (e) => {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setNum(mobileNum);
+      onChangeNumber(e);
+    }
+  };
   return (
     <>
       <input
@@ -30,7 +39,8 @@ const CreditCardForm = ({
         className="form-control mb-2 pl-2"
         placeholder="Mobile Number"
         inputMode="numeric"
-        onChange={(e) => onChangeNumber(e)}
+        value={num}
+        onChange={(e) => onChange(e)}
       />
       <input
         type="email"

@@ -2,6 +2,24 @@ import React from "react";
 import { jazzIcon } from "../../../../services/imagesLink";
 
 const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
+  const [num, setNum] = React.useState("");
+  const [cnic, setCnic] = React.useState("");
+
+  const onChange = (e) => {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setNum(mobileNum);
+      onChangeNumber(e);
+    }
+  };
+
+  const onChangeNic = (e) => {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setCnic(mobileNum);
+      onChangeCnic(e);
+    }
+  };
   return (
     <>
       <div className="form-control text-center">
@@ -18,7 +36,8 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
         className="form-control"
         placeholder="3xxxxxxxxxx"
         inputMode="numeric"
-        onChange={(e) => onChangeNumber(e)}
+        value={num}
+        onChange={(e) => onChange(e)}
       />
       <input
         type="text"
@@ -27,7 +46,8 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
         className="form-control w-100 mb-2 pl-2"
         placeholder="Last 6 digits of your CNIC"
         inputMode="numeric"
-        onChange={(e) => onChangeCnic(e)}
+        value={cnic}
+        onChange={(e) => onChangeNic(e)}
       />
     </>
   );

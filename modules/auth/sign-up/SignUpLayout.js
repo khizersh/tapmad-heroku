@@ -8,7 +8,6 @@ export default function SignUpLayout({ children }) {
   const { setLoader } = React.useContext(MainContext);
   const router = useRouter();
   const onClickBack = () => {
-    setLoader(true);
     if (!Cookie.getCookies("backUrl")) {
       router.push("/");
     } else {
@@ -17,9 +16,7 @@ export default function SignUpLayout({ children }) {
   };
 
   const onClickLogin = () => {
-    setLoader(true);
     router.push("/sign-in");
-    setLoader(false);
   };
 
   return (

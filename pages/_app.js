@@ -20,6 +20,8 @@ import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
 import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
+import Router from "next/router";
+import { setUrlToCookies } from "../services/utils";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -124,7 +126,19 @@ function MyApp({ Component, pageProps, test }) {
 export default MyApp;
 
 export const NoSideBarSkeleton = ({ children }) => {
-  const { initialState } = React.useContext(MainContext);
+  const { initialState, setLoader } = React.useContext(MainContext);
+  Router.onRouteChangeStart = (url) => {
+    let key = url.split("/")[1];
+    setUrlToCookies(key, url);
+    setLoader(true);
+  };
+  Router.onRouteChangeComplete = () => {
+    setLoader(false);
+  };
+
+  Router.onRouteChangeError = () => {
+    setLoader(false);
+  };
   return (
     <div>
       {initialState.loading ? <Loader /> : null}

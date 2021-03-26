@@ -116,7 +116,7 @@ function Login({ loginResponse }) {
           | &nbsp;&nbsp;Not Registered?
         </span>
         <Link href="/sign-up" shallow={true} passHref={true}>
-          <a className="text-light">Sign Up</a>
+          <a className="text-light">Sign up</a>
         </Link>
       </div>
     </div>
