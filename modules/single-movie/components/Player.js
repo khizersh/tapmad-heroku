@@ -240,9 +240,14 @@ export default function Player({ movies, setUrl }) {
                   ? relatedVideo.map((video, i) => {
                       let slug = SEOFriendlySlugsForVideo(video);
                       return (
-                        <Link href={slug} replace={true} shallow={false}>
+                        <Link
+                          href={slug}
+                          replace={true}
+                          shallow={false}
+                          key={i}
+                        >
                           <a>
-                            <RelatedProductCard key={i} video={video} />
+                            <RelatedProductCard video={video} />
                           </a>
                         </Link>
                       );

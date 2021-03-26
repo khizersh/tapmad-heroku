@@ -7,7 +7,7 @@ async function editAdDetails(body) {
   return data;
 }
 
-async function getAdData(body) {
+async function getAdData() {
   const data = await get(getAdDetails);
   let array = [];
   if (data && data.data) {

@@ -53,10 +53,10 @@ export const getChannelWithPaginationInitial =
   BASEURL + "api/getChannelWithPagination/0/5/0/16";
 
 export const localHost = "http://localhost:3000/";
-export const getFaqs = "api/faq";
-export const getAboutus = "api/about-us";
-export const getAdDetails = localHost + "api/ads";
-export const getCredentials = localHost + "api/credentials";
+export const getFaqs = "/api/faq";
+export const getAboutus = "/api/about-us";
+export const getAdDetails = "/api/ads";
+export const getCredentials = "/api/credentials";
 
 export const adCsvFile = "public/ads.csv";
 export const faqCsvFile = "public/faq.csv";

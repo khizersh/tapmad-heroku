@@ -31,7 +31,6 @@ const watch = (props) => {
       };
       actionsRequestContent(body);
     }
-    console.log("Rendered");
   }, [props.allowUser, url]);
 
   return (
