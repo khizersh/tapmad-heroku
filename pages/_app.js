@@ -66,6 +66,7 @@ function MyApp({ Component, pageProps, test }) {
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
         <script src="./static/newrelic.js"></script>
+        <script src="./static/gtm.js"></script>
         <title>
           Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
           Free
@@ -75,7 +76,6 @@ function MyApp({ Component, pageProps, test }) {
           name="keywords"
           content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"
         />
-
         <link
           rel="icon"
           type="image/png"
@@ -92,33 +92,37 @@ function MyApp({ Component, pageProps, test }) {
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
       </Head>
-      {pageProps.noSideBar ? (
-        pageProps.dashboard ? (
+      <>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
+          height="0" width="0" style={{ 'display': 'none', 'visibility': 'hidden' }}></iframe></noscript>
+        {pageProps.noSideBar ? (
+          pageProps.dashboard ? (
+            <>
+              <MainProvider>
+                <DashboardLayout>
+                  <Component {...pageProps} />
+                </DashboardLayout>
+              </MainProvider>
+            </>
+          ) : (
+            <MainProvider>
+              <NoSideBarSkeleton>
+                <Component {...pageProps} />
+              </NoSideBarSkeleton>
+            </MainProvider>
+          )
+        ) : (
           <>
             <MainProvider>
-              <DashboardLayout>
+              <Skeleton>
+                <Header />
                 <Component {...pageProps} />
-              </DashboardLayout>
+                <Footer />
+              </Skeleton>
             </MainProvider>
           </>
-        ) : (
-          <MainProvider>
-            <NoSideBarSkeleton>
-              <Component {...pageProps} />
-            </NoSideBarSkeleton>
-          </MainProvider>
-        )
-      ) : (
-        <>
-          <MainProvider>
-            <Skeleton>
-              <Header />
-              <Component {...pageProps} />
-              <Footer />
-            </Skeleton>
-          </MainProvider>
-        </>
-      )}
+        )}
+      </>
     </>
   );
 }
