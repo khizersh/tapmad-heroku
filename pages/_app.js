@@ -65,9 +65,8 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <script preload src="./static/gtm.js"></script>
-        {/* <script src="./static/newrelic.js"></script> */}
-        <script type="text/javascript" async src="https://www.google-analytics.com/analytics.js"></script>
+        <script src="./static/gtm.js"></script>
+        <script src="./static/newrelic.js"></script>
         <title>
           Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
           Free
