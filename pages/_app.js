@@ -68,8 +68,7 @@ function MyApp({ Component, pageProps, test }) {
         <script src="./static/gtm.js"></script>
         <script src="./static/newrelic.js"></script>
         <title>
-          Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
-          Free
+          Tapmad - Watch LIVE TV Channels Online |  ------- Test
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
