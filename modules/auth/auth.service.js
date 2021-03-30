@@ -221,7 +221,23 @@ async function loginUser(body) {
   const resp = await post(getCardUser, body);
   const data = handleResponse(resp);
   if (data != null) {
+    try {
+      dataLayer.push({
+        event: "Login_2",
+        product_id: "0",
+        device_category: "Web_Mobile",
+        response: {},
+        user_id: "123",
+        tracking: "Registered User 1294",
+        telco: "100004",
+      });
+    } catch (e) {
+      console.log(e);
+    }
+
+    console.log("Looogged Innnnn--------------------");
     if (data.responseCode == 1) {
+
       return {
         data: data,
         responseCode: data.responseCode,
