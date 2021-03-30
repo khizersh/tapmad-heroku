@@ -6,6 +6,7 @@ import { actionsRequestContent } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import { Authcontext } from "../../../contexts/AuthContext";
+import { loggingTags } from "../../../services/apilinks";
 
 export default function SetYourNewPin() {
   const router = useRouter();

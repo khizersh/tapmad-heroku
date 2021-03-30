@@ -12,6 +12,7 @@ export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURL + "api/getCardUser";
 export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
+export const paymentProcess = BASEURL + "api/processPaymentTransaction";
 export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const getShowsWithPagination =

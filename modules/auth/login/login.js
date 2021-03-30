@@ -14,7 +14,6 @@ function Login({ loginResponse }) {
     initialState,
     updateUserNumber,
     updateUserOperator,
-    getCountryCode,
     setLoader,
   } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
@@ -31,6 +30,7 @@ function Login({ loginResponse }) {
       setMobileNo(mobileNum.trim());
     }
   }
+
   async function loginUser() {
     let body = {
       event: loggingTags.login,
@@ -44,11 +44,14 @@ function Login({ loginResponse }) {
         Language: "en",
         MobileNo: mobileNo,
       };
-      const data = await AuthService.loginUser(body);
+      const data = await AuthService.loginUserWithNextApi(body, "", false);
+
       if (data != null) {
-        updateUserNumber(mobileNo);
-        loginResponse(data.data);
-        setLoader(false);
+        if (data.User) {
+          updateUserNumber(mobileNo);
+          loginResponse(data);
+          setLoader(false);
+        }
       } else {
         swal({
           title: "Something went wrong!",
@@ -65,7 +68,9 @@ function Login({ loginResponse }) {
       });
       setLoader(false);
     }
+    setLoader(false);
   }
+
   const onChangeNetwork = useCallback(
     (data) => {
       updateUserOperator(data.OperatorId);

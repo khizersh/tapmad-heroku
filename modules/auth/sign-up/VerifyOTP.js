@@ -7,7 +7,7 @@ import { useRef } from "react";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 
-const Pin = () => {
+const Pin = ({ newUser }) => {
   const { initialState, setLoader, getCountryCode } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
   const otp = useRef("");
@@ -19,8 +19,27 @@ const Pin = () => {
         MobileNo: "0" + initialState.User.MobileNo,
         otpCode: otp.current.value,
       };
-      const data = await AuthService.verifyOTP(body);
+      var data;
+      if (newUser) {
+        body = {
+          CodeOTP: otp.current.value,
+          Language: "en",
+          MobileNo: initialState.User.MobileNo,
+          OperatorId: initialState.User.OperatorId,
+          Platform: "web",
+          ProductId: authState.selectedPackageId,
+          Version: "V1",
+        };
+        data = await AuthService.paymentProcessTransaction(body);
+      } else {
+        body = {
+          MobileNo: "0" + initialState.User.MobileNo,
+          otpCode: otp.current.value,
+        };
+        data = await AuthService.verifyOTP(body);
+      }
 
+      console.log("data: ", data);
       if (data != null) {
         if (data.responseCode == 0) {
           swal({
@@ -30,9 +49,8 @@ const Pin = () => {
           });
         } else if (data.responseCode == 1) {
           swal({
-            timer: 3000,
+            timer: 2500,
             title: data.message,
-            text: "Enter new PIN code",
             icon: "success",
           }).then((result) => {
             updateResponseCode(34);

@@ -18,15 +18,24 @@ function get(url, ip) {
   });
 }
 
-function post(url, body, ip) {
+function post(url, body, ip, credentialAllowed = false) {
   return axios.post(url, body, {
+    withCredentials: credentialAllowed ? true : false,
     headers: {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",
     },
   });
 }
-
+function put(url, body, ip) {
+  return axios.put(url, body, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+      "X-Forwarded-For": ip ? ip : "",
+    },
+  });
+}
 async function actionsRequestContent(data) {
   let userId = Cookie.getCookies("userId")
     ? Cookie.getCookies("userId")
@@ -72,7 +81,12 @@ async function actionsRequestSignup(body) {
 function handleResponse(resp) {
   let responseCode, message;
   if (resp && resp.data) {
-    responseCode = resp.data.responseCode || resp.data.Response.responseCode;
+    if (resp.data.responseCode != undefined || resp.data.responseCode != null) {
+      responseCode = resp.data.responseCode;
+    } else {
+      responseCode = resp.data.Response.responseCode;
+    }
+
     message = resp.data.message || resp.data.Response.message;
     if (responseCode != null || responseCode != undefined) {
       return {
@@ -88,6 +102,7 @@ function handleResponse(resp) {
 module.exports = {
   get,
   post,
+  put,
   handleResponse,
   actionsRequestContent,
   actionsRequestView,

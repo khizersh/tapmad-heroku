@@ -5,6 +5,7 @@ import ForgetPin from "./forget-pin";
 import Login from "./login";
 import SetPin from "./setPin";
 import { useRouter } from "next/router";
+import swal from "sweetalert";
 
 export default function AuthViews() {
   const [viewToShow, setViewToShow] = useState("login");
@@ -12,7 +13,18 @@ export default function AuthViews() {
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
-    setViewToShow(viewToRender);
+
+    if (viewToRender === "sign-up") {
+      swal({
+        title: "You are not subscribed user. please subscribe!",
+        timer: 2500,
+        icon: "warning",
+      }).then(() => {
+        router.push("/sign-up");
+      });
+    } else {
+      setViewToShow(viewToRender);
+    }
   }
   function sendToForgetPin() {
     setViewToShow("forget-pin");
@@ -22,18 +34,16 @@ export default function AuthViews() {
     if (viewToShow == "enter-pin") {
       return <EnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
-      return <ForgetPin updateView={setViewToShow}/>;
+      return <ForgetPin updateView={setViewToShow} />;
     } else if (viewToShow == "set-pin") {
       return <SetPin />;
     } else if (viewToShow == "login") {
       return <Login loginResponse={processResponse} />;
     } else if (viewToShow == "send-otp") {
       return <ForgetPin updateView={setViewToShow} />;
-    } else if (viewToShow == "sign-up") {
-      router.push("sign-up");
-      return <div></div>;
     }
   }, [viewToShow]);
+
   return (
     <div>
       <div className="bg_dark">

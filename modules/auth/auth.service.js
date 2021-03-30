@@ -1,3 +1,4 @@
+import { json } from "body-parser";
 import {
   sendOTP,
   setUserPinCode,
@@ -6,6 +7,7 @@ import {
   initialPaymentTransaction,
   verifyOtp,
   getCardUser,
+  paymentProcess,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -80,7 +82,7 @@ async function verifyPinCode(pin) {
     UserPinCode: pin,
     Version: "V1",
   };
-  console.log("body: ", body);
+
   const resp = await post(verifyUserPinCode, body);
   const data = handleResponse(resp);
   if (data != null) {
@@ -193,6 +195,27 @@ async function verifyOTP(body) {
     return null;
   }
 }
+async function paymentProcessTransaction(body) {
+  const resp = await post(paymentProcess, body);
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 
 async function loginUser(body) {
   const resp = await post(getCardUser, body);
@@ -219,6 +242,7 @@ async function loginUser(body) {
 function validateUser(data) {
   var user = data.User;
   if (user.UserId) {
+    console.log("user in: ", user);
     Cookie.setCookies("userId", user.UserId);
     if (user.IsSubscribe) {
       if (user.IsPinSet) {
@@ -232,6 +256,34 @@ function validateUser(data) {
   } else {
     return "sign-up";
   }
+}
+
+async function loginUserFetchApi(body) {
+  let options = {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  };
+  const resp = await fetch(getCardUser, options);
+  const data = await resp.json();
+  if (data && data.Response) {
+    return data;
+  } else {
+    return null;
+  }
+}
+
+async function loginUserWithNextApi(body, ip = "", withMultiCredentials) {
+  const resp = await post(
+    "/api/authentication",
+    body,
+    ip,
+    withMultiCredentials
+  );
+  const data = await handleResponse(resp);
+  return data;
 }
 
 async function getGeoInfo() {
@@ -253,6 +305,7 @@ async function getGeoInfo() {
 
   return obj;
 }
+
 export const AuthService = {
   validateUser,
   setUserPin,
@@ -264,4 +317,7 @@ export const AuthService = {
   verifyOTP,
   loginUser,
   getGeoInfo,
+  loginUserFetchApi,
+  loginUserWithNextApi,
+  paymentProcessTransaction,
 };

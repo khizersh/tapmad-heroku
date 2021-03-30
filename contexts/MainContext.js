@@ -49,7 +49,7 @@ export default function MainProvider({ children }) {
       "https://api.tapmad.com/api/getAllPaymentMethodsPackages/V1/en/web"
     );
     dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
-    console.log("ope: ", operators);
+
     checkUserAuthentication();
   }, []);
 

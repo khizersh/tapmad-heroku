@@ -25,6 +25,7 @@ export default function EnterPin({ forgetPin }) {
       setLoader(true);
 
       const data = await AuthService.verifyPinCode(userPin);
+      console.log("data in login: ", data);
 
       if (data != null) {
         if (data.responseCode == 1) {

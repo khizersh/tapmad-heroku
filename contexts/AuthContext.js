@@ -18,6 +18,7 @@ export default function AuthProvider({ children }) {
     PackageImage: "",
     selectedPackageId: null,
     subscribeResponseCode: null,
+    newUser: false,
   });
 
   React.useEffect(() => {
@@ -73,11 +74,12 @@ export default function AuthProvider({ children }) {
       signUpComponent: name,
     });
   }
-  function updateResponseCode(code) {
+  function updateResponseCode(code, newUser = false) {
     let stateClone = authState;
     setAuthState({
       ...stateClone,
       subscribeResponseCode: code,
+      newUser: newUser,
     });
   }
   let data = {

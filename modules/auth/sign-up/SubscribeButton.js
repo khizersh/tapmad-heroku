@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
-import { post, actionsRequestSignup } from "../../../services/http-service";
 import router from "next/router";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
-import { initialPaymentTransaction } from "../../../services/apilinks";
 
 export default function SubscribeButton() {
-  const { initialState, setLoader, getCountryCode } = useContext(MainContext);
+  const { initialState, setLoader } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   async function SubscribeUser() {
@@ -70,7 +68,6 @@ export default function SubscribeButton() {
         // for credit card specific only
         AuthService.creditCardOrder(details);
       } else {
-        console.log("detail in signup: ", details);
         const data = await AuthService.initialTransaction(details);
 
         setLoader(false);
@@ -88,14 +85,29 @@ export default function SubscribeButton() {
             swal({
               title: data.message,
               icon: "error",
+              timer: 3000,
             });
           } else if (data.responseCode == 1) {
-            swal({
-              title: "OTP code send successfully, please enter your code!",
-              icon: "success",
-            });
-            // Mutate response code in state
-            updateResponseCode(data.responseCode);
+            // only for jazz cash start
+            if (authState.selectedPaymentMethod.PaymentType == 4) {
+              swal({
+                title: "You have logged out!",
+                text: "Redirecting you in 2s...",
+                timer: 2500,
+              }).then((res) => {
+                setisAuthenticateFalse();
+                router.push("/");
+                setLoader(false);
+              });
+              // end
+            } else {
+              swal({
+                title: "OTP code send successfully, please enter your code!",
+                icon: "success",
+              });
+              // setting responseCode and new user true for payment process
+              updateResponseCode(data.responseCode, true);
+            }
           } else if (data.responseCode == 13) {
             swal({
               title: data.message,

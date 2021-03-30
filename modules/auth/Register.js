@@ -8,12 +8,13 @@ import SetYourNewPin from "./sign-up/SetYourNewPin";
 
 export default memo(function Register() {
   const { authState } = useContext(Authcontext);
+
   const RenderViews = useCallback(
     function () {
       if (authState.subscribeResponseCode == 1) {
         return (
           <>
-            <Pin />
+            <Pin newUser={authState.newUser ? true : false} />
           </>
         );
       } else if (!authState.subscribeResponseCode) {

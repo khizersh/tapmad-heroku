@@ -65,8 +65,8 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <script src="./static/gtm.js"></script>
-        <script src="./static/newrelic.js"></script>
+        {/* <script src="./static/gtm.js"></script>
+        <script src="./static/newrelic.js"></script> */}
         <title>
           Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
           Free
@@ -93,8 +93,14 @@ function MyApp({ Component, pageProps, test }) {
         ></link>
       </Head>
       <>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
-          height="0" width="0" style={{ 'display': 'none', 'visibility': 'hidden' }}></iframe></noscript>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
         {pageProps.noSideBar ? (
           pageProps.dashboard ? (
             <>
