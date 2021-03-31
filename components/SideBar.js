@@ -9,8 +9,13 @@ import { actionsRequestContent } from "../services/http-service";
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
   function toggleNavbar() {
-    document.getElementsByTagName("html")[0].classList.toggle("openNav");
-    document.getElementsByClassName("nav-toggle")[0].classList.toggle("active");
+    document
+      .getElementsByClassName("nav-toggle")[0]
+      .classList.toggle("openNav");
+    // document.getElementsByTagName("html")[0].classList.toggle("menu").style = "left:"
+    // document.getElementsByClassName("nav-toggle")[0].classList.toggle("menu");
+    document.getElementsByClassName("menu")[0].classList.toggle("active");
+    // document.getElementsByClassName("menu")[0].classList.toggle("active");
   }
   const { initialState, setSearch } = React.useContext(MainContext);
 
@@ -33,7 +38,7 @@ export default function SideBar() {
   return (
     <div className="primary-nav">
       <button
-        className="hamburger open-panel nav-toggle"
+        className="hamburger hamburger-icon open-panel nav-toggle"
         onClick={toggleNavbar}
       ></button>
       <nav className="menu">

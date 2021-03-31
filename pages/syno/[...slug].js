@@ -11,8 +11,6 @@ const Syno = (props) => {
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
-  console.log("props in syno: ", props);
-
   if (!mount) {
     if (!video) {
       setVideo(props.data.Video);
@@ -27,7 +25,7 @@ const Syno = (props) => {
 
   return (
     <div className="container-fluid">
-      <CategoryDetail video={video} videoList={videoList} />
+      <CategoryDetail video={video} videoList={videoList} syno={true} />
     </div>
   );
 };
@@ -37,12 +35,9 @@ export default Syno;
 export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel } = manipulateUrls(context.query);
   var ip = requestIp.getClientIp(context.req);
-  console.log(" ip in syno: ", ip);
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
-  console.log(" url in syno: ", url);
   const data = await get(url, ip);
 
-  // Pass data to the page via props
   return { props: { data: data.data } };
 }

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./card/Card";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 
-export default function CategoryDetail({ video, videoList }) {
+export default function CategoryDetail({ video, videoList, syno }) {
   const [slug, setSlug] = useState(null);
 
   useEffect(() => {
@@ -12,7 +12,12 @@ export default function CategoryDetail({ video, videoList }) {
       videoList[0].Videos &&
       videoList[0].Videos.length > 0
     ) {
-      let vid = videoList[0].Videos[videoList[0].Videos.length - 1];
+      let vid;
+      if (syno) {
+        vid = video;
+      } else {
+        vid = videoList[0].Videos[videoList[0].Videos.length - 1];
+      }
       let slugPlay = SEOFriendlySlugsForVideo(vid);
       setSlug(slugPlay);
     }
