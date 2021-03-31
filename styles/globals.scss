@@ -28,6 +28,9 @@ body {
 .slick-disabled {
   display: none !important;
 }
+.slick-track {
+  margin-left: 0px;
+}
 .slick-next::before {
   font-family: "fontAwesome";
   content: "\f105";
