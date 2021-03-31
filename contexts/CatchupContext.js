@@ -29,7 +29,7 @@ export default function CatchupProvider({ children }) {
 
   function updateSelectedTab(selectedTab) {
     let stateClone = catchupState;
-    setAuthState({
+    setCatchupState({
       ...stateClone,
       selectedTab: selectedTab,
     });

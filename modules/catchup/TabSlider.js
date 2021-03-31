@@ -1,25 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import Slider from "react-slick";
+import { CatchupContext } from "../../contexts/CatchupContext";
 import { basicSliderConfig } from "../../services/utils";
 
-const TabSlider = ({ tabs }) => {
-  const settings = basicSliderConfig(7, 5);
+const TabSlider = () => {
+  const { updateSelectedTab, catchupState } = useContext(CatchupContext);
+  const settings = basicSliderConfig(7, 2);
+  console.log("catchupState: ", catchupState);
 
   const onClickTab = (tab) => {
-    console.log("click: ", tab);
+    updateSelectedTab(tab);
   };
+
   return (
     <div className="">
-      {tabs && tabs.length && (
+      {catchupState.tabs && catchupState.tabs.length && (
         <Slider {...settings}>
-          {tabs.map((m) => (
-            <div
-              className={`tab p-3 btn m-2 active-tab`}
-              onClick={() => onClickTab(m)}
-            >
-              <img src={m.TabPosterPath} width="100%" />
-            </div>
-          ))}
+          {catchupState.tabs
+            ? catchupState.tabs.map((m) => (
+                <div
+                  className={`tab p-3 btn m-2 ${
+                    catchupState.selectedTab.TabId == m.TabId
+                      ? "active-tab"
+                      : ""
+                  }`}
+                  onClick={() => onClickTab(m)}
+                >
+                  <img src={m.TabPosterPath} width="100%" />
+                </div>
+              ))
+            : null}
         </Slider>
       )}
     </div>

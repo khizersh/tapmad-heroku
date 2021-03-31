@@ -9,3 +9,36 @@
 .active-tab {
   border-bottom: 1px solid greenyellow;
 }
+
+.dys {
+  z-index: 0;
+  padding: 50px 35px;
+  height: 154px;
+  border: 1px solid #222;
+  background-color: #121117;
+  background-image: linear-gradient(90deg, #121117, #222);
+  box-shadow: 2px 2px 15px 0 rgb(0 0 0 / 20%);
+}
+
+.dys:after {
+  content: "\f0da";
+  font-family: fontawesome;
+  position: absolute;
+  right: -10px;
+  top: 32%;
+  font-size: 32px;
+  color: #222;
+}
+
+.dys h4 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #8cb926;
+  margin-bottom: 0;
+}
+
+.cont-image {
+  height: 154px;
+  width: 100%;
+  animation-duration: 0.3s;
+}

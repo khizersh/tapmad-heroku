@@ -98,6 +98,25 @@ function setUrlAccordingToVideoType(movie, type) {
   return slug;
 }
 
+// catchup
+function SEOFriendlySlugsForCatchupVideo(event) {
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
+
+  return slug;
+}
+
+function SEOFriendlySlugsForCatchup(event) {
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
+
+  return slug;
+}
+
 function calculateRowsToFetch(currentRow, movies) {
   let rowFrom = currentRow;
   let rowsTo = 0;
@@ -158,4 +177,5 @@ module.exports = {
   isAuthentictedUser,
   setUrlToCookies,
   isAuthentictedServerSide,
+  SEOFriendlySlugsForCatchupVideo,
 };
