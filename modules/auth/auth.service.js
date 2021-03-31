@@ -15,13 +15,18 @@ import { handleResponse, post, get } from "../../services/http-service";
 var userId = Cookie.getCookies("userId");
 
 async function setUserPin(pin) {
-  var resp = await post(setUserPinCode, {
-    Version: "V1",
-    Language: "en",
-    Platform: "Web",
-    UserId: userId,
-    UserPinCode: pin,
-  });
+  let resp;
+  try {
+    resp = await post(setUserPinCode, {
+      Version: "V1",
+      Language: "en",
+      Platform: "Web",
+      UserId: userId,
+      UserPinCode: pin,
+    });
+  } catch (error) {
+    resp = null;
+  }
 
   const data = handleResponse(resp);
   if (data != null) {
@@ -52,7 +57,14 @@ async function setNewPin(pin) {
     UserPinCode: pin,
     Version: "V1",
   };
-  const resp = await post(setUserPinCode, body);
+
+  let resp;
+  try {
+    resp = await post(setUserPinCode, body);
+  } catch (error) {
+    resp = null;
+  }
+
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -83,8 +95,15 @@ async function verifyPinCode(pin) {
     Version: "V1",
   };
 
-  const resp = await post(verifyUserPinCode, body);
+  let resp;
+  try {
+    resp = await post(sendOTP, body);
+  } catch (error) {
+    resp = null;
+  }
+
   const data = handleResponse(resp);
+
   if (data != null) {
     if (data.responseCode == 1) {
       return {
@@ -110,7 +129,13 @@ async function forgetPin(mobile, OperatorId) {
     OperatorId: OperatorId,
   };
 
-  const resp = await post(sendOTP, body);
+  let resp;
+  try {
+    resp = await post(sendOTP, body);
+  } catch (error) {
+    resp = null;
+  }
+
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -132,7 +157,12 @@ async function forgetPin(mobile, OperatorId) {
 }
 
 async function creditCardOrder(body) {
-  const resp = await post(creditCard, body);
+  let resp;
+  try {
+    resp = await post(creditCard, body);
+  } catch (error) {
+    resp = null;
+  }
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -154,7 +184,12 @@ async function creditCardOrder(body) {
 }
 
 async function initialTransaction(body) {
-  const resp = await post(initialPaymentTransaction, body);
+  let resp;
+  try {
+    resp = await post(initialPaymentTransaction, body);
+  } catch (error) {
+    resp = null;
+  }
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -175,7 +210,12 @@ async function initialTransaction(body) {
   }
 }
 async function verifyOTP(body) {
-  const resp = await post(verifyOtp, body);
+  let resp;
+  try {
+    resp = await post(verifyOtp, body);
+  } catch (error) {
+    resp = null;
+  }
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -237,7 +277,6 @@ async function loginUser(body) {
 
     console.log("Looogged Innnnn--------------------");
     if (data.responseCode == 1) {
-
       return {
         data: data,
         responseCode: data.responseCode,

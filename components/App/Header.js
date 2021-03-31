@@ -81,6 +81,14 @@ export default function Header() {
                   <a className="nav-link">Shows</a>
                 </Link>
               </li>
+              <li
+                className="nav-item topBarShows"
+                onClick={() => onCLickContent("catchup")}
+              >
+                <Link href="/catchup" passHref={true} shallow={true}>
+                  <a className="nav-link">Catchup</a>
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="col-6 col-sm-10 col-md-9 col-lg-3 additnl_menu">

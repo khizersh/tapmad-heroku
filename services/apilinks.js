@@ -19,39 +19,36 @@ export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";
 export const getEventPredicationGameChannel =
   BASEURL + "api/getEventPredicationGameChannel";
-
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
   BASEURL + "api/initiatePaymentTransaction";
-
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";
-
 export const unsubscribePaymentTransaction =
   BASEURL + "api/unsubscribePaymentTransaction";
-
 export const getMoviesWithPagination = (from, to) => {
   return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
 };
-
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
-
 export const getFeaturedHomepageWithRE = (from, to) => {
   return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/16`;
 };
-
 export const getChannelsWithPagination = (from, to) => {
   return BASEURL + `api/getChannelWithPagination/${from}/${to - from}/0/16`;
 };
-
 export const getMoviesWithPaginationInitial =
   BASEURL + "api/getMoviesWithPagination/0/5/0/16";
-
 export const getChannelWithPaginationInitial =
   BASEURL + "api/getChannelWithPagination/0/5/0/16";
+
+// catchup
+
+export const getCatchupTv = BASEURL + "api/getCatchupTV/V1/en/web";
+
+// ads setting
 
 export const localHost = "http://localhost:3000/";
 export const getFaqs = "/api/faq";

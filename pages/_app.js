@@ -8,6 +8,7 @@ import "../modules/auth/auth.css";
 import "../modules/search/search.css";
 import "../modules/my-account/myaccount.css";
 import "../modules/movies/movie.css";
+import "../modules/catchup/catchup.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -22,6 +23,7 @@ import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
 import { setUrlToCookies } from "../services/utils";
+import CatchupProvider from "../contexts/CatchupContext";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -117,11 +119,13 @@ function MyApp({ Component, pageProps, test }) {
         ) : (
           <>
             <MainProvider>
-              <Skeleton>
-                <Header />
-                <Component {...pageProps} />
-                <Footer />
-              </Skeleton>
+              <CatchupProvider>
+                <Skeleton>
+                  <Header />
+                  <Component {...pageProps} />
+                  <Footer />
+                </Skeleton>
+              </CatchupProvider>
             </MainProvider>
           </>
         )}

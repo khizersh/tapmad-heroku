@@ -1,0 +1,11 @@
+.tab {
+  width: 198px;
+  background: #121117;
+  border-radius: 0;
+  padding: 10px 0;
+  border: 1px solid #222;
+}
+
+.active-tab {
+  border-bottom: 1px solid greenyellow;
+}

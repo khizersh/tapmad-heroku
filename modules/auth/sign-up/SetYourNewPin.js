@@ -49,11 +49,12 @@ export default function SetYourNewPin() {
         // logging end
 
         swal({
-          timer: 3000,
+          timer: 2500,
           title: "Signed In Successfully",
           text: "Redirecting you...",
           icon: "success",
         }).then((result) => {
+          console.log("response in new: ", response);
           Cookie.setCookies("isAuth", 1);
           checkUserAuthentication();
           router.push("/");

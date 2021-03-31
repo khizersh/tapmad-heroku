@@ -10,9 +10,7 @@ import { AuthService } from "../auth.service";
 export default function SetPin() {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
-  const { checkUserAuthentication, setLoader, getCountryCode } = useContext(
-    MainContext
-  );
+  const { checkUserAuthentication, setLoader } = useContext(MainContext);
   const router = useRouter();
 
   async function setUserPin() {

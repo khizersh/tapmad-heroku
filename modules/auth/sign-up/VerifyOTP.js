@@ -6,9 +6,10 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { useRef } from "react";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
+import { Cookie } from "../../../services/cookies";
 
 const Pin = ({ newUser }) => {
-  const { initialState, setLoader, getCountryCode } = useContext(MainContext);
+  const { initialState, setLoader } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
   const otp = useRef("");
 
@@ -53,6 +54,7 @@ const Pin = ({ newUser }) => {
             title: data.message,
             icon: "success",
           }).then((result) => {
+            Cookie.setCookies("userId", data.data.User.UserId);
             updateResponseCode(34);
             setLoader(false);
           });
