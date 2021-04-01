@@ -1,8 +1,8 @@
 import React from "react";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import Link from "next/link";
-const CategoryVerticalCard = ({ video, type }) => {
-  let slug = SEOFriendlySlugsForVideo(video);
+const CategoryVerticalCard = ({ video, type , slug}) => {
+
 
   return (
     <div className="col-2 p-1 d-none d-sm-none d-md-block d-lg-block">

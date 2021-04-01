@@ -13,7 +13,6 @@ const TabDetails = () => {
   const settings = basicSliderConfig(6, 3);
 
   useEffect(() => {
-    console.log("catchupState: ", catchupState);
     setDetails(catchupState.selectedTab);
   }, [catchupState.selectedTab]);
   return (

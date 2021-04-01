@@ -5,13 +5,12 @@ import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 
 export default function CategoryDetail({ video, videoList, syno }) {
   const [slug, setSlug] = useState(null);
-
   useEffect(() => {
     if (
       videoList.length > 0 &&
       videoList[0].Videos &&
       videoList[0].Videos.length > 0
-    ) {
+      ) {
       let vid;
       if (syno) {
         vid = video;

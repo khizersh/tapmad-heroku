@@ -97,7 +97,7 @@ async function verifyPinCode(pin) {
 
   let resp;
   try {
-    resp = await post(sendOTP, body);
+    resp = await post(verifyUserPinCode, body);
   } catch (error) {
     resp = null;
   }

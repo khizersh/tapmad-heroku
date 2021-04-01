@@ -58,9 +58,9 @@ function basicSliderConfig(slidesToShow, mobileView) {
   };
 }
 
-function SEOFriendlySlugsForVideo(event) {
+function SEOFriendlySlugsForVideo(event , catchup = false) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/watch/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
     event.VideoEntityId
   }${event.IsVideoChannel ? "1" : "0"}`;
 

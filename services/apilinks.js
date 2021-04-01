@@ -48,7 +48,7 @@ export const getChannelWithPaginationInitial =
 
 export const getCatchupTv = BASEURL + "api/getCatchupTV/V1/en/web";
 export const getCatchupVideoData = BASEURL + "api/getCatchupTVURL/V1/en/web/";
-// https://api.tapmad.com/api/getCatchupTVURL/V1/en/web/9980
+
 
 // ads setting
 

@@ -13,6 +13,7 @@ import requestIp from "request-ip";
 import { PlayerService } from "../../modules/single-movie/Player.service";
 
 const watch = (props) => {
+  console.log("props: ",props);
   const router = useRouter();
 
   const [url, setUrl] = useState(null);
@@ -35,7 +36,7 @@ const watch = (props) => {
 
   return (
     <div>
-      {props.allowUser && <Player movies={props.data} setUrl={setUrl} />}
+      {props.allowUser && <Player movies={props.data} />}
     </div>
   );
 };
@@ -48,6 +49,7 @@ export async function getServerSideProps(context) {
     ip = "39.44.217.70";
   }
 
+  
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -89,6 +91,7 @@ export async function getServerSideProps(context) {
       };
     }
   }
+
 }
 
 export default watch;

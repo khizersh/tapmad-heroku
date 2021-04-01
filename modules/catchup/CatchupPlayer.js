@@ -3,17 +3,17 @@ import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 import ReactJWPlayer from "react-jw-player";
 import Link from "next/link";
-import { AuthService } from "../../auth/auth.service";
-import { DashboardService } from "../../dashboard/Dashboard.Service";
-import RelatedProductCard from "../../movies/components/RelatedProductCard";
-import PlayerShop from "../../player-shop/player-shop";
-import { PlayerService } from "../Player.service";
-import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { AuthService } from "../auth/auth.service";
+import { DashboardService } from "../dashboard/Dashboard.Service";
+import RelatedProductCard from "../movies/components/RelatedProductCard";
+import PlayerShop from "../player-shop/player-shop";
+import { PlayerService } from "../../modules/single-movie/Player.service";
+// import { SEOFriendlySlugsForVideo } from "../ut";
 import { useRouter } from "next/router";
+import { SEOFriendlySlugsForVideo } from "../../services/utils";
 
-export default function Player({ movies}) {
-
-  console.log("movie:c ",movies);
+export default function CatchupPlayer({ video, videoList }) {
+  console.log("video:c ", video);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
@@ -32,20 +32,21 @@ export default function Player({ movies}) {
 
   if (!mounted) {
     if (!movie) {
-      setMovie(movies);
+      setMovie(video);
       setMounted(true)
 
-      if (movies.Video.IsVideoChannel) {
+      if (video.IsVideoChannel) {
         setVideoLink({
-          highQuality: movies.Video.ChannelStreamUrlWHQ,
-          mediumQuality: movies.Video.ChannelStreamUrlWMQ,
-          lowQuality: movies.Video.ChannelStreamUrlWLQ,
+          highQuality: video.ChannelStreamUrlWHQ,
+          mediumQuality: video.ChannelStreamUrlWMQ,
+          lowQuality: video.ChannelStreamUrlWLQ,
         });
       } else {
+          console.log("video.VideoStreamUrlLQ ",video.VideoStreamUrlLQ );
         setVideoLink({
-          highQuality: movies.Video.VideoStreamUrlHQ,
-          mediumQuality: movies.Video.VideoStreamUrlMQ,
-          lowQuality: movies.Video.VideoStreamUrlLQ,
+          highQuality: video.VideoStreamUrlHQ,
+          mediumQuality: video.VideoStreamUrlMQ,
+          lowQuality: video.VideoStreamUrlLQ,
         });
       }
     }
@@ -58,18 +59,13 @@ export default function Player({ movies}) {
   }
 
   async function getRelatedChannels() {
-    const res = await PlayerService.getRelatedChannelsOrVODData(
-      movie.Video.VideoEntityId,
-      movie.Video.IsVideoChannel ? 1 : 0
-    );
-    if (res.data && res.responseCode == 1) {
-      setRelatedVideos(res.data.Sections[0].Videos);
+    if (videoList && videoList.length) {
+      setRelatedVideos(videoList);
     }
   }
 
   useEffect(async () => {
     await getRelatedChannels();
-
     const resp = await DashboardService.getAdData();
     const country = await AuthService.getGeoInfo();
     let data;
@@ -98,21 +94,21 @@ export default function Player({ movies}) {
   }, [router]);
 
   useEffect(() => {
-    setMovie(movies);
-    if (movies.Video.IsVideoChannel) {
+    setMovie(video);
+    if (video.IsVideoChannel) {
       setVideoLink({
-        highQuality: movies.Video.ChannelStreamUrlWHQ,
-        mediumQuality: movies.Video.ChannelStreamUrlWMQ,
-        lowQuality: movies.Video.ChannelStreamUrlWLQ,
+        highQuality: video.ChannelStreamUrlWHQ,
+        mediumQuality: video.ChannelStreamUrlWMQ,
+        lowQuality: video.ChannelStreamUrlWLQ,
       });
     } else {
       setVideoLink({
-        highQuality: movies.Video.VideoStreamUrlHQ,
-        mediumQuality: movies.Video.VideoStreamUrlMQ,
-        lowQuality: movies.Video.VideoStreamUrlLQ,
+        highQuality: video.VideoStreamUrlHQ,
+        mediumQuality: video.VideoStreamUrlMQ,
+        lowQuality: movie.VideoStreamUrlLQ,
       });
     }
-  }, [movies]);
+  }, [video]);
 
   return (
     <div>
@@ -241,7 +237,7 @@ export default function Player({ movies}) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video);
+                      let slug = SEOFriendlySlugsForVideo(video , true);
                       return (
                         <Link
                           href={slug}
