@@ -1,4 +1,4 @@
-import React,{useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { manipulateUrls } from "../../services/utils";
 import { CatchupService } from "../../modules/catchup/catchup.service";
 import VideoDetail from "../../modules/catchup/VideoDetail";
@@ -21,7 +21,7 @@ const CatchupDetail = (props) => {
   }, []);
   return (
     <div className="container-fluid">
-      <VideoDetail video={video} videoList={videoList} />
+      {/* <VideoDetail video={video} videoList={videoList} /> */}
     </div>
   );
 };
@@ -32,7 +32,9 @@ export async function getServerSideProps(context) {
   let { isChannel, OriginalMovieId, isFree, CleanVideoId } = manipulateUrls(
     context.query
   );
+  console.log("CleanVideoId: ", CleanVideoId);
   const data = await CatchupService.getCatchupVideo(CleanVideoId);
+  console.log("data: ", data);
 
   return { props: { video: data.data.Video, videoList: data.data.Videos } };
 }
