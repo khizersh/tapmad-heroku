@@ -34,7 +34,10 @@ export async function getServerSideProps(context) {
   );
   console.log("CleanVideoId: ", CleanVideoId);
   const data = await CatchupService.getCatchupVideo(CleanVideoId);
-  console.log("data: ", data);
 
-  return { props: { video: data.data.Video, videoList: data.data.Videos } };
+  if (data.responseCode == 1) {
+    return { props: { video: data.data.Video, videoList: data.data.Videos } };
+  } else {
+    return { props: { video: null, videoList: [] } };
+  }
 }
