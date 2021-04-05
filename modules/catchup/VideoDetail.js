@@ -1,18 +1,18 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import Card from "../category/components/card/Card"
+import Card from "../category/components/card/Card";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 
-
-export default function VideoDetail({ video, videoList}) {
+export default function VideoDetail({ video, videoList }) {
+  console.log("video: ", video);
   const [slug, setSlug] = useState(null);
+
   useEffect(() => {
     if (video) {
-      let slugPlay = SEOFriendlySlugsForVideo(video , true);
+      let slugPlay = SEOFriendlySlugsForVideo(video, true);
       setSlug(slugPlay);
     }
-  }, [video , videoList]);
-
+  }, [video, videoList]);
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function VideoDetail({ video, videoList}) {
         </div>
       </div>
       <div className="row mt-3">
-        {videoList && videoList.length > 0 
+        {videoList && videoList.length > 0
           ? videoList.map((vid, i) => {
               let type = "";
               if (!vid.IsVideoFree) {

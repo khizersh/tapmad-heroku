@@ -8,6 +8,7 @@ const CatchupDetail = (props) => {
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
+  console.log("catchup api call");
   if (!mount) {
     if (!video) {
       setVideo(props.video);
@@ -21,7 +22,7 @@ const CatchupDetail = (props) => {
   }, []);
   return (
     <div className="container-fluid">
-      <VideoDetail video={video} videoList={videoList} />
+      {video && <VideoDetail video={video} videoList={videoList} />}
     </div>
   );
 };
@@ -34,6 +35,7 @@ export async function getServerSideProps(context) {
   );
   console.log("CleanVideoId: ", CleanVideoId);
   const data = await CatchupService.getCatchupVideo(CleanVideoId);
+  console.log("data: ", data.responseCode);
 
   if (data.responseCode == 1) {
     return { props: { video: data.data.Video, videoList: data.data.Videos } };
