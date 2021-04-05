@@ -1,6 +1,7 @@
 import cookie from "cookie";
 import { func } from "joi";
-import { Cookies } from "react-cookie";
+// import { Cookies } from "react-cookie";
+import Cookies from "universal-cookie";
 
 function setCookies(name, val) {
   return initializeCookes().set(name, val, { path: "/" });
@@ -8,6 +9,10 @@ function setCookies(name, val) {
 
 function getCookies(name) {
   return initializeCookes().get(name);
+}
+
+function removeCookie(name) {
+  return initializeCookes().remove(name);
 }
 
 function initializeCookes() {
@@ -22,4 +27,6 @@ export const Cookie = {
   setCookies,
   getCookies,
   parseCookies,
+  removeCookie,
+  initializeCookes,
 };

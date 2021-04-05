@@ -10,21 +10,47 @@ function get(url, ip) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  return axios.get(url, {
-    headers: {
+  const Auth = Cookie.getCookies("content-token");
+
+  let headers = {};
+  if (Auth) {
+    headers = {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",
-    },
+      Authorization: Auth,
+    };
+  } else {
+    headers = {
+      "Content-Type": "application/json",
+      "X-Forwarded-For": ip ? ip : "",
+    };
+  }
+  return axios.get(url, {
+    headers,
   });
 }
 
 function post(url, body, ip, credentialAllowed = false) {
-  return axios.post(url, body, {
-    withCredentials: credentialAllowed ? true : false,
-    headers: {
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
+  let headers = {};
+  const Auth = Cookie.getCookies("content-token");
+  if (Auth) {
+    headers = {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",
-    },
+      Authorization: Auth,
+    };
+  } else {
+    headers = {
+      "Content-Type": "application/json",
+      "X-Forwarded-For": ip ? ip : "",
+    };
+  }
+  return axios.post(url, body, {
+    withCredentials: credentialAllowed ? true : false,
+    headers,
   });
 }
 function put(url, body, ip) {

@@ -36,30 +36,43 @@ export default function SetYourNewPin() {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
-        // logging start
-        if (authState && authState.selectedPackageId) {
-          let body = {
-            event: loggingTags.signup,
-            amount: authState.selectedPackageAmount,
-            operatorName: authState.selectedPackageName,
-            mobileNumber: initialState.User.MobileNo,
-          };
-          actionsRequestContent(body);
-        }
-        // logging end
-
-        swal({
-          timer: 2500,
-          title: "Signed In Successfully",
-          text: "Redirecting you...",
-          icon: "success",
-        }).then((result) => {
-          console.log("response in new: ", response);
+        let obj = {
+          Language: "en",
+          Platform: "web",
+          Version: "V1",
+          MobileNo: initialState.User.MobileNo,
+          OperatorId: initialState.User.OperatorId,
+          UserPassword: initialState.User.Password,
+        };
+        console.log("initialState: ", initialState);
+        let response = await AuthService.signInOrSignUpMobileOperator(
+          obj,
+          "",
+          false
+        );
+        if (response && response.data && response.data.UserId) {
+          // logging start
+          if (authState && authState.selectedPackageId) {
+            let body = {
+              event: loggingTags.signup,
+              amount: authState.selectedPackageAmount,
+              operatorName: authState.selectedPackageName,
+              mobileNumber: initialState.User.MobileNo,
+            };
+            actionsRequestContent(body);
+          }
+          // logging end
+          swal({
+            timer: 2500,
+            title: "Signed In Successfully",
+            text: "Redirecting you...",
+            icon: "success",
+          });
           Cookie.setCookies("isAuth", 1);
           checkUserAuthentication();
           router.push("/");
           setLoader(false);
-        });
+        }
       }
     } else {
       return swal({

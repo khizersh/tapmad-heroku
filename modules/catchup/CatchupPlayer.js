@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 
 export default function CatchupPlayer({ video, videoList }) {
-  console.log("video:c ", video);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
@@ -33,7 +32,7 @@ export default function CatchupPlayer({ video, videoList }) {
   if (!mounted) {
     if (!movie) {
       setMovie(video);
-      setMounted(true)
+      setMounted(true);
 
       if (video.IsVideoChannel) {
         setVideoLink({
@@ -42,7 +41,6 @@ export default function CatchupPlayer({ video, videoList }) {
           lowQuality: video.ChannelStreamUrlWLQ,
         });
       } else {
-          console.log("video.VideoStreamUrlLQ ",video.VideoStreamUrlLQ );
         setVideoLink({
           highQuality: video.VideoStreamUrlHQ,
           mediumQuality: video.VideoStreamUrlMQ,
@@ -163,15 +161,13 @@ export default function CatchupPlayer({ video, videoList }) {
               </div>
             </div>
             <div className="col-lg-12 p-0">
-              {movie && movie.Video ? (
+              {movie ? (
                 <>
-                  <h5 className="mt-3">{movie.Video.VideoName}</h5>
+                  <h5 className="mt-3">{movie.VideoName}</h5>
                   <span className="text-secondary">
-                    {movie.Video.VideoTotalViews} views
+                    {movie.VideoTotalViews} views
                   </span>
-                  <p style={{ color: "#aaa" }}>
-                    {movie.Video.VideoDescription}
-                  </p>
+                  <p style={{ color: "#aaa" }}>{movie.VideoDescription}</p>
                 </>
               ) : null}
             </div>
@@ -237,7 +233,7 @@ export default function CatchupPlayer({ video, videoList }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video , true);
+                      let slug = SEOFriendlySlugsForVideo(video, true);
                       return (
                         <Link
                           href={slug}

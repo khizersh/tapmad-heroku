@@ -11,9 +11,8 @@ import { PlayerService } from "../Player.service";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 
-export default function Player({ movies}) {
-
-  console.log("movie:c ",movies);
+export default function Player({ movies }) {
+  console.log("movie:c ", movies);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
@@ -33,7 +32,7 @@ export default function Player({ movies}) {
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
-      setMounted(true)
+      setMounted(true);
 
       if (movies.Video.IsVideoChannel) {
         setVideoLink({

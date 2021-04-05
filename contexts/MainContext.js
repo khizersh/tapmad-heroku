@@ -13,6 +13,8 @@ function reducer(state, action) {
       return { ...state, isSearch: action.data };
     case "UPDATE_FULLNAME":
       return { ...state, User: { ...state.User, FullName: action.data } };
+    case "SET_USER_PASSWORD":
+      return { ...state, User: { ...state.User, Password: action.data } };
     case "UPDATE_EMAIL":
       return { ...state, User: { ...state.User, Email: action.data } };
     case "UPDATE_CNIC":
@@ -56,6 +58,10 @@ export default function MainProvider({ children }) {
   function updateUserNumber(number) {
     dispatch({ type: "SET_USER_NUMBER", data: number });
   }
+
+  function updateUserPassword(password) {
+    dispatch({ type: "SET_USER_PASSWORD", data: password });
+  }
   function updateUserOperator(operator) {
     dispatch({ type: "UPDATE_OPERATOR", data: operator });
   }
@@ -70,9 +76,8 @@ export default function MainProvider({ children }) {
     dispatch({ type: "UPDATE_EMAIL", data: email });
   }
   function checkUserAuthentication() {
-    const userId = Cookie.getCookies("userId");
-    const isAuthenticated = Cookie.getCookies("isAuth");
-    if (userId && isAuthenticated && isAuthenticated == 1) {
+    const token = Cookie.getCookies("content-token");
+    if (token) {
       dispatch({ type: "SET_AUTHENTICATION", data: true });
     }
   }
@@ -87,6 +92,7 @@ export default function MainProvider({ children }) {
   function setisAuthenticateFalse() {
     Cookie.setCookies("isAuth", 0);
     Cookie.setCookies("userId", "");
+    Cookie.removeCookie("content-token");
     dispatch({ type: "SET_AUTHENTICATION", data: false });
   }
   function setLoader(bool) {
@@ -101,6 +107,7 @@ export default function MainProvider({ children }) {
     setSearch,
     checkUserAuthentication,
     updateUserNumber,
+    updateUserPassword,
     updateUserOperator,
     updateUserCnic,
     updateUserFullName,

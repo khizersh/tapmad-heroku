@@ -11,6 +11,7 @@ export default function SetPin() {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
   const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  const { initialState } = useContext(MainContext);
   const router = useRouter();
 
   async function setUserPin() {
@@ -39,7 +40,21 @@ export default function SetPin() {
         timer: 2000,
         icon: "success",
       });
-      setTimeout(() => {
+
+      let obj = {
+        Language: "en",
+        Platform: "web",
+        Version: "V1",
+        MobileNo: initialState.User.MobileNo,
+        OperatorId: initialState.User.OperatorId,
+        UserPassword: initialState.User.Password,
+      };
+      let response = await AuthService.signInOrSignUpMobileOperator(
+        obj,
+        "",
+        false
+      );
+      if (response && response.data && response.data.UserId) {
         swal({
           title: "Signin successfully!",
           text: "Redirecting you now..",
@@ -49,8 +64,20 @@ export default function SetPin() {
         checkUserAuthentication();
         router.push("/");
         setLoader(false);
-      }, 2000);
+      } else {
+        setLoader(false);
+        swal({
+          title: response.message,
+          icon: "error",
+          timer: 3000,
+        });
+      }
     } else {
+      swal({
+        title: "something went wrong!",
+        timer: 2000,
+        icon: "error",
+      });
       Cookie.setCookies("isAuth", 0);
       setLoader(false);
     }
@@ -71,7 +98,7 @@ export default function SetPin() {
       setCPin(mobileNum.trim());
     }
   }
-  const { initialState } = useContext(MainContext);
+
   return (
     <div className="login_slct_oprtr login_set_pin_card login_slct_oprtr_active">
       <img

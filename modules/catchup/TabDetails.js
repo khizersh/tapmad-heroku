@@ -15,6 +15,8 @@ const TabDetails = () => {
   useEffect(() => {
     setDetails(catchupState.selectedTab);
   }, [catchupState.selectedTab]);
+  console.log("catchupState.selectedTab: ", catchupState.selectedTab);
+
   return (
     <div>
       {details && details.sections.length
@@ -39,13 +41,15 @@ const TabDetails = () => {
                       return (
                         <Link href={slug} shallow passHref>
                           <a>
-                            <img
-                              className="cont-image"
-                              src={n.VideoImageThumbnail}
-                              width="100%"
-                            />
-                            <div className="live_side" style={{ left: "2px" }}>
-                              {n.PackageName}
+                            <div className="pos-rel">
+                              <img
+                                className="cont-image"
+                                src={n.VideoImageThumbnail}
+                                width="100%"
+                              />
+                              {n.IsVideoFree ? null : (
+                                <div className="live_side">{n.PackageName}</div>
+                              )}
                             </div>
                           </a>
                         </Link>

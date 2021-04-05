@@ -40,7 +40,6 @@ const Pin = ({ newUser }) => {
         data = await AuthService.verifyOTP(body);
       }
 
-      console.log("data: ", data);
       if (data != null) {
         if (data.responseCode == 0) {
           swal({
@@ -54,7 +53,10 @@ const Pin = ({ newUser }) => {
             title: data.message,
             icon: "success",
           }).then((result) => {
-            Cookie.setCookies("userId", data.data.User.UserId);
+            if (newUser) {
+              Cookie.setCookies("userId", data.data.User.UserId);
+            }
+
             updateResponseCode(34);
             setLoader(false);
           });

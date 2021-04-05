@@ -15,6 +15,9 @@ export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 export const paymentProcess = BASEURL + "api/processPaymentTransaction";
 export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
+export const SignUpORSignInMobileOperatorToken =
+  BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
+
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";
 export const getEventPredicationGameChannel =
@@ -48,7 +51,6 @@ export const getChannelWithPaginationInitial =
 
 export const getCatchupTv = BASEURL + "api/getCatchupTV/V1/en/web";
 export const getCatchupVideoData = BASEURL + "api/getCatchupTVURL/V1/en/web/";
-
 
 // ads setting
 

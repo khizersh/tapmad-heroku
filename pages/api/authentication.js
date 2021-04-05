@@ -2,6 +2,7 @@ import { AuthService } from "../../modules/auth/auth.service";
 import { MYSECRET } from "../../services/secret";
 var jwt = require("jsonwebtoken");
 import { serialize } from "cookie";
+import { Cookie } from "../../services/cookies";
 
 export const setCookie = (res, name, value, options = {}) => {
   const stringValue = value;
@@ -11,24 +12,37 @@ export const setCookie = (res, name, value, options = {}) => {
 export const clearCookie = (res, name) => {
   res.clearCookie(name, []);
 };
+
 export default async (req, res) => {
   if (req.method == "POST") {
     const data = await AuthService.loginUserFetchApi(req.body);
     let { responseCode, message } = data.Response;
     let { User } = data;
 
-    if (responseCode === 1) {
+    if (User && User.UserId) {
       var token = jwt.sign(
-        { userId: User.UserId, userTypeId: User.UserTypeId },
+        { userId: User.UserId, userTypeId: User.UserTypesId },
         MYSECRET,
         {
           expiresIn: 86400, // expires in 24 hours
         }
       );
       setCookie(res, "token", token);
-      res.json({ ...data, token: token });
-    } else if (responseCode === 0) {
-      res.json({ ...data });
+
+      let obj = {
+        data: User,
+        responseCode: responseCode,
+        message: message,
+      };
+      res.json({ ...obj });
+    } else {
+      let user = { ...User, jwtToken: null };
+      let obj = {
+        data: user,
+        responseCode: responseCode,
+        message: message,
+      };
+      res.json({ ...obj });
     }
   } else if (req.method == "PUT") {
     console.log("Loooogs", req.headers.cookie);

@@ -7,7 +7,9 @@ import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 
 export default function SubscribeButton() {
-  const { initialState, setLoader } = useContext(MainContext);
+  const { initialState, setLoader, updateUserPassword } = useContext(
+    MainContext
+  );
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   async function SubscribeUser() {
@@ -69,10 +71,12 @@ export default function SubscribeButton() {
         AuthService.creditCardOrder(details);
       } else {
         const data = await AuthService.initialTransaction(details);
+        console.log("initialTransaction: ", data);
 
         setLoader(false);
         if (data != null) {
           if (data.responseCode == 11) {
+            updateUserPassword(data.data.User.UserPassword);
             swal({
               timer: 3000,
               text:

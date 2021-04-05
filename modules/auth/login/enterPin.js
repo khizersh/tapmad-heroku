@@ -11,7 +11,9 @@ import { AuthService } from "../auth.service";
 export default function EnterPin({ forgetPin }) {
   const [userPin, seUserPin] = useState();
   const router = useRouter();
-  const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  const { checkUserAuthentication, setLoader, initialState } = useContext(
+    MainContext
+  );
 
   function handleNumber(e) {
     const pin = e.target.value;
@@ -25,26 +27,46 @@ export default function EnterPin({ forgetPin }) {
       setLoader(true);
 
       const data = await AuthService.verifyPinCode(userPin);
-      console.log("data in login: ", data);
 
       if (data != null) {
         if (data.responseCode == 1) {
-          Cookie.setCookies("isAuth", 1);
-          swal({
-            title: "Sign in successfully!",
-            text: "Redirecting you now...",
-            timer: 3000,
-            icon: "success",
-          });
-          checkUserAuthentication();
-          // logging start
-          let body = {
-            event: loggingTags.login,
-            action: "login_success",
+          let obj = {
+            Language: "en",
+            Platform: "web",
+            Version: "V1",
+            MobileNo: initialState.User.MobileNo,
+            OperatorId: initialState.User.OperatorId,
+            UserPassword: initialState.User.Password,
           };
-          actionsRequestContent(body);
-          // logging end
-          router.push("/");
+          const resp = await AuthService.signInOrSignUpMobileOperator(
+            obj,
+            "",
+            false
+          );
+
+          if (resp && resp.data && resp.data.UserId) {
+            Cookie.setCookies("isAuth", 1);
+            swal({
+              title: "Sign in successfully!",
+              text: "Redirecting you now...",
+              timer: 2500,
+              icon: "success",
+            });
+            checkUserAuthentication();
+            let body = {
+              event: loggingTags.login,
+              action: "login_success",
+            };
+            actionsRequestContent(body);
+            router.push("/");
+          } else {
+            setLoader(false);
+            swal({
+              title: response.message,
+              icon: "error",
+              timer: 3000,
+            });
+          }
         } else {
           setLoader(false);
           swal({

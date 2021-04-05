@@ -9,51 +9,43 @@ import {
 import { useRouter } from "next/router";
 import requestIp from "request-ip";
 import { CatchupService } from "../../modules/catchup/catchup.service";
-import CatchupPlayer from "../../modules/catchup/CatchupPlayer"
+import CatchupPlayer from "../../modules/catchup/CatchupPlayer";
 
 const watch = (props) => {
-  console.log("props: ", props);
   const router = useRouter();
 
-    useEffect(() => {
-      if (!props.allowUser) {
-        router.push("/sign-up");
-      } else {
-        let cId = props.video.VideoEntityId
-          ? props.video.VideoEntityId
-          : "";
-        let cName = props.video.VideoName ? props.video.VideoName : "";
-        let body = {
-          event: "view",
-          contentId: cId,
-          contentName: cName,
-        };
-        actionsRequestContent(body);
-      }
-    }, [props.allowUser]);
+  useEffect(() => {
+    if (!props.allowUser) {
+      router.push("/sign-up");
+    } else {
+      let cId = props.video.VideoEntityId ? props.video.VideoEntityId : "";
+      let cName = props.video.VideoName ? props.video.VideoName : "";
+      let body = {
+        event: "view",
+        contentId: cId,
+        contentName: cName,
+      };
+      actionsRequestContent(body);
+    }
+  }, [props.allowUser]);
 
-  return <div>
-      {props.allowUser && <CatchupPlayer video={props.video} videoList={props.videoList} />}
-    </div>;
+  return (
+    <div>
+      {props.allowUser && (
+        <CatchupPlayer video={props.video} videoList={props.videoList} />
+      )}
+    </div>
+  );
 };
 
 export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
-  const cookies = Cookie.parseCookies(context.req);
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
 
   let allowUser = true;
-//   let body = {
-//     Version: "V2",
-//     Language: "en",
-//     Platform: "web",
-//     ChannelOrVODId: chanelDetail.CleanVideoId,
-//     UserId: cookies.userId ? cookies.userId : "0",
-//     IsChannel: chanelDetail.isChannel,
-//   };
 
   var isFree = "1";
   isFree = chanelDetail.isFree;
@@ -85,11 +77,10 @@ export async function getServerSideProps(context) {
     } else {
       // not logged in
       return {
-        props: response(null,null, chanelDetail, false),
+        props: response(null, null, chanelDetail, false),
       };
     }
   }
-
 }
 
 export default watch;

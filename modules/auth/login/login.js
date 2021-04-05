@@ -13,6 +13,7 @@ function Login({ loginResponse }) {
   const {
     initialState,
     updateUserNumber,
+    updateUserPassword,
     updateUserOperator,
     setLoader,
   } = React.useContext(MainContext);
@@ -44,12 +45,15 @@ function Login({ loginResponse }) {
         Language: "en",
         MobileNo: mobileNo,
       };
-      const data = await AuthService.loginUserWithNextApi(body, "", false);
+      const data = await AuthService.loginUser(body);
+      console.log("data in check: ", data);
 
       if (data != null) {
-        if (data.User) {
+        if (data.data.User) {
+          console.log("User: ", data.data.User);
           updateUserNumber(mobileNo);
-          loginResponse(data);
+          updateUserPassword(data.data.User.UserPassword);
+          loginResponse(data.data);
           setLoader(false);
         }
       } else {

@@ -8,6 +8,7 @@ import {
   verifyOtp,
   getCardUser,
   paymentProcess,
+  SignUpORSignInMobileOperatorToken,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -274,8 +275,6 @@ async function loginUser(body) {
     } catch (e) {
       console.log(e);
     }
-
-    console.log("Looogged Innnnn--------------------");
     if (data.responseCode == 1) {
       return {
         data: data,
@@ -321,7 +320,7 @@ async function loginUserFetchApi(body) {
       "Content-type": "application/json; charset=UTF-8",
     },
   };
-  const resp = await fetch(getCardUser, options);
+  const resp = await fetch(SignUpORSignInMobileOperatorToken, options);
   const data = await resp.json();
   if (data && data.Response) {
     return data;
@@ -330,16 +329,45 @@ async function loginUserFetchApi(body) {
   }
 }
 
-async function loginUserWithNextApi(body, ip = "", withMultiCredentials) {
+async function signInOrSignUpMobileOperator(
+  body,
+  ip = "",
+  withMultiCredentials
+) {
   const resp = await post(
     "/api/authentication",
     body,
     ip,
     withMultiCredentials
   );
-  const data = await handleResponse(resp);
+  const data = handleResponse(resp);
+  if (data && data.data.jwtToken) {
+    Cookie.setCookies("content-token", data.data.jwtToken);
+  }
   return data;
 }
+
+// async function SignUpORSignInMobileOperator(body) {
+//   const resp = await post(SignUpORSignInMobileOperatorToken, body);
+//   const data = handleResponse(resp);
+//   if (data != null) {
+//     if (data.responseCode == 1) {
+//       return {
+//         data: data,
+//         responseCode: data.responseCode,
+//         message: data.message,
+//       };
+//     } else {
+//       return {
+//         data: data,
+//         responseCode: data.responseCode,
+//         message: data.message,
+//       };
+//     }
+//   } else {
+//     return null;
+//   }
+// }
 
 async function getGeoInfo() {
   let obj = {};
@@ -373,6 +401,6 @@ export const AuthService = {
   loginUser,
   getGeoInfo,
   loginUserFetchApi,
-  loginUserWithNextApi,
   paymentProcessTransaction,
+  signInOrSignUpMobileOperator,
 };
