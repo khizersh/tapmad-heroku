@@ -21,7 +21,7 @@ const CatchupDetail = (props) => {
   }, []);
   return (
     <div className="container-fluid">
-      {/* <VideoDetail video={video} videoList={videoList} /> */}
+      <VideoDetail video={video} videoList={videoList} />
     </div>
   );
 };
