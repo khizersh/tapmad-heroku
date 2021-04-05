@@ -1,4 +1,4 @@
-import { getCatchupTv , getCatchupVideoData} from "../../services/apilinks";
+import { getCatchupTv, getCatchupVideoData } from "../../services/apilinks";
 import { get, handleResponse } from "../../services/http-service";
 
 async function getCatchupTvData() {
@@ -22,8 +22,8 @@ async function getCatchupTvData() {
     return null;
   }
 }
-async function getCatchupVideo(id) {
-  const resp = await get(getCatchupVideoData + id);
+async function getCatchupVideo(id, ip) {
+  const resp = await get(getCatchupVideoData + id, ip);
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -46,5 +46,5 @@ async function getCatchupVideo(id) {
 
 export const CatchupService = {
   getCatchupTvData,
-  getCatchupVideo
+  getCatchupVideo,
 };

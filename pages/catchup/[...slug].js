@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { manipulateUrls } from "../../services/utils";
 import { CatchupService } from "../../modules/catchup/catchup.service";
 import VideoDetail from "../../modules/catchup/VideoDetail";
+import requestIp from "request-ip";
 
 const CatchupDetail = (props) => {
   const [videoList, setVideoList] = useState([]);
@@ -30,11 +31,13 @@ const CatchupDetail = (props) => {
 export default CatchupDetail;
 
 export async function getServerSideProps(context) {
-  let { isChannel, OriginalMovieId, isFree, CleanVideoId } = manipulateUrls(
-    context.query
-  );
+  let { CleanVideoId } = manipulateUrls(context.query);
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   console.log("CleanVideoId: ", CleanVideoId);
-  const data = await CatchupService.getCatchupVideo(CleanVideoId);
+  const data = await CatchupService.getCatchupVideo(CleanVideoId, ip);
   console.log("data: ", data.responseCode);
 
   if (data.responseCode == 1) {
