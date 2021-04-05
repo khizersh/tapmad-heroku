@@ -59,11 +59,13 @@ export const getFaqs = "/api/faq";
 export const getAboutus = "/api/about-us";
 export const getAdDetails = "/api/ads";
 export const getCredentials = "/api/credentials";
+export const homepageAds = "/api/homepage-ads";
 
 export const adCsvFile = "public/ads.csv";
 export const faqCsvFile = "public/faq.csv";
 export const aboutUsCsvFile = "public/about-us.csv";
 export const credentialsCsvFile = "public/credentials.csv";
+export const homePageAdsCsvFile = "public/homepage-ads.csv";
 
 // logging request
 export const loggingBaseURl = "http://staging.simpaisa.com:1234";

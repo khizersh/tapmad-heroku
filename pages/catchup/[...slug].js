@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { manipulateUrls } from "../../services/utils";
 import { CatchupService } from "../../modules/catchup/catchup.service";
 import VideoDetail from "../../modules/catchup/VideoDetail";
 import requestIp from "request-ip";
+import { CatchupContext } from "../../contexts/CatchupContext";
 
 const CatchupDetail = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
+  const { catchupState } = useContext(CatchupContext);
 
-  console.log("catchup api call");
   if (!mount) {
     if (!video) {
       setVideo(props.video);
-      setVideoList(props.videoList);
+      if (catchupState && catchupState.relatedContent) {
+        setVideoList(catchupState.relatedContent);
+      }
       setMount(true);
     }
   }
@@ -36,9 +39,8 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  console.log("CleanVideoId: ", CleanVideoId);
+
   const data = await CatchupService.getCatchupVideo(CleanVideoId, ip);
-  console.log("data: ", data.responseCode);
 
   if (data.responseCode == 1) {
     return { props: { video: data.data.Video, videoList: data.data.Videos } };

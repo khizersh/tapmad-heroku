@@ -9,6 +9,7 @@ import {
   getCardUser,
   paymentProcess,
   SignUpORSignInMobileOperatorToken,
+  homepageAds,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -210,6 +211,29 @@ async function initialTransaction(body) {
     return null;
   }
 }
+
+async function getHomePageAdsDetail() {
+  let resp;
+  try {
+    resp = await get(homepageAds, "", false);
+  } catch (error) {
+    resp = null;
+  }
+
+  return resp;
+}
+
+async function addHomePageAds(body) {
+  let resp;
+  try {
+    resp = await post(homepageAds, body);
+  } catch (error) {
+    resp = null;
+  }
+
+  return resp;
+}
+
 async function verifyOTP(body) {
   let resp;
   try {
@@ -347,28 +371,6 @@ async function signInOrSignUpMobileOperator(
   return data;
 }
 
-// async function SignUpORSignInMobileOperator(body) {
-//   const resp = await post(SignUpORSignInMobileOperatorToken, body);
-//   const data = handleResponse(resp);
-//   if (data != null) {
-//     if (data.responseCode == 1) {
-//       return {
-//         data: data,
-//         responseCode: data.responseCode,
-//         message: data.message,
-//       };
-//     } else {
-//       return {
-//         data: data,
-//         responseCode: data.responseCode,
-//         message: data.message,
-//       };
-//     }
-//   } else {
-//     return null;
-//   }
-// }
-
 async function getGeoInfo() {
   let obj = {};
   const response = await get("http://ip-api.com/json/");
@@ -403,4 +405,6 @@ export const AuthService = {
   loginUserFetchApi,
   paymentProcessTransaction,
   signInOrSignUpMobileOperator,
+  getHomePageAdsDetail,
+  addHomePageAds,
 };

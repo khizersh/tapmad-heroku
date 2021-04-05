@@ -34,6 +34,7 @@ function customizingData(parentarray) {
 
   return mov;
 }
+
 export const GolobalService = {
   checkIsArray,
   convertInArray,

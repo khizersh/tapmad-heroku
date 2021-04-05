@@ -201,7 +201,7 @@ export default function CatchupPlayer({ video, videoList }) {
             )}
 
             {ads.allow && isAutoPlay && ads.rightVideoAd ? (
-              <div style={{ border: "1px solid white", marginTop: "65px" }}>
+              <div style={{ marginTop: "65px" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id1"
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
@@ -210,11 +210,7 @@ export default function CatchupPlayer({ video, videoList }) {
                   isSkipable={false}
                   onOneHundredPercent={onRestartAd}
                   onAdSkipped={onRestartAd}
-                  file={
-                    videoLink
-                      ? videoLink.lowQuality
-                      : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
-                  }
+                  file={"https://www.tapmad.com/tapmad.mp4"}
                   onAdComplete={onRestartAd}
                   generatePrerollUrl={() =>
                     ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""

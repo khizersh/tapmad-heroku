@@ -35,20 +35,24 @@ const DashboardSidebar = () => {
                 </a>
               </Link>
             </li> */}
-            {/* <li>
-              <Link href="/dashboard/aboutus" shallow={true} passHref={true}>
+            <li>
+              <Link
+                href="/dashboard/homepage-ads"
+                shallow={true}
+                passHref={true}
+              >
                 <a>
-                  About us setting
+                  Home page ads
                   <span className="icon">
                     <i className="fa fa-film"></i>
                   </span>
                 </a>
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link href="/dashboard/ads" shallow={true} passHref={true}>
                 <a>
-                  Ads setting
+                  Player page ads
                   <span className="icon">
                     <i className="fa fa-ticket"></i>
                   </span>

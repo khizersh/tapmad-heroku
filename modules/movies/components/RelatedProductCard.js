@@ -2,9 +2,9 @@ import React from "react";
 
 const RelatedProductCard = ({ video }) => {
   return (
-    <div className="col-12 p-1">
+    <div className="col-12 p-1 img-hov">
       <div className="d-flex">
-        <div>
+        <div className="img-hov">
           <img src={video.VideoImagePath} alt={video.VideoName} width="130px" />
         </div>
         <div>
