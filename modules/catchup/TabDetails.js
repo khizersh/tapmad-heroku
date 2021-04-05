@@ -15,7 +15,6 @@ const TabDetails = () => {
   useEffect(() => {
     setDetails(catchupState.selectedTab);
   }, [catchupState.selectedTab]);
-  console.log("catchupState.selectedTab: ", catchupState.selectedTab);
 
   return (
     <div>

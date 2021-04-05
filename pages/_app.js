@@ -67,8 +67,8 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        {/* <script src="./static/gtm.js"></script>
-        <script src="./static/newrelic.js"></script> */}
+        <script src="./static/gtm.js"></script>
+        <script src="./static/newrelic.js"></script>
         <title>Tapmad - Watch LIVE TV Channels Online | ------- Test</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
