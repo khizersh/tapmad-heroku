@@ -15,6 +15,13 @@ export default function SetPin() {
   const router = useRouter();
 
   async function setUserPin() {
+    if (!pin) {
+      return swal({
+        title: "Please enter pin!",
+        timer: 2500,
+        icon: "error",
+      });
+    }
     if (pin != cpin) {
       return swal({
         title: "Pin does not match",
