@@ -59,6 +59,7 @@ const TabDetails = () => {
                                 className="cont-image"
                                 src={n.VideoImageThumbnail}
                                 width="100%"
+                                alt={n.VideoName}
                               />
                               {n.IsVideoFree ? null : (
                                 <div className="live_side">{n.PackageName}</div>

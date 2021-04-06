@@ -90,7 +90,7 @@ export default function EnterPin({ forgetPin }) {
 
   return (
     <div className="login_slct_oprtr login_pin_card login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" />
+      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
       <h4>Enter your PIN</h4>
       <p>Enter four digit PIN for login</p>
       <div className="form-group">

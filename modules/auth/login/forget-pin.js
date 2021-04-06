@@ -60,7 +60,7 @@ export default function ForgetPin({ updateView }) {
   }
   return (
     <div className="login_slct_oprtr login_slct_oprtr2 login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" />
+      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
       <h4>Enter your code</h4>
       <p>We have sent a 4-digits code</p>
       <div className="form-group">

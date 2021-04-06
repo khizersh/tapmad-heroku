@@ -105,6 +105,7 @@ const HomepageSlider = ({ movies }) => {
                                     <img
                                       src={mov.NewChannelThumbnailPath}
                                       style={{ width: "100%" }}
+                                      alt={mov.VideoName}
                                     />
                                     {mov.IsVideoFree ? null : (
                                       <div className="live_side">Premium</div>
@@ -155,6 +156,7 @@ const HomepageSlider = ({ movies }) => {
                                     <img
                                       src={mov.NewCategoryImage}
                                       style={{ width: "100%" }}
+                                      alt={mov.VideoName}
                                     />
                                     {mov.IsVideoFree
                                       ? null
@@ -190,8 +192,8 @@ const HomepageSlider = ({ movies }) => {
                       <HomePageAd
                         desktop={m.desktop}
                         mobile={m.mobile}
-                        sizeDesktop={m.sizeDesktop}
-                        sizeMobile={m.sizeMobile}
+                        sizeDesktop={m.desktopSize}
+                        sizeMobile={m.mobileSize}
                       />
                     ) : null
                   )

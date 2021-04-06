@@ -30,6 +30,7 @@ const MyAccount = () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData(formData);
+      console.log("data::: ", data);
       if (data != null) {
         if (data.responseCode == 1) {
           setAllData(data.data);
@@ -37,7 +38,7 @@ const MyAccount = () => {
             ...profileData,
             UserId: userId,
             Email: data.data.User.UserEmail,
-            UserMobileNumebr: data.data.UserProfile.MobileNumber,
+            UserMobileNumebr: data.data.UserProfile.UserProfileMobile,
             FullName: data.data.UserProfile.UserProfileFullName,
             BirthDate: data.data.UserProfile.UserProfileDOB,
             ProfilePicture: data.data.UserProfile.UserProfilePicture,
@@ -51,7 +52,7 @@ const MyAccount = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-12 col-sm-12 col-md-12 col-lg-3 ">
-          <PersonalInfo data={profileData} />
+          {profileData && <PersonalInfo data={profileData} />}
         </div>
         <div className="col-12 col-sm-12 col-md-12 col-lg-9">
           {allData && <UserStatus pdata={allData} userId={formData.UserId} />}

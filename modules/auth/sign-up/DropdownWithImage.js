@@ -59,7 +59,7 @@ function DropdownWithImage({ data, onChange }) {
                   onClick={() => onSelectItem(d)}
                   className="cursor-pointer border-bottom padding-left-bottom"
                 >
-                  <img src={d.OperatorImage} width="20" />{" "}
+                  <img src={d.OperatorImage} width="20" alt="Operator" />{" "}
                   <span className="pl-1">{d.OperatorName}</span>
                 </div>
               ))

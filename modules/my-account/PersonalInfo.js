@@ -67,6 +67,7 @@ const PersonalInfo = ({ data }) => {
   useEffect(() => {
     if (data && data.UserId) {
       setUserImage(data.ProfilePicture);
+      console.log("profileData: ", data);
       setProfileData({
         ...profileData,
         UserId: data.UserId,

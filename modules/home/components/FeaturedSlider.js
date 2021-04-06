@@ -12,7 +12,7 @@ export default function HomepageFeatured({ featured }) {
         {featured.WebBanners.map((e, i) => {
           return (
             <div key={i}>
-              <img src={e.TabPosterPath} className="img-fluid" />
+              <img src={e.TabPosterPath} className="img-fluid" alt="Featured" />
             </div>
           );
         })}

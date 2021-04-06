@@ -57,7 +57,11 @@ export default function LiveChannels({ channel }) {
         {channel.Banner.map((e, index) => {
           return (
             <div key={index}>
-              <img src={e.WebBannerImage} style={{ width: "100%" }} />
+              <img
+                src={e.WebBannerImage}
+                style={{ width: "100%" }}
+                alt="Banner"
+              />
             </div>
           );
         })}
