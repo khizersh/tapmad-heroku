@@ -15,6 +15,8 @@ const AuthenticatedSidebar = () => {
       title: "You have logged out!",
       text: "Redirecting you in 2s...",
       timer: 3000,
+      showCancelButton: false,
+      showConfirmButton: false,
     }).then((res) => {
       setisAuthenticateFalse();
       router.push("/");

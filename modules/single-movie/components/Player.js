@@ -153,11 +153,11 @@ export default function Player({ movies }) {
                       },
                       {
                         file: videoLink && videoLink.lowQuality,
-                        label: "LQ",
+                        label: "MQ",
                       },
                       {
                         file: videoLink && videoLink.lowQuality,
-                        label: "MQ",
+                        label: "LQ",
                       },
                     ],
                   }}
