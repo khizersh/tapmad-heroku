@@ -195,7 +195,7 @@ export default function CatchupPlayer({ video, videoList }) {
             {ads.allow && ads.rightAd && (
               <DFPSlotsProvider dfpNetworkId="28379801">
                 <div className="desktop-ads">
-                  <AdSlot sizes={[[300, 250]]} adUnit={"BlueKai_MREC_Banner"} />
+                  <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
                 </div>
               </DFPSlotsProvider>
             )}
