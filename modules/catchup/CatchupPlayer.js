@@ -8,7 +8,6 @@ import { DashboardService } from "../dashboard/Dashboard.Service";
 import RelatedProductCard from "../movies/components/RelatedProductCard";
 import PlayerShop from "../player-shop/player-shop";
 import { PlayerService } from "../../modules/single-movie/Player.service";
-// import { SEOFriendlySlugsForVideo } from "../ut";
 import { useRouter } from "next/router";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 
@@ -57,6 +56,7 @@ export default function CatchupPlayer({ video, videoList }) {
   }
 
   async function getRelatedChannels() {
+    console.log("videoList iiii: ", videoList);
     if (videoList && videoList.length) {
       setRelatedVideos(videoList);
     }
@@ -89,7 +89,7 @@ export default function CatchupPlayer({ video, videoList }) {
         rightVideoAd: data.rightVideoAd,
       });
     }
-  }, [router]);
+  }, [router, videoList]);
 
   useEffect(() => {
     setMovie(video);
