@@ -58,17 +58,17 @@ function basicSliderConfig(slidesToShow, mobileView) {
   };
 }
 
-function SEOFriendlySlugsForVideo(event , catchup = false) {
+function SEOFriendlySlugsForVideo(event, catchup = false) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
-    event.VideoEntityId
-  }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
+    event.IsVideoFree ? "1" : "0"
+  }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
 
 function SEOFriendlySlugsIsCategoryFalse(event) {
-  let prefix = "syno/season";
+  let prefix = "season";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
     event.IsVideoChannel ? "1" : "0"
@@ -77,7 +77,7 @@ function SEOFriendlySlugsIsCategoryFalse(event) {
 }
 
 function SEOFriendlySlugsIsCategoryTrue(event) {
-  let prefix = "category/season";
+  let prefix = "category";
   let name = event.VideoName ? event.VideoName : event.CategoryName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;

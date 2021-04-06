@@ -12,7 +12,6 @@ import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 
 export default function Player({ movies }) {
-  console.log("movie:c ", movies);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
