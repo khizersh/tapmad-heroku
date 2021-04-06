@@ -9,7 +9,7 @@ export default function Home(props) {
   return (
     <div>
       <Head>
-        <title>Tapmad</title>
+        <title>Tapmad - Watch LIVE TV Channels Online</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
