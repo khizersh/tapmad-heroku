@@ -71,91 +71,90 @@ function MyApp({ Component, pageProps, test }) {
         <script src="./static/newrelic.js"></script>
         <title>Tapmad - Watch LIVE TV Channels Online | ------- Test</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="noindex">
-
-          <meta
-            name="keywords"
-            content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="https://www.tapmad.com/favicon/favicon-32x32.png"
-          />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-          />
-          <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          ></link>
+        <meta name="robots" content="noindex" />
+        <meta
+          name="keywords"
+          content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="https://www.tapmad.com/favicon/favicon-32x32.png"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        ></link>
       </Head>
-        <>
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            ></iframe>
-          </noscript>
-          {pageProps.noSideBar ? (
-            pageProps.dashboard ? (
-              <>
-                <MainProvider>
-                  <DashboardLayout>
-                    <Component {...pageProps} />
-                  </DashboardLayout>
-                </MainProvider>
-              </>
-            ) : (
-              <MainProvider>
-                <NoSideBarSkeleton>
-                  <Component {...pageProps} />
-                </NoSideBarSkeleton>
-              </MainProvider>
-            )
-          ) : (
+      <>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+        {pageProps.noSideBar ? (
+          pageProps.dashboard ? (
             <>
               <MainProvider>
-                <CatchupProvider>
-                  <Skeleton>
-                    <Header />
-                    <Component {...pageProps} />
-                    <Footer />
-                  </Skeleton>
-                </CatchupProvider>
+                <DashboardLayout>
+                  <Component {...pageProps} />
+                </DashboardLayout>
               </MainProvider>
             </>
-          )}
-        </>
+          ) : (
+            <MainProvider>
+              <NoSideBarSkeleton>
+                <Component {...pageProps} />
+              </NoSideBarSkeleton>
+            </MainProvider>
+          )
+        ) : (
+          <>
+            <MainProvider>
+              <CatchupProvider>
+                <Skeleton>
+                  <Header />
+                  <Component {...pageProps} />
+                  <Footer />
+                </Skeleton>
+              </CatchupProvider>
+            </MainProvider>
+          </>
+        )}
+      </>
     </>
   );
 }
 
 export default MyApp;
 
-export const NoSideBarSkeleton = ({ children}) => {
-  const { initialState, setLoader} = React.useContext(MainContext);
+export const NoSideBarSkeleton = ({ children }) => {
+  const { initialState, setLoader } = React.useContext(MainContext);
   Router.onRouteChangeStart = (url) => {
-        let key = url.split("/")[1];
+    let key = url.split("/")[1];
     setUrlToCookies(key, url);
     setLoader(true);
   };
   Router.onRouteChangeComplete = () => {
-        setLoader(false);
+    setLoader(false);
   };
 
   Router.onRouteChangeError = () => {
-        setLoader(false);
+    setLoader(false);
   };
   return (
-      <div>
-        {initialState.loading ? <Loader /> : null}
-        {children}
-      </div>
+    <div>
+      {initialState.loading ? <Loader /> : null}
+      {children}
+    </div>
   );
 };
