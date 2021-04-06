@@ -51,7 +51,10 @@ export async function getServerSideProps(context) {
   isFree = chanelDetail.isFree;
 
   if (isFree == "1") {
-    const res = await CatchupService.getCatchupVideo(chanelDetail.CleanVideoId);
+    const res = await CatchupService.getCatchupVideo(
+      chanelDetail.CleanVideoId,
+      ip
+    );
 
     if (res != null) {
       return {
@@ -61,7 +64,8 @@ export async function getServerSideProps(context) {
   } else {
     if (isAuthentictedServerSide(context.req)) {
       const res = await CatchupService.getCatchupVideo(
-        chanelDetail.CleanVideoId
+        chanelDetail.CleanVideoId,
+        ip
       );
       if (res && res.responseCode == 5) {
         // expired subscription
