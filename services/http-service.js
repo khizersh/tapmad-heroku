@@ -34,20 +34,12 @@ function post(url, body, ip, credentialAllowed = false) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  let headers = {};
-  const Auth = Cookie.getCookies("content-token");
-  if (Auth) {
-    headers = {
-      "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-      Authorization: Auth,
-    };
-  } else {
-    headers = {
-      "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-    };
-  }
+  let headers = {
+    "Content-Type": "application/json",
+    "X-Forwarded-For": ip ? ip : "",
+    ...body.headers,
+  };
+  delete body.headers;
   return axios.post(url, body, {
     withCredentials: credentialAllowed ? true : false,
     headers,

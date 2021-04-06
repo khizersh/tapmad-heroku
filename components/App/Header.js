@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 import { loggingTags } from "../../services/apilinks";
 import { actionsRequestContent } from "../../services/http-service";
+import { AuthService } from "../../modules/auth/auth.service";
 
 export default function Header() {
   const {
@@ -18,18 +19,39 @@ export default function Header() {
   } = useContext(MainContext);
 
   const router = useRouter();
-  const onClickSignout = () => {
+
+  const onClickSignout = async () => {
     setLoader(true);
-    swal({
-      title: "You have logged out!",
-      text: "Redirecting you in 2s...",
-      timer: 3000,
-    }).then((res) => {
-      Cookie.setCookies("isAuth", 0);
-      setisAuthenticateFalse();
-      router.push("/");
-      setLoader(false);
-    });
+
+    let data = {
+      UserId: Cookie.getCookies("userId"),
+      headers: {
+        Authorization: Cookie.getCookies("content-token"),
+      },
+    };
+    const resp = await AuthService.logoutUser(data);
+
+    if (resp && resp.Response.responseCode == 1) {
+      swal({
+        title: "You have logged out!",
+        text: "Redirecting you in 2s...",
+        timer: 1900,
+        icon: "success",
+        buttons: false,
+      }).then((res) => {
+        Cookie.setCookies("isAuth", 0);
+        setisAuthenticateFalse();
+        router.push("/");
+        setLoader(false);
+      });
+    } else {
+      swal({
+        title: "Something went wrong. Please try again!",
+        timer: 1900,
+        icon: "error",
+        buttons: false,
+      });
+    }
   };
 
   const onClick = () => {

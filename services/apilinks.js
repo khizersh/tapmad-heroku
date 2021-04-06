@@ -17,6 +17,7 @@ export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const SignUpORSignInMobileOperatorToken =
   BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
+export const Logout = BASEURLAPP + "api/logout";
 
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";

@@ -32,7 +32,8 @@ function MyApp({ Component, pageProps, test }) {
     if (pageProps.protected) {
       const userId = Cookie.getCookies("userId");
       const isAuthenticated = Cookie.getCookies("isAuth");
-      if (userId && isAuthenticated && isAuthenticated == 1) {
+      const token = Cookie.getCookies("content-token");
+      if (token) {
         return true;
       } else {
         router.push("/sign-in");

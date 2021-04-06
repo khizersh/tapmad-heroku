@@ -10,6 +10,7 @@ import {
   paymentProcess,
   SignUpORSignInMobileOperatorToken,
   homepageAds,
+  Logout,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -212,6 +213,16 @@ async function initialTransaction(body) {
   }
 }
 
+async function logoutUser(body) {
+  let resp;
+  try {
+    resp = await post(Logout, body);
+  } catch (error) {
+    return (resp = null);
+  }
+  return resp.data;
+}
+
 async function getHomePageAdsDetail() {
   let resp;
   try {
@@ -407,4 +418,5 @@ export const AuthService = {
   signInOrSignUpMobileOperator,
   getHomePageAdsDetail,
   addHomePageAds,
+  logoutUser,
 };
