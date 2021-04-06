@@ -9,6 +9,7 @@ export default function CatchupProvider({ children }) {
   const [catchupState, setCatchupState] = React.useState({
     selectedTab: null,
     tabs: [],
+    relatedContent: [],
   });
 
   React.useEffect(async () => {
@@ -23,7 +24,11 @@ export default function CatchupProvider({ children }) {
           sections: m.Sections,
         };
       });
-      setCatchupState({ tabs: tabArray, selectedTab: tabArray[0] });
+      setCatchupState({
+        tabs: tabArray,
+        selectedTab: tabArray[0],
+        relatedContent: [],
+      });
     }
   }, []);
 
@@ -34,9 +39,19 @@ export default function CatchupProvider({ children }) {
       selectedTab: selectedTab,
     });
   }
+
+  function updateRelatedContent(content) {
+    console.log("contentL ", content);
+    let stateClone = catchupState;
+    setCatchupState({
+      ...stateClone,
+      relatedContent: content,
+    });
+  }
   let data = {
     catchupState,
     updateSelectedTab,
+    updateRelatedContent,
   };
   return (
     <CatchupContext.Provider value={data}>{children}</CatchupContext.Provider>

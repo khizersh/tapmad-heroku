@@ -9,8 +9,22 @@ import {
 
 const TabDetails = () => {
   const [details, setDetails] = useState(null);
-  const { catchupState } = useContext(CatchupContext);
+  const { catchupState, updateRelatedContent } = useContext(CatchupContext);
   const settings = basicSliderConfig(6, 3);
+
+  const onClick = (data) => {
+    let array = [];
+    catchupState.selectedTab.sections.map((m) => {
+      m.Videos.map((n) => {
+        if (n.VideoEntityId == data.VideoEntityId) {
+          array.push(m);
+        }
+      });
+    });
+    if (array.length) {
+      updateRelatedContent(array[0].Videos);
+    }
+  };
 
   useEffect(() => {
     setDetails(catchupState.selectedTab);
@@ -19,8 +33,8 @@ const TabDetails = () => {
   return (
     <div>
       {details && details.sections.length
-        ? details.sections.map((m) => (
-            <div className="row my-1">
+        ? details.sections.map((m, i) => (
+            <div key={i} className="row my-1">
               <div className=" col-md-2 col-sm-3 pr-0">
                 <div className="dys">
                   <h4>{m.SectionName.split(" ")[0]}</h4>
@@ -35,11 +49,11 @@ const TabDetails = () => {
                 <Slider {...settings}>
                   {m.Videos &&
                     m.Videos.length &&
-                    m.Videos.map((n) => {
+                    m.Videos.map((n, i) => {
                       let slug = SEOFriendlySlugsForCatchupVideo(n);
                       return (
-                        <Link href={slug} shallow passHref>
-                          <a>
+                        <Link key={i} href={slug} shallow passHref>
+                          <a onClick={() => onClick(n)}>
                             <div className="pos-rel">
                               <img
                                 className="cont-image"

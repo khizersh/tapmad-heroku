@@ -6,14 +6,14 @@ const {
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
 
-function get(url, ip) {
+function get(url, ip, auth = true) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
   const Auth = Cookie.getCookies("content-token");
 
   let headers = {};
-  if (Auth) {
+  if (Auth && auth) {
     headers = {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",

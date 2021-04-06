@@ -4,7 +4,6 @@ import Card from "../category/components/card/Card";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 
 export default function VideoDetail({ video, videoList }) {
-  console.log("video: ", video);
   const [slug, setSlug] = useState(null);
 
   useEffect(() => {
