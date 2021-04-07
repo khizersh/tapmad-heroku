@@ -84,7 +84,7 @@ function Login({ loginResponse }) {
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" />
+      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
       <h4>Enter your Mobile Number</h4>
       <p>Please Enter your Mobile Number to login</p>
       <div className="input-group">

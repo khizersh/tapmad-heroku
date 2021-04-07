@@ -1,4 +1,3 @@
-import { json } from "body-parser";
 import {
   sendOTP,
   setUserPinCode,
@@ -10,6 +9,7 @@ import {
   paymentProcess,
   SignUpORSignInMobileOperatorToken,
   homepageAds,
+  Logout,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -105,8 +105,8 @@ async function verifyPinCode(pin) {
   }
 
   const data = handleResponse(resp);
+
   if (data != null) {
-    Cookie.setCookies('utk', data.jwtToken);
     if (data.responseCode == 1) {
       return {
         data: data,
@@ -212,6 +212,16 @@ async function initialTransaction(body) {
   }
 }
 
+async function logoutUser(body) {
+  let resp;
+  try {
+    resp = await post(Logout, body);
+  } catch (error) {
+    return (resp = null);
+  }
+  return resp.data;
+}
+
 async function getHomePageAdsDetail() {
   let resp;
   try {
@@ -296,7 +306,6 @@ async function loginUser(body) {
         tracking: "Registered User 1294",
         telco: "100004",
       });
-      Cookie.setCookies('utk', data.User.UserPassword)
     } catch (e) {
       console.log(e);
     }
@@ -367,7 +376,7 @@ async function signInOrSignUpMobileOperator(
   );
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
-    Cookie.setCookies("utk", data.data.jwtToken);
+    Cookie.setCookies("content-token", data.data.jwtToken);
   }
   return data;
 }
@@ -408,4 +417,5 @@ export const AuthService = {
   signInOrSignUpMobileOperator,
   getHomePageAdsDetail,
   addHomePageAds,
+  logoutUser,
 };

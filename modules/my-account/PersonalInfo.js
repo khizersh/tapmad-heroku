@@ -28,8 +28,11 @@ const PersonalInfo = ({ data }) => {
   });
 
   const onChange = (e) => {
-    setBtnEnable(true);
-    setProfileData({ ...profileData, [e.target.name]: e.target.value });
+    let num = e.target.value;
+    if (+num === +num) {
+      setBtnEnable(true);
+      setProfileData({ ...profileData, [e.target.name]: e.target.value });
+    }
   };
   const onSubmit = async () => {
     var formData = new FormData();
@@ -67,6 +70,7 @@ const PersonalInfo = ({ data }) => {
   useEffect(() => {
     if (data && data.UserId) {
       setUserImage(data.ProfilePicture);
+
       setProfileData({
         ...profileData,
         UserId: data.UserId,

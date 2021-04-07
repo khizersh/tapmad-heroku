@@ -44,6 +44,7 @@ export default function EnterPin({ forgetPin }) {
             false
           );
 
+          console.log("resp in login: ", resp);
           if (resp && resp.data && resp.data.UserId) {
             Cookie.setCookies("isAuth", 1);
             swal({
@@ -62,7 +63,7 @@ export default function EnterPin({ forgetPin }) {
           } else {
             setLoader(false);
             swal({
-              title: response.message,
+              title: resp.message,
               icon: "error",
               timer: 3000,
             });
@@ -84,13 +85,17 @@ export default function EnterPin({ forgetPin }) {
         });
       }
     } else {
-      return;
+      swal({
+        title: "Invalid pin!",
+        timer: 2500,
+        icon: "error",
+      });
     }
   }
 
   return (
     <div className="login_slct_oprtr login_pin_card login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" />
+      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
       <h4>Enter your PIN</h4>
       <p>Enter four digit PIN for login</p>
       <div className="form-group">

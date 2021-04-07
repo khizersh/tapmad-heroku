@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import Player from "../../modules/single-movie/components/Player";
+import Head from "next/head";
 import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
 import {
@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import requestIp from "request-ip";
 
 import { PlayerService } from "../../modules/single-movie/Player.service";
-import EnhancedPlayer from "../../modules/single-movie/components/Player";
+import Player from "../../modules/single-movie/components/Player";
 
 const watch = (props) => {
   const router = useRouter();
@@ -34,7 +34,12 @@ const watch = (props) => {
     }
   }, [props.allowUser, url]);
 
-  return <div>{props.allowUser && <EnhancedPlayer movies={props.data} />}</div>;
+  return (
+    <div>
+      <Head>{/* <title>{props && props.data.VideoName}</title> */}</Head>
+      {props.allowUser && <Player movies={props.data} />}
+    </div>
+  );
 };
 
 export async function getServerSideProps(context) {

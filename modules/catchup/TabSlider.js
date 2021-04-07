@@ -9,10 +9,11 @@ const TabSlider = () => {
 
   const onClickTab = (tab) => {
     updateSelectedTab(tab);
+    console.log("tab: ", tab);
   };
 
   return (
-    <div className="">
+    <div>
       {catchupState.tabs && catchupState.tabs.length && (
         <Slider {...settings}>
           {catchupState.tabs
@@ -26,7 +27,7 @@ const TabSlider = () => {
                   }`}
                   onClick={() => onClickTab(m)}
                 >
-                  <img src={m.TabPosterPath} width="100%" />
+                  <img src={m.TabPosterPath} width="100%" alt={m.TabName} />
                 </div>
               ))
             : null}

@@ -32,7 +32,8 @@ function MyApp({ Component, pageProps, test }) {
     if (pageProps.protected) {
       const userId = Cookie.getCookies("userId");
       const isAuthenticated = Cookie.getCookies("isAuth");
-      if (userId && isAuthenticated && isAuthenticated == 1) {
+      const token = Cookie.getCookies("content-token");
+      if (token) {
         return true;
       } else {
         router.push("/sign-in");
@@ -67,7 +68,7 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <script src="./static/gtm.js"></script>
+        {/* <script src="./static/gtm.js"></script> */}
         <script src="./static/newrelic.js"></script>
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

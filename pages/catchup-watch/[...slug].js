@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
 import {
@@ -10,14 +10,21 @@ import { useRouter } from "next/router";
 import requestIp from "request-ip";
 import { CatchupService } from "../../modules/catchup/catchup.service";
 import CatchupPlayer from "../../modules/catchup/CatchupPlayer";
+import { CatchupContext } from "../../contexts/CatchupContext";
 
 const watch = (props) => {
   const router = useRouter();
-
+  const { catchupState } = useContext(CatchupContext);
+  console.log("catchupState in cat: ", catchupState);
+  const [related, setRelated] = useState([]);
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
     } else {
+      if (catchupState && catchupState.relatedContent.length) {
+        setRelated(catchupState.relatedContent);
+      }
+
       let cId = props.video.VideoEntityId ? props.video.VideoEntityId : "";
       let cName = props.video.VideoName ? props.video.VideoName : "";
       let body = {
@@ -32,7 +39,7 @@ const watch = (props) => {
   return (
     <div>
       {props.allowUser && (
-        <CatchupPlayer video={props.video} videoList={props.videoList} />
+        <CatchupPlayer video={props.video} videoList={related} />
       )}
     </div>
   );
@@ -51,7 +58,10 @@ export async function getServerSideProps(context) {
   isFree = chanelDetail.isFree;
 
   if (isFree == "1") {
-    const res = await CatchupService.getCatchupVideo(chanelDetail.CleanVideoId);
+    const res = await CatchupService.getCatchupVideo(
+      chanelDetail.CleanVideoId,
+      ip
+    );
 
     if (res != null) {
       return {
@@ -61,7 +71,8 @@ export async function getServerSideProps(context) {
   } else {
     if (isAuthentictedServerSide(context.req)) {
       const res = await CatchupService.getCatchupVideo(
-        chanelDetail.CleanVideoId
+        chanelDetail.CleanVideoId,
+        ip
       );
       if (res && res.responseCode == 5) {
         // expired subscription
