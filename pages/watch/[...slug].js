@@ -12,6 +12,7 @@ import requestIp from "request-ip";
 
 import { PlayerService } from "../../modules/single-movie/Player.service";
 import Player from "../../modules/single-movie/components/Player";
+import { GlobalService } from "../../modules/global-service";
 
 const watch = (props) => {
   const router = useRouter();
@@ -58,9 +59,7 @@ export async function getServerSideProps(context) {
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
-    headers: {
-      Authorization: cookies['utk']
-    }
+    headers: GlobalService.authHeaders(cookies['utk'])
   };
 
   var isFree = "1";

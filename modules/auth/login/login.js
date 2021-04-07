@@ -46,8 +46,6 @@ function Login({ loginResponse }) {
         MobileNo: mobileNo,
       };
       const data = await AuthService.loginUser(body);
-      console.log("data in check: ", data);
-
       if (data != null) {
         if (data.data.User) {
           console.log("User: ", data.data.User);

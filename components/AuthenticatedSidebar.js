@@ -17,7 +17,7 @@ const AuthenticatedSidebar = () => {
     let data = {
       UserId: Cookie.getCookies("userId"),
       headers: {
-        Authorization: Cookie.getCookies("content-token"),
+        Authorization: Cookie.getCookies("utk"),
       },
     };
     const resp = await AuthService.logoutUser(data);

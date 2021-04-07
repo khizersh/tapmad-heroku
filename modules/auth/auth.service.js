@@ -376,7 +376,7 @@ async function signInOrSignUpMobileOperator(
   );
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
-    Cookie.setCookies("content-token", data.data.jwtToken);
+    Cookie.setCookies("utk", data.data.jwtToken);
   }
   return data;
 }

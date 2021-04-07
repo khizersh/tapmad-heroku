@@ -1,3 +1,5 @@
+import { Cookie } from "../services/cookies";
+
 function checkIsArray(obj) {
   if (Array.isArray(obj)) {
     return true;
@@ -11,7 +13,11 @@ function convertInArray(obj) {
 
   return obj;
 }
-
+function authHeaders(token = null) {
+  return {
+    Authorization: Cookie.getCookies("content-token") || token
+  };
+}
 function customizingData(parentarray) {
   let mov = [];
   parentarray.map((m) => {
@@ -35,8 +41,9 @@ function customizingData(parentarray) {
   return mov;
 }
 
-export const GolobalService = {
+export const GlobalService = {
   checkIsArray,
   convertInArray,
   customizingData,
+  authHeaders
 };

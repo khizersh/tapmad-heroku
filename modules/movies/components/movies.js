@@ -8,7 +8,7 @@ import {
   calculateRowsToFetch,
   pushNewMoviesIntoList,
 } from "../../../services/utils";
-import { GolobalService } from "../../global-service";
+import { GlobalService } from "../../global-service";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Movies({ movies }) {
@@ -35,7 +35,7 @@ export default function Movies({ movies }) {
   useEffect(() => {
     let list = [];
     if (localMovies && localMovies.Sections && localMovies.Sections.Movies) {
-      list = GolobalService.customizingData(localMovies.Sections.Movies);
+      list = GlobalService.customizingData(localMovies.Sections.Movies);
     }
     let obj = {
       ...localMovies,
