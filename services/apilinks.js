@@ -21,7 +21,7 @@ export const SignUpORSignInMobileOperatorToken =
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";
 export const getEventPredicationGameChannel =
-  BASEURL + "api/getEventPredicationGameChannel";
+  BASEURLAPP + "api/getEventPredicationGameChannelToken";
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
 export const initialPaymentTransaction =

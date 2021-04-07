@@ -105,8 +105,8 @@ async function verifyPinCode(pin) {
   }
 
   const data = handleResponse(resp);
-
   if (data != null) {
+    Cookie.setCookies('utk', data.jwtToken);
     if (data.responseCode == 1) {
       return {
         data: data,
@@ -296,6 +296,7 @@ async function loginUser(body) {
         tracking: "Registered User 1294",
         telco: "100004",
       });
+      Cookie.setCookies('utk', data.User.UserPassword)
     } catch (e) {
       console.log(e);
     }
@@ -366,7 +367,7 @@ async function signInOrSignUpMobileOperator(
   );
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
-    Cookie.setCookies("content-token", data.data.jwtToken);
+    Cookie.setCookies("utk", data.data.jwtToken);
   }
   return data;
 }

@@ -14,7 +14,6 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 import EnhancedPlayer from "../../modules/single-movie/components/Player";
 
 const watch = (props) => {
-  console.log("props: ", props);
   const router = useRouter();
 
   const [url, setUrl] = useState(null);
@@ -45,7 +44,7 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-
+  console.log("Cookies ", cookies['utk']);
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -54,6 +53,9 @@ export async function getServerSideProps(context) {
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
+    headers: {
+      Authorization: cookies['utk']
+    }
   };
 
   var isFree = "1";

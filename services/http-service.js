@@ -10,7 +10,7 @@ function get(url, ip, auth = true) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  const Auth = Cookie.getCookies("content-token");
+  const Auth = Cookie.getCookies("utk");
 
   let headers = {};
   if (Auth && auth) {
@@ -34,24 +34,21 @@ function post(url, body, ip, credentialAllowed = false) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  let headers = {};
-  const Auth = Cookie.getCookies("content-token");
-  if (Auth) {
-    headers = {
-      "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-      Authorization: Auth,
-    };
-  } else {
-    headers = {
-      "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-    };
+  let headers = {
+    "Content-Type": "application/json",
+    "X-Forwarded-For": ip ? ip : "",
+    ...body.headers
+  };
+  delete body.headers;
+  try {
+    return axios.post(url, body, {
+      withCredentials: credentialAllowed ? true : false,
+      headers,
+    });
+  } catch (e) {
+    console.log(e);
   }
-  return axios.post(url, body, {
-    withCredentials: credentialAllowed ? true : false,
-    headers,
-  });
+
 }
 function put(url, body, ip) {
   return axios.put(url, body, {

@@ -6,6 +6,7 @@ import { post, handleResponse, get } from "../../services/http-service";
 
 async function getVideoData(body, ip) {
   const resp = await post(getEventPredicationGameChannel, body, ip);
+  console.log("resp ", resp);
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {

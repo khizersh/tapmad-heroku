@@ -45,7 +45,6 @@ export default async (req, res) => {
       res.json({ ...obj });
     }
   } else if (req.method == "PUT") {
-    console.log("Loooogs", req.headers.cookie);
     res.json({ status: 200 });
   }
 };
