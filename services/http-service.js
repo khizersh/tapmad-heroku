@@ -10,7 +10,7 @@ function get(url, ip, auth = true) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  const Auth = Cookie.getCookies("utk");
+  const Auth = Cookie.getCookies("content-token");
 
   let headers = {};
   if (Auth && auth) {

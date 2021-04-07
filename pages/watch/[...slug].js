@@ -50,7 +50,7 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  console.log("Cookies ", cookies['utk']);
+  console.log("Cookies ", cookies['content-token']);
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -59,7 +59,7 @@ export async function getServerSideProps(context) {
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
-    headers: GlobalService.authHeaders(cookies['utk'])
+    headers: GlobalService.authHeaders(cookies['content-token'])
   };
 
   var isFree = "1";

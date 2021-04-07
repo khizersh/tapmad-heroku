@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps, test }) {
     if (pageProps.protected) {
       const userId = Cookie.getCookies("userId");
       const isAuthenticated = Cookie.getCookies("isAuth");
-      const token = Cookie.getCookies("utk");
+      const token = Cookie.getCookies("content-token");
       if (token) {
         return true;
       } else {

@@ -76,7 +76,7 @@ export default function MainProvider({ children }) {
     dispatch({ type: "UPDATE_EMAIL", data: email });
   }
   function checkUserAuthentication() {
-    const token = Cookie.getCookies("utk");
+    const token = Cookie.getCookies("content-token");
     if (token) {
       dispatch({ type: "SET_AUTHENTICATION", data: true });
     }
@@ -92,7 +92,7 @@ export default function MainProvider({ children }) {
   function setisAuthenticateFalse() {
     Cookie.setCookies("isAuth", 0);
     Cookie.setCookies("userId", "");
-    Cookie.removeCookie("utk");
+    Cookie.removeCookie("content-token");
     dispatch({ type: "SET_AUTHENTICATION", data: false });
   }
   function setLoader(bool) {
