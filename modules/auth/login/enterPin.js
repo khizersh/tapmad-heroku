@@ -9,7 +9,7 @@ import { tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
 
 export default function EnterPin({ forgetPin }) {
-  const [userPin, seUserPin] = useState();
+  const [userPin, seUserPin] = useState("");
   const router = useRouter();
   const { checkUserAuthentication, setLoader, initialState } = useContext(
     MainContext

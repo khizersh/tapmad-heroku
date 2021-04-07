@@ -90,9 +90,19 @@ export default function MainProvider({ children }) {
     }
   }
   function setisAuthenticateFalse() {
-    Cookie.setCookies("isAuth", 0);
-    Cookie.setCookies("userId", "");
-    Cookie.removeCookie("content-token");
+    document.cookie.replace(/(?<=^|;).+?(?=\=|;|$)/g, (name) =>
+      location.hostname
+        .split(".")
+        .reverse()
+        .reduce(
+          (domain) => (
+            (domain = domain.replace(/^\.?[^.]+/, "")),
+            (document.cookie = `${name}=;max-age=0;path=/;domain=${domain}`),
+            domain
+          ),
+          location.hostname
+        )
+    );
     dispatch({ type: "SET_AUTHENTICATION", data: false });
   }
   function setLoader(bool) {

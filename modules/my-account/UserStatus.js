@@ -8,6 +8,7 @@ import {
 } from "../../services/apilinks";
 import { Button } from "react-bootstrap";
 import swal from "sweetalert";
+import { GlobalService } from "../global-service";
 
 const UserStatus = ({ pdata, userId }) => {
   const [subscritionData, setSubscritionData] = useState(null);
@@ -46,6 +47,7 @@ const UserStatus = ({ pdata, userId }) => {
       ProductId: data.UserPackageType,
       UserId: userId,
       Version: "V1",
+      headers: GlobalService.authHeaders() || null
     };
     MyAccountService.unsubcribeUser(body)
       .then((res) => {
@@ -82,31 +84,31 @@ const UserStatus = ({ pdata, userId }) => {
           </thead>
           <tbody>
             {subscritionData &&
-            subscritionData.UserActiveSubscription.length > 0
+              subscritionData.UserActiveSubscription.length > 0
               ? subscritionData.UserActiveSubscription.map((m, i) => (
-                  <tr key={i}>
-                    <td>{m.UserSubscriptionStartDate}</td>
-                    <td>{m.UserSubscriptionExpiryDate}</td>
-                    <td>{m.UserPackageType}</td>
-                    <td>
-                      {subscritionData.User && subscritionData.User.UserIsActive
-                        ? "Active"
-                        : "Inactive"}
-                    </td>
-                    <td>
-                      {m.IsSubscribe == "0" ? (
-                        "Deactivated"
-                      ) : (
-                        <button
-                          className="btn btn-red"
-                          onClick={() => unSubscribe(m)}
-                        >
-                          Unsubscribe
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))
+                <tr key={i}>
+                  <td>{m.UserSubscriptionStartDate}</td>
+                  <td>{m.UserSubscriptionExpiryDate}</td>
+                  <td>{m.UserPackageType}</td>
+                  <td>
+                    {subscritionData.User && subscritionData.User.UserIsActive
+                      ? "Active"
+                      : "Inactive"}
+                  </td>
+                  <td>
+                    {m.IsSubscribe == "0" ? (
+                      "Deactivated"
+                    ) : (
+                      <button
+                        className="btn btn-red"
+                        onClick={() => unSubscribe(m)}
+                      >
+                        Unsubscribe
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
               : null}
           </tbody>
         </table>
@@ -130,17 +132,17 @@ const UserStatus = ({ pdata, userId }) => {
           <tbody>
             {subscritionHistory.length > 0
               ? subscritionHistory.map((m, i) => (
-                  <tr key={i}>
-                    <td>{++i}</td>
-                    <td>{m.UserPaymentStartDate}</td>
-                    <td>{m.UserPaymentPackageName}</td>
-                    <td>{m.UserPaymentMobileNumber}</td>
-                    <td>{m.UserPaymentOperatorID}</td>
-                    <td>
-                      {m.UserPaymentStatus == "1" ? "Success" : "Failure"}
-                    </td>
-                  </tr>
-                ))
+                <tr key={i}>
+                  <td>{++i}</td>
+                  <td>{m.UserPaymentStartDate}</td>
+                  <td>{m.UserPaymentPackageName}</td>
+                  <td>{m.UserPaymentMobileNumber}</td>
+                  <td>{m.UserPaymentOperatorID}</td>
+                  <td>
+                    {m.UserPaymentStatus == "1" ? "Success" : "Failure"}
+                  </td>
+                </tr>
+              ))
               : null}
           </tbody>
         </table>
