@@ -16,7 +16,7 @@ function get(url, ip, header) {
       header,
     });
   } catch (error) {
-    console.log(error);
+    return null;
   }
 }
 
@@ -36,7 +36,7 @@ function post(url, body, ip, credentialAllowed = false) {
       headers,
     });
   } catch (e) {
-    console.log(e);
+    return null;
   }
 }
 function put(url, body, ip) {
