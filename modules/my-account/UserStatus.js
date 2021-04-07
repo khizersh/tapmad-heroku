@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { MyAccountService } from "./myaccount.service";
 import { post } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
@@ -9,8 +9,10 @@ import {
 import { Button } from "react-bootstrap";
 import swal from "sweetalert";
 import { GlobalService } from "../global-service";
+import { MainContext } from "../../contexts/MainContext";
 
 const UserStatus = ({ pdata, userId }) => {
+  const { setLoader } = useContext(MainContext);
   const [subscritionData, setSubscritionData] = useState(null);
   const [subscritionHistory, setSubscritionHistory] = useState([]);
   const [form, setForm] = useState({
@@ -22,7 +24,6 @@ const UserStatus = ({ pdata, userId }) => {
   useEffect(async () => {
     if (pdata.UserActiveSubscription) {
       setSubscritionData(pdata);
-      console.log("pdata: ", pdata);
     }
     if (userId) {
       setForm({ ...form, UserId: userId });
@@ -41,13 +42,14 @@ const UserStatus = ({ pdata, userId }) => {
   }, [pdata, userId]);
 
   const unSubscribe = (data) => {
+    setLoader(loader);
     let body = {
       Language: "en",
       Platform: "Web",
       ProductId: data.UserPackageType,
       UserId: userId,
       Version: "V1",
-      headers: GlobalService.authHeaders() || null
+      headers: GlobalService.authHeaders() || null,
     };
     MyAccountService.unsubcribeUser(body)
       .then((res) => {
@@ -66,6 +68,7 @@ const UserStatus = ({ pdata, userId }) => {
         }
       })
       .catch((e) => console.log(e));
+    setLoader(loader);
   };
   return (
     <div className="left-profile">
@@ -84,31 +87,31 @@ const UserStatus = ({ pdata, userId }) => {
           </thead>
           <tbody>
             {subscritionData &&
-              subscritionData.UserActiveSubscription.length > 0
+            subscritionData.UserActiveSubscription.length > 0
               ? subscritionData.UserActiveSubscription.map((m, i) => (
-                <tr key={i}>
-                  <td>{m.UserSubscriptionStartDate}</td>
-                  <td>{m.UserSubscriptionExpiryDate}</td>
-                  <td>{m.UserPackageType}</td>
-                  <td>
-                    {subscritionData.User && subscritionData.User.UserIsActive
-                      ? "Active"
-                      : "Inactive"}
-                  </td>
-                  <td>
-                    {m.IsSubscribe == "0" ? (
-                      "Deactivated"
-                    ) : (
-                      <button
-                        className="btn btn-red"
-                        onClick={() => unSubscribe(m)}
-                      >
-                        Unsubscribe
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))
+                  <tr key={i}>
+                    <td>{m.UserSubscriptionStartDate}</td>
+                    <td>{m.UserSubscriptionExpiryDate}</td>
+                    <td>{m.UserPackageType}</td>
+                    <td>
+                      {subscritionData.User && subscritionData.User.UserIsActive
+                        ? "Active"
+                        : "Inactive"}
+                    </td>
+                    <td>
+                      {m.IsSubscribe == "0" ? (
+                        "Deactivated"
+                      ) : (
+                        <button
+                          className="btn btn-red"
+                          onClick={() => unSubscribe(m)}
+                        >
+                          Unsubscribe
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
               : null}
           </tbody>
         </table>
@@ -132,17 +135,17 @@ const UserStatus = ({ pdata, userId }) => {
           <tbody>
             {subscritionHistory.length > 0
               ? subscritionHistory.map((m, i) => (
-                <tr key={i}>
-                  <td>{++i}</td>
-                  <td>{m.UserPaymentStartDate}</td>
-                  <td>{m.UserPaymentPackageName}</td>
-                  <td>{m.UserPaymentMobileNumber}</td>
-                  <td>{m.UserPaymentOperatorID}</td>
-                  <td>
-                    {m.UserPaymentStatus == "1" ? "Success" : "Failure"}
-                  </td>
-                </tr>
-              ))
+                  <tr key={i}>
+                    <td>{++i}</td>
+                    <td>{m.UserPaymentStartDate}</td>
+                    <td>{m.UserPaymentPackageName}</td>
+                    <td>{m.UserPaymentMobileNumber}</td>
+                    <td>{m.UserPaymentOperatorID}</td>
+                    <td>
+                      {m.UserPaymentStatus == "1" ? "Success" : "Failure"}
+                    </td>
+                  </tr>
+                ))
               : null}
           </tbody>
         </table>

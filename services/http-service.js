@@ -6,28 +6,18 @@ const {
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
 
-function get(url, ip, auth = true) {
+function get(url, ip, header) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  const Auth = Cookie.getCookies("content-token");
 
-  let headers = {};
-  if (Auth && auth) {
-    headers = {
-      "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-      Authorization: Auth,
-    };
-  } else {
-    headers = {
-      "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-    };
+  try {
+    return axios.get(url, {
+      header,
+    });
+  } catch (error) {
+    console.log(error);
   }
-  return axios.get(url, {
-    headers,
-  });
 }
 
 function post(url, body, ip, credentialAllowed = false) {
@@ -37,7 +27,7 @@ function post(url, body, ip, credentialAllowed = false) {
   let headers = {
     "Content-Type": "application/json",
     "X-Forwarded-For": ip ? ip : "",
-    ...body.headers
+    ...body.headers,
   };
   delete body.headers;
   try {
@@ -48,7 +38,6 @@ function post(url, body, ip, credentialAllowed = false) {
   } catch (e) {
     console.log(e);
   }
-
 }
 function put(url, body, ip) {
   return axios.put(url, body, {

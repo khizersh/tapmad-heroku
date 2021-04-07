@@ -17,28 +17,35 @@ import { GlobalService } from "../../modules/global-service";
 const watch = (props) => {
   const router = useRouter();
 
+  console.log("props in watch: ", props);
   const [url, setUrl] = useState(null);
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
     } else {
-      let cId = props.data.Video.VideoEntityId
-        ? props.data.Video.VideoEntityId
-        : "";
-      let cName = props.data.Video.VideoName ? props.data.Video.VideoName : "";
-      let body = {
-        event: "view",
-        contentId: cId,
-        contentName: cName,
-      };
-      actionsRequestContent(body);
+      if (props.data.responseCode != "401") {
+        let cId = props.data.Video.VideoEntityId
+          ? props.data.Video.VideoEntityId
+          : "";
+        let cName = props.data.Video.VideoName
+          ? props.data.Video.VideoName
+          : "";
+        let body = {
+          event: "view",
+          contentId: cId,
+          contentName: cName,
+        };
+        actionsRequestContent(body);
+      }
     }
   }, [props.allowUser, url]);
 
   return (
     <div>
       <Head>{/* <title>{props && props.data.VideoName}</title> */}</Head>
-      {props.allowUser && <Player movies={props.data} />}
+      {props.allowUser && props.data && props.data.responseCode != 401 && (
+        <Player movies={props.data} />
+      )}
     </div>
   );
 };
@@ -50,7 +57,7 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  console.log("Cookies ", cookies['content-token']);
+  console.log("Cookies ", cookies["content-token"]);
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -59,8 +66,9 @@ export async function getServerSideProps(context) {
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
-    headers: GlobalService.authHeaders(cookies['content-token'])
+    headers: GlobalService.authHeaders(cookies["content-token"]),
   };
+  console.log("body in watch: ", body);
 
   var isFree = "1";
   isFree = chanelDetail.isFree;
@@ -98,6 +106,7 @@ export async function getServerSideProps(context) {
 export default watch;
 
 const response = (data, channel, allowUser) => {
+  console.log("dataaa ", data);
   return {
     data,
     channel,

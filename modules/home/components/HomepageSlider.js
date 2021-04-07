@@ -37,7 +37,11 @@ const HomepageSlider = ({ movies }) => {
   }
 
   function handleOnClick(e, mov) {
-    dataLayer.push({ event: "related_video" });
+    try {
+      dataLayer.push({ event: "related_video" });
+    } catch (error) {
+      console.log(error);
+    }
 
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {

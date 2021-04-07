@@ -12,6 +12,7 @@ import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 
 export default function Player({ movies }) {
+  console.log("movies: ", movies);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
@@ -33,7 +34,7 @@ export default function Player({ movies }) {
       setMovie(movies);
       setMounted(true);
 
-      if (movies.Video.IsVideoChannel) {
+      if (movies.Video && movies.Video.IsVideoChannel) {
         setVideoLink({
           highQuality: movies.Video.ChannelStreamUrlWHQ,
           mediumQuality: movies.Video.ChannelStreamUrlWMQ,
@@ -97,7 +98,7 @@ export default function Player({ movies }) {
 
   useEffect(() => {
     setMovie(movies);
-    if (movies.Video.IsVideoChannel) {
+    if (movies.Video && movies.Video.IsVideoChannel) {
       setVideoLink({
         highQuality: movies.Video.ChannelStreamUrlWHQ,
         mediumQuality: movies.Video.ChannelStreamUrlWMQ,
@@ -235,20 +236,20 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                    let slug = SEOFriendlySlugsForVideo(video);
-                    return (
-                      <Link
-                        href={slug}
-                        replace={true}
-                        shallow={false}
-                        key={i}
-                      >
-                        <a>
-                          <RelatedProductCard video={video} />
-                        </a>
-                      </Link>
-                    );
-                  })
+                      let slug = SEOFriendlySlugsForVideo(video);
+                      return (
+                        <Link
+                          href={slug}
+                          replace={true}
+                          shallow={false}
+                          key={i}
+                        >
+                          <a>
+                            <RelatedProductCard video={video} />
+                          </a>
+                        </Link>
+                      );
+                    })
                   : null}
               </div>
             </div>

@@ -11,6 +11,7 @@ const Syno = (props) => {
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
+  console.log("props  in season: ", props);
   if (!mount) {
     if (!video) {
       setVideo(props.data.Video);
@@ -38,6 +39,9 @@ export async function getServerSideProps(context) {
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
-
-  return { props: { data: data.data } };
+  console.log("datadatadatadatadata: ", data);
+  if (data != null) {
+    return { props: { data: data.data } };
+  }
+  return { props: { data: data } };
 }

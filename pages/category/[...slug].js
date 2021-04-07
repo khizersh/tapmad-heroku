@@ -42,6 +42,7 @@ export async function getServerSideProps(context) {
   }
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
   const data = await get(getSeasonVodByCategoryId + categoryId, ip);
+  console.log("data detail: ", data);
 
   return { props: { data: data.data } };
 }
