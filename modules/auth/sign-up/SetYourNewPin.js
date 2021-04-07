@@ -18,6 +18,13 @@ export default function SetYourNewPin() {
   const [confirmPin, setConfirmPin] = useState("");
 
   const onClick = async () => {
+    if (!pin.length) {
+      return swal({
+        timer: 3000,
+        title: "Invalid pin code!",
+        icon: "error",
+      });
+    }
     if (pin != confirmPin) {
       return swal({
         timer: 3000,
@@ -25,6 +32,7 @@ export default function SetYourNewPin() {
         icon: "error",
       });
     }
+
     setLoader(true);
     const response = await AuthService.setNewPin(pin);
 
@@ -44,13 +52,13 @@ export default function SetYourNewPin() {
           OperatorId: initialState.User.OperatorId,
           UserPassword: initialState.User.Password,
         };
-        console.log("initialState: ", initialState);
-        let response = await AuthService.signInOrSignUpMobileOperator(
+        console.log("before sign up: ", initialState);
+        const resp = await AuthService.signInOrSignUpMobileOperator(
           obj,
           "",
           false
         );
-        if (response && response.data && response.data.UserId) {
+        if (resp && resp.data && resp.data.UserId) {
           // logging start
           if (authState && authState.selectedPackageId) {
             let body = {
@@ -72,6 +80,13 @@ export default function SetYourNewPin() {
           checkUserAuthentication();
           router.push("/");
           setLoader(false);
+        } else {
+          setLoader(false);
+          swal({
+            title: resp.message,
+            icon: "error",
+            timer: 3000,
+          });
         }
       }
     } else {

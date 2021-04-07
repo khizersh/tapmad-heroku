@@ -15,6 +15,7 @@ const UserStatus = ({ pdata, userId }) => {
   const { setLoader } = useContext(MainContext);
   const [subscritionData, setSubscritionData] = useState(null);
   const [subscritionHistory, setSubscritionHistory] = useState([]);
+  const [deactivated, setdeactivated] = useState(false);
   const [form, setForm] = useState({
     Version: "V1",
     Language: "en",
@@ -42,7 +43,7 @@ const UserStatus = ({ pdata, userId }) => {
   }, [pdata, userId]);
 
   const unSubscribe = (data) => {
-    setLoader(loader);
+    setLoader(true);
     let body = {
       Language: "en",
       Platform: "Web",
@@ -59,16 +60,21 @@ const UserStatus = ({ pdata, userId }) => {
             timer: 2500,
             icon: "success",
           });
+          setdeactivated(true);
+          setLoader(false);
         } else {
           swal({
             title: res.message,
             timer: 2500,
             icon: "error",
           });
+          setLoader(false);
         }
       })
-      .catch((e) => console.log(e));
-    setLoader(loader);
+      .catch((e) => {
+        setLoader(false);
+        console.log(e);
+      });
   };
   return (
     <div className="left-profile">
@@ -99,15 +105,19 @@ const UserStatus = ({ pdata, userId }) => {
                         : "Inactive"}
                     </td>
                     <td>
-                      {m.IsSubscribe == "0" ? (
-                        "Deactivated"
+                      {!deactivated ? (
+                        m.IsSubscribe == "0" ? (
+                          "Deactivated"
+                        ) : (
+                          <button
+                            className="btn btn-red"
+                            onClick={() => unSubscribe(m)}
+                          >
+                            Unsubscribe
+                          </button>
+                        )
                       ) : (
-                        <button
-                          className="btn btn-red"
-                          onClick={() => unSubscribe(m)}
-                        >
-                          Unsubscribe
-                        </button>
+                        "Deactivated"
                       )}
                     </td>
                   </tr>

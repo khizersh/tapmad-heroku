@@ -44,7 +44,6 @@ export default function EnterPin({ forgetPin }) {
             false
           );
 
-          console.log("resp in login: ", resp);
           if (resp && resp.data && resp.data.UserId) {
             Cookie.setCookies("isAuth", 1);
             swal({

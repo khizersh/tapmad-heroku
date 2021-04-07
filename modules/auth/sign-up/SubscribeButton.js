@@ -57,7 +57,7 @@ export default function SubscribeButton() {
           Version: "V1",
           Language: "en",
           Platform: "web",
-          ProductId: 1265,
+          // ProductId: 1214,
           ProductId: authState.selectedPackageId,
           MobileNo: initialState.User.MobileNo,
           OperatorId: initialState.User.OperatorId,
