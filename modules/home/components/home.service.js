@@ -74,9 +74,9 @@ async function getWebTabBannersData(ip) {
   }
 }
 
-async function getFeaturedHomepageWithRe(from, to) {
+async function getFeaturedHomepageWithRe(from, to, ip) {
   let url = getFeaturedHomepageWithRE(from, to);
-  const resp = await get(url);
+  const resp = await get(url, ip);
   const data = handleResponse(resp);
   if (data != null) {
     if (data.responseCode == 1) {

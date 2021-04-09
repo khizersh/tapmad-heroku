@@ -39,7 +39,8 @@ export default function HomePage({ movies, banner, featured, ip }) {
     } catch (error) {}
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
-      rowData.rowsTo
+      rowData.rowsTo,
+      ip
     );
     if (moviesList != null) {
       var newMovies = await moviesList.data;
