@@ -6,15 +6,13 @@ const {
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
 
-function get(url, ip, header) {
+function get(url, ip) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
 
   try {
-    return axios.get(url, {
-      header,
-    });
+    return axios.get(url);
   } catch (error) {
     return null;
   }
