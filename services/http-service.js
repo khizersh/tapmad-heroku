@@ -10,9 +10,12 @@ function get(url, ip) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-
   try {
-    return axios.get(url);
+    let headers = {
+      "Content-Type": "application/json",
+      "X-Forwarded-For": ip ? ip : "",
+    };
+    return axios.get(url, { ...headers });
   } catch (error) {
     return null;
   }
