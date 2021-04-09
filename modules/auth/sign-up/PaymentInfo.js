@@ -95,7 +95,6 @@ function PaymentInfo() {
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      console.log("num: " + mobileNum);
       if (mobileNum.length == 10) {
         updateUserNumber(mobileNum);
       }

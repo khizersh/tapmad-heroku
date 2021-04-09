@@ -12,6 +12,45 @@ export default function SubscribeButton() {
   );
   const { authState, updateResponseCode } = useContext(Authcontext);
 
+  function handleBody() {
+    return {
+      Version: "V1",
+      Language: "en",
+      Platform: "web",
+      ProductId: 1214,
+      // ProductId: authState.selectedPackageId,
+      MobileNo: initialState.User.MobileNo,
+      OperatorId: initialState.User.OperatorId,
+      cnic: initialState.User.Cnic,
+    };
+  }
+
+  const checkUser = async () => {
+    let body = { Language: "en", MobileNo: initialState.User.MobileNo };
+    try {
+      const data = await AuthService.loginUser(body);
+      if (data) {
+        if (data.data) {
+          if (data.data.User) {
+            if (data.data.User.IsSubscribe) {
+              if (data.data.User.IsPinSet) {
+                return { code: 11, message: "Already subscribe!" };
+              } else {
+                return { code: 34, message: "Set your pin!" };
+              }
+            } else {
+              return { code: 0, message: "Go!" };
+            }
+          } else {
+            return { code: 0, message: "Go!" };
+          }
+        }
+      } else {
+        return 0;
+      }
+    } catch (error) {}
+  };
+
   async function SubscribeUser() {
     setLoader(true);
 
@@ -22,56 +61,44 @@ export default function SubscribeButton() {
     ) {
       var details = {};
       if (authState.selectedPaymentMethod.PaymentType == 1) {
-        details = {
-          Version: "V1",
-          Language: "en",
-          Platform: "web",
-          ProductId: authState.selectedPackageId,
-          MobileNo: initialState.User.MobileNo,
-          OperatorId: initialState.User.OperatorId,
-        };
+        details = handleBody();
+        delete details.cnic;
       }
       if (authState.selectedPaymentMethod.PaymentType == 2) {
-        details = {
-          Email: initialState.User.Email,
-          FullName: initialState.User.FullName,
-          Version: "V1",
-          Language: "en",
-          Platform: "Android",
-          MobileNo: initialState.User.MobileNo,
-        };
+        details = handleBody();
+        delete details.cnic;
+        delete details.ProductId;
       }
       if (authState.selectedPaymentMethod.PaymentType == 3) {
-        details = {
-          Version: "V1",
-          Language: "en",
-          Platform: "web",
-          // ProductId: 1265,
-          ProductId: authState.selectedPackageId,
-          MobileNo: initialState.User.MobileNo,
-          OperatorId: initialState.User.OperatorId,
-        };
+        details = handleBody();
+        delete details.cnic;
       }
       if (authState.selectedPaymentMethod.PaymentType == 4) {
-        details = {
-          Version: "V1",
-          Language: "en",
-          Platform: "web",
-          // ProductId: 1214,
-          ProductId: authState.selectedPackageId,
-          MobileNo: initialState.User.MobileNo,
-          OperatorId: initialState.User.OperatorId,
-          cnic: initialState.User.Cnic,
-        };
+        details = handleBody();
       }
 
-      var resp;
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         // for credit card specific only
         AuthService.creditCardOrder(details);
       } else {
-        const data = await AuthService.initialTransaction(details);
-        console.log("initialTransaction: ", data);
+        // for other payment methods
+        const status = await checkUser();
+        var data;
+        if (status.code == 0) {
+          data = await AuthService.initialTransaction(details);
+        } else {
+          console.log("status: ", status);
+          swal({
+            timer: 2000,
+            text: status.message,
+            icon: "info",
+            buttons: false,
+          });
+          setLoader(false);
+          return updateResponseCode(status.code);
+        }
+
+        console.log("initialTransaction: ", status);
 
         setLoader(false);
         if (data != null) {
@@ -82,6 +109,7 @@ export default function SubscribeButton() {
               text:
                 "You are already subscribed user, please enter your PIN for login",
               icon: "info",
+              buttons: false,
             });
             updateResponseCode(data.responseCode);
             Cookie.setCookies("userId", data.data.User.UserId);
@@ -92,26 +120,14 @@ export default function SubscribeButton() {
               timer: 3000,
             });
           } else if (data.responseCode == 1) {
-            // only for jazz cash start
-            if (authState.selectedPaymentMethod.PaymentType == 4) {
-              swal({
-                title: "You have logged out!",
-                text: "Redirecting you in 2s...",
-                timer: 2500,
-              }).then((res) => {
-                setisAuthenticateFalse();
-                router.push("/");
-                setLoader(false);
-              });
-              // end
-            } else {
-              swal({
-                title: "OTP code send successfully, please enter your code!",
-                icon: "success",
-              });
-              // setting responseCode and new user true for payment process
-              updateResponseCode(data.responseCode, true);
-            }
+            swal({
+              title: "OTP code send successfully, please enter your code!",
+              icon: "success",
+            });
+            // setting responseCode and new user true for payment process
+            updateResponseCode(data.responseCode, true);
+          } else if (data.responseCode == 6) {
+            updateResponseCode(34, true);
           } else if (data.responseCode == 13) {
             swal({
               title: data.message,
