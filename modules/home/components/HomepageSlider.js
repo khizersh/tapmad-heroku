@@ -13,6 +13,7 @@ import { AuthService } from "../../../modules/auth/auth.service";
 import HomePageAd from "./HomePageAd";
 
 const HomepageSlider = ({ movies }) => {
+  console.log("Movies: ", movies);
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
@@ -61,7 +62,6 @@ const HomepageSlider = ({ movies }) => {
     AuthService.getHomePageAdsDetail()
       .then((res) => {
         if (res.data.responseCode == 1) {
-          console.log("res.data.data: ", res.data.data);
           setAdsRow(res.data.data);
         }
       })
