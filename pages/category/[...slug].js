@@ -10,33 +10,21 @@ const Category = (props) => {
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
-  // if (!mount) {
-  //   if (!video) {
-  //     let vid = {
-  //       VideoName: data.data.CategoryName,
-  //       VideoDescription: data.data.CategoryDescription,
-  //       NewVideoImageThumbnail: data.data.CategoryMobileLargeImage,
-  //     };
-  //     setVideo(vid);
-  //     setVideoList([{ Videos: data?.data?.Videos }]);
-  //   }
-  // }
-
-  useEffect(async () => {
-    const data = await get(getSeasonVodByCategoryId + 1300);
-    console.log("data detail: ", data);
+  if (!mount) {
     if (!video) {
       let vid = {
-        VideoName: data.data.CategoryName,
-        VideoDescription: data.data.CategoryDescription,
-        NewVideoImageThumbnail: data.data.CategoryMobileLargeImage,
+        VideoName: props.data.CategoryName,
+        VideoDescription: props.data.CategoryDescription,
+        NewVideoImageThumbnail: props.data.CategoryMobileLargeImage,
       };
       setVideo(vid);
-      setVideoList([{ Videos: data?.data?.Videos }]);
+      setVideoList([{ Videos: props?.data?.Videos }]);
     }
+  }
 
+  useEffect(() => {
     setMount(true);
-  }, []);
+  }, [props]);
 
   return (
     <div className="container-fluid">
@@ -53,8 +41,8 @@ export async function getServerSideProps(context) {
     ip = "39.44.217.70";
   }
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
-  // const data = await get(getSeasonVodByCategoryId + categoryId, ip);
-  // console.log("data detail: ", data);
+  const data = await get(getSeasonVodByCategoryId + categoryId, ip);
+  console.log("data detail: ", data);
 
   return { props: { data: data.data } };
 }
