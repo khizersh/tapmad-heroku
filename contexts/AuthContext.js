@@ -38,7 +38,7 @@ export default function AuthProvider({ children }) {
         selectedPackageName:
           initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]?.PackageName,
       };
-      setAuthState(AuthStateWithData);
+      setAuthState({ ...authState, ...AuthStateWithData });
     }
   }, [initialState.AuthDetails]);
 

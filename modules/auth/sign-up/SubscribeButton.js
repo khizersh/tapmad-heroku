@@ -17,39 +17,13 @@ export default function SubscribeButton() {
       Version: "V1",
       Language: "en",
       Platform: "web",
-      ProductId: 1214,
-      // ProductId: authState.selectedPackageId,
+      // ProductId: 1214,
+      ProductId: authState.selectedPackageId,
       MobileNo: initialState.User.MobileNo,
       OperatorId: initialState.User.OperatorId,
       cnic: initialState.User.Cnic,
     };
   }
-
-  const checkUser = async () => {
-    let body = { Language: "en", MobileNo: initialState.User.MobileNo };
-    try {
-      const data = await AuthService.loginUser(body);
-      if (data) {
-        if (data.data) {
-          if (data.data.User) {
-            if (data.data.User.IsSubscribe) {
-              if (data.data.User.IsPinSet) {
-                return { code: 11, message: "Already subscribe!" };
-              } else {
-                return { code: 34, message: "Set your pin!" };
-              }
-            } else {
-              return { code: 0, message: "Go!" };
-            }
-          } else {
-            return { code: 0, message: "Go!" };
-          }
-        }
-      } else {
-        return 0;
-      }
-    } catch (error) {}
-  };
 
   async function SubscribeUser() {
     setLoader(true);
@@ -82,7 +56,7 @@ export default function SubscribeButton() {
         AuthService.creditCardOrder(details);
       } else {
         // for other payment methods
-        const status = await checkUser();
+        const status = await AuthService.checkUser(initialState.User.MobileNo);
         var data;
         if (status.code == 0) {
           data = await AuthService.initialTransaction(details);
@@ -97,8 +71,6 @@ export default function SubscribeButton() {
           setLoader(false);
           return updateResponseCode(status.code);
         }
-
-        console.log("initialTransaction: ", status);
 
         setLoader(false);
         if (data != null) {

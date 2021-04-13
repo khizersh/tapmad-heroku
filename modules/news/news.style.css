@@ -1,0 +1,42 @@
+/* @font-face kit by Fonts2u (https://fonts2u.com) */
+@font-face {
+  font-family: "Mehr Nastaliq Web";
+  src: url("../../public//static/Mehr_Nastaliq_Web/MehrNastaliqWebRegular.ttf")
+    format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+.news-cat {
+  background-color: #007bff;
+  padding: 3px 10px 6px 10px;
+  margin-left: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+
+.news-card-title {
+  font-family: "Mehr Nastaliq Web";
+}
+
+.news-card-desc {
+  font-family: "Mehr Nastaliq Web";
+  font-size: 14px;
+}
+
+.tm_news_trndng {
+  background-color: #121117;
+  border: 1px solid #222;
+  height: 320px;
+}
+
+.cursor-point {
+  cursor: pointer;
+}
+
+.news-date {
+  font-size: 14px;
+  font-family: "Aktiv Grotesk W01 Regular";
+}

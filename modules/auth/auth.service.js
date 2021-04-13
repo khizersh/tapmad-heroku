@@ -10,6 +10,7 @@ import {
   SignUpORSignInMobileOperatorToken,
   homepageAds,
   Logout,
+  UserSignUpPromoCode,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -291,6 +292,27 @@ async function paymentProcessTransaction(body) {
     return null;
   }
 }
+async function userPromoCode(body) {
+  const resp = await post(UserSignUpPromoCode, body);
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 
 async function loginUser(body) {
   const resp = await post(getCardUser, body);
@@ -330,7 +352,6 @@ async function loginUser(body) {
 function validateUser(data) {
   var user = data.User;
   if (user.UserId) {
-    console.log("user in: ", user);
     Cookie.setCookies("userId", user.UserId);
     if (user.IsSubscribe) {
       if (user.IsPinSet) {
@@ -401,6 +422,32 @@ async function getGeoInfo() {
   return obj;
 }
 
+const checkUser = async (num) => {
+  let body = { Language: "en", MobileNo: num };
+  try {
+    const data = await loginUser(body);
+    if (data) {
+      if (data.data) {
+        if (data.data.User) {
+          if (data.data.User.IsSubscribe) {
+            if (data.data.User.IsPinSet) {
+              return { code: 11, message: "Already subscribe!" };
+            } else {
+              return { code: 34, message: "Set your pin!" };
+            }
+          } else {
+            return { code: 0, message: "Go!" };
+          }
+        } else {
+          return { code: 0, message: "Go!" };
+        }
+      }
+    } else {
+      return 0;
+    }
+  } catch (error) {}
+};
+
 export const AuthService = {
   validateUser,
   setUserPin,
@@ -418,4 +465,6 @@ export const AuthService = {
   getHomePageAdsDetail,
   addHomePageAds,
   logoutUser,
+  userPromoCode,
+  checkUser,
 };

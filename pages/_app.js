@@ -1,5 +1,6 @@
 import "../styles/globals.scss";
 import "../styles/game.css";
+import "../modules/home/sliderCard.css";
 import "../components/App/Header.css";
 import "../modules/dashboard/dashboard.style.css";
 import "../modules/category/css/card-hor.style.css";
@@ -9,6 +10,7 @@ import "../modules/search/search.css";
 import "../modules/my-account/myaccount.css";
 import "../modules/movies/movie.css";
 import "../modules/catchup/catchup.css";
+import "../modules/news/news.style.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -24,6 +26,7 @@ import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
 import { setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
+import AuthProvider from "../contexts/AuthContext";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -121,13 +124,15 @@ function MyApp({ Component, pageProps, test }) {
         ) : (
           <>
             <MainProvider>
-              <CatchupProvider>
-                <Skeleton>
-                  <Header />
-                  <Component {...pageProps} />
-                  <Footer />
-                </Skeleton>
-              </CatchupProvider>
+              <AuthProvider>
+                <CatchupProvider>
+                  <Skeleton>
+                    <Header />
+                    <Component {...pageProps} />
+                    <Footer />
+                  </Skeleton>
+                </CatchupProvider>
+              </AuthProvider>
             </MainProvider>
           </>
         )}

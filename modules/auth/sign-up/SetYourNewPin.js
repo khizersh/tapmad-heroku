@@ -32,8 +32,25 @@ export default function SetYourNewPin() {
         icon: "error",
       });
     }
-
+    let obj = {
+      Language: "en",
+      Platform: "web",
+      Version: "V1",
+      MobileNo: initialState.User.MobileNo,
+      OperatorId: initialState.User.OperatorId,
+      UserPassword: initialState.User.Password,
+    };
     setLoader(true);
+
+    const status = await AuthService.loginUser({
+      MobileNo: initialState.User.MobileNo,
+      Language: "en",
+    });
+    if (status.responseCode == 1) {
+      obj.UserPassword = status.data.User.UserPassword;
+      Cookie.setCookies("userId", status.data.User.UserId);
+    }
+
     const response = await AuthService.setNewPin(pin);
 
     if (response != null) {
@@ -44,15 +61,6 @@ export default function SetYourNewPin() {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
-        let obj = {
-          Language: "en",
-          Platform: "web",
-          Version: "V1",
-          MobileNo: initialState.User.MobileNo,
-          OperatorId: initialState.User.OperatorId,
-          UserPassword: initialState.User.Password,
-        };
-        console.log("before sign up: ", initialState);
         const resp = await AuthService.signInOrSignUpMobileOperator(
           obj,
           "",
@@ -72,14 +80,16 @@ export default function SetYourNewPin() {
           // logging end
           swal({
             timer: 2500,
-            title: "Signed In Successfully",
+            title: "Your pin set successfully!",
             text: "Redirecting you...",
             icon: "success",
+            buttons: false,
+          }).then((res) => {
+            Cookie.setCookies("isAuth", 1);
+            checkUserAuthentication();
+            router.push("/");
+            setLoader(false);
           });
-          Cookie.setCookies("isAuth", 1);
-          checkUserAuthentication();
-          router.push("/");
-          setLoader(false);
         } else {
           setLoader(false);
           swal({
@@ -103,7 +113,7 @@ export default function SetYourNewPin() {
       <div className="px-3 pb-2">
         <input
           type="text"
-          placeholder="Enter OTP Code"
+          placeholder="Mobile number"
           className="form-control"
           disabled={true}
           value={initialState.User.MobileNo}

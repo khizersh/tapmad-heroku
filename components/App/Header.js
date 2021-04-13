@@ -51,7 +51,10 @@ export default function Header() {
         icon: "error",
         buttons: false,
       });
+      setLoader(false);
     }
+
+    setLoader(false);
   };
 
   const onClick = () => {
@@ -65,7 +68,7 @@ export default function Header() {
     };
     actionsRequestContent(body);
   };
-  useEffect(() => { }, [initialState.isAuthenticated]);
+  useEffect(() => {}, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">

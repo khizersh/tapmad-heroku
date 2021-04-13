@@ -105,22 +105,12 @@ export default function SideBar() {
               </Link>
             </li> */}
             {/* conditional menu */}
-            {isAuth ? <AuthenticatedSidebar /> : <NotAuthenticatedSidebar />}
+            {isAuth ? (
+              <AuthenticatedSidebar onClick={onCLickContent} />
+            ) : (
+              <NotAuthenticatedSidebar onClick={onCLickContent} />
+            )}
 
-            <li
-              className="promoDiv"
-              style={{ display: "list-item" }}
-              onClick={() => onCLickContent("promo_code")}
-            >
-              <Link href="/promo-code" shallow={true} passHref={true}>
-                <a>
-                  Promo code
-                  <span className="icon">
-                    <i className="fa fa-gift"></i>
-                  </span>
-                </a>
-              </Link>
-            </li>
             <li onClick={() => onCLickContent("search")}>
               <a onClick={onClickSearch} className="search-btn">
                 Search

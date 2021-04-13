@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import { signUpImage } from "../../../services/imagesLink";
 import { MainContext } from "../../../contexts/MainContext";
 
-export default function SignUpLayout({ children }) {
-  const { setLoader } = React.useContext(MainContext);
+export default function SignUpLayout({ children, bgImage }) {
   const router = useRouter();
   const onClickBack = () => {
     if (!Cookie.getCookies("backUrl")) {

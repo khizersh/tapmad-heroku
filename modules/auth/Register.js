@@ -1,31 +1,38 @@
-import React, { useContext, memo, useCallback, useRef } from "react";
+import React, { useContext, memo, useCallback, useRef, useEffect } from "react";
 import { Authcontext } from "../../contexts/AuthContext";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";
 import Pin from "./sign-up/VerifyOTP";
 import EnterPinToVerify from "./sign-up/EnterPinToVerify";
 import SetYourNewPin from "./sign-up/SetYourNewPin";
+import { signUpImage } from "../../services/imagesLink";
+import { useRouter } from "next/router";
+import { MainContext } from "../../contexts/MainContext";
 
 export default memo(function Register() {
-  const { authState } = useContext(Authcontext);
+  const router = useRouter();
+  const { code, number } = router.query;
+  const { authState, updateResponseCode } = useContext(Authcontext);
+  const { updateUserNumber } = useContext(MainContext);
 
   const RenderViews = useCallback(
     function () {
-      if (authState.subscribeResponseCode == 1) {
+      var respCode = code || authState.subscribeResponseCode;
+      if (respCode == 1) {
         return (
           <>
             <Pin newUser={authState.newUser ? true : false} />
           </>
         );
-      } else if (!authState.subscribeResponseCode) {
+      } else if (!respCode) {
         return (
           <>
             <SignUpComponent />
           </>
         );
-      } else if (authState.subscribeResponseCode == 11) {
+      } else if (respCode == 11) {
         return <EnterPinToVerify />;
-      } else if (authState.subscribeResponseCode == 34) {
+      } else if (respCode == 34) {
         // Response code 34 is not coming from backend. This is only for frontend logic to display setPinView
         return <SetYourNewPin />;
       }
@@ -33,9 +40,16 @@ export default memo(function Register() {
     [authState.subscribeResponseCode]
   );
 
+  useEffect(() => {
+    if (code) {
+      updateResponseCode(code);
+      updateUserNumber(number);
+    }
+  }, [code]);
+
   return (
     <div>
-      <SignUpLayout>
+      <SignUpLayout bgImage={signUpImage}>
         <RenderViews />
       </SignUpLayout>
     </div>

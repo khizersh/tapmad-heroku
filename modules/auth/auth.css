@@ -122,6 +122,14 @@
   font-size: 14px;
 }
 
+.promo-code-input {
+  padding: 7px 0px;
+}
+
+.promo-btn {
+  font-size: large;
+}
+
 .clr-green {
   color: #87c242;
 }

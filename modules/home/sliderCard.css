@@ -4,3 +4,8 @@
 .list:hover {
   overflow-x: visible !important;
 }
+
+.zero-add {
+  position: relative;
+  top: 100px;
+}

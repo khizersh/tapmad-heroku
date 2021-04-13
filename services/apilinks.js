@@ -15,9 +15,12 @@ export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 export const paymentProcess = BASEURL + "api/processPaymentTransaction";
 export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
+export const UserSignUpPromoCode = BASEURL + "api/UserSignUpPromoCode";
 export const SignUpORSignInMobileOperatorToken =
   BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
 export const Logout = BASEURLAPP + "api/logout";
+
+export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/android";
 
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";

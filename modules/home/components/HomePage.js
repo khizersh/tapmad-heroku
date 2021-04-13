@@ -12,21 +12,15 @@ import Link from "next/link";
 import { HomeService } from "./home.service";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
+import { AuthService } from "../../auth/auth.service";
+import HomePageAd from "./HomePageAd";
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
+  const [ad, setAd] = useState(null);
   const { initialState, getCountryCode } = useContext(MainContext);
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
-
-  React.useEffect(() => {
-    setLocalMovies(modifiedResponse);
-    let body = {
-      event: loggingTags.fetch,
-      pageName: "homepage",
-    };
-    actionsRequestContent(body);
-  }, [movies]);
 
   async function fetchNewMovies() {
     if (currentRow == movies.totalSections) {
@@ -60,6 +54,28 @@ export default function HomePage({ movies, banner, featured, ip }) {
     }
   }
 
+  const checAd = async () => {
+    AuthService.getHomePageAdsDetail()
+      .then((res) => {
+        if (res.data.responseCode == 1) {
+          let data = res.data.data.filter((m) => m.row == "0")[0];
+          if (data) {
+            setAd(data);
+          }
+        }
+      })
+      .catch((e) => console.log(e));
+  };
+  React.useEffect(async () => {
+    await checAd();
+    setLocalMovies(modifiedResponse);
+    let body = {
+      event: loggingTags.fetch,
+      pageName: "homepage",
+    };
+    actionsRequestContent(body);
+  }, [movies]);
+
   return (
     <div>
       <div className="container-fluid p-1">
@@ -85,6 +101,17 @@ export default function HomePage({ movies, banner, featured, ip }) {
                 </div>
               </div>
             </div>
+
+            {ad && (
+              <div className="zero-add">
+                <HomePageAd
+                  desktop={ad.desktop}
+                  mobile={ad.mobile}
+                  sizeDesktop={ad.desktopSize}
+                  sizeMobile={ad.mobileSize}
+                />
+              </div>
+            )}
             {localMovies && localMovies.Sections && (
               <HomepageSlider movies={localMovies.Sections.Movies} />
             )}
