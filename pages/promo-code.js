@@ -10,8 +10,8 @@ import { Authcontext } from "../contexts/AuthContext";
 import { MainContext } from "../contexts/MainContext";
 import { AuthService } from "../modules/auth/auth.service";
 import SimCardForm from "../modules/auth/sign-up/payment-info-components/SimCardForm";
-import SignUpLayout from "../modules/auth/sign-up/SignUpLayout";
 import { useRouter } from "next/router";
+import PromoCodeLayout from "../modules/promo-code/PromoCodeLayout";
 
 const promoCode = () => {
   const router = useRouter();
@@ -101,24 +101,21 @@ const promoCode = () => {
 
   const operators = useMemo(() => authState.loginOperators);
 
-  useEffect(() => {
-    console.log("authState: ", authState);
-  }, [authState]);
   return (
     <div>
-      <SignUpLayout
+      <PromoCodeLayout
         bgImage={"http://d1s7wg2ne64q87.cloudfront.net/web/images/psl-min.jpg"}
       >
-        <div className="form-group mb-0">
+        <div className="form-group mb-0 tm_promo_cde_form w-100">
           <div>
-            <div className="my-4 px-3">
+            <div className="">
               <input
                 className="input-group text-center promo-code-input"
                 placeholder="Enter Your Promo Code"
                 onChange={onChangePromo}
               />
             </div>
-            <div className="input-group ng-scope my-4 px-3">
+            <div className="input-group ng-scope my-4 ">
               <SimCardForm
                 data={operators}
                 onChangeNetwork={onChangeNetwork}
@@ -139,7 +136,7 @@ const promoCode = () => {
             </div>
           </div>
         </div>
-      </SignUpLayout>
+      </PromoCodeLayout>
     </div>
   );
 };

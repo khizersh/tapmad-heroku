@@ -21,6 +21,8 @@ export const SignUpORSignInMobileOperatorToken =
 export const Logout = BASEURLAPP + "api/logout";
 
 export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/android";
+export const getNewsDetailBId =
+  BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/android/";
 
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";

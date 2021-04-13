@@ -429,11 +429,16 @@ const checkUser = async (num) => {
     if (data) {
       if (data.data) {
         if (data.data.User) {
+          Cookie.setCookies("userId", data.data.User.UserId);
           if (data.data.User.IsSubscribe) {
             if (data.data.User.IsPinSet) {
-              return { code: 11, message: "Already subscribe!" };
+              return {
+                code: 11,
+                message: "Already subscribe!",
+                data: data.data,
+              };
             } else {
-              return { code: 34, message: "Set your pin!" };
+              return { code: 34, message: "Set your pin!", data: data.data };
             }
           } else {
             return { code: 0, message: "Go!" };

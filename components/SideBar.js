@@ -94,7 +94,7 @@ export default function SideBar() {
                 </a>
               </Link>
             </li>
-            {/* <li onClick={() => onCLickContent("news")}>
+            <li onClick={() => onCLickContent("news")}>
               <Link href="news" shallow={true} passHref={true}>
                 <a>
                   News
@@ -103,7 +103,7 @@ export default function SideBar() {
                   </span>
                 </a>
               </Link>
-            </li> */}
+            </li>
             {/* conditional menu */}
             {isAuth ? (
               <AuthenticatedSidebar onClick={onCLickContent} />
