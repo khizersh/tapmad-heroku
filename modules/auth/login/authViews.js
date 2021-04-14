@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from "react";
 import { AuthService } from "../auth.service";
-import EnterPin from "./enterPin";
 import ForgetPin from "./forget-pin";
 import Login from "./login";
 import SetPin from "./setPin";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
+import EnhancedEnterPin from "./enterPin";
 
 export default function AuthViews() {
   const [viewToShow, setViewToShow] = useState("login");
@@ -23,6 +23,8 @@ export default function AuthViews() {
         router.push("/sign-up");
       });
     } else {
+      console.log("response ", viewToRender);
+
       setViewToShow(viewToRender);
     }
   }
@@ -32,7 +34,7 @@ export default function AuthViews() {
 
   const RenderViews = useCallback(() => {
     if (viewToShow == "enter-pin") {
-      return <EnterPin forgetPin={sendToForgetPin} />;
+      return <EnhancedEnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
       return <ForgetPin updateView={setViewToShow} />;
     } else if (viewToShow == "set-pin") {
