@@ -34,18 +34,13 @@ export default memo(function Register() {
         return <EnterPinToVerify />;
       } else if (respCode == 34) {
         // Response code 34 is not coming from backend. This is only for frontend logic to display setPinView
+        updateResponseCode(code);
+        updateUserNumber(number);
         return <SetYourNewPin />;
       }
     },
-    [authState.subscribeResponseCode]
+    [authState.subscribeResponseCode, code]
   );
-
-  useEffect(() => {
-    if (code) {
-      updateResponseCode(code);
-      updateUserNumber(number);
-    }
-  }, [code]);
 
   return (
     <div>

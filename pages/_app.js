@@ -11,6 +11,7 @@ import "../modules/my-account/myaccount.css";
 import "../modules/movies/movie.css";
 import "../modules/catchup/catchup.css";
 import "../modules/news/news.style.css";
+import "../modules/promo-code/promo-code.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";

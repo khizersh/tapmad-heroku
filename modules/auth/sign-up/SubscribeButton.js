@@ -57,11 +57,58 @@ export default function SubscribeButton() {
       } else {
         // for other payment methods
         const status = await AuthService.checkUser(initialState.User.MobileNo);
+
         var data;
         if (status.code == 0) {
           data = await AuthService.initialTransaction(details);
+          setLoader(false);
+          if (data != null) {
+            if (data.responseCode == 11) {
+              updateUserPassword(data.data.User.UserPassword);
+              swal({
+                timer: 3000,
+                text:
+                  "You are already subscribed user, please enter your PIN for login",
+                icon: "info",
+                buttons: false,
+              });
+              console.log("data in register: ", data);
+              Cookie.setCookies("userId", data.data.User.UserId);
+              updateResponseCode(data.responseCode);
+            } else if (data.responseCode == 0) {
+              swal({
+                title: data.message,
+                icon: "error",
+                timer: 3000,
+              });
+            } else if (data.responseCode == 1) {
+              swal({
+                title: "OTP code send successfully, please enter your code!",
+                icon: "success",
+              });
+              // setting responseCode and new user true for payment process
+              updateResponseCode(data.responseCode, true);
+            } else if (data.responseCode == 6) {
+              updateResponseCode(34, true);
+            } else if (data.responseCode == 13) {
+              swal({
+                title: data.message,
+                icon: "error",
+              });
+            } else {
+              swal({
+                title: data.message,
+                icon: "error",
+              });
+            }
+          } else {
+            swal({
+              title: "Something went wrong!",
+              icon: "error",
+            });
+            setLoader(false);
+          }
         } else {
-          console.log("status: ", status);
           swal({
             timer: 2000,
             text: status.message,
@@ -69,54 +116,9 @@ export default function SubscribeButton() {
             buttons: false,
           });
           setLoader(false);
-          return updateResponseCode(status.code);
-        }
-
-        setLoader(false);
-        if (data != null) {
-          if (data.responseCode == 11) {
-            updateUserPassword(data.data.User.UserPassword);
-            swal({
-              timer: 3000,
-              text:
-                "You are already subscribed user, please enter your PIN for login",
-              icon: "info",
-              buttons: false,
-            });
-            updateResponseCode(data.responseCode);
-            Cookie.setCookies("userId", data.data.User.UserId);
-          } else if (data.responseCode == 0) {
-            swal({
-              title: data.message,
-              icon: "error",
-              timer: 3000,
-            });
-          } else if (data.responseCode == 1) {
-            swal({
-              title: "OTP code send successfully, please enter your code!",
-              icon: "success",
-            });
-            // setting responseCode and new user true for payment process
-            updateResponseCode(data.responseCode, true);
-          } else if (data.responseCode == 6) {
-            updateResponseCode(34, true);
-          } else if (data.responseCode == 13) {
-            swal({
-              title: data.message,
-              icon: "error",
-            });
-          } else {
-            swal({
-              title: data.message,
-              icon: "error",
-            });
-          }
-        } else {
-          swal({
-            title: "Something went wrong!",
-            icon: "error",
-          });
-          setLoader(false);
+          Cookie.setCookies("userId", status.data.User.UserId);
+          updateUserPassword(status.data.User.UserPassword);
+          updateResponseCode(status.code);
         }
       }
     }

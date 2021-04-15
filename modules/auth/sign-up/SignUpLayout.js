@@ -2,7 +2,6 @@ import React from "react";
 import { Cookie } from "../../../services/cookies";
 import { useRouter } from "next/router";
 import { signUpImage } from "../../../services/imagesLink";
-import { MainContext } from "../../../contexts/MainContext";
 
 export default function SignUpLayout({ children, bgImage }) {
   const router = useRouter();
