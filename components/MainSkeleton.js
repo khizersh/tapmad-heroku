@@ -12,6 +12,7 @@ export default function Skeleton({ children }) {
   // const { authState } = React.useContext(Authcontext);
 
   Router.onRouteChangeStart = (url) => {
+    console.log(url);
     let key = url.split("/")[1];
     setUrlToCookies(key, url);
     setLoader(true);
@@ -24,7 +25,7 @@ export default function Skeleton({ children }) {
     setLoader(false);
   };
 
-  useEffect(() => {}, [initialState.isSearch]);
+  useEffect(() => { }, [initialState.isSearch]);
 
   return (
     <div className="pages_header">

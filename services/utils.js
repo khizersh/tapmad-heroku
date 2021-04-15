@@ -138,7 +138,7 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  if (key != "watch" && url != "/sign-up") {
+  if (url != "/sign-up") {
     Cookie.setCookies("backUrl", url);
   }
 }

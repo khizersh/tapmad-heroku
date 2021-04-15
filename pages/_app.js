@@ -146,8 +146,8 @@ export default MyApp;
 
 export const NoSideBarSkeleton = ({ children }) => {
   const { initialState, setLoader } = React.useContext(MainContext);
+
   Router.onRouteChangeStart = (url) => {
-    console.log(url);
     let key = url.split("/")[1];
     setUrlToCookies(key, url);
     setLoader(true);

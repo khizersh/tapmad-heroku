@@ -34,7 +34,8 @@ export default function withLogin(Component, data) {
                 });
                 Cookie.setCookies("isAuth", 1);
                 checkUserAuthentication();
-                router.push("/");
+                let backURL = Cookie.getCookies("backUrl") || "/";
+                router.push(backURL);
                 setLoader(false);
             } else {
                 setLoader(false);

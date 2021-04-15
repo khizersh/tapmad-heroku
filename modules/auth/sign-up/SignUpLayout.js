@@ -6,10 +6,15 @@ import { signUpImage } from "../../../services/imagesLink";
 export default function SignUpLayout({ children, bgImage }) {
   const router = useRouter();
   const onClickBack = () => {
-    if (!Cookie.getCookies("backUrl")) {
+    var backUrl = Cookie.getCookies("backUrl");
+    if (!backUrl) {
       router.push("/");
     } else {
-      router.push(Cookie.getCookies("backUrl"));
+      if (backUrl.split("/")[1] == "watch") {
+        router.push("/");
+      } else {
+        router.push(backUrl);
+      }
     }
   };
 
