@@ -433,15 +433,15 @@ const checkUser = async (num) => {
           Cookie.setCookies('content-token', data.data.User.UserPassword)
           if (data.data.User.IsSubscribe) {
             if (data.data.User.IsPinSet) {
-              return { code: 11, message: "Already subscribe!" };
+              return { code: 11, message: "Already subscribe!", data: data.data };
             } else {
-              return { code: 34, message: "Set your pin!" };
+              return { code: 34, message: "Set your pin!", data: data.data };
             }
           } else {
-            return { code: 0, message: "Go!" };
+            return { code: 0, message: "Go!", data: data.data };
           }
         } else {
-          return { code: 0, message: "Go!" };
+          return { code: 0, message: "Go!", data: data.data };
         }
       }
     } else {
