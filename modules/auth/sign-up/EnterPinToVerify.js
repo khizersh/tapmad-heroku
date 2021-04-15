@@ -11,8 +11,9 @@ import swal from "sweetalert";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
+import withLogin from "../LoginHOC";
 
-const EnterPinToVerify = () => {
+const EnterPinToVerifyUser = ({ login }) => {
   const router = useRouter();
   const { checkUserAuthentication, setLoader, initialState } = useContext(
     MainContext
@@ -64,41 +65,7 @@ const EnterPinToVerify = () => {
           };
           actionsRequestContent(body);
         }
-        // logging end
-
-        let obj = {
-          Language: "en",
-          Platform: "web",
-          Version: "V1",
-          MobileNo: initialState.User.MobileNo,
-          OperatorId: initialState.User.OperatorId,
-          UserPassword: initialState.User.Password,
-        };
-        console.log("initialState: ", initialState);
-        let response = await AuthService.signInOrSignUpMobileOperator(
-          obj,
-          "",
-          false
-        );
-        if (response && response.data && response.data.UserId) {
-          swal({
-            timer: 2000,
-            title: "Signed In Successfully",
-            text: "Redirecting you...",
-            icon: "success",
-          });
-          Cookie.setCookies("isAuth", 1);
-          checkUserAuthentication();
-          router.push("/");
-          setLoader(false);
-        } else {
-          setLoader(false);
-          swal({
-            title: response.message,
-            icon: "error",
-            timer: 3000,
-          });
-        }
+        login();
       } else {
         setLoader(false);
         swal({
@@ -153,4 +120,5 @@ const EnterPinToVerify = () => {
   );
 };
 
+const EnterPinToVerify = withLogin(EnterPinToVerifyUser);
 export default EnterPinToVerify;

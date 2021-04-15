@@ -6,8 +6,9 @@ import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { actionsRequestContent } from "../../../services/http-service";
 import { AuthService } from "../auth.service";
+import withLogin from "../LoginHOC";
 
-export default function SetPin() {
+function SetUserPin({ login }) {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
   const { checkUserAuthentication, setLoader } = useContext(MainContext);
@@ -47,38 +48,7 @@ export default function SetPin() {
         timer: 2000,
         icon: "success",
       });
-
-      let obj = {
-        Language: "en",
-        Platform: "web",
-        Version: "V1",
-        MobileNo: initialState.User.MobileNo,
-        OperatorId: initialState.User.OperatorId,
-        UserPassword: initialState.User.Password,
-      };
-      let response = await AuthService.signInOrSignUpMobileOperator(
-        obj,
-        "",
-        false
-      );
-      if (response && response.data && response.data.UserId) {
-        swal({
-          title: "Signin successfully!",
-          text: "Redirecting you now..",
-          timer: 2000,
-          icon: "success",
-        });
-        checkUserAuthentication();
-        router.push("/");
-        setLoader(false);
-      } else {
-        setLoader(false);
-        swal({
-          title: response.message,
-          icon: "error",
-          timer: 3000,
-        });
-      }
+      login();
     } else {
       swal({
         title: "something went wrong!",
@@ -163,3 +133,5 @@ export default function SetPin() {
     </div>
   );
 }
+const SetPin = withLogin(SetUserPin);
+export default SetPin;

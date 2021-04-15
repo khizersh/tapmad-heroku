@@ -42,12 +42,6 @@ export default memo(function Register() {
     [authState.subscribeResponseCode, code]
   );
 
-  // useEffect(() => {
-  //   if (code) {
-
-  //   }
-  // }, [code]);
-
   return (
     <div>
       <SignUpLayout bgImage={signUpImage}>
