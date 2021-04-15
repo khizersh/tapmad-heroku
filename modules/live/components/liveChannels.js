@@ -22,7 +22,6 @@ export default function LiveChannels({ channel }) {
 
   async function fetchNewMovies() {
     if (currentRow == channel.totalSections) {
-      console.log("loading match");
       return;
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);

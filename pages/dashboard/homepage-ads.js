@@ -33,7 +33,6 @@ const HomePageAds = () => {
 
     AuthService.addHomePageAds(array)
       .then((res) => {
-        console.log("res: ", res);
         if (res.data.statusCode == 200) {
           swal({ title: "Request Successfull!", timer: 2500, icon: "success" });
         } else {
@@ -62,7 +61,6 @@ const HomePageAds = () => {
     setRows(array);
     AuthService.addHomePageAds(array)
       .then((res) => {
-        console.log("res: ", res);
         if (res.data.statusCode == 200) {
           swal({ title: "Remove Successfull!", timer: 2500, icon: "success" });
         } else {
@@ -208,28 +206,28 @@ const HomePageAds = () => {
             <tbody>
               {rows.length
                 ? rows.map((m, i) => (
-                    <tr key={i}>
-                      <td>{m.row}</td>
-                      <td>{m.desktop.slice(0, 25)}</td>
-                      <td>{m.mobile.slice(0, 25)}</td>
-                      <td>{m.desktopSize.slice(0, 25)}</td>
-                      <td>{m.mobileSize.slice(0, 25)}</td>
-                      <td>
-                        <button
-                          className="btn btn-info"
-                          onClick={() => onClickUpdate(m, i)}
-                        >
-                          Update
+                  <tr key={i}>
+                    <td>{m.row}</td>
+                    <td>{m.desktop.slice(0, 25)}</td>
+                    <td>{m.mobile.slice(0, 25)}</td>
+                    <td>{m.desktopSize.slice(0, 25)}</td>
+                    <td>{m.mobileSize.slice(0, 25)}</td>
+                    <td>
+                      <button
+                        className="btn btn-info"
+                        onClick={() => onClickUpdate(m, i)}
+                      >
+                        Update
                         </button>
-                        <button
-                          className="btn btn-red"
-                          onClick={() => onClickRemove(m, i)}
-                        >
-                          Remove
+                      <button
+                        className="btn btn-red"
+                        onClick={() => onClickRemove(m, i)}
+                      >
+                        Remove
                         </button>
-                      </td>
-                    </tr>
-                  ))
+                    </td>
+                  </tr>
+                ))
                 : null}
             </tbody>
           </table>

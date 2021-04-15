@@ -4,7 +4,6 @@ import Card from "./card/Card";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 
 export default function CategoryDetail({ video, videoList, syno }) {
-  console.log("video: ", video);
   const [slug, setSlug] = useState(null);
   useEffect(() => {
     if (
@@ -76,12 +75,12 @@ export default function CategoryDetail({ video, videoList, syno }) {
       <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
-              let type = "";
-              if (!vid.IsVideoFree) {
-                type = vid.PackageName ? vid.PackageName : "";
-              }
-              return <Card key={i} video={vid} type={type} />;
-            })
+            let type = "";
+            if (!vid.IsVideoFree) {
+              type = vid.PackageName ? vid.PackageName : "";
+            }
+            return <Card key={i} video={vid} type={type} />;
+          })
           : null}
       </div>
     </>

@@ -23,7 +23,6 @@ const news = ({ news, newsArray }) => {
 
   useEffect(() => {
     if (news) {
-      console.log(news);
       setNewsList(newsArray);
       // trendng work
       let trending = [];
@@ -46,7 +45,6 @@ const news = ({ news, newsArray }) => {
       trending.push(sport);
       trending.push(business);
       setTopTrending(trending);
-      console.log("topTrending: ", trending);
 
       // trending end
 

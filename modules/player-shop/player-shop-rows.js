@@ -15,8 +15,6 @@ export default function PlayerShopRows({
             key={index}
             style={{ borderBottom: "1px solid" }}
             onClick={() => {
-              console.log(merchant);
-              console.log(defaultTab);
               if (defaultTab == 8) {
                 selectTab(merchant.MerchantTabId);
               }

@@ -56,7 +56,6 @@ export default function CatchupPlayer({ video, videoList }) {
   }
 
   async function getRelatedChannels() {
-    console.log("videoList iiii: ", videoList);
     if (videoList && videoList.length) {
       setRelatedVideos(videoList);
     }
@@ -229,20 +228,20 @@ export default function CatchupPlayer({ video, videoList }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video, true);
-                      return (
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      );
-                    })
+                    let slug = SEOFriendlySlugsForVideo(video, true);
+                    return (
+                      <Link
+                        href={slug}
+                        replace={true}
+                        shallow={false}
+                        key={i}
+                      >
+                        <a>
+                          <RelatedProductCard video={video} />
+                        </a>
+                      </Link>
+                    );
+                  })
                   : null}
               </div>
             </div>

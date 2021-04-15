@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
@@ -28,7 +28,6 @@ import Router from "next/router";
 import { setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
-import EnhancedFooter from "../components/Footer";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -131,7 +130,7 @@ function MyApp({ Component, pageProps, test }) {
                   <Skeleton>
                     <Header />
                     <Component {...pageProps} />
-                    <EnhancedFooter />
+                    <Footer />
                   </Skeleton>
                 </CatchupProvider>
               </AuthProvider>

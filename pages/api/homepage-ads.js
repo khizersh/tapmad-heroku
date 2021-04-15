@@ -20,7 +20,6 @@ export default async (req, res) => {
   if (req.method == "POST") {
     // post request
     let body = req.body;
-    console.log("body: ", body);
     csvWriter
       .writeRecords(body)
       .then(() => {
@@ -28,7 +27,6 @@ export default async (req, res) => {
         res.json({ statusCode: 200 });
       })
       .catch((e) => {
-        console.log("error occured: ", e);
         res.json({ statusCode: 400 });
       });
   } else {
@@ -37,7 +35,6 @@ export default async (req, res) => {
     await csv()
       .fromFile(homePageAdsCsvFile)
       .then((jsonObj) => {
-        // console.log("jsonObj: ", jsonObj);
         if (jsonObj != null || jsonObj.length > 0) {
           res.json({ data: jsonObj, responseCode: 1 });
         } else {

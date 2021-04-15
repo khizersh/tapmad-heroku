@@ -10,7 +10,6 @@ export default async (req, res) => {
     .createReadStream("public/data.csv")
     .pipe(csv())
     .on("data", (row) => {
-      console.log(row);
       data.push(row);
     })
     .on("end", () => {

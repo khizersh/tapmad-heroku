@@ -11,7 +11,6 @@ export default function UserInfo(props) {
     fetch(`http://ip-api.com/json/${props.clientIP}`)
       .then((e) => e.json())
       .then((resp) => {
-        console.log(resp);
         setInfo(resp);
       });
   }

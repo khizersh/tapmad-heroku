@@ -23,8 +23,6 @@ export default function AuthViews() {
         router.push("/sign-up");
       });
     } else {
-      console.log("response ", viewToRender);
-
       setViewToShow(viewToRender);
     }
   }

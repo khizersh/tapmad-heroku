@@ -29,7 +29,6 @@ export default async (req, res) => {
     csvWriter
       .writeRecords(body)
       .then(() => {
-        console.log("The CSV file was written successfully");
         res.json({ statusCode: 200 });
       })
       .catch((e) => {

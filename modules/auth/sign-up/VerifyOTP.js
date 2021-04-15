@@ -39,8 +39,6 @@ const Pin = ({ newUser }) => {
         };
         data = await AuthService.verifyOTP(body);
       }
-
-      console.log("data: in otp: ", data);
       if (data != null) {
         if (data.responseCode == 0) {
           swal({

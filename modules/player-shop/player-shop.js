@@ -14,7 +14,6 @@ export default function PlayerShop() {
       "https://app.tapmad.com/api/getAllMerchantProducts/V1/en/android"
     );
     let transformedResponse = transformResponse(response.data);
-    console.log(transformedResponse);
     setShopTabs(transformedResponse);
   }, []);
   function handleSelect(e) {
@@ -29,15 +28,12 @@ export default function PlayerShop() {
   }
   function changeTabs(e) {
     handleSelect(e);
-    console.log(defaultTab);
   }
   async function fetchMerchantTabs(index, tabId) {
-    console.log("Fetching Merhchant Tabs......");
     let response = await get(
       `https://app.tapmad.com/api/getProductsByMerchantTabsId/V1/en/android/${tabId}`
     );
     if (response.data.MerchantTabs && response.data.MerchantTabs.length > 0) {
-      console.log(response.data);
       let tabClone = [...shopTabs];
       tabClone[index].MerchantTabs = response.data.MerchantTabs;
       setShopTabs(tabClone);
@@ -59,9 +55,8 @@ export default function PlayerShop() {
                 tabClassName={
                   tabs.MerchantTabId == RELATED
                     ? "d-lg-none d-md-none tshop-tabs"
-                    : `tshop-tabs ${
-                        tabs.MerchantTabId == defaultTab ? "shop-active" : ""
-                      }`
+                    : `tshop-tabs ${tabs.MerchantTabId == defaultTab ? "shop-active" : ""
+                    }`
                 }
                 title={
                   <div>

@@ -48,7 +48,6 @@ function Login({ loginResponse }) {
       const data = await AuthService.GetCardUser(body);
       if (data != null) {
         if (data.data.User) {
-          console.log("User: ", data.data.User);
           updateUserNumber(mobileNo);
           updateUserPassword(data.data.User.UserPassword);
           loginResponse(data.data);

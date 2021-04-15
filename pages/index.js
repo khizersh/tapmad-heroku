@@ -25,7 +25,6 @@ export async function getServerSideProps(context) {
   console.log("Environment is " + process.env.TAPENV);
 
   let movie, banner, featured;
-  console.log("Ip is ", ip);
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
   else movie = {};

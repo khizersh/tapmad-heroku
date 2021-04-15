@@ -17,7 +17,6 @@ import { GlobalService } from "../../modules/global-service";
 const watch = (props) => {
   const router = useRouter();
 
-  console.log("props in watch: ", props);
   const [url, setUrl] = useState(null);
   useEffect(() => {
     if (!props.allowUser) {
@@ -57,7 +56,6 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  console.log("Cookies ", cookies["content-token"]);
   let allowUser = true;
   let body = {
     Version: "V2",
@@ -68,7 +66,6 @@ export async function getServerSideProps(context) {
     IsChannel: chanelDetail.isChannel,
     headers: GlobalService.authHeaders(cookies["content-token"]),
   };
-  console.log("body in watch: ", body);
 
   var isFree = "1";
   isFree = chanelDetail.isFree;
@@ -106,7 +103,7 @@ export async function getServerSideProps(context) {
 export default watch;
 
 const response = (data, channel, allowUser) => {
-  console.log("dataaa ", data);
+
   return {
     data,
     channel,

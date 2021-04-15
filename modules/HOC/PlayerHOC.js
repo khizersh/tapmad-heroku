@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 const PlayerHOC = (Component, data) => {
-  console.log("data in hoc: ", data);
   return function HOC() {
     return (
       <>

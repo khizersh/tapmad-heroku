@@ -41,7 +41,6 @@ export default function CatchupProvider({ children }) {
   }
 
   function updateRelatedContent(content) {
-    console.log("contentL ", content);
     let stateClone = catchupState;
     setCatchupState({
       ...stateClone,

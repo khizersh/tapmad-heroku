@@ -72,7 +72,6 @@ export default function SubscribeButton() {
                 icon: "info",
                 buttons: false,
               });
-              console.log("data in register: ", data);
               Cookie.setCookies("userId", data.data.User.UserId);
               updateResponseCode(data.responseCode);
             } else if (data.responseCode == 0) {

@@ -30,7 +30,6 @@ const MyAccount = () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData(formData);
-      console.log("data::: ", data);
       if (data != null) {
         if (data.responseCode == 1) {
           setAllData(data.data);

@@ -15,7 +15,6 @@ import { CatchupContext } from "../../contexts/CatchupContext";
 const watch = (props) => {
   const router = useRouter();
   const { catchupState } = useContext(CatchupContext);
-  console.log("catchupState in cat: ", catchupState);
   const [related, setRelated] = useState([]);
   useEffect(() => {
     if (!props.allowUser) {

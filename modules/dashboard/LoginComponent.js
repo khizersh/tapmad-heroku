@@ -16,7 +16,6 @@ const LoginComponent = () => {
   const onCLick = async () => {
     const resp = await get(getCredentials);
     const data = DashboardService.getListOfUsers(resp);
-    console.log("data in login: ", data);
     let isAuthenticated = false;
     if (secret != "@@@///") {
       return swal({
