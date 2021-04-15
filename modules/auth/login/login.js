@@ -45,7 +45,7 @@ function Login({ loginResponse }) {
         Language: "en",
         MobileNo: mobileNo,
       };
-      const data = await AuthService.getCardUser(body);
+      const data = await AuthService.GetCardUser(body);
       if (data != null) {
         if (data.data.User) {
           console.log("User: ", data.data.User);

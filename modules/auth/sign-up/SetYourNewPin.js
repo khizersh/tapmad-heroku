@@ -42,7 +42,7 @@ export default function SetYourNewPin() {
     };
     setLoader(true);
 
-    const status = await AuthService.getCardUser({
+    const status = await AuthService.GetCardUser({
       MobileNo: initialState.User.MobileNo,
       Language: "en",
     });
