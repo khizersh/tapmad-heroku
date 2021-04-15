@@ -314,7 +314,7 @@ async function userPromoCode(body) {
   }
 }
 
-async function loginUser(body) {
+async function getCardUser(body) {
   const resp = await post(getCardUser, body);
   const data = handleResponse(resp);
   if (data != null) {
@@ -425,10 +425,11 @@ async function getGeoInfo() {
 const checkUser = async (num) => {
   let body = { Language: "en", MobileNo: num };
   try {
-    const data = await loginUser(body);
+    const data = await getCardUser(body);
     if (data) {
       if (data.data) {
         if (data.data.User) {
+          Cookie.setCookies('userId', data.data.User.UserId)
           if (data.data.User.IsSubscribe) {
             if (data.data.User.IsPinSet) {
               return { code: 11, message: "Already subscribe!" };
@@ -445,7 +446,7 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const AuthService = {
@@ -457,7 +458,7 @@ export const AuthService = {
   creditCardOrder,
   initialTransaction,
   verifyOTP,
-  loginUser,
+  getCardUser,
   getGeoInfo,
   loginUserFetchApi,
   paymentProcessTransaction,
