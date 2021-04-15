@@ -33,10 +33,17 @@ function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
 
   function checkUserAuthentication() {
+    if (pageProps.auth) {
+      const token = Cookie.getCookies("content-token");
+      if (token) {
+        router.push("/");
+        return false;
+      } else {
+        return false;
+      }
+    }
     if (pageProps.protected) {
-      const userId = Cookie.getCookies("userId");
-      const isAuthenticated = Cookie.getCookies("isAuth");
-      const token = Cookie.getCookies("utk");
+      const token = Cookie.getCookies("content-token");
       if (token) {
         return true;
       } else {

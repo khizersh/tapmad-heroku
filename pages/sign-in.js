@@ -22,6 +22,7 @@ export function getStaticProps() {
   return {
     props: {
       noSideBar: true,
+      auth: true
     },
   };
 }
