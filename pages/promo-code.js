@@ -142,3 +142,11 @@ const promoCode = () => {
 };
 
 export default promoCode;
+
+export function getStaticProps() {
+  return {
+    props: {
+      auth: true
+    },
+  };
+}
