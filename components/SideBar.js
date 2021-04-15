@@ -12,10 +12,7 @@ export default function SideBar() {
     document
       .getElementsByClassName("nav-toggle")[0]
       .classList.toggle("openNav");
-    // document.getElementsByTagName("html")[0].classList.toggle("menu").style = "left:"
-    // document.getElementsByClassName("nav-toggle")[0].classList.toggle("menu");
     document.getElementsByClassName("menu")[0].classList.toggle("active");
-    // document.getElementsByClassName("menu")[0].classList.toggle("active");
   }
   const { initialState, setSearch } = React.useContext(MainContext);
 
