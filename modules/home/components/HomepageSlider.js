@@ -20,14 +20,18 @@ const HomepageSlider = ({ movies }) => {
   const [adsRow, setAdsRow] = useState([]);
 
   function handleMouseOver(index) {
-    document.getElementsByClassName("slick-list")[index + 1].style.overflow =
-      "visible";
-    document.getElementsByTagName("body")[0].style.overflowX = "hidden";
+    if (window.screen.width > 992) {
+      document.getElementsByClassName("slick-list")[index + 1].style.overflow =
+        "visible";
+      document.getElementsByTagName("body")[0].style.overflowX = "hidden";
+    }
   }
   function handleMouseOut(index) {
-    document.getElementsByClassName("slick-list")[index + 1].style.overflow =
-      "hidden";
-    document.getElementsByTagName("body")[0].style.overflowX = "visible";
+    if (window.screen.width > 992) {
+      document.getElementsByClassName("slick-list")[index + 1].style.overflow =
+        "hidden";
+      document.getElementsByTagName("body")[0].style.overflowX = "visible";
+    }
   }
 
   function handleOnMouseDown(e) {
