@@ -162,6 +162,12 @@ function isAuthentictedServerSide(req) {
     return false;
   }
 }
+function closeNavBar() {
+  document
+    .getElementsByClassName("nav-toggle")[0]
+    .classList.toggle("openNavs");
+  document.getElementsByClassName("menu")[0].classList.toggle("actives");
+}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -174,4 +180,5 @@ module.exports = {
   setUrlToCookies,
   isAuthentictedServerSide,
   SEOFriendlySlugsForCatchupVideo,
+  closeNavBar
 };

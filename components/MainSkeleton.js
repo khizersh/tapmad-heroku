@@ -4,7 +4,7 @@ import Router from "next/router";
 import Loader from "./Loader";
 import { MainContext } from "../contexts/MainContext";
 import Search from "../modules/search/Search";
-import { setUrlToCookies } from "../services/utils";
+import { closeNavBar, setUrlToCookies } from "../services/utils";
 import { Authcontext } from "../contexts/AuthContext";
 
 export default function Skeleton({ children }) {
@@ -12,7 +12,8 @@ export default function Skeleton({ children }) {
   // const { authState } = React.useContext(Authcontext);
 
   Router.onRouteChangeStart = (url) => {
-    console.log(url);
+    // console.log(url);
+    // closeNavBar();
     let key = url.split("/")[1];
     setUrlToCookies(key, url);
     setLoader(true);

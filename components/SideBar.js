@@ -12,7 +12,7 @@ export default function SideBar() {
     document
       .getElementsByClassName("nav-toggle")[0]
       .classList.toggle("openNav");
-    document.getElementsByClassName("menu")[0].classList.toggle("active");
+    document.getElementsByClassName("menu")[0].classList.toggle("active-nav");
   }
   const { initialState, setSearch } = React.useContext(MainContext);
 
@@ -92,7 +92,7 @@ export default function SideBar() {
               </Link>
             </li>
             <li onClick={() => onCLickContent("news")}>
-              <Link href="news" shallow={true} passHref={true}>
+              <Link href="/news" shallow={true} passHref={true}>
                 <a>
                   News
                   <span className="icon">
