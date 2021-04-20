@@ -117,13 +117,17 @@ function Login({ loginResponse }) {
           LOGIN
         </button>
         <br />
-        <a className=" mt-2 text-muted">Back</a>
-        <span className="mt-2 mr-2 text-muted">
-          | &nbsp;&nbsp;Not Registered?
-        </span>
-        <Link href="/sign-up" shallow={true} passHref={true}>
-          <a className="text-light">Sign up</a>
-        </Link>
+        <>
+          <Link href="/" shallow={true} passHref={true}>
+            <a className=" mt-2 text-muted">Back &nbsp;</a>
+          </Link>
+          <span className="mt-2 mr-2 text-muted">
+            | &nbsp;&nbsp;Not Registered?
+          </span>
+          <Link href="/sign-up" shallow={true} passHref={true}>
+            <a className="text-light">Sign up</a>
+          </Link>
+        </>
       </div>
     </div>
   );
