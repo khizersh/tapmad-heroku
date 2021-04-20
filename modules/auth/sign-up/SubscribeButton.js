@@ -27,12 +27,12 @@ export default function SubscribeButton() {
 
   async function SubscribeUser() {
     setLoader(true);
-
     if (
       authState &&
       authState.selectedPaymentMethod &&
       authState.selectedPackageId
     ) {
+      console.log(authState.selectedPaymentMethod, authState.selectedPackageId);
       var details = {};
       if (authState.selectedPaymentMethod.PaymentType == 1) {
         details = handleBody();
@@ -55,11 +55,33 @@ export default function SubscribeButton() {
         // for credit card specific only
         AuthService.creditCardOrder(details);
       } else {
+        if (!details.OperatorId) {
+          swal({
+            timer: 3000,
+            text:
+              "Please select operator",
+            icon: "info",
+            buttons: false,
+          });
+          setLoader(false);
+          return 0;
+        } else if (!details.MobileNo) {
+          swal({
+            timer: 3000,
+            text:
+              "Please enter mobile number",
+            icon: "info",
+            buttons: false,
+          });
+          setLoader(false);
+          return 0;
+        }
         // for other payment methods
         const status = await AuthService.checkUser(initialState.User.MobileNo);
 
         var data;
         if (status.code == 0) {
+
           data = await AuthService.initialTransaction(details);
           setLoader(false);
           if (data != null) {

@@ -29,10 +29,16 @@ const PersonalInfo = ({ data }) => {
 
   const onChange = (e) => {
     let num = e.target.value;
-    if (+num === +num) {
+    if (e.target.name == "UserMobileNumebr") {
+      if (+num === +num) {
+        setBtnEnable(true);
+        setProfileData({ ...profileData, [e.target.name]: e.target.value });
+      }
+    } else {
       setBtnEnable(true);
       setProfileData({ ...profileData, [e.target.name]: e.target.value });
     }
+
   };
   const onSubmit = async () => {
     var formData = new FormData();
@@ -167,9 +173,8 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <button
-            className={`profile-btn w-100  border-0 rounded-0 text-white ${
-              btnEnable ? "" : "btn-click"
-            }`}
+            className={`profile-btn w-100  border-0 rounded-0 text-white ${btnEnable ? "" : "btn-click"
+              }`}
             onClick={onSubmit}
           >
             Update Profile

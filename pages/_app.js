@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps, test }) {
   function checkUserAuthentication() {
     if (pageProps.auth) {
       const token = Cookie.getCookies("content-token");
-      if (token) {
+      if (token && token.length > 50) {
         router.push("/");
         return false;
       } else {
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps, test }) {
     }
     if (pageProps.protected) {
       const token = Cookie.getCookies("content-token");
-      if (token) {
+      if (token && token.length > 50) {
         return true;
       } else {
         router.push("/sign-in");
