@@ -69,7 +69,6 @@ const EnterPinToVerifyUser = ({ login }) => {
       } else {
         setLoader(false);
         swal({
-          timer: 3000,
           title: data.message,
           icon: "error",
         });

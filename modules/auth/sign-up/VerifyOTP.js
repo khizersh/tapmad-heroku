@@ -7,12 +7,13 @@ import { useRef } from "react";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { Cookie } from "../../../services/cookies";
+import { useRouter } from "next/router";
 
 const Pin = ({ newUser }) => {
   const { initialState, setLoader } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
   const otp = useRef("");
-
+  const router = useRouter();
   async function verifyOTPPinCode() {
     setLoader(true);
     if (initialState && initialState.User) {
@@ -22,16 +23,25 @@ const Pin = ({ newUser }) => {
       };
       var data;
       if (newUser) {
-        body = {
-          CodeOTP: otp.current.value,
-          Language: "en",
-          MobileNo: initialState.User.MobileNo,
-          OperatorId: initialState.User.OperatorId,
-          Platform: "web",
-          ProductId: authState.selectedPackageId,
-          Version: "V1",
-        };
-        data = await AuthService.paymentProcessTransaction(body);
+        try {
+          body = {
+            CodeOTP: otp.current.value,
+            Language: "en",
+            MobileNo: initialState.User.MobileNo,
+            OperatorId: initialState.User.OperatorId,
+            Platform: "web",
+            ProductId: authState.selectedPackageId,
+            Version: "V1",
+          };
+          data = await AuthService.paymentProcessTransaction(body);
+        } catch (e) {
+          swal({
+            timer: 3000,
+            title: "Something went wrong",
+            icon: "error",
+          });
+        }
+
       } else {
         body = {
           MobileNo: "0" + initialState.User.MobileNo,
@@ -45,7 +55,9 @@ const Pin = ({ newUser }) => {
             timer: 3000,
             title: data.message,
             icon: "error",
-          });
+          }).then((e) => {
+            router.push("/");
+          })
         } else if (data.responseCode == 1) {
           swal({
             timer: 2500,
