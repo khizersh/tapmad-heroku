@@ -13,7 +13,7 @@ export default function Skeleton({ children }) {
 
   Router.onRouteChangeStart = (url) => {
     // console.log(url);
-    // closeNavBar();
+    closeNavBar();
     let key = url.split("/")[1];
     setUrlToCookies(key, url);
     setLoader(true);

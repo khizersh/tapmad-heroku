@@ -165,8 +165,8 @@ function isAuthentictedServerSide(req) {
 function closeNavBar() {
   document
     .getElementsByClassName("nav-toggle")[0]
-    .classList.toggle("openNavs");
-  document.getElementsByClassName("menu")[0].classList.toggle("actives");
+    .classList.remove("openNav");
+  document.getElementsByClassName("menu")[0].classList.remove("active-nav");
 }
 module.exports = {
   manipulateUrls,
