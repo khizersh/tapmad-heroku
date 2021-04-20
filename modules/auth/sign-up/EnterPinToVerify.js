@@ -51,33 +51,41 @@ const EnterPinToVerifyUser = ({ login }) => {
   }
 
   async function verifyPinCode() {
-    setLoader(true);
-    const data = await AuthService.verifyPinCode(pinCode.current.value);
-    if (data != null) {
-      if (data.responseCode == 1) {
-        // logging start
-        if (authState && authState.selectedPackageId) {
-          let body = {
-            event: loggingTags.signup,
-            amount: authState.selectedPackageAmount,
-            operatorName: authState.selectedPackageName,
-            mobileNumber: initialState.User.MobileNo,
-          };
-          actionsRequestContent(body);
+    if (pinCode.current.value.length == 4) {
+      setLoader(true);
+      const data = await AuthService.verifyPinCode(pinCode.current.value);
+      if (data != null) {
+        if (data.responseCode == 1) {
+          // logging start
+          if (authState && authState.selectedPackageId) {
+            let body = {
+              event: loggingTags.signup,
+              amount: authState.selectedPackageAmount,
+              operatorName: authState.selectedPackageName,
+              mobileNumber: initialState.User.MobileNo,
+            };
+            actionsRequestContent(body);
+          }
+          login();
+        } else {
+          setLoader(false);
+          swal({
+            title: data.message,
+            icon: "error",
+          });
         }
-        login();
       } else {
         setLoader(false);
         swal({
-          title: data.message,
+          timer: 3000,
+          title: "Something Went Wrong",
           icon: "error",
         });
       }
     } else {
-      setLoader(false);
       swal({
-        timer: 3000,
-        title: "Something Went Wrong",
+        timer: 5000,
+        title: "Incorrect PIN",
         icon: "error",
       });
     }

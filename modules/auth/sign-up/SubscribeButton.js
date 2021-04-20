@@ -24,7 +24,11 @@ export default function SubscribeButton() {
       cnic: initialState.User.Cnic,
     };
   }
-
+  function updateApiData(status) {
+    Cookie.setCookies("userId", status.data.User.UserId);
+    updateUserPassword(status.data.User.UserPassword);
+    updateResponseCode(status.code);
+  }
   async function SubscribeUser() {
     setLoader(true);
     if (
@@ -81,7 +85,7 @@ export default function SubscribeButton() {
 
         var data;
         if (status.code == 0) {
-
+          updateApiData(status)
           data = await AuthService.initialTransaction(details);
           setLoader(false);
           if (data != null) {
@@ -137,9 +141,7 @@ export default function SubscribeButton() {
             buttons: false,
           });
           setLoader(false);
-          Cookie.setCookies("userId", status.data.User.UserId);
-          updateUserPassword(status.data.User.UserPassword);
-          updateResponseCode(status.code);
+          updateApiData(status);
         }
       }
     }

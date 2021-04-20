@@ -14,9 +14,19 @@ const Pin = ({ newUser }) => {
   const { authState, updateResponseCode } = useContext(Authcontext);
   const otp = useRef("");
   const router = useRouter();
+
   async function verifyOTPPinCode() {
-    setLoader(true);
     if (initialState && initialState.User) {
+      console.log(otp.current.value.length);
+      if (otp.current.value.length < 4) {
+        swal({
+          timer: 5000,
+          title: "Incorrect OTP",
+          icon: "error",
+        });
+        return 0;
+      }
+      setLoader(true);
       let body = {
         MobileNo: "0" + initialState.User.MobileNo,
         otpCode: otp.current.value,
