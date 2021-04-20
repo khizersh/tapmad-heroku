@@ -15,11 +15,12 @@ import {
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
 
-var userId = Cookie.getCookies("userId");
 
 async function setUserPin(pin) {
   let resp;
   try {
+    var userId = Cookie.getCookies("userId");
+
     resp = await post(setUserPinCode, {
       Version: "V1",
       Language: "en",
