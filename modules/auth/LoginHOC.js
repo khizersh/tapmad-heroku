@@ -7,7 +7,7 @@ import { MainContext } from "../../contexts/MainContext";
 
 export default function withLogin(Component, data) {
 
-    return () => {
+    return (props) => {
         const { checkUserAuthentication, setLoader, initialState } = useContext(MainContext);
         const router = useRouter();
 
@@ -46,6 +46,6 @@ export default function withLogin(Component, data) {
                 });
             }
         }
-        return <Component login={loginUser} />
+        return <Component login={loginUser} {...props} />
     }
 }
