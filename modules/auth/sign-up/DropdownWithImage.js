@@ -10,7 +10,7 @@ function DropdownWithImage({ data, onChange }) {
   };
   return (
     <div>
-      <div className=" form-control width-11rem">
+      <div className="form-control width-11rem">
         <div onClick={() => setIsCaretOpen(!isCaretOpen)} className="textfirst">
           {selectedData ? (
             <div className="">
