@@ -23,6 +23,9 @@ export default function Live(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   var channelList = await get(getChannelWithPaginationInitial, ip);
   var channel = await channelList.data;
   return {

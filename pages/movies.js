@@ -22,6 +22,9 @@ export default function MoviesPage(props) {
 }
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   var moviesList = await get(getMoviesWithPaginationInitial, ip);
   var movies = await moviesList.data;
   return {

@@ -11,6 +11,7 @@ import { get } from "../../../services/http-service";
 import { getChannelsWithPagination } from "../../../services/apilinks";
 
 export default function LiveChannels({ channel }) {
+  console.log("channel:: ", channel);
   var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(channel);
   const [currentRow, setCurrentRow] = useState(5);
