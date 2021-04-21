@@ -29,11 +29,11 @@ export async function getServerSideProps(context) {
   if (movieList != null) movie = await movieList.data;
   else movie = {};
 
-  var bannersList = await HomeService.getFeaturedBannerDetailData();
+  var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
   else banner = {};
 
-  var featuredContent = await HomeService.getWebTabBannersData();
+  var featuredContent = await HomeService.getWebTabBannersData(ip);
   if (featuredContent != null) featured = await featuredContent.data;
   else featured = {};
 
