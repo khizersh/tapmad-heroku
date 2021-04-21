@@ -8,8 +8,15 @@ module.exports = {
         header: true,
         skipEmptyLines: true,
       },
-    });
-
+    },
+      {
+        test: /\.js$/,
+        include: [
+          /node_modules/
+        ],
+        loader: 'babel-loader'
+      }
+    );
     return config;
   },
   images: {
