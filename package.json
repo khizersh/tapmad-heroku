@@ -15,7 +15,6 @@
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.21.1",
-    "babel-loader": "^8.2.2",
     "bootstrap": "^4.5.3",
     "cookie": "^0.4.1",
     "cookie-parser": "^1.4.5",
