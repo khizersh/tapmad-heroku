@@ -90,19 +90,13 @@ export default function MainProvider({ children }) {
     }
   }
   function setisAuthenticateFalse() {
-    document.cookie.replace(/(?<=^|;).+?(?=\=|;|$)/g, (name) =>
-      location.hostname
-        .split(".")
-        .reverse()
-        .reduce(
-          (domain) => (
-            (domain = domain.replace(/^\.?[^.]+/, "")),
-            (document.cookie = `${name}=;max-age=0;path=/;domain=${domain}`),
-            domain
-          ),
-          location.hostname
-        )
-    );
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
     dispatch({ type: "SET_AUTHENTICATION", data: false });
   }
   function setLoader(bool) {
