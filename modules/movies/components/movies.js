@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import ScrollComponent from "../../../components/scrollComponent";
 import { getMoviesWithPagination } from "../../../services/apilinks";
@@ -12,7 +12,7 @@ import { GlobalService } from "../../global-service";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Movies({ movies }) {
-  var bannerSettings = basicSliderConfig(1);
+  var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
 
@@ -59,13 +59,14 @@ export default function Movies({ movies }) {
                 <img
                   src={e.WebBannerImage}
                   style={{ width: "100%" }}
+                  className="banner-main"
                   alt="Banner"
                 />
               </div>
             );
           })}
       </Slider>{" "}
-      <HomepageSlider movies={localMovies.Sections.Movies} />
+      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} />
       {currentRow !== movies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />
       )}

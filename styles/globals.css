@@ -1,0 +1,9 @@
+.banner-main {
+  height: 285px;
+}
+
+@media screen and (max-width: 992px) {
+  .banner-main {
+    height: 200px !important;
+  }
+}
