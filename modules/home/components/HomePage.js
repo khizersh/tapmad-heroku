@@ -19,7 +19,6 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
   const [ad, setAd] = useState(null);
-  const { initialState, getCountryCode } = useContext(MainContext);
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
 
   async function fetchNewMovies() {
@@ -113,7 +112,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
               </div>
             )}
             {localMovies && localMovies.Sections && (
-              <HomepageSlider movies={localMovies.Sections.Movies} />
+              <HomepageSlider movies={localMovies.Sections.Movies} ads={true} />
             )}
             {currentRow !== movies.totalSections && (
               <ScrollComponent loadMore={fetchNewMovies} />

@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { AuthService } from "../../../modules/auth/auth.service";
 import HomePageAd from "./HomePageAd";
 
-const HomepageSlider = ({ movies }) => {
+const HomepageSlider = ({ movies, ads }) => {
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
@@ -82,127 +82,127 @@ const HomepageSlider = ({ movies }) => {
                 <div>
                   <Slider {...settings}>
                     {movieSection &&
-                      !movieSection.IsCategories &&
-                      movieSection.Videos &&
-                      movieSection.Videos.length > 0
+                    !movieSection.IsCategories &&
+                    movieSection.Videos &&
+                    movieSection.Videos.length > 0
                       ? movieSection.Videos.map((mov, index) => {
-                        let slug = setUrlAccordingToVideoType(
-                          mov,
-                          IsLiveChannel
-                        );
-                        return (
-                          <Link
-                            href={slug}
-                            key={index}
-                            passHref={true}
-                            shallow={true}
-                          >
-                            <a
-                              onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => handleOnClick(e, mov)}
+                          let slug = setUrlAccordingToVideoType(
+                            mov,
+                            IsLiveChannel
+                          );
+                          return (
+                            <Link
+                              href={slug}
+                              key={index}
+                              passHref={true}
+                              shallow={true}
                             >
-                              <div
-                                className="tm-mv-bx"
-                                key={index}
-                                onMouseOver={() => handleMouseOver(row)}
-                                onMouseOut={() => handleMouseOut(row)}
+                              <a
+                                onMouseDown={(e) => handleOnMouseDown(e)}
+                                onClick={(e) => handleOnClick(e, mov)}
                               >
-                                <div className="movies-images">
-                                  <img
-                                    src={mov.NewChannelThumbnailPath}
-                                    style={{ width: "100%" }}
-                                    alt={mov.VideoName}
-                                  />
-                                  {mov.IsVideoFree ? null : (
-                                    <div className="live_side">Premium</div>
-                                  )}
-                                </div>
-                                <div className="tm-mv-items">
-                                  <div className="tm-mv-name">
-                                    <div
-                                      style={{
-                                        fontSize: "10px",
-                                        color: "white",
-                                      }}
-                                    >
-                                      {mov.VideoName}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </Link>
-                        );
-                      })
-                      : movieSection &&
-                      movieSection.Categories &&
-                      movieSection.Categories.map((mov, index) => {
-                        let slug = setUrlAccordingToVideoType(
-                          mov,
-                          IsCategory
-                        );
-                        return (
-                          <Link
-                            href={slug}
-                            key={index}
-                            passHref={true}
-                            shallow={true}
-                          >
-                            <a
-                              onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => handleOnClick(e, mov)}
-                            >
-                              <div
-                                className="tm-mv-bx"
-                                onMouseOver={() => handleMouseOver(row)}
-                                onMouseOut={() => handleMouseOut(row)}
-                                key={index}
-                              >
-                                <div className="movies-images">
-                                  <img
-                                    src={mov.NewCategoryImage}
-                                    style={{ width: "100%" }}
-                                    alt={mov.VideoName}
-                                  />
-                                  {mov.IsVideoFree
-                                    ? null
-                                    : mov.PackageName && (
-                                      <div className="live_side">
-                                        {mov.PackageName}
-                                      </div>
+                                <div
+                                  className="tm-mv-bx"
+                                  key={index}
+                                  onMouseOver={() => handleMouseOver(row)}
+                                  onMouseOut={() => handleMouseOut(row)}
+                                >
+                                  <div className="movies-images">
+                                    <img
+                                      src={mov.NewChannelThumbnailPath}
+                                      style={{ width: "100%" }}
+                                      alt={mov.VideoName}
+                                    />
+                                    {mov.IsVideoFree ? null : (
+                                      <div className="live_side">Premium</div>
                                     )}
-                                </div>
-                                <div className="tm-mv-items">
-                                  <div className="tm-mv-name">
-                                    <div
-                                      style={{
-                                        fontSize: "10px",
-                                        color: "white",
-                                      }}
-                                    >
-                                      {mov.CategoryName}
+                                  </div>
+                                  <div className="tm-mv-items">
+                                    <div className="tm-mv-name">
+                                      <div
+                                        style={{
+                                          fontSize: "10px",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {mov.VideoName}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </a>
-                          </Link>
-                        );
-                      })}
+                              </a>
+                            </Link>
+                          );
+                        })
+                      : movieSection &&
+                        movieSection.Categories &&
+                        movieSection.Categories.map((mov, index) => {
+                          let slug = setUrlAccordingToVideoType(
+                            mov,
+                            IsCategory
+                          );
+                          return (
+                            <Link
+                              href={slug}
+                              key={index}
+                              passHref={true}
+                              shallow={true}
+                            >
+                              <a
+                                onMouseDown={(e) => handleOnMouseDown(e)}
+                                onClick={(e) => handleOnClick(e, mov)}
+                              >
+                                <div
+                                  className="tm-mv-bx"
+                                  onMouseOver={() => handleMouseOver(row)}
+                                  onMouseOut={() => handleMouseOut(row)}
+                                  key={index}
+                                >
+                                  <div className="movies-images">
+                                    <img
+                                      src={mov.NewCategoryImage}
+                                      style={{ width: "100%" }}
+                                      alt={mov.VideoName}
+                                    />
+                                    {mov.IsVideoFree
+                                      ? null
+                                      : mov.PackageName && (
+                                          <div className="live_side">
+                                            {mov.PackageName}
+                                          </div>
+                                        )}
+                                  </div>
+                                  <div className="tm-mv-items">
+                                    <div className="tm-mv-name">
+                                      <div
+                                        style={{
+                                          fontSize: "10px",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {mov.CategoryName}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </Link>
+                          );
+                        })}
                   </Slider>
                 </div>
               </div>
-              {adsRow.length
+              {ads && adsRow.length
                 ? adsRow.map((m) =>
-                  m.row == row + 1 ? (
-                    <HomePageAd
-                      desktop={m.desktop}
-                      mobile={m.mobile}
-                      sizeDesktop={m.desktopSize}
-                      sizeMobile={m.mobileSize}
-                    />
-                  ) : null
-                )
+                    m.row == row + 1 ? (
+                      <HomePageAd
+                        desktop={m.desktop}
+                        mobile={m.mobile}
+                        sizeDesktop={m.desktopSize}
+                        sizeMobile={m.mobileSize}
+                      />
+                    ) : null
+                  )
                 : null}
             </>
           );

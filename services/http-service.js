@@ -40,6 +40,7 @@ function post(url, body, ip, credentialAllowed = false) {
     return null;
   }
 }
+
 function put(url, body, ip) {
   return axios.put(url, body, {
     withCredentials: true,

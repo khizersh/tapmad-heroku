@@ -4,7 +4,7 @@ import { basicSliderConfig } from "../../../services/utils";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Shows({ shows }) {
-  var bannerSettings = basicSliderConfig(1);
+  var bannerSettings = basicSliderConfig(1, 1);
   return (
     <div>
       <Slider {...bannerSettings}>
@@ -20,7 +20,7 @@ export default function Shows({ shows }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={shows.Sections.Shows} />
+      <HomepageSlider movies={shows.Sections.Shows} ads={false} />
     </div>
   );
 }

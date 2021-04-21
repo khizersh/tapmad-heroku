@@ -11,7 +11,7 @@ import { get } from "../../../services/http-service";
 import { getChannelsWithPagination } from "../../../services/apilinks";
 
 export default function LiveChannels({ channel }) {
-  var bannerSettings = basicSliderConfig(1);
+  var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(channel);
   const [currentRow, setCurrentRow] = useState(5);
   const modifiedResponse = modifyLivePageResponse(channel);
@@ -65,7 +65,7 @@ export default function LiveChannels({ channel }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={localMovies.Sections.Movies} />
+      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} />
       {currentRow !== localMovies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />
       )}
