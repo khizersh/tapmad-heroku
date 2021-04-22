@@ -870,6 +870,24 @@ button:focus {
 }
 
 @media screen and (max-width: 991px) {
+  .tm-mv-items {
+    background: none !important;
+  }
+  .tm-mv-bx {
+    transition: linear 0.2s;
+    box-shadow: none;
+  }
+  .tm-mv-bx:hover {
+    transform: none !important;
+  }
+
+  .tm-mv-bx:hover .tm-mv-items {
+    opacity: 1 !important;
+    transform: none;
+  }
+  .tm-mv-bx:hover ~ .slick-list {
+    overflow: hidden !important;
+  }
   .main_menu {
     display: none !important;
   }
