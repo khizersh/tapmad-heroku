@@ -33,7 +33,7 @@ export default function VideoDetail({ video, videoList }) {
               ></div>
               <div className="video-syno-text">
                 <div className="row m-0 mt-5">
-                  <div className="col-lg-4 col-md-4 col-11 pad-mbl">
+                  <div className="col-lg-6 col-md- col-11 pad-mbl">
                     <h2>{video && video.VideoName}</h2>
                     <div className="text-dark">
                       {video &&
@@ -60,7 +60,7 @@ export default function VideoDetail({ video, videoList }) {
           </div>
         </div>
       </div>
-      <div className="row mt-3">
+      <div className="row mt-5">
         {videoList && videoList.length > 0
           ? videoList.map((vid, i) => {
               let type = "";

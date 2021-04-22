@@ -10,7 +10,10 @@ export default function SignUpLayout({ children, bgImage }) {
     if (!backUrl) {
       router.push("/");
     } else {
-      if (backUrl.split("/")[1] == "watch") {
+      if (
+        backUrl.split("/")[1] == "watch" ||
+        backUrl.split("/")[1] == "catchup-watch"
+      ) {
         router.push("/");
       } else {
         router.push(backUrl);
@@ -28,33 +31,18 @@ export default function SignUpLayout({ children, bgImage }) {
         <div className="">
           <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-4 offset-lg-4 p-0">
             <div className="pymnt_pge_bx">
-              <a
-                id="sign-up-back-btn"
+              <button
+                className="btn float-left "
                 style={{
                   position: "absolute",
-                  top: -16,
-                  left: "-5px",
-                  color: "#6f6e6f",
+                  background: "#ffffff",
+                  fontSize: "13px",
+                  color: "black",
                 }}
                 onClick={onClickBack}
-                className="mt-2 text-light btn"
               >
                 <i className="fa fa-arrow-left"></i> Back
-              </a>
-
-              <a
-                id="sign-up-screen-btn"
-                style={{
-                  display: "none",
-                  position: "absolute",
-                  top: 0,
-                  left: "10px",
-                  color: "#fff",
-                }}
-                className="mt-2 text-light"
-              >
-                <i className="fa fa-arrow-left"></i> Back
-              </a>
+              </button>
 
               <img className="w-100 mb-0" src={signUpImage} />
               <button
@@ -71,7 +59,7 @@ export default function SignUpLayout({ children, bgImage }) {
                 }}
                 onClick={onClickLogin}
               >
-                Login
+                Login <i className="fa fa-sign-in"></i>
               </button>
               {children}
             </div>
