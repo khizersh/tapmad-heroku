@@ -28,33 +28,19 @@ export default function SignUpLayout({ children, bgImage }) {
         <div className="">
           <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-4 offset-lg-4 p-0">
             <div className="pymnt_pge_bx">
-              <a
-                id="sign-up-back-btn"
+              <button
+                className="btn float-left p-0"
                 style={{
                   position: "absolute",
-                  top: -16,
-                  left: "-5px",
-                  color: "#6f6e6f",
+                  top: "-8px",
+                  background: "#ffffff",
+                  color: "black",
                 }}
                 onClick={onClickBack}
-                className="mt-2 text-light btn"
+                className="mt-2 btn"
               >
                 <i className="fa fa-arrow-left"></i> Back
-              </a>
-
-              <a
-                id="sign-up-screen-btn"
-                style={{
-                  display: "none",
-                  position: "absolute",
-                  top: 0,
-                  left: "10px",
-                  color: "#fff",
-                }}
-                className="mt-2 text-light"
-              >
-                <i className="fa fa-arrow-left"></i> Back
-              </a>
+              </button>
 
               <img className="w-100 mb-0" src={signUpImage} />
               <button
