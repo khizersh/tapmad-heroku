@@ -6,6 +6,7 @@ import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Debounce from "../../services/Debounce";
 import { loggingTags } from "../../services/apilinks";
 import { SearchService } from "./Search.service";
+import { SearchTag } from "../../services/gtm";
 
 const Search = () => {
   const { setSearch, setLoader, getCountryCode } = useContext(MainContext);
@@ -26,15 +27,17 @@ const Search = () => {
 
   useEffect(async () => {
     if (debouncedSearchKeyWord) {
-      setisSearched(true);
-      setLoader(true);
-      const data = await searchHandler(debouncedSearchKeyWord);
-      setSearchedItem(data);
-      setLoader(false);
-    } else {
-      setSearchedItem([]);
-      setLoader(false);
+      // setisSearched(true);
+      // setLoader(true);
+      // const data = await searchHandler(debouncedSearchKeyWord);
+      // setSearchedItem(data);
+      // setLoader(false);
+      onClickSearch();
     }
+    // else {
+    //   setSearchedItem([]);
+    //   setLoader(false);
+    // }
   }, [debouncedSearchKeyWord]);
 
   const searchHandler = async (keyword) => {
@@ -60,8 +63,15 @@ const Search = () => {
     if (data != null) {
       if (data.responseCode == 1) {
         setSearchedItem(data.data.Videos);
+        let allVideosName = data.data.Videos.map((e) => {
+          return e.VideoName;
+        })
+        try {
+          SearchTag({ term: keyword, data: data.data.Videos.length, result: allVideosName.toString() });
+        } catch (e) { console.log(e) }
       } else {
         setSearchedItem([]);
+        SearchTag({ term: keyword, data: 0, result: "" });
       }
     }
     setLoader(false);

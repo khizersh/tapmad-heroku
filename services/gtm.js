@@ -29,16 +29,14 @@ export function SignUpTag(body, resp) {
         console.log(e);
     }
 }
-export function SearchTag() {
+export function SearchTag(body) {
+    console.log(body);
     try {
         dataLayer.push({
             event: "search",
-            product_id: "0",
-            device_category: "Web_Mobile",
-            response: {},
-            user_id: "123",
-            tracking: "Registered User 1294",
-            telco: "100004",
+            search_term: body.term,
+            search_count: body.data,
+            search_result: body.result
         });
     } catch (e) {
         console.log(e);
