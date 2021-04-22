@@ -73,6 +73,7 @@ export async function getServerSideProps(context) {
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
     if (res != null) {
+      console.log(res);
       return {
         props: response(res.data, chanelDetail, allowUser),
       };

@@ -10,6 +10,7 @@ import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
+import { VideoWatched } from "../../../services/gtm";
 
 export default function Player({ movies }) {
   const router = useRouter();
@@ -32,7 +33,6 @@ export default function Player({ movies }) {
     if (!movie) {
       setMovie(movies);
       setMounted(true);
-
       if (movies.Video && movies.Video.IsVideoChannel) {
         setVideoLink({
           highQuality: movies.Video.ChannelStreamUrlWHQ,
@@ -93,6 +93,7 @@ export default function Player({ movies }) {
         rightVideoAd: data.rightVideoAd,
       });
     }
+    VideoWatched(movie);
   }, [router]);
 
   useEffect(() => {

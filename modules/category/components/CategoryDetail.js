@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Card from "./card/Card";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { ContentViewed } from "../../../services/gtm";
 
 export default function CategoryDetail({ video, videoList, syno }) {
   const [slug, setSlug] = useState(null);
@@ -19,6 +20,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
       }
       let slugPlay = SEOFriendlySlugsForVideo(vid);
       setSlug(slugPlay);
+      ContentViewed(video.VideoName);
     }
   }, [videoList]);
   return (
@@ -77,12 +79,12 @@ export default function CategoryDetail({ video, videoList, syno }) {
       <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
-              let type = "";
-              if (!vid.IsVideoFree) {
-                type = vid.PackageName ? vid.PackageName : "";
-              }
-              return <Card key={i} video={vid} type={type} />;
-            })
+            let type = "";
+            if (!vid.IsVideoFree) {
+              type = vid.PackageName ? vid.PackageName : "";
+            }
+            return <Card key={i} video={vid} type={type} />;
+          })
           : null}
       </div>
     </>

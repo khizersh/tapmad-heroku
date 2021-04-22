@@ -42,3 +42,26 @@ export function SearchTag(body) {
         console.log(e);
     }
 }
+export function ContentViewed(name) {
+    try {
+        dataLayer.push({ "event": "content_viewed", "Name": name })
+    } catch (e) {
+        console.log(e);
+    }
+}
+export function VideoWatched(response) {
+    if (response.Video && response.Video.getProductiongenreName) {
+        var Genre = [];
+        response.Video.getProductiongenreName.forEach((e) => {
+            Genre.push(e.genraName);
+        });
+        dataLayer.push({
+            event: "video_watched",
+            ID: response.Video.VideoEntityId,
+            Name: response.Video.VideoName,
+            Genre: Genre.toString(),
+            Category: response.Video.productioncategoryName,
+            Productionhouse: response.Video.productionhouseName,
+        });
+    }
+}
