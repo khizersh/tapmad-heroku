@@ -106,7 +106,10 @@
   position: absolute;
   bottom: 0;
   z-index: 3;
+  width: 100% !important;
+  height: 600px !important;
 }
+
 .synopsis-card-text {
   font-size: 13px;
   display: -webkit-box;
@@ -137,6 +140,11 @@
   color: #000 !important;
   border: none !important;
   border-radius: 0px;
+  z-index: 9999;
+}
+
+.z-index-play {
+  z-index: 9999999 !important;
 }
 
 .video-syno-text {
@@ -155,6 +163,8 @@
 @media screen and (max-width: 700px) {
   .bg-color {
     background: none !important;
+    width: 0% !important;
+    height: 0px !important;
   }
 
   .video-syno-text {

@@ -35,10 +35,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
                   }}
                 ></div>
               ) : null}
-              <div
-                className="bg-color"
-                style={{ width: "100%", height: "600px" }}
-              ></div>
+              <div className="bg-color"></div>
               <div className="video-syno-text">
                 <div className="row m-0 mar-5">
                   <div className="col-lg-4 col-md-4 col-11 pad-mbl">
@@ -57,7 +54,12 @@ export default function CategoryDetail({ video, videoList, syno }) {
                     <br />
                     <div>
                       {slug && (
-                        <Link href={slug} passHref shallow>
+                        <Link
+                          href={slug}
+                          passHref
+                          shallow
+                          className="z-index-play"
+                        >
                           <a className="btn tm_wishlst_btn">
                             <i className="fa fa-play rounded-circle pr-2"></i>
                             Play
@@ -75,12 +77,12 @@ export default function CategoryDetail({ video, videoList, syno }) {
       <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
-            let type = "";
-            if (!vid.IsVideoFree) {
-              type = vid.PackageName ? vid.PackageName : "";
-            }
-            return <Card key={i} video={vid} type={type} />;
-          })
+              let type = "";
+              if (!vid.IsVideoFree) {
+                type = vid.PackageName ? vid.PackageName : "";
+              }
+              return <Card key={i} video={vid} type={type} />;
+            })
           : null}
       </div>
     </>
