@@ -10,7 +10,10 @@ export default function SignUpLayout({ children, bgImage }) {
     if (!backUrl) {
       router.push("/");
     } else {
-      if (backUrl.split("/")[1] == "watch") {
+      if (
+        backUrl.split("/")[1] == "watch" ||
+        backUrl.split("/")[1] == "catchup-watch"
+      ) {
         router.push("/");
       } else {
         router.push(backUrl);
