@@ -11,3 +11,13 @@
   transition: all 0.3s;
   color: #87c242 !important;
 }
+
+.banner-main {
+  height: 332px;
+}
+
+@media screen and (max-width: 992px) {
+  .banner-main {
+    height: 150px !important;
+  }
+}
