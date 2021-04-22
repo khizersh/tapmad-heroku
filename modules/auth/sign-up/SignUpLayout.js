@@ -29,15 +29,14 @@ export default function SignUpLayout({ children, bgImage }) {
           <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-4 offset-lg-4 p-0">
             <div className="pymnt_pge_bx">
               <button
-                className="btn float-left p-0"
+                className="btn float-left "
                 style={{
                   position: "absolute",
-                  top: "-8px",
                   background: "#ffffff",
+                  fontSize: "13px",
                   color: "black",
                 }}
                 onClick={onClickBack}
-                className="mt-2 btn"
               >
                 <i className="fa fa-arrow-left"></i> Back
               </button>
@@ -57,7 +56,7 @@ export default function SignUpLayout({ children, bgImage }) {
                 }}
                 onClick={onClickLogin}
               >
-                Login
+                Login <i className="fa fa-sign-in"></i>
               </button>
               {children}
             </div>
