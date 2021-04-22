@@ -51,7 +51,6 @@ const Pin = ({ newUser }) => {
             icon: "error",
           });
         }
-
       } else {
         body = {
           MobileNo: "0" + initialState.User.MobileNo,
@@ -65,9 +64,8 @@ const Pin = ({ newUser }) => {
             timer: 3000,
             title: data.message,
             icon: "error",
-          }).then((e) => {
-            router.push("/");
-          })
+          });
+          setLoader(false);
         } else if (data.responseCode == 1) {
           swal({
             timer: 2500,
