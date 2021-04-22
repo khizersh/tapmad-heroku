@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { Cookie } from "../../../services/cookies";
 import { useRouter } from "next/router";
+import { SignUpTag } from "../../../services/gtm";
 
 const Pin = ({ newUser }) => {
   const { initialState, setLoader } = useContext(MainContext);
@@ -17,7 +18,6 @@ const Pin = ({ newUser }) => {
 
   async function verifyOTPPinCode() {
     if (initialState && initialState.User) {
-      console.log(otp.current.value.length);
       if (otp.current.value.length < 4) {
         swal({
           timer: 5000,
@@ -44,6 +44,7 @@ const Pin = ({ newUser }) => {
             Version: "V1",
           };
           data = await AuthService.paymentProcessTransaction(body);
+          SignUpTag(body, data.data);
         } catch (e) {
           swal({
             timer: 3000,
@@ -75,7 +76,6 @@ const Pin = ({ newUser }) => {
             if (newUser) {
               Cookie.setCookies("userId", data.data.User.UserId);
             }
-
             updateResponseCode(34);
             setLoader(false);
           });
