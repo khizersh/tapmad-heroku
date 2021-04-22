@@ -78,7 +78,7 @@ const AuthenticatedSidebar = () => {
           </a>
         </Link>
       </li>
-      <li id="loginAva5">
+      <li className="sign-out">
         <a onClick={onClickSignout}>
           Signout
           <span className="icon">
