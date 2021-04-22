@@ -24,13 +24,18 @@ const HomepageSlider = ({ movies, ads }) => {
       document.getElementsByClassName("slick-list")[index + 1].style.overflow =
         "visible";
       document.getElementsByTagName("body")[0].style.overflowX = "hidden";
+    } else {
+      document.getElementsByTagName("body")[0].style.overflowX = "hidden";
     }
   }
+
   function handleMouseOut(index) {
     if (window.screen.width > 992) {
       document.getElementsByClassName("slick-list")[index + 1].style.overflow =
         "hidden";
       document.getElementsByTagName("body")[0].style.overflowX = "visible";
+    } else {
+      document.getElementsByTagName("body")[0].style.overflowX = "hidden";
     }
   }
 
