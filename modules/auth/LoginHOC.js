@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
+import { LoginTag } from "../../services/gtm";
 
 export default function withLogin(Component, data) {
 
@@ -33,6 +34,7 @@ export default function withLogin(Component, data) {
                     icon: "success",
                 });
                 Cookie.setCookies("isAuth", 1);
+                LoginTag(obj, response.response);
                 checkUserAuthentication();
                 let backURL = Cookie.getCookies("backUrl") || "/";
                 router.push(backURL);
