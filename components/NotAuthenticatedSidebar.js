@@ -24,11 +24,15 @@ const NotAuthenticatedSidebar = ({ onClick }) => {
           </a>
         </Link>
       </li>
-      <li id="loginAva3">
-        <a href="sign-in">Sign In</a>
-        <span className="icon">
-          <i className="fa fa-sign-in"></i>
-        </span>
+      <li className="sign-out">
+        <Link href="/sign-in" shallow={true} passHref={true}>
+          <a>
+            Sign In
+            <span className="icon">
+              <i className="fa fa-sign-in"></i>
+            </span>
+          </a>
+        </Link>
       </li>
     </>
   );

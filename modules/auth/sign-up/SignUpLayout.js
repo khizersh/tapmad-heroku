@@ -32,9 +32,9 @@ export default function SignUpLayout({ children, bgImage }) {
                 id="sign-up-back-btn"
                 style={{
                   position: "absolute",
-                  top: 0,
-                  left: "10px",
-                  color: "#fff",
+                  top: -16,
+                  left: "-5px",
+                  color: "#6f6e6f",
                 }}
                 onClick={onClickBack}
                 className="mt-2 text-light btn"
