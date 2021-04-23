@@ -36,12 +36,14 @@ export default function ForgetPin({ updateView }) {
 
     if (data != null) {
       if (data.responseCode == 1) {
-        updateView("set-pin");
-        swal({
-          title: "Verified",
-          timer: 3000,
-          icon: "success",
-        });
+        AuthService.clearUserToken(body.MobileNo.substring(1)).then((e) => {
+          updateView("set-pin");
+          swal({
+            title: "Verified",
+            timer: 3000,
+            icon: "success",
+          });
+        })
       } else {
         swal({
           title: data.message,

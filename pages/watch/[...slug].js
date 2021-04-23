@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Head from "next/head";
 import { actionsRequestContent } from "../../services/http-service";
 import { Cookie } from "../../services/cookies";
@@ -13,12 +13,15 @@ import requestIp from "request-ip";
 import { PlayerService } from "../../modules/single-movie/Player.service";
 import Player from "../../modules/single-movie/components/Player";
 import { GlobalService } from "../../modules/global-service";
+import swal from "sweetalert";
+import { MainContext } from "../../contexts/MainContext";
 
 const watch = (props) => {
   const router = useRouter();
-
+  const { setisAuthenticateFalse } = useContext(MainContext)
   const [url, setUrl] = useState(null);
   useEffect(() => {
+    console.log(props);
     if (!props.allowUser) {
       router.push("/sign-up");
     } else {
@@ -38,13 +41,38 @@ const watch = (props) => {
       }
     }
   }, [props.allowUser, url]);
-
+  useEffect(() => {
+    if (props.data && props.data.responseCode == 401) {
+      swal({
+        text: props.data.message,
+        timer: 3000,
+        icon: "error",
+      }).then((res) => {
+        swal({
+          title: "You have logged out!",
+          text: "Redirecting you in 2s...",
+          timer: 1900,
+          icon: "success",
+          buttons: false,
+        }).then((res) => {
+          Cookie.setCookies("isAuth", 0);
+          setisAuthenticateFalse();
+          router.push("/");
+        });
+      })
+    }
+  }, [url])
   return (
     <div>
       <Head>{/* <title>{props && props.data.VideoName}</title> */}</Head>
       {props.allowUser && props.data && props.data.responseCode != 401 && (
         <Player movies={props.data} />
       )}
+      {
+        props.data && props.data.responseCode == 401 && (
+          <></>
+        )
+      }
     </div>
   );
 };
@@ -73,10 +101,14 @@ export async function getServerSideProps(context) {
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
     if (res != null) {
-      console.log(res);
-      return {
-        props: response(res.data, chanelDetail, allowUser),
-      };
+      if (res.responseCode != 401) {
+        console.log(res);
+        return {
+          props: response(res.data, chanelDetail, allowUser),
+        };
+      } else {
+        return { props: response(res.data, chanelDetail, true) }
+      }
     }
   } else {
     if (isAuthentictedServerSide(context.req)) {
@@ -86,6 +118,10 @@ export async function getServerSideProps(context) {
         return {
           props: response(res.data, chanelDetail, false),
         };
+      } else if (res && res.responseCode == 401) {
+        return {
+          props: response(res.data, chanelDetail, true)
+        }
       } else {
         // authenticated
         return {

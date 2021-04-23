@@ -39,6 +39,7 @@ export default function withLogin(Component, data) {
                 let backURL = Cookie.getCookies("backUrl") || "/";
                 router.push(backURL);
                 setLoader(false);
+                return null;
             } else {
                 setLoader(false);
                 swal({
@@ -46,6 +47,7 @@ export default function withLogin(Component, data) {
                     icon: "error",
                     timer: 3000,
                 });
+                return response;
             }
         }
         return <Component login={loginUser} {...props} />

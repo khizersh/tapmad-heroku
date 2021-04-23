@@ -27,7 +27,13 @@ function EnterPin({ forgetPin, login }) {
 
       if (data != null) {
         if (data.responseCode == 1) {
-          login();
+          var loginResp = login();
+          loginResp.then((e) => {
+            if (e != null && e.responseCode == 401) {
+              console.log(e);
+              forgetPin();
+            }
+          })
         } else {
           setLoader(false);
           swal({

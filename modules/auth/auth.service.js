@@ -390,7 +390,10 @@ async function signInOrSignUpMobileOperator(
   }
   return data;
 }
-
+async function clearUserToken(number) {
+  const response = await get(`http://app.tapmad.com/api/ClearAllCache/T${number}`)
+  return response;
+}
 async function getGeoInfo() {
   let obj = {};
   const response = await get("http://ip-api.com/json/");
@@ -458,4 +461,5 @@ export const AuthService = {
   logoutUser,
   userPromoCode,
   checkUser,
+  clearUserToken
 };

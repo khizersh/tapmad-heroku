@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
-import { post } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import swal from "sweetalert";
@@ -9,7 +8,7 @@ import swal from "sweetalert";
 export default function EnterOTP({ forgetPin }) {
   const [userPin, seUserPin] = useState();
   const router = useRouter();
-  const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  const { checkUserAuthentication, setLoader, initialState } = useContext(MainContext);
   function handleNumber(e) {
     const pin = e.target.value;
     if (+pin === +pin) {
