@@ -19,21 +19,13 @@ export default function VideoDetail({ video, videoList }) {
         <div className="col-12 mt-2">
           <div className="row mr-0">
             <div className="col-lg-12 col-md-12 col-12 col-sm-12">
-              {video && video["VideoImagePathLarge"] ? (
-                <div
-                  className="category-bg-img"
-                  style={{
-                    background: `url('${video["VideoImagePathLarge"]}')`,
-                  }}
-                ></div>
-              ) : null}
-              <div
+              {/* <div
                 className="bg-color"
                 style={{ width: "100%", height: "600px" }}
-              ></div>
+              ></div> */}
               <div className="video-syno-text">
                 <div className="row m-0 mt-5">
-                  <div className="col-lg-6 col-md- col-11 pad-mbl">
+                  <div className="col-lg-6 col-md-6 col-12 pad-mbl">
                     <h2>{video && video.VideoName}</h2>
                     <div className="text-dark">
                       {video &&
@@ -53,6 +45,16 @@ export default function VideoDetail({ video, videoList }) {
                         </Link>
                       )}
                     </div>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-12 d-none d-sm-block pr-0">
+                    {video && video["VideoImagePathLarge"] ? (
+                      <div
+                        className="category-bg-img"
+                        style={{
+                          background: `url('${video["VideoImagePathLarge"]}')`,
+                        }}
+                      ></div>
+                    ) : null}
                   </div>
                 </div>
               </div>

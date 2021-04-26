@@ -29,18 +29,10 @@ export default function CategoryDetail({ video, videoList, syno }) {
         <div className="col-12 mt-2">
           <div className="row mr-0">
             <div className="col-lg-12 col-md-12 col-12 col-sm-12">
-              {video && video["NewVideoImageThumbnail"] ? (
-                <div
-                  className="category-bg-img"
-                  style={{
-                    background: `url('${video["NewVideoImageThumbnail"]}')`,
-                  }}
-                ></div>
-              ) : null}
-              <div className="bg-color"></div>
+              {/* <div className="bg-color"></div> */}
               <div className="video-syno-text">
                 <div className="row m-0 mar-5">
-                  <div className="col-lg-4 col-md-4 col-11 pad-mbl">
+                  <div className="col-lg-6 col-md-6 col-12 pad-mbl">
                     <h2 className="font-20">{video && video.VideoName}</h2>
                     <div className="font-20">
                       {video && video.VideoCategoryName}
@@ -70,6 +62,16 @@ export default function CategoryDetail({ video, videoList, syno }) {
                       )}
                     </div>
                   </div>
+                  <div className="col-lg-6 col-md-6 col-12 d-none d-sm-block pr-0 ">
+                    {video && video["NewVideoImageThumbnail"] ? (
+                      <div
+                        className="category-bg-img"
+                        style={{
+                          background: `url('${video["NewVideoImageThumbnail"]}')`,
+                        }}
+                      ></div>
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </div>
@@ -79,12 +81,12 @@ export default function CategoryDetail({ video, videoList, syno }) {
       <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
-            let type = "";
-            if (!vid.IsVideoFree) {
-              type = vid.PackageName ? vid.PackageName : "";
-            }
-            return <Card key={i} video={vid} type={type} />;
-          })
+              let type = "";
+              if (!vid.IsVideoFree) {
+                type = vid.PackageName ? vid.PackageName : "";
+              }
+              return <Card key={i} video={vid} type={type} />;
+            })
           : null}
       </div>
     </>
