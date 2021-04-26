@@ -68,7 +68,7 @@ export default function Header() {
     };
     actionsRequestContent(body);
   };
-  useEffect(() => {}, [initialState.isAuthenticated]);
+  useEffect(() => { }, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -149,7 +149,7 @@ export default function Header() {
                     alt=""
                   />
                 </p>
-                <a href="news">
+                <a href="/news">
                   <img
                     src={tapmadNews}
                     style={{
