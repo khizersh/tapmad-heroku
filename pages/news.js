@@ -19,6 +19,7 @@ const news = ({ news, newsArray }) => {
   const onCLickCategory = (category) => {
     let array = newsArray.filter((f) => f.CategoryTitle == category);
     setNewsList(array);
+    document.getElementsByClassName('news-card')[0].scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -120,7 +121,7 @@ const news = ({ news, newsArray }) => {
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row news-card">
         {newsList.length
           ? newsList.map((m, i) => <NewsCard key={i} news={m} />)
           : null}
