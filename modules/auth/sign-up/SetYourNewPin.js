@@ -46,9 +46,11 @@ export default function SetYourNewPin() {
       MobileNo: initialState.User.MobileNo,
       Language: "en",
     });
-    if (status.responseCode == 1) {
+    console.log("statusstatusstatus: ", status);
+    if (status.data.User) {
       obj.UserPassword = status.data.User.UserPassword;
       Cookie.setCookies("userId", status.data.User.UserId);
+      Cookie.setCookies("content-token", status.data.User.UserPassword);
     }
 
     const response = await AuthService.setNewPin(pin);
@@ -62,7 +64,7 @@ export default function SetYourNewPin() {
         });
       } else if (response.responseCode == 1) {
         const resp = await AuthService.signInOrSignUpMobileOperator(
-          obj,
+          { ...obj, UserPassword: Cookie.getCookies("content-token") },
           "",
           false
         );
