@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getFaqs } from "../services/apilinks";
 import { get } from "../services/http-service";
+import Head from "next/head";
 
 export default function FAQ() {
   const [data, setData] = useState([]);
