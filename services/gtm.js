@@ -59,6 +59,7 @@ export function VideoWatched(response) {
         response.Video.getProductiongenreName.forEach((e) => {
             Genre.push(e.genraName);
         });
+        const { mobile, userId } = getUserDetails();
 
         dataLayer.push({
             event: "video_watched",
@@ -67,6 +68,8 @@ export function VideoWatched(response) {
             Genre: Genre.toString(),
             Category: response.Video.productioncategoryName,
             Productionhouse: response.Video.productionhouseName,
+            msisdn: mobile,
+            user_id: userId
         });
     }
 }
@@ -78,13 +81,14 @@ export function ProfileViewed() {
         msisdn: mobile
     });
 }
-export function UpdateProfile(email) {
+export function UpdateProfile(profile) {
     const { mobile, userId } = getUserDetails();
     dataLayer.push({
         event: "Profile_Update",
         user_id: userId,
         msisdn: mobile,
-        email: email
+        email: profile.Email,
+        name: profile.Name
     });
 
 }

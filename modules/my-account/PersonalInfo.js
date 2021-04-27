@@ -61,7 +61,7 @@ const PersonalInfo = ({ data }) => {
         icon: "success",
       });
       setBtnEnable(false);
-      UpdateProfile(profileData.Email)
+      UpdateProfile(profileData)
     } else {
       swal({
         title: "Something went wrong!",
