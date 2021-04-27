@@ -88,7 +88,7 @@ export function UpdateProfile(profile) {
         user_id: userId,
         msisdn: mobile,
         email: profile.Email,
-        name: profile.Name
+        name: profile.FullName
     });
 
 }
