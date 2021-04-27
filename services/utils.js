@@ -179,6 +179,11 @@ const decryptWithAES = (ciphertext) => {
   const originalText = bytes.toString(CryptoJS.enc.Utf8);
   return originalText;
 };
+function getUserDetails() {
+  var mobile = Cookie.getCookies("user_mob");
+  var userId = Cookie.getCookies("userId");
+  return { mobile: decryptWithAES(mobile), userId: userId }
+}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -193,5 +198,6 @@ module.exports = {
   SEOFriendlySlugsForCatchupVideo,
   closeNavBar,
   encryptWithAES,
-  decryptWithAES
+  decryptWithAES,
+  getUserDetails
 };

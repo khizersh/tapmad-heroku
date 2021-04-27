@@ -1,8 +1,6 @@
-import { Cookie } from "./cookies";
-import { decryptWithAES } from "./utils";
+import { getUserDetails } from "./utils";
 
 export function LoginTag(body, resp) {
-    console.log(body, resp);
     try {
         dataLayer.push({
             event: "login",
@@ -33,23 +31,24 @@ export function SignUpTag(body, resp) {
     }
 }
 export function SearchTag(body) {
-    console.log(body);
+    const { mobile, userId } = getUserDetails();
     try {
         dataLayer.push({
             event: "search",
             search_term: body.term,
             search_count: body.data,
-            search_result: body.result
+            search_result: body.result,
+            msisdn: mobile,
+            user_id: userId
         });
     } catch (e) {
         console.log(e);
     }
 }
 export function ContentViewed(video) {
-    var mobile = Cookie.getCookies("user_mob");
-    var userId = Cookie.getCookies("userId");
+    const { mobile, userId } = getUserDetails();
     try {
-        dataLayer.push({ "event": "content_viewed", "Name": video.VideoName, "user_id": userId, "msisdn": mobile, "ID": video.VideoEntityId });
+        dataLayer.push({ event: "content_viewed", Name: video.VideoName, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
     } catch (e) {
         console.log(e);
     }
@@ -60,6 +59,7 @@ export function VideoWatched(response) {
         response.Video.getProductiongenreName.forEach((e) => {
             Genre.push(e.genraName);
         });
+
         dataLayer.push({
             event: "video_watched",
             ID: response.Video.VideoEntityId,
@@ -69,4 +69,22 @@ export function VideoWatched(response) {
             Productionhouse: response.Video.productionhouseName,
         });
     }
+}
+export function ProfileViewed() {
+    const { mobile, userId } = getUserDetails();
+    dataLayer.push({
+        event: "Viewed_Profile",
+        user_id: userId,
+        msisdn: mobile
+    });
+}
+export function UpdateProfile(email) {
+    const { mobile, userId } = getUserDetails();
+    dataLayer.push({
+        event: "Profile_Update",
+        user_id: userId,
+        msisdn: mobile,
+        email: email
+    });
+
 }

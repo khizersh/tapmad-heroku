@@ -11,6 +11,7 @@ import {
   mailIcon,
 } from "../../services/imagesLink";
 import { MyAccountService } from "./myaccount.service";
+import { ProfileViewed, UpdateProfile } from "../../services/gtm";
 
 const PersonalInfo = ({ data }) => {
   const [userImage, setUserImage] = useState(null);
@@ -60,6 +61,7 @@ const PersonalInfo = ({ data }) => {
         icon: "success",
       });
       setBtnEnable(false);
+      UpdateProfile(profileData.Email)
     } else {
       swal({
         title: "Something went wrong!",
@@ -87,6 +89,9 @@ const PersonalInfo = ({ data }) => {
       });
     }
   }, [data]);
+  useEffect(() => {
+    ProfileViewed();
+  }, [])
   return (
     <div className="tm_usr_img text-center left-profile ">
       {/* user profile */}

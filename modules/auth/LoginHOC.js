@@ -34,7 +34,7 @@ export default function withLogin(Component, data) {
                     icon: "success",
                 });
                 Cookie.setCookies("isAuth", 1);
-                Cookie.setCookies("user_mob", obj.MobileNo);
+                Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
                 LoginTag(obj, response.response);
                 checkUserAuthentication();
                 let backURL = Cookie.getCookies("backUrl") || "/";
