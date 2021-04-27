@@ -182,7 +182,11 @@ const decryptWithAES = (ciphertext) => {
 function getUserDetails() {
   var mobile = Cookie.getCookies("user_mob");
   var userId = Cookie.getCookies("userId");
-  return { mobile: decryptWithAES(mobile), userId: userId }
+  if (mobile && userId) {
+    return { mobile: decryptWithAES(mobile), userId: userId }
+  } else {
+    return { mobile: "", userId: "" }
+  }
 }
 module.exports = {
   manipulateUrls,
