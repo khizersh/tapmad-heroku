@@ -65,7 +65,7 @@ export const getCatchupVideoData = BASEURL + "api/getCatchupTVURL/V1/en/web/";
 
 export const SEOTvSeriesData = BASEURL + "api/getSeoTvSeriesData"
 export const SEOTvShowsByCategory = BASEURL + "api/getSeoTvShowsByCategoryId"
-
+export const SEOLiveChannelData = BASEURL + "api/getSeoLiveChannelsData"
 
 // ads setting
 

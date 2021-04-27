@@ -34,7 +34,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
               <div className="video-syno-text">
                 <div className="row m-0 mar-5">
                   <div className="col-lg-6 col-md-6 col-12 pad-mbl">
-                    <h2 className="font-20">{video && video.VideoName}</h2>
+                    <h1 className="font-20 h2">{video && video.VideoName}</h1>
                     <div className="font-20">
                       {video && video.VideoCategoryName}
                     </div>

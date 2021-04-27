@@ -15,7 +15,7 @@ import Player from "../../modules/single-movie/components/Player";
 import { GlobalService } from "../../modules/global-service";
 import swal from "sweetalert";
 import { MainContext } from "../../contexts/MainContext";
-import { getSEOData } from "../../services/seo.service";
+import { getSEOData, getSEODataForLiveChannel } from "../../services/seo.service";
 
 const watch = (props) => {
   const router = useRouter();
@@ -103,8 +103,11 @@ export async function getServerSideProps(context) {
 
   var isFree = "1";
   isFree = chanelDetail.isFree;
-
-  let seo = await getSEOData(chanelDetail.CleanVideoId, context.resolvedUrl);
+  if (chanelDetail.isChannel) {
+    var seo = await getSEODataForLiveChannel(chanelDetail.CleanVideoId, context.resolvedUrl);
+  } else {
+    var seo = await getSEOData(chanelDetail.CleanVideoId, context.resolvedUrl);
+  }
   console.log("Seo ", seo);
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
