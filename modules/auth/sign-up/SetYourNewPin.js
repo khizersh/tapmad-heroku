@@ -46,7 +46,7 @@ export default function SetYourNewPin() {
       MobileNo: initialState.User.MobileNo,
       Language: "en",
     });
-    console.log("statusstatusstatus: ", status);
+
     if (status && status.data.User) {
       obj.UserPassword = status.data.User.UserPassword;
       Cookie.setCookies("userId", status.data.User.UserId);
