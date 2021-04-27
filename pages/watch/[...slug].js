@@ -15,6 +15,7 @@ import Player from "../../modules/single-movie/components/Player";
 import { GlobalService } from "../../modules/global-service";
 import swal from "sweetalert";
 import { MainContext } from "../../contexts/MainContext";
+import { getSEOData } from "../../services/seo.service";
 
 const watch = (props) => {
   const router = useRouter();
@@ -64,7 +65,12 @@ const watch = (props) => {
   }, [url])
   return (
     <div>
-      <Head>{/* <title>{props && props.data.VideoName}</title> */}</Head>
+      <Head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema) }}
+        />
+      </Head>
       {props.allowUser && props.data && props.data.responseCode != 401 && (
         <Player movies={props.data} />
       )}
@@ -98,16 +104,18 @@ export async function getServerSideProps(context) {
   var isFree = "1";
   isFree = chanelDetail.isFree;
 
+  let seo = await getSEOData(chanelDetail.CleanVideoId, context.resolvedUrl);
+  console.log("Seo ", seo);
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
     if (res != null) {
       if (res.responseCode != 401) {
         console.log(res);
         return {
-          props: response(res.data, chanelDetail, allowUser),
+          props: response(res.data, chanelDetail, allowUser, seo),
         };
       } else {
-        return { props: response(res.data, chanelDetail, true) }
+        return { props: response(res.data, chanelDetail, true, seo) }
       }
     }
   } else {
@@ -116,22 +124,22 @@ export async function getServerSideProps(context) {
       if (res && res.responseCode == 5) {
         // expired subscription
         return {
-          props: response(res.data, chanelDetail, false),
+          props: response(res.data, chanelDetail, false, seo),
         };
       } else if (res && res.responseCode == 401) {
         return {
-          props: response(res.data, chanelDetail, true)
+          props: response(res.data, chanelDetail, true, seo)
         }
       } else {
         // authenticated
         return {
-          props: response(res.data, chanelDetail, true),
+          props: response(res.data, chanelDetail, true, seo),
         };
       }
     } else {
       // not logged in
       return {
-        props: response(null, chanelDetail, false),
+        props: response(null, chanelDetail, false, seo),
       };
     }
   }
@@ -139,11 +147,12 @@ export async function getServerSideProps(context) {
 
 export default watch;
 
-const response = (data, channel, allowUser) => {
+const response = (data, channel, allowUser, seo) => {
 
   return {
     data,
     channel,
     allowUser,
+    schmea: seo
   };
 };

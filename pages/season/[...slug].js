@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { manipulateUrls } from "../../services/utils";
-import { get } from "../../services/http-service";
+import { get, post } from "../../services/http-service";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
-import { getRelatedChannelsOrVODs } from "../../services/apilinks";
+import { getRelatedChannelsOrVODs, SEOTvSeriesData } from "../../services/apilinks";
 import requestIp from "request-ip";
+import Head from "next/head";
+import { getSEOData } from "../../services/seo.service";
 
 const Syno = (props) => {
   const [videoList, setVideoList] = useState([]);
@@ -23,9 +25,17 @@ const Syno = (props) => {
   }, []);
 
   return (
-    <div className="container-fluid">
-      <CategoryDetail video={video} videoList={videoList} syno={true} />
-    </div>
+    <>
+      <Head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema) }}
+        />
+      </Head>
+      <div className="container-fluid">
+        <CategoryDetail video={video} videoList={videoList} syno={true} />
+      </div>
+    </>
   );
 };
 
@@ -38,8 +48,10 @@ export async function getServerSideProps(context) {
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
 
+
   if (data != null) {
-    return { props: { data: data.data } };
+    let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
+    return { props: { data: data.data, schema: seo } };
   }
   return { props: { data: data } };
 }

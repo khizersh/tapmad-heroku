@@ -90,5 +90,11 @@ export function UpdateProfile(profile) {
         email: profile.Email,
         name: profile.FullName
     });
+}
 
+export function SignOut() {
+    dataLayer.push({
+        event: "sign_out",
+        Platform: "web"
+    });
 }

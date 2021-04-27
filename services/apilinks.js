@@ -53,10 +53,19 @@ export const getMoviesWithPaginationInitial =
 export const getChannelWithPaginationInitial =
   BASEURL + "api/getChannelWithPagination/0/5/0/16";
 
+
+
 // catchup
 
 export const getCatchupTv = BASEURL + "api/getCatchupTV/V1/en/web";
 export const getCatchupVideoData = BASEURL + "api/getCatchupTVURL/V1/en/web/";
+
+
+// SEO settings
+
+export const SEOTvSeriesData = BASEURL + "api/getSeoTvSeriesData"
+export const SEOTvShowsByCategory = BASEURL + "api/getSeoTvShowsByCategoryId"
+
 
 // ads setting
 

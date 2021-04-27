@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { get } from "../../services/http-service";
+import { get, post } from "../../services/http-service";
 import { manipulateUrlsForCatgeory } from "../../services/utils";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
-import { getSeasonVodByCategoryId } from "../../services/apilinks";
+import { getSeasonVodByCategoryId, SEOTvShowsByCategory } from "../../services/apilinks";
 import requestIp from "request-ip";
+import Head from "next/head";
+import { getSEODataByCategory } from "../../services/seo.service";
 
 const Category = (props) => {
   const [videoList, setVideoList] = useState([]);
@@ -27,9 +29,17 @@ const Category = (props) => {
   }, [props]);
 
   return (
-    <div className="container-fluid">
-      <CategoryDetail video={video} videoList={videoList} />
-    </div>
+    <>
+      <Head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema) }}
+        />
+      </Head>
+      <div className="container-fluid">
+        <CategoryDetail video={video} videoList={videoList} />
+      </div>
+    </>
   );
 };
 
@@ -42,6 +52,7 @@ export async function getServerSideProps(context) {
   }
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
   const data = await get(getSeasonVodByCategoryId + categoryId, ip);
+  let seo = await getSEODataByCategory(categoryId, context.resolvedUrl)
 
-  return { props: { data: data.data } };
+  return { props: { data: data.data, schema: seo } };
 }

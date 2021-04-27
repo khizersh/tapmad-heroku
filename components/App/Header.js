@@ -9,6 +9,7 @@ import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 import { loggingTags } from "../../services/apilinks";
 import { actionsRequestContent } from "../../services/http-service";
 import { AuthService } from "../../modules/auth/auth.service";
+import { SignOut } from "../../services/gtm";
 
 export default function Header() {
   const {
@@ -39,6 +40,7 @@ export default function Header() {
         icon: "success",
         buttons: false,
       }).then((res) => {
+        SignOut();
         Cookie.setCookies("isAuth", 0);
         setisAuthenticateFalse();
         router.push("/");
