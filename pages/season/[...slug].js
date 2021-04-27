@@ -3,7 +3,6 @@ import { manipulateUrls } from "../../services/utils";
 import { get } from "../../services/http-service";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
 import { getRelatedChannelsOrVODs } from "../../services/apilinks";
-import { Cookie } from "../../services/cookies";
 import requestIp from "request-ip";
 
 const Syno = (props) => {

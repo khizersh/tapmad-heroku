@@ -11,18 +11,13 @@ function VerifyUser({ login }) {
     updateUserNumber,
     updateUserPassword,
     updateUserOperator,
+    setLoader,
   } = useContext(MainContext);
 
-  //   Language: "en",
-  //   Platform: "web",
-  //   Version: "V1",
-  //   MobileNo: initialState.User.MobileNo,
-  //   OperatorId: initialState.User.OperatorId,
-  //   UserPassword: initialState.User.Password,
-
   useEffect(async () => {
-    let body = { Language: "en", MobileNo: "3368250350" };
-    const data = await AuthService.GetCardUser(body);
+    setLoader(true);
+    const data = await AuthService.checkUser("3368250350");
+    console.log("data: ", data);
     if (data && data.data.User) {
       let userOperator = Cookie.getCookies("uop");
       let userNumber = Cookie.getCookies("unum");
@@ -30,10 +25,11 @@ function VerifyUser({ login }) {
       updateUserPassword(data.data.User.UserPassword);
       updateUserNumber("3368250350");
 
-      console.log(data);
+      console.log(data.data.User.UserPassword);
 
       if (initialState.User.Password) {
         let loginResp = login();
+        setLoader(false);
         loginResp.then((e) => {
           if (e != null && e.responseCode == 401) {
             swal({
@@ -44,7 +40,9 @@ function VerifyUser({ login }) {
           }
         });
       }
+      setLoader(false);
     }
+    setLoader(false);
   }, [initialState.User.Password]);
   return <div></div>;
 }

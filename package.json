@@ -18,6 +18,7 @@
     "bootstrap": "^4.5.3",
     "cookie": "^0.4.1",
     "cookie-parser": "^1.4.5",
+    "crypto-js": "^4.0.0",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "csvtojson": "^2.0.10",

@@ -5,6 +5,7 @@ import swal from "sweetalert";
 import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
+import { encryptWithAES } from "../../services/utils";
 
 export default function withLogin(Component, data) {
   return (props) => {
@@ -14,7 +15,7 @@ export default function withLogin(Component, data) {
     const router = useRouter();
 
     async function loginUser() {
-      var obj = {
+      let obj = {
         Language: "en",
         Platform: "web",
         Version: "V1",
@@ -36,6 +37,7 @@ export default function withLogin(Component, data) {
         });
         Cookie.setCookies("isAuth", 1);
         Cookie.setCookies("userId", response.data.UserId);
+        Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
         LoginTag(obj, response.response);
         checkUserAuthentication();
         let backURL = Cookie.getCookies("backUrl") || "/";
