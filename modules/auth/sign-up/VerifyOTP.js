@@ -68,16 +68,18 @@ const Pin = ({ newUser }) => {
           });
           setLoader(false);
         } else if (data.responseCode == 1) {
-          swal({
-            timer: 2500,
-            title: data.message,
-            icon: "success",
-          }).then((result) => {
-            if (newUser) {
-              Cookie.setCookies("userId", data.data.User.UserId);
-            }
-            updateResponseCode(34);
-            setLoader(false);
+          AuthService.clearUserToken(initialState.User.MobileNo).then((e) => {
+            swal({
+              timer: 2500,
+              title: data.message,
+              icon: "success",
+            }).then((result) => {
+              if (newUser) {
+                Cookie.setCookies("userId", data.data.User.UserId);
+              }
+              updateResponseCode(34);
+              setLoader(false);
+            });
           });
         } else {
           swal({

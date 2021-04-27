@@ -54,6 +54,7 @@ const EnterPinToVerifyUser = ({ login }) => {
     if (pinCode.current.value.length == 4) {
       setLoader(true);
       const data = await AuthService.verifyPinCode(pinCode.current.value);
+      console.log("verofy pin code: ", data);
       if (data != null) {
         if (data.responseCode == 1) {
           // logging start
@@ -66,7 +67,15 @@ const EnterPinToVerifyUser = ({ login }) => {
             };
             actionsRequestContent(body);
           }
-          login();
+          var loginResp = login();
+          loginResp.then((e) => {
+            if (e != null && e.responseCode == 401) {
+              console.log(e);
+              forgetPin()
+                .then((re) => {})
+                .catch((e) => console.log(e));
+            }
+          });
         } else {
           setLoader(false);
           swal({
