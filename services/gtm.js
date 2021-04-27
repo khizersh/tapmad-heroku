@@ -1,3 +1,6 @@
+import { Cookie } from "./cookies";
+import { decryptWithAES } from "./utils";
+
 export function LoginTag(body, resp) {
     console.log(body, resp);
     try {
@@ -42,9 +45,11 @@ export function SearchTag(body) {
         console.log(e);
     }
 }
-export function ContentViewed(name) {
+export function ContentViewed(video) {
+    var mobile = Cookie.getCookies("user_mob");
+    var userId = Cookie.getCookies("userId");
     try {
-        dataLayer.push({ "event": "content_viewed", "Name": name })
+        dataLayer.push({ "event": "content_viewed", "Name": video.VideoName, "user_id": userId, "msisdn": mobile, "ID": video.VideoEntityId });
     } catch (e) {
         console.log(e);
     }

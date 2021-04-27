@@ -1,6 +1,6 @@
 const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
 const { Cookie } = require("./cookies");
-
+const CryptoJS = require("crypto-js");
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
   let isChannel = movieId.charAt(movieId.length - 1);
@@ -168,6 +168,17 @@ function closeNavBar() {
     .classList.remove("openNav");
   document.getElementsByClassName("menu")[0].classList.remove("active-nav");
 }
+const encryptWithAES = (text) => {
+  const passphrase = "My Secret Passphrase";
+  return CryptoJS.AES.encrypt(text, passphrase).toString();
+};
+//The Function Below To Decrypt Text
+const decryptWithAES = (ciphertext) => {
+  const passphrase = "My Secret Passphrase";
+  const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
+  const originalText = bytes.toString(CryptoJS.enc.Utf8);
+  return originalText;
+};
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -180,5 +191,7 @@ module.exports = {
   setUrlToCookies,
   isAuthentictedServerSide,
   SEOFriendlySlugsForCatchupVideo,
-  closeNavBar
+  closeNavBar,
+  encryptWithAES,
+  decryptWithAES
 };
