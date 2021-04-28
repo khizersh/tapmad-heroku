@@ -2,7 +2,6 @@ import { AuthService } from "../../modules/auth/auth.service";
 import { MYSECRET } from "../../services/secret";
 var jwt = require("jsonwebtoken");
 import { serialize } from "cookie";
-import { Cookie } from "../../services/cookies";
 
 export const setCookie = (res, name, value, options = {}) => {
   const stringValue = value;
@@ -17,6 +16,8 @@ export default async (req, res) => {
   if (req.method == "POST") {
     const data = await AuthService.loginUserFetchApi(req.body);
     let { responseCode, message } = data.Response;
+    console.log(JSON.stringify(data));
+    console.log(JSON.stringify(req.body));
     let { User } = data;
     console.log("api: ", data);
 
@@ -35,15 +36,24 @@ export default async (req, res) => {
         responseCode: responseCode,
         message: message,
         response: data,
+<<<<<<< HEAD
+=======
+        error: false
+>>>>>>> c6a5e411d3eb70babee336922ad003ff7047a3fc
       };
       res.json({ ...obj });
     } else {
-      let user = { ...User, jwtToken: null };
+      let userClone = User;
+      let user = { ...userClone, jwtToken: false };
       let obj = {
         data: user,
         responseCode: responseCode,
         message: message,
         response: data,
+<<<<<<< HEAD
+=======
+        error: true
+>>>>>>> c6a5e411d3eb70babee336922ad003ff7047a3fc
       };
       res.json({ ...obj });
     }
