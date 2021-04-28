@@ -37,7 +37,8 @@ export default async (req, res) => {
       };
       res.json({ ...obj });
     } else {
-      let user = { ...User, jwtToken: null };
+      let userClone = User;
+      let user = { ...userClone, jwtToken: null };
       let obj = {
         data: user,
         responseCode: responseCode,
