@@ -100,7 +100,7 @@ export async function getServerSideProps(context) {
     IsChannel: chanelDetail.isChannel,
     headers: GlobalService.authHeaders(cookies["content-token"]),
   };
-
+  console.log(body);
   var isFree = "1";
   isFree = chanelDetail.isFree;
   if (chanelDetail.isChannel) {
