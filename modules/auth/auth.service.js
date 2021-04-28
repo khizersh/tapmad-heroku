@@ -15,7 +15,6 @@ import {
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
 
-
 async function setUserPin(pin) {
   let resp;
   try {
@@ -319,7 +318,6 @@ async function GetCardUser(body) {
   const resp = await post(getCardUser, body);
   const data = handleResponse(resp);
   if (data != null) {
-
     if (data.responseCode == 1) {
       return {
         data: data,
@@ -385,13 +383,16 @@ async function signInOrSignUpMobileOperator(
     withMultiCredentials
   );
   const data = handleResponse(resp);
+  console.log("data in handle respo: ", resp);
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);
   }
   return data;
 }
 async function clearUserToken(number) {
-  const response = await get(`http://app.tapmad.com/api/ClearAllCache/T${number}`)
+  const response = await get(
+    `http://app.tapmad.com/api/ClearAllCache/T${number}`
+  );
   return response;
 }
 async function getGeoInfo() {
@@ -421,11 +422,15 @@ const checkUser = async (num) => {
     if (data) {
       if (data.data) {
         if (data.data.User) {
-          Cookie.setCookies('userId', data.data.User.UserId)
-          Cookie.setCookies('content-token', data.data.User.UserPassword)
+          Cookie.setCookies("userId", data.data.User.UserId);
+          Cookie.setCookies("content-token", data.data.User.UserPassword);
           if (data.data.User.IsSubscribe) {
             if (data.data.User.IsPinSet) {
-              return { code: 11, message: "Already subscribe!", data: data.data };
+              return {
+                code: 11,
+                message: "Already subscribe!",
+                data: data.data,
+              };
             } else {
               return { code: 34, message: "Set your pin!", data: data.data };
             }
@@ -439,7 +444,7 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const AuthService = {
@@ -461,5 +466,5 @@ export const AuthService = {
   logoutUser,
   userPromoCode,
   checkUser,
-  clearUserToken
+  clearUserToken,
 };

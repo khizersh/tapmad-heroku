@@ -41,7 +41,11 @@ export default function withLogin(Component, data) {
         LoginTag(obj, response.response);
         checkUserAuthentication();
         let backURL = Cookie.getCookies("backUrl") || "/";
-        router.push(backURL);
+        if (backURL == "sign-in") {
+          router.push("/");
+        } else {
+          router.push(backURL);
+        }
         setLoader(false);
         return null;
       } else {
