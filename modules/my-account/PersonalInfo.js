@@ -39,7 +39,6 @@ const PersonalInfo = ({ data }) => {
       setBtnEnable(true);
       setProfileData({ ...profileData, [e.target.name]: e.target.value });
     }
-
   };
   const onSubmit = async () => {
     var formData = new FormData();
@@ -61,7 +60,7 @@ const PersonalInfo = ({ data }) => {
         icon: "success",
       });
       setBtnEnable(false);
-      UpdateProfile(profileData)
+      UpdateProfile(profileData);
     } else {
       swal({
         title: "Something went wrong!",
@@ -91,7 +90,7 @@ const PersonalInfo = ({ data }) => {
   }, [data]);
   useEffect(() => {
     ProfileViewed();
-  }, [])
+  }, []);
   return (
     <div className="tm_usr_img text-center left-profile ">
       {/* user profile */}
@@ -165,7 +164,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Email Address</label>
-          <img src={mailIcon} width="24" className="float-right" />
+          <img src={calenderIcon} width="24" className="float-right" />
           <input
             type="email"
             required
@@ -178,8 +177,9 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <button
-            className={`profile-btn w-100  border-0 rounded-0 text-white ${btnEnable ? "" : "btn-click"
-              }`}
+            className={`profile-btn w-100  border-0 rounded-0 text-white ${
+              btnEnable ? "" : "btn-click"
+            }`}
             onClick={onSubmit}
           >
             Update Profile

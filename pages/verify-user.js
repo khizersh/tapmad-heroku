@@ -49,3 +49,11 @@ function VerifyUser({ login }) {
 
 const EnhancedEnterPin = withLogin(VerifyUser);
 export default EnhancedEnterPin;
+
+export function getStaticProps() {
+  return {
+    props: {
+      noSideBar: true,
+    },
+  };
+}

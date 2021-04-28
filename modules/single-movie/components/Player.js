@@ -199,34 +199,64 @@ export default function Player({ movies }) {
           </div>
           {/* Side Add */}
           <div className="col-lg-3 text-center pt-5 ">
-            {ads.allow && ads.rightAd && (
-              <DFPSlotsProvider dfpNetworkId="28379801">
-                <div className="desktop-ads">
-                  <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
+            {ads.allow && ads.rightAd ? (
+              ads.rightAd.includes("http") ? (
+                <div style={{ marginTop: "65px" }}>
+                  <ReactJWPlayer
+                    playerId="my-unique-id1"
+                    playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                    isAutoPlay={true}
+                    isMuted={true}
+                    isSkipable={false}
+                    onOneHundredPercent={onRestartAd}
+                    onAdSkipped={onRestartAd}
+                    file={"https://www.tapmad.com/tapmad.mp4"}
+                    onAdComplete={onRestartAd}
+                    generatePrerollUrl={() =>
+                      ads.rightAd && ads.allow ? ads.rightAd : ""
+                    }
+                    customProps={{
+                      controls: true,
+                    }}
+                  />
                 </div>
-              </DFPSlotsProvider>
-            )}
+              ) : (
+                <DFPSlotsProvider dfpNetworkId="28379801">
+                  <div className="desktop-ads">
+                    <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
+                  </div>
+                </DFPSlotsProvider>
+              )
+            ) : null}
 
             {ads.allow && isAutoPlay && ads.rightVideoAd ? (
-              <div style={{ marginTop: "65px" }}>
-                <ReactJWPlayer
-                  playerId="my-unique-id1"
-                  playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                  isAutoPlay={true}
-                  isMuted={true}
-                  isSkipable={false}
-                  onOneHundredPercent={onRestartAd}
-                  onAdSkipped={onRestartAd}
-                  file={"https://www.tapmad.com/tapmad.mp4"}
-                  onAdComplete={onRestartAd}
-                  generatePrerollUrl={() =>
-                    ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
-                  }
-                  customProps={{
-                    controls: true,
-                  }}
-                />
-              </div>
+              ads.rightVideoAd.includes("http") ? (
+                <div style={{ marginTop: "65px" }}>
+                  <ReactJWPlayer
+                    playerId="my-unique-id1"
+                    playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                    isAutoPlay={true}
+                    isMuted={true}
+                    isSkipable={false}
+                    onOneHundredPercent={onRestartAd}
+                    onAdSkipped={onRestartAd}
+                    file={"https://www.tapmad.com/tapmad.mp4"}
+                    onAdComplete={onRestartAd}
+                    generatePrerollUrl={() =>
+                      ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
+                    }
+                    customProps={{
+                      controls: true,
+                    }}
+                  />
+                </div>
+              ) : (
+                <DFPSlotsProvider dfpNetworkId="28379801">
+                  <div className="desktop-ads">
+                    <AdSlot sizes={[[300, 250]]} adUnit={ads.rightVideoAd} />
+                  </div>
+                </DFPSlotsProvider>
+              )
             ) : null}
             <div
               className="text-left mt-3"
