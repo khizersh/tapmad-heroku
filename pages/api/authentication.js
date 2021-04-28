@@ -33,7 +33,8 @@ export default async (req, res) => {
         data: User,
         responseCode: responseCode,
         message: message,
-        response: data
+        response: data,
+        error: false
       };
       res.json({ ...obj });
     } else {
