@@ -4,6 +4,7 @@ import { MainContext } from "../contexts/MainContext";
 import { AuthService } from "../modules/auth/auth.service";
 import withLogin from "../modules/auth/LoginHOC";
 import { Cookie } from "../services/cookies";
+import { useRouter } from "next/router";
 
 function VerifyUser({ login }) {
   const {
@@ -14,38 +15,47 @@ function VerifyUser({ login }) {
     setLoader,
   } = useContext(MainContext);
 
+  const router = useRouter();
+
   useEffect(async () => {
     setLoader(true);
-    var userNumber = Cookie.getCookies("unum");
+    let userNumber = Cookie.getCookies("unum");
     const data = await AuthService.checkUser(userNumber);
     console.log("data in verify: ", data);
-    if (data && data.data.User) {
+    if (data && data.code == 11) {
       let userOperator = Cookie.getCookies("uop");
+      let userNumber = Cookie.getCookies("unum");
+      if (userOperator && userNumber) {
+        updateUserOperator(userOperator);
+        updateUserPassword(data.data.User.UserPassword);
+        updateUserNumber(userNumber);
 
-      updateUserOperator(userOperator);
-      updateUserPassword(data.data.User.UserPassword);
-      updateUserNumber(userNumber);
-      console.log("userNumber: ", userNumber);
-
-      console.log(data.data.User.UserPassword);
-
-      if (initialState.User.Password) {
-        let loginResp = login();
-        setLoader(false);
-        loginResp.then((e) => {
-          if (e != null && e.responseCode == 401) {
-            swal({
-              title: "Something went wrong!",
-              icon: "error",
-              timer: 2500,
-            });
-          }
-        });
+        if (initialState.User.Password) {
+          let loginResp = login();
+          setLoader(false);
+          loginResp.then((e) => {
+            if (e != null && e.responseCode == 401) {
+              router.push("/sign-in");
+            }
+          });
+        }
       }
       setLoader(false);
+    } else if (data.code == 0) {
+      swal({
+        title: "Please sign up!",
+        timer: 2500,
+        icon: "warning",
+      }).then((r) => router.push("/sign-up"));
+    } else if (data.code == 34) {
+      swal({
+        title: "Please sign in!",
+        timer: 2500,
+        icon: "warning",
+      }).then((r) => router.push("/sign-in"));
     }
     setLoader(false);
-  }, [initialState.User.Password]);
+  }, [initialState.User.Password, initialState.User.MobileNo]);
   return <div></div>;
 }
 
