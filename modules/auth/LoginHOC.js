@@ -23,6 +23,7 @@ export default function withLogin(Component, data) {
         OperatorId: initialState.User.OperatorId,
         UserPassword: initialState.User.Password,
       };
+      console.log("initialState: ", initialState);
       let response = await AuthService.signInOrSignUpMobileOperator(
         obj,
         "",
