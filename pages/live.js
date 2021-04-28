@@ -5,6 +5,7 @@ import requestIp from "request-ip";
 import { getChannelWithPaginationInitial } from "../services/apilinks";
 
 export default function Live(props) {
+  console.log("live: ", props);
   return (
     <div>
       <Head>
