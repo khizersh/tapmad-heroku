@@ -17,6 +17,7 @@ export default async (req, res) => {
   if (req.method == "POST") {
     const data = await AuthService.loginUserFetchApi(req.body);
     let { responseCode, message } = data.Response;
+    console.log(JSON.stringify(data));
     let { User } = data;
 
     if (User && User.UserId) {

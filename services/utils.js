@@ -67,7 +67,7 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
 }
 
 function SEOFriendlySlugsIsCategoryFalse(event) {
-  let prefix = "season";
+  let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
     }`;
