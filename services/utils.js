@@ -60,8 +60,9 @@ function basicSliderConfig(slidesToShow, mobileView) {
 
 function SEOFriendlySlugsForVideo(event, catchup = false) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
-    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
+    event.IsVideoFree ? "1" : "0"
+  }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -69,8 +70,9 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "season";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
-    }`;
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+    event.IsVideoChannel ? "1" : "0"
+  }`;
   return slug;
 }
 
@@ -99,16 +101,18 @@ function setUrlAccordingToVideoType(movie, type) {
 // catchup
 function SEOFriendlySlugsForCatchupVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
-    }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
 
 function SEOFriendlySlugsForCatchup(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
-    }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -138,7 +142,7 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  if (url != "/sign-up") {
+  if (url != "/sign-up" || url != "/sign-in") {
     Cookie.setCookies("backUrl", url);
   }
 }
@@ -163,9 +167,7 @@ function isAuthentictedServerSide(req) {
   }
 }
 function closeNavBar() {
-  document
-    .getElementsByClassName("nav-toggle")[0]
-    .classList.remove("openNav");
+  document.getElementsByClassName("nav-toggle")[0].classList.remove("openNav");
   document.getElementsByClassName("menu")[0].classList.remove("active-nav");
 }
 const encryptWithAES = (text) => {
@@ -183,9 +185,9 @@ function getUserDetails() {
   var mobile = Cookie.getCookies("user_mob");
   var userId = Cookie.getCookies("userId");
   if (mobile && userId) {
-    return { mobile: decryptWithAES(mobile), userId: userId }
+    return { mobile: decryptWithAES(mobile), userId: userId };
   } else {
-    return { mobile: "", userId: "" }
+    return { mobile: "", userId: "" };
   }
 }
 module.exports = {
@@ -203,5 +205,5 @@ module.exports = {
   closeNavBar,
   encryptWithAES,
   decryptWithAES,
-  getUserDetails
+  getUserDetails,
 };
