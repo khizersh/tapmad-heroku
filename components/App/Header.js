@@ -2,62 +2,17 @@ import Link from "next/link";
 import React, { useContext, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
 // import "./Header.css";
-import { Cookie } from "../../services/cookies";
-import swal from "sweetalert";
-import { useRouter } from "next/router";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 import { loggingTags } from "../../services/apilinks";
 import { actionsRequestContent } from "../../services/http-service";
-import { AuthService } from "../../modules/auth/auth.service";
-import { SignOut } from "../../services/gtm";
+import withSignout from "../../modules/auth/signout/SignoutHOC";
 
-export default function Header() {
+function HeaderBasic({ signout }) {
   const {
     initialState,
-    setLoader,
-    setisAuthenticateFalse,
     setSearch,
   } = useContext(MainContext);
 
-  const router = useRouter();
-
-  const onClickSignout = async () => {
-    setLoader(true);
-
-    let data = {
-      UserId: Cookie.getCookies("userId"),
-      headers: {
-        Authorization: Cookie.getCookies("content-token"),
-      },
-    };
-    const resp = await AuthService.logoutUser(data);
-
-    if (resp && resp.Response.responseCode == 1) {
-      swal({
-        title: "You have logged out!",
-        text: "Redirecting you in 2s...",
-        timer: 1900,
-        icon: "success",
-        buttons: false,
-      }).then((res) => {
-        SignOut();
-        Cookie.setCookies("isAuth", 0);
-        setisAuthenticateFalse();
-        router.push("/");
-        setLoader(false);
-      });
-    } else {
-      swal({
-        title: "Something went wrong. Please try again!",
-        timer: 1900,
-        icon: "error",
-        buttons: false,
-      });
-      setLoader(false);
-    }
-
-    setLoader(false);
-  };
 
   const onClick = () => {
     setSearch(true);
@@ -168,7 +123,7 @@ export default function Header() {
               {initialState.isAuthenticated ? (
                 <li id="loginAva2" className="nav-item">
                   <a
-                    onClick={onClickSignout}
+                    onClick={signout}
                     className="pull-right d-xs-none btn nav-link hov-green"
                   >
                     Signout
@@ -192,3 +147,5 @@ export default function Header() {
     </>
   );
 }
+const Header = withSignout(HeaderBasic);
+export default Header;

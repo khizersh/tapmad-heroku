@@ -60,9 +60,8 @@ function basicSliderConfig(slidesToShow, mobileView) {
 
 function SEOFriendlySlugsForVideo(event, catchup = false) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
-    event.IsVideoFree ? "1" : "0"
-  }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -70,9 +69,8 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "season";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
-    event.IsVideoChannel ? "1" : "0"
-  }`;
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
+    }`;
   return slug;
 }
 
@@ -101,18 +99,16 @@ function setUrlAccordingToVideoType(movie, type) {
 // catchup
 function SEOFriendlySlugsForCatchupVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
-    event.VideoEntityId
-  }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
+    }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
 
 function SEOFriendlySlugsForCatchup(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
-    event.VideoEntityId
-  }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
+    }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -190,6 +186,9 @@ function getUserDetails() {
     return { mobile: "", userId: "" };
   }
 }
+function SignOutUser() {
+
+}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -206,4 +205,5 @@ module.exports = {
   encryptWithAES,
   decryptWithAES,
   getUserDetails,
+  SignOutUser
 };
