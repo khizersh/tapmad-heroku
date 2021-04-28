@@ -16,14 +16,16 @@ function VerifyUser({ login }) {
 
   useEffect(async () => {
     setLoader(true);
-    const data = await AuthService.checkUser("3368250350");
+    var userNumber = Cookie.getCookies("unum");
+    const data = await AuthService.checkUser(userNumber);
     console.log("data in verify: ", data);
     if (data && data.data.User) {
       let userOperator = Cookie.getCookies("uop");
-      let userNumber = Cookie.getCookies("unum");
+
       updateUserOperator(userOperator);
       updateUserPassword(data.data.User.UserPassword);
       updateUserNumber(userNumber);
+      console.log("userNumber: ", userNumber);
 
       console.log(data.data.User.UserPassword);
 
