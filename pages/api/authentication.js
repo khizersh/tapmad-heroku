@@ -19,6 +19,7 @@ export default async (req, res) => {
     console.log(JSON.stringify(data));
     console.log(JSON.stringify(req.body));
     let { User } = data;
+    console.log("api: ", data);
 
     if (User && User.UserId) {
       var token = jwt.sign(
@@ -35,7 +36,10 @@ export default async (req, res) => {
         responseCode: responseCode,
         message: message,
         response: data,
+<<<<<<< HEAD
+=======
         error: false
+>>>>>>> c6a5e411d3eb70babee336922ad003ff7047a3fc
       };
       res.json({ ...obj });
     } else {
@@ -46,7 +50,10 @@ export default async (req, res) => {
         responseCode: responseCode,
         message: message,
         response: data,
+<<<<<<< HEAD
+=======
         error: true
+>>>>>>> c6a5e411d3eb70babee336922ad003ff7047a3fc
       };
       res.json({ ...obj });
     }

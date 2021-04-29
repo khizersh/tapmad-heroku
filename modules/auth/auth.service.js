@@ -383,7 +383,6 @@ async function signInOrSignUpMobileOperator(
     withMultiCredentials
   );
   const data = handleResponse(resp);
-  console.log("data in handle respo: ", resp);
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);
   }

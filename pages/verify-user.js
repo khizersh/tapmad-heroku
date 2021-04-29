@@ -5,6 +5,7 @@ import { AuthService } from "../modules/auth/auth.service";
 import withLogin from "../modules/auth/LoginHOC";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
+import { Authcontext } from "../contexts/AuthContext";
 
 function VerifyUser({ login }) {
   const {
@@ -14,6 +15,7 @@ function VerifyUser({ login }) {
     updateUserOperator,
     setLoader,
   } = useContext(MainContext);
+  const { updateResponseCode } = useContext(Authcontext);
 
   const router = useRouter();
 
@@ -35,7 +37,10 @@ function VerifyUser({ login }) {
           setLoader(false);
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
-              router.push("/sign-in");
+              AuthService.forgetPin(userNumber, userOperator).then((res) => {
+                updateResponseCode(1);
+                router.push("/sign-up");
+              });
             }
           });
         }

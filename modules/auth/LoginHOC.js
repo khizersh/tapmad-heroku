@@ -23,12 +23,13 @@ export default function withLogin(Component, data) {
         OperatorId: initialState.User.OperatorId,
         UserPassword: initialState.User.Password,
       };
-      console.log("initialState: ", initialState);
-      let response = await AuthService.signInOrSignUpMobileOperator(
-        obj,
-        "",
-        false
-      );
+
+      // let response = await AuthService.signInOrSignUpMobileOperator(
+      //   obj,
+      //   "",
+      //   false
+      // );
+      const response = await AuthService.loginUserFetchApi(obj);
       if (response && response.data && response.data.UserId) {
         swal({
           timer: 2000,
@@ -40,7 +41,7 @@ export default function withLogin(Component, data) {
         Cookie.setCookies("userId", response.data.UserId);
         Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
         LoginTag(obj, response.response);
-        console.log("safaf");
+
         checkUserAuthentication();
         let backURL = Cookie.getCookies("backUrl") || "/";
         if (backURL == "sign-in") {
