@@ -24,12 +24,11 @@ export default function withLogin(Component, data) {
         UserPassword: initialState.User.Password,
       };
 
-      // let response = await AuthService.signInOrSignUpMobileOperator(
-      //   obj,
-      //   "",
-      //   false
-      // );
-      const response = await AuthService.loginUserFetchApi(obj);
+      let response = await AuthService.signInOrSignUpMobileOperator(
+        obj,
+        "",
+        false
+      );
       if (response && response.data && response.data.UserId) {
         swal({
           timer: 2000,
