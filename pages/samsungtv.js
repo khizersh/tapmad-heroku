@@ -18,14 +18,12 @@ const samsungtv = () => {
       <div className="category-container">
         <div className="category__product-row text-center">
           <a
-            href="javascript:void(0)"
             onClick={resetPin}
             className="category__product-container btnStyle"
           >
             <div className="category__product-title">Reset Pin</div>
           </a>
           <a
-            href="javascript:void(0)"
             onClick={unSubscribeUser}
             className="category__product-container btnStyle"
           >
@@ -98,3 +96,7 @@ const samsungtv = () => {
 };
 
 export default samsungtv;
+
+export async function getStaticProps() {
+  return { props: { noSideBar: true } };
+}
