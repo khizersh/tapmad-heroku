@@ -169,9 +169,9 @@ export default function Player({ movies }) {
               {movie && movie.Video ? (
                 <>
                   <h5 className="mt-3">{movie.Video.VideoName}</h5>
-                  <span className="text-secondary">
+                  {/* <span className="text-secondary">
                     {movie.Video.VideoTotalViews} views
-                  </span>
+                  </span> */}
                   <p style={{ color: "#aaa" }}>
                     {movie.Video.VideoDescription}
                   </p>
@@ -266,20 +266,20 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video);
-                      return (
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      );
-                    })
+                    let slug = SEOFriendlySlugsForVideo(video);
+                    return (
+                      <Link
+                        href={slug}
+                        replace={true}
+                        shallow={false}
+                        key={i}
+                      >
+                        <a>
+                          <RelatedProductCard video={video} />
+                        </a>
+                      </Link>
+                    );
+                  })
                   : null}
               </div>
             </div>

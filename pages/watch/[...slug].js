@@ -112,8 +112,6 @@ export async function getServerSideProps(context) {
   } else {
     var seo = await getSEOData(chanelDetail.CleanVideoId, context.resolvedUrl);
   }
-  console.log("Seoo ", seo)
-  console.log("Seoo ", body)
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
     if (res != null) {
