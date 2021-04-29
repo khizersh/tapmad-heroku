@@ -1,6 +1,3 @@
-.slick-list {
-}
-
 .list:hover {
   overflow-x: visible !important;
 }
@@ -8,4 +5,18 @@
 .zero-add {
   position: relative;
   top: 100px;
+}
+
+.play-btn {
+  position: relative;
+  bottom: 31px;
+  width: 78px;
+  color: white;
+  background: black;
+  padding: 5px 10px 5px 10px;
+}
+
+.play-btn:hover {
+  transition: all 0.3s;
+  color: #87c242;
 }

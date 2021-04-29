@@ -89,7 +89,11 @@ export default function HomePage({ movies, banner, featured, ip }) {
             <div className="width-100">
               <div className="col-12">
                 <div className="home-banner-btn">
-                  <Link href="/" passHref={true} shallow={true}>
+                  <Link
+                    href={banner?.Video[0]?.bannerRedirectionURL}
+                    passHref={true}
+                    shallow={true}
+                  >
                     <a className="btn btn-primary">Watch Now</a>
                   </Link>
                 </div>
