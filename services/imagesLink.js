@@ -16,3 +16,9 @@ export const jazzIcon =
 
 export const tapmadCoin = "https://www.tapmad.com/images/coint.png";
 export const tapmadNews = "https://www.tapmad.com/images/news-btn.png";
+
+export const samsungTvLogo =
+  "https://www.tapmad.com/images/samsungtv/Samsung-smarttv-logo-white.png";
+
+export const tapmadLogoBgWhite =
+  " https://www.tapmad.com/images/samsungtv/tm-logo-clr.png";

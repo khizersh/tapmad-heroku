@@ -21,6 +21,7 @@ function VerifyUser({ login }) {
   useEffect(async () => {
     setLoader(true);
     let userNumber = Cookie.getCookies("unum");
+    console.log("userNumber: ", userNumber);
     const data = await AuthService.checkUser(userNumber);
     console.log("data in verify: ", data);
     if (data && data.code == 11) {
@@ -34,19 +35,6 @@ function VerifyUser({ login }) {
         if (initialState.User.Password) {
           let loginResp = login();
           setLoader(false);
-          loginResp.then((e) => {
-            if (e != null && e.responseCode == 401) {
-              AuthService.forgetPin(userNumber, userOperator).then((res) => {
-                router.push(
-                  {
-                    pathname: "/sign-up",
-                    query: { code: "1", number: userNumber },
-                  },
-                  "/sign-up"
-                );
-              });
-            }
-          });
         }
       }
       setLoader(false);
@@ -67,6 +55,20 @@ function VerifyUser({ login }) {
   }, [initialState.User.Password, initialState.User.MobileNo]);
   return <div></div>;
 }
+
+// loginResp.then((e) => {
+//   if (e != null && e.responseCode == 401) {
+//     AuthService.forgetPin(userNumber, userOperator).then((res) => {
+//       router.push(
+//         {
+//           pathname: "/sign-up",
+//           query: { code: "1", number: userNumber },
+//         },
+//         "/sign-up"
+//       );
+//     });
+//   }
+// });
 
 const EnhancedEnterPin = withLogin(VerifyUser);
 export default EnhancedEnterPin;
