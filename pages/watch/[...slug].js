@@ -22,7 +22,6 @@ const watch = (props) => {
   const { setisAuthenticateFalse } = useContext(MainContext)
   const [url, setUrl] = useState(null);
   useEffect(() => {
-    console.log(props);
     if (!props.allowUser) {
       router.push("/sign-up");
     } else {
@@ -66,9 +65,15 @@ const watch = (props) => {
   return (
     <div>
       <Head>
+        <title>{props.schema.metaData[0].title}</title>
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={props.schema.metaData[0].title} />
+        <meta property="og:description" content={props.schema.metaData[0].description} />
+        <meta property="og:image" content={props.schema.metaData[0].image.url} />
+        <meta property="og:url" content={props.schema.url} />
         <script
           type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema.Channels ? props.schema.Channels[0] : props.schema.Vod[0]) }}
         />
       </Head>
       {props.allowUser && props.data && props.data.responseCode != 401 && (
@@ -99,21 +104,20 @@ export async function getServerSideProps(context) {
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
     headers: GlobalService.authHeaders(cookies["content-token"]),
-  };
-  console.log(body);
+  };;
   var isFree = "1";
   isFree = chanelDetail.isFree;
-  if (chanelDetail.isChannel) {
+  if (chanelDetail.isChannel == "1") {
     var seo = await getSEODataForLiveChannel(chanelDetail.CleanVideoId, context.resolvedUrl);
   } else {
     var seo = await getSEOData(chanelDetail.CleanVideoId, context.resolvedUrl);
   }
-  console.log("Seo ", seo);
+  console.log("Seoo ", seo)
+  console.log("Seoo ", body)
   if (isFree == "1") {
     const res = await PlayerService.getVideoData(body, ip);
     if (res != null) {
       if (res.responseCode != 401) {
-        console.log(res);
         return {
           props: response(res.data, chanelDetail, allowUser, seo),
         };

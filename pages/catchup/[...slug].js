@@ -4,8 +4,6 @@ import { CatchupService } from "../../modules/catchup/catchup.service";
 import VideoDetail from "../../modules/catchup/VideoDetail";
 import requestIp from "request-ip";
 import { CatchupContext } from "../../contexts/CatchupContext";
-import Head from "next/head";
-import { getSEOData } from "../../services/seo.service";
 
 const CatchupDetail = (props) => {
   const [videoList, setVideoList] = useState([]);
@@ -51,8 +49,7 @@ export async function getServerSideProps(context) {
   }
 
   const data = await CatchupService.getCatchupVideo(CleanVideoId, ip);
-  // let seo = await getSEOData(CleanVideoId, context.resolvedUrl)
-  // console.log(seo)
+
   if (data.responseCode == 1) {
     return { props: { video: data.data.Video, videoList: data.data.Videos } };
   } else {
