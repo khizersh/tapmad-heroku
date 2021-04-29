@@ -116,7 +116,7 @@ export default function Player({ movies }) {
   return (
     <div>
       <div className="container-fluid">
-        <div className="row mt-5">
+        <div className="row">
           <div className="col-lg-9">
             <div className="col-12 p-0">
               {/* Top Ad */}
@@ -168,7 +168,7 @@ export default function Player({ movies }) {
             <div className="col-lg-12 p-0">
               {movie && movie.Video ? (
                 <>
-                  <h5 className="mt-3">{movie.Video.VideoName}</h5>
+                  <h1 className="mt-3 h5">{movie.Video.VideoName}</h1>
                   {/* <span className="text-secondary">
                     {movie.Video.VideoTotalViews} views
                   </span> */}

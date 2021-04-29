@@ -37,7 +37,7 @@ function HeaderBasic({ signout }) {
               </a>
             </Link>
           </div>
-          <div className="col-6 col-sm-6 col-md-6 .col-lg-6 d-none d-sm-block main_menu">
+          <div className="col-6 col-sm-6 col-md-6 col-lg-6 d-none d-sm-block main_menu">
             <ul className="nav justify-content-center">
               <li
                 className="nav-item topBarLive"
