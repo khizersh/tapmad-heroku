@@ -15,7 +15,6 @@ function VerifyUser({ login }) {
     updateUserOperator,
     setLoader,
   } = useContext(MainContext);
-  const { updateResponseCode } = useContext(Authcontext);
 
   const router = useRouter();
 
@@ -38,8 +37,13 @@ function VerifyUser({ login }) {
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
               AuthService.forgetPin(userNumber, userOperator).then((res) => {
-                updateResponseCode(1);
-                router.push("/sign-up");
+                router.push(
+                  {
+                    pathname: "/sign-up",
+                    query: { code: "1", number: userNumber },
+                  },
+                  "/sign-up"
+                );
               });
             }
           });

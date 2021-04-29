@@ -47,7 +47,7 @@ export default memo(function Register() {
   useEffect(() => {
     updateResponseCode(code);
     updateUserNumber(number);
-  }, [code]);
+  }, [code, number]);
 
   return (
     <div>
