@@ -156,6 +156,6 @@ const response = (data, channel, allowUser, seo) => {
     data,
     channel,
     allowUser,
-    schmea: seo
+    schema: seo
   };
 };
