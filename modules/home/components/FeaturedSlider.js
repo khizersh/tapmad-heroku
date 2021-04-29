@@ -1,9 +1,11 @@
+import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
 import { basicSliderConfig } from "../../../services/utils";
 
 export default function HomepageFeatured({ featured }) {
   var settings = basicSliderConfig(3, 2);
+  console.log("featured: ", featured);
 
   return (
     <div>
@@ -12,7 +14,18 @@ export default function HomepageFeatured({ featured }) {
         {featured.WebBanners.map((e, i) => {
           return (
             <div key={i}>
-              <img src={e.TabPosterPath} className="img-fluid" alt="Featured" />
+              <Link href={e.RedirectWebBannerImage} shallow passHref>
+                <a>
+                  <img
+                    src={e.TabPosterPath}
+                    className="img-fluid"
+                    alt="Featured"
+                  />
+                  <div className="play-btn">
+                    <i className="fa fa-play rounded-circle pr-2"></i>Play
+                  </div>
+                </a>
+              </Link>
             </div>
           );
         })}
