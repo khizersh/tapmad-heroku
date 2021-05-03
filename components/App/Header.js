@@ -3,16 +3,13 @@ import React, { useContext, useEffect } from "react";
 import { MainContext } from "../../contexts/MainContext";
 // import "./Header.css";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
+// import tapLogo from "../../public/icons/tm-logo.png";
 import { loggingTags } from "../../services/apilinks";
 import { actionsRequestContent } from "../../services/http-service";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 
 function HeaderBasic({ signout }) {
-  const {
-    initialState,
-    setSearch,
-  } = useContext(MainContext);
-
+  const { initialState, setSearch } = useContext(MainContext);
 
   const onClick = () => {
     setSearch(true);
@@ -25,7 +22,7 @@ function HeaderBasic({ signout }) {
     };
     actionsRequestContent(body);
   };
-  useEffect(() => { }, [initialState.isAuthenticated]);
+  useEffect(() => {}, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">

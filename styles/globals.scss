@@ -953,9 +953,23 @@ label {
   left: 1rem;
 }
 
+.tm_wishlst_btn_active {
+  background-color: #87c242 !important;
+  color: black;
+  padding: 12px 25px !important;
+  font-size: 15px;
+  transition: linear 0.3s;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.tm_wishlst_btn_active:hover {
+  transition: 0.3 ease;
+  color: white !important;
+}
 .tm-upcmng {
   position: relative;
-  bottom: 34vh;
+  bottom: 258px;
   z-index: 10;
   height: 0;
 }

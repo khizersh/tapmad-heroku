@@ -94,7 +94,10 @@ export default function HomePage({ movies, banner, featured, ip }) {
                     passHref={true}
                     shallow={true}
                   >
-                    <a className="btn btn-primary">Watch Now</a>
+                    <a className="tm_wishlst_btn_active">
+                      <i className="fa fa-play rounded-circle pr-1"></i> Watch
+                      Now
+                    </a>
                   </Link>
                 </div>
               </div>
