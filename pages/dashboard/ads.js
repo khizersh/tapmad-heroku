@@ -4,6 +4,7 @@ import { MainContext } from "../../contexts/MainContext";
 import { DashboardService } from "../../modules/dashboard/Dashboard.Service";
 import { getAdDetails } from "../../services/apilinks";
 import { post } from "../../services/http-service";
+import Head from "next/head";
 
 export default function ads() {
   const [data, setData] = useState([
@@ -95,6 +96,9 @@ export default function ads() {
 
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>{" "}
       <div className="row">
         <div className="col-12 bord pt-2">
           <div className="row">

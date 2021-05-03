@@ -6,6 +6,7 @@ import SetPin from "./setPin";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
 import EnhancedEnterPin from "./enterPin";
+import EnhancedCombineLogin from "./combineLogin";
 
 export default function AuthViews() {
   const [viewToShow, setViewToShow] = useState("login");
@@ -38,7 +39,13 @@ export default function AuthViews() {
     } else if (viewToShow == "set-pin") {
       return <SetPin />;
     } else if (viewToShow == "login") {
-      return <Login loginResponse={processResponse} />;
+      return (
+        <EnhancedCombineLogin
+          forgetPin={sendToForgetPin}
+          loginResponse={processResponse}
+        />
+      );
+      // return <Login loginResponse={processResponse} />;
     } else if (viewToShow == "send-otp") {
       return <ForgetPin updateView={setViewToShow} />;
     }

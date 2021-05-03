@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { AuthService } from "../../modules/auth/auth.service";
+import Head from "next/head";
 
 const HomePageAds = () => {
   const [rows, setRows] = useState([]);
@@ -82,6 +83,9 @@ const HomePageAds = () => {
 
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>{" "}
       <div className="row">
         <div className="col-12 bord pt-2">
           <div className="row">
@@ -188,7 +192,6 @@ const HomePageAds = () => {
           </div>
         </div>
       </div>
-
       {/* table */}
       <div className="row mt-5">
         <div className="table-responsive">
@@ -206,28 +209,28 @@ const HomePageAds = () => {
             <tbody>
               {rows.length
                 ? rows.map((m, i) => (
-                  <tr key={i}>
-                    <td>{m.row}</td>
-                    <td>{m.desktop.slice(0, 25)}</td>
-                    <td>{m.mobile.slice(0, 25)}</td>
-                    <td>{m.desktopSize.slice(0, 25)}</td>
-                    <td>{m.mobileSize.slice(0, 25)}</td>
-                    <td>
-                      <button
-                        className="btn btn-info"
-                        onClick={() => onClickUpdate(m, i)}
-                      >
-                        Update
+                    <tr key={i}>
+                      <td>{m.row}</td>
+                      <td>{m.desktop.slice(0, 25)}</td>
+                      <td>{m.mobile.slice(0, 25)}</td>
+                      <td>{m.desktopSize.slice(0, 25)}</td>
+                      <td>{m.mobileSize.slice(0, 25)}</td>
+                      <td>
+                        <button
+                          className="btn btn-info"
+                          onClick={() => onClickUpdate(m, i)}
+                        >
+                          Update
                         </button>
-                      <button
-                        className="btn btn-red"
-                        onClick={() => onClickRemove(m, i)}
-                      >
-                        Remove
+                        <button
+                          className="btn btn-red"
+                          onClick={() => onClickRemove(m, i)}
+                        >
+                          Remove
                         </button>
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                    </tr>
+                  ))
                 : null}
             </tbody>
           </table>

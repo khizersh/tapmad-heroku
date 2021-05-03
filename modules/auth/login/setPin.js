@@ -11,9 +11,8 @@ import withLogin from "../LoginHOC";
 function SetUserPin({ login }) {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
-  const { checkUserAuthentication, setLoader } = useContext(MainContext);
+  const { setLoader } = useContext(MainContext);
   const { initialState } = useContext(MainContext);
-  const router = useRouter();
 
   async function setUserPin() {
     if (!pin) {
@@ -32,7 +31,6 @@ function SetUserPin({ login }) {
     } else {
       setLoader(true);
     }
-
     const resp = await AuthService.setUserPin(pin);
     if (resp.responseCode == 1) {
       // logging start
@@ -48,7 +46,8 @@ function SetUserPin({ login }) {
         timer: 2000,
         icon: "success",
       });
-      login();
+      await AuthService.checkUser(initialState.User.MobileNo);
+      await login();
     } else {
       swal({
         title: "something went wrong!",

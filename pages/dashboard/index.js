@@ -1,9 +1,14 @@
 import React from "react";
-import DashboardLayout from "../../modules/dashboard/DashboardLayout";
-import DashboardSidebar from "../../modules/dashboard/DashboardSidebar";
+import Head from "next/head";
 
 const index = () => {
-  return <></>;
+  return (
+    <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>{" "}
+    </>
+  );
 };
 
 export async function getStaticProps() {

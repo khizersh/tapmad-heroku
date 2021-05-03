@@ -29,6 +29,16 @@
   color: #fff;
   border: 0;
 }
+.req_pin_cde_btn-blue {
+  background-color: #15417c;
+  padding: 12px 6px;
+  font-size: 18px;
+  text-transform: uppercase;
+  height: 50px;
+  margin-top: 15px;
+  color: #fff;
+  border: 0;
+}
 
 .list-group-horizontal .list-group-item {
   margin-right: -1px;

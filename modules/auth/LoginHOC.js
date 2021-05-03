@@ -21,7 +21,8 @@ export default function withLogin(Component, data) {
         Version: "V1",
         MobileNo: initialState.User.MobileNo,
         OperatorId: initialState.User.OperatorId,
-        UserPassword: initialState.User.Password,
+        UserPassword:
+          initialState.User.Password || Cookie.getCookies("content-token"),
       };
 
       let response = await AuthService.signInOrSignUpMobileOperator(
