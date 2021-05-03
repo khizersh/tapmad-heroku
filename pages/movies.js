@@ -4,7 +4,6 @@ import { getMoviesWithPaginationInitial } from "../services/apilinks";
 import { get } from "../services/http-service";
 import requestIp from "request-ip";
 export default function MoviesPage(props) {
-  console.log("prop in movies: ", JSON.stringify(props.movies.Banner));
   return (
     <div>
       <Head>
