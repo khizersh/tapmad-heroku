@@ -1,4 +1,4 @@
-.row {
+.row-samsung {
   display: flex;
   flex-wrap: wrap;
 }
@@ -76,7 +76,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  .row,
+  .row-samsung,
   .navbar {
     flex-direction: column;
   }
