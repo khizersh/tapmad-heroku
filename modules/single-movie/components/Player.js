@@ -132,7 +132,7 @@ export default function Player({ movies }) {
                   </DFPSlotsProvider>
                 </div>
               )}
-              <div style={{ border: "1px solid white" }}>
+              <div className="player-div" style={{ border: "1px solid white" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id"
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
@@ -266,20 +266,20 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                    let slug = SEOFriendlySlugsForVideo(video);
-                    return (
-                      <Link
-                        href={slug}
-                        replace={true}
-                        shallow={false}
-                        key={i}
-                      >
-                        <a>
-                          <RelatedProductCard video={video} />
-                        </a>
-                      </Link>
-                    );
-                  })
+                      let slug = SEOFriendlySlugsForVideo(video);
+                      return (
+                        <Link
+                          href={slug}
+                          replace={true}
+                          shallow={false}
+                          key={i}
+                        >
+                          <a>
+                            <RelatedProductCard video={video} />
+                          </a>
+                        </Link>
+                      );
+                    })
                   : null}
               </div>
             </div>
