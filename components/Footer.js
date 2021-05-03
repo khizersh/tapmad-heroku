@@ -1,5 +1,5 @@
 import React from "react";
-import { androidApp, appleApp } from "../services/imagesLink";
+import { androidApp, appleApp, samsungApp } from "../services/imagesLink";
 
 export default function Footer() {
   return (
@@ -85,6 +85,14 @@ export default function Footer() {
                     target="_blank"
                   >
                     <img src={androidApp} className="img-fluid" alt="" />
+                  </a>
+                </li>
+                <li className="list-group-item">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.tapmad.tapmadtv&amp;hl=en"
+                    target="_blank"
+                  >
+                    <img src={samsungApp} className="img-fluid" alt="" />
                   </a>
                 </li>
               </ul>
