@@ -21,3 +21,6 @@ export const tapmadNews = "/icons/news-btn.png";
 export const samsungTvLogo = "/icons/Samsung-smarttv-logo-white.png";
 
 export const tapmadLogoBgWhite = "/icons/tm-logo-clr.png";
+
+export const appleApp = "/icons/appstore.png";
+export const androidApp = "/icons/gply.png";

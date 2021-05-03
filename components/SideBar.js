@@ -5,6 +5,7 @@ import { loggingTags } from "../services/apilinks";
 import AuthenticatedSidebar from "./AuthenticatedSidebar";
 import NotAuthenticatedSidebar from "./NotAuthenticatedSidebar";
 import { actionsRequestContent } from "../services/http-service";
+import { tapmadLogo } from "../services/imagesLink";
 
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -42,7 +43,7 @@ export default function SideBar() {
         <Link href="/" shallow={true} passHref={true}>
           <a className="logotype" onClick={() => onCLickContent("homepage")}>
             <img
-              src="https://www.tapmad.com/images/tm-logo.png"
+              src={tapmadLogo}
               width="115"
               className="img-fluid img-responsive"
               alt="tapmad logo"
