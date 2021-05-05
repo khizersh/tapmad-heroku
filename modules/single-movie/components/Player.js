@@ -26,6 +26,7 @@ export default function Player({ movies }) {
     onVideo: "",
     rightAd: "",
     bottomBannerAd: "",
+    bottomBannerAdMobile: "",
     rightVideoAd: "",
   });
 
@@ -82,6 +83,7 @@ export default function Player({ movies }) {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
+      console.log("ad data: ", data);
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,
@@ -91,6 +93,7 @@ export default function Player({ movies }) {
         rightAd: data.rightAd,
         bottomBannerAd: data.bottomBannerAd,
         rightVideoAd: data.rightVideoAd,
+        bottomBannerAdMobile: data.bottomBannerAdMobile,
       });
     }
     VideoWatched(movie);
@@ -187,77 +190,123 @@ export default function Player({ movies }) {
                 </div>
               ) : null}
 
-              {/* Banner Add */}
-              {ads.allow && ads.bottomBannerAd && (
-                <DFPSlotsProvider dfpNetworkId="28379801">
-                  <div className="desktops-ads text-center d-none d-lg-block d-md-block">
-                    <AdSlot sizes={[[970, 250]]} adUnit={ads.bottomBannerAd} />
-                  </div>
-                </DFPSlotsProvider>
-              )}
+              {/* Banner bottom Ad */}
+
+              <div>
+                {ads.allow && ads.bottomBannerAd && (
+                  <DFPSlotsProvider dfpNetworkId="28379801">
+                    <div className="desktops-ads text-center d-none d-lg-block d-md-block">
+                      <AdSlot
+                        sizes={[[970, 250]]}
+                        adUnit={ads.bottomBannerAd}
+                      />
+                    </div>
+                  </DFPSlotsProvider>
+                )}
+              </div>
             </div>
           </div>
-          {/* Side Add */}
-          <div className="col-lg-3 text-center pt-5 ">
-            {ads.allow && ads.rightAd ? (
-              ads.rightAd.includes("http") ? (
-                <div style={{ marginTop: "65px" }}>
-                  <ReactJWPlayer
-                    playerId="my-unique-id1"
-                    playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                    isAutoPlay={true}
-                    isMuted={true}
-                    isSkipable={false}
-                    onOneHundredPercent={onRestartAd}
-                    onAdSkipped={onRestartAd}
-                    file={"https://www.tapmad.com/tapmad.mp4"}
-                    onAdComplete={onRestartAd}
-                    generatePrerollUrl={() =>
-                      ads.rightAd && ads.allow ? ads.rightAd : ""
-                    }
-                    customProps={{
-                      controls: true,
-                    }}
-                  />
-                </div>
-              ) : (
-                <DFPSlotsProvider dfpNetworkId="28379801">
-                  <div className="desktop-ads">
-                    <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
-                  </div>
-                </DFPSlotsProvider>
-              )
-            ) : null}
 
-            {ads.allow && isAutoPlay && ads.rightVideoAd ? (
-              ads.rightVideoAd.includes("http") ? (
-                <div style={{ marginTop: "65px" }}>
-                  <ReactJWPlayer
-                    playerId="my-unique-id1"
-                    playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                    isAutoPlay={true}
-                    isMuted={true}
-                    isSkipable={false}
-                    onOneHundredPercent={onRestartAd}
-                    onAdSkipped={onRestartAd}
-                    file={"https://www.tapmad.com/tapmad.mp4"}
-                    onAdComplete={onRestartAd}
-                    generatePrerollUrl={() =>
-                      ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
-                    }
-                    customProps={{
-                      controls: true,
-                    }}
-                  />
-                </div>
-              ) : (
-                <DFPSlotsProvider dfpNetworkId="28379801">
-                  <div className="desktop-ads">
-                    <AdSlot sizes={[[300, 250]]} adUnit={ads.rightVideoAd} />
+          <div className="col-lg-3 text-center pt-5 ">
+            {/* Side Add desktop start*/}
+            <div className="d-none d-lg-block d-md-block">
+              {ads.allow && ads.rightAd ? (
+                ads.rightAd.includes("http") ? (
+                  <div style={{ marginTop: "65px" }}>
+                    <ReactJWPlayer
+                      playerId="my-unique-id1"
+                      playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                      isAutoPlay={true}
+                      isMuted={true}
+                      isSkipable={false}
+                      onOneHundredPercent={onRestartAd}
+                      onAdSkipped={onRestartAd}
+                      file={"https://www.tapmad.com/tapmad.mp4"}
+                      onAdComplete={onRestartAd}
+                      generatePrerollUrl={() =>
+                        ads.rightAd && ads.allow ? ads.rightAd : ""
+                      }
+                      customProps={{
+                        controls: true,
+                      }}
+                    />
                   </div>
-                </DFPSlotsProvider>
-              )
-            ) : null}
+                ) : (
+                  <DFPSlotsProvider dfpNetworkId="28379801">
+                    <div className="desktop-ads">
+                      <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
+                    </div>
+                  </DFPSlotsProvider>
+                )
+              ) : null}
+
+              {ads.allow && isAutoPlay && ads.rightVideoAd ? (
+                ads.rightVideoAd.includes("http") ? (
+                  <div style={{ marginTop: "65px" }}>
+                    <ReactJWPlayer
+                      playerId="my-unique-id1"
+                      playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                      isAutoPlay={true}
+                      isMuted={true}
+                      isSkipable={false}
+                      onOneHundredPercent={onRestartAd}
+                      onAdSkipped={onRestartAd}
+                      file={"https://www.tapmad.com/tapmad.mp4"}
+                      onAdComplete={onRestartAd}
+                      generatePrerollUrl={() =>
+                        ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
+                      }
+                      customProps={{
+                        controls: true,
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <DFPSlotsProvider dfpNetworkId="28379801">
+                    <div className="desktop-ads">
+                      <AdSlot sizes={[[300, 250]]} adUnit={ads.rightVideoAd} />
+                    </div>
+                  </DFPSlotsProvider>
+                )
+              ) : null}
+            </div>
+            {/* side add desktop end */}
+            {/* bottom banner add mobile start*/}
+            <div className="d-block  d-sm-none">
+         
+              {ads.allow && ads.bottomBannerAdMobile ? (
+                ads.bottomBannerAdMobile.includes("http") ? (
+                  <div style={{ marginTop: "65px" }}>
+                    <ReactJWPlayer
+                      playerId="my-unique-id1"
+                      playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                      isAutoPlay={true}
+                      isMuted={true}
+                      isSkipable={false}
+                      onOneHundredPercent={onRestartAd}
+                      onAdSkipped={onRestartAd}
+                      file={"https://www.tapmad.com/tapmad.mp4"}
+                      onAdComplete={onRestartAd}
+                      generatePrerollUrl={() => ads.bottomBannerAdMobile}
+                      customProps={{
+                        controls: true,
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <DFPSlotsProvider dfpNetworkId="28379801">
+                    <div className="desktop-ads">
+                      <AdSlot
+                        sizes={[[300, 250]]}
+                        adUnit={ads.bottomBannerAdMobile}
+                      />
+                    </div>
+                  </DFPSlotsProvider>
+                )
+              ) : null}
+            </div>
+            {/* bottom banner add mobile end*/}
+
             <div
               className="text-left mt-3"
               style={{ height: "100vh", overflow: "scroll" }}
