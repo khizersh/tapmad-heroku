@@ -25,3 +25,4 @@ export const tapmadLogoBgWhite = "/icons/tm-logo-clr.png";
 export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const samsungApp = "/icons/huawei-black.png";
+export const sendMessage = "/icons/psl/send-message.svg";

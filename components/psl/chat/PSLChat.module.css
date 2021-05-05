@@ -3,12 +3,15 @@
     height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
+    position: relative;
+    background-color: #121117 !important;
 }
 .chatMessageBox{
     background-color: white;
     border-radius: 4px;
     color: black;
-    padding: 5px;
+    padding: 10px;
+    font-size: 0.875rem;
 }
 .insideChat{
     display: flex;
@@ -20,4 +23,34 @@
 }
 .msgTime{
     font-size: 10px;
+    color: rgba(255,255,255,0.5);
+}
+.userInput{
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid grey;
+    width: 100%;
+}
+.msgField{
+    padding: 10px;
+    display: flex;
+}
+.type_msg{
+    background-color: rgba(0,0,0,0.3) !important;
+    border: 0 !important;
+    color: white !important;
+    height: 40px !important;
+    overflow-y: auto;
+    border-radius: 20px !important;
+    padding: 5px 10px;
+    width: 100%;
+}
+.sendMessage{
+    border-radius: 50% !important;
+    background-color: rgb(135 194 66) !important;
+    border: 0 !important;
+    color: white !important;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
