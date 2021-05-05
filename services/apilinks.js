@@ -89,6 +89,10 @@ export const actionRequestView = "http://staging.simpaisa.com:1234/view";
 export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
 export const loggingRequest = loggingBaseURl + "/analytics";
 
+
+// PSL Chat Bids
+export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
+
 export const loggingTags = {
   search: "search",
   fetch: "fetch",

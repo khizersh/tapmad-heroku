@@ -153,7 +153,7 @@ export async function getServerSideProps(context) {
 export default watch;
 
 const response = (data, channel, allowUser, seo) => {
-
+  console.log(data);
   return {
     data,
     channel,

@@ -11,6 +11,7 @@ import { PlayerService } from "../Player.service";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
+import PSLComponent from "../../../components/psl/psl-component";
 
 export default function Player({ movies }) {
   const router = useRouter();
@@ -182,7 +183,8 @@ export default function Player({ movies }) {
             <div className="col-lg-12 p-0">
               {movie && movie.CookFeed ? (
                 <div className="the-shop">
-                  <PlayerShop />
+                  {/* <PlayerShop /> */}
+                  <PSLComponent />
                   <br />
                 </div>
               ) : null}
@@ -266,20 +268,20 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video);
-                      return (
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      );
-                    })
+                    let slug = SEOFriendlySlugsForVideo(video);
+                    return (
+                      <Link
+                        href={slug}
+                        replace={true}
+                        shallow={false}
+                        key={i}
+                      >
+                        <a>
+                          <RelatedProductCard video={video} />
+                        </a>
+                      </Link>
+                    );
+                  })
                   : null}
               </div>
             </div>
