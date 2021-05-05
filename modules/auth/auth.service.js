@@ -390,7 +390,7 @@ async function signInOrSignUpMobileOperator(
 }
 async function clearUserToken(number) {
   const response = await get(
-    `http://app.tapmad.com/api/ClearAllCache/T${number}`
+    `https://app.tapmad.com/api/ClearAllCache/T${number}`
   );
   return response;
 }
@@ -443,7 +443,7 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const AuthService = {
