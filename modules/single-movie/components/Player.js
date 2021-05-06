@@ -276,7 +276,7 @@ export default function Player({ movies }) {
          
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
-                  <div style={{ marginTop: "65px" }}>
+                  <div style={{ marginTop: "10px" }}>
                     <ReactJWPlayer
                       playerId="my-unique-id1"
                       playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"

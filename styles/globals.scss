@@ -969,10 +969,49 @@ label {
 }
 .tm-upcmng {
   position: relative;
-  bottom: 258px;
+  bottom: 15rem;
   z-index: 10;
   height: 0;
 }
+
+@media screen and (min-width: 1500px) {
+  
+  .tm-upcmng {
+    position: relative;
+    bottom: 17rem;
+    z-index: 10;
+    height: 0;
+  }
+  
+}
+
+@media screen and (min-width: 1200px) and (max-wdith: 1499px) {
+  
+  .tm-upcmng {
+    position: relative;
+    bottom: 15rem;
+    z-index: 10;
+    height: 0;
+  }
+  
+}
+
+
+@media screen and (max-width: 900px) {
+  .home-banner-btn {
+    position: relative;
+    bottom: 17rem;
+    left: 0rem !important;
+  }
+  .tm-upcmng {
+    position: relative;
+    bottom: 10rem;
+    z-index: 10;
+    height: 0;
+  }
+  
+}
+
 
 @media screen and (max-width: 570px) {
   .the-shop nav {
@@ -986,14 +1025,13 @@ label {
   .footer_links {
     display: block;
   }
-  .tm-upcmng {
-    margin-top: 6rem;
-  }
+  
   .tm-upcmng {
     position: relative;
     bottom: 130px;
     z-index: 10;
     height: 0;
+    margin-top: 6rem;
   }
   .home-banner-btn {
     text-align: center;
@@ -1007,16 +1045,7 @@ label {
   }
 }
 
-@media screen and (max-width: 900px) {
-  .home-banner-btn {
-    position: relative;
-    bottom: 17rem;
-    left: 0rem !important;
-  }
-  // .width-100 {
-  //   width: auto !important;
-  // }
-}
+
 .form-control {
   border-radius: 0px;
 }
