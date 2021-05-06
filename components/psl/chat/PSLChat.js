@@ -25,10 +25,10 @@ export default function PSLChat() {
             </div>
             <div className={pslStyles.userInput}>
                 <div className={pslStyles.msgField}>
-                    <div style={{ width: "80%" }}>
+                    <div style={{ flex: "1" }}>
                         <textarea className={pslStyles.type_msg} placeholder="Type your message..."></textarea>
                     </div>
-                    <div style={{ width: "20%", textAlign: "center" }}>
+                    <div style={{ textAlign: "center", paddingLeft: '10px' }}>
                         <button className={pslStyles.sendMessage}>
                             <img src={sendMessage} width="20" />
                         </button>
