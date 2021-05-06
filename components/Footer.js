@@ -1,5 +1,5 @@
 import React from "react";
-import { androidApp, appleApp, samsungApp } from "../services/imagesLink";
+import { androidApp, appleApp, huaweiApp } from "../services/imagesLink";
 
 export default function Footer() {
   return (
@@ -89,10 +89,10 @@ export default function Footer() {
                 </li>
                 <li className="list-group-item">
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.tapmad.tapmadtv&amp;hl=en"
+                    href="https://appgallery.huawei.com/#/app/C100909517"
                     target="_blank"
                   >
-                    <img src={samsungApp} className="img-fluid" alt="" />
+                    <img src={huaweiApp} className="img-fluid" alt="" />
                   </a>
                 </li>
               </ul>
