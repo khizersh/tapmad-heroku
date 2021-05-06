@@ -2,6 +2,23 @@ import { sendMessage } from "../../../services/imagesLink";
 import pslStyles from "./PSLChat.module.css";
 export default function PSLChat() {
     return <div>
+        <div>
+            <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
+                <li className={`nav-item ${pslStyles.chatRoomList}`}>
+                    <a className={pslStyles.chatRoomName}>General</a>
+                </li>
+                <li className="nav-item">
+                    <a className={pslStyles.chatRoomName}>General</a>
+                </li>
+                <li className="nav-item">
+                    <a className={pslStyles.chatRoomName}>General</a>
+                </li>
+                <li className="nav-item">
+                    <a className={pslStyles.chatRoomName}>General</a>
+                </li>
+            </ul>
+        </div>
+
         <div className={pslStyles.chatBox}>
             <div className="row">
                 <div className="col-12">

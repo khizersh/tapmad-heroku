@@ -310,7 +310,7 @@ export default function Player({ movies }) {
             {/* bottom banner add mobile end*/}
 
             <div
-              className="text-left mt-3"
+              className="text-left mt-3 related-video"
               style={{ height: "100vh", overflow: "scroll" }}
             >
               <h5>Related Videos</h5>

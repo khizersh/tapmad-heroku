@@ -54,3 +54,24 @@
     width: 40px;
     height: 40px;
 }
+.chatRoomName{
+    float: left;
+    padding: 0 20px;
+    line-height: 30px;
+    border-right: 30px solid transparent;
+    border-left: 30px solid transparent;
+    border-bottom: 30px solid #121117;
+    border-bottom-color: #87c242 !important;
+    height: 0;
+    color: white;
+}
+.chatRoomList{
+    margin: 0 -30px 0 0;
+}
+.noBorders::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
+.noBorders{
+    border: 0px;
+}

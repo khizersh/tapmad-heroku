@@ -4,16 +4,27 @@ import PSLChat from "./chat/PSLChat";
 
 export default function PSLComponent() {
     const [tabs, setTabs] = useState([]);
+    const [selectedTab, setSelectedTab] = useState();
     useEffect(async () => {
         const tabs = await getPSLTabsService();
         setTabs(tabs.Tabs);
+        setSelectedTab(1);
     }, [])
+    function RenderViews() {
+        if (selectedTab == 1) {
+            return <PSLChat />
+        } else if (selectedTab == 2) {
+            return <div></div>;
+        } else {
+            return <div></div>;
+        }
+    }
     return <>
         <div>
             <div className="btn-group w-100">
                 {tabs ? tabs.map((e) => {
                     return <div className="w-100 m-2">
-                        <button className="btn btn-primary w-100">
+                        <button className={`btn w-100 ${selectedTab == e.TabId ? 'btn-primary' : 'btn-dark'}`} onClick={() => setSelectedTab(e.TabId)}>
                             {e.TabName}
                         </button>
                     </div>
@@ -21,7 +32,7 @@ export default function PSLComponent() {
             </div>
             <hr />
             <div>
-                <PSLChat />
+                <RenderViews />
             </div>
         </div>
     </>
