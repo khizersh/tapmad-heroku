@@ -60,7 +60,8 @@ async function actionsRequestContent(data) {
     ...data,
   };
   try {
-    await post(loggingRequest, body).then((res) => console.log(res));
+    // await post(loggingRequest, body).then((res) => console.log(res));
+    console.log(" ");
   } catch (error) {
     console.log(error);
   }

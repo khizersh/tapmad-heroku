@@ -396,17 +396,15 @@ async function clearUserToken(number) {
 }
 async function getGeoInfo() {
   let obj = {};
-  const response = await get("http://ip-api.com/json/");
+  const response = await get("https://api.tapmad.com/api/getLoginDetail");
   let data = response.data;
 
   if (data) {
     obj = {
-      countryName: data.country,
-      countryCode: data.countryCode,
+      countryCode: data.LoginDetail.country,
     };
   } else {
     obj = {
-      countryName: "Pakistan",
       countryCode: "PK",
     };
   }

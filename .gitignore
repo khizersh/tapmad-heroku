@@ -32,3 +32,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+#csv files
+public/ads.csv
+public/homepage-ads.csv

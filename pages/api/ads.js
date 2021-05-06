@@ -18,6 +18,7 @@ export default async (req, res) => {
       { id: "rightVideoAd", title: "rightVideoAd" },
       { id: "rightAd", title: "rightAd" },
       { id: "bottomBannerAd", title: "bottomBannerAd" },
+      { id: "bottomBannerAdMobile", title: "bottomBannerAdMobile" },
       { id: "videoAdDuration", title: "videoAdDuration" },
       { id: "allow", title: "allow" },
     ],

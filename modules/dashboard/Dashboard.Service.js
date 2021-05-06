@@ -17,6 +17,7 @@ async function getAdData() {
 }
 
 function customizeData(data) {
+  console.log("custom data ",data);
   let array = [];
   if (data && data.length == 2) {
     let local = data.filter((m) => m.type.toLowerCase() == "local")[0];
