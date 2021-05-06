@@ -273,7 +273,7 @@ export default function Player({ movies }) {
             {/* side add desktop end */}
             {/* bottom banner add mobile start*/}
             <div className="d-block  d-sm-none">
-         
+
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
                   <div style={{ marginTop: "65px" }}>
@@ -315,20 +315,20 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video);
-                      return (
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      );
-                    })
+                    let slug = SEOFriendlySlugsForVideo(video);
+                    return (
+                      <Link
+                        href={slug}
+                        replace={true}
+                        shallow={false}
+                        key={i}
+                      >
+                        <a>
+                          <RelatedProductCard video={video} />
+                        </a>
+                      </Link>
+                    );
+                  })
                   : null}
               </div>
             </div>
