@@ -425,7 +425,7 @@ const checkUser = async (num) => {
             if (data.data.User.IsPinSet) {
               return {
                 code: 11,
-                message: "Already subscribe!",
+                message: "Already subscribed!",
                 data: data.data,
               };
             } else {

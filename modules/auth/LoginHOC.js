@@ -30,35 +30,41 @@ export default function withLogin(Component, data) {
         "",
         false
       );
-      if (response && response.data && response.data.UserId) {
-        swal({
-          timer: 2000,
-          title: "Signed In Successfully",
-          text: "Redirecting you...",
-          icon: "success",
-        });
-        Cookie.setCookies("isAuth", 1);
-        Cookie.setCookies("userId", response.data.UserId);
-        Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
-        LoginTag(obj, response.response);
+      try {
+        if (response && response.data && response.data.UserId) {
+          swal({
+            timer: 2000,
+            title: "Signed In Successfully",
+            text: "Redirecting you...",
+            icon: "success",
+          });
+          Cookie.setCookies("isAuth", 1);
+          Cookie.setCookies("userId", response.data.UserId);
+          Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
+          console.log("Woaaahhh ", response.response);
+          LoginTag(obj, response.response);
 
-        checkUserAuthentication();
-        let backURL = Cookie.getCookies("backUrl") || "/";
-        if (backURL == "sign-in") {
-          router.push("/");
+          checkUserAuthentication();
+          let backURL = Cookie.getCookies("backUrl") || "/";
+          if (backURL == "sign-in") {
+            router.push("/");
+          } else {
+            router.push(backURL);
+          }
+          setLoader(false);
+          return null;
         } else {
-          router.push(backURL);
+          setLoader(false);
+          swal({
+            title: response.message,
+            icon: "error",
+            timer: 3000,
+          });
+          return response;
         }
-        setLoader(false);
-        return null;
-      } else {
-        setLoader(false);
-        swal({
-          title: response.message,
-          icon: "error",
-          timer: 3000,
-        });
-        return response;
+      }
+      catch (err) {
+        console.log(err);
       }
     }
     return <Component login={loginUser} {...props} />;

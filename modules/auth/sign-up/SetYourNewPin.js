@@ -7,8 +7,9 @@ import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { loggingTags } from "../../../services/apilinks";
+import withLogin from "../LoginHOC";
 
-export default function SetYourNewPin() {
+function SetYourNewPinSignUp({ login }) {
   const router = useRouter();
   const { initialState, checkUserAuthentication, setLoader } = useContext(
     MainContext
@@ -63,43 +64,7 @@ export default function SetYourNewPin() {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
-        const resp = await AuthService.signInOrSignUpMobileOperator(
-          { ...obj, UserPassword: Cookie.getCookies("content-token") },
-          "",
-          false
-        );
-        if (resp && resp.data && resp.data.UserId) {
-          // logging start
-          if (authState && authState.selectedPackageId) {
-            let body = {
-              event: loggingTags.signup,
-              amount: authState.selectedPackageAmount,
-              operatorName: authState.selectedPackageName,
-              mobileNumber: initialState.User.MobileNo,
-            };
-            actionsRequestContent(body);
-          }
-          // logging end
-          swal({
-            timer: 2500,
-            title: "Your pin set successfully!",
-            text: "Redirecting you...",
-            icon: "success",
-            buttons: false,
-          }).then((res) => {
-            Cookie.setCookies("isAuth", 1);
-            checkUserAuthentication();
-            router.push("/");
-            setLoader(false);
-          });
-        } else {
-          setLoader(false);
-          swal({
-            title: resp.message,
-            icon: "error",
-            timer: 3000,
-          });
-        }
+        await login();
       }
     } else {
       return swal({
@@ -152,3 +117,5 @@ export default function SetYourNewPin() {
     </div>
   );
 }
+const SetYourNewPin = withLogin(SetYourNewPinSignUp);
+export default SetYourNewPin;
