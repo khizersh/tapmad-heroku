@@ -23,7 +23,9 @@ export const samsungTvLogo = "/icons/Samsung-smarttv-logo-white.png";
 export const tapmadLogoBgWhite = "/icons/tm-logo-clr.png";
 
 export const sendMessage = "/icons/psl/send-message.svg";
+export const pslCoins = "/icons/psl/coin.svg";
 
 export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const huaweiApp = "/icons/huawei-black.png";
+

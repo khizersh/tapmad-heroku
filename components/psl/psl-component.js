@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getPSLTabsService } from "./psl-service"
 import PSLChat from "./chat/PSLChat";
+import MatchBids from "./bids/MatchBids";
 
 export default function PSLComponent() {
     const [tabs, setTabs] = useState([]);
@@ -14,7 +15,7 @@ export default function PSLComponent() {
         if (selectedTab == 1) {
             return <PSLChat />
         } else if (selectedTab == 2) {
-            return <div></div>;
+            return <MatchBids />;
         } else {
             return <div></div>;
         }
