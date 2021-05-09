@@ -1,23 +1,26 @@
 import { Accordion, Card } from "react-bootstrap";
 import styles from "./bids.module.css";
 import { pslCoins } from "../../../services/imagesLink";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAllMatchDetails } from "./bids.service";
+import { FirebaseContext } from "../../../contexts/FireBase";
 
 export default function MatchBids() {
     const [match, setMatches] = useState();
+    const { api } = useContext(FirebaseContext);
 
     async function getMatchLiveDetails() {
         const matches = await getAllMatchDetails();
         setMatches(matches.MatchOdds);
         console.log("Matccccched ", matches);
+        api.getLiveUsers();
     }
     useEffect(() => {
         getMatchLiveDetails();
     }, [])
     return <div>
-        {match ? match.map((e) => {
-            return <Accordion defaultActiveKey="0">
+        {match ? match.map((e, index) => {
+            return <Accordion defaultActiveKey="0" key={index}>
                 <Card bsPrefix="card border-0 bg-secondary pt-1">
                     <Accordion.Toggle as={Card.Header} bsPrefix={`${styles.matchTitleBar} card-header`} eventKey="0">
 
@@ -56,8 +59,8 @@ export default function MatchBids() {
                                                 <div className="col-2">
                                                     <div className={styles.team_vs}>
                                                         <div style={{
-                                                            background: '#464646', border: '1px solid #222222', 'border-radius': '6px', 'padding': '12px', 'margin': 'auto',
-                                                            'font-weight': '600'
+                                                            background: '#464646', border: '1px solid #222222', borderRadius: '6px', 'padding': '12px', 'margin': 'auto',
+                                                            fontWeight: '600'
                                                         }}>
                                                             <h6 style={{ margin: '0px' }}>VS</h6>
                                                         </div>
@@ -75,11 +78,11 @@ export default function MatchBids() {
                                             <div className="row mb-4">
                                                 <div className="col-4">
                                                     <div className={styles.quantitybtnqty}>
-                                                        <div className={styles.minus}><span><i class="fa fa-minus" aria-hidden="true"></i>
+                                                        <div className={styles.minus}><span><i className="fa fa-minus" aria-hidden="true"></i>
                                                         </span>
                                                         </div>
-                                                        <input type="number" className={styles.count} name="qty" value="1" disabled="" tabindex="0" />
-                                                        <div className={styles.plus}><span><i class="fa fa-plus" aria-hidden="true"></i>
+                                                        <input type="number" className={styles.count} name="qty" value="1" disabled="" tabIndex="0" />
+                                                        <div className={styles.plus}><span><i className="fa fa-plus" aria-hidden="true"></i>
                                                         </span></div>
                                                     </div>
                                                     <span className={styles.bid_text}>Your Bid</span>
@@ -99,7 +102,7 @@ export default function MatchBids() {
                                                 </div>
                                             </div>
                                             <div className={`${styles.go_btn} d-flex justify-content-center`}>
-                                                <button type="button" class={`btn btn-success ${styles.btn_circle}`}>
+                                                <button type="button" className={`btn btn-success ${styles.btn_circle}`}>
                                                     <span>GO</span>
                                                 </button>
                                             </div>

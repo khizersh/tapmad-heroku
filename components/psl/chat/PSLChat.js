@@ -24,7 +24,7 @@ export default function PSLChat() {
                 <div className="col-12">
                     <div className={pslStyles.insideChat}>
                         <div className={pslStyles.avatar}>
-                            <img src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" width="40" style={{ 'border-radius': '10px' }} />
+                            <img src="https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png" width="40" style={{ borderRadius: '10px' }} />
                         </div> &nbsp;&nbsp;
                         <div className="message">
                             <div>

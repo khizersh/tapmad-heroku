@@ -29,6 +29,7 @@ import Router from "next/router";
 import { setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
+import FireBaseProvider from "../contexts/FireBase";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -143,17 +144,19 @@ function MyApp({ Component, pageProps, test }) {
           )
         ) : (
           <>
-            <MainProvider>
-              <AuthProvider>
-                <CatchupProvider>
-                  <Skeleton>
-                    <Header />
-                    <Component {...pageProps} />
-                    <Footer />
-                  </Skeleton>
-                </CatchupProvider>
-              </AuthProvider>
-            </MainProvider>
+            <FireBaseProvider>
+              <MainProvider>
+                <AuthProvider>
+                  <CatchupProvider>
+                    <Skeleton>
+                      <Header />
+                      <Component {...pageProps} />
+                      <Footer />
+                    </Skeleton>
+                  </CatchupProvider>
+                </AuthProvider>
+              </MainProvider>
+            </FireBaseProvider>
           </>
         )}
       </>
