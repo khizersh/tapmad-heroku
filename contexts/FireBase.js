@@ -27,7 +27,8 @@ export default function FireBaseProvider({ children }) {
     }
 
     function getLiveUsers() {
-        if (firebase) {
+        console.log("Hy");
+        try {
             firebase.database.ref("Game").on("value", (snapshot) => {
                 const vals = snapshot.val();
                 const _records = [];
@@ -42,6 +43,8 @@ export default function FireBaseProvider({ children }) {
                 // setFirebase({ ...firebase, streams: [..._records] });
                 console.log("Context ", vals);
             });
+        } catch (e) {
+            console.log(e);
         }
     }
 
