@@ -93,6 +93,10 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 // PSL Chat Bids
 export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
 
+
+// PSL bids 
+export const getAllMatches = BASEURL + "api/getMatchDetail";
+
 export const loggingTags = {
   search: "search",
   fetch: "fetch",
