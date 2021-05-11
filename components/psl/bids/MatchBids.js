@@ -8,6 +8,7 @@ import { FirebaseContext } from "../../../contexts/FireBase";
 export default function MatchBids() {
     const [match, setMatches] = useState();
     const [questions, setQuestions] = useState();
+    const [answer, setAnswer] = useState("1665930150");
     const { database } = useContext(FirebaseContext);
 
     async function getMatchLiveDetails() {
@@ -26,6 +27,7 @@ export default function MatchBids() {
                 }
             }
             setQuestions(_records);
+            console.log(_records);
         });
     }
     useEffect(() => {
@@ -33,10 +35,10 @@ export default function MatchBids() {
         getAllMatchesQuestions();
     }, [])
     return <div>
-        {match ? match.map((e, index) => {
-            return <Accordion defaultActiveKey="0" key={index}>
-                <Card bsPrefix="card border-0 bg-secondary pt-1">
-                    <Accordion.Toggle as={Card.Header} bsPrefix={`${styles.matchTitleBar} card-header`} eventKey="0">
+        <Accordion onSelect={() => setAnswer(0)}>
+            {match ? match.map((e, index) => {
+                return <Card bsPrefix="card border-0 bg-secondary pt-1" key={index}>
+                    <Accordion.Toggle as={Card.Header} bsPrefix={`${styles.matchTitleBar} card-header`} eventKey={index + 1}>
 
                         <div className={styles.tag}>
                             {e.isLive ? <>
@@ -54,7 +56,7 @@ export default function MatchBids() {
                             </button>
                         </h5>
                     </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="0">
+                    <Accordion.Collapse eventKey={index + 1}>
                         <Card.Body bsPrefix="card-body bg-secondary">
                             <div className="row">
                                 {questions ? questions.map((ques) => {
@@ -66,7 +68,7 @@ export default function MatchBids() {
                                                     <div className={styles.biding}>
                                                         <div className="row">
                                                             <div className="col-5">
-                                                                <div className={styles.team1}>
+                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].AnswerId == answer ? '1px solid red' : '0px' }} onClick={() => setAnswer(innerQues.Options[0].AnswerId)}>
                                                                     <h6>{innerQues.Options[0].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[0].odds}</h6>
@@ -84,7 +86,7 @@ export default function MatchBids() {
                                                                 </div>
                                                             </div>
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px' }}>
+                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].AnswerId == answer ? '1px solid red' : '0px' }} onClick={() => setAnswer(innerQues.Options[1].AnswerId)}>
                                                                     <h6>{innerQues.Options[1].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[1].odds}</h6>
@@ -119,7 +121,7 @@ export default function MatchBids() {
                                                             </div>
                                                         </div>
                                                         <div className={`${styles.go_btn} d-flex justify-content-center`}>
-                                                            <button type="button" className={`btn btn-success ${styles.btn_circle}`}>
+                                                            <button type="button" className={`btn btn-success ${styles.btn_circle}`} disabled={answer == 0 ? true : false} style={{ cursor: answer == 0 ? 'not-allowed' : 'arrow' }}>
                                                                 <span>GO</span>
                                                             </button>
                                                         </div>
@@ -134,7 +136,7 @@ export default function MatchBids() {
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>
-            </Accordion>
-        }) : null}
+            }) : null}
+        </Accordion>
     </div>
 }
