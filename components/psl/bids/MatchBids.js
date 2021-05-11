@@ -8,7 +8,7 @@ import { FirebaseContext } from "../../../contexts/FireBase";
 export default function MatchBids() {
     const [match, setMatches] = useState();
     const [questions, setQuestions] = useState();
-    const [answer, setAnswer] = useState("1665930150");
+    const [team, setTeam] = useState({ answer: 0, odds: 0 });
     const { database } = useContext(FirebaseContext);
 
     async function getMatchLiveDetails() {
@@ -35,7 +35,7 @@ export default function MatchBids() {
         getAllMatchesQuestions();
     }, [])
     return <div>
-        <Accordion onSelect={() => setAnswer(0)}>
+        <Accordion onSelect={() => setTeam({ ...team, answer: 0, odds: 0 })}>
             {match ? match.map((e, index) => {
                 return <Card bsPrefix="card border-0 bg-secondary pt-1" key={index}>
                     <Accordion.Toggle as={Card.Header} bsPrefix={`${styles.matchTitleBar} card-header`} eventKey={index + 1}>
@@ -62,13 +62,13 @@ export default function MatchBids() {
                                 {questions ? questions.map((ques) => {
                                     if (ques.id == e.matchId) {
                                         return ques.AllQuestion.map((innerQues) => {
-                                            return <div className="col-12 col-lg-6 col-sm-12 mb-5">
+                                            return <div className="col-12 col-lg-6 col-sm-12 mb-5 p-0">
                                                 <div className={styles.bidQ}>
                                                     <h5>{innerQues.EventQuestion}</h5>
                                                     <div className={styles.biding}>
                                                         <div className="row">
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].AnswerId == answer ? '1px solid red' : '0px' }} onClick={() => setAnswer(innerQues.Options[0].AnswerId)}>
+                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => setTeam({ ...team, answer: innerQues.Options[0].AnswerId, odds: innerQues.Options[0].odds })}>
                                                                     <h6>{innerQues.Options[0].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[0].odds}</h6>
@@ -86,7 +86,7 @@ export default function MatchBids() {
                                                                 </div>
                                                             </div>
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].AnswerId == answer ? '1px solid red' : '0px' }} onClick={() => setAnswer(innerQues.Options[1].AnswerId)}>
+                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => setTeam({ ...team, answer: innerQues.Options[1].AnswerId, odds: innerQues.Options[1].odds })}>
                                                                     <h6>{innerQues.Options[1].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[1].odds}</h6>
@@ -97,12 +97,17 @@ export default function MatchBids() {
                                                         <div className="row mb-4">
                                                             <div className="col-4">
                                                                 <div className={styles.quantitybtnqty}>
-                                                                    <div className={styles.minus}><span><i className="fa fa-minus" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    </div>
-                                                                    <input type="number" className={styles.count} name="qty" value="1" disabled="" tabIndex="0" />
-                                                                    <div className={styles.plus}><span><i className="fa fa-plus" aria-hidden="true"></i>
-                                                                    </span></div>
+                                                                    <button className={styles.minus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }}>
+                                                                        <span>
+                                                                            <i className="fa fa-minus" aria-hidden="true"></i>
+                                                                        </span>
+                                                                    </button>
+                                                                    <input type="text" className={styles.count} name="qty" value="4" disabled={true} readOnly={true} tabIndex="0" />
+                                                                    <button className={styles.plus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }} >
+                                                                        <span>
+                                                                            <i className="fa fa-plus" aria-hidden="true"></i>
+                                                                        </span>
+                                                                    </button>
                                                                 </div>
                                                                 <span className={styles.bid_text}>Your Bid</span>
                                                             </div>
@@ -121,7 +126,7 @@ export default function MatchBids() {
                                                             </div>
                                                         </div>
                                                         <div className={`${styles.go_btn} d-flex justify-content-center`}>
-                                                            <button type="button" className={`btn btn-success ${styles.btn_circle}`} disabled={answer == 0 ? true : false} style={{ cursor: answer == 0 ? 'not-allowed' : 'arrow' }}>
+                                                            <button type="button" className={`btn btn-success ${styles.btn_circle}`} disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'arrow' }}>
                                                                 <span>GO</span>
                                                             </button>
                                                         </div>

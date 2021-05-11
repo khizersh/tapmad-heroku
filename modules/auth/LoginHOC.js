@@ -40,6 +40,7 @@ export default function withLogin(Component, data) {
           });
           Cookie.setCookies("isAuth", 1);
           Cookie.setCookies("userId", response.data.UserId);
+          Cookie.setCookies("userCoins", response.response.UserTotalCoins);
           Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
           console.log("Woaaahhh ", response.response);
           LoginTag(obj, response.response);

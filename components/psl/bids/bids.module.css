@@ -107,18 +107,19 @@
 .minus{
     cursor: pointer;
     color: white;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     font: 20px;
     border-radius: 2px;
     background-color: #87c242;
     float: left;
+    border: 0px;
 }
 .minus span{
     text-align: center;
     position: relative;
     vertical-align: text-top;
-    font-size: 10px;
+    font-size: 15px;
 }
 .count{
     color: #fff;
@@ -129,15 +130,19 @@
     border: 0;
     width: 28%;
 }
+input.count:focus {
+    outline-width: 0;
+}
 .plus {
     cursor: pointer;
     color: white;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     font: 20px;
     border-radius: 2px;
     background-color: #87c242;
     float: right;
+    border: 0px;
 }
 .bid_text{
     color: white;
