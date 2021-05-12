@@ -1,7 +1,7 @@
 import { Accordion, Card } from "react-bootstrap";
 import styles from "./bids.module.css";
 import { pslCoins } from "../../../services/imagesLink";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getAllMatchDetails, getAllMatchQuestions } from "./bids.service";
 import { FirebaseContext } from "../../../contexts/FireBase";
 
@@ -10,7 +10,8 @@ export default function MatchBids() {
     const [questions, setQuestions] = useState();
     const [team, setTeam] = useState({ answer: 0, odds: 0 });
     const { database } = useContext(FirebaseContext);
-
+    const [counter, setCounter] = useState(4);
+    const [totalOdds, setTotalOdds] = useState(0.00);
     async function getMatchLiveDetails() {
         const matches = await getAllMatchDetails();
         setMatches(matches.MatchOdds);
@@ -34,6 +35,32 @@ export default function MatchBids() {
         getMatchLiveDetails();
         getAllMatchesQuestions();
     }, [])
+    function increment() {
+        var counterClone = counter;
+        counterClone = counterClone * 2;
+        setCounter(counterClone);
+        setTotalOdds(team.odds * counterClone)
+    }
+    function decrement() {
+        if (counter > 4) {
+            var counterClone = counter;
+            counterClone = counterClone / 2;
+            setCounter(counterClone);
+            setTotalOdds(team.odds * counterClone)
+        }
+    }
+    function answerA(innerQues) {
+        var teamClone = { ...team }
+        setTeam({ ...teamClone, answer: innerQues.Options[0].AnswerId, odds: innerQues.Options[0].odds });
+        setTotalOdds(counter * innerQues.Options[0].odds);
+        console.log(team);
+    }
+    function answerB(innerQues) {
+        var teamClone = { ...team }
+        setTeam({ ...teamClone, answer: innerQues.Options[1].AnswerId, odds: innerQues.Options[1].odds });
+        setTotalOdds(counter * innerQues.Options[1].odds);
+        console.log(team);
+    }
     return <div>
         <Accordion onSelect={() => setTeam({ ...team, answer: 0, odds: 0 })}>
             {match ? match.map((e, index) => {
@@ -68,7 +95,7 @@ export default function MatchBids() {
                                                     <div className={styles.biding}>
                                                         <div className="row">
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => setTeam({ ...team, answer: innerQues.Options[0].AnswerId, odds: innerQues.Options[0].odds })}>
+                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => answerA(innerQues)}>
                                                                     <h6>{innerQues.Options[0].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[0].odds}</h6>
@@ -86,7 +113,7 @@ export default function MatchBids() {
                                                                 </div>
                                                             </div>
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => setTeam({ ...team, answer: innerQues.Options[1].AnswerId, odds: innerQues.Options[1].odds })}>
+                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => answerB(innerQues)}>
                                                                     <h6>{innerQues.Options[1].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[1].odds}</h6>
@@ -97,13 +124,13 @@ export default function MatchBids() {
                                                         <div className="row mb-4">
                                                             <div className="col-4">
                                                                 <div className={styles.quantitybtnqty}>
-                                                                    <button className={styles.minus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }}>
+                                                                    <button className={styles.minus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }} onClick={decrement}>
                                                                         <span>
                                                                             <i className="fa fa-minus" aria-hidden="true"></i>
                                                                         </span>
                                                                     </button>
-                                                                    <input type="text" className={styles.count} name="qty" value="4" disabled={true} readOnly={true} tabIndex="0" />
-                                                                    <button className={styles.plus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }} >
+                                                                    <input type="text" className={styles.count} value={counter} disabled={true} readOnly={true} tabIndex="0" />
+                                                                    <button className={styles.plus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }} onClick={increment}>
                                                                         <span>
                                                                             <i className="fa fa-plus" aria-hidden="true"></i>
                                                                         </span>
@@ -116,8 +143,8 @@ export default function MatchBids() {
                                                             </div>
                                                             <div className="col-4">
                                                                 <div className={styles.coins}>
-                                                                    <p>0.00
-                                                                <span>
+                                                                    <p>{totalOdds}
+                                                                        <span>
                                                                             <img src={pslCoins} />
                                                                         </span>
                                                                     </p>
