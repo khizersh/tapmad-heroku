@@ -2,8 +2,12 @@ import { Accordion, Card } from "react-bootstrap";
 import styles from "./bids.module.css";
 import { pslCoins } from "../../../services/imagesLink";
 import { useContext, useEffect, useRef, useState } from "react";
-import { getAllMatchDetails, getAllMatchQuestions } from "./bids.service";
+import { getAllMatchDetails, getAllMatchQuestions, nFormatter } from "./bids.service";
 import { FirebaseContext } from "../../../contexts/FireBase";
+import { Cookie } from "../../../services/cookies";
+import swal from "sweetalert";
+import { submitMatchBids } from "../../../services/apilinks";
+import { post } from "../../../services/http-service";
 
 export default function MatchBids() {
     const [match, setMatches] = useState();
@@ -36,10 +40,21 @@ export default function MatchBids() {
         getAllMatchesQuestions();
     }, [])
     function increment() {
-        var counterClone = counter;
-        counterClone = counterClone * 2;
-        setCounter(counterClone);
-        setTotalOdds(team.odds * counterClone)
+        var totalCoins = Cookie.getCookies('userCoins');
+
+        var counterClone = counter; d
+        if (counterClone < totalCoins) {
+            counterClone = counterClone * 2;
+            setCounter(counterClone);
+            setTotalOdds(team.odds * counterClone)
+        } else {
+            swal({
+                text: "You can not increase more coins, please purchase more coins",
+                icon: "error",
+                allowOutsideClick: false,
+                closeOnClickOutside: false
+            })
+        }
     }
     function decrement() {
         if (counter > 4) {
@@ -51,15 +66,39 @@ export default function MatchBids() {
     }
     function answerA(innerQues) {
         var teamClone = { ...team }
-        setTeam({ ...teamClone, answer: innerQues.Options[0].AnswerId, odds: innerQues.Options[0].odds });
+        setTeam({ ...teamClone, answer: innerQues.Options[0].GameAnswer, odds: innerQues.Options[0].odds });
         setTotalOdds(counter * innerQues.Options[0].odds);
         console.log(team);
     }
     function answerB(innerQues) {
         var teamClone = { ...team }
-        setTeam({ ...teamClone, answer: innerQues.Options[1].AnswerId, odds: innerQues.Options[1].odds });
+        setTeam({ ...teamClone, answer: innerQues.Options[1].GameAnswer, odds: innerQues.Options[1].odds });
         setTotalOdds(counter * innerQues.Options[1].odds);
         console.log(team);
+    }
+    async function submitBid(channelId, questionId) {
+        var userId = Cookie.getCookies('userId');
+        const requestData = { "Version": "V1", "Language": "en", "Platform": "android", "ChannelId": channelId, "QuestionId": questionId, "UserId": userId, "AnswerId": team.answer, "UserBidCoins": counter, "QuestionOdds": team.odds };
+        const response = await post(submitMatchBids, requestData);
+        if (response.data && response.data.Response.responseCode == 1) {
+            Cookie.setCookies('userCoins', response.data.UserTotalCoins)
+            swal({
+                title: 'Your answer has been submitted successfully.',
+                text: "Thank you for playing the game",
+                icon: "success",
+                allowOutsideClick: false,
+                closeOnClickOutside: false,
+                timer: 3000
+            })
+        } else {
+            swal({
+                title: 'Something Went Wrong',
+                icon: "error",
+                allowOutsideClick: false,
+                closeOnClickOutside: false,
+                timer: 3000
+            })
+        }
     }
     return <div>
         <Accordion onSelect={() => setTeam({ ...team, answer: 0, odds: 0 })}>
@@ -88,14 +127,14 @@ export default function MatchBids() {
                             <div className="row">
                                 {questions ? questions.map((ques) => {
                                     if (ques.id == e.matchId) {
-                                        return ques.AllQuestion.map((innerQues) => {
-                                            return <div className="col-12 col-lg-6 col-sm-12 mb-5 p-0">
+                                        return ques.AllQuestion.map((innerQues, index) => {
+                                            return <div className="col-12 col-lg-6 col-sm-12 mb-5 p-0" key={index}>
                                                 <div className={styles.bidQ}>
                                                     <h5>{innerQues.EventQuestion}</h5>
                                                     <div className={styles.biding}>
                                                         <div className="row">
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => answerA(innerQues)}>
+                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].GameAnswer == team.answer ? '1px solid red' : '0px' }} onClick={() => answerA(innerQues)}>
                                                                     <h6>{innerQues.Options[0].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[0].odds}</h6>
@@ -113,7 +152,7 @@ export default function MatchBids() {
                                                                 </div>
                                                             </div>
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].AnswerId == team.answer ? '1px solid red' : '0px' }} onClick={() => answerB(innerQues)}>
+                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].GameAnswer == team.answer ? '1px solid red' : '0px' }} onClick={() => answerB(innerQues)}>
                                                                     <h6>{innerQues.Options[1].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[1].odds}</h6>
@@ -129,7 +168,7 @@ export default function MatchBids() {
                                                                             <i className="fa fa-minus" aria-hidden="true"></i>
                                                                         </span>
                                                                     </button>
-                                                                    <input type="text" className={styles.count} value={counter} disabled={true} readOnly={true} tabIndex="0" />
+                                                                    <input type="text" className={styles.count} value={nFormatter(counter, 1)} disabled={true} readOnly={true} tabIndex="0" />
                                                                     <button className={styles.plus} type="button" disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }} onClick={increment}>
                                                                         <span>
                                                                             <i className="fa fa-plus" aria-hidden="true"></i>
@@ -143,7 +182,7 @@ export default function MatchBids() {
                                                             </div>
                                                             <div className="col-4">
                                                                 <div className={styles.coins}>
-                                                                    <p>{totalOdds}
+                                                                    <p>{nFormatter(totalOdds, 1)}
                                                                         <span>
                                                                             <img src={pslCoins} />
                                                                         </span>
@@ -153,7 +192,7 @@ export default function MatchBids() {
                                                             </div>
                                                         </div>
                                                         <div className={`${styles.go_btn} d-flex justify-content-center`}>
-                                                            <button type="button" className={`btn btn-success ${styles.btn_circle}`} disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'arrow' }}>
+                                                            <button type="button" className={`btn btn-success ${styles.btn_circle}`} disabled={team.answer == 0 ? true : false} style={{ cursor: team.answer == 0 ? 'not-allowed' : 'pointer' }} onClick={() => submitBid(ques.id, innerQues.QuestionId)}>
                                                                 <span>GO</span>
                                                             </button>
                                                         </div>

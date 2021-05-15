@@ -101,7 +101,7 @@
     background: #8b8b8b88;
     padding: 4px;
     border-radius: 4px;
-    width: 100px;
+    width: 150px;
     margin: 10px 0px 0px 10px;
 }
 .minus{
@@ -128,7 +128,7 @@
     text-align: center;
     background: transparent;
     border: 0;
-    width: 28%;
+    width: 40%;
 }
 input.count:focus {
     outline-width: 0;

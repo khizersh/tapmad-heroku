@@ -92,7 +92,7 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
 export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
-
+export const submitMatchBids = BASEURLAPP + "api/updateNewUserEventQuestionAnswers"
 
 // PSL bids 
 export const getAllMatches = BASEURL + "api/getMatchDetail";
