@@ -1,10 +1,31 @@
+import { useEffect, useState } from "react";
+import { getUserRooms } from "../../../services/apilinks";
+import { Cookie } from "../../../services/cookies";
+import { get } from "../../../services/http-service";
 import { sendMessage } from "../../../services/imagesLink";
 import pslStyles from "./PSLChat.module.css";
-export default function PSLChat() {
+export default function PSLChat({ channelID }) {
+    const [chatRoom, setChatRooms] = useState([]);
+    useEffect(() => {
+        getUserAllRooms();
+    }, [])
+    async function getUserAllRooms() {
+        const userId = Cookie.getCookies('userId');
+        const response = await get(getUserRooms(userId, channelID));
+        if (response.data.Response.responseCode == 1) {
+            setChatRooms(response.data.ChatRooms[0].Rooms)
+        }
+    }
     return <div>
         <div>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
-                <li className={`nav-item ${pslStyles.chatRoomList}`}>
+                {chatRoom.length > 0 ? chatRoom.map((room) => {
+                    return <li className={`nav-item ${pslStyles.chatRoomList}`}>
+                        <a className={pslStyles.chatRoomName}>{room.RoomName}</a>
+                    </li>
+                }) : null}
+
+                {/* <li className="nav-item">
                     <a className={pslStyles.chatRoomName}>General</a>
                 </li>
                 <li className="nav-item">
@@ -12,10 +33,7 @@ export default function PSLChat() {
                 </li>
                 <li className="nav-item">
                     <a className={pslStyles.chatRoomName}>General</a>
-                </li>
-                <li className="nav-item">
-                    <a className={pslStyles.chatRoomName}>General</a>
-                </li>
+                </li> */}
             </ul>
         </div>
 

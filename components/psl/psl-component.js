@@ -3,7 +3,7 @@ import { getPSLTabsService } from "./psl-service"
 import PSLChat from "./chat/PSLChat";
 import MatchBids from "./bids/MatchBids";
 
-export default function PSLComponent() {
+export default function PSLComponent({ channelID }) {
     const [tabs, setTabs] = useState([]);
     const [selectedTab, setSelectedTab] = useState();
     useEffect(async () => {
@@ -13,7 +13,7 @@ export default function PSLComponent() {
     }, [])
     function RenderViews() {
         if (selectedTab == 1) {
-            return <PSLChat />
+            return <PSLChat channelID={channelID} />
         } else if (selectedTab == 2) {
             return <MatchBids />;
         } else {

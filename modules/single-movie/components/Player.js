@@ -187,7 +187,7 @@ export default function Player({ movies }) {
               {movie && movie.CookFeed ? (
                 <div className="the-shop">
                   {/* <PlayerShop /> */}
-                  <PSLComponent />
+                  <PSLComponent channelID={movie.Video.VideoEntityId} />
                   <br />
                 </div>
               ) : null}
