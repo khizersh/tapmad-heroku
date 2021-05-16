@@ -6,6 +6,7 @@ import { get } from "../../../services/http-service";
 import { sendMessageIcon } from "../../../services/imagesLink";
 import pslStyles from "./PSLChat.module.css";
 import { getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
+var userId = "";
 export default function PSLChat({ channelID }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
@@ -24,11 +25,11 @@ export default function PSLChat({ channelID }) {
         }
     }, [database])
     async function getUserAllRooms() {
-        const userId = Cookie.getCookies('userId');
+        userId = Cookie.getCookies('userId');
         const response = await get(getUserRooms(userId, channelID));
         if (response.data.Response.responseCode == 1) {
             setChatRooms(response.data.ChatRooms[0].Rooms);
-            getAllChats()
+            getAllChats();
         }
     }
     function getAllChats() {
@@ -85,18 +86,18 @@ export default function PSLChat({ channelID }) {
                     }, 100)
                     return <div className="row" key={keyIndex}>
                         <div className="col-12">
-                            <div className={pslStyles.insideChat}>
+                            <div className={pslStyles.insideChat} style={{ flexDirection: chats[room][keyName].userId == userId ? 'row-reverse' : '' }}>
                                 <div className={pslStyles.avatar}>
                                     <img src={chats[room][keyName].userProfile != "null" ? chats[room][keyName].userProfile : "https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png"} width="40" style={{ borderRadius: '10px' }} />
                                 </div> &nbsp;&nbsp;
-                        <div className="message">
-                                    <div>
+                                <div className="message">
+                                    <div style={{ textAlign: chats[room][keyName].userId == userId ? 'right' : 'left' }}>
                                         <small>{chats[room][keyName].userName}</small>
                                     </div>
-                                    <div className={pslStyles.chatMessageBox}>
+                                    <div className={pslStyles.chatMessageBox} style={{ background: chats[room][keyName].userId == userId ? 'rgb(135 194 66)' : 'white' }}>
                                         {chats[room][keyName].textMessage}
                                     </div>
-                                    <div>
+                                    <div style={{ textAlign: chats[room][keyName].userId == userId ? 'right' : 'left' }}>
                                         <small className={pslStyles.msgTime}>9:00 AM Today</small>
                                     </div>
                                 </div>
