@@ -13,14 +13,16 @@ export default function PSLChat({ channelID }) {
     const [room, setRoom] = useState(6);
     const textMessage = useRef();
     useEffect(() => {
-        getUserAllRooms();
+        if (database) {
+            getUserAllRooms();
+        }
         return () => {
             // database.goOffline();
             // setChats({});
             // setRoom(0);
             // setChatRooms([]);
         }
-    }, [])
+    }, [database])
     async function getUserAllRooms() {
         const userId = Cookie.getCookies('userId');
         const response = await get(getUserRooms(userId, channelID));
@@ -50,9 +52,6 @@ export default function PSLChat({ channelID }) {
         } else {
             sendGroupChatMessage(database, message);
             textMessage.current.value = '';
-            setTimeout(() => {
-                document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100)
         }
 
     }
@@ -81,6 +80,9 @@ export default function PSLChat({ channelID }) {
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
                 {chats[room] && Object.keys(chats[room]).map(function (keyName, keyIndex) {
+                    setTimeout(() => {
+                        document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100)
                     return <div className="row" key={keyIndex}>
                         <div className="col-12">
                             <div className={pslStyles.insideChat}>
