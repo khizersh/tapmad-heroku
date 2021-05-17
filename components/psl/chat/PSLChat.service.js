@@ -1,4 +1,6 @@
+import { createRoom } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
+import { post } from "../../../services/http-service";
 
 export const getAllChatChannels = (database, channelID, cb) => {
     database.ref(`GroupChat/${channelID}`).on("value", (snapshot) => {
@@ -18,4 +20,9 @@ export const sendGroupChatMessage = (database, chatDetails) => {
         userName: name,
         userProfile: picture
     })
+}
+
+export const createAChatRoom = async (body) => {
+    const response = await post(createRoom, body);
+    return response.data;
 }

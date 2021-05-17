@@ -94,6 +94,7 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
 export const submitMatchBids = BASEURLAPP + "api/updateNewUserEventQuestionAnswers"
 export const getUserRooms = (userId, channelId) => BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+export const createRoom = BASEURLAPP + "api/createNewChatRoom";
 
 // PSL bids 
 export const getAllMatches = BASEURL + "api/getMatchDetail";

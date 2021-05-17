@@ -196,7 +196,7 @@ a:focus {
 .modal-content {
   border: none;
   border-radius: 0;
-  background-color: #121117;
+  color: black;
 }
 
 @media (max-width: 576px) {

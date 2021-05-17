@@ -4,8 +4,10 @@ import { getUserRooms } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { get } from "../../../services/http-service";
 import { sendMessageIcon } from "../../../services/imagesLink";
+import { CenteredModal } from "../../Modal";
 import pslStyles from "./PSLChat.module.css";
 import { getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
+import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
 export default function PSLChat({ channelID }) {
     const [chatRoom, setChatRooms] = useState([]);
@@ -13,6 +15,8 @@ export default function PSLChat({ channelID }) {
     const { database } = useContext(FirebaseContext);
     const [room, setRoom] = useState(6);
     const textMessage = useRef();
+    const [modalShow, setModalShow] = useState(false);
+    const [currentRoomOption, setCurrentRoomOption] = useState(0);
     useEffect(() => {
         if (database) {
             getUserAllRooms();
@@ -23,7 +27,8 @@ export default function PSLChat({ channelID }) {
             // setRoom(0);
             // setChatRooms([]);
         }
-    }, [database])
+    }, [database]);
+
     async function getUserAllRooms() {
         userId = Cookie.getCookies('userId');
         const response = await get(getUserRooms(userId, channelID));
@@ -56,7 +61,6 @@ export default function PSLChat({ channelID }) {
         }
 
     }
-
     return <div>
         <div>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
@@ -65,7 +69,9 @@ export default function PSLChat({ channelID }) {
                         <a className={pslStyles.chatRoomName}>{room.RoomName}</a>
                     </li>
                 }) : null}
-
+                <li>
+                    <button className="btn btn-dark btn-sm" onClick={() => setModalShow(true)}>+</button>
+                </li>
                 {/* <li className="nav-item">
                     <a className={pslStyles.chatRoomName}>General</a>
                 </li>
@@ -77,7 +83,6 @@ export default function PSLChat({ channelID }) {
                 </li> */}
             </ul>
         </div>
-
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
                 {chats[room] && Object.keys(chats[room]).map(function (keyName, keyIndex) {
@@ -121,5 +126,9 @@ export default function PSLChat({ channelID }) {
                 </div>
             </div>
         </div>
+        <CenteredModal show={modalShow}
+            onHide={() => (setModalShow(false), setCurrentRoomOption(0))}>
+            <CreateJoinRoomModalBody channelId={channelID} />
+        </CenteredModal>
     </div>
 }
