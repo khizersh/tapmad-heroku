@@ -1,0 +1,182 @@
+import React, { useEffect, useState, useContext } from "react";
+import {
+  getAllLeagueOnline,
+  getLeaderBoardByLeague,
+} from "../../../components/psl/bids/bids.service";
+import { GameContext } from "../../../contexts/GameContext";
+import { MainContext } from "../../../contexts/MainContext";
+import styles from "../game.module.css";
+
+const leaderboardComponent = () => {
+  const [data, setData] = useState([]);
+  const [leaderBoard, setLeaderBoard] = useState([]);
+  const { gameState, updateSelectedTab } = useContext(GameContext);
+  const { setLoader } = React.useContext(MainContext);
+
+  const goldCrown =
+    "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-sil.png";
+  const brownCrown =
+    "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-brw.png";
+  const silverCrown =
+    "//d1s7wg2ne64q87.cloudfront.net/web/images/crown-grey.png";
+
+  const onClickTab = (tab) => {
+    setLoader(true);
+    updateSelectedTab({ ...tab, offset: 0 });
+    getLeaderBoardByLeague(tab.LeagueId, 0)
+      .then((lead) => {
+        if (lead && lead.responseCode == 1) {
+          setLoader(false);
+          setLeaderBoard(lead.data.LeaderBoard);
+        } else {
+          setLoader(false);
+          setLeaderBoard([]);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+        console.log(e);
+      });
+  };
+
+  const onReadMore = () => {
+    setLoader(true);
+    let clone = leaderBoard;
+
+    getLeaderBoardByLeague(
+      gameState.selectedTab.LeagueId,
+      gameState.selectedTab.offset + 50
+    )
+      .then((lead) => {
+        if (lead && lead.responseCode == 1) {
+          if (lead.data.LeaderBoard.length) {
+            lead.data.LeaderBoard.map((m) => clone.push(m));
+            setLeaderBoard(clone);
+          }
+          setLoader(false);
+        } else {
+          setLoader(false);
+        }
+      })
+      .catch((e) => console.log(e));
+    setLoader(true);
+    updateSelectedTab({
+      ...gameState.selectedTab,
+      offset: gameState.selectedTab.offset + 50,
+    });
+  };
+
+  useEffect(() => {
+    console.log("effect");
+    if (gameState && gameState.tabs.length) {
+      setData(gameState.tabs);
+      getLeaderBoardByLeague(gameState.selectedTab.LeagueId, 0)
+        .then((lead) => {
+          if (lead && lead.responseCode == 1) {
+            if (lead.data.LeaderBoard.length) {
+              setLeaderBoard(lead.data.LeaderBoard);
+            }
+          }
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [gameState.tabs]);
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <ul
+            className={`list-group list-group-horizontal text-center  my-2 d-flex`}
+          >
+            {data.length
+              ? data.map((m, i) => (
+                  <li
+                    key={i}
+                    onClick={() => onClickTab(m)}
+                    className={`rounded-0 p-0 flex-fill ${styles.bgDark} ${
+                      m.LeagueId == gameState.selectedTab.LeagueId
+                        ? styles.active
+                        : ""
+                    }`}
+                  >
+                    <div className="nav-link rounded-0 league_tab">
+                      {m.DisplayName}
+                    </div>
+                  </li>
+                ))
+              : null}
+          </ul>
+
+          <table class="table table-striped table-dark tm_btng_tble mb-0 mt-2 ng-scope">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Name</th>
+                <th scope="col">Coins Won</th>
+              </tr>
+            </thead>
+            <tbody>
+              {leaderBoard.length ? (
+                leaderBoard.map((m, i) => (
+                  <>
+                    <tr key={i}>
+                      <td>
+                        <span>
+                          <img
+                            src={
+                              m.LeaderPicture
+                                ? m.LeaderPicture
+                                : "//d1s7wg2ne64q87.cloudfront.net/web/images/17797.png"
+                            }
+                            className="img-fluid rounded-circle"
+                            width="26px"
+                          />
+                        </span>
+                        <span class="badge badge-success rounded-circle ml-1 px-2 py-1">
+                          {m.Rank}
+                        </span>
+                        <img
+                          src={
+                            i == 0
+                              ? goldCrown
+                              : i == 1
+                              ? brownCrown
+                              : silverCrown
+                          }
+                          width="20px"
+                          className="ml-1"
+                        />
+                      </td>
+                      <th scope="row">{m.FullName}</th>
+                      <td>{m.TotalCoins}</td>
+                    </tr>
+                  </>
+                ))
+              ) : (
+                <td colSpan="3" className="text-center">
+                  Record not found
+                </td>
+              )}
+            </tbody>
+            {leaderBoard.length ? (
+              <tfoot>
+                <tr>
+                  <th colSpan="3" className="text-center">
+                    <button className="btn btn-success" onClick={onReadMore}>
+                      Load More
+                    </button>
+                  </th>
+                </tr>
+              </tfoot>
+            ) : (
+              null
+            )}
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default leaderboardComponent;

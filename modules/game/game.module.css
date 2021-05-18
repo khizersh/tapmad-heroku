@@ -1,0 +1,47 @@
+.textBlack {
+  color:white
+}
+
+.cardHeader {
+  background-color: #121117;
+  border: 1px solid #222;
+}
+
+.car {
+  border: 1px solid #222;
+}
+.cardBody {
+background-color: #1e1d23;
+}
+
+.title{
+  font-size: 15px;
+}
+.width{
+  width: 55%;
+  margin: auto;
+}
+
+.active{
+  color: #87c242 !important;
+  border-width: 2px;
+  border-color: transparent !important;
+  background: white !important;
+}
+
+.bgDark{
+  background-image: linear-gradient(to left, #121117, #000);
+  padding: 1rem 1rem !important;
+}
+
+.bgDark:hover{
+  background: white !important;
+}
+
+
+@media screen and (max-width: 990px) {
+  .width{
+    width: 100% !important;
+    margin: auto;
+  }
+}

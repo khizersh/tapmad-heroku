@@ -97,6 +97,13 @@ export const getUserRooms = (userId, channelId) => BASEURLAPP + `api/getAllChatR
 
 // PSL bids 
 export const getAllMatches = BASEURL + "api/getMatchDetail";
+export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
+export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
+export const getLeaderBoardByLeagueId = BASEURL + "api/getLeaderBoardByLeagueId";
+
+
+
+
 
 export const loggingTags = {
   search: "search",
