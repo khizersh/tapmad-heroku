@@ -130,3 +130,18 @@
     cursor: pointer;
 }
 
+
+
+@media only screen and (max-width: 746px) {
+
+    .noBorders {
+        border: 0px;
+        flex-direction: row-reverse;
+        justify-content: end;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        overflow-x: scroll;
+    }
+
+    
+}

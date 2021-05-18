@@ -1,5 +1,5 @@
 .tabIcon_image {
-    width: 6%;
+    width: 30px;
     margin: 0px 10px 0px 0px;
 }
 
@@ -20,4 +20,13 @@
     color: #000000;
     font-size: 20px;
     font-weight: 600;
+}
+
+@media only screen and (max-width: 746px) {
+
+    .tabIcon_image {
+        width: 24px;
+        margin: 0px 10px 0px 0px;
+    }
+    
 }
