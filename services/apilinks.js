@@ -95,11 +95,12 @@ export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
 export const submitMatchBids = BASEURLAPP + "api/updateNewUserEventQuestionAnswers"
 export const getUserRooms = (userId, channelId) => BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
 
-// PSL bids 
+// PSL bids / game
 export const getAllMatches = BASEURL + "api/getMatchDetail";
 export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
 export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
 export const getLeaderBoardByLeagueId = BASEURL + "api/getLeaderBoardByLeagueId";
+export const getBuyCoinsPackages = BASEURL + "api/getBuyCoinsPackages/v1/en/web";
 
 
 

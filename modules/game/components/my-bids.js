@@ -20,8 +20,7 @@ const MyBid = () => {
             {
               id: "collapse2",
               title: "Won",
-              icon:
-                "//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png",
+              icon: "//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png",
               content: res.Won || "No Win",
             },
             {
@@ -33,8 +32,7 @@ const MyBid = () => {
             {
               id: "collapse4",
               title: "No Result/Draw",
-              icon:
-                "//d1s7wg2ne64q87.cloudfront.net/web/images/coin-draw-white.png",
+              icon: "//d1s7wg2ne64q87.cloudfront.net/web/images/coin-draw-white.png",
               content: res.NoResult || "No draw matches data",
             },
           ]);
@@ -53,7 +51,11 @@ const MyBid = () => {
           aria-multiselectable="true"
         >
           {data.length
-            ? data.map((m, i) => <CustomCollapse data={m} />)
+            ? data.map((m, i) => (
+                <div className={styles.width}>
+                  <CustomCollapse data={m} />
+                </div>
+              ))
             : null}
         </div>
       </div>

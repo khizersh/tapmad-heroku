@@ -1,5 +1,5 @@
 .textBlack {
-  color:white
+  color: white;
 }
 
 .cardHeader {
@@ -11,36 +11,121 @@
   border: 1px solid #222;
 }
 .cardBody {
-background-color: #1e1d23;
+  background-color: #1e1d23;
+  text-align: center;
 }
 
-.title{
+
+
+.title {
   font-size: 15px;
 }
-.width{
+.width {
   width: 55%;
   margin: auto;
 }
 
-.active{
+
+.tm_btng_tble tbody {
+  background: #1a1921;
+  height: 300px;
+  overflow: hidden;
+  color: white;
+}
+
+.active {
   color: #87c242 !important;
   border-width: 2px;
   border-color: transparent !important;
   background: white !important;
 }
 
-.bgDark{
+.font400 {
+  font-weight: 400;
+}
+
+
+.tm_btng_tble thead tr th {
+  font-weight: 400;
+}
+.tm_btng_tble tbody tr td span {
+  font-weight: 400;
+}
+
+.bgBlack {
+  background-color: #121117;
+  border: 1px solid #222;
+}
+
+.bgDark {
   background-image: linear-gradient(to left, #121117, #000);
   padding: 1rem 1rem !important;
 }
 
-.bgDark:hover{
+.bgDark:hover {
   background: white !important;
 }
 
 
+/* home */
+.tm_pcoins_bx {
+  border: 1px solid #222;
+  padding: 20px 15px;
+  background-color: #121117;
+  margin-bottom: 10px;
+  /* border-radius: 5px; */
+  box-shadow: 2px 2px 5px 0 rgb(0 0 0 / 20%);
+}
+.tm_pcoins_icn {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 9px;
+}
+
+
+.tm_pcoins_btn button {
+  border-radius: 2px;
+  padding: 10px 20px;
+  background-image: linear-gradient(
+180deg
+, #47770b, #7dc81c);
+  border: 1px solid #275800;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.tm_pcoins_btn span {
+  color: #6fa631 !important;
+  margin-right: 7px;
+  right: 2px;
+}
+.tm_pcoins_icn span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fb9600;
+  display: block;
+  margin-left: 5px;
+  top: 6px;
+  position: relative;
+}
+.tm_pcoins_icn span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fb9600;
+  display: block;
+  margin-left: 5px;
+  top: 6px;
+  position: relative;
+}
+
+.tm_pcoins_icn li {
+  display: inline-block;
+}
+
 @media screen and (max-width: 990px) {
-  .width{
+  .width {
     width: 100% !important;
     margin: auto;
   }

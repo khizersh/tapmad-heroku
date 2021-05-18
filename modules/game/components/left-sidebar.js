@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import BuyCoinModal from "./BuyCoinModal";
 
 export default function LeftSidebar() {
+  const [buyCoinModal, setBuyCoinModal] = useState(false);
+
+  const onClickBuy = () => {
+    setBuyCoinModal(!buyCoinModal);
+  };
+
   return (
     <div>
+      <BuyCoinModal open={buyCoinModal} toggle={onClickBuy} />
       <div className="tm_btng_sidebar mb-3 text-center">
         <div className="tm_btng_sidebar_hdr mb-2 d-none d-lg-block d-md-none">
           <h5>User Profile</h5>
@@ -11,14 +20,12 @@ export default function LeftSidebar() {
           <div className="row">
             <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block">
               <div className="p-2 tm_btng_sidebar_btns">
-                <a
-                  href="https://www.tapmad.com/my-bids"
-                  className="btn border-0 text-muted"
-                  target="_self"
-                >
-                  <i className="fa fa-btc d-block pb-1"></i>
-                  My Bids
-                </a>
+                <Link href="/my-bids">
+                  <a className="btn border-0 text-muted">
+                    <i className="fa fa-btc d-block pb-1"></i>
+                    My Bids
+                  </a>
+                </Link>
               </div>
             </div>
             <div className="col-12 col-lg-4 col-md-4 ">
@@ -32,7 +39,11 @@ export default function LeftSidebar() {
             </div>
             <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block">
               <div className="p-2 tm_btng_sidebar_btns">
-                <a id="buy_coins" className="btn border-0 text-muted">
+                <a
+                  id="buy_coins"
+                  className="btn border-0 text-muted"
+                  onClick={onClickBuy}
+                >
                   <i className="fa fa-gift d-block pb-1"></i>Buy Coins
                 </a>
               </div>

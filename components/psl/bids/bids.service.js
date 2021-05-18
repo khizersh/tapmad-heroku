@@ -2,10 +2,11 @@ import {
   getAllMatches,
   getMatchBetsByUserId,
   getAllLeagues,
-  getLeaderBoardByLeagueId
+  getLeaderBoardByLeagueId,
+  getBuyCoinsPackages,
 } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
-import { post , handleResponse } from "../../../services/http-service";
+import { post, handleResponse, get } from "../../../services/http-service";
 
 export const getAllMatchDetails = async () => {
   const response = await post(getAllMatches, { Version: "V1", Language: "en" });
@@ -18,14 +19,13 @@ export const getMatchBetsByUser = async () => {
     Version: "V1",
     Language: "en",
     Platform: "web",
-    UserId : userId,
+    UserId: userId,
   };
   const response = await post(getMatchBetsByUserId, body);
   return response.data;
 };
 
 export const getAllLeagueOnline = async () => {
-
   let body = {
     Version: "V1",
     Language: "en",
@@ -50,18 +50,16 @@ export const getAllLeagueOnline = async () => {
   } else {
     return null;
   }
-
 };
-export const getLeaderBoardByLeague = async (leagueId , offset) => {
+export const getLeaderBoardByLeague = async (leagueId, offset) => {
   let userId = Cookie.getCookies("userId");
   let body = {
     Version: "V1",
     Language: "en",
     Platform: "web",
-    UserId:userId,
+    UserId: userId,
     LeagueId: leagueId,
-    Offset:offset
-
+    Offset: offset,
   };
   const response = await post(getLeaderBoardByLeagueId, body);
   const data = handleResponse(response);
@@ -82,7 +80,27 @@ export const getLeaderBoardByLeague = async (leagueId , offset) => {
   } else {
     return null;
   }
-
+};
+export const getBuyCoinsData = async (leagueId, offset) => {
+  const response = await get(getBuyCoinsPackages);
+  const data = handleResponse(response);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
 };
 
 export const getAllMatchQuestions = (database, cb) => {
@@ -91,44 +109,3 @@ export const getAllMatchQuestions = (database, cb) => {
     cb(vals);
   });
 };
-
-export function nFormatter(num, digits) {
-  var si = [
-    {
-      value: 1,
-      symbol: "",
-    },
-    {
-      value: 1e3,
-      symbol: "k",
-    },
-    {
-      value: 1e6,
-      symbol: "M",
-    },
-    {
-      value: 1e9,
-      symbol: "B",
-    },
-    {
-      value: 1e12,
-      symbol: "T",
-    },
-    {
-      value: 1e15,
-      symbol: "P",
-    },
-    {
-      value: 1e18,
-      symbol: "E",
-    },
-  ];
-  var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-  var i;
-  for (i = si.length - 1; i > 0; i--) {
-    if (num >= si[i].value) {
-      break;
-    }
-  }
-  return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
-}

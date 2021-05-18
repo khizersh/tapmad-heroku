@@ -6,6 +6,7 @@ import {
 import { GameContext } from "../../../contexts/GameContext";
 import { MainContext } from "../../../contexts/MainContext";
 import styles from "../game.module.css";
+import { GlobalService } from "../../global-service";
 
 const leaderboardComponent = () => {
   const [data, setData] = useState([]);
@@ -19,6 +20,7 @@ const leaderboardComponent = () => {
     "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-brw.png";
   const silverCrown =
     "//d1s7wg2ne64q87.cloudfront.net/web/images/crown-grey.png";
+  const goldCoin = "//d1s7wg2ne64q87.cloudfront.net/web/images/coins.png";
 
   const onClickTab = (tab) => {
     setLoader(true);
@@ -51,7 +53,13 @@ const leaderboardComponent = () => {
         if (lead && lead.responseCode == 1) {
           if (lead.data.LeaderBoard.length) {
             lead.data.LeaderBoard.map((m) => clone.push(m));
-            setLeaderBoard(clone);
+            let array = clone.map((m) => {
+              return {
+                ...m,
+                TotalCoins: GlobalService.nFormatter(m.TotalCoins, 1),
+              };
+            });
+            setLeaderBoard(array);
           }
           setLoader(false);
         } else {
@@ -74,7 +82,13 @@ const leaderboardComponent = () => {
         .then((lead) => {
           if (lead && lead.responseCode == 1) {
             if (lead.data.LeaderBoard.length) {
-              setLeaderBoard(lead.data.LeaderBoard);
+              let array = lead.data.LeaderBoard.map((m) => {
+                return {
+                  ...m,
+                  TotalCoins: GlobalService.nFormatter(m.TotalCoins, 1),
+                };
+              });
+              setLeaderBoard(array);
             }
           }
         })
@@ -84,7 +98,7 @@ const leaderboardComponent = () => {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className={`row ${styles.width}`}>
         <div className="col-12">
           <ul
             className={`list-group list-group-horizontal text-center  my-2 d-flex`}
@@ -108,8 +122,10 @@ const leaderboardComponent = () => {
               : null}
           </ul>
 
-          <table class="table table-striped table-dark tm_btng_tble mb-0 mt-2 ng-scope">
-            <thead className="thead-light">
+          <table
+            className={`table table-striped table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
+          >
+            <thead className="thead-light text-center">
               <tr>
                 <th scope="col">Rank</th>
                 <th scope="col">Name</th>
@@ -120,7 +136,7 @@ const leaderboardComponent = () => {
               {leaderBoard.length ? (
                 leaderBoard.map((m, i) => (
                   <>
-                    <tr key={i}>
+                    <tr key={i} className="text-center">
                       <td>
                         <span>
                           <img
@@ -133,7 +149,9 @@ const leaderboardComponent = () => {
                             width="26px"
                           />
                         </span>
-                        <span class="badge badge-success rounded-circle ml-1 px-2 py-1">
+                        <span
+                          className={`${styles.font400} badge badge-success rounded-circle ml-1 px-2 py-1`}
+                        >
                           {m.Rank}
                         </span>
                         <img
@@ -148,8 +166,14 @@ const leaderboardComponent = () => {
                           className="ml-1"
                         />
                       </td>
-                      <th scope="row">{m.FullName}</th>
-                      <td>{m.TotalCoins}</td>
+                      <td>{m.FullName}</td>
+                      <td>
+                        {m.TotalCoins}{" "}
+                        <span>
+                          {" "}
+                          <img src={goldCoin} width="25px" />
+                        </span>
+                      </td>
                     </tr>
                   </>
                 ))
@@ -169,9 +193,7 @@ const leaderboardComponent = () => {
                   </th>
                 </tr>
               </tfoot>
-            ) : (
-              null
-            )}
+            ) : null}
           </table>
         </div>
       </div>

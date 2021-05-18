@@ -17,7 +17,7 @@ export default function GameProvider({ children }) {
 
   React.useEffect(async () => {
     await getAllLeagueTabs();
-    console.log("game context");
+ 
   }, []);
 
   async function getAllLeagueTabs() {

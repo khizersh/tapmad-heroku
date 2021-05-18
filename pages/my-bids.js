@@ -1,12 +1,13 @@
-import React from 'react'
-import MyBid from "../modules/game/components/my-bids"
+import React from "react";
+import MyBid from "../modules/game/components/my-bids";
+import GameLayout from "../modules/game/components/GameLayout"
 
 const MyBids = () => {
-    return (
-        <div>
-            <MyBid />
-        </div>
-    )
-}
+  return (
+    <GameLayout>
+      <MyBid />
+    </GameLayout>
+  );
+};
 
-export default MyBids
+export default MyBids;
