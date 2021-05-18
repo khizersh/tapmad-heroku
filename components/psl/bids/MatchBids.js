@@ -134,9 +134,9 @@ export default function MatchBids() {
                                                     <div className={styles.biding}>
                                                         <div className="row">
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].GameAnswer == team.answer ? '1px solid red' : '0px' }} onClick={() => answerA(innerQues)}>
+                                                                <div className={styles.team1} style={{ border: innerQues.Options[0].GameAnswer == team.answer ? '1 solid #87c242' : '0px' }} onClick={() => answerA(innerQues)}>
                                                                     <h6>{innerQues.Options[0].GameAnswer}</h6>
-                                                                    <div className={styles.score}>
+                                                                    <div className={styles.score} style={{ background: innerQues.Options[0].GameAnswer == team.answer ? '#87c242' : '#2e2e2e' }}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[0].odds}</h6>
                                                                     </div>
                                                                 </div>
@@ -152,7 +152,7 @@ export default function MatchBids() {
                                                                 </div>
                                                             </div>
                                                             <div className="col-5">
-                                                                <div className={styles.team1} style={{ margin: '10px 10px 0px 0px', border: innerQues.Options[1].GameAnswer == team.answer ? '1px solid red' : '0px' }} onClick={() => answerB(innerQues)}>
+                                                                <div className={`${styles.team1} ${styles.team2}`} style={{ border: innerQues.Options[1].GameAnswer == team.answer ? '1px solid red' : '0px' }} onClick={() => answerB(innerQues)}>
                                                                     <h6>{innerQues.Options[1].GameAnswer}</h6>
                                                                     <div className={styles.score}>
                                                                         <h6 style={{ margin: '0px' }}>{innerQues.Options[1].odds}</h6>

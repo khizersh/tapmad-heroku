@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from "react"
 import { getPSLTabsService } from "./psl-service"
 import PSLChat from "./chat/PSLChat";
 import MatchBids from "./bids/MatchBids";
+import pslStyles from "./psl.module.css";
 
 export default memo(function PSLComponent({ channelID }) {
     const [tabs, setTabs] = useState([]);
@@ -26,8 +27,9 @@ export default memo(function PSLComponent({ channelID }) {
             <div className="btn-group w-100">
                 {tabs ? tabs.map((e) => {
                     return <div className="w-100 m-2">
-                        <button className={`btn w-100 ${selectedTab == e.TabId ? 'btn-primary' : 'btn-dark'}`} onClick={() => setSelectedTab(e.TabId)}>
-                            {e.TabName}
+                        <button className={`btn w-100 ${selectedTab == e.TabId ? pslStyles.tabactive : pslStyles.tabUnactive}`} onClick={() => setSelectedTab(e.TabId)}>
+                            {selectedTab == e.TabId ? <img className={pslStyles.tabIcon_image} src={e.TabIcon} /> : <img className={pslStyles.tabIcon_image} src={e.TabIconUnActive} />}
+                            <span>{e.TabName}</span>
                         </button>
                     </div>
                 }) : null}

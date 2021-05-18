@@ -1,7 +1,7 @@
 .matchTitleBar{
     margin-bottom: 0;
     background: #222222 !important;
-    border-radius: 6px;
+    border-radius: 6px !important;
     padding: 6px 10px 6px 10px;
     display: flex;
     position: relative;
@@ -35,7 +35,10 @@
     text-align: start;
     padding: 0px;
     margin-left: 10px;
+
 }
+
+
 .teamName span{
     font-weight: 800;
     color: #757575;
@@ -76,7 +79,7 @@
     background: #121117;
     border-radius: 6px;
     display: flex;
-    margin: 10px 0px 10px 10px;
+    margin: 10px 10px 10px 10px;
     cursor: pointer;
 }
 .team1 > h6 {
@@ -90,10 +93,10 @@
     padding: 12px;
 }
 .team_vs{
-    background: #121117;
+    /* background: #121117; */
     border-radius: 6px;
     display: flex;
-    margin: 10px 10px 0px 0px;
+    margin: 10px 0px 0px 0px;
 }
 
 .quantitybtnqty{
@@ -190,4 +193,45 @@ input.count:focus {
     background: #87c242;
     position: absolute;
     top: -25px;
+}
+
+
+@media only screen and (max-width: 768px){
+    .teamName {
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 20px;
+        text-decoration: none;
+        text-align: start;
+        padding: 0px;
+        margin-left: 10px;
+        width: 260px;
+        letter-spacing: 1px;
+    }
+    .tag{
+        width: auto;
+        background: red;
+        border-radius: 4px;
+        margin: auto 0px;
+        display: flex;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .team_vs {
+        border-radius: 6px;
+        display: flex;
+        margin: 10px 0px 0px -4px;
+    }
+
+    .team1 {
+        margin: 10px -10px 10px 10px;
+        cursor: pointer;
+    }
+    .team2 {
+        margin: 10px 10px 10px -10px;
+        cursor: pointer;
+    }
+
 }

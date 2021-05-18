@@ -14,10 +14,10 @@ export const sendGroupChatMessage = (database, chatDetails) => {
     const name = Cookie.getCookies('userProfileName');
     const picture = Cookie.getCookies('userProfilePicture');
     database.ref(`GroupChat/${chatDetails.channelID}/${chatDetails.roomID}`).push({
-        dateTime: Date.now(),
-        textMessage: chatDetails.message,
-        userId: userId,
-        userName: name,
+        date: Date.now(),
+        message: chatDetails.message,
+        id: Number(userId),
+        senderName: name,
         userProfile: picture
     })
 }
