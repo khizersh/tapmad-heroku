@@ -8,7 +8,7 @@ import { actionsRequestContent } from "../../../services/http-service";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 
-function SetUserPin({ login }) {
+function SetUserPin({ login, ip }) {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
   const { setLoader } = useContext(MainContext);
@@ -49,7 +49,7 @@ function SetUserPin({ login }) {
         icon: "success",
       });
       await AuthService.checkUser(initialState.User.MobileNo);
-      await login();
+      await login(ip);
     } else {
       swal({
         title: "something went wrong!",

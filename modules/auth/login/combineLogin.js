@@ -10,7 +10,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
-function combineLogin({ loginResponse, forgetPin, login }) {
+function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   const {
     initialState,
     updateUserNumber,
@@ -63,25 +63,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           Cookie.setCookies("userId", data.data.User.UserId);
           let viewToRendor = loginResponse(data.data);
           if (viewToRendor == true) {
-            const pinResponse = await AuthService.verifyPinCode(pin);
-            if (pinResponse && pinResponse.responseCode == 1) {
-              var loginResp = login();
-              loginResp.then((e) => {
-                if (e != null && e.responseCode == 401) {
-                  console.log(e);
-                  forgetPin();
-                  setLoader(false);
-                }
-              });
-            } else {
-              setLoader(false);
-              swal({
-                title: pinResponse.message,
-                timer: 3000,
-                icon: "error",
-              });
-              Cookie.setCookies("isAuth", 0);
-            }
+            verifyPin(ip, pin, forgetPin);
             setLoader(false);
           }
         }
@@ -137,7 +119,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
             </span>
           </>
         )}
-        
+
         <input
           type="text"
           maxLength="10"

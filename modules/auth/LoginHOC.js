@@ -14,7 +14,7 @@ export default function withLogin(Component, data) {
     );
     const router = useRouter();
 
-    async function loginUser() {
+    async function loginUser(userIp) {
       let obj = {
         Language: "en",
         Platform: "web",
@@ -27,7 +27,7 @@ export default function withLogin(Component, data) {
 
       let response = await AuthService.signInOrSignUpMobileOperator(
         obj,
-        "",
+        userIp,
         false
       );
       try {
@@ -67,6 +67,27 @@ export default function withLogin(Component, data) {
         console.log(err);
       }
     }
-    return <Component login={loginUser} {...props} />;
+    async function verifyPinCode(ip, pin, forgetPin) {
+      const pinResponse = await AuthService.verifyPinCode(pin);
+      if (pinResponse && pinResponse.responseCode == 1) {
+        var loginResp = loginUser(ip);
+        loginResp.then((e) => {
+          if (e != null && e.responseCode == 401) {
+            console.log(e);
+            forgetPin();
+            setLoader(false);
+          }
+        });
+      } else {
+        setLoader(false);
+        swal({
+          title: pinResponse.message,
+          timer: 3000,
+          icon: "error",
+        });
+        Cookie.setCookies("isAuth", 0);
+      }
+    }
+    return <Component login={loginUser} verifyPin={verifyPinCode} {...props} />;
   };
 }

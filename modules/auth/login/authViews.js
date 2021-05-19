@@ -8,7 +8,7 @@ import swal from "sweetalert";
 import EnhancedEnterPin from "./enterPin";
 import EnhancedCombineLogin from "./combineLogin";
 
-export default function AuthViews() {
+export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
   const router = useRouter();
 
@@ -49,6 +49,7 @@ export default function AuthViews() {
         <EnhancedCombineLogin
           forgetPin={sendToForgetPin}
           loginResponse={processResponse}
+          ip={props.ip}
         />
       );
       // return <Login loginResponse={processResponse} />;

@@ -5,9 +5,9 @@ import { AuthService } from "../modules/auth/auth.service";
 import withLogin from "../modules/auth/LoginHOC";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
-import { Authcontext } from "../contexts/AuthContext";
+import requestIp from "request-ip";
 
-function VerifyUser({ login }) {
+function VerifyUser({ login, ip }) {
   const {
     initialState,
     updateUserNumber,
@@ -33,7 +33,7 @@ function VerifyUser({ login }) {
         updateUserNumber(userNumber);
 
         if (initialState.User.Password) {
-          let loginResp = login();
+          let loginResp = login(ip);
           setLoader(false);
         }
       }
@@ -73,10 +73,15 @@ function VerifyUser({ login }) {
 const EnhancedEnterPin = withLogin(VerifyUser);
 export default EnhancedEnterPin;
 
-export function getStaticProps() {
+export function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   return {
     props: {
       noSideBar: true,
+      ip: ip
     },
   };
 }
