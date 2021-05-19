@@ -89,6 +89,7 @@ function MyApp({ Component, pageProps, test }) {
                 })(window,document,'script','dataLayer','GTM-PJ4M57N');`,
           }}
         />
+        <script src="https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js" type="text/javascript"></script>
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
           name="viewport"
