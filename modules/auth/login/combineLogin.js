@@ -122,8 +122,8 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
 
         <input
           type="text"
-          maxLength="10"
-          minLength="10"
+          maxLength="20"
+           minLength="5"
           className="form-control mb-2"
           placeholder="xxxxxxxxxxx"
           inputMode="numeric"
