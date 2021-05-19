@@ -137,11 +137,12 @@ function combineLogin({ loginResponse, forgetPin, login }) {
             </span>
           </>
         )}
+        
         <input
           type="text"
           maxLength="10"
           minLength="10"
-          className="form-control"
+          className="form-control mb-2"
           placeholder="xxxxxxxxxxx"
           inputMode="numeric"
           value={mobileNo}
