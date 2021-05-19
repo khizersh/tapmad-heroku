@@ -5,9 +5,9 @@ import { AuthService } from "../modules/auth/auth.service";
 import withLogin from "../modules/auth/LoginHOC";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
-import { Authcontext } from "../contexts/AuthContext";
+import requestIp from "request-ip";
 
-function VerifyUser({ login }) {
+function VerifyUser({ login, ip }) {
   const {
     initialState,
     updateUserNumber,
@@ -21,21 +21,13 @@ function VerifyUser({ login }) {
   useEffect(async () => {
     setLoader(true);
     let userNumber = Cookie.getCookies("unum");
-    console.log("userNumber: ", userNumber);
     const data = await AuthService.checkUser(userNumber);
-    console.log("data in verify: ", data);
     if (data && data.code == 11) {
       let userOperator = Cookie.getCookies("uop");
-      let userNumber = Cookie.getCookies("unum");
       if (userOperator && userNumber) {
         updateUserOperator(userOperator);
         updateUserPassword(data.data.User.UserPassword);
         updateUserNumber(userNumber);
-
-        if (initialState.User.Password) {
-          let loginResp = login();
-          setLoader(false);
-        }
       }
       setLoader(false);
     } else if (data.code == 0) {
@@ -52,7 +44,17 @@ function VerifyUser({ login }) {
       }).then((r) => router.push("/sign-in"));
     }
     setLoader(false);
-  }, [initialState.User.Password, initialState.User.MobileNo]);
+  }, []);
+
+
+  useEffect(() => {
+    let userNumber = Cookie.getCookies("unum");
+    if (initialState.User.Password) {
+      console.log("userNumber Inside condition: ", userNumber);
+      let loginResp = login(ip);
+      setLoader(false);
+    }
+  }, [initialState.User.MobileNo])
   return <div></div>;
 }
 
@@ -73,10 +75,15 @@ function VerifyUser({ login }) {
 const EnhancedEnterPin = withLogin(VerifyUser);
 export default EnhancedEnterPin;
 
-export function getStaticProps() {
+export function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   return {
     props: {
       noSideBar: true,
+      ip: ip
     },
   };
 }

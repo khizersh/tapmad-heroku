@@ -10,7 +10,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
-function combineLogin({ loginResponse, forgetPin, login }) {
+function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   const {
     initialState,
     updateUserNumber,
@@ -39,7 +39,6 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     const userPin = e.target.value;
     if (+userPin === +userPin) {
       setPin(userPin);
-   
     }
   }
   async function loginUser() {
@@ -62,33 +61,11 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           updateUserPassword(data.data.User.UserPassword);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
           Cookie.setCookies("userId", data.data.User.UserId);
-         let viewToRendor = loginResponse(data.data);
-         if(viewToRendor == true){
-          const pinResponse = await AuthService.verifyPinCode(pin);
-          if (pinResponse && pinResponse.responseCode == 1) {
-            var loginResp = login();
-            loginResp.then((e) => {
-              if (e != null && e.responseCode == 401) {
-                console.log(e);
-                forgetPin();
-                setLoader(false);
-              }
-            });
-          } else {
+          let viewToRendor = loginResponse(data.data);
+          if (viewToRendor == true) {
+            verifyPin(ip, pin, forgetPin);
             setLoader(false);
-            swal({
-              title: pinResponse.message,
-              timer: 3000,
-              icon: "error",
-            });
-            Cookie.setCookies("isAuth", 0);
           }
-          setLoader(false);
-         }
-
-        
-          //   loginResponse(data.data);
-        
         }
       } else {
         swal({
@@ -121,6 +98,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     },
     [updateUserOperator]
   );
+
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
@@ -130,7 +108,9 @@ function combineLogin({ loginResponse, forgetPin, login }) {
       <div className="input-group">
         {initialState.AuthDetails && (
           <>
-            <DropdownWithImage data={operators} onChange={onChangeNetwork} />
+            {operators && operators.length ? (
+              <DropdownWithImage data={operators} onChange={onChangeNetwork} />
+            ) : null}
             <input type="hidden" id="CountryMobileCode" value="+92" />
             <span>
               <label className="form-control" style={{ fontSize: "14px" }}>
@@ -139,12 +119,13 @@ function combineLogin({ loginResponse, forgetPin, login }) {
             </span>
           </>
         )}
+
         <input
           type="text"
           maxLength="10"
           minLength="10"
-          className="form-control"
-          placeholder="3xxxxxxxxxx"
+          className="form-control mb-2"
+          placeholder="xxxxxxxxxxx"
           inputMode="numeric"
           value={mobileNo}
           onChange={(e) => handleNumber(e)}
@@ -182,17 +163,10 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           >
             | &nbsp;&nbsp;Forgot Passcode?
           </span>
-
-          {/* <Link href="/sign-up" shallow={true} passHref={true}>
-            <a className="text-light">Sign up</a>
-          </Link> */}
         </>
       </div>
     </div>
   );
 }
-
-// export default memo(combineLogin);
-
 const EnhancedCombineLogin = withLogin(memo(combineLogin));
 export default EnhancedCombineLogin;

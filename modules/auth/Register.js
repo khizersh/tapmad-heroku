@@ -9,7 +9,7 @@ import { signUpImage } from "../../services/imagesLink";
 import { useRouter } from "next/router";
 import { MainContext } from "../../contexts/MainContext";
 
-export default memo(function Register() {
+export default memo(function Register(props) {
   const router = useRouter();
   const { code, number } = router.query;
   const { authState, updateResponseCode } = useContext(Authcontext);
@@ -36,7 +36,7 @@ export default memo(function Register() {
         // Response code 34 is not coming from backend. This is only for frontend logic to display setPinView
         return (
           <>
-            <SetYourNewPin />
+            <SetYourNewPin {...props} />
           </>
         );
       }
