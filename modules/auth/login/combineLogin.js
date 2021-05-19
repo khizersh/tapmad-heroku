@@ -19,6 +19,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     setLoader,
   } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
+  const [pin, setPin] = React.useState("");
   const [btnDisabled, setbtnDisabled] = React.useState(true);
 
   function handleNumber(e) {
@@ -34,6 +35,13 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     }
   }
 
+  function handlePin(e) {
+    const userPin = e.target.value;
+    if (+userPin === +userPin) {
+      setPin(userPin);
+   
+    }
+  }
   async function loginUser() {
     let body = {
       event: loggingTags.login,
@@ -41,7 +49,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     };
     actionsRequestContent(body);
 
-    if (mobileNo.length == 10) {
+    if (mobileNo.length == 10 && pin.length > 0) {
       setLoader(true);
       let body = {
         Language: "en",
@@ -53,15 +61,34 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           updateUserNumber(mobileNo);
           updateUserPassword(data.data.User.UserPassword);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
-          var loginResp = login();
-          loginResp.then((e) => {
-            if (e != null && e.responseCode == 401) {
-              console.log(e);
-              forgetPin();
-            }
-          });
-          //   loginResponse(data.data);
+          Cookie.setCookies("userId", data.data.User.UserId);
+         let viewToRendor = loginResponse(data.data);
+         if(viewToRendor == true){
+          const pinResponse = await AuthService.verifyPinCode(pin);
+          if (pinResponse && pinResponse.responseCode == 1) {
+            var loginResp = login();
+            loginResp.then((e) => {
+              if (e != null && e.responseCode == 401) {
+                console.log(e);
+                forgetPin();
+                setLoader(false);
+              }
+            });
+          } else {
+            setLoader(false);
+            swal({
+              title: pinResponse.message,
+              timer: 3000,
+              icon: "error",
+            });
+            Cookie.setCookies("isAuth", 0);
+          }
           setLoader(false);
+         }
+
+        
+          //   loginResponse(data.data);
+        
         }
       } else {
         swal({
@@ -73,7 +100,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
       }
     } else {
       swal({
-        title: "Invalid number!",
+        title: "Enter all fields!",
         timer: 3000,
         icon: "error",
       });
@@ -128,10 +155,10 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           type="password"
           maxLength="4"
           minLength="4"
-          //   value={userPin}
+          value={pin}
           className="text-center form-control"
           placeholder="Enter your PIN"
-          //   onChange={handleNumber}
+          onChange={handlePin}
         />
       </div>
       <div className="form-group">

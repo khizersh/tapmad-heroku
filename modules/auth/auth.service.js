@@ -342,7 +342,8 @@ function validateUser(data) {
     Cookie.setCookies("userId", user.UserId);
     if (user.IsSubscribe) {
       if (user.IsPinSet) {
-        return "enter-pin";
+        // return "enter-pin";
+        return true;
       } else {
         return "send-otp";
       }
