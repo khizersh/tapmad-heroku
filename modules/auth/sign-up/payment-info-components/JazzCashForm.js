@@ -31,8 +31,8 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
       </span>
       <input
         type="text"
-        maxLength="10"
-        minLength="10"
+        maxLength="20"
+         minLength="5"
         className="form-control"
         placeholder="3xxxxxxxxxx"
         inputMode="numeric"
