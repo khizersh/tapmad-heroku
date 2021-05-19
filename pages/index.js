@@ -6,7 +6,6 @@ import requestIp from "request-ip";
 import { HomeService } from "../modules/home/components/home.service";
 
 export default function Home(props) {
-  console.log("props in home: ", props);
   return (
     <div>
       <Head>

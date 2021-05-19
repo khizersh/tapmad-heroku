@@ -21,21 +21,13 @@ function VerifyUser({ login, ip }) {
   useEffect(async () => {
     setLoader(true);
     let userNumber = Cookie.getCookies("unum");
-    console.log("userNumber: ", userNumber);
     const data = await AuthService.checkUser(userNumber);
-    console.log("data in verify: ", data);
     if (data && data.code == 11) {
       let userOperator = Cookie.getCookies("uop");
-      let userNumber = Cookie.getCookies("unum");
       if (userOperator && userNumber) {
         updateUserOperator(userOperator);
         updateUserPassword(data.data.User.UserPassword);
         updateUserNumber(userNumber);
-
-        if (initialState.User.Password) {
-          let loginResp = login(ip);
-          setLoader(false);
-        }
       }
       setLoader(false);
     } else if (data.code == 0) {
@@ -52,7 +44,17 @@ function VerifyUser({ login, ip }) {
       }).then((r) => router.push("/sign-in"));
     }
     setLoader(false);
-  }, [initialState.User.Password, initialState.User.MobileNo]);
+  }, []);
+
+
+  useEffect(() => {
+    let userNumber = Cookie.getCookies("unum");
+    if (initialState.User.Password) {
+      console.log("userNumber Inside condition: ", userNumber);
+      let loginResp = login(ip);
+      setLoader(false);
+    }
+  }, [initialState.User.MobileNo])
   return <div></div>;
 }
 

@@ -8,7 +8,6 @@ export default function LoginPage(props) {
   const { initialState } = useContext(MainContext);
   const router = useRouter();
   React.useEffect(() => {
-    console.log(initialState);
     if (initialState.isAuthenticated) {
       router.push("/");
     }

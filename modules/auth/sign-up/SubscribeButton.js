@@ -39,7 +39,6 @@ export default function SubscribeButton() {
       authState.selectedPaymentMethod &&
       authState.selectedPackageId
     ) {
-      console.log(authState.selectedPaymentMethod, authState.selectedPackageId);
       var details = {};
       if (authState.selectedPaymentMethod.PaymentType == 1) {
         details = handleBody();
@@ -61,7 +60,6 @@ export default function SubscribeButton() {
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         // for credit card specific only
         const response = await AuthService.creditCardOrder(details);
-        console.log("respoooooo ", response);
         if (response.data.responseCode == 1) {
           window.location.href = response.data.CardPaymentUrl;
         } else if (response.data.responseCode == 4) {

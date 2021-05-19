@@ -41,7 +41,6 @@ export default function withLogin(Component, data) {
           Cookie.setCookies("isAuth", 1);
           Cookie.setCookies("userId", response.data.UserId);
           Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
-          console.log("Woaaahhh ", response.response);
           LoginTag(obj, response.response);
 
           checkUserAuthentication();
@@ -73,7 +72,6 @@ export default function withLogin(Component, data) {
         var loginResp = loginUser(ip);
         loginResp.then((e) => {
           if (e != null && e.responseCode == 401) {
-            console.log(e);
             forgetPin();
             setLoader(false);
           }

@@ -6,12 +6,10 @@ import { AuthService } from "../modules/auth/auth.service";
 const NotAuthenticatedSidebar = ({ onClick }) => {
   const { initialState } = useContext(MainContext);
   const [countryCode, setCountryCode] = useState(null);
-  console.log("initialState in pk: ", initialState);
 
   useEffect(() => {
     AuthService.getGeoInfo()
       .then((res) => {
-        console.log(res.countryCode);
         setCountryCode(res.countryCode);
       })
       .catch((e) => console.log(e));

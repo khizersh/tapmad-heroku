@@ -17,7 +17,6 @@ export default function AuthViews(props) {
     if (viewToRender == true) {
       return true;
     } else {
-      console.log("viewToRender: ", viewToRender);
       if (viewToRender === "sign-up") {
         swal({
           title: "You are not subscribed user. please subscribe!",
