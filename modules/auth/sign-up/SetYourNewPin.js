@@ -64,6 +64,8 @@ function SetYourNewPinSignUp({ login }) {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
+        await AuthService.clearUserToken(initialState.User.MobileNo);
+
         await login();
       }
     } else {

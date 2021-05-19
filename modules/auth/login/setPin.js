@@ -33,6 +33,8 @@ function SetUserPin({ login }) {
     }
     const resp = await AuthService.setUserPin(pin);
     if (resp.responseCode == 1) {
+      const clearCache = await AuthService.clearUserToken(initialState?.User?.MobileNo);
+
       // logging start
       let body = {
         event: loggingTags.login,
