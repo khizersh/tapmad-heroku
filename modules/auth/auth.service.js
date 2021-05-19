@@ -355,12 +355,13 @@ function validateUser(data) {
   }
 }
 
-async function loginUserFetchApi(body) {
+async function loginUserFetchApi(body, ip) {
   let options = {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
+      "X-Forwarded-For": ip ? ip : "",
     },
   };
   const resp = await fetch(SignUpORSignInMobileOperatorToken, options);
