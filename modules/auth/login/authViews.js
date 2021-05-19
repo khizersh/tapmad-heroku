@@ -14,19 +14,25 @@ export default function AuthViews() {
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
-
-    if (viewToRender === "sign-up") {
-      swal({
-        title: "You are not subscribed user. please subscribe!",
-        timer: 2500,
-        icon: "warning",
-      }).then(() => {
-        router.push("/sign-up");
-      });
+    if (viewToRender == true) {
+      return true;
     } else {
-      setViewToShow(viewToRender);
+      console.log("viewToRender: ", viewToRender);
+      if (viewToRender === "sign-up") {
+        swal({
+          title: "You are not subscribed user. please subscribe!",
+          timer: 2500,
+          icon: "warning",
+        }).then(() => {
+          console.log("push");
+          router.push("/sign-up");
+        });
+      } else {
+        setViewToShow(viewToRender);
+      }
     }
   }
+
   function sendToForgetPin() {
     setViewToShow("forget-pin");
   }

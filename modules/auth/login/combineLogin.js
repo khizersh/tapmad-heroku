@@ -62,8 +62,8 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           updateUserPassword(data.data.User.UserPassword);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
           Cookie.setCookies("userId", data.data.User.UserId);
-
-
+         let viewToRendor = loginResponse(data.data);
+         if(viewToRendor == true){
           const pinResponse = await AuthService.verifyPinCode(pin);
           if (pinResponse && pinResponse.responseCode == 1) {
             var loginResp = login();
@@ -83,8 +83,12 @@ function combineLogin({ loginResponse, forgetPin, login }) {
             });
             Cookie.setCookies("isAuth", 0);
           }
-          //   loginResponse(data.data);
           setLoader(false);
+         }
+
+        
+          //   loginResponse(data.data);
+        
         }
       } else {
         swal({
