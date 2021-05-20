@@ -23,7 +23,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
   return (
     <>
       <div className="form-control text-center">
-        <img src={jazzIcon} width="20" />{" "}
+        <img src={jazzIcon} width="20" alt={'jazzcash'} />{" "}
         <span className="font-weight">JazzCash</span>
       </div>
       <span>
@@ -32,7 +32,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
       <input
         type="text"
         maxLength="20"
-         minLength="5"
+        minLength="5"
         className="form-control"
         placeholder="3xxxxxxxxxx"
         inputMode="numeric"

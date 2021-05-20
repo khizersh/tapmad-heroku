@@ -11,7 +11,7 @@ export default function PlayerShopProducts({ MerchantProducts }) {
             return (
               <div key={i}>
                 <div className="product-images">
-                  <img src={product.MerchantProductImage} />
+                  <img src={product.MerchantProductImage} alt={'merchant-image'} />
                 </div>
                 <div>{product.MerchantProductName}</div>
                 <div className="text-primary">

@@ -76,7 +76,7 @@ export default function Footer() {
                     href="https://apps.apple.com/pk/app/tapmad/id1317253610"
                     target="_blank"
                   >
-                    <img src={appleApp} className="img-fluid" alt="" />
+                    <img src={appleApp} className="img-fluid" alt="apple-app" />
                   </a>
                 </li>
                 <li className="list-group-item">
@@ -84,7 +84,7 @@ export default function Footer() {
                     href="https://play.google.com/store/apps/details?id=com.tapmad.tapmadtv&amp;hl=en"
                     target="_blank"
                   >
-                    <img src={androidApp} className="img-fluid" alt="" />
+                    <img src={androidApp} className="img-fluid" alt="android-app" />
                   </a>
                 </li>
                 <li className="list-group-item">
@@ -92,7 +92,7 @@ export default function Footer() {
                     href="https://appgallery.huawei.com/#/app/C100909517"
                     target="_blank"
                   >
-                    <img src={huaweiApp} className="img-fluid" alt="" />
+                    <img src={huaweiApp} className="img-fluid" alt="huawie-app" />
                   </a>
                 </li>
               </ul>
