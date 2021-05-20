@@ -26,7 +26,7 @@ import { Cookie } from "../services/cookies";
 import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
-import { addScriptUrlInDom, setUrlToCookies } from "../services/utils";
+import { addScriptCodeInDom, addScriptUrlInDom, setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
 
@@ -68,7 +68,12 @@ function MyApp({ Component, pageProps, test }) {
   }, []);
 
   useLayoutEffect(() => {
-    // addScriptUrlInDom("public/clevertap_sw.js")
+    // addScriptUrlInDom("public/clevertap_sw.js");
+    addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
   }, [])
   let styles =
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
@@ -84,16 +89,7 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-PJ4M57N');`,
-          }}
-        />
-        {/* <script src="https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js" type="text/javascript"></script> */}
+        {/* <script src="clevertap_sw.js" type="text/javascript"></script> */}
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
           name="viewport"
