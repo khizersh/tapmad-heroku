@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "export $(cat .env) && TAPENV=production && next start -p 3000",
+    "start": "export $(cat .env) && TAPENV=production && next start -p 3100",
     "prod": "export $(cat .env) && TAPENV=production && npm run dev",
     "staging": "export $(cat .env) && TAPENV=staging && npm run dev",
     "local": "export $(cat .env) && TAPENV=local && npm run dev",
