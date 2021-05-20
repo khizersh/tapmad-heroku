@@ -68,7 +68,7 @@ function MyApp({ Component, pageProps, test }) {
   }, []);
 
   useLayoutEffect(() => {
-    addScriptUrlInDom("https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js")
+    // addScriptUrlInDom("public/clevertap_sw.js")
   }, [])
   let styles =
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
