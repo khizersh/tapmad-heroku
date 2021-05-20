@@ -56,11 +56,9 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           var loginResp = login();
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
-              console.log(e);
               forgetPin();
             }
           });
-          //   loginResponse(data.data);
           setLoader(false);
         }
       } else {

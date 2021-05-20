@@ -17,9 +17,9 @@ export default async (req, res) => {
     const data = await AuthService.loginUserFetchApi(req.body);
     let { responseCode, message } = data.Response;
     console.log(JSON.stringify(data));
-    console.log(JSON.stringify(req.body));
+    console.log(JSON.stringify("req: ",req.body));
     let { User } = data;
-    console.log("api: ", data);
+ 
 
     if (User && User.UserId) {
       var token = jwt.sign(
