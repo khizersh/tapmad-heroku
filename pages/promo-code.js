@@ -18,12 +18,8 @@ const promoCode = () => {
   const [promoCode, setPromoCode] = useState("");
   const [number, setNumber] = useState([]);
   const { authState, updateSelectedOperator } = useContext(Authcontext);
-  const {
-    updateUserOperator,
-    initialState,
-    setLoader,
-    updateUserNumber,
-  } = useContext(MainContext);
+  const { updateUserOperator, initialState, setLoader, updateUserNumber } =
+    useContext(MainContext);
 
   const handleNumber = (e) => {
     let num = e.target.value;
@@ -101,12 +97,13 @@ const promoCode = () => {
 
   const operators = useMemo(() => authState.loginOperators);
 
+
   return (
     <div>
       <PromoCodeLayout
         bgImage={"http://d1s7wg2ne64q87.cloudfront.net/web/images/psl-min.jpg"}
       >
-        <div className="form-group mb-0 tm_promo_cde_form w-100">
+        <div className="form-group mb-0 ">
           <div>
             <div className="">
               <input
@@ -146,7 +143,7 @@ export default promoCode;
 export function getStaticProps() {
   return {
     props: {
-      auth: true
+      auth: true,
     },
   };
 }
