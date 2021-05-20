@@ -2,6 +2,7 @@ import { AuthService } from "../../modules/auth/auth.service";
 import { MYSECRET } from "../../services/secret";
 var jwt = require("jsonwebtoken");
 import { serialize } from "cookie";
+import requestIp from "request-ip";
 
 export const setCookie = (res, name, value, options = {}) => {
   const stringValue = value;
@@ -13,10 +14,16 @@ export const clearCookie = (res, name) => {
 };
 
 export default async (req, res) => {
+<<<<<<< HEAD
     
   console.log(JSON.stringify("req.body: ",req.body));
+=======
+  console.log(req.headers);
+  var ip = requestIp.getClientIp(req);
+  console.log("ip   ", ip);
+>>>>>>> 9739a5c73e71598df7030a62b15ce080e35bdf26
   if (req.method == "POST") {
-    const data = await AuthService.loginUserFetchApi(req.body);
+    const data = await AuthService.loginUserFetchApi(req.body, ip);
     let { responseCode, message } = data.Response;
 
     let { User } = data;
