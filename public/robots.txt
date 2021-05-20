@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /syno?*
+Disallow: /player?*
+Disallow: /vodlist?*
+Disallow: /*.php
+
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
