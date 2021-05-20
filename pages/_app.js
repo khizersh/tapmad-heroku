@@ -16,7 +16,7 @@ import "../modules/samsungtv/samsung.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
@@ -26,7 +26,7 @@ import { Cookie } from "../services/cookies";
 import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
-import { setUrlToCookies } from "../services/utils";
+import { addScriptUrlInDom, setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
 
@@ -66,6 +66,10 @@ function MyApp({ Component, pageProps, test }) {
   useEffect(() => {
     checkUserAuthentication();
   }, []);
+
+  useLayoutEffect(() => {
+    addScriptUrlInDom("https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js")
+  }, [])
   let styles =
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
   let message = "tapmad ";
