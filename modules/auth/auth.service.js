@@ -361,6 +361,7 @@ async function loginUserFetchApi(body) {
     body: JSON.stringify(body),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
+      "X-Forwarded-For": body.userIp,
     },
   };
   const resp = await fetch(SignUpORSignInMobileOperatorToken, options);
@@ -377,12 +378,8 @@ async function signInOrSignUpMobileOperator(
   ip = "",
   withMultiCredentials
 ) {
-  const resp = await post(
-    "/api/authentication",
-    body,
-    ip,
-    withMultiCredentials
-  );
+  let obj = { ...body, userIp: ip };
+  const resp = await post("/api/authentication", obj, ip, withMultiCredentials);
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);
@@ -442,7 +439,7 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const AuthService = {
