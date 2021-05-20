@@ -14,9 +14,9 @@ export const clearCookie = (res, name) => {
 };
 
 export default async (req, res) => {
- 
+
   if (req.method == "POST") {
-    const data = await AuthService.loginUserFetchApi(req.body, "");
+    const data = await AuthService.loginUserFetchApi(req.body);
     let { responseCode, message } = data.Response;
 
     let { User } = data;

@@ -355,7 +355,7 @@ function validateUser(data) {
   }
 }
 
-async function loginUserFetchApi(body, ip) {
+async function loginUserFetchApi(body) {
   let options = {
     method: "POST",
     body: JSON.stringify(body),
@@ -439,7 +439,7 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const AuthService = {
