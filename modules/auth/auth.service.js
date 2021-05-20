@@ -364,10 +364,10 @@ async function loginUserFetchApi(body, ip) {
       "X-Forwarded-For": body.userIp ? body.userIp : "",
     },
   };
-  const resp = await fetch(SignUpORSignInMobileOperatorToken, options);
-  const data = await resp.json();
-  if (data && data.Response) {
-    return data;
+  const resp = await post(SignUpORSignInMobileOperatorToken,body, body.userIp);
+  console.log("data: ",resp);
+  if (resp.data && resp.data.Response) {
+    return resp.data;
   } else {
     return null;
   }

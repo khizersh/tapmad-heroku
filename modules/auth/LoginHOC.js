@@ -15,7 +15,7 @@ export default function withLogin(Component, data) {
 
  
     async function loginUser(userIp) {
-      console.log("userIp:   ", userIp);
+
       let obj = {
         Language: "en",
         Platform: "web",
