@@ -89,7 +89,7 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        {/* <script src="clevertap_sw.js" type="text/javascript"></script> */}
+        <script src="clevertap_sw.js" type="text/javascript"></script>
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
           name="viewport"
