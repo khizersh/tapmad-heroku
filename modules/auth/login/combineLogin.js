@@ -48,7 +48,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
     };
     actionsRequestContent(body);
 
-    if (mobileNo.length == 10 && pin.length > 0) {
+    if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
       let body = {
         Language: "en",
@@ -123,7 +123,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
         <input
           type="text"
           maxLength="20"
-           minLength="5"
+          minLength="5"
           className="form-control mb-2"
           placeholder="xxxxxxxxxxx"
           inputMode="numeric"
