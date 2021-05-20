@@ -80,7 +80,7 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -88,7 +88,7 @@ function MyApp({ Component, pageProps, test }) {
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                 })(window,document,'script','dataLayer','GTM-PJ4M57N');`,
           }}
-        />
+        /> */}
         {/* <script src="https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js" type="text/javascript"></script> */}
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
