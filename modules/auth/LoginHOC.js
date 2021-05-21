@@ -15,7 +15,7 @@ export default function withLogin(Component, data) {
 
  
     async function loginUser(userIp) {
-
+      setLoader(true)
       let obj = {
         Language: "en",
         Platform: "web",
@@ -43,7 +43,7 @@ export default function withLogin(Component, data) {
           Cookie.setCookies("userId", response.data.UserId);
           Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
           LoginTag(obj, response.response);
-
+          setLoader(false);
           checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
           if (backURL == "sign-in") {
@@ -67,6 +67,7 @@ export default function withLogin(Component, data) {
       }
     }
     async function verifyPinCode(ip, pin, forgetPin) {
+      setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);
       if (pinResponse && pinResponse.responseCode == 1) {
         var loginResp = loginUser(ip);

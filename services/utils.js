@@ -1,6 +1,8 @@
 const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
 const { Cookie } = require("./cookies");
 const CryptoJS = require("crypto-js");
+
+
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
   let isChannel = movieId.charAt(movieId.length - 1);
