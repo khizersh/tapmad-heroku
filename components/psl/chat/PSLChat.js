@@ -28,7 +28,12 @@ export default function PSLChat({ channelID }) {
             // setChatRooms([]);
         }
     }, [database]);
-
+    function appendChatRoom(newRoom) {
+        var chatRoomClone = chatRoom;
+        chatRoomClone.unshift(newRoom);
+        setChatRooms(chatRoomClone);
+        setModalShow(false)
+    }
     async function getUserAllRooms() {
         userId = Cookie.getCookies('userId');
         const response = await get(getUserRooms(userId, channelID));
@@ -78,15 +83,6 @@ export default function PSLChat({ channelID }) {
                         <a className={pslStyles.chatRoomName} style={{ borderBottomColor: room == roomData.ChatRoomId ? null : 'grey' }}>{roomData.RoomName}</a>
                     </li>
                 }) : null}
-                {/* <li className="nav-item">
-                    <a className={pslStyles.chatRoomName}>General</a>
-                </li>
-                <li className="nav-item">
-                    <a className={pslStyles.chatRoomName}>General</a>
-                </li>
-                <li className="nav-item">
-                    <a className={pslStyles.chatRoomName}>General</a>
-                </li> */}
             </ul>
         </div>
         <div className={pslStyles.chatBox}>
@@ -134,7 +130,7 @@ export default function PSLChat({ channelID }) {
         </div>
         <CenteredModal show={modalShow}
             onHide={() => (setModalShow(false), setCurrentRoomOption(0))}>
-            <CreateJoinRoomModalBody channelId={channelID} />
+            <CreateJoinRoomModalBody channelId={channelID} mergeRoom={(e) => appendChatRoom(e)} />
         </CenteredModal>
     </div>
 }

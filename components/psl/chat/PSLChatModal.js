@@ -1,12 +1,15 @@
 import { useRef, useState } from "react";
+import swal from "sweetalert";
 import { Cookie } from "../../../services/cookies";
-import { createAChatRoom } from "./PSLChat.service";
+import { createAChatRoom, joinAChatRoom } from "./PSLChat.service";
 
 
-export default function CreateJoinRoomModalBody({ channelId }) {
+export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
     const roomName = useRef();
+    const chatRoomId = useRef();
     async function createRoom() {
+        console.log(roomName);
         if (roomName.current.value.length > 2) {
             var body = {
                 Version: "v1",
@@ -17,9 +20,43 @@ export default function CreateJoinRoomModalBody({ channelId }) {
                 RoomName: roomName.current.value
             }
             const data = await createAChatRoom(body);
-            console.log("Woahooo ", data);
+            if (data.Response.responseCode == 2) {
+                swal({
+                    title: data.Response.message,
+                    icon: "error",
+                    allowOutsideClick: false,
+                    closeOnClickOutside: false,
+                })
+            } else if (data.Response.responseCode == 1) {
+                mergeRoom(data.ChatRooms[0]);
+            }
         } else {
-            alert("STFU")
+            swal({
+                title: 'Add more than 3 characters.',
+                icon: "error",
+                allowOutsideClick: false,
+                closeOnClickOutside: false,
+            })
+        }
+    }
+    async function joinChatRoom() {
+        if (chatRoomId.current.value.length > 5) {
+            var body = {
+                Version: "V1",
+                Language: "en",
+                Platform: "android",
+                UserId: Cookie.getCookies("userId"),
+                ChannelId: channelId,
+                ChatLink: chatRoomId.current.value,
+            }
+            const data = await joinAChatRoom(body);
+        } else {
+            swal({
+                title: 'Invalid chat room id',
+                icon: "error",
+                allowOutsideClick: false,
+                closeOnClickOutside: false,
+            })
         }
     }
     return <>
@@ -38,19 +75,19 @@ export default function CreateJoinRoomModalBody({ channelId }) {
                     <button className="btn btn-dark btn-sm">Room ID</button>
                 </div> */}
                 <div className="col-12 mt-2">
-                    <input type="text" className="form-control bg-dark" placeholder="Enter Room Name" />
+                    <input type="text" className="form-control bg-dark" ref={roomName} placeholder="Enter Room Name" />
                 </div>
                 <div className="col-12 mt-2">
                     <button type="button" className="btn btn-primary btn-sm" onClick={createRoom}>Submit</button>
                 </div>
             </> : (currentRoomOption == 2 ?
                 <>
-                    <div className="col-12">
+                    {/* <div className="col-12">
                         <button className="btn btn-primary btn-sm">Shareable Link</button> &nbsp;&nbsp;&nbsp;
                         <button className="btn btn-dark btn-sm">Room ID</button>
-                    </div>
+                    </div> */}
                     <div className="col-12 mt-2">
-                        <input type="text" className="form-control bg-dark" ref={roomName} placeholder="Enter shareable link" />
+                        <input type="text" className="form-control bg-dark" ref={chatRoomId} placeholder="Enter Room Id" />
                     </div>
                 </>
                 : null)}
