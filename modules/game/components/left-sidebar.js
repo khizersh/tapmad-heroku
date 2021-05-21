@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import BuyCoinModal from "./BuyCoinModal";
+import { Accordion, Card } from "react-bootstrap";
 
 export default function LeftSidebar() {
   const [buyCoinModal, setBuyCoinModal] = useState(false);
@@ -97,83 +98,45 @@ export default function LeftSidebar() {
           </a>
         </div>
       </div>
-      <div className="tm_btng_sidebar text-center mb-3  d-none d-lg-block">
+
+      <div className="tm_btng_sidebar text-center mb-3 d-none d-lg-block">
         <div className="tm_btng_sidebar_hdr pl-2">
           <h5 className="text-left">Live Sports</h5>
         </div>
-        <ul className="text-left list-group-flush list-group">
-          <li>
-            <a
-              className="list-group-item bg-transparent p-2 text-light collapsed"
-              data-target="#multiCollapseExample1"
-              data-toggle="collapse"
-              aria-expanded="false"
+        <Accordion>
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="0">
+              Click me!
+            </Accordion.Toggle>
+            <Accordion.Collapse
+              eventKey="0"
+              className="tm_btng_sidebar_hdr pl-2"
             >
-              <img
-                src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png"
-                className="img-fluid mr-2"
-                width="20"
-                alt=""
-              />
-              Cricket<span className="fa fa-plus pull-right mt-1"></span>
-            </a>
-          </li>
-          <li
-            className="list-group-item bg-transparent multi-collapse p-0 collapse"
-            id="multiCollapseExample1"
-          >
-            <ul className="list-group-flush list-group text-light m-0">
-              <li className="list-group-item bg-transparent tm_btng_sidebar_hdr">
-                <h6 className="m-0 text-muted pl-2 ">Today Matches</h6>
-              </li>
-              <li className="list-group-item bg-transparent text-muted">
-                West Indies vs Ireland
-              </li>
-              <li className="list-group-item bg-transparent text-muted">
-                Dhaka Platoon vs Rangpur Rangers
-              </li>
-              <li className="list-group-item bg-transparent text-muted">
-                Melbourne Renegades vs Melbourne Stars
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            <a
-              className="list-group-item bg-transparent p-2 text-light collapsed"
-              data-toggle="collapse"
-              data-target="#multiCollapseExample2"
-              aria-expanded="false"
-            >
-              <img
-                src="https://cdn0.iconfinder.com/data/icons/sports-59/512/Soccer-512.png"
-                className="img-fluid mr-2"
-                width="20"
-                alt=""
-              />
-              Football<span className="fa fa-plus pull-right mt-1"></span>
-            </a>
-          </li>
-          <li
-            className="list-group-item bg-transparent multi-collapse p-0 collapse"
-            id="multiCollapseExample2"
-          >
-            <ul className="list-group-flush list-group text-light m-0">
-              <li className="list-group-item bg-transparent tm_btng_sidebar_hdr">
-                <h6 className="m-0 text-muted pl-2 ">Today Matches</h6>
-              </li>
-              <li className="list-group-item bg-transparent text-muted">
-                Premier League
-              </li>
-              <li className="list-group-item bg-transparent text-muted">
-                UEFA Champions League
-              </li>
-              <li className="list-group-item bg-transparent text-muted">
-                Primera División
-              </li>
-            </ul>
-          </li>
-        </ul>
+              <ul class="list-group-flush list-group text-light m-0">
+                <li class="list-group-item bg-transparent tm_btng_sidebar_hdr">
+                  <h6 class="m-0 text-muted pl-2 ">Today Matches</h6>
+                </li>
+                <li class="list-group-item bg-transparent text-muted">
+                  West Indies vs Ireland
+                </li>
+                <li class="list-group-item bg-transparent text-muted">
+                  Dhaka Platoon vs Rangpur Rangers
+                </li>
+                <li class="list-group-item bg-transparent text-muted">
+                  Melbourne Renegades vs Melbourne Stars
+                </li>
+              </ul>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="1">
+              Click me!
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body>Hello! I'm another body</Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
       </div>
       <div className="tm_btng_sidebar text-center mb-3  d-none d-lg-block">
         <div className="tm_btng_sidebar_hdr pl-2">

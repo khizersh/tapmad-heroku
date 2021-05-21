@@ -4,6 +4,8 @@ import {
   getAllLeagues,
   getLeaderBoardByLeagueId,
   getBuyCoinsPackages,
+  makeCoinTransaction,
+  rewardPredicationCoda,
 } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post, handleResponse, get } from "../../../services/http-service";
@@ -81,6 +83,8 @@ export const getLeaderBoardByLeague = async (leagueId, offset) => {
     return null;
   }
 };
+
+// coins
 export const getBuyCoinsData = async (leagueId, offset) => {
   const response = await get(getBuyCoinsPackages);
   const data = handleResponse(response);
@@ -102,6 +106,49 @@ export const getBuyCoinsData = async (leagueId, offset) => {
     return null;
   }
 };
+export const makeCoinTransactionData = async (body) => {
+  const response = await post(makeCoinTransaction , body);
+  const data = handleResponse(response);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+};
+export const rewardPredication = async (body) => {
+  const response = await post(rewardPredicationCoda , body);
+  const data = handleResponse(response);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+};
+
 
 export const getAllMatchQuestions = (database, cb) => {
   database.ref("Game").on("value", (snapshot) => {

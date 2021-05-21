@@ -101,6 +101,10 @@ export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
 export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
 export const getLeaderBoardByLeagueId = BASEURL + "api/getLeaderBoardByLeagueId";
 export const getBuyCoinsPackages = BASEURL + "api/getBuyCoinsPackages/v1/en/web";
+export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
+export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
+
+
 
 
 
