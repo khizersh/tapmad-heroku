@@ -34,8 +34,8 @@ const CreditCardForm = ({
       </span>
       <input
         type="text"
-        maxLength="10"
-        minLength="10"
+        maxLength="20"
+         minLength="5"
         className="form-control mb-2 pl-2"
         placeholder="Mobile Number"
         inputMode="numeric"

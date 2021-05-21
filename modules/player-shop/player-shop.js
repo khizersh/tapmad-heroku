@@ -60,7 +60,7 @@ export default function PlayerShop() {
                 }
                 title={
                   <div>
-                    <img src={tabs.MerchantImageName} width={25} />
+                    <img src={tabs.MerchantImageName} width={25} alt={tabs.MerchantTabName} />
                     <p className="text-white m-0">{tabs.MerchantTabName}</p>
                   </div>
                 }

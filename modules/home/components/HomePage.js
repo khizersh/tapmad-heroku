@@ -29,7 +29,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setCurrentRow(rowData.rowsTo);
 
     try {
-    } catch (error) {}
+    } catch (error) { }
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
       rowData.rowsTo,
@@ -84,6 +84,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
               <img
                 src={banner?.Video[0]?.bannerPoster}
                 style={{ width: "100%" }}
+                alt="homepage-banner"
               />
             </div>
             <div className="width-100">

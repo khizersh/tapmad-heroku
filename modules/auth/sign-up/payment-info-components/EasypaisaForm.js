@@ -14,7 +14,7 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
   return (
     <>
       <div className="form-control text-center">
-        <img src={easyPaisaIcon} width="20" />{" "}
+        <img src={easyPaisaIcon} width="20" alt={'easypaisa'} />{" "}
         <span className="font-weight">{methodName}</span>
       </div>
       <span>
@@ -23,8 +23,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
 
       <input
         type="text"
-        maxLength="10"
-        minLength="10"
+        maxLength="20"
+        minLength="5"
         className="form-control"
         placeholder="3xxxxxxxxxx"
         inputMode="numeric"

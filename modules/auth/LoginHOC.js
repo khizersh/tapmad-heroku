@@ -9,12 +9,13 @@ import { encryptWithAES } from "../../services/utils";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const { checkUserAuthentication, setLoader, initialState } = useContext(
-      MainContext
-    );
+    const { checkUserAuthentication, setLoader, initialState } =
+      useContext(MainContext);
     const router = useRouter();
 
+ 
     async function loginUser(userIp) {
+
       let obj = {
         Language: "en",
         Platform: "web",
@@ -64,8 +65,7 @@ export default function withLogin(Component, data) {
           });
           return response;
         }
-      }
-      catch (err) {
+      } catch (err) {
         console.log(err);
       }
     }

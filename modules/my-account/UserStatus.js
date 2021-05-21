@@ -93,35 +93,35 @@ const UserStatus = ({ pdata, userId }) => {
           </thead>
           <tbody>
             {subscritionData &&
-            subscritionData.UserActiveSubscription.length > 0
+              subscritionData.UserActiveSubscription.length > 0
               ? subscritionData.UserActiveSubscription.map((m, i) => (
-                  <tr key={i}>
-                    <td>{m.UserSubscriptionStartDate}</td>
-                    <td>{m.UserSubscriptionExpiryDate}</td>
-                    <td>{m.UserPackageType}</td>
-                    <td>
-                      {subscritionData.User && subscritionData.User.UserIsActive
-                        ? "Active"
-                        : "Inactive"}
-                    </td>
-                    <td>
-                      {!deactivated ? (
-                        m.IsSubscribe == "0" ? (
-                          "Deactivated"
-                        ) : (
-                          <button
-                            className="btn btn-red"
-                            onClick={() => unSubscribe(m)}
-                          >
-                            Unsubscribe
-                          </button>
-                        )
-                      ) : (
+                <tr key={i}>
+                  <td>{m.UserSubscriptionStartDate}</td>
+                  <td>{m.UserSubscriptionExpiryDate}</td>
+                  <td>{m.UserPackageType}</td>
+                  <td>
+                    {subscritionData.User && subscritionData.User.UserIsActive
+                      ? "Active"
+                      : "Inactive"}
+                  </td>
+                  <td>
+                    {!deactivated ? (
+                      m.IsSubscribe == "0" ? (
                         "Deactivated"
-                      )}
-                    </td>
-                  </tr>
-                ))
+                      ) : (
+                        <button
+                          className="btn btn-red"
+                          onClick={() => unSubscribe(m)}
+                        >
+                          Unsubscribe
+                        </button>
+                      )
+                    ) : (
+                      "Deactivated"
+                    )}
+                  </td>
+                </tr>
+              ))
               : null}
           </tbody>
         </table>
@@ -135,7 +135,7 @@ const UserStatus = ({ pdata, userId }) => {
           <thead className="thead-light">
             <tr>
               <th>S.NO</th>
-              <th>Expiry Date</th>
+              <th>Current Date</th>
               <th>Package</th>
               <th>Mobile#</th>
               <th>Network</th>
@@ -145,17 +145,17 @@ const UserStatus = ({ pdata, userId }) => {
           <tbody>
             {subscritionHistory.length > 0
               ? subscritionHistory.map((m, i) => (
-                  <tr key={i}>
-                    <td>{++i}</td>
-                    <td>{m.UserPaymentStartDate}</td>
-                    <td>{m.UserPaymentPackageName}</td>
-                    <td>{m.UserPaymentMobileNumber}</td>
-                    <td>{m.UserPaymentOperatorID}</td>
-                    <td>
-                      {m.UserPaymentStatus == "1" ? "Success" : "Failure"}
-                    </td>
-                  </tr>
-                ))
+                <tr key={i}>
+                  <td>{++i}</td>
+                  <td>{m.UserPaymentStartDate}</td>
+                  <td>{m.UserPaymentPackageName}</td>
+                  <td>{m.UserPaymentMobileNumber}</td>
+                  <td>{m.UserPaymentOperatorID}</td>
+                  <td>
+                    {m.UserPaymentStatus == "1" ? "Success" : "Failure"}
+                  </td>
+                </tr>
+              ))
               : null}
           </tbody>
         </table>
