@@ -29,7 +29,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setCurrentRow(rowData.rowsTo);
 
     try {
-    } catch (error) { }
+    } catch (error) {}
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
       rowData.rowsTo,
@@ -56,9 +56,11 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const checAd = async () => {
     AuthService.getHomePageAdsDetail()
       .then((res) => {
+   
         if (res.data.responseCode == 1) {
           let data = res.data.data.filter((m) => m.row == "0")[0];
           if (data) {
+     
             setAd(data);
           }
         }

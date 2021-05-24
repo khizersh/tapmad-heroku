@@ -16,6 +16,7 @@ const news = ({ news, newsArray }) => {
   const [categoryList, setCategoryList] = useState([]);
   const [topTrending, setTopTrending] = useState([]);
 
+
   const onCLickCategory = (category) => {
     let array = newsArray.filter((f) => f.CategoryTitle == category);
     setNewsList(array);
