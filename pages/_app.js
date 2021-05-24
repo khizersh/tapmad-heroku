@@ -75,9 +75,6 @@ function MyApp({ Component, pageProps, test }) {
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
   }, [])
-  let styles =
-    "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
-  let message = "tapmad ";
 
   return (
     <>

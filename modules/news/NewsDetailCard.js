@@ -1,13 +1,23 @@
 import React from "react";
 import NewsBage from "./NewsBage";
 import { useRouter } from "next/router";
+import ReactJWPlayer from "react-jw-player";
 
 const NewsDetailCard = ({ news }) => {
+  console.log(news);
   const router = useRouter();
   return (
     <div>
       <div className="tm_news_big mt-3 text-right cursor-point">
-        <img src={news.Thumbnail} className="img-fluid" alt={news.Category} />
+        {news.fileUrl == null ? <img src={news.Thumbnail} className="w-100" alt={news.Category} /> : <ReactJWPlayer
+          playerId="tapmad-news"
+          playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+          isAutoPlay={true}
+          file={news.fileUrl}
+          customProps={{
+            controls: true,
+          }}
+        />}
         <div className="tm_news_cat_dtls p-3">
           <label className="news-date text-muted">{news.PublishDate}</label>
           <NewsBage color={"#dc3545"}>Latest</NewsBage>
