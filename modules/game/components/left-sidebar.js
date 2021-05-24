@@ -70,7 +70,7 @@ export default function LeftSidebar() {
             className="btn d-inline-block text-muted"
             target="_self"
           >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/coin-white.png" />
+            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/coin-white.png" alt="in-play" />
             <p className="m-0 ng-binding">In Play: 0</p>
           </a>
           <a
@@ -78,7 +78,7 @@ export default function LeftSidebar() {
             className="btn d-inline-block text-muted"
             target="_self"
           >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png" />
+            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png" alt="won" />
             <p className="m-0 ng-binding">Won: 4</p>
           </a>
           <a
@@ -86,7 +86,7 @@ export default function LeftSidebar() {
             className="btn d-inline-block text-muted"
             target="_self"
           >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/lost-white.png" />
+            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/lost-white.png" alt="Lost" />
             <p className="m-0 ng-binding">Lost: 9</p>
           </a>
           <a
@@ -94,7 +94,7 @@ export default function LeftSidebar() {
             className="btn d-inline-block text-muted"
             target="_self"
           >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/rank-white.png" />
+            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/rank-white.png" alt="rank" />
             <p className="m-0 ng-binding">Rank: 0</p>
           </a>
         </div>

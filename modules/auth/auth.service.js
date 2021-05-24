@@ -342,7 +342,8 @@ function validateUser(data) {
     Cookie.setCookies("userId", user.UserId);
     if (user.IsSubscribe) {
       if (user.IsPinSet) {
-        return "enter-pin";
+        // return "enter-pin";
+        return true;
       } else {
         return "send-otp";
       }
@@ -360,12 +361,13 @@ async function loginUserFetchApi(body) {
     body: JSON.stringify(body),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
+      "X-Forwarded-For": body.userIp ? body.userIp : "",
     },
   };
-  const resp = await fetch(SignUpORSignInMobileOperatorToken, options);
-  const data = await resp.json();
-  if (data && data.Response) {
-    return data;
+  const resp = await post(SignUpORSignInMobileOperatorToken, body, body.userIp);
+  console.log("data: ", resp);
+  if (resp.data && resp.data.Response) {
+    return resp.data;
   } else {
     return null;
   }
@@ -376,12 +378,8 @@ async function signInOrSignUpMobileOperator(
   ip = "",
   withMultiCredentials
 ) {
-  const resp = await post(
-    "/api/authentication",
-    body,
-    ip,
-    withMultiCredentials
-  );
+  let obj = { ...body, userIp: ip };
+  const resp = await post("/api/authentication", obj, ip, withMultiCredentials);
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);

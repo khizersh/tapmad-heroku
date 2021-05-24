@@ -12,24 +12,20 @@ export default function Skeleton({ children }) {
   // const { authState } = React.useContext(Authcontext);
 
   Router.onRouteChangeStart = (url) => {
-    // console.log(url);
     closeNavBar();
     let key = url.split("/")[1];
     setUrlToCookies(key, url);
     setLoader(true);
   };
   Router.onRouteChangeComplete = () => {
-    console.log("complete");
-    console.log(document.getElementsByClassName("desktop-ads").length);
     setLoader(false);
   };
 
   Router.onRouteChangeError = () => {
-    console.log("ERror");
     setLoader(false);
   };
 
-  useEffect(() => {}, [initialState.isSearch]);
+  useEffect(() => { }, [initialState.isSearch]);
 
   return (
     <div className="pages_header">

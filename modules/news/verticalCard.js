@@ -14,7 +14,7 @@ const verticalCard = ({ news }) => {
         </h6>
       </div>
       <div className="col-6 col-sm-6 col-md-4 col-lg-4 pl-0">
-        <img src={news.ThumbnailURL} className="img-fluid" />
+        <img src={news.ThumbnailURL} className="img-fluid" alt={news.Title} />
       </div>
     </div>
   );

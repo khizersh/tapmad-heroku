@@ -9,7 +9,7 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { loggingTags } from "../../../services/apilinks";
 import withLogin from "../LoginHOC";
 
-function SetYourNewPinSignUp({ login }) {
+function SetYourNewPinSignUp({ login, ip }) {
   const router = useRouter();
   const { initialState, checkUserAuthentication, setLoader } = useContext(
     MainContext
@@ -64,7 +64,9 @@ function SetYourNewPinSignUp({ login }) {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
-        await login();
+        await AuthService.clearUserToken(initialState.User.MobileNo);
+
+        await login(ip);
       }
     } else {
       return swal({

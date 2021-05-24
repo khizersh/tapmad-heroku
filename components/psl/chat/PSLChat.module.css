@@ -61,12 +61,21 @@
     border-right: 30px solid transparent;
     border-left: 30px solid transparent;
     border-bottom: 30px solid #121117;
-    border-bottom-color: #87c242 !important;
+    border-bottom-color: #87c242;
     height: 0;
     color: white;
+    cursor: pointer;
 }
+
+.chatRoomName:hover{
+    color: white;
+    cursor: pointer;
+}
+
+
 .chatRoomList{
     margin: 0 -30px 0 0;
+    z-index: 12;
 }
 .noBorders::-webkit-scrollbar {
     width: 0 !important;
@@ -74,9 +83,65 @@
   }
 .noBorders{
     border: 0px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
 }
 .all_messages{
     height: calc(100% - 70px);
     overflow-y: scroll;
     overflow-x: hidden;
+}
+.plusBtn{
+    margin: 0 0 0 20px;
+}
+
+.aaa {
+    width: 60px;
+    height: 24px;
+    -webkit-transform: skew( 
+60deg
+ );
+    transform: skew( 
+44deg
+ );
+    margin: 6px 0 0 -20px;
+    text-align: center;
+    z-index: 0;
+    border: 1px solid #222;
+    background: #121117;
+    color: white;
+    border-radius: 0px;
+    position: relative;
+}
+
+.aaa:hover {
+    z-index: 0;
+    border: 1px solid #222;
+    background: #121117;
+    color: white;
+}
+
+
+.add_plus {
+    position: relative;
+    line-height: 2px;
+    left: -28px;
+    top: 4px;
+    cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 746px) {
+
+    .noBorders {
+        border: 0px;
+        flex-direction: row-reverse;
+        justify-content: end;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        overflow-x: scroll;
+    }
+
+    
 }

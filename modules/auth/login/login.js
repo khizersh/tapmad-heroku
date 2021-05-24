@@ -3,7 +3,6 @@ import React, { useCallback, useMemo, memo } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
-import { Cookie } from "../../../services/cookies";
 import { actionsRequestContent } from "../../../services/http-service";
 import { tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
@@ -98,8 +97,8 @@ function Login({ loginResponse }) {
         )}
         <input
           type="text"
-          maxLength="10"
-          minLength="10"
+          maxLength="20"
+          minLength="5"
           className="form-control"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"

@@ -1,22 +1,25 @@
 import React, { useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 
 export default function SubscribeButton() {
+  const router = useRouter();
+
   const { initialState, setLoader, updateUserPassword } = useContext(
     MainContext
   );
+
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   function handleBody() {
     return {
       Version: "V1",
       Language: "en",
-      Platform: "web",
+      Platform: "android",
       // ProductId: 1214,
       ProductId: authState.selectedPackageId,
       MobileNo: initialState.User.MobileNo,
@@ -36,7 +39,6 @@ export default function SubscribeButton() {
       authState.selectedPaymentMethod &&
       authState.selectedPackageId
     ) {
-      console.log(authState.selectedPaymentMethod, authState.selectedPackageId);
       var details = {};
       if (authState.selectedPaymentMethod.PaymentType == 1) {
         details = handleBody();
@@ -57,7 +59,20 @@ export default function SubscribeButton() {
 
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         // for credit card specific only
-        AuthService.creditCardOrder(details);
+        const response = await AuthService.creditCardOrder(details);
+        if (response.data.responseCode == 1) {
+          window.location.href = response.data.CardPaymentUrl;
+        } else if (response.data.responseCode == 4) {
+          swal({
+            timer: 3000,
+            text: response.data.message,
+            icon: "info",
+            buttons: true,
+          }).then((e) => {
+            router.push('/sign-in')
+          })
+        }
+
       } else {
         if (!details.OperatorId) {
           swal({

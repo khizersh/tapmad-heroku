@@ -10,7 +10,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
-function combineLogin({ loginResponse, forgetPin, login }) {
+function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   const {
     initialState,
     updateUserNumber,
@@ -19,6 +19,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     setLoader,
   } = React.useContext(MainContext);
   const [mobileNo, setMobileNo] = React.useState("");
+  const [pin, setPin] = React.useState("");
   const [btnDisabled, setbtnDisabled] = React.useState(true);
 
   function handleNumber(e) {
@@ -34,6 +35,12 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     }
   }
 
+  function handlePin(e) {
+    const userPin = e.target.value;
+    if (+userPin === +userPin) {
+      setPin(userPin);
+    }
+  }
   async function loginUser() {
     let body = {
       event: loggingTags.login,
@@ -41,7 +48,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     };
     actionsRequestContent(body);
 
-    if (mobileNo.length == 10) {
+    if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
       let body = {
         Language: "en",
@@ -53,13 +60,12 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           updateUserNumber(mobileNo);
           updateUserPassword(data.data.User.UserPassword);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
-          var loginResp = login();
-          loginResp.then((e) => {
-            if (e != null && e.responseCode == 401) {
-              forgetPin();
-            }
-          });
-          setLoader(false);
+          Cookie.setCookies("userId", data.data.User.UserId);
+          let viewToRendor = loginResponse(data.data);
+          if (viewToRendor == true) {
+            verifyPin(ip, pin, forgetPin);
+            setLoader(false);
+          }
         }
       } else {
         swal({
@@ -71,7 +77,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
       }
     } else {
       swal({
-        title: "Invalid number!",
+        title: "Enter all fields!",
         timer: 3000,
         icon: "error",
       });
@@ -92,6 +98,7 @@ function combineLogin({ loginResponse, forgetPin, login }) {
     },
     [updateUserOperator]
   );
+
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
@@ -101,7 +108,9 @@ function combineLogin({ loginResponse, forgetPin, login }) {
       <div className="input-group">
         {initialState.AuthDetails && (
           <>
-            <DropdownWithImage data={operators} onChange={onChangeNetwork} />
+            {operators && operators.length ? (
+              <DropdownWithImage data={operators} onChange={onChangeNetwork} />
+            ) : null}
             <input type="hidden" id="CountryMobileCode" value="+92" />
             <span>
               <label className="form-control" style={{ fontSize: "14px" }}>
@@ -110,12 +119,13 @@ function combineLogin({ loginResponse, forgetPin, login }) {
             </span>
           </>
         )}
+
         <input
           type="text"
-          maxLength="10"
-          minLength="10"
-          className="form-control"
-          placeholder="3xxxxxxxxxx"
+          maxLength="20"
+          minLength="5"
+          className="form-control mb-2"
+          placeholder="xxxxxxxxxxx"
           inputMode="numeric"
           value={mobileNo}
           onChange={(e) => handleNumber(e)}
@@ -126,10 +136,10 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           type="password"
           maxLength="4"
           minLength="4"
-          //   value={userPin}
+          value={pin}
           className="text-center form-control"
           placeholder="Enter your PIN"
-          //   onChange={handleNumber}
+          onChange={handlePin}
         />
       </div>
       <div className="form-group">
@@ -153,17 +163,10 @@ function combineLogin({ loginResponse, forgetPin, login }) {
           >
             | &nbsp;&nbsp;Forgot Passcode?
           </span>
-
-          {/* <Link href="/sign-up" shallow={true} passHref={true}>
-            <a className="text-light">Sign up</a>
-          </Link> */}
         </>
       </div>
     </div>
   );
 }
-
-// export default memo(combineLogin);
-
 const EnhancedCombineLogin = withLogin(memo(combineLogin));
 export default EnhancedCombineLogin;

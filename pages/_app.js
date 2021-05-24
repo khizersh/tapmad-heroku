@@ -16,7 +16,7 @@ import "../modules/samsungtv/samsung.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Header from "../components/App/Header";
 import Skeleton from "../components/MainSkeleton";
 import Footer from "../components/Footer";
@@ -26,7 +26,7 @@ import { Cookie } from "../services/cookies";
 import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
-import { setUrlToCookies } from "../services/utils";
+import { addScriptCodeInDom, addScriptUrlInDom, setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
 import FireBaseProvider from "../contexts/FireBase";
@@ -68,6 +68,15 @@ function MyApp({ Component, pageProps, test }) {
   useEffect(() => {
     checkUserAuthentication();
   }, []);
+
+  useLayoutEffect(() => {
+    // addScriptUrlInDom("public/clevertap_sw.js");
+    addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
+  }, [])
   let styles =
     "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
   let message = "tapmad ";
@@ -82,22 +91,12 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        {/* <script src="./static/gtm.js"></script> */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-W3VZGWZ');`,
-          }}
-        />
+        <script src="clevertap_sw.js" type="text/javascript"></script>
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <meta name="robots" content="noindex" />
         <meta
           name="keywords"
           content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"

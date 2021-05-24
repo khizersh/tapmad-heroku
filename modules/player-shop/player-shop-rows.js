@@ -23,7 +23,7 @@ export default function PlayerShopRows({
             <div className="col-12">
               <div className="pt-2">
                 <span>
-                  <img src={merchant.MerchantImageName} width="20" />{" "}
+                  <img src={merchant.MerchantImageName} width="20" alt={'merchant.MerchantName'} />{" "}
                 </span>
                 {merchant.MerchantName}
               </div>

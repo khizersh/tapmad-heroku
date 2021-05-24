@@ -8,25 +8,30 @@ import swal from "sweetalert";
 import EnhancedEnterPin from "./enterPin";
 import EnhancedCombineLogin from "./combineLogin";
 
-export default function AuthViews() {
+export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
   const router = useRouter();
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
-
-    if (viewToRender === "sign-up") {
-      swal({
-        title: "You are not subscribed user. please subscribe!",
-        timer: 2500,
-        icon: "warning",
-      }).then(() => {
-        router.push("/sign-up");
-      });
+    if (viewToRender == true) {
+      return true;
     } else {
-      setViewToShow(viewToRender);
+      if (viewToRender === "sign-up") {
+        swal({
+          title: "You are not subscribed user. please subscribe!",
+          timer: 2500,
+          icon: "warning",
+        }).then(() => {
+          console.log("push");
+          router.push("/sign-up");
+        });
+      } else {
+        setViewToShow(viewToRender);
+      }
     }
   }
+
   function sendToForgetPin() {
     setViewToShow("forget-pin");
   }
@@ -43,6 +48,7 @@ export default function AuthViews() {
         <EnhancedCombineLogin
           forgetPin={sendToForgetPin}
           loginResponse={processResponse}
+          ip={props.ip}
         />
       );
       // return <Login loginResponse={processResponse} />;
