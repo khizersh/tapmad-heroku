@@ -13,7 +13,7 @@ export default function PSLChat({ channelID }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
     const { database } = useContext(FirebaseContext);
-    const [room, setRoom] = useState(10000);
+    const [room, setRoom] = useState(1);
     const textMessage = useRef();
     const [modalShow, setModalShow] = useState(false);
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
@@ -29,9 +29,9 @@ export default function PSLChat({ channelID }) {
         }
     }, [database]);
     function appendChatRoom(newRoom) {
-        var chatRoomClone = chatRoom;
-        chatRoomClone.unshift(newRoom);
-        setChatRooms(chatRoomClone);
+        // var chatRoomClone = chatRoom;
+        // chatRoomClone.unshift(newRoom);
+        setChatRooms(newRoom);
         setModalShow(false)
     }
     async function getUserAllRooms() {
@@ -73,16 +73,16 @@ export default function PSLChat({ channelID }) {
     return <div>
         <div>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
-                <li className={pslStyles.plusBtn} onClick={() => setModalShow(true)}>
-                    <a className={`btn btn-dark btn-sm ${pslStyles.aaa}`} >
-                    </a>
-                    <span className={pslStyles.add_plus}>+</span>
-                </li>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
                     return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index}>
                         <a className={pslStyles.chatRoomName} style={{ borderBottomColor: room == roomData.ChatRoomId ? null : 'grey' }}>{roomData.RoomName}</a>
                     </li>
                 }) : null}
+                <li className={pslStyles.plusBtn} onClick={() => setModalShow(true)}>
+                    <a className={`btn btn-dark btn-sm ${pslStyles.aaa}`} >
+                    </a>
+                    <span className={pslStyles.add_plus}>+</span>
+                </li>
             </ul>
         </div>
         <div className={pslStyles.chatBox}>
@@ -95,7 +95,7 @@ export default function PSLChat({ channelID }) {
                         <div className="col-12">
                             <div className={pslStyles.insideChat} style={{ flexDirection: chats[room][keyName].id == userId ? 'row-reverse' : '' }}>
                                 <div className={pslStyles.avatar}>
-                                    <img src={chats[room][keyName].userProfile != "null" ? chats[room][keyName].userProfile : "https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png"} width="40" style={{ borderRadius: '10px' }} />
+                                    <img src={chats[room][keyName].userProfile != "" ? chats[room][keyName].userProfile : "https://miro.medium.com/max/600/1*PiHoomzwh9Plr9_GA26JcA.png"} width="40" style={{ borderRadius: '10px' }} />
                                 </div> &nbsp;&nbsp;
                                 <div className="message">
                                     <div style={{ textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>

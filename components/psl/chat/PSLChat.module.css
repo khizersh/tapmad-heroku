@@ -83,8 +83,6 @@
   }
 .noBorders{
     border: 0px;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
 }
 .all_messages{
     height: calc(100% - 70px);
@@ -136,8 +134,6 @@
 
     .noBorders {
         border: 0px;
-        flex-direction: row-reverse;
-        justify-content: end;
         flex-wrap: nowrap;
         overflow: scroll;
         overflow-x: scroll;

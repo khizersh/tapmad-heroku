@@ -28,7 +28,7 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     closeOnClickOutside: false,
                 })
             } else if (data.Response.responseCode == 1) {
-                mergeRoom(data.ChatRooms[0]);
+                mergeRoom(data.ChatRooms);
             }
         } else {
             swal({

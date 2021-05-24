@@ -18,7 +18,7 @@ export const sendGroupChatMessage = (database, chatDetails) => {
         message: chatDetails.message,
         id: Number(userId),
         senderName: name,
-        userProfile: picture
+        userProfile: picture == "null" ? "" : picture
     })
 }
 
