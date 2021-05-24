@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import ReactJWPlayer from "react-jw-player";
 
 const NewsDetailCard = ({ news }) => {
-  console.log(news);
+
   const router = useRouter();
   return (
     <div>

@@ -56,11 +56,11 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const checAd = async () => {
     AuthService.getHomePageAdsDetail()
       .then((res) => {
-        console.log("res ad: ", res);
+   
         if (res.data.responseCode == 1) {
           let data = res.data.data.filter((m) => m.row == "0")[0];
           if (data) {
-            console.log("ad::: ",data.mobileSize.trim());
+     
             setAd(data);
           }
         }
