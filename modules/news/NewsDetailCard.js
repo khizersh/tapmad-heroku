@@ -15,8 +15,7 @@ const NewsDetailCard = ({ news }) => {
             playerId="tapmad-news"
             playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
             isAutoPlay={true}
-            file={"https://vodss.tapmad.com/vods/TapmadNews/24May/sindh24may.mp4"}
-            // file={news.fileUrl}
+            file={news.fileUrl}
             customProps={{
               controls: true,
             }}
