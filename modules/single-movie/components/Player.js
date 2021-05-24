@@ -84,7 +84,7 @@ export default function Player({ movies }) {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
-      console.log("ad data: ", data);
+ 
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,

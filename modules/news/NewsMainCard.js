@@ -6,7 +6,7 @@ const NewsMainCard = ({ news }) => {
       <div className="tm_news_big mt-3 text-right cursor-point">
         <img
           src={news.ThumbnailURL}
-          className="img-fluid"
+          className="w-100"
           alt={news.CategoryTitle}
         />
         <div className="tm_news_cat_dtls p-3">

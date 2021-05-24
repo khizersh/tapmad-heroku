@@ -81,7 +81,7 @@ function HeaderBasic({ signout }) {
                 </a>
               </li>
               <li className="nav-item">
-                <p
+                {/* <p
                   className="tm_stre_lnk"
                   style={{
                     color: "rgb(255, 255, 255)",
@@ -102,7 +102,7 @@ function HeaderBasic({ signout }) {
                     className="img-fluid toGames"
                     alt=""
                   />
-                </p>
+                </p> */}
                 <a href="/news">
                   <img
                     src={tapmadNews}
