@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import ScrollComponent from "../../../components/scrollComponent";
@@ -55,14 +56,16 @@ export default function Movies({ movies }) {
         {movies.Banner &&
           movies.Banner.map((e, index) => {
             return (
-              <div key={index}>
-                <img
-                  src={e.WebBannerImage}
-                  style={{ width: "100%" }}
-                  className="banner-main"
-                  alt="Banner"
-                />
-              </div>
+              <Link href={e.BannerURL} key={index} passHref>
+                <a>
+                  <img
+                    src={e.WebBannerImage}
+                    style={{ width: "100%" }}
+                    className="banner-main"
+                    alt="Banner"
+                  />
+                </a>
+              </Link>
             );
           })}
       </Slider>{" "}

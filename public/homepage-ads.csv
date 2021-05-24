@@ -1,3 +1,5 @@
 row,desktop,mobile,desktopSize,mobileSize
 4,Tapmad_970*250_Desktop_HP,http://localhost:3000/das,"970,250","320,100"
 2,Tapmad_LB_Desktop_HP_3,http://localhost:3000/das,"728,90","320,100"
+0,,320x100-MW-HP,,"	320,100"
+3,,Tapmad_300*250_MS_HP,,"300,250"
