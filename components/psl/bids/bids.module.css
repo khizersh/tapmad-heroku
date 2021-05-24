@@ -1,237 +1,236 @@
-.matchTitleBar{
-    margin-bottom: 0;
-    background: #222222 !important;
-    border-radius: 6px !important;
-    padding: 6px 10px 6px 10px;
-    display: flex;
-    position: relative;
+.matchTitleBar {
+  margin-bottom: 0;
+  background: #222222 !important;
+  border-radius: 6px !important;
+  padding: 6px 10px 6px 10px;
+  display: flex;
+  position: relative;
 }
-.tag{
+.tag {
+  width: auto;
+  background: red;
+  border-radius: 4px;
+  margin: auto 10px;
+  display: flex;
+  padding: 2px;
+}
+.cricle {
+  background: #87c242;
+  border-radius: 50%;
+  padding: 4px;
+  text-align: center;
+  margin: auto 4px;
+}
+.tagText {
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  margin: auto 9px auto 1px;
+}
+.teamName {
+  /* font-weight: 800; */
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: start;
+  padding: 0px;
+  margin-left: 10px;
+}
+
+.letter {
+  letter-spacing: 1px;
+}
+.teamName span {
+  font-weight: 800;
+  color: #757575;
+  font-size: 18px;
+  text-decoration: none;
+}
+.teamName p {
+  font-weight: 500;
+  color: #757575;
+  font-size: 16px;
+  text-decoration: none;
+}
+.teamName:hover {
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: start;
+  padding: 0px;
+  margin-left: 10px;
+}
+.bidQ {
+  background: #121117;
+  border: 1px solid #222222;
+  border-radius: 6px;
+}
+.biding {
+  background: #464646;
+  border: 1px solid #222222;
+  border-radius: 6px;
+}
+.bidQ h5 {
+  color: white;
+  padding: 10px 20px 10px 20px;
+  font-size: 18px;
+}
+.team1 {
+  background: #121117;
+  border-radius: 6px;
+  display: flex;
+  margin: 10px 10px 10px 10px;
+  cursor: pointer;
+}
+.team1 > h6 {
+  text-align: left;
+  margin: auto auto auto 10px;
+  color: white;
+}
+.score {
+  background: #2e2e2e;
+  border-radius: 6px;
+  padding: 12px;
+}
+.team_vs {
+  /* background: #121117; */
+  border-radius: 6px;
+  display: flex;
+  margin: 10px 0px 0px 0px;
+}
+
+.quantitybtnqty {
+  text-align: center;
+  background: #8b8b8b88;
+  padding: 4px;
+  border-radius: 4px;
+  width: 150px;
+  margin: 10px 0px 0px 10px;
+}
+.minus {
+  cursor: pointer;
+  color: white;
+  width: 24px;
+  height: 24px;
+  font: 20px;
+  border-radius: 2px;
+  background-color: #87c242;
+  float: left;
+  border: 0px;
+}
+.minus span {
+  text-align: center;
+  position: relative;
+  vertical-align: text-top;
+  font-size: 15px;
+}
+.count {
+  color: #fff;
+  font-weight: 600;
+  min-width: 18px;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  width: 40%;
+}
+input.count:focus {
+  outline-width: 0;
+}
+.plus {
+  cursor: pointer;
+  color: white;
+  width: 24px;
+  height: 24px;
+  font: 20px;
+  border-radius: 2px;
+  background-color: #87c242;
+  float: right;
+  border: 0px;
+}
+.bid_text {
+  color: white;
+  margin: 10px 0px 0px 10px;
+  font-size: 12px;
+}
+.coins {
+  text-align: center;
+  background: #ffffff;
+  padding: 4px;
+  border-radius: 4px;
+  width: 120px;
+  margin: 10px 10px 0px 0px;
+  float: right;
+}
+.coins p {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #74d700;
+}
+.coins span {
+  float: right;
+  margin-right: 6px;
+}
+.coins_text {
+  color: white;
+  margin: 2px 10px 0px 10px;
+  font-size: 12px;
+  float: right;
+}
+.go_btn {
+  position: relative;
+  text-align: center;
+}
+.btn_circle {
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2.33;
+  border-radius: 25px;
+  background: #87c242;
+  position: absolute;
+  top: -25px;
+}
+
+@media only screen and (max-width: 768px) {
+  .teamName {
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 20px;
+    text-decoration: none;
+    text-align: start;
+    padding: 0px;
+    margin-left: 10px;
+    width: 260px;
+    letter-spacing: 1px;
+  }
+  .tag {
     width: auto;
     background: red;
     border-radius: 4px;
-    margin: auto 10px;
+    margin: auto 0px;
     display: flex;
     padding: 2px;
-}
-.cricle{
-    background: #87c242;
-    border-radius: 50%;
-    padding: 4px;
-    text-align: center;
-    margin: auto 4px;
-}
-.tagText{
-    text-align: center;
-    font-weight: 600;
-    color: white;
-    margin: auto 9px auto 1px;
-}
-.teamName {
-    font-weight: 800;
-    color: #ffffff;
-    font-size: 20px;
-    text-decoration: none;
-    text-align: start;
-    padding: 0px;
-    margin-left: 10px;
-
-}
-
-
-.teamName span{
-    font-weight: 800;
-    color: #757575;
-    font-size: 18px;
-    text-decoration: none;
-}
-.teamName p{
-    font-weight: 500;
-    color: #757575;
-    font-size: 16px;
-    text-decoration: none;
-}
-.teamName:hover{
-    font-weight: 800;
-    color: #ffffff;
-    font-size: 20px;
-    text-decoration: none;
-    text-align: start;
-    padding: 0px;
-    margin-left: 10px;
-}
-.bidQ {
-    background: #121117;
-    border: 1px solid #222222;
-    border-radius: 6px;
-}
-.biding {
-    background: #464646;
-    border: 1px solid #222222;
-    border-radius: 6px;
-}
-.bidQ h5{
-    color: white;
-    padding: 10px 20px 10px 20px;
-    font-size: 18px;
-}
-.team1 {
-    background: #121117;
-    border-radius: 6px;
-    display: flex;
-    margin: 10px 10px 10px 10px;
-    cursor: pointer;
-}
-.team1 > h6 {
-    text-align: left;
-    margin: auto auto auto 10px;
-    color: white;
-}
-.score {
-    background: #2e2e2e;
-    border-radius: 6px;
-    padding: 12px;
-}
-.team_vs{
-    /* background: #121117; */
-    border-radius: 6px;
-    display: flex;
-    margin: 10px 0px 0px 0px;
-}
-
-.quantitybtnqty{
-    text-align: center;
-    background: #8b8b8b88;
-    padding: 4px;
-    border-radius: 4px;
-    width: 150px;
-    margin: 10px 0px 0px 10px;
-}
-.minus{
-    cursor: pointer;
-    color: white;
-    width: 24px;
-    height: 24px;
-    font: 20px;
-    border-radius: 2px;
-    background-color: #87c242;
-    float: left;
-    border: 0px;
-}
-.minus span{
-    text-align: center;
-    position: relative;
-    vertical-align: text-top;
-    font-size: 15px;
-}
-.count{
-    color: #fff;
-    font-weight: 600;
-    min-width: 18px;
-    text-align: center;
-    background: transparent;
-    border: 0;
-    width: 40%;
-}
-input.count:focus {
-    outline-width: 0;
-}
-.plus {
-    cursor: pointer;
-    color: white;
-    width: 24px;
-    height: 24px;
-    font: 20px;
-    border-radius: 2px;
-    background-color: #87c242;
-    float: right;
-    border: 0px;
-}
-.bid_text{
-    color: white;
-    margin: 10px 0px 0px 10px;
-    font-size: 12px;
-
-}
-.coins{
-    text-align: center;
-    background: #ffffff;
-    padding: 4px;
-    border-radius: 4px;
-    width: 120px;
-    margin: 10px 10px 0px 0px;
-    float: right;
-}
-.coins p{
-    padding: 0px;
-    margin: 0px;
     font-size: 14px;
-    font-weight: 600;
-    color: #74d700;
-}
-.coins span {
-    float: right;
-    margin-right: 6px;
-}
-.coins_text{
-    color: white;
-    margin: 2px 10px 0px 10px;
-    font-size: 12px;
-    float: right;
-}
-.go_btn{
-    position: relative;
     text-align: center;
-}
-.btn_circle {
-    width: 50px;
-    height: 50px;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 2.33;
-    border-radius: 25px;
-    background: #87c242;
-    position: absolute;
-    top: -25px;
-}
+  }
 
+  .team_vs {
+    border-radius: 6px;
+    display: flex;
+    margin: 10px 0px 0px -4px;
+  }
 
-@media only screen and (max-width: 768px){
-    .teamName {
-        font-weight: 800;
-        color: #ffffff;
-        font-size: 20px;
-        text-decoration: none;
-        text-align: start;
-        padding: 0px;
-        margin-left: 10px;
-        width: 260px;
-        letter-spacing: 1px;
-    }
-    .tag{
-        width: auto;
-        background: red;
-        border-radius: 4px;
-        margin: auto 0px;
-        display: flex;
-        padding: 2px;
-        font-size: 14px;
-        text-align: center;
-    }
-
-    .team_vs {
-        border-radius: 6px;
-        display: flex;
-        margin: 10px 0px 0px -4px;
-    }
-
-    .team1 {
-        margin: 10px -10px 10px 10px;
-        cursor: pointer;
-    }
-    .team2 {
-        margin: 10px 10px 10px -10px;
-        cursor: pointer;
-    }
-
+  .team1 {
+    margin: 10px -10px 10px 10px;
+    cursor: pointer;
+  }
+  .team2 {
+    margin: 10px 10px 10px -10px;
+    cursor: pointer;
+  }
 }
