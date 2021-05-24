@@ -32,6 +32,11 @@
   background-color: #121117;
 }
 
+.mid{
+  width: 50%;
+  margin: auto;
+}
+
 .tm_btng_tble tbody {
   background: #1a1921;
   height: 300px;

@@ -77,9 +77,6 @@ function MyApp({ Component, pageProps, test }) {
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
   }, [])
-  let styles =
-    "font-weight: bold; font-size: 150px;color: #87c242; text-shadow: 3px 3px 0 rgb(217,31,38)  , 12px 12px 0 rgb(5,148,68)";
-  let message = "tapmad ";
 
   return (
     <>
@@ -91,7 +88,6 @@ function MyApp({ Component, pageProps, test }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <script src="clevertap_sw.js" type="text/javascript"></script>
         <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
           name="viewport"
