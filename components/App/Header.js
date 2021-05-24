@@ -22,7 +22,7 @@ function HeaderBasic({ signout }) {
     };
     actionsRequestContent(body);
   };
-  useEffect(() => {}, [initialState.isAuthenticated]);
+  useEffect(() => { }, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -103,19 +103,21 @@ function HeaderBasic({ signout }) {
                     alt=""
                   />
                 </p> */}
-                <a href="/news">
-                  <img
-                    src={tapmadNews}
-                    style={{
-                      width: "20px",
-                      marginTop: "17px",
-                      cursor: "pointer",
-                      marginLeft: "5px",
-                    }}
-                    className="img-fluid"
-                    alt=""
-                  />
-                </a>
+                <Link href="/news" passHref={true} shallow={true}>
+                  <a>
+                    <img
+                      src={tapmadNews}
+                      style={{
+                        width: "20px",
+                        marginTop: "17px",
+                        cursor: "pointer",
+                        marginLeft: "5px",
+                      }}
+                      className="img-fluid"
+                      alt=""
+                    />
+                  </a>
+                </Link>
               </li>
               {initialState.isAuthenticated ? (
                 <li id="loginAva2" className="nav-item">
