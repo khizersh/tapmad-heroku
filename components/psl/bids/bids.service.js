@@ -6,6 +6,7 @@ import {
   getBuyCoinsPackages,
   makeCoinTransaction,
   rewardPredicationCoda,
+  updateRewardStore,
 } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post, handleResponse, get } from "../../../services/http-service";
@@ -53,6 +54,7 @@ export const getAllLeagueOnline = async () => {
     return null;
   }
 };
+
 export const getLeaderBoardByLeague = async (leagueId, offset) => {
   let userId = Cookie.getCookies("userId");
   let body = {
@@ -108,6 +110,27 @@ export const getBuyCoinsData = async (leagueId, offset) => {
 };
 export const makeCoinTransactionData = async (body) => {
   const response = await post(makeCoinTransaction , body);
+  const data = handleResponse(response);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+};
+export const updateVoucher = async (body) => {
+  const response = await post(updateRewardStore , body);
   const data = handleResponse(response);
   if (data != null) {
     if (data.responseCode == 1) {

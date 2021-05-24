@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext} from "react";
 import Link from "next/link";
 import BuyCoinModal from "./BuyCoinModal";
 import { Accordion, Card } from "react-bootstrap";
 import styles from "../game.module.css";
+import LearnModal from "./LearnModal";
+import { GameContext } from "../../../contexts/GameContext";
 
 export default function LeftSidebar() {
   const [buyCoinModal, setBuyCoinModal] = useState(false);
+  const [learnMore, setLearnMore] = useState(false);
+  const {gameState ,  updateBuyModal} = useContext(GameContext)
 
   const onClickBuy = () => {
-    setBuyCoinModal(!buyCoinModal);
+    updateBuyModal(true)
+  };
+
+  const onClickLearnMore = () => {
+    setLearnMore(!learnMore);
   };
 
   return (
     <div>
-      <BuyCoinModal open={buyCoinModal} toggle={onClickBuy} />
+      <BuyCoinModal open={gameState.buyModal} toggle={updateBuyModal} />
+      <LearnModal open={learnMore} toggle={onClickLearnMore} />
       <div className="tm_btng_sidebar mb-3 text-center">
         <div className="tm_btng_sidebar_hdr mb-2 d-none d-lg-block d-md-none">
           <h5>User Profile</h5>
@@ -59,6 +68,7 @@ export default function LeftSidebar() {
               data-toggle="modal"
               data-target="#largeModal_Learn"
               className="d-block mt-2 text-primary"
+              onClick={onClickLearnMore}
             >
               <i className="fa fa-info"></i> Learn more
             </a>

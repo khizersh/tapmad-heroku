@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { getBuyCoinsData } from "../../../components/psl/bids/bids.service";
 import BuyCoinCard from "./buyCoinCard";
+import styles from "../game.module.css";
 
 const BuyCoinModal = ({ open, toggle }) => {
   const [data, setData] = useState([]);
@@ -12,18 +13,15 @@ const BuyCoinModal = ({ open, toggle }) => {
         if (res && res.responseCode == 1) {
           setData(res.data.CoinsPackages);
         }
-        console.log("ggg: ", res);
       })
       .catch((e) => console.log(e));
   }, []);
 
-  const onClick = () => {
-    console.log("onClick");
-  };
+ 
   return (
     <>
-      <Modal show={open} onHide={toggle}>
-        <Modal.Header closeButton>
+      <Modal show={open} onHide={() => toggle(false)}>
+        <Modal.Header closeButton className={`${styles.bgBlack} text-white`} >
           <Modal.Title>Purchase Coins</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-light">
@@ -34,7 +32,6 @@ const BuyCoinModal = ({ open, toggle }) => {
           {data.length
             ? data.map((m, i) => <BuyCoinCard key={i} data={m} />)
             : ""}
-          Woohoo, you're reading this text in a modal!
         </Modal.Body>
       </Modal>
     </>

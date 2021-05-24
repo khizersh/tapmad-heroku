@@ -23,6 +23,15 @@
   margin: auto;
 }
 
+.learnList {
+  list-style-type: disc !important;
+  padding-left: 15px;
+}
+
+.bgBlack{
+  background-color: #121117;
+}
+
 .tm_btng_tble tbody {
   background: #1a1921;
   height: 300px;
@@ -46,14 +55,13 @@
   color: #6c757d;
 }
 
-
 .listgroupitem {
   position: relative;
   display: block;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .sideBarLiHeader {

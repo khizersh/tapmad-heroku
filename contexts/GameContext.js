@@ -12,12 +12,11 @@ export default function GameProvider({ children }) {
   const [gameState, setGameState] = React.useState({
     selectedTab: null,
     tabs: [],
-
+    buyModal: false,
   });
 
   React.useEffect(async () => {
     await getAllLeagueTabs();
- 
   }, []);
 
   async function getAllLeagueTabs() {
@@ -44,12 +43,18 @@ export default function GameProvider({ children }) {
       selectedTab: selectedTab,
     });
   }
-
-
+  function updateBuyModal(data) {
+    let stateClone = gameState;
+    setGameState({
+      ...stateClone,
+      buyModal: data,
+    });
+  }
 
   let data = {
     gameState,
     updateSelectedTab,
+    updateBuyModal
   };
   return <GameContext.Provider value={data}>{children}</GameContext.Provider>;
 }

@@ -14,8 +14,10 @@ const buyCoinCard = ({ data }) => {
     UserId: Cookie.getCookies("userId"),
   });
 
-  const { initialState } = useContext(MainContext);
+  const { setLoader } = useContext(MainContext);
+  
   const onClickBuy = async () => {
+    setLoader(true);
     const resp = await MyAccountService.getUserData(formData);
     if (resp && resp.responseCode == 1) {
       let body = {
@@ -26,17 +28,31 @@ const buyCoinCard = ({ data }) => {
         UserId: Cookie.getCookies("userId"),
         ProudctCoins: data.ProudctCoins,
         CoinProductPrice: data.CoinProductPrice,
-        MobileNo: resp.data.UserProfile.MobileNumber,
+        MobileNo: resp.data.UserProfile.UserProfileMobile ,
         OperatorId: resp.data.UserProfile.OperatorId,
         TransactionType: 1,
       };
-      const respCoin = await makeCoinTransactionData(body);
-      if (respCoin && respCoin.responseCode == "0009") {
-        return swal({ title: respCoin.message, icon: "error", timer: 3000 });
-      } else {
-        return swal({ title: respCoin.message, icon: "success", timer: 3000 });
-      }
+      makeCoinTransactionData(body)
+        .then((respCoin) => {
+          if (respCoin && respCoin.responseCode == "10") {
+            setLoader(false);
+            return swal({
+              title: respCoin.message,
+              icon: "success",
+              timer: 3000,
+            });
+          } else {
+            setLoader(false);
+            return swal({
+              title: respCoin.message,
+              icon: "error",
+              timer: 3000,
+            });
+          }
+        })
+        .catch((e) => console.log(e));
     }
+    setLoader(false);
   };
   const coin = "//d1s7wg2ne64q87.cloudfront.net/web/images/coin.png";
   return (

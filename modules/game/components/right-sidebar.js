@@ -1,11 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Slider from "react-slick";
-import { rewardPredication } from "../../../components/psl/bids/bids.service";
+import swal from "sweetalert";
+import {
+  rewardPredication,
+  updateVoucher,
+} from "../../../components/psl/bids/bids.service";
+import { MainContext } from "../../../contexts/MainContext";
+import { GameContext } from "../../../contexts/GameContext";
+import { Cookie } from "../../../services/cookies";
 import { basicSliderConfig } from "../../../services/utils";
 
-const RightSidebar = ({ data }) => {
+const RightSidebar = () => {
   const setting = basicSliderConfig(2, 2);
   const [rewards, setRewards] = useState([]);
+  const { setLoader } = useContext(MainContext);
+  const { updateBuyModal } = useContext(GameContext);
+
+  const onClickVoucher = (data) => {
+    setLoader(true);
+    let userId = Cookie.getCookies("userId");
+    let body = {
+      Language: "en",
+      Platform: "android",
+      ProductId: data.RewardProductId,
+      UserId: userId,
+      Version: "V1",
+    };
+
+    updateVoucher(body)
+      .then((res) => {
+        setLoader(false);
+        if (res && res.responseCode == 6) {
+          swal({
+            title: res.message,
+            icon: "success",
+          });
+        } else if (res && res.responseCode == 8) {
+          swal({
+            title: res.message,
+            icon: "error",
+          });
+        } else if (res && res.responseCode == 4) {
+          swal({
+            title: res.message,
+            icon: "error",
+            timer: 3000,
+          }).then((r) => updateBuyModal(true));
+        } else {
+          swal({
+            title: res.message,
+            icon: "error",
+          });
+        }
+      })
+      .catch((e) => console.log(e));
+    setLoader(false);
+  };
 
   useEffect(() => {
     let body = {
@@ -17,7 +67,6 @@ const RightSidebar = ({ data }) => {
       .then((res) => {
         if (res && res.responseCode == 1) {
           setRewards(res.data.Rewards);
-          console.log("res.data.Rewards: ", res.data.Rewards);
         }
       })
       .catch((e) => console.log(e));
@@ -37,18 +86,26 @@ const RightSidebar = ({ data }) => {
                     </div>
                   </div>
                 </div>
-                <div className="p-2" style={{ marginRight: "0px", backgroundColor: "#121117" }}>
+                <div
+                  className="p-2"
+                  style={{ marginRight: "0px", backgroundColor: "#121117" }}
+                >
                   <Slider {...setting}>
                     {m.StoreProducts &&
                       m.StoreProducts.map((n, j) => (
-                        <div className="p-2">
+                        <div
+                          className="p-2 btn"
+                          onClick={() => onClickVoucher(n)}
+                        >
                           <img
                             src={n.RewardProductImage}
                             alt="reward"
                             width="100%"
                           />
                           <div className="card-body p-2 text-light text-center">
-                            <h5 style={{fontSize:'14px'}}>{n.RewardProductName}</h5>
+                            <h5 style={{ fontSize: "14px" }}>
+                              {n.RewardProductName}
+                            </h5>
                           </div>
                         </div>
                       ))}
