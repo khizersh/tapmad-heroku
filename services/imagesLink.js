@@ -18,9 +18,9 @@ export const jazzIcon =
 export const tapmadCoin = "/icons/coint.png";
 export const tapmadNews = "/icons/news-btn.png";
 
-export const samsungTvLogo = "/icons/Samsung-smarttv-logo-white.png";
+export const samsungTvLogo = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859275Samsung-smarttv-logo-white.png";
 
-export const tapmadLogoBgWhite = "/icons/tm-logo-clr.png";
+export const tapmadLogoBgWhite = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859428tm-logo-clr.png";
 
 export const sendMessageIcon = "/icons/psl/send-message.svg";
 export const pslCoins = "/icons/psl/coin.svg";

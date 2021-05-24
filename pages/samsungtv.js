@@ -1,10 +1,19 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { samsungTvLogo, tapmadLogoBgWhite } from "../services/imagesLink";
 
 const samsungtv = () => {
-  const subscribeUser = () => { };
-  const resetPin = () => { };
-  const unSubscribeUser = () => { };
+  const router = useRouter();
+  const subscribeUser = () => {
+    router.push('/sign-up')
+
+  };
+  const resetPin = () => {
+    router.push('/sign-in')
+  };
+  const unSubscribeUser = () => {
+    router.push('/myaccount')
+  };
   samsungTvLogo;
   return (
     <div className="main">
