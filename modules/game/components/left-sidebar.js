@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import BuyCoinModal from "./BuyCoinModal";
 import { Accordion, Card } from "react-bootstrap";
+import styles from "../game.module.css";
 
 export default function LeftSidebar() {
   const [buyCoinModal, setBuyCoinModal] = useState(false);
@@ -104,36 +105,105 @@ export default function LeftSidebar() {
           <h5 className="text-left">Live Sports</h5>
         </div>
         <Accordion>
-          <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="0">
-              Click me!
-            </Accordion.Toggle>
-            <Accordion.Collapse
+          <Card style={{ backgroundColor: "#121117" }}>
+            <Accordion.Toggle
+              as={Card.Header}
+              className={styles.tm_btng_sidebar_hdr}
               eventKey="0"
-              className="tm_btng_sidebar_hdr pl-2"
             >
-              <ul class="list-group-flush list-group text-light m-0">
-                <li class="list-group-item bg-transparent tm_btng_sidebar_hdr">
-                  <h6 class="m-0 text-muted pl-2 ">Today Matches</h6>
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png"
+                className="img-fluid mr-2"
+                width="20"
+                alt=""
+              />
+              Cricket
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0" className="tm_btng_sidebar_hdr">
+              <ul className="list-group-flush list-group text-light m-0">
+                <li
+                  className="list-group-item "
+                  className={styles.sideBarLiHeader}
+                >
+                  <h6 className="m-0 text-muted text-left pl-2">
+                    Today Matches
+                  </h6>
                 </li>
-                <li class="list-group-item bg-transparent text-muted">
-                  West Indies vs Ireland
+                <li
+                  className="list-group-item text-muted text-left"
+                  className={styles.listSidebar}
+                >
+                  <a href="#" className="text-muted">
+                    West Indies vs Ireland
+                  </a>
                 </li>
-                <li class="list-group-item bg-transparent text-muted">
-                  Dhaka Platoon vs Rangpur Rangers
+                <li
+                  className="list-group-item text-muted text-left"
+                  className={styles.listSidebar}
+                >
+                  <a href="#" className="text-muted">
+                    Dhaka Platoon vs Rangpur Rangers
+                  </a>
                 </li>
-                <li class="list-group-item bg-transparent text-muted">
-                  Melbourne Renegades vs Melbourne Stars
+                <li
+                  className="list-group-item  text-left"
+                  className={styles.listSidebar}
+                >
+                  <a href="#" className="text-muted">
+                    Melbourne Renegades vs Melbourne Stars
+                  </a>
                 </li>
               </ul>
             </Accordion.Collapse>
           </Card>
-          <Card>
-            <Accordion.Toggle as={Card.Header} eventKey="1">
-              Click me!
+          <Card style={{ backgroundColor: "#121117" }}>
+            <Accordion.Toggle
+              as={Card.Header}
+              className={styles.tm_btng_sidebar_hdr}
+              eventKey="1"
+            >
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/sports-59/512/Soccer-512.png"
+                alt=""
+                width="22px"
+              />{" "}
+              Football
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="1">
-              <Card.Body>Hello! I'm another body</Card.Body>
+            <Accordion.Collapse eventKey="1" className="tm_btng_sidebar_hdr">
+              <ul className="list-group-flush list-group text-light m-0">
+                <li
+                  className="list-group-item "
+                  className={styles.sideBarLiHeader}
+                >
+                  <h6 className="m-0 text-muted text-left pl-2">
+                    Today Matches
+                  </h6>
+                </li>
+                <li
+                  className="list-group-item text-muted text-left"
+                  className={styles.listSidebar}
+                >
+                  <a href="#" className="text-muted">
+                    Premier League
+                  </a>
+                </li>
+                <li
+                  className="list-group-item text-muted text-left"
+                  className={`${styles.listSidebar}`}
+                >
+                  <a href="#" className="text-muted">
+                    UEFA Champions League
+                  </a>
+                </li>
+                <li
+                  className="list-group-item  text-left"
+                  className={styles.listSidebar}
+                >
+                  <a href="#" className="text-muted">
+                    Primera División
+                  </a>
+                </li>
+              </ul>
             </Accordion.Collapse>
           </Card>
         </Accordion>
