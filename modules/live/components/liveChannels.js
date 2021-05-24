@@ -55,13 +55,15 @@ export default function LiveChannels({ channel }) {
       <Slider {...bannerSettings}>
         {channel.Banner.map((e, index) => {
           return (
-            <div key={index}>
-              <img
-                src={e.WebBannerImage}
-                style={{ width: "100%" }}
-                alt="Banner"
-              />
-            </div>
+            <Link href={e.BannerURL} key={index} passHref>
+              <a>
+                <img
+                  src={e.WebBannerImage}
+                  style={{ width: "100%" }}
+                  alt="Banner"
+                />
+              </a>
+            </Link>
           );
         })}
       </Slider>
