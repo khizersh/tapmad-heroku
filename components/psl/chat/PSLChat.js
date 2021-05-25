@@ -6,7 +6,7 @@ import { get } from "../../../services/http-service";
 import { sendMessageIcon } from "../../../services/imagesLink";
 import { CenteredModal } from "../../Modal";
 import pslStyles from "./PSLChat.module.css";
-import { getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
+import { deleteAChatRoom, getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
 export default function PSLChat({ channelID }) {
@@ -28,11 +28,23 @@ export default function PSLChat({ channelID }) {
             // setChatRooms([]);
         }
     }, [database]);
+
     function appendChatRoom(newRoom) {
-        // var chatRoomClone = chatRoom;
-        // chatRoomClone.unshift(newRoom);
-        setChatRooms(newRoom);
+        if (Array.isArray(newRoom)) {
+            setChatRooms(newRoom);
+            setRoom(newRoom[newRoom.length - 1].ChatRoomId);
+
+        } else {
+            var chatRoomClone = chatRoom;
+            chatRoomClone.push(newRoom);
+
+            setChatRooms(chatRoomClone);
+            setRoom(newRoom.ChatRoomId);
+            console.log(newRoom);
+            console.log(chatRoomClone);
+        }
         setModalShow(false)
+
     }
     async function getUserAllRooms() {
         userId = Cookie.getCookies('userId');
@@ -85,13 +97,27 @@ export default function PSLChat({ channelID }) {
         var time = formatAMPM(new Date(timestamp));
         return day + " " + time;
     }
+    async function deleteRoom(room) {
+        var body = {
+            "Version": "V1",
+            "Language": "en",
+            "Platform": "Android",
+            "UserId": Cookie.getCookies('userId'),
+            "ChatLink": room.ChatLink
+        }
+        await deleteAChatRoom(body);
+        var chatRoomClone = chatRoom.filter((e) => e.ChatRoomId != room.ChatRoomId);
+        setChatRooms(chatRoomClone);
+        setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
+
+    }
     return <div>
         <div>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
                     return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
                         <a className={pslStyles.chatRoomName} style={{ borderBottomColor: room == roomData.ChatRoomId ? null : 'grey' }}><span className={pslStyles.chatSpan}>{roomData.RoomName}</span>
-                            {room == roomData.ChatRoomId && room != 1 ? <i className={`fa fa-times ${pslStyles.crossIcon}`}></i> : null}
+                            {room == roomData.ChatRoomId && room != 1 ? <i className={`fa fa-times ${pslStyles.crossIcon}`} onClick={() => deleteRoom(roomData)}></i> : null}
                         </a>
                     </li>
                 }) : null}
@@ -105,9 +131,11 @@ export default function PSLChat({ channelID }) {
         </div>
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
+
                 {chats && chats[room] && Object.keys(chats[room]).map(function (keyName, keyIndex) {
                     setTimeout(() => {
-                        document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+
                     }, 100)
                     return <div className="row" key={keyIndex}>
                         <div className="col-12">
@@ -130,6 +158,8 @@ export default function PSLChat({ channelID }) {
                         </div>
                     </div>
                 })}
+                {/* <div id="lastDiv">
+                </div> */}
                 <div className="lastDiv">
                 </div>
             </div>

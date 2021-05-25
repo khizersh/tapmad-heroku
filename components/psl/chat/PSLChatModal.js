@@ -44,13 +44,15 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                 Version: "V1",
                 Language: "en",
                 Platform: "android",
-                // UserId: Cookie.getCookies("userId"),
-                UserId: "31276887",
+                UserId: Cookie.getCookies("userId"),
+                // UserId: "31276887",
                 ChannelId: channelId,
                 ChatLink: chatRoomId.current.value,
             }
             const data = await joinAChatRoom(body);
             console.log("data ", data);
+            mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
+
         } else {
             swal({
                 title: 'Invalid chat room id',
