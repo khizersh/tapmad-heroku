@@ -9,7 +9,6 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
     const roomName = useRef();
     const chatRoomId = useRef();
     async function createRoom() {
-        console.log(roomName);
         if (roomName.current.value.length > 2) {
             var body = {
                 Version: "v1",
@@ -45,11 +44,13 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                 Version: "V1",
                 Language: "en",
                 Platform: "android",
-                UserId: Cookie.getCookies("userId"),
+                // UserId: Cookie.getCookies("userId"),
+                UserId: "31276887",
                 ChannelId: channelId,
                 ChatLink: chatRoomId.current.value,
             }
             const data = await joinAChatRoom(body);
+            console.log("data ", data);
         } else {
             swal({
                 title: 'Invalid chat room id',
@@ -88,6 +89,9 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     </div> */}
                     <div className="col-12 mt-2">
                         <input type="text" className="form-control bg-dark" ref={chatRoomId} placeholder="Enter Room Id" />
+                    </div>
+                    <div className="col-12 mt-2">
+                        <button type="button" className="btn btn-primary btn-sm" onClick={joinChatRoom}>Submit</button>
                     </div>
                 </>
                 : null)}

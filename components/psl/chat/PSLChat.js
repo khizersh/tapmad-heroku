@@ -70,16 +70,34 @@ export default function PSLChat({ channelID }) {
         }
 
     }
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+    function getDayTime(timestamp) {
+        var day = new Date(timestamp).toLocaleDateString('en-US', { weekday: 'long' });
+        var time = formatAMPM(new Date(timestamp));
+        return day + " " + time;
+    }
     return <div>
         <div>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
-                    return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index}>
-                        <a className={pslStyles.chatRoomName} style={{ borderBottomColor: room == roomData.ChatRoomId ? null : 'grey' }}>{roomData.RoomName}</a>
+                    return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
+                        <a className={pslStyles.chatRoomName} style={{ borderBottomColor: room == roomData.ChatRoomId ? null : 'grey' }}><span className={pslStyles.chatSpan}>{roomData.RoomName}</span>
+                            {room == roomData.ChatRoomId && room != 1 ? <i className={`fa fa-times ${pslStyles.crossIcon}`}></i> : null}
+                        </a>
                     </li>
                 }) : null}
                 <li className={pslStyles.plusBtn} onClick={() => setModalShow(true)}>
                     <a className={`btn btn-dark btn-sm ${pslStyles.aaa}`} >
+
                     </a>
                     <span className={pslStyles.add_plus}>+</span>
                 </li>
@@ -105,7 +123,7 @@ export default function PSLChat({ channelID }) {
                                         {chats[room][keyName].message}
                                     </div>
                                     <div style={{ textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
-                                        <small className={pslStyles.msgTime}>9:00 AM Today</small>
+                                        <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small>
                                     </div>
                                 </div>
                             </div>
