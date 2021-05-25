@@ -1,23 +1,45 @@
-import React, { useState, useEffect , useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import BuyCoinModal from "./BuyCoinModal";
 import { Accordion, Card } from "react-bootstrap";
 import styles from "../game.module.css";
 import LearnModal from "./LearnModal";
 import { GameContext } from "../../../contexts/GameContext";
+import { getUserChallengeData } from "../../../components/psl/bids/bids.service";
+import { Cookie } from "../../../services/cookies";
 
 export default function LeftSidebar() {
-  const [buyCoinModal, setBuyCoinModal] = useState(false);
+  const [userChallenge, setUserChallenge] = useState(null);
   const [learnMore, setLearnMore] = useState(false);
-  const {gameState ,  updateBuyModal} = useContext(GameContext)
+  const { gameState, updateBuyModal } = useContext(GameContext);
 
   const onClickBuy = () => {
-    updateBuyModal(true)
+    updateBuyModal(true);
   };
 
   const onClickLearnMore = () => {
     setLearnMore(!learnMore);
   };
+
+  useEffect(() => {
+    let userId = Cookie.getCookies("userId");
+    if (userId) {
+      let body = {
+        Language: "en",
+        Platform: "Web",
+        UserId: userId,
+        Version: "V1",
+      };
+      getUserChallengeData(body)
+        .then((res) => {
+          if (res && res.data && res.data.responseCode == 1) {
+            setUserChallenge(res.data);
+            // console.log(res.data.InPlay);
+          }
+        })
+        .catch((e) => console.log(e));
+    }
+  }, []);
 
   return (
     <div>
@@ -41,7 +63,7 @@ export default function LeftSidebar() {
             </div>
             <div className="col-12 col-lg-4 col-md-4 ">
               <img
-                src="https://app.tapmad.com/pics/profilepics/img-20190528-5ced055b2a438ProfilePicture.jpg"
+                src="/static/ava.png"
                 className="img-fluid pb-0 mt-2 mb-2 rounded-circle"
                 width="60"
                 height="60"
@@ -62,7 +84,9 @@ export default function LeftSidebar() {
           </div>
           <div className="d-none d-md-block d-lg-block d-xl-block">
             <h6 className="mt-2 ng-binding"></h6>
-            <p className="color-white user-coins ng-binding">Coins : 18999 </p>
+            <p className="color-white user-coins ng-binding">
+              Coins : {userChallenge ? userChallenge.Challenges.LoginCoins : 0}{" "}
+            </p>
             <a
               href="#"
               data-toggle="modal"
@@ -75,38 +99,50 @@ export default function LeftSidebar() {
           </div>
         </div>
         <div className="p-0 tm_btng_sidebar_btns2 d-block">
-          <a
-            href="https://www.tapmad.com/my-bids?channel=inPlay"
-            className="btn d-inline-block text-muted"
-            target="_self"
-          >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/coin-white.png" alt="in-play" />
-            <p className="m-0 ng-binding">In Play: 0</p>
-          </a>
-          <a
-            href="https://www.tapmad.com/my-bids?channel=won"
-            className="btn d-inline-block text-muted"
-            target="_self"
-          >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png" alt="won" />
-            <p className="m-0 ng-binding">Won: 4</p>
-          </a>
-          <a
-            href="https://www.tapmad.com/my-bids?channel=lost"
-            className="btn d-inline-block text-muted"
-            target="_self"
-          >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/lost-white.png" alt="Lost" />
-            <p className="m-0 ng-binding">Lost: 9</p>
-          </a>
-          <a
-            href="https://www.tapmad.com/leaderboard"
-            className="btn d-inline-block text-muted"
-            target="_self"
-          >
-            <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/rank-white.png" alt="rank" />
-            <p className="m-0 ng-binding">Rank: 0</p>
-          </a>
+          <Link href="/my-bids">
+            <a className="btn d-inline-block text-muted" target="_self">
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/coin-white.png"
+                alt="in-play"
+              />
+              <p className="m-0 ng-binding">
+                In Play:{userChallenge ? userChallenge.InPlay : 0}
+              </p>
+            </a>
+          </Link>
+          <Link href="/my-bids">
+            <a className="btn d-inline-block text-muted" target="_self">
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png"
+                alt="won"
+              />
+              <p className="m-0 ng-binding">
+                Won: {userChallenge ? userChallenge.Won : 0}
+              </p>
+            </a>
+          </Link>
+          <Link href="/my-bids">
+            <a className="btn d-inline-block text-muted" target="_self">
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/lost-white.png"
+                alt="Lost"
+              />
+              <p className="m-0 ng-binding">
+                Lost: {userChallenge ? userChallenge.Lost : 0}
+              </p>
+            </a>
+          </Link>
+          <Link href="/leaderboard">
+            <a className="btn d-inline-block text-muted" target="_self">
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/rank-white.png"
+                alt="rank"
+              />
+              <p className="m-0 ng-binding">
+                Rank: {userChallenge ? userChallenge.Rank : 0}
+              </p>
+            </a>
+          </Link>
         </div>
       </div>
 

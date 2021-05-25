@@ -10,7 +10,7 @@ import { submitMatchBids } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
 import { GlobalService } from "../../../modules/global-service";
 
-export default function MatchBids({ game }) {
+export default function MatchBids({ game, filteredData }) {
   const [match, setMatches] = useState();
   const [questions, setQuestions] = useState();
   const [team, setTeam] = useState({ answer: 0, odds: 0 });
@@ -18,10 +18,14 @@ export default function MatchBids({ game }) {
   const [counter, setCounter] = useState(4);
   const [totalOdds, setTotalOdds] = useState(0.0);
 
-  
   async function getMatchLiveDetails() {
-    const matches = await getAllMatchDetails();
-    setMatches(matches.MatchOdds);
+    if (filteredData) {
+      setMatches(filteredData);
+    } else {
+      const matches = await getAllMatchDetails();
+      setMatches(matches.MatchOdds);
+     
+    }
   }
   function getAllMatchesQuestions() {
     getAllMatchQuestions(firebas.database, (questions) => {
@@ -43,7 +47,7 @@ export default function MatchBids({ game }) {
       getMatchLiveDetails();
       getAllMatchesQuestions();
     }
-  }, []);
+  }, [filteredData]);
   function increment() {
     var totalCoins = Cookie.getCookies("userCoins");
 
@@ -147,7 +151,9 @@ export default function MatchBids({ game }) {
                       )}
                     </div>
                     <h5 className="mb-0">
-                      <button className={`btn btn-link ${styles.teamName} ${styles.letter}`}>
+                      <button
+                        className={`btn btn-link ${styles.teamName} ${styles.letter}`}
+                      >
                         {e.matchTitle}
                         <p className="mb-0">{e.leagueName}</p>
                       </button>

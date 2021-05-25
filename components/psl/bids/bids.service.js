@@ -7,6 +7,7 @@ import {
   makeCoinTransaction,
   rewardPredicationCoda,
   updateRewardStore,
+  getUserChallenges
 } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post, handleResponse, get } from "../../../services/http-service";
@@ -129,6 +130,7 @@ export const makeCoinTransactionData = async (body) => {
     return null;
   }
 };
+
 export const updateVoucher = async (body) => {
   const response = await post(updateRewardStore , body);
   const data = handleResponse(response);
@@ -150,6 +152,30 @@ export const updateVoucher = async (body) => {
     return null;
   }
 };
+
+export const getUserChallengeData = async (body) => {
+  const response = await post(getUserChallenges , body);
+  const data = handleResponse(response);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+};
+
+
 export const rewardPredication = async (body) => {
   const response = await post(rewardPredicationCoda , body);
   const data = handleResponse(response);

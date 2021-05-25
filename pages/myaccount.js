@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { MyAccountService } from "../modules/my-account/myaccount.service";
 import PersonalInfo from "../modules/my-account/PersonalInfo";
 import UserStatus from "../modules/my-account/UserStatus";
-import { getUserByUserId } from "../services/apilinks";
 import { Cookie } from "../services/cookies";
 
 const MyAccount = () => {

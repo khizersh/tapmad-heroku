@@ -1,147 +1,141 @@
 .chatBox {
-    border: 1px solid #87c242;
-    height: 500px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    position: relative;
-    background-color: #121117 !important;
+  border: 1px solid #87c242;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #121117 !important;
 }
-.chatMessageBox{
-    background-color: white;
-    border-radius: 4px;
-    color: black;
-    padding: 10px;
-    font-size: 0.875rem;
+.chatMessageBox {
+  background-color: white;
+  border-radius: 4px;
+  color: black;
+  padding: 10px;
+  font-size: 0.875rem;
 }
-.insideChat{
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 10px;
-}
-.avatar{
-    margin-top: 10px ;
-}
-.msgTime{
-    font-size: 10px;
-    color: rgba(255,255,255,0.5);
-}
-.userInput{
-    position: absolute;
-    bottom: 0;
-    border-top: 1px solid grey;
-    width: 100%;
-}
-.msgField{
-    padding: 10px;
-    display: flex;
-}
-.type_msg{
-    background-color: rgba(0,0,0,0.3);
-    border: 0;
-    color: white !important;
-    height: 40px !important;
-    overflow-y: auto;
-    border-radius: 20px !important;
-    padding: 7px 10px;
-    width: 100%;
-}
-.sendMessage{
-    border-radius: 50% !important;
-    background-color: rgb(135 194 66) !important;
-    border: 0 !important;
-    color: white !important;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-}
-.chatRoomName{
-    float: left;
-    padding: 0 20px;
-    line-height: 30px;
-    border-right: 30px solid transparent;
-    border-left: 30px solid transparent;
-    border-bottom: 30px solid #121117;
-    border-bottom-color: #87c242;
-    height: 0;
-    color: white;
-    cursor: pointer;
+.insideChat {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 10px;
 }
 
-.chatRoomName:hover{
-    color: white;
-    cursor: pointer;
+.moveDown {
+  position: relative;
+  bottom: 0px;
+}
+.avatar {
+  margin-top: 10px;
+}
+.msgTime {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.userInput {
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid grey;
+  width: 100%;
+}
+.msgField {
+  padding: 10px;
+  display: flex;
+}
+.type_msg {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 0;
+  color: white !important;
+  height: 40px !important;
+  overflow-y: auto;
+  border-radius: 20px !important;
+  padding: 7px 10px;
+  width: 100%;
+}
+.sendMessage {
+  border-radius: 50% !important;
+  background-color: rgb(135 194 66) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.chatRoomName {
+  float: left;
+  padding: 0 20px;
+  line-height: 30px;
+  border-right: 30px solid transparent;
+  border-left: 30px solid transparent;
+  border-bottom: 30px solid #121117;
+  border-bottom-color: #87c242;
+  height: 0;
+  color: white;
+  cursor: pointer;
 }
 
+.chatRoomName:hover {
+  color: white;
+  cursor: pointer;
+}
 
-.chatRoomList{
-    margin: 0 -30px 0 0;
-    z-index: 12;
+.chatRoomList {
+  margin: 0 -30px 0 0;
+  z-index: 12;
 }
 .noBorders::-webkit-scrollbar {
-    width: 0 !important;
-    display: none;
-  }
-.noBorders{
-    border: 0px;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+  width: 0 !important;
+  display: none;
 }
-.all_messages{
-    height: calc(100% - 70px);
-    overflow-y: scroll;
-    overflow-x: hidden;
+.noBorders {
+  border: 0px;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
-.plusBtn{
-    margin: 0 0 0 20px;
+.all_messages {
+  height: calc(100% - 70px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.plusBtn {
+  margin: 0 0 0 20px;
 }
 
 .aaa {
-    width: 60px;
-    height: 24px;
-    -webkit-transform: skew( 
-60deg
- );
-    transform: skew( 
-44deg
- );
-    margin: 6px 0 0 -20px;
-    text-align: center;
-    z-index: 0;
-    border: 1px solid #222;
-    background: #121117;
-    color: white;
-    border-radius: 0px;
-    position: relative;
+  width: 60px;
+  height: 24px;
+  -webkit-transform: skew(60deg);
+  transform: skew(44deg);
+  margin: 6px 0 0 -20px;
+  text-align: center;
+  z-index: 0;
+  border: 1px solid #222;
+  background: #121117;
+  color: white;
+  border-radius: 0px;
+  position: relative;
 }
 
 .aaa:hover {
-    z-index: 0;
-    border: 1px solid #222;
-    background: #121117;
-    color: white;
+  z-index: 0;
+  border: 1px solid #222;
+  background: #121117;
+  color: white;
 }
-
 
 .add_plus {
-    position: relative;
-    line-height: 2px;
-    left: -28px;
-    top: 4px;
-    cursor: pointer;
+  position: relative;
+  line-height: 2px;
+  left: -28px;
+  top: 4px;
+  cursor: pointer;
 }
 
-
-
 @media only screen and (max-width: 746px) {
-
-    .noBorders {
-        border: 0px;
-        flex-direction: row-reverse;
-        justify-content: end;
-        flex-wrap: nowrap;
-        overflow: scroll;
-        overflow-x: scroll;
-    }
-
-    
+  .noBorders {
+    border: 0px;
+    flex-direction: row-reverse;
+    justify-content: end;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    overflow-x: scroll;
+  }
 }
