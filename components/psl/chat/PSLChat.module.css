@@ -91,6 +91,7 @@
 }
 .plusBtn{
     margin: 0 0 0 20px;
+    position: relative;
 }
 
 .aaa {
@@ -122,10 +123,10 @@
 
 
 .add_plus {
-    position: relative;
+    position: absolute;
     line-height: 2px;
-    left: -40px;
-    top: 25px;
+    left: 20px;
+    top: 36px;
     cursor: pointer;
 }
 
@@ -142,6 +143,8 @@
     text-align: center;
 
 }
+
+
 
 .crossIcon {
     display: block;
@@ -172,8 +175,26 @@
 
     .add_plus {
         left: 20px;
-    top: -1px;
+    top: 34px;
     }
+
+    .tabhight {
+        height: auto;
+    }
+
+
+    .chatSpan{
+
+        height: 34px;
+    
+    }
+
+    .crossIcon {
+        top: -36px;
+    }
+    
+    
 
     
 }
+

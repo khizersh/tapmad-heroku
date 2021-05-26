@@ -27,6 +27,7 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     closeOnClickOutside: false,
                 })
             } else if (data.Response.responseCode == 1) {
+                setCurrentRoomOption(3);
                 mergeRoom(data.ChatRooms);
             }
         } else {
@@ -51,7 +52,16 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
             }
             const data = await joinAChatRoom(body);
             console.log("data ", data);
-            mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
+            if (data.UserChatRooms) {
+                mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
+            } else {
+                swal({
+                    title: data.Response.message,
+                    icon: "error",
+                    allowOutsideClick: false,
+                    closeOnClickOutside: false,
+                })
+            }
 
         } else {
             swal({
@@ -65,11 +75,11 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
     return <>
         <div className="row">
             {currentRoomOption == 0 ? <>
-                <div className="col-6 text-right">
-                    <button className="btn btn-primary" onClick={() => setCurrentRoomOption(1)}>Create a new room</button>
+                <div className="col-lg-6 col-12 col-sm-12 text-lg-right mb-1 mb-lg-0 mb-md-0">
+                    <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(1)}>Create a new room</button>
                 </div>
-                <div className="col-6">
-                    <button className="btn btn-primary" onClick={() => setCurrentRoomOption(2)}>Join existing room</button>
+                <div className="col-lg-6 col-12 col-sm-12 ">
+                    <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(2)}>Join existing room</button>
                 </div>
             </> : null}
             {currentRoomOption == 1 ? <>
@@ -102,10 +112,6 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     <h2 className="text-primary text-center">Congratulations</h2>
                     <div className="text-center">
                         You have successfully created chat room now you can share link or ID with your friends.
-                    </div>
-                    <div className="col-12 mt-4">
-                        <button className="btn btn-primary btn-sm">Shareable Link</button> &nbsp;&nbsp;&nbsp;
-                         <button className="btn btn-dark btn-sm">Room ID</button>
                     </div>
                     <div className="col-12 mt-2">
                         <div className="d-flex">

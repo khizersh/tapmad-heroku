@@ -43,7 +43,7 @@ export default function PSLChat({ channelID }) {
             console.log(newRoom);
             console.log(chatRoomClone);
         }
-        setModalShow(false)
+        // setModalShow(false)
 
     }
     async function getUserAllRooms() {
@@ -112,7 +112,7 @@ export default function PSLChat({ channelID }) {
 
     }
     return <div>
-        <div>
+        <div className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
                     return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
@@ -167,6 +167,11 @@ export default function PSLChat({ channelID }) {
                 <div className={pslStyles.msgField}>
                     <div style={{ flex: "1" }}>
                         <textarea className={pslStyles.type_msg} ref={textMessage} placeholder="Type your message..."></textarea>
+                    </div>
+                    <div style={{ textAlign: "center", paddingLeft: '10px' }}>
+                        <button className={pslStyles.sendMessage} onClick={sendMessage}>
+                            <img src={sendMessageIcon} width="20" />
+                        </button>
                     </div>
                     <div style={{ textAlign: "center", paddingLeft: '10px' }}>
                         <button className={pslStyles.sendMessage} onClick={sendMessage}>
