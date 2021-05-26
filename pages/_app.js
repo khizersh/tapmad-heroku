@@ -17,18 +17,20 @@ import "../modules/samsungtv/samsung.css";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useLayoutEffect } from "react";
-import Header from "../components/App/Header";
-import Skeleton from "../components/MainSkeleton";
-import Footer from "../components/Footer";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
-import DashboardLayout from "../modules/dashboard/DashboardLayout";
 import { DashboardService } from "../modules/dashboard/Dashboard.Service";
 import Router from "next/router";
-import { addScriptCodeInDom, addScriptUrlInDom, setUrlToCookies } from "../services/utils";
+import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
+import dynamic from "next/dynamic";
+
+const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
+const Skeleton = dynamic(() => import("../components/MainSkeleton"));
+const Header = dynamic(() => import("../components/App/Header"));
+const Footer = dynamic(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
