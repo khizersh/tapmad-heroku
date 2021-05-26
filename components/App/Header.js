@@ -104,7 +104,7 @@ function HeaderBasic({ signout }) {
                   />
                 </p> */}
                 <Link href="/news" passHref={true} shallow={true}>
-                  <a>
+                  <a ariaLabel={'news'}>
                     <img
                       src={tapmadNews}
                       style={{

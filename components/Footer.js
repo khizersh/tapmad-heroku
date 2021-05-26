@@ -52,17 +52,17 @@ export default function Footer() {
               <h5>Connect with us</h5>
               <ul className="list-group list-group-horizontal tm_socl_lnks">
                 <li className="list-group-item">
-                  <a href="https://twitter.com/tapmadtv" target="_blank">
+                  <a href="https://twitter.com/tapmadtv" rel="noreferrer" target="_blank">
                     <i className="fa fa-twitter"></i>
                   </a>
                 </li>
                 <li className="list-group-item">
-                  <a href="https://www.facebook.com/TapmadTV/" target="_blank">
+                  <a href="https://www.facebook.com/TapmadTV/" rel="noreferrer" target="_blank">
                     <i className="fa fa-facebook"></i>
                   </a>
                 </li>
                 <li className="list-group-item">
-                  <a href="https://www.instagram.com/tapmadtv/" target="_blank">
+                  <a href="https://www.instagram.com/tapmadtv/" rel="noreferrer" target="_blank">
                     <i className="fa fa-instagram"></i>
                   </a>
                 </li>
@@ -75,6 +75,7 @@ export default function Footer() {
                   <a
                     href="https://apps.apple.com/pk/app/tapmad/id1317253610"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <img src={appleApp} className="img-fluid" alt="apple-app" />
                   </a>
@@ -83,6 +84,7 @@ export default function Footer() {
                   <a
                     href="https://play.google.com/store/apps/details?id=com.tapmad.tapmadtv&amp;hl=en"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <img src={androidApp} className="img-fluid" alt="android-app" />
                   </a>
@@ -91,6 +93,7 @@ export default function Footer() {
                   <a
                     href="https://appgallery.huawei.com/#/app/C100909517"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <img src={huaweiApp} className="img-fluid" alt="huawie-app" />
                   </a>
