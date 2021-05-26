@@ -5,8 +5,9 @@ import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { encryptWithAES } from "../../services/utils";
-import dynamic from "next/dynamic";
-const swal = dynamic(() => import('sweetalert'));
+// import dynamic from "next/dynamic";
+import swal from "sweetalert";
+// const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
 
 export default function withLogin(Component, data) {
   return (props) => {
