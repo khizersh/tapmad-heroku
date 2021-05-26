@@ -19,7 +19,7 @@ export default function MatchBids({ game, filteredData }) {
   const [totalOdds, setTotalOdds] = useState(0.0);
 
   async function getMatchLiveDetails() {
-    if (filteredData) {
+    if (filteredData && filteredData.length) {
       setMatches(filteredData);
     } else {
       const matches = await getAllMatchDetails();

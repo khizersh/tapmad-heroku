@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { getBuyCoinsData } from "../../../components/psl/bids/bids.service";
 import BuyCoinCard from "./buyCoinCard";
 import styles from "../game.module.css";
+import { GameContext } from "../../../contexts/GameContext";
 
-const BuyCoinModal = ({ open, toggle }) => {
+const BuyCoinModal = () => {
   const [data, setData] = useState([]);
+  // open={gameState.buyModal} toggle={updateBuyModal}
+  const { gameState, updateBuyModal } = useContext(GameContext);
 
   useEffect(() => {
     getBuyCoinsData()
@@ -17,11 +20,10 @@ const BuyCoinModal = ({ open, toggle }) => {
       .catch((e) => console.log(e));
   }, []);
 
- 
   return (
     <>
-      <Modal show={open} onHide={() => toggle(false)}>
-        <Modal.Header closeButton className={`${styles.bgBlack} text-white`} >
+      <Modal show={gameState.buyModal} onHide={() => updateBuyModal(false)}>
+        <Modal.Header closeButton className={`${styles.bgBlack} text-white`}>
           <Modal.Title>Purchase Coins</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-light">

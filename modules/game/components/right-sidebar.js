@@ -9,8 +9,7 @@ import { MainContext } from "../../../contexts/MainContext";
 import { GameContext } from "../../../contexts/GameContext";
 import { Cookie } from "../../../services/cookies";
 import { basicSliderConfig } from "../../../services/utils";
-
-const RightSidebar = () => {
+const RightSidebar = ({ shop }) => {
   const setting = basicSliderConfig(2, 2);
   const [rewards, setRewards] = useState([]);
   const { setLoader } = useContext(MainContext);
@@ -79,37 +78,46 @@ const RightSidebar = () => {
           ? rewards.map((m, i) => (
               <>
                 {" "}
-                <div className="row mt-2" key={i}>
+                <div className={`row mt-2`} key={i}>
                   <div className="col">
                     <div className="tm_btng_sidebar_hdr pl-2">
                       <h5 className="ng-binding">{m.RewardCategoryName}</h5>
                     </div>
                   </div>
-                </div>
-                <div
-                  className="p-2"
-                  style={{ marginRight: "0px", backgroundColor: "#121117" }}
-                >
-                  <Slider {...setting}>
-                    {m.StoreProducts &&
-                      m.StoreProducts.map((n, j) => (
-                        <div
-                          className="p-2 btn"
-                          onClick={() => onClickVoucher(n)}
-                        >
-                          <img
-                            src={n.RewardProductImage}
-                            alt="reward"
-                            width="100%"
-                          />
-                          <div className="card-body p-2 text-light text-center">
-                            <h5 style={{ fontSize: "14px" }}>
-                              {n.RewardProductName}
-                            </h5>
-                          </div>
-                        </div>
-                      ))}
-                  </Slider>
+                  <div className="col-12">
+                    <div
+                      className="p-2"
+                      style={{ marginRight: "0px", backgroundColor: "#121117" }}
+                    >
+                      <Slider {...setting}>
+                        {m.StoreProducts &&
+                          m.StoreProducts.map((n, j) => (
+                            <div className="p-2 text-center">
+                              <img
+                                onClick={() => onClickVoucher(n)}
+                                src={n.RewardProductImage}
+                                alt="reward"
+                                width={shop ? shop : "100%"}
+                                className=" btn m-auto"
+                              />
+                              <div
+                                className="card-body p-2 text-light"
+                                onClick={() => onClickVoucher(n)}
+                              >
+                                <h5
+                                  style={{
+                                    fontSize: "14px",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  {n.RewardProductName}
+                                </h5>
+                              </div>
+                            </div>
+                          ))}
+                      </Slider>
+                    </div>
+                  </div>
                 </div>
               </>
             ))
