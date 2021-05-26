@@ -109,12 +109,12 @@ const HomepageSlider = ({ movies, ads }) => {
                                 onMouseOut={() => handleMouseOut(row)}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  {/* <img
                                     src={mov.NewChannelThumbnailPath}
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                  /> */}
+                                  <Image
                                     src={mov.NewChannelThumbnailPath}
                                     // style={{ width: "100%" }}
                                     height={304}
@@ -122,7 +122,7 @@ const HomepageSlider = ({ movies, ads }) => {
                                     loading={'eager'}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
-                                  /> */}
+                                  />
                                   {mov.IsVideoFree ? null : (
                                     <div className="live_side">Premium</div>
                                   )}
@@ -169,12 +169,12 @@ const HomepageSlider = ({ movies, ads }) => {
                                 key={index}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  {/* <img
                                     src={mov.NewCategoryImage}
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                  /> */}
+                                  <Image
                                     src={mov.NewCategoryImage}
                                     // style={{ width: "100%" }}
                                     loading={'eager'}
@@ -182,7 +182,7 @@ const HomepageSlider = ({ movies, ads }) => {
                                     width={228}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
-                                  /> */}
+                                  />
                                   {mov.IsVideoFree
                                     ? null
                                     : mov.PackageName && (
