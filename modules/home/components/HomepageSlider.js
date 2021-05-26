@@ -117,9 +117,9 @@ const HomepageSlider = ({ movies, ads }) => {
                                   <Image
                                     src={mov.NewChannelThumbnailPath}
                                     // style={{ width: "100%" }}
-                                    className="w-100"
                                     height={304}
                                     width={228}
+                                    loading={'eager'}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
                                   />
@@ -177,7 +177,7 @@ const HomepageSlider = ({ movies, ads }) => {
                                   <Image
                                     src={mov.NewCategoryImage}
                                     // style={{ width: "100%" }}
-                                    className="w-100"
+                                    loading={'eager'}
                                     height={304}
                                     width={228}
                                     // layout='fill'
