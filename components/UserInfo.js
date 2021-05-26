@@ -1,6 +1,4 @@
 import React from "react";
-import ReactJWPlayer from "react-jw-player";
-import { DFPSlotsProvider, AdSlot, DFPManager } from "react-dfp";
 import { post } from "../services/http-service";
 
 export default function UserInfo(props) {

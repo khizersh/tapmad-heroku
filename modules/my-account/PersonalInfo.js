@@ -128,7 +128,7 @@ const PersonalInfo = ({ data }) => {
         <h5 className="text-left">Personal Information</h5>
         <div className="form-group">
           <label className="float-left">Full name</label>
-          <img src={usernameIcon} width="24" className="float-right" />
+          <img src={usernameIcon} width="24" className="float-right" alt="username" />
           <input
             type="text"
             className="form-control"
@@ -140,7 +140,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Mobile Number</label>
-          <img src={phoneIcon} width="24" className="float-right" />
+          <img src={phoneIcon} width="24" className="float-right" alt="phone" />
           <input
             type="text"
             className="form-control"
@@ -152,7 +152,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Date of Birth</label>
-          <img src={calenderIcon} width="24" className="float-right" />
+          <img src={calenderIcon} width="24" className="float-right" alt="calender" />
           <input
             type="date"
             className="form-control"
@@ -164,7 +164,7 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Email Address</label>
-          <img src={calenderIcon} width="24" className="float-right" />
+          <img src={calenderIcon} width="24" className="float-right" alt="calender" />
           <input
             type="email"
             required
@@ -177,9 +177,8 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <button
-            className={`profile-btn w-100  border-0 rounded-0 text-white ${
-              btnEnable ? "" : "btn-click"
-            }`}
+            className={`profile-btn w-100  border-0 rounded-0 text-white ${btnEnable ? "" : "btn-click"
+              }`}
             onClick={onSubmit}
           >
             Update Profile

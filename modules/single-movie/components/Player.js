@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
-import ReactJWPlayer from "react-jw-player";
 import Link from "next/link";
 import { AuthService } from "../../auth/auth.service";
 import { DashboardService } from "../../dashboard/Dashboard.Service";
 import RelatedProductCard from "../../movies/components/RelatedProductCard";
-import PlayerShop from "../../player-shop/player-shop";
+// import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
+import dynamic from "next/dynamic";
+
+const ReactJWPlayer = dynamic(() => import('react-jw-player'));
 
 export default function Player({ movies }) {
   const router = useRouter();
@@ -83,7 +85,7 @@ export default function Player({ movies }) {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
-      console.log("ad data: ", data);
+
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,
@@ -183,12 +185,12 @@ export default function Player({ movies }) {
             </div>
 
             <div className="col-lg-12 p-0">
-              {movie && movie.CookFeed ? (
+              {/* {movie && movie.CookFeed ? (
                 <div className="the-shop">
                   <PlayerShop />
                   <br />
                 </div>
-              ) : null}
+              ) : null} */}
 
               {/* Banner bottom Ad */}
 

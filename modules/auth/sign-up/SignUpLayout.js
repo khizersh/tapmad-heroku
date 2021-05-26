@@ -44,7 +44,7 @@ export default function SignUpLayout({ children, bgImage }) {
                 <i className="fa fa-arrow-left"></i> Back
               </button>
 
-              <img className="w-100 mb-0" src={signUpImage} />
+              <img className="w-100 mb-0" alt="sign-up" src={signUpImage} />
               <button
                 type="button"
                 className="btn pull-right"

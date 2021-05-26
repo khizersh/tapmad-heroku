@@ -1,11 +1,13 @@
 import { LoginTag } from "../../services/gtm";
 import { AuthService } from "./auth.service";
 import { useRouter } from "next/router";
-import swal from "sweetalert";
 import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { encryptWithAES } from "../../services/utils";
+// import dynamic from "next/dynamic";
+import swal from "sweetalert";
+// const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
 
 export default function withLogin(Component, data) {
   return (props) => {
@@ -13,9 +15,9 @@ export default function withLogin(Component, data) {
       useContext(MainContext);
     const router = useRouter();
 
- 
-    async function loginUser(userIp) {
 
+    async function loginUser(userIp) {
+      setLoader(true)
       let obj = {
         Language: "en",
         Platform: "web",
@@ -43,7 +45,7 @@ export default function withLogin(Component, data) {
           Cookie.setCookies("userId", response.data.UserId);
           Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
           LoginTag(obj, response.response);
-
+          setLoader(false);
           checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
           if (backURL == "sign-in") {
@@ -67,6 +69,7 @@ export default function withLogin(Component, data) {
       }
     }
     async function verifyPinCode(ip, pin, forgetPin) {
+      setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);
       if (pinResponse && pinResponse.responseCode == 1) {
         var loginResp = loginUser(ip);
