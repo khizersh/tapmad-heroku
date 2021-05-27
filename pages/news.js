@@ -81,7 +81,6 @@ const news = ({ news, newsArray }) => {
       <div className="row">
         <div className="col-12 col-sm-2 col-md-4 col-lg-2 pr-3 pr-sm-3 pr-md-0 pr-lg-0 ">
           <h5 className="text-light pl-2 border-left">Top Categories</h5>
-
           <ul className="list-group tm_news_cat_list">
             {categoryList.length &&
               categoryList.map((m, i) => (

@@ -1,11 +1,13 @@
 import { LoginTag } from "../../services/gtm";
 import { AuthService } from "./auth.service";
 import { useRouter } from "next/router";
-import swal from "sweetalert";
 import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { encryptWithAES } from "../../services/utils";
+// import dynamic from "next/dynamic";
+import swal from "sweetalert";
+// const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
 
 export default function withLogin(Component, data) {
   return (props) => {
@@ -13,7 +15,7 @@ export default function withLogin(Component, data) {
       useContext(MainContext);
     const router = useRouter();
 
- 
+
     async function loginUser(userIp) {
       setLoader(true)
       let obj = {

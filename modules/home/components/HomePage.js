@@ -1,19 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import ScrollComponent from "../../../components/scrollComponent";
-import HomepageSlider from "./HomepageSlider";
 import {
-  basicSliderConfig,
   calculateRowsToFetch,
   pushNewMoviesIntoList,
 } from "../../../services/utils";
 import { actionsRequestContent } from "../../../services/http-service";
-import HomepageFeatured from "./FeaturedSlider";
 import Link from "next/link";
 import { HomeService } from "./home.service";
-import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
 import { AuthService } from "../../auth/auth.service";
-import HomePageAd from "./HomePageAd";
+import dynamic from "next/dynamic";
+
+const HomepageSlider = dynamic(() => import("./HomepageSlider"));
+const HomePageAd = dynamic(() => import('./HomePageAd'));
+const HomepageFeatured = dynamic(() => import("./FeaturedSlider"));
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
@@ -29,7 +29,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setCurrentRow(rowData.rowsTo);
 
     try {
-    } catch (error) {}
+    } catch (error) { }
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
       rowData.rowsTo,
@@ -56,11 +56,11 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const checAd = async () => {
     AuthService.getHomePageAdsDetail()
       .then((res) => {
-   
+
         if (res.data.responseCode == 1) {
           let data = res.data.data.filter((m) => m.row == "0")[0];
           if (data) {
-     
+
             setAd(data);
           }
         }
