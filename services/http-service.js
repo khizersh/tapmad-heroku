@@ -13,7 +13,8 @@ function get(url, ip) {
   try {
     let headers = {
       "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
+    // "X-Forwarded-For": ip ? ip : "",
+    "X-Forwarded-For": "144.168.163.34",
     };
     return axios.get(url, { headers: headers });
   } catch (error) {
@@ -27,7 +28,8 @@ function post(url, body, ip, credentialAllowed = false) {
   }
   let headers = {
     "Content-Type": "application/json",
-    "X-Forwarded-For": ip ? ip : "",
+    // "X-Forwarded-For": ip ? ip : "",
+    "X-Forwarded-For": "144.168.163.34",
     ...body.headers,
   };
   delete body.headers;
@@ -46,7 +48,8 @@ function put(url, body, ip) {
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
+      // "X-Forwarded-For": ip ? ip : "",
+      "X-Forwarded-For": "144.168.163.34",
     },
   });
 }
