@@ -14,6 +14,8 @@ export default function Live(props) {
         </title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="https://wwww.tapmad.com/live" />
+
       </Head>
       <div>
         <LiveChannels {...props} />

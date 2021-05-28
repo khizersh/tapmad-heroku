@@ -13,6 +13,8 @@ export default function ShowsPage(props) {
         </title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="https://wwww.tapmad.com/shows" />
+
       </Head>
       <div>
         <Shows {...props} />

@@ -37,6 +37,8 @@ const Category = (props) => {
         <meta property="og:description" content={props.schema.metaData[0].description} />
         <meta property="og:image" content={props.schema.metaData[0].image.url} />
         <meta property="og:url" content={props.schema.url} />
+        <link rel="canonical" href={props.schema.url} />
+
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema.Channels ? props.schema.Channels[0] : props.schema.Vod[0]) }}
