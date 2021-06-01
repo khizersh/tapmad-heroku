@@ -13,6 +13,21 @@ export default memo(function PSLComponent({ channelID }) {
         setSelectedTab(1);
     }, [])
 
+    useEffect(() => {
+        const header = document.getElementById("tab-btn");
+        const sticky = header.offsetTop;
+        const scrollCallBack = window.addEventListener("scroll", () => {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky-tab");        
+          } else {
+            header.classList.remove("sticky-tab");
+          }
+        });
+        return () => {
+          window.removeEventListener("scroll", scrollCallBack);
+        };
+      }, []);
+
     const RenderViews = useCallback(function () {
         if (selectedTab == 1) {
             return <PSLChat channelID={channelID} />
@@ -24,7 +39,7 @@ export default memo(function PSLComponent({ channelID }) {
     })
     return <>
         <div>
-            <div className="btn-group w-100">
+            <div id="tab-btn" className="btn-group w-100">
                 {tabs ? tabs.map((e) => {
                     return <div className="w-100 m-2">
                         <button className={`btn w-100 ${selectedTab == e.TabId ? pslStyles.tabactive : pslStyles.tabUnactive}`} onClick={() => setSelectedTab(e.TabId)}>

@@ -9,6 +9,8 @@ import pslStyles from "./PSLChat.module.css";
 import { deleteAChatRoom, getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
+
+
 export default function PSLChat({ channelID }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
@@ -56,7 +58,7 @@ export default function PSLChat({ channelID }) {
     }
     function getAllChats() {
         getAllChatChannels(database, channelID, (list) => {
-            console.log("Chat channel ", list)
+     
             if (list != null) {
                 setChats(list)
             } else {
@@ -111,12 +113,31 @@ export default function PSLChat({ channelID }) {
         setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
 
     }
-    return <div>
-        <div className={pslStyles.tabhight}>
+
+
+    useEffect(() => {
+        const header = document.getElementById("chat-margin");
+        const sticky = header.offsetTop;
+        const scrollCallBack = window.addEventListener("scroll", () => {
+          if (window.pageYOffset > sticky) {
+            header.classList.add(pslStyles.margChat);
+            
+          } else {
+            header.classList.remove(pslStyles.margChat);
+            
+          }
+        });
+        return () => {
+          window.removeEventListener("scroll", scrollCallBack);
+        };
+      }, []);
+
+    return <div id="chat-margin">
+        <div  className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
                     return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
-                        <a className={pslStyles.chatRoomName} style={{ borderBottomColor: room == roomData.ChatRoomId ? null : 'grey' }}><span className={pslStyles.chatSpan}>{roomData.RoomName}</span>
+                        <a className={pslStyles.chatRoomName} style={{ border: room == roomData.ChatRoomId ? null : '1px solid #66aa33' , backgroundColor: room == roomData.ChatRoomId ? null : '#231f20' }}>{roomData.RoomName}
                             {room == roomData.ChatRoomId && room != 1 ? <i className={`fa fa-times ${pslStyles.crossIcon}`} onClick={() => deleteRoom(roomData)}></i> : null}
                         </a>
                     </li>
