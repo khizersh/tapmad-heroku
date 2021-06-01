@@ -89,6 +89,32 @@ export const actionRequestView = "http://staging.simpaisa.com:1234/view";
 export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
 export const loggingRequest = loggingBaseURl + "/analytics";
 
+
+// PSL Chat Bids
+export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
+export const submitMatchBids = BASEURLAPP + "api/updateNewUserEventQuestionAnswers"
+export const getUserRooms = (userId, channelId) => BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+export const createRoom = BASEURLAPP + "api/createNewChatRoom";
+export const joinRoom = BASEURLAPP + "api/joinChatRoom";
+
+// PSL bids / game
+export const getAllMatches = BASEURL + "api/getMatchDetail";
+export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
+export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
+export const getLeaderBoardByLeagueId = BASEURL + "api/getLeaderBoardByLeagueId";
+export const getBuyCoinsPackages = BASEURL + "api/getBuyCoinsPackages/v1/en/web";
+export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
+export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
+export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreV2";
+export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
+
+
+
+
+
+
+
+
 export const loggingTags = {
   search: "search",
   fetch: "fetch",

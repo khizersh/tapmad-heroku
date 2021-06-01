@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function BottomNav() {
   return (
@@ -8,78 +9,73 @@ export default function BottomNav() {
         id="footer_nav_a"
       >
         <li className="list-group-item border-left-0 border-top-0 border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
-          <a
-            href="https://www.tapmad.com/game"
-            className="text-light"
-            id="g_home"
-            target="_self"
-          >
-            <img
-              src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/house_green.png"
-              width="30"
-              alt=""
-            />{" "}
-            <span className="d-block mt-1 mb-0">Home</span>
-          </a>
+          <Link href="/game" className="text-light" target="_self">
+            <a
+              className="text-light"
+              id="g_home"
+              target="_self"
+            >
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/house_green.png"
+                width="30"
+                alt=""
+              />{" "}
+              <span className="d-block mt-1 mb-0">Home</span>
+            </a>
+          </Link>
         </li>
         <li className="list-group-item border-left-0 border-top-0 border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
-          <a
-            href="https://www.tapmad.com/all-games"
-            className="text-light"
-            id="g_games"
-            target="_self"
-          >
-            <img
-              src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/calendar_green.png"
-              width="30"
-              alt=""
-            />{" "}
-            <span className="d-block mt-1 mb-0">Games</span>
-          </a>
+          <Link href="/all-games" className="text-light" target="_self">
+            <a className="text-light" id="g_games" target="_self">
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/calendar_green.png"
+                width="30"
+                alt=""
+              />{" "}
+              <span className="d-block mt-1 mb-0">Games</span>
+            </a>
+          </Link>
         </li>
         <li className="list-group-item border-left-0 border-top-0 border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
-          <a
-            href="https://www.tapmad.com/tapmad-shop"
-            className="text-light"
-            id="g_rewards"
-            target="_self"
-          >
-            <img
-              src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/trophy_green.png"
-              width="30"
-              alt=""
-            />{" "}
-            <span className="d-block mt-1 mb-0">T Shop</span>
-          </a>
+          <Link href="/tapmad-shop" className="text-light" target="_self">
+            <a
+              // href="https://www.tapmad.com/tapmad-shop"
+              className="text-light"
+              id="g_rewards"
+              target="_self"
+            >
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/trophy_green.png"
+                width="30"
+                alt=""
+              />{" "}
+              <span className="d-block mt-1 mb-0">T Shop</span>
+            </a>
+          </Link>
         </li>
         <li className="list-group-item border-left-0 border-top-0 border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
-          <a
-            href="https://www.tapmad.com/leaderboard"
-            className="text-light"
-            id="g_leader"
-            target="_self"
-          >
-            <img
-              src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/crown_green.png"
-              width="30"
-              alt=""
-            />{" "}
-            <span className="d-block mt-1 mb-0">leaderBoard</span>
-          </a>
+          <Link href="/leaderboard" className="text-light" target="_self">
+            <a className="text-light">
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/crown_green.png"
+                width="30"
+                alt=""
+              />{" "}
+              <span className="d-block mt-1 mb-0">leaderBoard</span>
+            </a>
+          </Link>
         </li>
         <li className="list-group-item border-left-0 border-top-0 border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
-          <a
-            href="https://www.tapmad.com/my-bids"
-            className="text-light"
-            target="_self"
-          >
-            <img
-              src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/auction_green.png"
-              width="30"
-              alt=""
-            />{" "}
-            <span className="d-block mt-1 mb-0">My Bids</span>
-          </a>
+          <Link href="/my-bids" className="text-light" target="_self">
+            <a>
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/auction_green.png"
+                width="30"
+                alt=""
+              />{" "}
+              <span className="d-block mt-1 mb-0">My Bids</span>
+            </a>
+          </Link>
         </li>
       </ul>
     </div>

@@ -23,7 +23,7 @@ export default function AuthViews(props) {
           timer: 2500,
           icon: "warning",
         }).then(() => {
-          console.log("push");
+    
           router.push("/sign-up");
         });
       } else {

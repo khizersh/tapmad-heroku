@@ -41,7 +41,8 @@
     "sass": "^1.32.8",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "firebase": "^8.5.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

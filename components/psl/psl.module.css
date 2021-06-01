@@ -1,0 +1,32 @@
+.tabIcon_image {
+    width: 30px;
+    margin: 0px 10px 0px 0px;
+}
+
+.tabUnactive{
+    background: #000000;
+    border: 1px solid #222;
+    color: #535353;
+    font-size: 20px;
+}
+
+.tabUnactive:hover{
+    border: 1px solid #87c242;
+    color: #535353;
+}
+
+.tabactive{
+    background: #87c242;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 746px) {
+
+    .tabIcon_image {
+        width: 24px;
+        margin: 0px 10px 0px 0px;
+    }
+    
+}

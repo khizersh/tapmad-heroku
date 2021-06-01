@@ -88,9 +88,6 @@ a:focus {
 .tm_btng_sidebar a {
   color: #fff;
 }
-.text-primary {
-  color: #007bff !important;
-}
 
 .tm_btng_sidebar_btns2 a {
   font-size: 11px;
@@ -196,7 +193,7 @@ a:focus {
 .modal-content {
   border: none;
   border-radius: 0;
-  background-color: #121117;
+  color: black;
 }
 
 @media (max-width: 576px) {

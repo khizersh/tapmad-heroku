@@ -185,12 +185,13 @@ export default function Player({ movies }) {
             </div>
 
             <div className="col-lg-12 p-0">
-              {/* {movie && movie.CookFeed ? (
+              {movie && movie.IsPsl ? (
                 <div className="the-shop">
-                  <PlayerShop />
+                  {/* <PlayerShop /> */}
+                  <PSLComponent channelID={movie.Video.VideoEntityId} />
                   <br />
                 </div>
-              ) : null} */}
+              ) : null}
 
               {/* Banner bottom Ad */}
 
@@ -310,7 +311,7 @@ export default function Player({ movies }) {
             {/* bottom banner add mobile end*/}
 
             <div
-              className="text-left mt-3"
+              className="text-left mt-3 related-video"
               style={{ height: "100vh", overflow: "scroll" }}
             >
               <h5>Related Videos</h5>
@@ -336,7 +337,7 @@ export default function Player({ movies }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

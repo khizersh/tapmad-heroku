@@ -4,7 +4,7 @@ import "../modules/home/sliderCard.css";
 import "../components/App/Header.css";
 import "../modules/dashboard/dashboard.style.css";
 import "../modules/category/css/card-hor.style.css";
-import "../modules/player-shop/player-shop.css";
+// import "../modules/player-shop/player-shop.css";
 import "../modules/auth/auth.css";
 import "../modules/search/search.css";
 import "../modules/my-account/myaccount.css";
@@ -141,17 +141,21 @@ function MyApp({ Component, pageProps, test }) {
           )
         ) : (
           <>
-            <MainProvider>
-              <AuthProvider>
-                <CatchupProvider>
-                  <Skeleton>
-                    <Header />
-                    <Component {...pageProps} />
-                    <Footer />
-                  </Skeleton>
-                </CatchupProvider>
-              </AuthProvider>
-            </MainProvider>
+            <FireBaseProvider>
+              <MainProvider>
+                <AuthProvider>
+                  <CatchupProvider>
+                    <GameProvider>
+                      <Skeleton>
+                        <Header />
+                        <Component {...pageProps} />
+                        <Footer />
+                      </Skeleton>
+                    </GameProvider>
+                  </CatchupProvider>
+                </AuthProvider>
+              </MainProvider>
+            </FireBaseProvider>
           </>
         )}
       </>

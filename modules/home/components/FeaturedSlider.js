@@ -5,7 +5,6 @@ import { basicSliderConfig } from "../../../services/utils";
 
 export default function HomepageFeatured({ featured }) {
   var settings = basicSliderConfig(3, 2);
-  console.log("featured: ", featured);
 
   return (
     <div>
