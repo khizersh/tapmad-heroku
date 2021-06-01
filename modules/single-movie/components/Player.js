@@ -188,7 +188,7 @@ export default function Player({ movies }) {
               {movie && movie.IsPsl ? (
                 <div className="the-shop">
                   {/* <PlayerShop /> */}
-                  <PSLComponent channelID={movie.Video.VideoEntityId} />
+                  {/* <pslComponent channelID={movie.Video.VideoEntityId} /> */}
                   <br />
                 </div>
               ) : null}

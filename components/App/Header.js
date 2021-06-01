@@ -81,28 +81,32 @@ function HeaderBasic({ signout }) {
                 </a>
               </li>
               <li className="nav-item">
-                {/* <p
-                  className="tm_stre_lnk"
-                  style={{
-                    color: "rgb(255, 255, 255)",
-                    fontWeight: "bold",
-                    float: "left",
-                    maxWidth: "80px",
-                    display: "block",
-                  }}
-                >
-                  <img
-                    src={tapmadCoin}
-                    style={{
-                      width: "20px",
-                      marginTop: "17px",
-                      cursor: "pointer",
-                      marginLeft: "5px",
-                    }}
-                    className="img-fluid toGames"
-                    alt=""
-                  />
-                </p> */}
+                <Link href="/game" passHref={true} shallow={true}>
+                  <a>
+                    <p
+                      className="tm_stre_lnk"
+                      style={{
+                        color: "rgb(255, 255, 255)",
+                        fontWeight: "bold",
+                        float: "left",
+                        maxWidth: "80px",
+                        display: "block",
+                      }}
+                    >
+                      <img
+                        src={tapmadCoin}
+                        style={{
+                          width: "20px",
+                          marginTop: "17px",
+                          cursor: "pointer",
+                          marginLeft: "5px",
+                        }}
+                        className="img-fluid toGames"
+                        alt=""
+                      />
+                    </p>
+                  </a>
+                </Link>
                 <Link href="/news" passHref={true} shallow={true}>
                   <a ariaLabel={'news'}>
                     <img

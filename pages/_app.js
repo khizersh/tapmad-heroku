@@ -4,7 +4,7 @@ import "../modules/home/sliderCard.css";
 import "../components/App/Header.css";
 import "../modules/dashboard/dashboard.style.css";
 import "../modules/category/css/card-hor.style.css";
-// import "../modules/player-shop/player-shop.css";
+import "../modules/player-shop/player-shop.css";
 import "../modules/auth/auth.css";
 import "../modules/search/search.css";
 import "../modules/my-account/myaccount.css";
@@ -26,6 +26,8 @@ import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
 import dynamic from "next/dynamic";
+import FireBaseProvider from "../contexts/FireBase";
+import GameProvider from "../contexts/GameContext";
 
 const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
 const Skeleton = dynamic(() => import("../components/MainSkeleton"));
