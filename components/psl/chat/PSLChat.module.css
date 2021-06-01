@@ -1,17 +1,16 @@
 .chatBox {
-    border: 1px solid #87c242;
+    border: 1px solid #121117 !important;
     height: 500px;
-    overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
-    background-color: #121117 !important;
+    background-color: #000000 !important;
 }
 .chatMessageBox{
-    background-color: white;
+    /* background-color: white; */
     border-radius: 4px;
-    color: black;
+    color: white;
     padding: 10px;
-    font-size: 0.875rem;
+    font-size: 16px;
 }
 .insideChat{
     display: flex;
@@ -22,12 +21,66 @@
     margin-top: 10px ;
 }
 
+@media (max-width: 640px) {
 .margChat{
     margin-top: 50%;
 }
+}
+
+@media (max-width: 414px) {
+  
+    .margChat{
+        margin-top: 60%;
+    }
+  
+    
+  }
+  
+  @media (max-width: 411px) {
+    
+    .margChat{
+        margin-top: 60%;
+    }
+  
+    
+  }
+  
+  @media (max-width: 375px) {
+    
+    .margChat{
+        margin-top: 60%;
+    }
+  
+    
+  }
+  
+  @media (max-width: 360px) {
+    
+    .margChat{
+        margin-top: 50%;
+    }
+  
+    
+  }
+  
+  @media (max-width: 320px) {
+    
+    .margChat{
+        margin-top: 40%;
+    }
+  
+    
+  }
+
+
 .msgTime{
-    font-size: 10px;
+    font-size: 16px;
     color: rgba(255,255,255,0.5);
+}
+
+.msgProfile{
+    font-size: 16px;
+    font-weight: 500;
 }
 .userInput{
     position: absolute;
@@ -40,7 +93,7 @@
     display: flex;
 }
 .type_msg{
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgb(0 0 0 / 0%);
     border: 0;
     color: white !important;
     height: 40px !important;
@@ -49,6 +102,16 @@
     padding: 7px 10px;
     width: 100%;
 }
+
+.type_msg:focus-visible{
+ outline-style: none;
+}
+.type_msg:focus{
+    outline-style: none;
+   }
+   
+
+
 .sendMessage{
     border-radius: 50% !important;
     background-color: rgb(135 194 66) !important;
@@ -78,11 +141,15 @@
     cursor: pointer;
     border-radius: 10px 10px 0 0;
     background: #66aa33;
-    width: 150px;
+    width: 180px;
+    height: 40px;
     text-align: center;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
-
 
 
 .chatRoomName:hover{
@@ -92,7 +159,7 @@
 
 
 .chatRoomList{
-    margin: 10px -14px -2px 0px;
+    /* margin: 10px -14px -2px 0px; */
     z-index: 12;
 }
 .noBorders::-webkit-scrollbar {
@@ -112,7 +179,7 @@
     position: relative;
 }
 
-.aaa {
+/* .aaa {
     width: 60px;
     height: 24px;
     -webkit-transform: skew( 
@@ -130,9 +197,24 @@
     position: relative;
     top: 24px;
     left: -9px;
+} */
+
+.addGroup{
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    z-index: 0;
+    border: 1px solid #222;
+    background: #121117;
+    color: white;
+    border-radius: 6px;
+    position: relative;
+    top: 6px;
+    left: -30px;
+
 }
 
-.aaa:hover {
+.addGroup:hover {
     z-index: 0;
     border: 1px solid #222;
     background: #121117;
@@ -143,9 +225,11 @@
 .add_plus {
     position: absolute;
     line-height: 2px;
-    left: 20px;
-    top: 36px;
+    left: -2px;
+    top: 16px;
     cursor: pointer;
+    font-size: 32px;
+    margin: auto;
 }
 
 

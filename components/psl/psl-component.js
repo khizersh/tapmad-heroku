@@ -3,7 +3,8 @@ import { getPSLTabsService } from "./psl-service"
 import PSLChat from "./chat/PSLChat";
 import MatchBids from "./bids/MatchBids";
 import pslStyles from "./psl.module.css";
-
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 export default memo(function PSLComponent({ channelID }) {
     const [tabs, setTabs] = useState([]);
     const [selectedTab, setSelectedTab] = useState();
@@ -17,17 +18,19 @@ export default memo(function PSLComponent({ channelID }) {
         const header = document.getElementById("tab-btn");
         const sticky = header.offsetTop;
         const scrollCallBack = window.addEventListener("scroll", () => {
-          if (window.pageYOffset > sticky) {
-            header.classList.add("sticky-tab");        
-          } else {
-            header.classList.remove("sticky-tab");
-          }
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky-tab");
+            } else {
+                header.classList.remove("sticky-tab");
+            }
         });
         return () => {
-          window.removeEventListener("scroll", scrollCallBack);
+            window.removeEventListener("scroll", scrollCallBack);
         };
-      }, []);
-
+    }, []);
+    function handleSelect(e) {
+        console.log(e);
+    }
     const RenderViews = useCallback(function () {
         if (selectedTab == 1) {
             return <PSLChat channelID={channelID} />
@@ -39,15 +42,26 @@ export default memo(function PSLComponent({ channelID }) {
     })
     return <>
         <div>
-            <div id="tab-btn" className="btn-group w-100">
-                {tabs ? tabs.map((e) => {
-                    return <div className="w-100 m-2">
-                        <button className={`btn w-100 ${selectedTab == e.TabId ? pslStyles.tabactive : pslStyles.tabUnactive}`} onClick={() => setSelectedTab(e.TabId)}>
-                            {selectedTab == e.TabId ? <img className={pslStyles.tabIcon_image} src={e.TabIcon} /> : <img className={pslStyles.tabIcon_image} src={e.TabIconUnActive} />}
-                            <span>{e.TabName}</span>
-                        </button>
-                    </div>
-                }) : null}
+            <div id="tab-btn" >
+                <Tabs
+                    defaultActiveKey={selectedTab}
+                    activeKey={selectedTab}
+                    onSelect={(e) => handleSelect(e)}
+                >
+                    {tabs ? tabs.map((tab, index) => {
+                        return <Tab
+                            key={index}
+                            eventKey={tab.TabId}
+                            tabClassName={'tshop-tabs'}
+                            title={
+                                <div>
+                                    <img src={tab.TabIconUnActive} width={25} alt={tab.TabIconUnActive} />
+                                    <p className="text-white m-0">{tab.TabName}</p>
+                                </div>
+                            }
+                        ></Tab>
+                    }) : null}
+                </Tabs>
             </div>
             <hr />
             <div>
