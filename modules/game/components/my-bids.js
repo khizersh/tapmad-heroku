@@ -51,11 +51,19 @@ const MyBid = ({ type }) => {
           aria-multiselectable="true"
           className={styles.width}
         >
-          <Accordion className="mt-3" activeKey={type}>
-            {data.length
-              ? data.map((m, i) => <CustomCollapse data={m} />)
-              : null}
-          </Accordion>
+          {type ? (
+            <Accordion className="mt-3" defaultActiveKey={type}>
+              {data.length
+                ? data.map((m, i) => <CustomCollapse data={m} />)
+                : null}
+            </Accordion>
+          ) : (
+            <Accordion className="mt-3">
+              {data.length
+                ? data.map((m, i) => <CustomCollapse data={m} />)
+                : null}
+            </Accordion>
+          )}
         </div>
       </div>
     </div>

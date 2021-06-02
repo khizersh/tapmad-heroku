@@ -5,7 +5,7 @@ import { Accordion, Card } from "react-bootstrap";
 const CustomCollapse = ({ data }) => {
   const [arrow, setArrow] = React.useState(false);
   return (
-    <Card className={styles.bgBlack} onClick={() => setArrow(!arrow)}>
+    <Card className={`${styles.bgBlack} mt-2`} onClick={() => setArrow(!arrow)}>
       <Accordion.Toggle as={Card.Header} eventKey={data.id}>
         <h5 className={`mb-0 text-light ${styles.title}`}>
           <img src={data.icon} /> {data.title}
