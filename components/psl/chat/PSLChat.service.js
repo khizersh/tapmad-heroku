@@ -1,4 +1,4 @@
-import { createRoom, joinRoom } from "../../../services/apilinks";
+import { createRoom, deleteRoom, joinRoom } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
@@ -18,7 +18,7 @@ export const sendGroupChatMessage = (database, chatDetails) => {
         message: chatDetails.message,
         id: Number(userId),
         senderName: name,
-        userProfile: picture
+        userProfile: picture == "null" ? "" : picture
     })
 }
 
@@ -29,5 +29,9 @@ export const createAChatRoom = async (body) => {
 
 export const joinAChatRoom = async (body) => {
     const response = await post(joinRoom, body);
+    return response.data;
+}
+export const deleteAChatRoom = async (body) => {
+    const response = await post(deleteRoom, body);
     return response.data;
 }

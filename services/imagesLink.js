@@ -24,8 +24,11 @@ export const tapmadLogoBgWhite = "https://d34080pnh6e62j.cloudfront.net/images/V
 
 export const sendMessageIcon = "/icons/psl/send-message.svg";
 export const pslCoins = "/icons/psl/coin.svg";
+export const userProfile = "/icons/psl/profile.svg";
+export const otherProfile = "/icons/psl/otherProfile.svg";
 
 export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const huaweiApp = "/icons/huawei-black.png";
+
 

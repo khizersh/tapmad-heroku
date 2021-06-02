@@ -98,6 +98,8 @@ export const createRoom = BASEURLAPP + "api/createNewChatRoom";
 export const joinRoom = BASEURLAPP + "api/joinChatRoom";
 
 // PSL bids / game
+export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
+// PSL bids 
 export const getAllMatches = BASEURL + "api/getMatchDetail";
 export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
 export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
