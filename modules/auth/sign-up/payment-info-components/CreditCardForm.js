@@ -35,10 +35,11 @@ const CreditCardForm = ({
       <input
         type="text"
         maxLength="20"
-         minLength="5"
+        minLength="5"
         className="form-control mb-2 pl-2"
         placeholder="Mobile Number"
         inputMode="numeric"
+        required={true}
         value={num}
         onChange={(e) => onChange(e)}
       />
@@ -46,6 +47,7 @@ const CreditCardForm = ({
         type="email"
         className="form-control w-100 mb-2 pl-2"
         placeholder="Email"
+        required={true}
         onChange={(e) => onChangeEmail(e)}
       />
     </>

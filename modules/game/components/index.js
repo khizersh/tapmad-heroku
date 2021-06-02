@@ -16,6 +16,13 @@ export default function Game() {
           </div>
           <div className="col-12 col-sm-9 col-md-6 col-lg-6">
             {/* <GameMain /> */}
+            <div>
+              <img
+                src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
+                alt="psl image"
+                width="100%"
+              />
+            </div>
             <MatchBids game="12" />
           </div>
           <div className="col-12 col-sm-12 col-md-12 col-lg-3">
