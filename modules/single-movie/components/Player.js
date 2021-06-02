@@ -11,7 +11,7 @@ import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
-
+import PSLComponent from "../../../components/psl/psl-component";
 const ReactJWPlayer = dynamic(() => import('react-jw-player'));
 
 export default function Player({ movies }) {
@@ -208,6 +208,7 @@ export default function Player({ movies }) {
                 <div className="the-shop">
                   {/* <PlayerShop /> */}
                   {/* <pslComponent channelID={movie.Video.VideoEntityId} /> */}
+                  <PSLComponent channelID={movie.Video.VideoEntityId} />
                   <br />
                 </div>
               ) : null}
