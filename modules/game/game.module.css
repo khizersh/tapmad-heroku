@@ -188,8 +188,18 @@
   display: inline-block;
 }
 
+.discountImage{
+  width: 200px;
+  margin: auto;
+}
+
 @media screen and (max-width: 990px) {
   .width {
+    width: 100% !important;
+    margin: auto;
+  }
+
+  .discountImage{
     width: 100% !important;
     margin: auto;
   }
