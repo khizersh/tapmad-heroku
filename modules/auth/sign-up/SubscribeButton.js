@@ -9,9 +9,8 @@ import { AuthService } from "../auth.service";
 export default function SubscribeButton() {
   const router = useRouter();
 
-  const { initialState, setLoader, updateUserPassword } = useContext(
-    MainContext
-  );
+  const { initialState, setLoader, updateUserPassword } =
+    useContext(MainContext);
 
   const { authState, updateResponseCode } = useContext(Authcontext);
 
@@ -57,8 +56,27 @@ export default function SubscribeButton() {
         details = handleBody();
       }
 
+      if (!details.MobileNo) {
+        setLoader(false);
+        return swal({
+          timer: 3000,
+          text: "Please enter mobile number",
+          icon: "error",
+          buttons: false,
+        });
+      }
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         // for credit card specific only
+        if (!initialState.User.Email || !initialState.User.FullName) {
+          setLoader(false);
+          return swal({
+            timer: 3000,
+            text: "Enter all fields",
+            icon: "error",
+            buttons: false,
+          });
+        }
+
         const response = await AuthService.creditCardOrder(details);
         if (response.data.responseCode == 1) {
           window.location.href = response.data.CardPaymentUrl;
@@ -69,38 +87,25 @@ export default function SubscribeButton() {
             icon: "info",
             buttons: true,
           }).then((e) => {
-            router.push('/sign-in')
-          })
+            router.push("/sign-in");
+          });
         }
-
       } else {
         if (!details.OperatorId) {
           swal({
             timer: 3000,
-            text:
-              "Please select operator",
+            text: "Please select operator",
             icon: "info",
             buttons: false,
           });
           setLoader(false);
-          return 0;
-        } else if (!details.MobileNo) {
-          swal({
-            timer: 3000,
-            text:
-              "Please enter mobile number",
-            icon: "info",
-            buttons: false,
-          });
-          setLoader(false);
-          return 0;
         }
         // for other payment methods
         const status = await AuthService.checkUser(initialState.User.MobileNo);
 
         var data;
         if (status.code == 0) {
-          updateApiData(status)
+          updateApiData(status);
           data = await AuthService.initialTransaction(details);
           setLoader(false);
           if (data != null) {
@@ -108,8 +113,7 @@ export default function SubscribeButton() {
               updateUserPassword(data.data.User.UserPassword);
               swal({
                 timer: 3000,
-                text:
-                  "You are already subscribed user, please enter your PIN for login",
+                text: "You are already subscribed user, please enter your PIN for login",
                 icon: "info",
                 buttons: false,
               });
