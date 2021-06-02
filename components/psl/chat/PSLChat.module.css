@@ -167,6 +167,10 @@
     cursor: pointer;
 }
 
+.chatRoomName:hover {
+  color: white;
+  cursor: pointer;
+}
 
 .chatRoomList{
     /* margin: 10px -14px -2px 0px; */
@@ -179,10 +183,10 @@
 .noBorders{
     border: 0px;
 }
-.all_messages{
-    height: calc(100% - 70px);
-    overflow-y: scroll;
-    overflow-x: hidden;
+.all_messages {
+  height: calc(100% - 70px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .plusBtn{
     margin: 0 0 0 20px;
@@ -230,7 +234,6 @@
     background: #121117;
     color: white;
 }
-
 
 .add_plus {
     position: absolute;

@@ -365,7 +365,7 @@ async function loginUserFetchApi(body) {
     },
   };
   const resp = await post(SignUpORSignInMobileOperatorToken, body, body.userIp);
-  console.log("data: ", resp);
+
   if (resp.data && resp.data.Response) {
     return resp.data;
   } else {

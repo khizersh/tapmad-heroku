@@ -99,6 +99,21 @@ export const joinRoom = BASEURLAPP + "api/joinChatRoom";
 export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
 // PSL bids 
 export const getAllMatches = BASEURL + "api/getMatchDetail";
+export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
+export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
+export const getLeaderBoardByLeagueId = BASEURL + "api/getLeaderBoardByLeagueId";
+export const getBuyCoinsPackages = BASEURL + "api/getBuyCoinsPackages/v1/en/web";
+export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
+export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
+export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreV2";
+export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
+
+
+
+
+
+
+
 
 export const loggingTags = {
   search: "search",

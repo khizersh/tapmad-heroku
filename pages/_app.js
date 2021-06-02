@@ -30,6 +30,7 @@ import { addScriptCodeInDom, addScriptUrlInDom, setUrlToCookies } from "../servi
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
 import FireBaseProvider from "../contexts/FireBase";
+import GameProvider from "../contexts/GameContext";
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
@@ -142,11 +143,13 @@ function MyApp({ Component, pageProps, test }) {
               <MainProvider>
                 <AuthProvider>
                   <CatchupProvider>
-                    <Skeleton>
-                      <Header />
-                      <Component {...pageProps} />
-                      <Footer />
-                    </Skeleton>
+                    <GameProvider>
+                      <Skeleton>
+                        <Header />
+                        <Component {...pageProps} />
+                        <Footer />
+                      </Skeleton>
+                    </GameProvider>
                   </CatchupProvider>
                 </AuthProvider>
               </MainProvider>
