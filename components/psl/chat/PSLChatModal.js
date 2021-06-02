@@ -9,7 +9,6 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
     const roomName = useRef();
     const chatRoomId = useRef();
     async function createRoom() {
-        console.log(roomName);
         if (roomName.current.value.length > 2) {
             var body = {
                 Version: "v1",
@@ -28,7 +27,8 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     closeOnClickOutside: false,
                 })
             } else if (data.Response.responseCode == 1) {
-                mergeRoom(data.ChatRooms[0]);
+                setCurrentRoomOption(3);
+                mergeRoom(data.ChatRooms);
             }
         } else {
             swal({
@@ -46,10 +46,23 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                 Language: "en",
                 Platform: "android",
                 UserId: Cookie.getCookies("userId"),
+                // UserId: "31276887",
                 ChannelId: channelId,
                 ChatLink: chatRoomId.current.value,
             }
             const data = await joinAChatRoom(body);
+            console.log("data ", data);
+            if (data.UserChatRooms) {
+                mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
+            } else {
+                swal({
+                    title: data.Response.message,
+                    icon: "error",
+                    allowOutsideClick: false,
+                    closeOnClickOutside: false,
+                })
+            }
+
         } else {
             swal({
                 title: 'Invalid chat room id',
@@ -62,11 +75,11 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
     return <>
         <div className="row">
             {currentRoomOption == 0 ? <>
-                <div className="col-6 text-right">
-                    <button className="btn btn-primary" onClick={() => setCurrentRoomOption(1)}>Create a new room</button>
+                <div className="col-lg-6 col-12 col-sm-12 text-lg-right mb-1 mb-lg-0 mb-md-0">
+                    <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(1)}>Create a new room</button>
                 </div>
-                <div className="col-6">
-                    <button className="btn btn-primary" onClick={() => setCurrentRoomOption(2)}>Join existing room</button>
+                <div className="col-lg-6 col-12 col-sm-12 ">
+                    <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(2)}>Join existing room</button>
                 </div>
             </> : null}
             {currentRoomOption == 1 ? <>
@@ -89,6 +102,9 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     <div className="col-12 mt-2">
                         <input type="text" className="form-control bg-dark" ref={chatRoomId} placeholder="Enter Room Id" />
                     </div>
+                    <div className="col-12 mt-2">
+                        <button type="button" className="btn btn-primary btn-sm" onClick={joinChatRoom}>Submit</button>
+                    </div>
                 </>
                 : null)}
             {currentRoomOption == 3 ? <>
@@ -96,10 +112,6 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     <h2 className="text-primary text-center">Congratulations</h2>
                     <div className="text-center">
                         You have successfully created chat room now you can share link or ID with your friends.
-                    </div>
-                    <div className="col-12 mt-4">
-                        <button className="btn btn-primary btn-sm">Shareable Link</button> &nbsp;&nbsp;&nbsp;
-                         <button className="btn btn-dark btn-sm">Room ID</button>
                     </div>
                     <div className="col-12 mt-2">
                         <div className="d-flex">

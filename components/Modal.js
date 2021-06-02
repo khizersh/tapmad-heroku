@@ -5,7 +5,7 @@ export function CenteredModal(props) {
     return (
         <Modal
             {...props}
-            size="lg"
+            size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -17,9 +17,9 @@ export function CenteredModal(props) {
             <Modal.Body>
                 {props.children}
             </Modal.Body>
-            <Modal.Footer>
+            {/* <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
+            </Modal.Footer> */}
         </Modal>
     );
 }
