@@ -54,6 +54,7 @@ export default memo(function PSLComponent({ channelID }) {
                 contents.getElementsByClassName('fixed-bottom')[0].style.display = "none";
                 contents.getElementsByClassName('scrolling-navbar')[0].style.display = "none";
                 contents.getElementsByClassName('primary-nav')[0].style.display = "none";
+                contents.getElementsByTagName('footer')[0].style.display = "none";
             })
         }
     }, [selectedTab])
