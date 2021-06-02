@@ -2,10 +2,16 @@ import React from "react";
 import styles from "../game.module.css";
 import { Accordion, Card } from "react-bootstrap";
 
-const CustomCollapse = ({ data }) => {
+const CustomCollapse = ({ data, onChange }) => {
   const [arrow, setArrow] = React.useState(false);
+
+  const onChangeTab = () => {
+    onChange(data);
+    setArrow(!arrow);
+  };
+
   return (
-    <Card className={styles.bgBlack} onClick={() => setArrow(!arrow)}>
+    <Card className={styles.bgBlack} onClick={() => onChangeTab()} >
       <Accordion.Toggle as={Card.Header} eventKey={data.id}>
         <h5 className={`mb-0 text-light ${styles.title}`}>
           <img src={data.icon} /> {data.title}
@@ -17,7 +23,41 @@ const CustomCollapse = ({ data }) => {
         </h5>
       </Accordion.Toggle>
       <Accordion.Collapse eventKey={data.id}>
-        <Card.Body className={styles.cardBody}>{data.content}</Card.Body>
+        <Card.Body className={styles.cardBody}>
+          {data.content.length > 0 ? (
+            <table className="table table-striped table-dark tm_btng_tble">
+              <thead className="thead-light">
+                <tr>
+                  <th>Date</th>
+                  <th>Questions</th>
+                  <th>Answers</th>
+                  <th>Odds</th>
+                  <th>Bids</th>
+                  <th>You can win</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.content.map((m, i) => (
+                  <tr key={i} style={{ fontSize: "12px" }}>
+                    <td>{m.ChannelEventDate}</td>
+                    <td>
+                      {m.GameQuestion}
+                      <label className="badge badge-light text-dark">
+                        {m.MatchName}
+                      </label>
+                    </td>
+                    <td>{m.UserAnswer}</td>
+                    <td>{m.QuestionOdds}</td>
+                    <td>{m.MyBids}</td>
+                    <td>{m.YouWins}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            "No " + data.title
+          )}
+        </Card.Body>
       </Accordion.Collapse>
     </Card>
   );

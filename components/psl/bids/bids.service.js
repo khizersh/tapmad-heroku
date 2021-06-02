@@ -7,7 +7,7 @@ import {
   makeCoinTransaction,
   rewardPredicationCoda,
   updateRewardStore,
-  getUserChallenges
+  getUserChallenges,
 } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post, handleResponse, get } from "../../../services/http-service";
@@ -24,6 +24,7 @@ export const getMatchBetsByUser = async () => {
     Language: "en",
     Platform: "web",
     UserId: userId,
+    // UserId: "7845020",
   };
   const response = await post(getMatchBetsByUserId, body);
   return response.data;
@@ -110,7 +111,7 @@ export const getBuyCoinsData = async (leagueId, offset) => {
   }
 };
 export const makeCoinTransactionData = async (body) => {
-  const response = await post(makeCoinTransaction , body);
+  const response = await post(makeCoinTransaction, body);
   const data = handleResponse(response);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -132,7 +133,7 @@ export const makeCoinTransactionData = async (body) => {
 };
 
 export const updateVoucher = async (body) => {
-  const response = await post(updateRewardStore , body);
+  const response = await post(updateRewardStore, body);
   const data = handleResponse(response);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -154,7 +155,7 @@ export const updateVoucher = async (body) => {
 };
 
 export const getUserChallengeData = async (body) => {
-  const response = await post(getUserChallenges , body);
+  const response = await post(getUserChallenges, body);
   const data = handleResponse(response);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -174,10 +175,9 @@ export const getUserChallengeData = async (body) => {
     return null;
   }
 };
-
 
 export const rewardPredication = async (body) => {
-  const response = await post(rewardPredicationCoda , body);
+  const response = await post(rewardPredicationCoda, body);
   const data = handleResponse(response);
   if (data != null) {
     if (data.responseCode == 1) {
@@ -197,7 +197,6 @@ export const rewardPredication = async (body) => {
     return null;
   }
 };
-
 
 export const getAllMatchQuestions = (database, cb) => {
   database.ref("Game").on("value", (snapshot) => {
