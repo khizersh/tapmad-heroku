@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
-import ReactJWPlayer from "react-jw-player";
 import Link from "next/link";
 import { AuthService } from "../../auth/auth.service";
 import { DashboardService } from "../../dashboard/Dashboard.Service";
 import RelatedProductCard from "../../movies/components/RelatedProductCard";
-import PlayerShop from "../../player-shop/player-shop";
+// import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
-import PSLComponent from "../../../components/psl/psl-component";
+import dynamic from "next/dynamic";
+
+const ReactJWPlayer = dynamic(() => import('react-jw-player'));
 
 export default function Player({ movies }) {
   const router = useRouter();
@@ -206,7 +207,7 @@ export default function Player({ movies }) {
               {movie && movie.IsPsl ? (
                 <div className="the-shop">
                   {/* <PlayerShop /> */}
-                  <PSLComponent channelID={movie.Video.VideoEntityId} />
+                  {/* <pslComponent channelID={movie.Video.VideoEntityId} /> */}
                   <br />
                 </div>
               ) : null}
@@ -355,7 +356,7 @@ export default function Player({ movies }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

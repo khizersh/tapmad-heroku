@@ -38,7 +38,7 @@ export default function SideBar() {
       <button
         className="hamburger hamburger-icon open-panel nav-toggle"
         onClick={toggleNavbar}
-      ></button>
+      >&nbsp;</button>
       <nav className="menu">
         <Link href="/" shallow={true} passHref={true}>
           <a className="logotype" onClick={() => onCLickContent("homepage")}>

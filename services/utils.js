@@ -200,6 +200,7 @@ function addScriptUrlInDom(src) {
 function addScriptCodeInDom(src) {
   var script = document.createElement("script");
   script.type = "text/javascript";
+  script.setAttribute('defer', true);
   script.innerHTML = src;
   document.getElementsByTagName('head')[0].appendChild(script);
 }
