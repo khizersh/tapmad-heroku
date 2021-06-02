@@ -96,6 +96,8 @@ export const submitMatchBids = BASEURLAPP + "api/updateNewUserEventQuestionAnswe
 export const getUserRooms = (userId, channelId) => BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
 export const createRoom = BASEURLAPP + "api/createNewChatRoom";
 export const joinRoom = BASEURLAPP + "api/joinChatRoom";
+
+// PSL bids / game
 export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
 // PSL bids 
 export const getAllMatches = BASEURL + "api/getMatchDetail";

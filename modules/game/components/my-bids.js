@@ -9,6 +9,7 @@ const MyBid = ({ type }) => {
   useEffect(() => {
     getMatchBetsByUser()
       .then((res) => {
+        console.log(res);
         if (res && res.Response.responseCode == 1) {
           setData([
             {
@@ -34,7 +35,7 @@ const MyBid = ({ type }) => {
               title: "No Result/Draw",
               icon: "//d1s7wg2ne64q87.cloudfront.net/web/images/coin-draw-white.png",
               content: res.NoResult || "No draw matches data",
-            },
+            }
           ]);
         }
       })
@@ -51,21 +52,11 @@ const MyBid = ({ type }) => {
           aria-multiselectable="true"
           className={styles.width}
         >
-          {type ? (
-            <Accordion className="mt-3" activeKey={type}>
-              {
-              
-              data.length
-                ? data.map((m, i) => <CustomCollapse data={m} />)
-                : null}
-            </Accordion>
-          ) : (
-            <Accordion className="mt-3">
-              {data.length
-                ? data.map((m, i) => <CustomCollapse data={m} />)
-                : null}
-            </Accordion>
-          )}
+          <Accordion className="mt-3" activeKey={type}>
+            {data.length > 0
+              ? data.map((m, i) => <CustomCollapse data={m} index={i} />)
+              : null}
+          </Accordion>
         </div>
       </div>
     </div>

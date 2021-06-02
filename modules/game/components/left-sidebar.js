@@ -35,7 +35,6 @@ export default function LeftSidebar() {
         .then((res) => {
           if (res && res.data && res.data.responseCode == 1) {
             setUserChallenge(res.data);
-            // console.log(res.data.InPlay);
           }
         })
         .catch((e) => console.log(e));
@@ -103,7 +102,7 @@ export default function LeftSidebar() {
           </div>
         </div>
         <div className="p-0 tm_btng_sidebar_btns2 d-block">
-          <Link href="/my-bids">
+          <Link href="/my-bids?channel=play">
             <a className="btn d-inline-block text-muted" target="_self">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/coin-white.png"
@@ -114,7 +113,7 @@ export default function LeftSidebar() {
               </p>
             </a>
           </Link>
-          <Link href="/my-bids">
+          <Link href="/my-bids?channel=won">
             <a className="btn d-inline-block text-muted" target="_self">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png"
@@ -125,7 +124,7 @@ export default function LeftSidebar() {
               </p>
             </a>
           </Link>
-          <Link href="/my-bids">
+          <Link href="/my-bids?channel=lost">
             <a className="btn d-inline-block text-muted" target="_self">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/lost-white.png"

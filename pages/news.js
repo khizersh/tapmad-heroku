@@ -9,7 +9,6 @@ import NewsMainCard from "../modules/news/NewsMainCard";
 import VerticalCard from "../modules/news/verticalCard";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
-import NewsBage from "../modules/news/NewsBage";
 
 const news = ({ news, newsArray }) => {
   const [newsList, setNewsList] = useState([]);
