@@ -84,7 +84,7 @@ export default function Player({ movies }) {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
- 
+
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,
@@ -124,10 +124,10 @@ export default function Player({ movies }) {
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky-value");
-        
+
       } else {
         header.classList.remove("sticky-value");
-        
+
       }
     });
     return () => {

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import swal from "sweetalert";
 import { Cookie } from "../../../services/cookies";
+import { pslCongrats } from "../../../services/imagesLink";
 import { createAChatRoom, joinAChatRoom } from "./PSLChat.service";
 
 
@@ -108,6 +109,9 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                 </>
                 : null)}
             {currentRoomOption == 3 ? <>
+                <div className="col-12 text-center">
+                    <img src={pslCongrats} />
+                </div>
                 <div className="col-12">
                     <h2 className="text-primary text-center">Congratulations</h2>
                     <div className="text-center">

@@ -57,7 +57,7 @@
   @media (max-width: 360px) {
     
     .margChat{
-        margin-top: 50%;
+      margin-top: 60%;
     }
   
     
@@ -114,12 +114,22 @@
 
 .sendMessage{
     border-radius: 50% !important;
-    background-color: rgb(135 194 66) !important;
+    background-color: rgb(135 194 66 / 0%) !important;
     border: 0 !important;
     color: white !important;
     cursor: pointer;
     width: 40px;
     height: 40px;
+}
+
+.shareChat{
+  border-radius: 50% !important;
+  background-color: rgb(135 194 66 / 0%) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
 }
 /* .chatRoomName{
     float: left;
@@ -269,21 +279,29 @@
 .crossIcon {
    /* display: block; */
    position: relative;
-   top: 5px;
+   top: 6px;
    left: -2px;
    background: white;
    width: 16px;
-   height: 17px;
+   height: 16px;
    border-radius: 20px;
    color: black;
    text-align: center;
    margin: 0px;
    font-size: 10px;
    border: 2px solid;
-   line-height: 12px;
+   line-height: 10px;
    float: right;
 
 }
+
+
+.shareIcon{
+    margin: auto;
+    width: 40px;
+    margin-left: -6px;
+}
+
 
 
  
@@ -298,8 +316,9 @@
     }
 
     .add_plus {
-        left: 20px;
-    top: 34px;
+      left: -2px;
+    top: 16px;
+
     }
 
     .tabhight {
@@ -313,10 +332,10 @@
     
     }
 
-    .crossIcon {
+    /* .crossIcon {
         top: -36px;
     }
-    
+     */
     
 
     

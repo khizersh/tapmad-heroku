@@ -1,12 +1,12 @@
 import { Accordion, Card } from "react-bootstrap";
 import styles from "./bids.module.css";
-import { pslCoins } from "../../../services/imagesLink";
+import { pslCoins, userProfile } from "../../../services/imagesLink";
 import { useContext, useEffect, useRef, useState } from "react";
 import { getAllMatchDetails, getAllMatchQuestions, nFormatter } from "./bids.service";
 import { FirebaseContext } from "../../../contexts/FireBase";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
-import { submitMatchBids } from "../../../services/apilinks";
+import { submitMatchBids, updateUserProfile } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
 
 export default function MatchBids() {
@@ -106,19 +106,22 @@ export default function MatchBids() {
                 return <Card bsPrefix="card border-0 bg-secondary pt-1" key={index}>
                     <Accordion.Toggle as={Card.Header} bsPrefix={`${styles.matchTitleBar} card-header`} eventKey={index + 1}>
 
-                        <div className={styles.tag}>
-                            {e.isLive ? <>
-                                <div className={styles.cricle}>
-                                </div>
-                                <div className={styles.tagText}>
-                                    LIVE
-                            </div></> : e.StartDate}
-
+                        <div className={styles.bollImage}>
+                            <img src={userProfile} width="40" style={{ borderRadius: '10px' }} />
                         </div>
                         <h5 className="mb-0">
+                            <div className={styles.tag}><span>
+                                {e.isLive ? <>
+                                    <span className={styles.cricle}>
+                                    </span>
+                                    <span className={styles.tagText}>
+                                        LIVE
+                            </span></> : e.StartDate}
+                            </span>
+                            </div>
                             <button className={`btn btn-link ${styles.teamName}`}>
                                 {e.matchTitle}
-                                <p className="mb-0">{e.leagueName}</p>
+                                {/* <p className="mb-0">{e.leagueName}</p> */}
                             </button>
                         </h5>
                     </Accordion.Toggle>
@@ -127,7 +130,7 @@ export default function MatchBids() {
                             <div className="row">
                                 {questions ? questions.map((ques) => {
                                     if (ques.id == e.matchId) {
-                                        return ques.AllQuestion.map((innerQues, index) => {
+                                        return ques.AllQuestion && ques.AllQuestion.map((innerQues, index) => {
                                             return <div className="col-12 col-lg-6 col-sm-12 mb-5 p-0" key={index}>
                                                 <div className={styles.bidQ}>
                                                     <h5>{innerQues.EventQuestion}</h5>

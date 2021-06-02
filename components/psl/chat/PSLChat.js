@@ -3,7 +3,7 @@ import { FirebaseContext } from "../../../contexts/FireBase";
 import { getUserRooms } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { get } from "../../../services/http-service";
-import { sendMessageIcon, userProfile } from "../../../services/imagesLink";
+import { sendMessageIcon, shareIcon, userProfile } from "../../../services/imagesLink";
 import { CenteredModal } from "../../Modal";
 import pslStyles from "./PSLChat.module.css";
 import { deleteAChatRoom, getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
@@ -113,7 +113,20 @@ export default function PSLChat({ channelID }) {
         setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
 
     }
-
+    async function shareOnSocial() {
+        if (navigator.share) {
+            const shareData = {
+                title: 'Watch HBL PSL 6',
+                text: 'Watch HBL PSL 6',
+                url: window.location.href,
+            }
+            await navigator.share(shareData)
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
+        } else {
+            alert("Device can not share");
+        }
+    }
 
     useEffect(() => {
         const header = document.getElementById("chat-margin");
@@ -190,13 +203,13 @@ export default function PSLChat({ channelID }) {
                         <textarea className={pslStyles.type_msg} ref={textMessage} placeholder="Type your message..."></textarea>
                     </div>
                     <div style={{ textAlign: "center", paddingLeft: '10px' }}>
-                        <button className={pslStyles.sendMessage} onClick={sendMessage}>
-                            <img src={sendMessageIcon} width="20" />
+                        <button className={pslStyles.shareChat} onClick={shareOnSocial}>
+                            <img className={pslStyles.shareIcon} src={shareIcon} />
                         </button>
                     </div>
                     <div style={{ textAlign: "center", paddingLeft: '10px' }}>
                         <button className={pslStyles.sendMessage} onClick={sendMessage}>
-                            <img src={sendMessageIcon} width="20" />
+                            <img className={pslStyles.shareIcon} src={sendMessageIcon} />
                         </button>
                     </div>
                 </div>

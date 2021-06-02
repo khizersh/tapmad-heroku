@@ -30,16 +30,26 @@ export default memo(function PSLComponent({ channelID }) {
     }, []);
     function handleSelect(e) {
         console.log(e);
+        setSelectedTab(e);
+
     }
     const RenderViews = useCallback(function () {
         if (selectedTab == 1) {
             return <PSLChat channelID={channelID} />
         } else if (selectedTab == 2) {
-            return <MatchBids />;
+            // return <MatchBids />;
+            return <iframe src="http://localhost:3000/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />;
         } else {
             return <div></div>;
         }
     })
+    useEffect(() => {
+        var frameObj = document.getElementById('gameFrame');
+        if (frameObj) {
+            frameObj = frameObj.contentDocument || frameObj.contentWindow.document;;
+            console.log(frameObj)
+        }
+    }, [selectedTab])
     return <>
         <div>
             <div id="tab-btn" >
