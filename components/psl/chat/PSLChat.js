@@ -12,13 +12,13 @@ var userId = "";
 export default function PSLChat({ channelID }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
-    const { database } = useContext(FirebaseContext);
+    const firbase = useContext(FirebaseContext);
     const [room, setRoom] = useState(10000);
     const textMessage = useRef();
     const [modalShow, setModalShow] = useState(false);
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
     useEffect(() => {
-        if (database) {
+        if (firbase && firbase.database) {
             getUserAllRooms();
         }
         return () => {
@@ -27,7 +27,7 @@ export default function PSLChat({ channelID }) {
             // setRoom(0);
             // setChatRooms([]);
         }
-    }, [database]);
+    }, [firbase]);
     function appendChatRoom(newRoom) {
         var chatRoomClone = chatRoom;
         chatRoomClone.unshift(newRoom);
@@ -43,7 +43,7 @@ export default function PSLChat({ channelID }) {
         }
     }
     function getAllChats() {
-        getAllChatChannels(database, channelID, (list) => {
+        getAllChatChannels(firbase.database, channelID, (list) => {
             console.log("Chat channel ", list)
             if (list != null) {
                 setChats(list)
@@ -65,7 +65,7 @@ export default function PSLChat({ channelID }) {
                 textMessage.current.style.border = "0px";
             }, 2000)
         } else {
-            sendGroupChatMessage(database, message);
+            sendGroupChatMessage(firbase.database, message);
             textMessage.current.value = '';
         }
 
