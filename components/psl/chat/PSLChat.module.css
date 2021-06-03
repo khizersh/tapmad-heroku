@@ -9,8 +9,7 @@
     /* background-color: white; */
     border-radius: 4px;
     color: white;
-    padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
 }
 .insideChat{
     display: flex;
@@ -74,12 +73,12 @@
 
 
 .msgTime{
-    font-size: 16px;
+    font-size: 10px;
     color: rgba(255,255,255,0.5);
 }
 
 .msgProfile{
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
 }
 .userInput{
@@ -118,8 +117,8 @@
     border: 0 !important;
     color: white !important;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    /* width: 30px; */
+    height: 30px;
 }
 
 .shareChat{
@@ -128,21 +127,10 @@
   border: 0 !important;
   color: white !important;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  /* width: 30px; */
+  height: 30px;
 }
-/* .chatRoomName{
-    float: left;
-    padding: 10px;
-    line-height: 30px;
-    border-right: 30px solid transparent;
-    border-left: 30px solid transparent;
-    border-bottom: 30px solid #121117;
-    border-bottom-color: #87c242;
-    height: 0;
-    color: white;
-    cursor: pointer;
-} */
+
 
 .chatRoomName{
     float: left;
