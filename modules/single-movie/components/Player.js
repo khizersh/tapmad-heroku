@@ -98,7 +98,9 @@ export default function Player({ movies }) {
         bottomBannerAdMobile: data.bottomBannerAdMobile,
       });
     }
-    VideoWatched(movie);
+    setTimeout(() => {
+      VideoWatched(movie);
+    }, 3000)
   }, [router]);
 
   useEffect(() => {

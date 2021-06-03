@@ -3,7 +3,9 @@ import { getPSLTabsService } from "./psl-service"
 import PSLChat from "./chat/PSLChat";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import { useRouter } from "next/router";
 export default memo(function PSLComponent({ channel }) {
+    const router = useRouter();
     const [tabs, setTabs] = useState([]);
     const [selectedTab, setSelectedTab] = useState();
     useEffect(async () => {
@@ -36,7 +38,15 @@ export default memo(function PSLComponent({ channel }) {
             return <PSLChat channel={channel} />
         } else if (selectedTab == 2) {
             // return <MatchBids />;
-            return <iframe allow src="/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />;
+            return <>
+                <div className="loader-5 center" id="loader">
+                    <span></span>
+                </div>
+                <iframe src="/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />
+            </>
+        } else if (selectedTab == 3) {
+            router.push("/all-games");
+            return null
         } else {
             return <div></div>;
         }
@@ -47,6 +57,7 @@ export default memo(function PSLComponent({ channel }) {
 
         if (frameObj) {
             frameObj.onload = (() => {
+                document.getElementById('loader').style.display = "none";
                 contents = frameObj.contentDocument || frameObj.contentWindow.document;
                 console.log(contents)
                 contents.getElementsByClassName('fixed-bottom')[0].style.display = "none";

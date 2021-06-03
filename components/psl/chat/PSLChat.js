@@ -21,7 +21,7 @@ export default function PSLChat({ channel }) {
     const [modalShow, setModalShow] = useState(false);
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
     useEffect(() => {
-        if (firbase && firbase.database) {
+        if (firbase) {
             getUserAllRooms();
         }
     }, [firbase]);
@@ -30,13 +30,13 @@ export default function PSLChat({ channel }) {
         if (Array.isArray(newRoom)) {
             // Delete Room
             setChatRooms(newRoom);
-            setRoom(newRoom[newRoom.length - 1].ChatRoomId);
+            selectRoom(newRoom[newRoom.length - 1].ChatRoomId);
         } else {
             // Join room
             var chatRoomClone = chatRoom;
             chatRoomClone.push(newRoom);
             setChatRooms(chatRoomClone);
-            setRoom(newRoom.ChatRoomId);
+            selectRoom(newRoom.ChatRoomId);
             let message = {
                 message: "Join",
                 channelID: channel.VideoEntityId,
@@ -127,7 +127,7 @@ export default function PSLChat({ channel }) {
                 textMessage.current.value = '';
                 var chatRoomClone = chatRoom.filter((e) => e.ChatRoomId != room.ChatRoomId);
                 setChatRooms(chatRoomClone);
-                setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
+                selectRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
             }
         })
 
