@@ -31,6 +31,7 @@ export default function PSLChat({ channel }) {
             // Delete Room
             setChatRooms(newRoom);
             selectRoom(newRoom[newRoom.length - 1].ChatRoomId);
+
         } else {
             // Join room
             var chatRoomClone = chatRoom;
@@ -45,7 +46,6 @@ export default function PSLChat({ channel }) {
             }
             sendGroupChatMessage(firbase.database, message);
         }
-        setModalShow(false)
 
     }
     async function getUserAllRooms() {

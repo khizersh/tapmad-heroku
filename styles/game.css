@@ -192,8 +192,25 @@ a:focus {
 
 .modal-content {
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
   color: black;
+}
+
+.modal-header {
+  padding: 2px 10px 2px 10px;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 18px;
+  color: #6d6d6d;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.modal-header .close {
+  font-weight: 400;
 }
 
 @media (max-width: 576px) {

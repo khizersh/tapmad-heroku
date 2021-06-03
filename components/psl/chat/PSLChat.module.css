@@ -20,6 +20,30 @@
     margin-top: 10px ;
 }
 
+
+
+.roomChatText {
+    width: 160px;
+    margin: 0px 0 0 30px;
+}
+
+.copyBtn {
+    background: #d4d4d4 !important;
+    color: #616161 !important;
+    box-shadow: 0 0 5px 0px #0000002e;
+    font-size: 16px;
+}
+
+.shareBtn{
+        width: 160px;
+        padding: 8px;
+        background: black;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+}
+
 @media (max-width: 640px) {
 .margChat{
     margin-top: 50%;
