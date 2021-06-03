@@ -140,7 +140,7 @@ export default function Player({ movies }) {
               <div className="player-div" style={{ border: "1px solid white" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id"
-                  playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                  playerScript="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"
                   isAutoPlay={true}
                   file={
                     videoLink
