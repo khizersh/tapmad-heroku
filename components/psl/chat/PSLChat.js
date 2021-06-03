@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import swal from "sweetalert";
 import { FirebaseContext } from "../../../contexts/FireBase";
 import { getUserRooms } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
@@ -60,7 +61,7 @@ export default function PSLChat({ channelID }) {
         getAllChatChannels(firbase.database, channelID, (list) => {
             console.log("Chat channel ", list)
             if (list != null) {
-                console.log("firebase: ",list);
+                console.log("firebase: ", list);
                 setChats(list)
             } else {
                 // alert("Woah")
@@ -100,26 +101,42 @@ export default function PSLChat({ channelID }) {
         var time = formatAMPM(new Date(timestamp));
         return day + " " + time;
     }
-    async function deleteRoom(room) {
-        let body = {
-            "Version": "V1",
-            "Language": "en",
-            "Platform": "Android",
-            "UserId": Cookie.getCookies('userId'),
-            "ChatLink": room.ChatLink
-        }
-        let message = {
-            message: "Left",
-            channelID: channelID,
-            roomID: room.id,
-            type:1
-        }
-        await deleteAChatRoom(body);
-        sendGroupChatMessage(firbase.database, message);
-        textMessage.current.value = '';
-        var chatRoomClone = chatRoom.filter((e) => e.ChatRoomId != room.ChatRoomId);
-        setChatRooms(chatRoomClone);
-        setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
+
+    function deleteRoom(room) {
+        swal({
+            title: "Are you sure you want to delete room?",
+            icon: "info",
+            allowOutsideClick: false,
+            closeOnClickOutside: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            buttons: {
+                cancel: "No",
+                confirm: "Yes",
+            },
+        }).then(async (event) => {
+            if (event) {
+                var body = {
+                    "Version": "V1",
+                    "Language": "en",
+                    "Platform": "Android",
+                    "UserId": Cookie.getCookies('userId'),
+                    "ChatLink": room.ChatLink
+                }
+                let message = {
+                    message: "Left",
+                    channelID: channelID,
+                    roomID: room.id,
+                    type: 1
+                }
+                await deleteAChatRoom(body);
+                sendGroupChatMessage(firbase.database, message);
+                textMessage.current.value = '';
+                var chatRoomClone = chatRoom.filter((e) => e.ChatRoomId != room.ChatRoomId);
+                setChatRooms(chatRoomClone);
+                setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
+            }
+        })
 
     }
     async function shareOnSocial() {
@@ -137,24 +154,9 @@ export default function PSLChat({ channelID }) {
         }
     }
 
-    useEffect(() => {
-        const header = document.getElementById("chat-margin");
-        const sticky = header.offsetTop;
-        const scrollCallBack = window.addEventListener("scroll", () => {
-            if (window.pageYOffset > sticky) {
-                header.classList.add(pslStyles.margChat);
 
-            } else {
-                header.classList.remove(pslStyles.margChat);
 
-            }
-        });
-        return () => {
-            window.removeEventListener("scroll", scrollCallBack);
-        };
-    }, []);
-
-    return <div id="chat-margin">
+    return <div>
         <div className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
@@ -187,7 +189,7 @@ export default function PSLChat({ channelID }) {
                                     {/* <img src={chats[room][keyName].userProfile != "" ? chats[room][keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
                                     <img src={userProfile} width="40" style={{ borderRadius: '10px' }} />
                                 </div> &nbsp;&nbsp;
-                                { chats[room][keyName].type && chats[room][keyName].type == 3 ?  <div className="message">
+                                {chats[room][keyName].type && chats[room][keyName].type == 3 ? <div className="message">
                                     <div style={{ textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
                                         {chats[room][keyName].id == userId ? <>
                                             <small className={pslStyles.msgProfile}>{chats[room][keyName].senderName}</small> &nbsp;&nbsp;&nbsp; <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small></> : <> <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small> &nbsp;&nbsp;&nbsp; <small className={pslStyles.msgProfile}>{chats[room][keyName].senderName}</small></>
@@ -197,8 +199,8 @@ export default function PSLChat({ channelID }) {
                                     <div className={pslStyles.chatMessageBox} style={{ background: chats[room][keyName].id == userId ? '#ffffff00' : '#ffffff00' }, { textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
                                         {chats[room][keyName].message}
                                     </div>
-                                </div> : <p className="badge badge-info">{chats[room][keyName].senderName + " " + chats[room][keyName].message} </p>  }
-                               
+                                </div> : <p className="badge badge-info">{chats[room][keyName].senderName + " " + chats[room][keyName].message} </p>}
+
                             </div>
                         </div>
                     </div>
