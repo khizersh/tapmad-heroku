@@ -11,8 +11,8 @@ const CustomCollapse = ({ data, onChange }) => {
   };
 
   return (
-    <Card className={styles.bgBlack} onClick={() => onChangeTab()} >
-      <Accordion.Toggle as={Card.Header} eventKey={data.id}>
+    <Card className={styles.bgBlack}  >
+      <Accordion.Toggle as={Card.Header} eventKey={data.id} onClick={() => onChangeTab()}>
         <h5 className={`mb-0 text-light ${styles.title}`}>
           <img src={data.icon} /> {data.title}
           <i

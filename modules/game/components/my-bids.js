@@ -6,7 +6,7 @@ import { Accordion, Card } from "react-bootstrap";
 
 const MyBid = ({ type }) => {
   const [data, setData] = useState([]);
-  const [openTab, setOpenTab] = useState("");
+  const [openTab, setOpenTab] = useState(type);
   useEffect(() => {
     getMatchBetsByUser()
       .then((res) => {
@@ -48,8 +48,11 @@ const MyBid = ({ type }) => {
   }, [type]);
 
   const onChange = (e) => {
-    console.log("eeee: ", e);
-    setOpenTab(e.id);
+    if (openTab == e.id) {
+      setOpenTab("");
+    } else {
+      setOpenTab(e.id);
+    }
   };
   return (
     <div>
