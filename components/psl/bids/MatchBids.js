@@ -133,13 +133,26 @@ export default function MatchBids({ game, filteredData }) {
         {match
           ? match.map((e, index) => {
             return (
-              <Card bsPrefix="card border-0 bg-secondary pt-1" key={index}>
+              <Card bsPrefix="card border-0 bg-secondary pt-1 btn px-0" key={index}>
                 <Accordion.Toggle
                   as={Card.Header}
                   bsPrefix={`${styles.matchTitleBar} card-header`}
                   eventKey={index + 1}
                 >
-                  <div className={styles.tag}>
+                  <div className={styles.ballIcon}>
+                    {/* {e.isLive ? (
+                      <>
+                        <div className={styles.cricle}></div>
+                        <div className={styles.tagText}>LIVE</div>
+                      </>
+                    ) : (
+                      e.StartDate
+                    )} */}
+                    <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png" alt="Ball" width="30px"/>
+                  </div>
+                  <h5 className="mb-0">
+                  <span className={styles.tag}>
+                    <span>
                     {e.isLive ? (
                       <>
                         <div className={styles.cricle}></div>
@@ -148,13 +161,13 @@ export default function MatchBids({ game, filteredData }) {
                     ) : (
                       e.StartDate
                     )}
-                  </div>
-                  <h5 className="mb-0">
+                    </span>
+                  </span>
                     <button
-                      className={`btn btn-link ${styles.teamName} ${styles.letter}`}
+                      className={`mx-0 btn btn-link ${styles.teamName} ${styles.letter}`}
                     >
                       {e.matchTitle}
-                      <p className="mb-0">{e.leagueName}</p>
+                      {/* <p className="mb-0">{e.leagueName}</p> */}
                     </button>
                   </h5>
                 </Accordion.Toggle>
@@ -176,7 +189,7 @@ export default function MatchBids({ game, filteredData }) {
                                       <h5>{innerQues.EventQuestion}</h5>
                                       <div className={styles.biding}>
                                         <div className="row">
-                                          <div className="col-5">
+                                          <div className="col-12 col-lg-5 col-sm-12">
                                             <div
                                               className={styles.team1}
                                               style={{
@@ -184,8 +197,8 @@ export default function MatchBids({ game, filteredData }) {
                                                   innerQues.Options[0]
                                                     .GameAnswer ==
                                                     team.answer
-                                                    ? "1 solid #87c242"
-                                                    : "0px",
+                                                    ? "1px solid #87c242"
+                                                    : "1px solid #464646",
                                               }}
                                               onClick={() =>
                                                 answerA(innerQues)
@@ -209,7 +222,7 @@ export default function MatchBids({ game, filteredData }) {
                                                 }}
                                               >
                                                 <h6
-                                                  style={{ margin: "0px" }}
+                                                  style={{ margin: "0px", color: "white" }}
                                                 >
                                                   {
                                                     innerQues.Options[0]
@@ -219,7 +232,7 @@ export default function MatchBids({ game, filteredData }) {
                                               </div>
                                             </div>
                                           </div>
-                                          <div className="col-2">
+                                          <div className="col-12 col-lg-2 col-sm-12">
                                             <div className={styles.team_vs}>
                                               <div
                                                 style={{
@@ -240,7 +253,7 @@ export default function MatchBids({ game, filteredData }) {
                                               </div>
                                             </div>
                                           </div>
-                                          <div className="col-5">
+                                          <div className="col-12 col-lg-5 col-sm-12">
                                             <div
                                               className={`${styles.team1} ${styles.team2}`}
                                               style={{
@@ -248,8 +261,8 @@ export default function MatchBids({ game, filteredData }) {
                                                   innerQues.Options[1]
                                                     .GameAnswer ==
                                                     team.answer
-                                                    ? "1px solid red"
-                                                    : "0px",
+                                                    ? "1px solid #87c242"
+                                                    : "1px solid #464646",
                                               }}
                                               onClick={() =>
                                                 answerB(innerQues)
@@ -261,9 +274,18 @@ export default function MatchBids({ game, filteredData }) {
                                                     .GameAnswer
                                                 }
                                               </h6>
-                                              <div className={styles.score}>
+                                              <div className={styles.score}
+                                              style={{
+                                                background:
+                                                  innerQues.Options[1]
+                                                    .GameAnswer ==
+                                                    team.answer
+                                                    ? "#87c242"
+                                                    : "#2e2e2e",
+                                              }}
+                                              >
                                                 <h6
-                                                  style={{ margin: "0px" }}
+                                                  style={{ margin: "0px", color: "white" }}
                                                 >
                                                   {
                                                     innerQues.Options[1]
@@ -275,7 +297,7 @@ export default function MatchBids({ game, filteredData }) {
                                           </div>
                                         </div>
                                         <div className="row mb-4">
-                                          <div className="col-4">
+                                          <div className="col-6 col-lg-6 col-sm-6">
                                             <div
                                               className={
                                                 styles.quantitybtnqty
@@ -345,8 +367,8 @@ export default function MatchBids({ game, filteredData }) {
                                               Your Bid
                                                 </span>
                                           </div>
-                                          <div className="col-4"></div>
-                                          <div className="col-4">
+                                
+                                          <div className="col-6 col-lg-6 col-sm-6">
                                             <div className={styles.coins}>
                                               <p>
                                                 {GlobalService.nFormatter(

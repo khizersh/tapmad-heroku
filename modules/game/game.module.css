@@ -189,8 +189,9 @@
 }
 
 .discountImage{
-  width: 200px;
+  width: 100%;
   margin: auto;
+  max-width: 200px;
 }
 
 @media screen and (max-width: 990px) {
@@ -202,5 +203,6 @@
   .discountImage{
     width: 100% !important;
     margin: auto;
+    max-width: 200px;
   }
 }
