@@ -11,8 +11,12 @@ const CustomCollapse = ({ data, onChange }) => {
   };
 
   return (
-    <Card className={styles.bgBlack}  >
-      <Accordion.Toggle as={Card.Header} eventKey={data.id} onClick={() => onChangeTab()}>
+    <Card className={`${styles.bgBlack} mt-1`}>
+      <Accordion.Toggle
+        as={Card.Header}
+        eventKey={data.id}
+        onClick={() => onChangeTab()}
+      >
         <h5 className={`mb-0 text-light ${styles.title}`}>
           <img src={data.icon} /> {data.title}
           <i
@@ -25,35 +29,37 @@ const CustomCollapse = ({ data, onChange }) => {
       <Accordion.Collapse eventKey={data.id}>
         <Card.Body className={styles.cardBody}>
           {data.content.length > 0 ? (
-            <table className="table table-striped table-dark tm_btng_tble">
-              <thead className="thead-light">
-                <tr>
-                  <th>Date</th>
-                  <th>Questions</th>
-                  <th>Answers</th>
-                  <th>Odds</th>
-                  <th>Bids</th>
-                  <th>You can win</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.content.map((m, i) => (
-                  <tr key={i} style={{ fontSize: "12px" }}>
-                    <td>{m.ChannelEventDate}</td>
-                    <td>
-                      {m.GameQuestion}
-                      <label className="badge badge-light text-dark">
-                        {m.MatchName}
-                      </label>
-                    </td>
-                    <td>{m.UserAnswer}</td>
-                    <td>{m.QuestionOdds}</td>
-                    <td>{m.MyBids}</td>
-                    <td>{m.YouWins}</td>
+            <div className="overflow-auto">
+              <table className="table table-striped table-dark tm_btng_tble">
+                <thead className="thead-light">
+                  <tr>
+                    <th>Date</th>
+                    <th>Questions</th>
+                    <th>Answers</th>
+                    <th>Odds</th>
+                    <th>Bids</th>
+                    <th>You can win</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {data.content.map((m, i) => (
+                    <tr key={i} style={{ fontSize: "12px" }}>
+                      <td>{m.ChannelEventDate}</td>
+                      <td>
+                        {m.GameQuestion}
+                        <label className="badge badge-light text-dark">
+                          {m.MatchName}
+                        </label>
+                      </td>
+                      <td>{m.UserAnswer}</td>
+                      <td>{m.QuestionOdds}</td>
+                      <td>{m.MyBids}</td>
+                      <td>{m.YouWins}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             "No " + data.title
           )}
