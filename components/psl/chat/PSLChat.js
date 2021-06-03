@@ -7,7 +7,7 @@ import { get } from "../../../services/http-service";
 import { sendMessageIcon, shareIcon, userProfile } from "../../../services/imagesLink";
 import { CenteredModal } from "../../Modal";
 import pslStyles from "./PSLChat.module.css";
-import { deleteAChatRoom, getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
+import { deleteAChatRoom, getSingleRoomChat, sendGroupChatMessage } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
 
@@ -53,16 +53,13 @@ export default function PSLChat({ channel }) {
         const response = await get(getUserRooms(userId, channel.VideoEntityId));
         if (response.data.Response.responseCode == 1) {
             setChatRooms(response.data.ChatRooms[0].Rooms);
-            getAllChats();
+            selectRoom(1);
         }
     }
-    function getAllChats() {
-        getAllChatChannels(firbase.database, channel.VideoEntityId, (list) => {
-            if (list != null) {
-                setChats(list)
-            } else {
-                // alert("Woah")
-            }
+    function selectRoom(e) {
+        setRoom(e);
+        getSingleRoomChat(firbase.database, channel.VideoEntityId, e, (list) => {
+            setChats(list);
         })
     }
     function sendMessage() {
@@ -160,7 +157,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         <div className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
-                    return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
+                    return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => selectRoom(roomData.ChatRoomId)}>
                         <a className={pslStyles.chatRoomName} style={{ border: room == roomData.ChatRoomId ? null : '1px solid #66aa33', backgroundColor: room == roomData.ChatRoomId ? null : '#231f20' }}>{roomData.RoomName}
                             {room == roomData.ChatRoomId && room != 1 ? <i className={`fa fa-times ${pslStyles.crossIcon}`} onClick={() => deleteRoom(roomData)}></i> : null}
                         </a>
@@ -176,33 +173,33 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         </div>
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
-                {chats && chats[room] && Object.keys(chats[room]).map(function (keyName, keyIndex) {
+                {chats && Object.keys(chats).map(function (keyName, keyIndex) {
                     setTimeout(() => {
                         document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
                     }, 100)
                     return <div className="row" key={keyIndex}>
-                        {chats[room][keyName].type == 3 &&
+                        {chats[keyName].type == 3 &&
                             <div className="col-12">
-                                <div className={pslStyles.insideChat} style={{ flexDirection: chats[room][keyName].id == userId ? 'row-reverse' : '' }}>
+                                <div className={pslStyles.insideChat} style={{ flexDirection: chats[keyName].id == userId ? 'row-reverse' : '' }}>
                                     <div className={pslStyles.avatar}>
-                                        {/* <img src={chats[room][keyName].userProfile != "" ? chats[room][keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
+                                        {/* <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
                                         <img src={userProfile} width="40" style={{ borderRadius: '10px' }} />
                                     </div> &nbsp;&nbsp;
                                 <div className="message">
-                                        <div style={{ textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
-                                            {chats[room][keyName].id == userId ? <>
-                                                <small className={pslStyles.msgProfile}>{chats[room][keyName].senderName}</small> &nbsp; <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small></> : <> <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small> &nbsp; <small className={pslStyles.msgProfile}>{chats[room][keyName].senderName}</small></>
+                                        <div style={{ textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
+                                            {chats[keyName].id == userId ? <>
+                                                <small className={pslStyles.msgProfile}>{chats[keyName].senderName}</small> &nbsp; <small className={pslStyles.msgTime}>{getDayTime(chats[keyName].date)}</small></> : <> <small className={pslStyles.msgTime}>{getDayTime(chats[keyName].date)}</small> &nbsp; <small className={pslStyles.msgProfile}>{chats[keyName].senderName}</small></>
                                             }
 
                                         </div>
-                                        <div className={pslStyles.chatMessageBox} style={{ background: chats[room][keyName].id == userId ? '#ffffff00' : '#ffffff00' }, { textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
-                                            {chats[room][keyName].message}
+                                        <div className={pslStyles.chatMessageBox} style={{ background: chats[keyName].id == userId ? '#ffffff00' : '#ffffff00' }, { textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
+                                            {chats[keyName].message}
                                         </div>
                                     </div>
                                 </div>
                             </div>}
                         <div className="col-12 text-center">
-                            {chats[room][keyName].type == 1 || chats[room][keyName].type == 2 ? <p className="badge badge-light">{chats[room][keyName].senderName + " " + chats[room][keyName].message} </p>
+                            {chats[keyName].type == 1 || chats[keyName].type == 2 ? <p className="badge badge-light">{chats[keyName].senderName + " " + chats[keyName].message} </p>
                                 : null}
                         </div>
                     </div>
