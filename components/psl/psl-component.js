@@ -1,11 +1,9 @@
 import { memo, useCallback, useEffect, useState } from "react"
 import { getPSLTabsService } from "./psl-service"
 import PSLChat from "./chat/PSLChat";
-import MatchBids from "./bids/MatchBids";
-import pslStyles from "./psl.module.css";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-export default memo(function PSLComponent({ channelID }) {
+export default memo(function PSLComponent({ channel }) {
     const [tabs, setTabs] = useState([]);
     const [selectedTab, setSelectedTab] = useState();
     useEffect(async () => {
@@ -35,7 +33,7 @@ export default memo(function PSLComponent({ channelID }) {
     }
     const RenderViews = useCallback(function () {
         if (selectedTab == 1) {
-            return <PSLChat channelID={channelID} />
+            return <PSLChat channel={channel} />
         } else if (selectedTab == 2) {
             // return <MatchBids />;
             return <iframe allow src="/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />;

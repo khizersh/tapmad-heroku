@@ -12,7 +12,7 @@ import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
 
 
-export default function PSLChat({ channelID }) {
+export default function PSLChat({ channel }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
     const firbase = useContext(FirebaseContext);
@@ -39,7 +39,7 @@ export default function PSLChat({ channelID }) {
             setRoom(newRoom.ChatRoomId);
             let message = {
                 message: "Join",
-                channelID: channelID,
+                channelID: channel.VideoEntityId,
                 roomID: newRoom.ChatRoomId,
                 type: 2
             }
@@ -50,14 +50,14 @@ export default function PSLChat({ channelID }) {
     }
     async function getUserAllRooms() {
         userId = Cookie.getCookies('userId');
-        const response = await get(getUserRooms(userId, channelID));
+        const response = await get(getUserRooms(userId, channel.VideoEntityId));
         if (response.data.Response.responseCode == 1) {
             setChatRooms(response.data.ChatRooms[0].Rooms);
             getAllChats();
         }
     }
     function getAllChats() {
-        getAllChatChannels(firbase.database, channelID, (list) => {
+        getAllChatChannels(firbase.database, channel.VideoEntityId, (list) => {
             if (list != null) {
                 setChats(list)
             } else {
@@ -68,7 +68,7 @@ export default function PSLChat({ channelID }) {
     function sendMessage() {
         var message = {
             message: textMessage.current.value,
-            channelID: channelID,
+            channelID: channel.VideoEntityId,
             roomID: room,
         }
         if (message.message.trim() == "") {
@@ -121,7 +121,7 @@ export default function PSLChat({ channelID }) {
                 }
                 let message = {
                     message: "Left",
-                    channelID: channelID,
+                    channelID: channel.VideoEntityId,
                     roomID: room.ChatRoomId,
                     type: 1
                 }
@@ -137,9 +137,15 @@ export default function PSLChat({ channelID }) {
     }
     async function shareOnSocial() {
         if (navigator.share) {
+            var chatIndex = chatRoom.find((_room) => _room.ChatRoomId == room);
+            let shareText = `${Cookie.getCookies('userProfileName')} is inviting you to stream ${channel.VideoName} and join the room ${chatIndex.RoomName} on Tapmad! Click the link below to join:
+            Link: ${window.location.href}
+            Room ID: ${chatIndex.ChatLink}
+            It’s going to be intense, don’t miss it.
+            Subscribe to Tapmad or Login to join now!`;
             const shareData = {
-                title: 'Watch HBL PSL 6',
-                text: 'Watch HBL PSL 6',
+                title: channel.VideoName,
+                text: shareText,
                 url: window.location.href,
             }
             await navigator.share(shareData)
@@ -211,11 +217,12 @@ export default function PSLChat({ channelID }) {
                     <div style={{ flex: "1" }}>
                         <textarea className={pslStyles.type_msg} ref={textMessage} placeholder="Type your message..."></textarea>
                     </div>
-                    <div style={{ textAlign: "center", paddingLeft: '10px' }}>
-                        <button className={pslStyles.shareChat} onClick={shareOnSocial}>
-                            <img className={pslStyles.shareIcon} src={shareIcon} />
-                        </button>
-                    </div>
+                    {room != 1 ?
+                        <div style={{ textAlign: "center", paddingLeft: '10px' }}>
+                            <button className={pslStyles.shareChat} onClick={shareOnSocial}>
+                                <img className={pslStyles.shareIcon} src={shareIcon} />
+                            </button>
+                        </div> : null}
                     <div style={{ textAlign: "center", paddingLeft: '10px' }}>
                         <button className={pslStyles.sendMessage} onClick={sendMessage}>
                             <img className={pslStyles.shareIcon} src={sendMessageIcon} />
@@ -226,7 +233,7 @@ export default function PSLChat({ channelID }) {
         </div>
         <CenteredModal show={modalShow}
             onHide={() => (setModalShow(false), setCurrentRoomOption(0))}>
-            <CreateJoinRoomModalBody channelId={channelID} mergeRoom={(e) => appendChatRoom(e)} />
+            <CreateJoinRoomModalBody channelId={channel.VideoEntityId} mergeRoom={(e) => appendChatRoom(e)} />
         </CenteredModal>
     </div >
 }
