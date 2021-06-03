@@ -275,7 +275,7 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
-                      file={"https://www.tapmad.com/tapmad.mp4"}
+                      file={"https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"}
                       onAdComplete={onRestartAd}
                       generatePrerollUrl={() =>
                         ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
@@ -309,7 +309,7 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
-                      file={"https://www.tapmad.com/tapmad.mp4"}
+                      file={"https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"}
                       onAdComplete={onRestartAd}
                       generatePrerollUrl={() => ads.bottomBannerAdMobile}
                       customProps={{
