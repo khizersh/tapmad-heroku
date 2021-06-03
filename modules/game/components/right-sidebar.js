@@ -9,6 +9,9 @@ import { MainContext } from "../../../contexts/MainContext";
 import { GameContext } from "../../../contexts/GameContext";
 import { Cookie } from "../../../services/cookies";
 import { basicSliderConfig } from "../../../services/utils";
+import styles from "../game.module.css"
+
+
 const RightSidebar = ({ shop }) => {
   const setting = basicSliderConfig(2, 2);
   const [rewards, setRewards] = useState([]);
@@ -96,9 +99,8 @@ const RightSidebar = ({ shop }) => {
                               <img
                                 onClick={() => onClickVoucher(n)}
                                 src={n.RewardProductImage}
-                                alt="reward"
-                                width={shop ? shop : "100%"}
-                                className=" btn m-auto"
+                                alt="reward" 
+                                className={`btn m-auto ${styles.discountImage}`}
                               />
                               <div
                                 className="card-body p-2 text-light"

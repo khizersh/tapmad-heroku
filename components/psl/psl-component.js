@@ -30,16 +30,34 @@ export default memo(function PSLComponent({ channelID }) {
     }, []);
     function handleSelect(e) {
         console.log(e);
+        setSelectedTab(e);
+
     }
     const RenderViews = useCallback(function () {
         if (selectedTab == 1) {
             return <PSLChat channelID={channelID} />
         } else if (selectedTab == 2) {
-            return <MatchBids />;
+            // return <MatchBids />;
+            return <iframe allow src="/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />;
         } else {
             return <div></div>;
         }
     })
+    useEffect(() => {
+        var frameObj = document.getElementById('gameFrame');
+        var contents = "";
+
+        if (frameObj) {
+            frameObj.onload = (() => {
+                contents = frameObj.contentDocument || frameObj.contentWindow.document;
+                console.log(contents)
+                contents.getElementsByClassName('fixed-bottom')[0].style.display = "none";
+                contents.getElementsByClassName('scrolling-navbar')[0].style.display = "none";
+                contents.getElementsByClassName('primary-nav')[0].style.display = "none";
+                contents.getElementsByTagName('footer')[0].style.display = "none";
+            })
+        }
+    }, [selectedTab])
     return <>
         <div>
             <div id="tab-btn" >

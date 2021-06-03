@@ -3,7 +3,7 @@ import { androidApp, appleApp, huaweiApp } from "../services/imagesLink";
 
 export default function Footer() {
   return (
-    <div>
+    <div id="footer">
       <footer className="pt-5 pb-5">
         <div className="container-fluid pr-4 pl-4">
           <div className="row">

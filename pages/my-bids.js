@@ -13,11 +13,7 @@ const MyBids = () => {
       setType(channel);
     }
   }, [channel]);
-  return (
-    <GameLayout>
-      <MyBid type={type}/>
-    </GameLayout>
-  );
+  return <GameLayout>{type ? <MyBid type={type} /> : <MyBid />}</GameLayout>;
 };
 
 export default MyBids;

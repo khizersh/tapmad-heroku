@@ -22,7 +22,7 @@ function HeaderBasic({ signout }) {
     };
     actionsRequestContent(body);
   };
-  useEffect(() => { }, [initialState.isAuthenticated]);
+  useEffect(() => {}, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -83,32 +83,23 @@ function HeaderBasic({ signout }) {
               <li className="nav-item">
                 <Link href="/game" passHref={true} shallow={true}>
                   <a>
-                    <p
-                      className="tm_stre_lnk"
+                    <img
+                      src={tapmadCoin}
                       style={{
-                        color: "rgb(255, 255, 255)",
-                        fontWeight: "bold",
-                        float: "left",
-                        maxWidth: "80px",
-                        display: "block",
+                        width: "20px",
+                        marginTop: "17px",
+                        cursor: "pointer",
+                        marginLeft: "5px",
                       }}
-                    >
-                      <img
-                        src={tapmadCoin}
-                        style={{
-                          width: "20px",
-                          marginTop: "17px",
-                          cursor: "pointer",
-                          marginLeft: "5px",
-                        }}
-                        className="img-fluid toGames"
-                        alt=""
-                      />
-                    </p>
+                      className="img-fluid"
+                      alt=""
+                    />
                   </a>
                 </Link>
+              </li>
+              <li className="nav-item">
                 <Link href="/news" passHref={true} shallow={true}>
-                  <a ariaLabel={'news'}>
+                  <a ariaLabel={"news"}>
                     <img
                       src={tapmadNews}
                       style={{

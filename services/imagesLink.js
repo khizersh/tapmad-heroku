@@ -22,10 +22,12 @@ export const samsungTvLogo = "https://d34080pnh6e62j.cloudfront.net/images/Video
 
 export const tapmadLogoBgWhite = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859428tm-logo-clr.png";
 
-export const sendMessageIcon = "/icons/psl/send-message.svg";
+export const sendMessageIcon = "/icons/psl/sendBtn.svg";
+export const shareIcon = "/icons/psl/chatShare.svg";
 export const pslCoins = "/icons/psl/coin.svg";
 export const userProfile = "/icons/psl/profile.svg";
 export const otherProfile = "/icons/psl/otherProfile.svg";
+export const pslCongrats = "/icons/psl/psl-congrats.jpg";
 
 export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";

@@ -7,8 +7,17 @@
   position: relative;
 }
 .tag {
-  width: auto;
+  width: 130px;
   background: red;
+  border-radius: 4px;
+  margin: auto 4px;
+  display: flex;
+  padding: 0 0 0 10px;
+  font-size: 12px;
+}
+
+.ballIcon {
+  width: 50px;
   border-radius: 4px;
   margin: auto 10px;
   display: flex;
@@ -28,14 +37,19 @@
   margin: auto 9px auto 1px;
 }
 .teamName {
-  /* font-weight: 800; */
-  font-weight: 700;
+  font-weight: 500;
   color: #ffffff;
   font-size: 20px;
   text-decoration: none;
   text-align: start;
   padding: 0px;
   margin-left: 10px;
+}
+
+.teamName:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .letter {
@@ -54,14 +68,11 @@
   text-decoration: none;
 }
 .teamName:hover {
-  font-weight: 800;
-  color: #ffffff;
-  font-size: 20px;
   text-decoration: none;
-  text-align: start;
   padding: 0px;
-  margin-left: 10px;
+  color: white;
 }
+
 .bidQ {
   background: #121117;
   border: 1px solid #222222;
@@ -198,23 +209,31 @@ input.count:focus {
 
 @media only screen and (max-width: 768px) {
   .teamName {
-    font-weight: 800;
+    font-weight: 600;
     color: #ffffff;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     text-align: start;
     padding: 0px;
     margin-left: 10px;
-    width: 260px;
+    width: 253px;
     letter-spacing: 1px;
+    padding: 4px;
   }
   .tag {
-    width: auto;
     background: red;
     border-radius: 4px;
-    margin: auto 0px;
     display: flex;
-    padding: 2px;
+    padding: 2px 0 2px 6px;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+  }
+  .bollImage {
+    width: 160px;
+    border-radius: 4px;
+    display: flex;
+    padding: 6px;
     font-size: 14px;
     text-align: center;
   }
@@ -222,15 +241,15 @@ input.count:focus {
   .team_vs {
     border-radius: 6px;
     display: flex;
-    margin: 10px 0px 0px -4px;
+    margin: 0px;
   }
 
   .team1 {
-    margin: 10px -10px 10px 10px;
+    margin: 10px 9px 10px 10px;
     cursor: pointer;
   }
   .team2 {
-    margin: 10px 10px 10px -10px;
+    margin: 10px 10px 10px 9px;
     cursor: pointer;
   }
 }

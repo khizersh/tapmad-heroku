@@ -11,7 +11,7 @@ import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
-
+import PSLComponent from "../../../components/psl/psl-component";
 const ReactJWPlayer = dynamic(() => import('react-jw-player'));
 
 export default function Player({ movies }) {
@@ -125,10 +125,10 @@ export default function Player({ movies }) {
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky-value");
-        
+
       } else {
         header.classList.remove("sticky-value");
-        
+
       }
     });
     return () => {
@@ -207,7 +207,7 @@ export default function Player({ movies }) {
               {movie && movie.IsPsl ? (
                 <div className="the-shop">
                   {/* <PlayerShop /> */}
-                  {/* <pslComponent channelID={movie.Video.VideoEntityId} /> */}
+                  <PSLComponent channelID={movie.Video.VideoEntityId} />
                   <br />
                 </div>
               ) : null}
