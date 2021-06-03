@@ -134,19 +134,19 @@
 
 .chatRoomName{
     float: left;
-    padding: 6px;
+    padding: 4px;
     color: white;
     cursor: pointer;
     border-radius: 10px 10px 0 0;
     background: #66aa33;
-    width: 180px;
-    height: 40px;
+    width: 140px;
+    height: 30px;
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 199px;
 }
 
 
@@ -229,7 +229,7 @@
     left: -2px;
     top: 16px;
     cursor: pointer;
-    font-size: 32px;
+    font-size: 18px;
     margin: auto;
 }
 
@@ -270,8 +270,7 @@
 .crossIcon {
    /* display: block; */
    position: relative;
-   top: 6px;
-   left: -2px;
+   top: 2px;
    background: white;
    width: 16px;
    height: 16px;

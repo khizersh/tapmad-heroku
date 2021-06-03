@@ -148,21 +148,21 @@ export default function MatchBids({ game, filteredData }) {
                     ) : (
                       e.StartDate
                     )} */}
-                    <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png" alt="Ball" width="30px"/>
+                    <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png" alt="Ball" width="30px" />
                   </div>
                   <h5 className="mb-0">
-                  <span className={styles.tag}>
-                    <span>
-                    {e.isLive ? (
-                      <>
-                        <div className={styles.cricle}></div>
-                        <div className={styles.tagText}>LIVE</div>
-                      </>
-                    ) : (
-                      e.StartDate
-                    )}
+                    <span className={styles.tag}>
+                      <span>
+                        {e.isLive ? (
+                          <>
+                            <div className={styles.cricle}></div>
+                            <div className={styles.tagText}>LIVE</div>
+                          </>
+                        ) : (
+                          e.StartDate
+                        )}
+                      </span>
                     </span>
-                  </span>
                     <button
                       className={`mx-0 btn btn-link ${styles.teamName} ${styles.letter}`}
                     >
@@ -232,7 +232,7 @@ export default function MatchBids({ game, filteredData }) {
                                               </div>
                                             </div>
                                           </div>
-                                          <div className="col-12 col-lg-2 col-sm-12">
+                                          <div className="col-12 col-lg-2 col-sm-12 d-none d-md-block">
                                             <div className={styles.team_vs}>
                                               <div
                                                 style={{
@@ -275,14 +275,14 @@ export default function MatchBids({ game, filteredData }) {
                                                 }
                                               </h6>
                                               <div className={styles.score}
-                                              style={{
-                                                background:
-                                                  innerQues.Options[1]
-                                                    .GameAnswer ==
-                                                    team.answer
-                                                    ? "#87c242"
-                                                    : "#2e2e2e",
-                                              }}
+                                                style={{
+                                                  background:
+                                                    innerQues.Options[1]
+                                                      .GameAnswer ==
+                                                      team.answer
+                                                      ? "#87c242"
+                                                      : "#2e2e2e",
+                                                }}
                                               >
                                                 <h6
                                                   style={{ margin: "0px", color: "white" }}
@@ -367,7 +367,7 @@ export default function MatchBids({ game, filteredData }) {
                                               Your Bid
                                                 </span>
                                           </div>
-                                
+
                                           <div className="col-6 col-lg-6 col-sm-6">
                                             <div className={styles.coins}>
                                               <p>

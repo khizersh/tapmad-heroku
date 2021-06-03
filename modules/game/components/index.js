@@ -25,7 +25,7 @@ export default function Game() {
             </div>
             <MatchBids game="12" />
           </div>
-          <div className="col-12 col-sm-12 col-md-12 col-lg-3">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-3" id="tshop">
             <RightSideBar />
           </div>
         </div>
