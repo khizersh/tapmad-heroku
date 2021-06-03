@@ -12,6 +12,7 @@ import {
 } from "../../services/imagesLink";
 import { MyAccountService } from "./myaccount.service";
 import { ProfileViewed, UpdateProfile } from "../../services/gtm";
+import { Cookie } from "../../services/cookies";
 
 const PersonalInfo = ({ data }) => {
   const [userImage, setUserImage] = useState(null);
@@ -42,6 +43,7 @@ const PersonalInfo = ({ data }) => {
   };
   const onSubmit = async () => {
     var formData = new FormData();
+    // console.log("profileData: ", profileData);
     for (var property in profileData) {
       if (profileData.hasOwnProperty(property)) {
         formData.append(property, profileData[property]);
@@ -54,6 +56,9 @@ const PersonalInfo = ({ data }) => {
       if (data.data.UserProfile.UserProfilePicture != userImage) {
         setUserImage(data.data.UserProfile.UserProfilePicture);
       }
+      Cookie.setCookies("userProfileName" , profileData.FullName)
+      console.log("name: " ,profileData.FullName);
+
       swal({
         title: data.data.Response.message,
         timer: 2000,
@@ -128,7 +133,12 @@ const PersonalInfo = ({ data }) => {
         <h5 className="text-left">Personal Information</h5>
         <div className="form-group">
           <label className="float-left">Full name</label>
-          <img src={usernameIcon} width="24" className="float-right" alt="username" />
+          <img
+            src={usernameIcon}
+            width="24"
+            className="float-right"
+            alt="username"
+          />
           <input
             type="text"
             className="form-control"
@@ -152,7 +162,12 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Date of Birth</label>
-          <img src={calenderIcon} width="24" className="float-right" alt="calender" />
+          <img
+            src={calenderIcon}
+            width="24"
+            className="float-right"
+            alt="calender"
+          />
           <input
             type="date"
             className="form-control"
@@ -164,7 +179,12 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <label className="float-left">Email Address</label>
-          <img src={calenderIcon} width="24" className="float-right" alt="calender" />
+          <img
+            src={calenderIcon}
+            width="24"
+            className="float-right"
+            alt="calender"
+          />
           <input
             type="email"
             required
@@ -177,8 +197,9 @@ const PersonalInfo = ({ data }) => {
         </div>
         <div className="form-group">
           <button
-            className={`profile-btn w-100  border-0 rounded-0 text-white ${btnEnable ? "" : "btn-click"
-              }`}
+            className={`profile-btn w-100  border-0 rounded-0 text-white ${
+              btnEnable ? "" : "btn-click"
+            }`}
             onClick={onSubmit}
           >
             Update Profile
