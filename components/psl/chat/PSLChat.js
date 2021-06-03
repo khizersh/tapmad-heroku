@@ -139,14 +139,12 @@ export default function PSLChat({ channel }) {
         if (navigator.share) {
             var chatIndex = chatRoom.find((_room) => _room.ChatRoomId == room);
             let shareText = `${Cookie.getCookies('userProfileName')} is inviting you to stream ${channel.VideoName} and join the room ${chatIndex.RoomName} on Tapmad! Click the link below to join:
-            Link: ${window.location.href}
-            Room ID: ${chatIndex.ChatLink}
-            It’s going to be intense, don’t miss it.
-            Subscribe to Tapmad or Login to join now!`;
+Link: ${window.location.href}
+Room ID: ${chatIndex.ChatLink}
+It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to join now!`;
             const shareData = {
                 title: channel.VideoName,
                 text: shareText,
-                url: window.location.href,
             }
             await navigator.share(shareData)
                 .then(() => console.log('Successful share'))
