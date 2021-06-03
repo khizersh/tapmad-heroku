@@ -45,7 +45,7 @@ export default memo(function PSLComponent({ channel }) {
                 <iframe src="/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />
             </>
         } else if (selectedTab == 3) {
-            router.push("/all-games");
+            router.push("/tapmad-shop");
             return null
         } else {
             return <div></div>;
@@ -59,11 +59,12 @@ export default memo(function PSLComponent({ channel }) {
             frameObj.onload = (() => {
                 document.getElementById('loader').style.display = "none";
                 contents = frameObj.contentDocument || frameObj.contentWindow.document;
-                console.log(contents)
+                console.log(contents);
                 contents.getElementsByClassName('fixed-bottom')[0].style.display = "none";
                 contents.getElementsByClassName('scrolling-navbar')[0].style.display = "none";
                 contents.getElementsByClassName('primary-nav')[0].style.display = "none";
                 contents.getElementsByTagName('footer')[0].style.display = "none";
+                contents.getElementById('tshop').style.display = "none";
             })
         }
     }, [selectedTab])
