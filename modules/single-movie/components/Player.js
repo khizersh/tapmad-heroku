@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import PSLComponent from "../../../components/psl/psl-component";
-const ReactJWPlayer = dynamic(() => import('react-jw-player'));
+const ReactJWPlayer = dynamic(() => import("react-jw-player"));
 
 export default function Player({ movies }) {
   const router = useRouter();
@@ -85,7 +85,6 @@ export default function Player({ movies }) {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
-
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,
@@ -98,7 +97,7 @@ export default function Player({ movies }) {
         bottomBannerAdMobile: data.bottomBannerAdMobile,
       });
     }
-    VideoWatched(movie);
+    // VideoWatched(movie);
   }, [router]);
 
   useEffect(() => {
@@ -118,24 +117,20 @@ export default function Player({ movies }) {
     }
   }, [movies]);
 
-
   useEffect(() => {
     const header = document.getElementById("player-div1");
     const sticky = header.offsetTop;
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky-value");
-
       } else {
         header.classList.remove("sticky-value");
-
       }
     });
     return () => {
       window.removeEventListener("scroll", scrollCallBack);
     };
   }, []);
-
 
   return (
     <div>
@@ -156,7 +151,11 @@ export default function Player({ movies }) {
                   </DFPSlotsProvider>
                 </div>
               )}
-              <div id="player-div1" className="player-div" style={{ border: "1px solid white" }}>
+              <div
+                id="player-div1"
+                className="player-div"
+                style={{ border: "1px solid white" }}
+              >
                 <ReactJWPlayer
                   playerId="my-unique-id"
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
@@ -229,7 +228,7 @@ export default function Player({ movies }) {
             </div>
           </div>
 
-          <div className="col-lg-3 text-center pt-5 ">
+          <div className="col-lg-3 text-center pt-5 d-none d-lg-block d-md-block">
             {/* Side Add desktop start*/}
             <div className="d-none d-lg-block d-md-block">
               {ads.allow && ads.rightAd ? (
@@ -295,7 +294,6 @@ export default function Player({ movies }) {
             {/* side add desktop end */}
             {/* bottom banner add mobile start*/}
             <div className="d-block  d-sm-none">
-
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
                   <div style={{ marginTop: "10px" }}>
@@ -329,7 +327,7 @@ export default function Player({ movies }) {
             </div>
             {/* bottom banner add mobile end*/}
 
-            <div
+            {/* <div
               className="text-left mt-3 related-video"
               style={{ height: "100vh", overflow: "scroll" }}
             >
@@ -337,26 +335,26 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                    let slug = SEOFriendlySlugsForVideo(video);
-                    return (
-                      <Link
-                        href={slug}
-                        replace={true}
-                        shallow={false}
-                        key={i}
-                      >
-                        <a>
-                          <RelatedProductCard video={video} />
-                        </a>
-                      </Link>
-                    );
-                  })
+                      let slug = SEOFriendlySlugsForVideo(video);
+                      return (
+                        <Link
+                          href={slug}
+                          replace={true}
+                          shallow={false}
+                          key={i}
+                        >
+                          <a>
+                            <RelatedProductCard video={video} />
+                          </a>
+                        </Link>
+                      );
+                    })
                   : null}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }

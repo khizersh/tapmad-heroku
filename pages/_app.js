@@ -1,3 +1,4 @@
+import "../styles/globals.css";
 import "../styles/globals.scss";
 import "../styles/game.css";
 import "../modules/home/sliderCard.css";

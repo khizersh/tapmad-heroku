@@ -1,0 +1,29 @@
+@media (max-width: 414px) {
+  .margChat {
+    margin-top: 60%;
+  }
+}
+
+@media (max-width: 411px) {
+  .margChat {
+    margin-top: 60%;
+  }
+}
+
+@media (max-width: 375px) {
+  .margChat {
+    margin-top: 60%;
+  }
+}
+
+@media (max-width: 360px) {
+  .margChat {
+    margin-top: 60%;
+  }
+}
+
+@media (max-width: 320px) {
+  .margChat {
+    margin-top: 40%;
+  }
+}

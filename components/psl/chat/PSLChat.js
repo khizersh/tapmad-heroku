@@ -20,6 +20,7 @@ export default function PSLChat({ channelID }) {
     const textMessage = useRef();
     const [modalShow, setModalShow] = useState(false);
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
+
     useEffect(() => {
         if (firbase && firbase.database) {
             getUserAllRooms();
@@ -79,6 +80,11 @@ export default function PSLChat({ channelID }) {
         } else {
             sendGroupChatMessage(firbase.database, message);
             textMessage.current.value = '';
+            // setTimeout(() => {
+            //     document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            // }, 100)
+       
+
         }
 
     }
@@ -152,6 +158,8 @@ export default function PSLChat({ channelID }) {
 
 
 
+  
+
     return <div>
         <div className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
@@ -206,17 +214,17 @@ export default function PSLChat({ channelID }) {
                 <div className="lastDiv">
                 </div>
             </div>
-            <div className={pslStyles.userInput}>
+            <div className={` ${pslStyles.userInput} ${pslStyles.chatTextInput}`}>
                 <div className={pslStyles.msgField + ' p-0'}>
                     <div style={{ flex: "1" }}>
                         <textarea className={pslStyles.type_msg} ref={textMessage} placeholder="Type your message..."></textarea>
                     </div>
-                    <div style={{ textAlign: "center", paddingLeft: '10px' }}>
+                    <div style={{ textAlign: "center", paddingLeft: '10px', margin: 'auto' }}>
                         <button className={pslStyles.shareChat} onClick={shareOnSocial}>
                             <img className={pslStyles.shareIcon} src={shareIcon} />
                         </button>
                     </div>
-                    <div style={{ textAlign: "center", paddingLeft: '10px' }}>
+                    <div style={{ textAlign: "center", paddingLeft: '10px', margin: 'auto' }}>
                         <button className={pslStyles.sendMessage} onClick={sendMessage}>
                             <img className={pslStyles.shareIcon} src={sendMessageIcon} />
                         </button>
