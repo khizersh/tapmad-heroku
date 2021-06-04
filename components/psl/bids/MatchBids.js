@@ -14,7 +14,7 @@ export default function MatchBids({ game, filteredData }) {
   const [match, setMatches] = useState();
   const [questions, setQuestions] = useState();
   const [team, setTeam] = useState({ answer: 0, odds: 0 });
-  const { database } = useContext(FirebaseContext);
+  const firebas = useContext(FirebaseContext);
   const [counter, setCounter] = useState(4);
   const [totalOdds, setTotalOdds] = useState(0.0);
 
@@ -23,12 +23,13 @@ export default function MatchBids({ game, filteredData }) {
       setMatches(filteredData);
     } else {
       const matches = await getAllMatchDetails();
+      console.log("matches ", matches);
       setMatches(matches.MatchOdds);
 
     }
   }
   function getAllMatchesQuestions() {
-    getAllMatchQuestions(database, (questions) => {
+    getAllMatchQuestions(firebas.database, (questions) => {
       let _records = [];
       for (var key in questions) {
         if (questions[key]) {
@@ -43,11 +44,12 @@ export default function MatchBids({ game, filteredData }) {
     });
   }
   useEffect(() => {
-    if (database) {
-      getMatchLiveDetails();
+    if (firebas && firebas.database) {
       getAllMatchesQuestions();
     }
+    getMatchLiveDetails();
   }, [filteredData]);
+
   function increment() {
     var totalCoins = Cookie.getCookies("userCoins");
 
