@@ -3,7 +3,7 @@ import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
 export const getSingleRoomChat = (database, channelID, roomId, cb) => {
-    database.ref(`GroupChat/${channelID}/${roomId}`).limitToLast(100).on("value", (snapshot) => {
+    database.ref(`GroupChat/${roomId}`).limitToLast(100).on("value", (snapshot) => {
         const vals = snapshot.val();
         cb(vals);
     })
@@ -12,7 +12,7 @@ export const sendGroupChatMessage = (database, chatDetails) => {
     const userId = Cookie.getCookies('userId');
     const name = Cookie.getCookies('userProfileName');
     const picture = Cookie.getCookies('userProfilePicture');
-    database.ref(`GroupChat/${chatDetails.channelID}/${chatDetails.roomID}`).push({
+    database.ref(`GroupChat/${chatDetails.roomID}`).push({
         date: Date.now(),
         message: chatDetails.message,
         id: Number(userId),
