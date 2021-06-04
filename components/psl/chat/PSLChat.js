@@ -15,16 +15,18 @@ var userId = "";
 export default function PSLChat({ channel }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
-    const firbase = useContext(FirebaseContext);
+    // const firebase = useContext(FirebaseContext);
+    const { database } = useContext(FirebaseContext);
     const [room, setRoom] = useState(1);
     const textMessage = useRef();
     const [modalShow, setModalShow] = useState(false);
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
     useEffect(() => {
-        if (firbase) {
+        console.log("Database ", database);
+        if (database) {
             getUserAllRooms();
         }
-    }, [firbase]);
+    }, [database]);
 
     function appendChatRoom(newRoom) {
         if (Array.isArray(newRoom)) {
@@ -44,7 +46,7 @@ export default function PSLChat({ channel }) {
                 roomID: newRoom.ChatRoomId,
                 type: 2
             }
-            sendGroupChatMessage(firbase.database, message);
+            sendGroupChatMessage(database, message);
         }
 
     }
@@ -58,7 +60,7 @@ export default function PSLChat({ channel }) {
     }
     function selectRoom(e) {
         setRoom(e);
-        getSingleRoomChat(firbase.database, channel.VideoEntityId, e, (list) => {
+        getSingleRoomChat(database, channel.VideoEntityId, e, (list) => {
             setChats(list);
         })
     }
@@ -74,7 +76,7 @@ export default function PSLChat({ channel }) {
                 textMessage.current.style.border = "0px";
             }, 2000)
         } else {
-            sendGroupChatMessage(firbase.database, message);
+            sendGroupChatMessage(database, message);
             textMessage.current.value = '';
         }
 
@@ -117,13 +119,13 @@ export default function PSLChat({ channel }) {
                     "ChatLink": room.ChatLink
                 }
                 let message = {
-                    message: "Left",
+                    message: `${Cookie.getCookies('userProfileName')} Left`,
                     channelID: channel.VideoEntityId,
                     roomID: room.ChatRoomId,
                     type: 1
                 }
                 await deleteAChatRoom(body);
-                sendGroupChatMessage(firbase.database, message);
+                sendGroupChatMessage(database, message);
                 textMessage.current.value = '';
                 var chatRoomClone = chatRoom.filter((e) => e.ChatRoomId != room.ChatRoomId);
                 setChatRooms(chatRoomClone);
