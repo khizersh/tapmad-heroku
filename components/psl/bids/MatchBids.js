@@ -25,7 +25,6 @@ export default function MatchBids({ game, filteredData }) {
       const matches = await getAllMatchDetails();
       console.log("matches ", matches);
       setMatches(matches.MatchOdds);
-
     }
   }
   function getAllMatchesQuestions() {
@@ -135,7 +134,10 @@ export default function MatchBids({ game, filteredData }) {
         {match
           ? match.map((e, index) => {
             return (
-              <Card bsPrefix="card border-0 bg-secondary pt-1 btn px-0" key={index}>
+              <Card
+                bsPrefix="card border-0 bg-secondary pt-1 btn px-0"
+                key={index}
+              >
                 <Accordion.Toggle
                   as={Card.Header}
                   bsPrefix={`${styles.matchTitleBar} card-header`}
@@ -150,20 +152,24 @@ export default function MatchBids({ game, filteredData }) {
                     ) : (
                       e.StartDate
                     )} */}
-                    <img src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png" alt="Ball" width="30px" />
+                    <img
+                      src="//d1s7wg2ne64q87.cloudfront.net/web/images/png-cricket-ball.png"
+                      alt="Ball"
+                      width="30px"
+                    />
                   </div>
                   <h5 className="mb-0">
-                    <span className={styles.tag}>
-                      <span>
-                        {e.isLive ? (
-                          <>
+                    <span>
+                      {e.isLive ? (
+                        <>
+                          <span className={styles.tagLive}>
                             <div className={styles.cricle}></div>
                             <div className={styles.tagText}>LIVE</div>
-                          </>
-                        ) : (
-                          e.StartDate
-                        )}
-                      </span>
+                          </span>
+                        </>
+                      ) : (
+                        <span className={styles.tag}>{e.StartDate}</span>
+                      )}
                     </span>
                     <button
                       className={`mx-0 btn btn-link ${styles.teamName} ${styles.letter}`}
@@ -179,8 +185,9 @@ export default function MatchBids({ game, filteredData }) {
                       {questions
                         ? questions.map((ques) => {
                           if (ques.id == e.matchId) {
-                            return ques.AllQuestion && ques.AllQuestion.map(
-                              (innerQues, index) => {
+                            return (
+                              ques.AllQuestion &&
+                              ques.AllQuestion.map((innerQues, index) => {
                                 return (
                                   <div
                                     className={`col-12 col-lg-${game ? game : "6"
@@ -224,7 +231,10 @@ export default function MatchBids({ game, filteredData }) {
                                                 }}
                                               >
                                                 <h6
-                                                  style={{ margin: "0px", color: "white" }}
+                                                  style={{
+                                                    margin: "0px",
+                                                    color: "white",
+                                                  }}
                                                 >
                                                   {
                                                     innerQues.Options[0]
@@ -234,7 +244,7 @@ export default function MatchBids({ game, filteredData }) {
                                               </div>
                                             </div>
                                           </div>
-                                          <div className="col-12 col-lg-2 col-sm-12 d-none d-md-block">
+                                          <div className="col-12 col-lg-2 col-sm-12">
                                             <div className={styles.team_vs}>
                                               <div
                                                 style={{
@@ -276,7 +286,8 @@ export default function MatchBids({ game, filteredData }) {
                                                     .GameAnswer
                                                 }
                                               </h6>
-                                              <div className={styles.score}
+                                              <div
+                                                className={styles.score}
                                                 style={{
                                                   background:
                                                     innerQues.Options[1]
@@ -287,7 +298,10 @@ export default function MatchBids({ game, filteredData }) {
                                                 }}
                                               >
                                                 <h6
-                                                  style={{ margin: "0px", color: "white" }}
+                                                  style={{
+                                                    margin: "0px",
+                                                    color: "white",
+                                                  }}
                                                 >
                                                   {
                                                     innerQues.Options[1]
@@ -420,7 +434,7 @@ export default function MatchBids({ game, filteredData }) {
                                     </div>
                                   </div>
                                 );
-                              }
+                              })
                             );
                           }
                         })

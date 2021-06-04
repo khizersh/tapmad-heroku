@@ -180,7 +180,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
 
     return <div>
         <div id="tab-chat" className={pslStyles.tabhight}>
-            <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
+            <ul className={`nav nav-tabs  d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
                     return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => selectRoom(roomData.ChatRoomId)}>
                         <a className={pslStyles.chatRoomName} style={{ border: room == roomData.ChatRoomId ? null : '1px solid #66aa33', backgroundColor: room == roomData.ChatRoomId ? null : '#231f20' }}>{roomData.RoomName}
