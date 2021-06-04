@@ -98,7 +98,7 @@ function MyApp({ Component, pageProps, test }) {
         <meta name="robots" content="noindex" />
         <meta
           name="keywords"
-          content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"
+          content="Watch LIVE TV channels online, live psl, live cricket, watch live psl streaming, ad free stream, live sports, live sports, watch adfree psl online, hd stream, Pakistan cricket match, live cricket, live sports"
         />
         {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
 
