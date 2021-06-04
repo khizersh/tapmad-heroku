@@ -22,6 +22,22 @@ export default function PSLChat({ channelID }) {
     const [currentRoomOption, setCurrentRoomOption] = useState(0);
 
     useEffect(() => {
+        const header = document.getElementById("tab-chat");
+        const sticky = header.offsetTop;
+        console.log("Header ", header);
+        const scrollCallBack = window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 17) {
+                header.classList.add("margChat");
+            } else {
+                header.classList.remove("margChat");
+            }
+        });
+        return () => {
+            window.removeEventListener("scroll", scrollCallBack);
+        };
+    }, []);
+
+    useEffect(() => {
         if (firbase && firbase.database) {
             getUserAllRooms();
         }
@@ -161,7 +177,7 @@ export default function PSLChat({ channelID }) {
   
 
     return <div>
-        <div className={pslStyles.tabhight}>
+        <div id="tab-chat" className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
                     return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
