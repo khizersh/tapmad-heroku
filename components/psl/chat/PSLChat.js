@@ -7,15 +7,16 @@ import { get } from "../../../services/http-service";
 import { sendMessageIcon, shareIcon, userProfile } from "../../../services/imagesLink";
 import { CenteredModal } from "../../Modal";
 import pslStyles from "./PSLChat.module.css";
-import { deleteAChatRoom, getAllChatChannels, sendGroupChatMessage } from "./PSLChat.service";
+import { deleteAChatRoom, getSingleRoomChat, sendGroupChatMessage } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
 
 
-export default function PSLChat({ channelID }) {
+export default function PSLChat({ channel }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
-    const firbase = useContext(FirebaseContext);
+    // const firebase = useContext(FirebaseContext);
+    const { database } = useContext(FirebaseContext);
     const [room, setRoom] = useState(1);
     const textMessage = useRef();
     const [modalShow, setModalShow] = useState(false);
@@ -38,54 +39,51 @@ export default function PSLChat({ channelID }) {
     }, []);
 
     useEffect(() => {
-        if (firbase && firbase.database) {
+        if (database) {
             getUserAllRooms();
         }
-    }, [firbase]);
+    }, [database]);
 
     function appendChatRoom(newRoom) {
         if (Array.isArray(newRoom)) {
             // Delete Room
             setChatRooms(newRoom);
-            setRoom(newRoom[newRoom.length - 1].ChatRoomId);
+            selectRoom(newRoom[newRoom.length - 1].ChatRoomId);
+
         } else {
             // Join room
             var chatRoomClone = chatRoom;
             chatRoomClone.push(newRoom);
             setChatRooms(chatRoomClone);
-            setRoom(newRoom.ChatRoomId);
+            selectRoom(newRoom.ChatRoomId);
             let message = {
                 message: "Join",
-                channelID: channelID,
+                channelID: channel.VideoEntityId,
                 roomID: newRoom.ChatRoomId,
                 type: 2
             }
-            sendGroupChatMessage(firbase.database, message);
+            sendGroupChatMessage(database, message);
         }
-        setModalShow(false)
 
     }
     async function getUserAllRooms() {
         userId = Cookie.getCookies('userId');
-        const response = await get(getUserRooms(userId, channelID));
+        const response = await get(getUserRooms(userId, channel.VideoEntityId));
         if (response.data.Response.responseCode == 1) {
             setChatRooms(response.data.ChatRooms[0].Rooms);
-            getAllChats();
+            selectRoom(1);
         }
     }
-    function getAllChats() {
-        getAllChatChannels(firbase.database, channelID, (list) => {
-            if (list != null) {
-                setChats(list)
-            } else {
-                // alert("Woah")
-            }
+    function selectRoom(e) {
+        setRoom(e);
+        getSingleRoomChat(database, channel.VideoEntityId, e, (list) => {
+            setChats(list);
         })
     }
     function sendMessage() {
         var message = {
             message: textMessage.current.value,
-            channelID: channelID,
+            channelID: channel.VideoEntityId,
             roomID: room,
         }
         if (message.message.trim() == "") {
@@ -94,12 +92,12 @@ export default function PSLChat({ channelID }) {
                 textMessage.current.style.border = "0px";
             }, 2000)
         } else {
-            sendGroupChatMessage(firbase.database, message);
+            sendGroupChatMessage(database, message);
             textMessage.current.value = '';
             // setTimeout(() => {
             //     document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
             // }, 100)
-       
+
 
         }
 
@@ -142,27 +140,31 @@ export default function PSLChat({ channelID }) {
                     "ChatLink": room.ChatLink
                 }
                 let message = {
-                    message: "Left",
-                    channelID: channelID,
+                    message: `${Cookie.getCookies('userProfileName')} Left`,
+                    channelID: channel.VideoEntityId,
                     roomID: room.ChatRoomId,
                     type: 1
                 }
                 await deleteAChatRoom(body);
-                sendGroupChatMessage(firbase.database, message);
+                sendGroupChatMessage(database, message);
                 textMessage.current.value = '';
                 var chatRoomClone = chatRoom.filter((e) => e.ChatRoomId != room.ChatRoomId);
                 setChatRooms(chatRoomClone);
-                setRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
+                selectRoom(chatRoomClone[chatRoomClone.length - 1].ChatRoomId);
             }
         })
 
     }
     async function shareOnSocial() {
         if (navigator.share) {
+            var chatIndex = chatRoom.find((_room) => _room.ChatRoomId == room);
+            let shareText = `${Cookie.getCookies('userProfileName')} is inviting you to stream ${channel.VideoName} and join the room ${chatIndex.RoomName} on Tapmad! Click the link below to join:
+Link: ${window.location.href}
+Room ID: ${chatIndex.ChatLink}
+It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to join now!`;
             const shareData = {
-                title: 'Watch HBL PSL 6',
-                text: 'Watch HBL PSL 6',
-                url: window.location.href,
+                title: channel.VideoName,
+                text: shareText,
             }
             await navigator.share(shareData)
                 .then(() => console.log('Successful share'))
@@ -174,13 +176,13 @@ export default function PSLChat({ channelID }) {
 
 
 
-  
+
 
     return <div>
         <div id="tab-chat" className={pslStyles.tabhight}>
             <ul className={`nav nav-tabs d-flex ${pslStyles.noBorders}`}>
                 {chatRoom.length > 0 ? chatRoom.map((roomData, index) => {
-                    return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => setRoom(roomData.ChatRoomId)}>
+                    return <li className={`nav-item ${pslStyles.chatRoomList}`} key={index} onClick={() => selectRoom(roomData.ChatRoomId)}>
                         <a className={pslStyles.chatRoomName} style={{ border: room == roomData.ChatRoomId ? null : '1px solid #66aa33', backgroundColor: room == roomData.ChatRoomId ? null : '#231f20' }}>{roomData.RoomName}
                             {room == roomData.ChatRoomId && room != 1 ? <i className={`fa fa-times ${pslStyles.crossIcon}`} onClick={() => deleteRoom(roomData)}></i> : null}
                         </a>
@@ -196,33 +198,33 @@ export default function PSLChat({ channelID }) {
         </div>
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
-                {chats && chats[room] && Object.keys(chats[room]).map(function (keyName, keyIndex) {
+                {chats && Object.keys(chats).map(function (keyName, keyIndex) {
                     setTimeout(() => {
                         document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
                     }, 100)
                     return <div className="row" key={keyIndex}>
-                        {chats[room][keyName].type == 3 &&
+                        {chats[keyName].type == 3 &&
                             <div className="col-12">
-                                <div className={pslStyles.insideChat} style={{ flexDirection: chats[room][keyName].id == userId ? 'row-reverse' : '' }}>
+                                <div className={pslStyles.insideChat} style={{ flexDirection: chats[keyName].id == userId ? 'row-reverse' : '' }}>
                                     <div className={pslStyles.avatar}>
-                                        {/* <img src={chats[room][keyName].userProfile != "" ? chats[room][keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
+                                        {/* <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
                                         <img src={userProfile} width="40" style={{ borderRadius: '10px' }} />
                                     </div> &nbsp;&nbsp;
                                 <div className="message">
-                                        <div style={{ textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
-                                            {chats[room][keyName].id == userId ? <>
-                                                <small className={pslStyles.msgProfile}>{chats[room][keyName].senderName}</small> &nbsp; <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small></> : <> <small className={pslStyles.msgTime}>{getDayTime(chats[room][keyName].date)}</small> &nbsp; <small className={pslStyles.msgProfile}>{chats[room][keyName].senderName}</small></>
+                                        <div style={{ textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
+                                            {chats[keyName].id == userId ? <>
+                                                <small className={pslStyles.msgProfile}>{chats[keyName].senderName}</small> &nbsp; <small className={pslStyles.msgTime}>{getDayTime(chats[keyName].date)}</small></> : <> <small className={pslStyles.msgTime}>{getDayTime(chats[keyName].date)}</small> &nbsp; <small className={pslStyles.msgProfile}>{chats[keyName].senderName}</small></>
                                             }
 
                                         </div>
-                                        <div className={pslStyles.chatMessageBox} style={{ background: chats[room][keyName].id == userId ? '#ffffff00' : '#ffffff00' }, { textAlign: chats[room][keyName].id == userId ? 'right' : 'left' }}>
-                                            {chats[room][keyName].message}
+                                        <div className={pslStyles.chatMessageBox} style={{ background: chats[keyName].id == userId ? '#ffffff00' : '#ffffff00' }, { textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
+                                            {chats[keyName].message}
                                         </div>
                                     </div>
                                 </div>
                             </div>}
                         <div className="col-12 text-center">
-                            {chats[room][keyName].type == 1 || chats[room][keyName].type == 2 ? <p className="badge badge-light">{chats[room][keyName].senderName + " " + chats[room][keyName].message} </p>
+                            {chats[keyName].type == 1 || chats[keyName].type == 2 ? <p className="badge badge-light">{chats[keyName].senderName + " " + chats[keyName].message} </p>
                                 : null}
                         </div>
                     </div>
@@ -250,7 +252,7 @@ export default function PSLChat({ channelID }) {
         </div>
         <CenteredModal show={modalShow}
             onHide={() => (setModalShow(false), setCurrentRoomOption(0))}>
-            <CreateJoinRoomModalBody channelId={channelID} mergeRoom={(e) => appendChatRoom(e)} />
+            <CreateJoinRoomModalBody channelId={channel.VideoEntityId} mergeRoom={(e) => appendChatRoom(e)} />
         </CenteredModal>
     </div >
 }

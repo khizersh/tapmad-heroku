@@ -2,25 +2,24 @@ import { createRoom, deleteRoom, joinRoom } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
-export const getAllChatChannels = (database, channelID, cb) => {
-    database.ref(`GroupChat/${channelID}`).on("value", (snapshot) => {
+export const getSingleRoomChat = (database, channelID, roomId, cb) => {
+    database.ref(`GroupChat/${roomId}`).limitToLast(100).on("value", (snapshot) => {
         const vals = snapshot.val();
         cb(vals);
     })
 }
-
 export const sendGroupChatMessage = (database, chatDetails) => {
     const userId = Cookie.getCookies('userId');
     const name = Cookie.getCookies('userProfileName');
     const picture = Cookie.getCookies('userProfilePicture');
-    database.ref(`GroupChat/${chatDetails.channelID}/${chatDetails.roomID}`).push({
+    database.ref(`GroupChat/${chatDetails.roomID}`).push({
         date: Date.now(),
         message: chatDetails.message,
         id: Number(userId),
         senderName: name,
         userProfile: picture == "null" ? "" : picture,
-        type: chatDetails.type ? chatDetails.type : 3 
-    
+        type: chatDetails.type ? chatDetails.type : 3
+
     })
 }
 
