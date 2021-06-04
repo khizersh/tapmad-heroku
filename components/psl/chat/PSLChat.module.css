@@ -4,6 +4,7 @@
     overflow-x: hidden;
     position: relative;
     background-color: #000000 !important;
+    border-bottom: 3px solid #121117 !important;
 }
 .chatMessageBox{
     /* background-color: white; */
@@ -149,9 +150,11 @@
     width: 0 !important;
     display: none;
   }
+
 .noBorders{
     border: 0px;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
+    overflow-x: scroll !important;
 }
 .all_messages {
   height: calc(100% - 70px);
