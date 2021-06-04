@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import app from "firebase/app";
 import "firebase/database";
 
@@ -14,40 +14,20 @@ export default function FireBaseProvider({ children }) {
         storageBucket: "tapmad-tv-159112.appspot.com",
     };
 
-    if (!app.apps.length) {
-        app.initializeApp(config);
-        const firebaseConfig = {
-            app: app,
-            database: app.database(),
-            api: {
-                getLiveUsers,
-            },
-        };
-        setFirebase(firebaseConfig);
-    }
 
-    function getLiveUsers() {
-        console.log("Hy");
-        try {
-            firebase.database.ref("Game").on("value", (snapshot) => {
-                const vals = snapshot.val();
-                const _records = [];
-                // for (var key in vals) {
-                //     if (vals[key]) {
-                //         _records.push({
-                //             ...vals[key],
-                //             id: key,
-                //         });
-                //     }
-                // }
-                // setFirebase({ ...firebase, streams: [..._records] });
-                console.log("Context ", vals);
-            });
-        } catch (e) {
-            console.log(e);
+    useEffect(() => {
+        if (!app.apps.length) {
+            app.initializeApp(config);
+            const firebaseConfig = {
+                app: app,
+                database: app.database(),
+            };
+            setFirebase(firebaseConfig);
+        } else {
+            // setFirebase(firebaseConfig);
+
         }
-    }
-
+    }, [])
 
     return (
         <>

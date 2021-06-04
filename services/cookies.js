@@ -1,10 +1,12 @@
 import cookie from "cookie";
-import { func } from "joi";
 // import { Cookies } from "react-cookie";
 import Cookies from "universal-cookie";
 
 function setCookies(name, val) {
-  return initializeCookes().set(name, val, { path: "/" });
+  var expiryDate = new Date();
+  let maxAges = expiryDate.setMonth(expiryDate.getMonth() + 1);
+  console.log(maxAges)
+  return initializeCookes().set(name, val, { path: "/", maxAge: maxAges });
 }
 
 function getCookies(name) {

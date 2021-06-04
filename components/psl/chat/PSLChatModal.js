@@ -3,6 +3,7 @@ import swal from "sweetalert";
 import { Cookie } from "../../../services/cookies";
 import { pslCongrats } from "../../../services/imagesLink";
 import { createAChatRoom, joinAChatRoom } from "./PSLChat.service";
+import styles from "./PSLChat.module.css"
 
 
 export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
@@ -74,13 +75,13 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
         }
     }
     return <>
-        <div className="row">
+        <div className="row p-0">
             {currentRoomOption == 0 ? <>
-                <div className="col-lg-6 col-12 col-sm-12 text-lg-right mb-1 mb-lg-0 mb-md-0">
-                    <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(1)}>Create a new room</button>
-                </div>
-                <div className="col-lg-6 col-12 col-sm-12 ">
+                <div className="col-lg-12 col-12 col-sm-12 ">
                     <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(2)}>Join existing room</button>
+                </div>
+                <div className="col-lg-12 col-12 col-sm-12 text-lg-right mb-1 mb-lg-0 mb-md-0 mt-3">
+                    <button className="btn btn-primary w-100 w-lg-25" onClick={() => setCurrentRoomOption(1)}>Create a new room</button>
                 </div>
             </> : null}
             {currentRoomOption == 1 ? <>
@@ -119,9 +120,12 @@ export default function CreateJoinRoomModalBody({ channelId, mergeRoom }) {
                     </div>
                     <div className="col-12 mt-2">
                         <div className="d-flex">
-                            <input type="text" className="form-control bg-dark text-white" placeholder="Enter shareable link" value="64683vsdvSWR" />
-                            <button type="button" className="btn-sm btn btn-primary">Copy</button>
+                            <input type="text" className={`form-control bg-dark text-white ${styles.copyBtn} `} placeholder="Enter shareable link" value="64683vsdvSWR" />
+                            <button type="button" className={`btn-sm btn btn-primary ${styles.roomChatText}`}>Copy</button>
                         </div>
+                    </div>
+                    <div className="col-12 text-center">
+                            <button type="button" className={`btn-sm btn btn-primary mt-3 ${styles.shareBtn}`}>SHARE</button>
                     </div>
                 </div>
             </> : null}
