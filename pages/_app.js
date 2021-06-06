@@ -27,7 +27,6 @@ import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import CatchupProvider from "../contexts/CatchupContext";
 import AuthProvider from "../contexts/AuthContext";
 import dynamic from "next/dynamic";
-import FireBaseProvider from "../contexts/FireBase";
 import GameProvider from "../contexts/GameContext";
 
 const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
@@ -145,21 +144,19 @@ function MyApp({ Component, pageProps, test }) {
           )
         ) : (
           <>
-            <FireBaseProvider>
-              <MainProvider>
-                <AuthProvider>
-                  <CatchupProvider>
-                    <GameProvider>
-                      <Skeleton>
-                        <Header />
-                        <Component {...pageProps} />
-                        <Footer />
-                      </Skeleton>
-                    </GameProvider>
-                  </CatchupProvider>
-                </AuthProvider>
-              </MainProvider>
-            </FireBaseProvider>
+            <MainProvider>
+              <AuthProvider>
+                <CatchupProvider>
+                  <GameProvider>
+                    <Skeleton>
+                      <Header />
+                      <Component {...pageProps} />
+                      <Footer />
+                    </Skeleton>
+                  </GameProvider>
+                </CatchupProvider>
+              </AuthProvider>
+            </MainProvider>
           </>
         )}
       </>

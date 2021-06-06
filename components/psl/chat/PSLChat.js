@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import swal from "sweetalert";
-import { FirebaseContext } from "../../../contexts/FireBase";
 import { getUserRooms } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
+import { FireBase } from "../../../services/firebase";
 import { get } from "../../../services/http-service";
 import { sendMessageIcon, shareIcon, userProfile } from "../../../services/imagesLink";
 import { CenteredModal } from "../../Modal";
@@ -15,8 +15,7 @@ var userId = "";
 export default function PSLChat({ channel }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
-    // const firebase = useContext(FirebaseContext);
-    const { database } = useContext(FirebaseContext);
+    const database = FireBase.database();
     const [room, setRoom] = useState(1);
     const textMessage = useRef();
     const [modalShow, setModalShow] = useState(false);

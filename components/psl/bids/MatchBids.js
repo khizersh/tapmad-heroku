@@ -1,20 +1,20 @@
 import { Accordion, Card } from "react-bootstrap";
 import styles from "./bids.module.css";
 import { pslCoins, userProfile } from "../../../services/imagesLink";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAllMatchDetails, getAllMatchQuestions } from "./bids.service";
-import { FirebaseContext } from "../../../contexts/FireBase";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { submitMatchBids, updateUserProfile } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
 import { GlobalService } from "../../../modules/global-service";
+import { FireBase } from "../../../services/firebase";
 
 export default function MatchBids({ game, filteredData }) {
   const [match, setMatches] = useState();
   const [questions, setQuestions] = useState();
   const [team, setTeam] = useState({ answer: 0, odds: 0 });
-  const firebase = useContext(FirebaseContext);
+  const database = FireBase.database();
   const [counter, setCounter] = useState(4);
   const [totalOdds, setTotalOdds] = useState(0.0);
 
@@ -28,7 +28,7 @@ export default function MatchBids({ game, filteredData }) {
     }
   }
   function getAllMatchesQuestions() {
-    getAllMatchQuestions(firebase.database, (questions) => {
+    getAllMatchQuestions(database, (questions) => {
       let _records = [];
       for (var key in questions) {
         if (questions[key]) {
@@ -42,13 +42,13 @@ export default function MatchBids({ game, filteredData }) {
       console.log(_records);
     });
   }
-  
+
   useEffect(() => {
-    if (firebase && firebase.database) {
+    if (database) {
       getAllMatchesQuestions();
     }
     getMatchLiveDetails();
-  }, [filteredData , firebase]);
+  }, [filteredData]);
 
   function increment() {
     var totalCoins = Cookie.getCookies("userCoins");
