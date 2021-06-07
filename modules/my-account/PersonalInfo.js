@@ -190,7 +190,7 @@ const PersonalInfo = ({ data }) => {
             required
             name="Email"
             onChange={onChange}
-            value={profileData.Email}
+            value={profileData.Email || "" }
             className="form-control"
             placeholder="Email Address"
           />

@@ -55,8 +55,9 @@ export default function PSLChat({ channel }) {
             chatRoomClone.push(newRoom);
             setChatRooms(chatRoomClone);
             selectRoom(newRoom.ChatRoomId);
+            const name = Cookie.getCookies('userProfileName');
             let message = {
-                message: "Join",
+                message: `${Cookie.getCookies('userProfileName')} Join`,
                 channelID: channel.VideoEntityId,
                 roomID: newRoom.ChatRoomId,
                 type: 2
@@ -223,7 +224,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                                 </div>
                             </div>}
                         <div className="col-12 text-center">
-                            {chats[keyName].type == 1 || chats[keyName].type == 2 ? <p className="badge badge-light">{chats[keyName].senderName + " " + chats[keyName].message} </p>
+                            {chats[keyName].type == 1 || chats[keyName].type == 2 ? <p className="badge badge-light">{chats[keyName].message} </p>
                                 : null}
                         </div>
                     </div>

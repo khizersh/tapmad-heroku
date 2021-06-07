@@ -75,7 +75,6 @@ const leaderboardComponent = () => {
   };
 
   useEffect(() => {
-    console.log("effect");
     if (gameState && gameState.tabs.length) {
       setData(gameState.tabs);
       getLeaderBoardByLeague(gameState.selectedTab.LeagueId, 0)
@@ -94,6 +93,8 @@ const leaderboardComponent = () => {
         })
         .catch((e) => console.log(e));
     }
+
+
   }, [gameState.tabs]);
 
   return (

@@ -29,7 +29,6 @@ export default memo(function PSLComponent({ channel }) {
         };
     }, []);
     function handleSelect(e) {
-        console.log(e);
         setSelectedTab(e);
 
     }
@@ -55,6 +54,7 @@ export default memo(function PSLComponent({ channel }) {
         var frameObj = document.getElementById('gameFrame');
         var contents = "";
 
+        console.log("on .oad");
         if (frameObj) {
             frameObj.onload = (() => {
                 document.getElementById('loader').style.display = "none";
