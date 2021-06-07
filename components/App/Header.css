@@ -136,7 +136,7 @@
   .margChat {
     margin-top: 109px;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     width: 92%;
     left: 15px;
     background: black;
@@ -147,7 +147,7 @@
   .margChat {
     margin-top: 26%;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     width: 92%;
     left: 15px;
     background: black;
@@ -158,7 +158,7 @@
   .margChat {
     margin-top: 88px;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     width: 92%;
     left: 15px;
     background: black;
@@ -169,7 +169,7 @@
   .margChat {
     margin-top: 52px;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     width: 92%;
     left: 15px;
     background: black;
@@ -180,7 +180,7 @@
   .margChat {
     margin-top: 3%;
     position: fixed;
-    z-index: 10000;
+    z-index: 1000;
     width: 92%;
     left: 15px;
     background: black;

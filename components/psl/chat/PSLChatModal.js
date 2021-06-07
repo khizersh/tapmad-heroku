@@ -18,13 +18,13 @@ export default function CreateJoinRoomModalBody({
   const [btnText, setBtnText] = useState("Copy");
 
   async function createRoom() {
-    setOnLoad(true)
+    setOnLoad(true);
     if (
       roomName.current.value &&
       !roomName.current.value.trim().length > 3 &&
       !roomName.current.value.trim().length < 12
     ) {
-      setOnLoad(false)
+      setOnLoad(false);
       return swal({
         title: "Please enter valid title!",
         icon: "error",
@@ -48,13 +48,14 @@ export default function CreateJoinRoomModalBody({
           allowOutsideClick: false,
           closeOnClickOutside: false,
         });
-        setOnLoad(false)
+        setOnLoad(false);
       } else if (data.Response.responseCode == 1) {
         setCurrentRoomOption(3);
         if (data.ChatRooms && data.ChatRooms.length) {
           setNewRoom(data.ChatRooms[data.ChatRooms.length - 1]);
         }
-        mergeRoom(data.ChatRooms);setOnLoad(false)
+        mergeRoom(data.ChatRooms);
+        setOnLoad(false);
       }
     } else {
       swal({
@@ -63,7 +64,7 @@ export default function CreateJoinRoomModalBody({
         allowOutsideClick: false,
         closeOnClickOutside: false,
       });
-      setOnLoad(false)
+      setOnLoad(false);
     }
   }
   async function joinChatRoom() {
@@ -185,7 +186,7 @@ export default function CreateJoinRoomModalBody({
         ) : null}
         {currentRoomOption == 3 ? (
           <>
-            <div className="col-12 text-center">
+            <div className="col-12 text-center" style={{ zIndex: "99999" }}>
               <img src={pslCongrats} />
             </div>
             <div className="col-12">
