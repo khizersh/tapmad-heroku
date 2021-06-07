@@ -17,7 +17,7 @@ import "../modules/samsungtv/samsung.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect , useState} from "react";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
@@ -29,16 +29,14 @@ import AuthProvider from "../contexts/AuthContext";
 import dynamic from "next/dynamic";
 import GameProvider from "../contexts/GameContext";
 
-const DashboardLayout = dynamic(() =>
-  import("../modules/dashboard/DashboardLayout")
-);
+const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
 const Skeleton = dynamic(() => import("../components/MainSkeleton"));
 const Header = dynamic(() => import("../components/App/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
-  const [showHeader, setShowHeader] = useState(true);
+  const [showHeader , setShowHeader] = useState(true)
 
   function checkUserAuthentication() {
     if (pageProps.auth) {
@@ -70,26 +68,22 @@ function MyApp({ Component, pageProps, test }) {
     }
   }
 
-  useEffect(() => {
-    checkUserAuthentication();
-    if (window.innerWidth <= 800) {
-      if (
-        window.parent &&
-        window.parent.location &&
-        window.parent.location.pathname.includes("watch")
-      ) {
-        setShowHeader(false);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   checkUserAuthentication();
+  //   if(window.innerWidth <= 800){
+  //     if(window.parent && window.parent.location && window.parent.location.pathname.includes("watch")){
+  //       setShowHeader(false)
+  //     }
+  //   }
+  // }, []);
 
   useLayoutEffect(() => {
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
-  }, []);
+    })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
+  }, [])
 
   return (
     <>
@@ -161,9 +155,9 @@ function MyApp({ Component, pageProps, test }) {
                 <CatchupProvider>
                   <GameProvider>
                     <Skeleton>
-                      {showHeader && <Header />}
+                      <Header />
                       <Component {...pageProps} />
-                      {showHeader && <Footer />}
+                      <Footer />
                     </Skeleton>
                   </GameProvider>
                 </CatchupProvider>
