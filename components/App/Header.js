@@ -23,7 +23,6 @@ function HeaderBasic({ signout }) {
     };
     actionsRequestContent(body);
   };
-  useEffect(() => {}, [initialState.isAuthenticated]);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -81,7 +80,7 @@ function HeaderBasic({ signout }) {
                   <i className="fa fa-search hov-green"></i>
                 </a>
               </li>
-              {initialState && initialState.AuthDetails.CountryCode == "PK" ? (
+              {initialState && initialState?.AuthDetails?.CountryCode == "PK" ? (
                 <li className="nav-item">
                   <Link href="/game" passHref={true} shallow={true}>
                     <a>
