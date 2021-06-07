@@ -11,7 +11,7 @@ import withSignout from "../../modules/auth/signout/SignoutHOC";
 function HeaderBasic({ signout }) {
   const { initialState, setSearch } = useContext(MainContext);
 
-console.log("initialState: ",initialState);
+  console.log("initialState: ", initialState);
   const onClick = () => {
     setSearch(true);
   };
@@ -81,23 +81,28 @@ console.log("initialState: ",initialState);
                   <i className="fa fa-search hov-green"></i>
                 </a>
               </li>
-              <li className="nav-item">
-                <Link href="/game" passHref={true} shallow={true}>
-                  <a>
-                    <img
-                      src={tapmadCoin}
-                      style={{
-                        width: "20px",
-                        marginTop: "17px",
-                        cursor: "pointer",
-                        marginLeft: "5px",
-                      }}
-                      className="img-fluid"
-                      alt=""
-                    />
-                  </a>
-                </Link>
-              </li>
+              {initialState && initialState.AuthDetails.CountryCode == "PK" ? (
+                <li className="nav-item">
+                  <Link href="/game" passHref={true} shallow={true}>
+                    <a>
+                      <img
+                        src={tapmadCoin}
+                        style={{
+                          width: "20px",
+                          marginTop: "17px",
+                          cursor: "pointer",
+                          marginLeft: "5px",
+                        }}
+                        className="img-fluid"
+                        alt=""
+                      />
+                    </a>
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+
               <li className="nav-item">
                 <Link href="/news" passHref={true} shallow={true}>
                   <a ariaLabel={"news"}>
