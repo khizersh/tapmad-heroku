@@ -108,7 +108,7 @@
 
 @media (max-width: 414px) {
   .margChat {
-    margin-top: 109px;
+    margin-top: -2%;
     position: fixed;
     z-index: 1000;
     width: 92%;
@@ -119,7 +119,7 @@
 
 @media (max-width: 411px) {
   .margChat {
-    margin-top: 26%;
+    margin-top: -3%;
     position: fixed;
     z-index: 1000;
     width: 92%;
@@ -130,7 +130,7 @@
 
 @media (max-width: 375px) {
   .margChat {
-    margin-top: 88px;
+    margin-top: -32px;
     position: fixed;
     z-index: 1000;
     width: 92%;
@@ -141,7 +141,7 @@
 
 @media (max-width: 360px) {
   .margChat {
-    margin-top: 52px;
+    margin-top: -67px;
     position: fixed;
     z-index: 1000;
     width: 92%;
@@ -152,7 +152,7 @@
 
 @media (max-width: 320px) {
   .margChat {
-    margin-top: 3%;
+    margin-top: -35%;
     position: fixed;
     z-index: 1000;
     width: 92%;
