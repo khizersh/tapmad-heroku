@@ -18,7 +18,6 @@ export default function CreateJoinRoomModalBody({
   const [btnText, setBtnText] = useState("Copy");
 
   async function createRoom() {
-    console.log("Hello ", roomName.current.value);
     setOnLoad(true);
     if (
       roomName.current.value &&
