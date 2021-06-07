@@ -41,7 +41,7 @@ export default memo(function PSLComponent({ channel }) {
                 <div className="loader-5 center" id="loader">
                     <span></span>
                 </div>
-                <iframe src="/game" id="gameFrame" style={{ width: "100%", height: "500px", border: "0px" }} />
+                <iframe src="/game" id="gameFrame" style={{ width: "100%", height: "700px", border: "0px" }} />
             </>
         } else if (selectedTab == 3) {
             router.push("/tapmad-shop");

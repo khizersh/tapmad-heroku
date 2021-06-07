@@ -6,6 +6,11 @@ const leaderboard = () => {
     return (
         <GameLayout>
             <LeaderboardComponent />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </GameLayout>
     )
 }

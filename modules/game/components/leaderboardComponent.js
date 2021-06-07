@@ -84,7 +84,7 @@ const leaderboardComponent = () => {
               let array = lead.data.LeaderBoard.map((m) => {
                 return {
                   ...m,
-                  TotalCoins: GlobalService.nFormatter(m.TotalCoins, 1),
+                  TotalCoins: GlobalService.nFormatter(m.TotalCoins, 1) || m.TotalCoins,
                 };
               });
               setLeaderBoard(array);

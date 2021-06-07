@@ -148,7 +148,7 @@ export default function LeftSidebar() {
           </Link>
         </div>
       </div>
-
+{/* 
       <div className="tm_btng_sidebar text-center mb-3 d-none d-lg-block">
         <div className="tm_btng_sidebar_hdr pl-2">
           <h5 className="text-left">Live Sports</h5>
@@ -256,8 +256,8 @@ export default function LeftSidebar() {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-      </div>
-      <div className="tm_btng_sidebar text-center mb-3  d-none d-lg-block">
+      </div> */}
+      {/* <div className="tm_btng_sidebar text-center mb-3  d-none d-lg-block">
         <div className="tm_btng_sidebar_hdr pl-2">
           <h5 className="text-left">Live Matches</h5>
         </div>
@@ -285,7 +285,7 @@ export default function LeftSidebar() {
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }

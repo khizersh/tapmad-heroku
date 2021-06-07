@@ -55,6 +55,7 @@ export default function PSLChat({ channel }) {
             chatRoomClone.push(newRoom);
             setChatRooms(chatRoomClone);
             selectRoom(newRoom.ChatRoomId);
+            setModalShow(false)
             const name = Cookie.getCookies('userProfileName');
             let message = {
                 message: `${Cookie.getCookies('userProfileName')} Join`,
@@ -252,7 +253,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         </div>
         <CenteredModal show={modalShow}
             onHide={() => (setModalShow(false), setCurrentRoomOption(0))}>
-            <CreateJoinRoomModalBody channelId={channel.VideoEntityId} mergeRoom={(e) => appendChatRoom(e)} />
+            <CreateJoinRoomModalBody channelId={channel.VideoEntityId} mergeRoom={(e) => appendChatRoom(e)}  onShare={shareOnSocial}/>
         </CenteredModal>
     </div >
 }

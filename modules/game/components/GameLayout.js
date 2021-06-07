@@ -7,20 +7,20 @@ const GameLayout = ({ children }) => {
   const [show , setShow] = useState(true)
 
 
-  useEffect(() => {
-    if(window.innerWidth <= 800){
-      if(window.parent && window.parent.location && window.parent.location.pathname.includes("watch")){
-        setShow(false)
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(window.innerWidth <= 800){
+  //     if(window.parent && window.parent.location && window.parent.location.pathname.includes("watch")){
+  //       setShow(false)
+  //     }
+  //   }
+  // }, [])
   
  
   return (
     <div>
       <BuyCoinModal />
       {children}
-     {show && <BottomNav />} 
+      <BottomNav />
     </div>
   );
 };
