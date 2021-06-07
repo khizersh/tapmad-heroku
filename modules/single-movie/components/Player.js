@@ -171,8 +171,7 @@ export default function Player({ movies }) {
                     ads.onVideo && ads.allow ? ads.onVideo : ""
                   }
                   customProps={{
-
-                    mediaid: videoLink.JWMediaId,
+                    mediaid: videoLink && videoLink.JWMediaId,
                     controls: true,
                     sources: [
                       {
