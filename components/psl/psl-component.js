@@ -16,7 +16,7 @@ export default memo(function PSLComponent({ channel }) {
 
     useEffect(() => {
         const header = document.getElementById("tab-btn");
-        const sticky = header.offsetTop;
+        const sticky = header.offsetTop + 100;
         const scrollCallBack = window.addEventListener("scroll", () => {
             if (window.pageYOffset > sticky) {
                 header.classList.add("sticky-tab");

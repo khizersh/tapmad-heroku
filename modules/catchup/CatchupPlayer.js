@@ -113,7 +113,7 @@ export default function CatchupPlayer({ video, videoList }) {
     const sticky = header.offsetTop;
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
-        header.classList.add("sticky-value"); 
+        header.classList.add("sticky-value");
       } else {
         header.classList.remove("sticky-value");
       }

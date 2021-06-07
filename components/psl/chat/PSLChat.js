@@ -26,7 +26,7 @@ export default function PSLChat({ channel }) {
         const sticky = header.offsetTop;
         console.log("Header ", header);
         const scrollCallBack = window.addEventListener("scroll", () => {
-            if (window.pageYOffset > 17) {
+            if (window.pageYOffset > 117) {
                 header.classList.add("margChat");
             } else {
                 header.classList.remove("margChat");
@@ -253,7 +253,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         </div>
         <CenteredModal show={modalShow}
             onHide={() => (setModalShow(false), setCurrentRoomOption(0))}>
-            <CreateJoinRoomModalBody channelId={channel.VideoEntityId} mergeRoom={(e) => appendChatRoom(e)}  onShare={shareOnSocial}/>
+            <CreateJoinRoomModalBody channelId={channel.VideoEntityId} mergeRoom={(e) => appendChatRoom(e)} onShare={shareOnSocial} />
         </CenteredModal>
     </div >
 }

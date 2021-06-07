@@ -121,7 +121,7 @@ export default function Player({ movies }) {
 
   useEffect(() => {
     const header = document.getElementById("player-div1");
-    const sticky = header.offsetTop;
+    const sticky = header.offsetTop + 100;
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky-value");
