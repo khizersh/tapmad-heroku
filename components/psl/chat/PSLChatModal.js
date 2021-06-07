@@ -18,18 +18,20 @@ export default function CreateJoinRoomModalBody({
   const [btnText, setBtnText] = useState("Copy");
 
   async function createRoom() {
+    console.log("Hello ", roomName.current.value);
     setOnLoad(true);
     if (
       roomName.current.value &&
-      !roomName.current.value.trim().length > 3 &&
-      !roomName.current.value.trim().length < 12
+      !roomName.current.value.trim().length > 3 ||
+      roomName.current.value.trim().length > 12
     ) {
       setOnLoad(false);
-      return swal({
+      swal({
         title: "Please enter valid title!",
         icon: "error",
         timer: 2500,
       });
+      return true;
     }
     if (roomName.current.value.length > 2) {
       var body = {
