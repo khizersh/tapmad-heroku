@@ -58,7 +58,7 @@ export default function PSLChat({ channel }) {
             setModalShow(false)
             const name = Cookie.getCookies('userProfileName');
             let message = {
-                message: `${Cookie.getCookies('userProfileName')} Join`,
+                message: `${Cookie.getCookies('userProfileName')} Joined`,
                 channelID: channel.VideoEntityId,
                 roomID: newRoom.ChatRoomId,
                 type: 2
