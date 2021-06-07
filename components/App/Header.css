@@ -44,7 +44,7 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: 46px;
+    margin-top: -71px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -56,7 +56,7 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: 44px;
+    margin-top: -73px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -68,7 +68,7 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: 25px;
+    margin-top: -91px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -80,7 +80,7 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -10px;
+    margin-top: -125px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -92,7 +92,7 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -56px;
+    margin-top: -171px;
     background-color: black;
     max-width: 100%;
     width: 100%;
