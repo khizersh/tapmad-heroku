@@ -50,9 +50,8 @@ const buyCoinCard = ({ data }) => {
             });
           }
         })
-        .catch((e) => console.log(e));
+        .catch((e) => setLoader(false));
     }
-    setLoader(false);
   };
   const coin = "//d1s7wg2ne64q87.cloudfront.net/web/images/coin.png";
   return (
