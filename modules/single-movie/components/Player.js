@@ -171,6 +171,7 @@ export default function Player({ movies }) {
                     ads.onVideo && ads.allow ? ads.onVideo : ""
                   }
                   customProps={{
+                    mediaid: "iKU8DPuh",
                     controls: true,
                     sources: [
                       {
