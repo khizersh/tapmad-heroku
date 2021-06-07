@@ -11,6 +11,7 @@ import withSignout from "../../modules/auth/signout/SignoutHOC";
 function HeaderBasic({ signout }) {
   const { initialState, setSearch } = useContext(MainContext);
 
+console.log("initialState: ",initialState);
   const onClick = () => {
     setSearch(true);
   };

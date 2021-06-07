@@ -170,6 +170,7 @@ export default function CreateJoinRoomModalBody({
                 type="text"
                 className="form-control bg-dark"
                 ref={chatRoomId}
+                maxLength={15}
                 placeholder="Enter Room Id"
               />
             </div>
