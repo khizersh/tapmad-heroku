@@ -63,7 +63,7 @@ export default function BottomNav() {
         </Link>
         <Link href="/my-bids" className="text-light" target="_self">
           <li className="list-group-item border-left-0 btn border-top-0 border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
-            <a>
+            <a className="text-light">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/auction_green.png"
                 width="30"
