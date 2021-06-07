@@ -2,8 +2,8 @@ import { createRoom, deleteRoom, joinRoom } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
-export const getSingleRoomChat = (database, channelID, roomId, cb) => {
-    database.ref(`GroupChat/${roomId}`).limitToLast(100).on("value", (snapshot) => {
+export const getSingleRoomChat = (database, roomId, cb) => {
+    database.ref(`GroupChat`).on("value", (snapshot) => {
         const vals = snapshot.val();
         cb(vals);
     })

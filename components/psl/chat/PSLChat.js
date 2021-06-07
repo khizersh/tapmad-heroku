@@ -10,8 +10,6 @@ import pslStyles from "./PSLChat.module.css";
 import { deleteAChatRoom, getSingleRoomChat, sendGroupChatMessage } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
-
-
 export default function PSLChat({ channel }) {
     const [chatRoom, setChatRooms] = useState([]);
     const [chats, setChats] = useState({});
@@ -76,11 +74,13 @@ export default function PSLChat({ channel }) {
         }
     }
     function selectRoom(e) {
-        setRoom(e);
-        getSingleRoomChat(database, channel.VideoEntityId, e, (list) => {
-            setChats(list);
+        let roomId = e;
+        setRoom(roomId);
+        getSingleRoomChat(database, roomId, (list) => {
+            setChats(list[roomId]);
         })
     }
+
     function sendMessage() {
         var message = {
             message: textMessage.current.value,
@@ -174,8 +174,6 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
             alert("Device can not share");
         }
     }
-
-
 
 
 
