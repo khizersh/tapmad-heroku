@@ -13,6 +13,7 @@ export default function GameProvider({ children }) {
     selectedTab: null,
     tabs: [],
     buyModal: false,
+    userCoin: 0,
   });
 
   React.useEffect(async () => {
@@ -43,6 +44,13 @@ export default function GameProvider({ children }) {
       selectedTab: selectedTab,
     });
   }
+  function updateUserCoin(coin) {
+    let stateClone = gameState;
+    setGameState({
+      ...stateClone,
+      userCoin: coin,
+    });
+  }
   function updateBuyModal(data) {
     let stateClone = gameState;
     setGameState({
@@ -54,7 +62,8 @@ export default function GameProvider({ children }) {
   let data = {
     gameState,
     updateSelectedTab,
-    updateBuyModal
+    updateBuyModal,
+    updateUserCoin,
   };
   return <GameContext.Provider value={data}>{children}</GameContext.Provider>;
 }

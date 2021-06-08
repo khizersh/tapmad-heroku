@@ -5,6 +5,7 @@ import { MainContext, initialState } from "../../../contexts/MainContext";
 import { MyAccountService } from "../../my-account/myaccount.service";
 import { makeCoinTransactionData } from "../../../components/psl/bids/bids.service";
 import swal from "sweetalert";
+import { GameContext } from "../../../contexts/GameContext";
 
 const buyCoinCard = ({ data }) => {
   const [formData, setFormData] = useState({
@@ -13,9 +14,10 @@ const buyCoinCard = ({ data }) => {
     Platform: "web",
     UserId: Cookie.getCookies("userId"),
   });
+  const { updateUserCoin } = useContext(GameContext);
 
   const { setLoader } = useContext(MainContext);
-  
+
   const onClickBuy = async () => {
     setLoader(true);
     const resp = await MyAccountService.getUserData(formData);
@@ -28,7 +30,7 @@ const buyCoinCard = ({ data }) => {
         UserId: Cookie.getCookies("userId"),
         ProudctCoins: data.ProudctCoins,
         CoinProductPrice: data.CoinProductPrice,
-        MobileNo: resp.data.UserProfile.UserProfileMobile ,
+        MobileNo: resp.data.UserProfile.UserProfileMobile,
         OperatorId: resp.data.UserProfile.OperatorId,
         TransactionType: 1,
       };
@@ -36,6 +38,9 @@ const buyCoinCard = ({ data }) => {
         .then((respCoin) => {
           if (respCoin && respCoin.responseCode == "10") {
             setLoader(false);
+            console.log("respCoin: ", respCoin);
+            Cookie.setCookies("userCoins", respCoin.data.UserTotalCoins);
+            updateUserCoin(respCoin.data.UserTotalCoins);
             return swal({
               title: respCoin.message,
               icon: "success",

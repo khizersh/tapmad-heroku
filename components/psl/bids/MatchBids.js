@@ -117,6 +117,7 @@ export default function MatchBids({ game, filteredData }) {
     const response = await post(submitMatchBids, requestData);
     if (response.data && response.data.Response.responseCode == 1) {
       Cookie.setCookies("userCoins", response.data.UserTotalCoins);
+      updateUserCoin(response.data.UserTotalCoins);
       swal({
         title: "Your answer has been submitted successfully.",
         text: "Thank you for playing the game",

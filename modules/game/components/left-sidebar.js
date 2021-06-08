@@ -11,8 +11,7 @@ import { Cookie } from "../../../services/cookies";
 export default function LeftSidebar() {
   const [userChallenge, setUserChallenge] = useState(null);
   const [learnMore, setLearnMore] = useState(false);
-  const [coin, setCoin] = useState(false);
-  const { gameState, updateBuyModal } = useContext(GameContext);
+  const { gameState, updateBuyModal, updateUserCoin } = useContext(GameContext);
 
   const onClickBuy = () => {
     updateBuyModal(true);
@@ -41,8 +40,8 @@ export default function LeftSidebar() {
     }
 
     let userCoin = Cookie.getCookies("userCoins");
-    setCoin(userCoin);
-  }, []);
+    updateUserCoin(userCoin);
+  }, [gameState.userCoin]);
 
   return (
     <div>
@@ -88,7 +87,7 @@ export default function LeftSidebar() {
           <div className="d-none d-md-block d-lg-block d-xl-block">
             <h6 className="mt-2 ng-binding"></h6>
             <p className="color-white user-coins ng-binding">
-              Coins : {coin ? coin : 0}{" "}
+              Coins : {gameState && gameState.userCoin ? gameState.userCoin : 0}{" "}
             </p>
             <a
               href="#"
@@ -148,7 +147,7 @@ export default function LeftSidebar() {
           </Link>
         </div>
       </div>
-{/* 
+      {/* 
       <div className="tm_btng_sidebar text-center mb-3 d-none d-lg-block">
         <div className="tm_btng_sidebar_hdr pl-2">
           <h5 className="text-left">Live Sports</h5>
