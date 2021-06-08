@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect , useState} from "react";
 import { MainContext } from "../../contexts/MainContext";
 // import "./Header.css";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
@@ -11,7 +11,7 @@ import { AuthService } from "../../modules/auth/auth.service";
 
 function HeaderBasic({ signout }) {
   const [country, setCountry] = useState("PK");
-  const { initialState } = useContext(MainContext);
+   const {initialState , setSearch}= useContext(MainContext)
 
   const onClick = () => {
     setSearch(true);
@@ -24,6 +24,7 @@ function HeaderBasic({ signout }) {
     };
     actionsRequestContent(body);
   };
+
 
   useEffect(async () => {
     const country = await AuthService.getGeoInfo();
