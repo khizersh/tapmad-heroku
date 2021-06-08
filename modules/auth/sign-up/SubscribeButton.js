@@ -26,6 +26,7 @@ export default function SubscribeButton() {
       OperatorId: initialState.User.OperatorId,
       cnic: initialState.User.Cnic,
       Email: initialState.User.Email,
+      FullName : initialState.User.FullName,
     };
   }
   function updateApiData(status) {
