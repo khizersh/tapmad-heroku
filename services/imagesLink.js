@@ -2,6 +2,11 @@ export const tapmadLogo = "/icons/tm-logo.png";
 
 export const usernameIcon =
   "http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/UserName.png";
+
+export const logo =
+  "https://d1s7wg2ne64q87.cloudfront.net/web/images/tm-icon-logo.png";
+
+
 export const phoneIcon =
   "http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/phone.png";
 export const calenderIcon =
