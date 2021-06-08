@@ -153,8 +153,8 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
         </button>
         <br />
         <>
-          <Link href="/" shallow={true} passHref={true}>
-            <a className=" mt-2 text-light">Back &nbsp;</a>
+          <Link href="/sign-up" shallow={true} passHref={true}>
+            <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
           </Link>
           <span
             className="mt-2 mr-2 text-light"
