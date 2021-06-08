@@ -12,6 +12,7 @@ export default function SubscribeButton() {
   const { initialState, setLoader, updateUserPassword } =
     useContext(MainContext);
 
+  console.log("initialState: ", initialState);
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   function handleBody() {
@@ -24,6 +25,7 @@ export default function SubscribeButton() {
       MobileNo: initialState.User.MobileNo,
       OperatorId: initialState.User.OperatorId,
       cnic: initialState.User.Cnic,
+      Email: initialState.User.Email,
     };
   }
   function updateApiData(status) {
