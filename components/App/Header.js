@@ -11,7 +11,7 @@ import { AuthService } from "../../modules/auth/auth.service";
 
 function HeaderBasic({ signout }) {
   const [country, setCountry] = useState("PK");
-  const { initialState } = useContext(MainContext);
+  const { initialState, setSearch } = useContext(MainContext);
 
   const onClick = () => {
     setSearch(true);
