@@ -179,8 +179,16 @@ a:focus {
   padding: 2px 0;
 }
 .gm_mob_menu li:hover {
-  border-bottom: 2px solid #87c242;
+  border-bottom: 3px solid #87c242 !important;
 }
+
+.border-bottom {
+  border-bottom: 3px solid #87c242 !important;
+}
+.color-green{
+  color: #87c242 !important;
+}
+
 a.text-light:focus,
 a.text-light:hover {
   color: #cbd3da !important;

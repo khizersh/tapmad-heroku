@@ -1,14 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function BottomNav() {
+  const { asPath } = useRouter();
+  const [tabs, setTabs] = useState([
+    {
+      id: 1,
+      title: "Home",
+      image:
+        "//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/house_green.png",
+      link: "/game",
+    },
+    {
+      id: 2,
+      title: "Games",
+      image:
+        "//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/calendar_green.png",
+      link: "/all-games",
+    },
+    {
+      id: 3,
+      title: "T Shop",
+      image:
+        "//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/trophy_green.png",
+      link: "/tapmad-shop",
+    },
+    {
+      id: 4,
+      title: "LeaderBoard",
+      image:
+        "//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/crown_green.png",
+      link: "/leaderboard",
+    },
+    {
+      id: 5,
+      title: "My Bids",
+      image:
+        "//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/auction_green.png",
+      link: "/my-bids",
+    },
+  ]);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+
+  const onClickTab = (data) => {
+    setActiveTab(data);
+  };
+
+  useEffect(() => {
+    if (tabs.length) {
+      let path = tabs.find((m) => m.link == asPath);
+      console.log("pathpath: ", path);
+      setActiveTab(path)
+    }
+  }, []);
+
   return (
     <div className="gm_foo_nav fixed-bottom ng-scope">
       <ul
         className="gm_mob_menu list-group list-group-horizontal d-flex"
         id="footer_nav_a"
       >
-        <Link href="/game" className="text-light" target="_self">
+        {tabs.length
+          ? tabs.map((m, i) => (
+              <Link key={i} href={m.link} className="text-light" target="_self">
+                <li
+                  className={`list-group-item ${
+                    activeTab.id == m.id ? "border-bottom" : ""
+                  } border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center`}
+                  onClick={() => onClickTab(m)}
+                >
+                  <a className="text-light" id="g_home" target="_self">
+                    <img src={m.image} width="30" alt="" />{" "}
+                    <span className={`d-block mt-1 mb-0 ${activeTab.id == m.id ? "color-green" : ""}`}>{m.title}</span>
+                  </a>
+                </li>
+              </Link>
+            ))
+          : null}
+        {/* <Link href="/game" className="text-light" target="_self">
           <li className="list-group-item border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">
             <a className="text-light" id="g_home" target="_self">
               <img
@@ -57,7 +127,7 @@ export default function BottomNav() {
                 width="30"
                 alt=""
               />{" "}
-              <span className="d-block mt-1 mb-0">leaderBoard</span>
+              <span className="d-block mt-1 mb-0">LeaderBoard</span>
             </a>
           </li>
         </Link>
@@ -72,7 +142,7 @@ export default function BottomNav() {
               <span className="d-block mt-1 mb-0">My Bids</span>
             </a>
           </li>
-        </Link>
+        </Link> */}
       </ul>
     </div>
   );
