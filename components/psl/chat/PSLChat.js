@@ -197,7 +197,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         </div>
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
-                {chats && Object.keys(chats).map(function (keyName, keyIndex) {
+                {chats && Object.keys(chats).slice(-100).map(function (keyName, keyIndex) {
                     setTimeout(() => {
                         document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
                     }, 100)
@@ -206,8 +206,8 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                             <div className="col-12">
                                 <div className={pslStyles.insideChat} style={{ flexDirection: chats[keyName].id == userId ? 'row-reverse' : '' }}>
                                     <div className={pslStyles.avatar}>
-                                        {/* <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
-                                        <img src={userProfile} width="40" style={{ borderRadius: '10px' }} />
+                                        <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : userProfile} width="40" style={{ borderRadius: '10px' }} />
+                                        {/* <img src={userProfile} width="40" style={{ borderRadius: '10px' }} /> */}
                                     </div> &nbsp;&nbsp;
                                 <div className="message">
                                         <div style={{ textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
