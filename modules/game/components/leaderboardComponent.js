@@ -52,11 +52,17 @@ const leaderboardComponent = () => {
       .then((lead) => {
         if (lead && lead.responseCode == 1) {
           if (lead.data.LeaderBoard.length) {
-            lead.data.LeaderBoard.map((m) => clone.push(m));
+            lead.data.LeaderBoard.map((m) => {
+              let obj = {
+                ...m,
+                originalCoin: m.TotalCoins,
+              };
+              clone.push(obj);
+            });
             let array = clone.map((m) => {
               return {
                 ...m,
-                TotalCoins: GlobalService.nFormatter(m.TotalCoins, 1),
+                TotalCoins: GlobalService.nFormatter(m.originalCoin, 1),
               };
             });
             setLeaderBoard(array);
@@ -84,7 +90,9 @@ const leaderboardComponent = () => {
               let array = lead.data.LeaderBoard.map((m) => {
                 return {
                   ...m,
-                  TotalCoins: GlobalService.nFormatter(m.TotalCoins, 1) || m.TotalCoins,
+                  TotalCoins:
+                    GlobalService.nFormatter(m.TotalCoins, 1) || m.TotalCoins,
+                  originalCoin: m.TotalCoins,
                 };
               });
               setLeaderBoard(array);
@@ -93,8 +101,6 @@ const leaderboardComponent = () => {
         })
         .catch((e) => console.log(e));
     }
-
-
   }, [gameState.tabs]);
 
   return (
