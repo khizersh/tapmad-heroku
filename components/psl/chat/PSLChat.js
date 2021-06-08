@@ -199,7 +199,9 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
             <div className={pslStyles.all_messages}>
                 {chats && Object.keys(chats).slice(-100).map(function (keyName, keyIndex) {
                     setTimeout(() => {
-                        document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                        // document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth' });
+                        var target = document.getElementsByClassName('lastDiv')[0];
+                        target.parentNode.scrollTop = target.offsetTop;
                     }, 100)
                     return <div className="row" key={keyIndex}>
                         {chats[keyName].type == 3 &&
