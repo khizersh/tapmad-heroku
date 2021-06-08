@@ -137,10 +137,7 @@
     cursor: pointer;
 }
 
-.chatRoomName:hover {
-  color: white;
-  cursor: pointer;
-}
+
 
 .chatRoomList{
     /* margin: 10px -14px -2px 0px; */
