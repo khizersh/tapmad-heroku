@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
-import Link from "next/link";
 import { AuthService } from "../../auth/auth.service";
 import { DashboardService } from "../../dashboard/Dashboard.Service";
-import RelatedProductCard from "../../movies/components/RelatedProductCard";
 // import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
-import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
-import PSLComponent from "../../../components/psl/psl-component";
-const ReactJWPlayer = dynamic(() => import("react-jw-player"));
+import ReactJWPlayer from "react-jw-player";
+const PSLComponent = dynamic(() => import("../../../components/psl/psl-component"));
 
 export default function Player({ movies }) {
   const router = useRouter();

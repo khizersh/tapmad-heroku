@@ -1,5 +1,5 @@
 .bg_dark {
-  background: url("//d1s7wg2ne64q87.cloudfront.net/web/images/sign-bg.jpg");
+  background: url("https://www.tapmad.com/psl6/images/front-background.jpg");
   background-size: cover;
   background-blend-mode: multiply;
 }
@@ -249,6 +249,7 @@
     overflow: hidden;
     overflow-y: hidden;
   }
+
 }
 
 /* Smartphones (portrait) ----------- */
@@ -257,6 +258,11 @@
   .tm_login_pg {
     overflow: hidden;
     overflow-y: hidden;
+  }
+  .bg_dark {
+    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background-size: cover;
+    background-blend-mode: multiply;
   }
 }
 
@@ -267,6 +273,11 @@
     overflow: hidden;
     overflow-y: hidden;
   }
+  .bg_dark {
+    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background-size: cover;
+    background-blend-mode: multiply;
+  }
 }
 
 /* iPhone 5 (landscape)----------- */
@@ -276,6 +287,11 @@
     overflow: hidden;
     overflow-y: hidden;
   }
+  .bg_dark {
+    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background-size: cover;
+    background-blend-mode: multiply;
+  }
 }
 
 /* iPhone 5 (portrait)----------- */
@@ -284,6 +300,11 @@
   .tm_login_pg {
     overflow: hidden;
     overflow-y: hidden;
+  }
+  .bg_dark {
+    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background-size: cover;
+    background-blend-mode: multiply;
   }
 }
 
