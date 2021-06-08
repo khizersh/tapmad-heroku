@@ -62,7 +62,7 @@ export const getLeaderBoardByLeague = async (leagueId, offset) => {
   let body = {
     Version: "V1",
     Language: "en",
-    Platform: "web",
+    Platform: "android",
     UserId: userId,
     LeagueId: leagueId,
     Offset: offset,
