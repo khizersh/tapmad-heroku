@@ -121,7 +121,7 @@ export default function PSLChat({ channel }) {
 
     function deleteRoom(room) {
         swal({
-            title: "Are you sure you want to delete room?",
+            title: "Are you sure you want to leave room?",
             icon: "info",
             allowOutsideClick: false,
             closeOnClickOutside: false,
