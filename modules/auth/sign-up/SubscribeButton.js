@@ -55,7 +55,7 @@ export default function SubscribeButton() {
       if (authState.selectedPaymentMethod.PaymentType == 4) {
         details = handleBody();
       }
-
+      console.log(details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
