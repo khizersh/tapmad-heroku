@@ -1,4 +1,8 @@
 export const tapmadLogo = "/icons/tm-logo.png";
+export const signinBackground= "/icons/background/background1.jpg";
+// export const pslBackground = "https://www.tapmad.com/psl6/images/front-background.jpg"; old wala psl
+export const pslBackground = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623166451SigninPage-min.jpg";
+
 
 export const usernameIcon =
   "http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/UserName.png";
@@ -26,6 +30,7 @@ export const tapmadNews = "/icons/news-btn.png";
 export const samsungTvLogo = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859275Samsung-smarttv-logo-white.png";
 
 export const tapmadLogoBgWhite = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859428tm-logo-clr.png";
+
 
 export const sendMessageIcon = "/icons/psl/sendBtn.svg";
 export const shareIcon = "/icons/psl/chatShare.svg";

@@ -2,10 +2,13 @@ import React, { useEffect, useReducer } from "react";
 import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
+import { AuthService } from "../modules/auth/auth.service";
 
 export const MainContext = React.createContext(null);
 
 function reducer(state, action) {
+
+  console.log("action ::: ",action);
   switch (action.type) {
     case "UPDATE_OPERATOR":
       return { ...state, User: { ...state.User, OperatorId: action.data } };
@@ -23,6 +26,8 @@ function reducer(state, action) {
       return { ...state, AuthDetails: action.data };
     case "SET_AUTHENTICATION":
       return { ...state, isAuthenticated: action.data };
+    case "SET_COUNTRY_CODE":
+      return { ...state, countryCode: action.data };
     case "SET_USER_NUMBER":
       return {
         ...state,
@@ -38,6 +43,7 @@ export default function MainProvider({ children }) {
     isAuthenticated: false,
     loading: false,
     isSearch: false,
+    countryCode: "",
     User: {
       FullName: "",
       MobileNo: "",
@@ -53,8 +59,18 @@ export default function MainProvider({ children }) {
     dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
 
     checkUserAuthentication();
+    const country = await AuthService.getGeoInfo();
+    if (country) {
+      country.countryCode == "PK";
+      console.log("shikar: ",country);
+      updateCountryCode(country.countryCode);
+    }
   }, []);
 
+  function updateCountryCode(code) {
+    console.log("Code: ",code);
+    dispatch({ type: "SET_COUNTRY_CODE", data: code });
+  }
   function updateUserNumber(number) {
     dispatch({ type: "SET_USER_NUMBER", data: number });
   }
@@ -122,6 +138,7 @@ export default function MainProvider({ children }) {
     setLoader,
     setisAuthenticateFalse,
     getCountryCode,
+    updateCountryCode,
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }

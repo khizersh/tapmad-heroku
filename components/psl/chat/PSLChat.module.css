@@ -1,109 +1,92 @@
 .chatBox {
-    border: 1px solid #121117 !important;
-    height: 500px;
-    overflow-x: hidden;
-    position: relative;
-    background-color: #000000 !important;
-    border-bottom: 3px solid #121117 !important;
+  border: 1px solid #121117 !important;
+  height: 500px;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #000000 !important;
+  border-bottom: 3px solid #121117 !important;
 }
-.chatMessageBox{
-    /* background-color: white; */
-    border-radius: 4px;
-    color: white;
-    font-size: 14px;
+.chatMessageBox {
+  /* background-color: white; */
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
 }
-.insideChat{
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 10px;
+.insideChat {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 10px;
 }
-.avatar{
-    margin-top: 10px ;
+.avatar {
+  margin-top: 10px;
 }
-
-
 
 .roomChatText {
-    width: 160px;
-    margin: 0px 0 0 30px;
+  width: 160px;
+  margin: 0px 0 0 30px;
 }
 
 .copyBtn {
-    background: #d4d4d4 !important;
-    color: #616161 !important;
-    box-shadow: 0 0 5px 0px #0000002e;
-    font-size: 16px;
+  background: #d4d4d4 !important;
+  color: #616161 !important;
+  box-shadow: 0 0 5px 0px #0000002e;
+  font-size: 16px;
 }
 
-.shareBtn{
-        width: 160px;
-        padding: 8px;
-        background: black;
-        color: white;
-        font-size: 16px;
-        font-weight: 500;
-        border: none;
+.shareBtn {
+  width: 160px;
+  padding: 8px;
+  background: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
 }
 
 @media (max-width: 640px) {
-.margChat{
+  .margChat {
     margin-top: 50%;
-}
-}
-
-
-
-
-.msgTime{
-    font-size: 10px;
-    color: rgba(255,255,255,0.5);
+  }
 }
 
-.msgProfile{
-    font-size: 12px;
-    font-weight: 500;
-}
-.userInput{
-    position: absolute;
-    bottom: 0;
-    border-top: 1px solid grey;
-    width: 100%;
-}
-.msgField{
-    padding: 10px;
-    display: flex;
-}
-.type_msg{
-    background-color: rgb(0 0 0 / 0%);
-    border: 0;
-    color: white !important;
-    height: 40px !important;
-    overflow-y: auto;
-    border-radius: 20px !important;
-    padding: 7px 10px;
-    width: 100%;
+.msgTime {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.type_msg:focus-visible{
- outline-style: none;
+.msgProfile {
+  font-size: 12px;
+  font-weight: 500;
 }
-.type_msg:focus{
-    outline-style: none;
-   }
-   
-
-
-.sendMessage{
-    border-radius: 50% !important;
-    background-color: rgb(135 194 66 / 0%) !important;
-    border: 0 !important;
-    color: white !important;
-    cursor: pointer;
-    /* width: 30px; */
-    height: 30px;
+.userInput {
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid grey;
+  width: 100%;
+}
+.msgField {
+  padding: 10px;
+  display: flex;
+}
+.type_msg {
+  background-color: rgb(0 0 0 / 0%);
+  border: 0;
+  color: white !important;
+  height: 40px !important;
+  overflow-y: auto;
+  border-radius: 20px !important;
+  padding: 7px 10px;
+  width: 100%;
 }
 
-.shareChat{
+.type_msg:focus-visible {
+  outline-style: none;
+}
+.type_msg:focus {
+  outline-style: none;
+}
+
+.sendMessage {
   border-radius: 50% !important;
   background-color: rgb(135 194 66 / 0%) !important;
   border: 0 !important;
@@ -113,54 +96,60 @@
   height: 30px;
 }
 
-
-.chatRoomName{
-    float: left;
-    padding: 4px;
-    color: white;
-    cursor: pointer;
-    border-radius: 10px 10px 0 0;
-    background: #66aa33;
-    width: 140px;
-    height: 30px;
-    text-align: center;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 199px;
+.shareChat {
+  border-radius: 50% !important;
+  background-color: rgb(135 194 66 / 0%) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer;
+  /* width: 30px; */
+  height: 30px;
 }
 
-
-.chatRoomName:hover{
-    color: white;
-    cursor: pointer;
+.chatRoomName {
+  float: left;
+  padding: 4px;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  background: #66aa33;
+  width: 140px;
+  height: 30px;
+  text-align: center;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 199px;
 }
 
+.chatRoomName:hover {
+  color: white;
+  cursor: pointer;
+}
 
-
-.chatRoomList{
-    /* margin: 10px -14px -2px 0px; */
-    z-index: 12;
+.chatRoomList {
+  /* margin: 10px -14px -2px 0px; */
+  z-index: 12;
 }
 .noBorders::-webkit-scrollbar {
-    width: 0 !important;
-    display: none;
-  }
+  width: 0 !important;
+  display: none;
+}
 
-.noBorders{
-    border: 0px;
-    overflow-y: hidden !important;
-    overflow-x: scroll !important;
+.noBorders {
+  border: 0px;
+  overflow-y: hidden !important;
+  overflow-x: scroll !important;
 }
 .all_messages {
   height: calc(100% - 70px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.plusBtn{
-    margin: 0 0 0 20px;
-    position: relative;
+.plusBtn {
+  margin: 0 0 0 20px;
+  position: relative;
 }
 
 /* .aaa {
@@ -183,115 +172,98 @@
     left: -9px;
 } */
 
-.addGroup{
-    width: 60px;
-    height: 30px;
-    text-align: center;
-    z-index: 0;
-    border: 1px solid #222;
-    background: #121117;
-    color: white;
-    border-radius: 6px;
-    position: relative;
-    top: 6px;
-    left: -30px;
-
+.addGroup {
+  width: 60px;
+  height: 30px;
+  text-align: center;
+  z-index: 0;
+  border: 1px solid #222;
+  background: #121117;
+  color: white;
+  border-radius: 6px;
+  position: relative;
+  top: 6px;
+  left: -30px;
 }
 
 .addGroup:hover {
-    z-index: 0;
-    border: 1px solid #222;
-    background: #121117;
-    color: white;
+  z-index: 0;
+  border: 1px solid #222;
+  background: #121117;
+  color: white;
 }
 
 .add_plus {
-    position: absolute;
-    line-height: 2px;
-    left: -2px;
-    top: 16px;
-    cursor: pointer;
-    font-size: 18px;
-    margin: auto;
+  position: absolute;
+  line-height: 2px;
+  left: -2px;
+  top: 16px;
+  cursor: pointer;
+  font-size: 18px;
+  margin: auto;
 }
 
-
-
-
-.chatSpan{
-    display: block;
-    width: 130px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 48px;
-    text-align: center;
-
+.chatSpan {
+  display: block;
+  width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 48px;
+  text-align: center;
 }
-
-
 
 .crossIcon {
-   /* display: block; */
-   position: relative;
-   top: 2px;
-   background: white;
-   width: 16px;
-   height: 16px;
-   border-radius: 20px;
-   color: black;
-   text-align: center;
-   margin: 0px;
-   font-size: 10px;
-   border: 2px solid;
-   line-height: 10px;
-   float: right;
-
+  /* display: block; */
+  position: relative;
+  top: 2px;
+  background: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 20px;
+  color: black;
+  text-align: center;
+  margin: 0px;
+  font-size: 10px;
+  border: 2px solid;
+  line-height: 10px;
+  float: right;
 }
 
-
-.shareIcon{
-    margin: auto;
-    width: 30px;
-    margin-left: -6px;
+.shareIcon {
+  margin: auto;
+  width: 30px;
+  margin-left: -6px;
 }
-
 
 @media screen and (max-width: 746px) {
+  .noBorders {
+    border: 0px;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    overflow-x: scroll;
+  }
 
-    .noBorders {
-        border: 0px;
-        flex-wrap: nowrap;
-        overflow: scroll;
-        overflow-x: scroll;
-    }
-
-    .add_plus {
-      left: -2px;
+  .add_plus {
+    left: -2px;
     top: 16px;
+  }
 
-    }
+  .tabhight {
+    height: auto;
+  }
 
-    .tabhight {
-        height: auto;
-    }
+  .chatSpan {
+    height: 34px;
+  }
 
+  .all_messages {
+    height: calc(100% - 0px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 
-    .chatSpan{
-
-        height: 34px;
-    
-    }
-
-    .all_messages {
-        height: calc(100% - 0px);
-        overflow-y: scroll;
-        overflow-x: hidden;
-      }
-
-      
-
-.chatTextInput{
+  .chatTextInput {
     position: fixed;
     z-index: 10000;
     background: black;
@@ -300,13 +272,5 @@
     right: 0;
     margin: auto;
     border-radius: 15px 15px 0 0;
+  }
 }
-
-
-
-    
-}
-
-
-
-

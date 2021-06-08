@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext, useEffect } from "react";
 import { AuthService } from "../auth.service";
 import ForgetPin from "./forget-pin";
 import Login from "./login";
@@ -7,10 +7,15 @@ import { useRouter } from "next/router";
 import swal from "sweetalert";
 import EnhancedEnterPin from "./enterPin";
 import EnhancedCombineLogin from "./combineLogin";
+import { pslBackground, signinBackground } from "../../../services/imagesLink";
+import { MainContext } from "../../../contexts/MainContext";
 
 export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
   const router = useRouter();
+  const [bg, setBg] = useState(pslBackground);
+
+  const { initialState } = useContext(MainContext);
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
@@ -23,7 +28,6 @@ export default function AuthViews(props) {
           timer: 2500,
           icon: "warning",
         }).then(() => {
-    
           router.push("/sign-up");
         });
       } else {
@@ -57,9 +61,25 @@ export default function AuthViews(props) {
     }
   }, [viewToShow]);
 
+  useEffect(() => {
+    // if (initialState.countryCode && initialState.countryCode == "PK") {
+      console.log("initialState: ",initialState);
+    if (
+      initialState &&
+      initialState.AuthDetails &&
+      initialState.AuthDetails.CountryCode
+    ) {
+      setBg(pslBackground);
+    } else {
+      if (!initialState.AuthDetails  ) {
+        setBg(signinBackground);
+      }
+    }
+  }, [initialState.AuthDetails]);
+
   return (
     <div>
-      <div className="bg_dark">
+      <div className="bg_dark" style={{ background: `url('${bg}')` }}>
         <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-4">
