@@ -11,7 +11,7 @@ export default function Shows({ shows }) {
       <Slider {...bannerSettings}>
         {shows.Banner.map((e, index) => {
           return (
-            <Link href={e.BannerURL} key={index} passHref>
+            <Link href={e.BannerURL ? e.BannerURL : "/shows"} key={index} passHref>
               <a>
                 <img
                   src={e.WebBannerImage}

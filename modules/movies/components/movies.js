@@ -56,7 +56,7 @@ export default function Movies({ movies }) {
         {movies.Banner &&
           movies.Banner.map((e, index) => {
             return (
-              <Link href={e.BannerURL} key={index} passHref>
+              <Link href={e.BannerURL ? e.BannerURL : "/movies"} key={index} passHref>
                 <a>
                   <img
                     src={e.WebBannerImage}

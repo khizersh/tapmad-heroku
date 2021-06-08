@@ -53,7 +53,6 @@ const leaderboardComponent = () => {
       .then((lead) => {
         if (lead && lead.responseCode == 1) {
           if (lead.data.LeaderBoard.length) {
-            console.log("lead: ", lead);
             lead.data.LeaderBoard.map((m) => {
               let obj = {
                 ...m,
@@ -87,11 +86,9 @@ const leaderboardComponent = () => {
       setData(gameState.tabs);
       getLeaderBoardByLeague(gameState.selectedTab.LeagueId, 0)
         .then((lead) => {
-          console.log("lead: ", lead);
           if (lead && lead.responseCode == 1) {
             if (lead.data.LeaderBoard.length) {
               let limit = lead.data.Size / lead.data.Limit;
-              console.log("limit: ",limit);
               if (limit > 1) {
                 setLimit(lead.data.Limit);
               }
