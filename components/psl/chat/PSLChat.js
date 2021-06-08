@@ -21,13 +21,23 @@ export default function PSLChat({ channel }) {
 
     useEffect(() => {
         const header = document.getElementById("tab-chat");
-        const sticky = header.offsetTop;
+        const sticky = 100;
         console.log("Header ", header);
         const scrollCallBack = window.addEventListener("scroll", () => {
-            if (window.pageYOffset > 117) {
-                header.classList.add("margChat");
+            const player = document.getElementById('player-div1');
+            const playerHeight = player.getBoundingClientRect().height;
+            if (window.pageYOffset > sticky) {
+                if (window.screen.width < 639) {
+                    header.classList.add("margChat");
+                    header.style.position = "fixed";
+                    header.style.top = Number(playerHeight) + 60 + 75 + "px";
+                } else {
+                    header.classList.remove("margChat");
+                }
             } else {
                 header.classList.remove("margChat");
+                header.style.position = "unset";
+                header.style.top = "unset";
             }
         });
         return () => {

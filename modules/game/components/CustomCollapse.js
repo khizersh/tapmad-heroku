@@ -20,9 +20,8 @@ const CustomCollapse = ({ data, onChange }) => {
         <h5 className={`mb-0 text-light ${styles.title}`}>
           <img src={data.icon} /> {data.title}
           <i
-            className={`fa fa-angle-${
-              arrow ? "up" : "down"
-            } rotate-icon float-right`}
+            className={`fa fa-angle-${arrow ? "up" : "down"
+              } rotate-icon float-right`}
           ></i>
         </h5>
       </Accordion.Toggle>
@@ -37,7 +36,7 @@ const CustomCollapse = ({ data, onChange }) => {
                     <th>Questions</th>
                     <th>Answers</th>
                     <th>Odds</th>
-                    <th>Bids</th>
+                    <th>Games</th>
                     <th>You can win</th>
                   </tr>
                 </thead>

@@ -35,10 +35,10 @@ export default function BottomNav() {
     },
     {
       id: 5,
-      title: "My Bids",
+      title: "My Game",
       image:
         "//d1s7wg2ne64q87.cloudfront.net/web/images/mobApp/auction_green.png",
-      link: "/my-bids",
+      link: "/my-game",
     },
   ]);
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -63,20 +63,19 @@ export default function BottomNav() {
       >
         {tabs.length
           ? tabs.map((m, i) => (
-              <Link key={i} href={m.link} className="text-light" target="_self">
-                <li
-                  className={`list-group-item ${
-                    activeTab.id == m.id ? "border-bottom-game" : ""
+            <Link key={i} href={m.link} className="text-light" target="_self">
+              <li
+                className={`list-group-item ${activeTab.id == m.id ? "border-bottom-game" : ""
                   } border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center`}
-                  onClick={() => onClickTab(m)}
-                >
-                  <a className="text-light" id="g_home" target="_self">
-                    <img src={m.image} width="30" alt="" />{" "}
-                    <span className={`d-block mt-1 mb-0 ${activeTab.id == m.id ? "color-green" : ""}`}>{m.title}</span>
-                  </a>
-                </li>
-              </Link>
-            ))
+                onClick={() => onClickTab(m)}
+              >
+                <a className="text-light" id="g_home" target="_self">
+                  <img src={m.image} width="30" alt="" />{" "}
+                  <span className={`d-block mt-1 mb-0 ${activeTab.id == m.id ? "color-green" : ""}`}>{m.title}</span>
+                </a>
+              </li>
+            </Link>
+          ))
           : null}
         {/* <Link href="/game" className="text-light" target="_self">
           <li className="list-group-item border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">

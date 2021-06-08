@@ -18,12 +18,25 @@ export default memo(function PSLComponent({ channel }) {
 
     useEffect(() => {
         const header = document.getElementById("tab-btn");
-        const sticky = header.offsetTop + 100;
         const scrollCallBack = window.addEventListener("scroll", () => {
+            const player = document.getElementById('player-div1');
+            const playerHeight = player.getBoundingClientRect().height;
+            const sticky = 100 + 0;
+            console.log("sticky ", sticky)
             if (window.pageYOffset > sticky) {
-                header.classList.add("sticky-tab");
+                if (window.screen.width < 639) {
+                    header.classList.add("sticky-tab");
+                    header.style.position = "fixed";
+                    header.style.top = Number(playerHeight) + 58 + "px";
+                    header.style.marginTop = "0px";
+                    console.log(playerHeight);
+                } else {
+                    header.classList.remove("sticky-tab");
+                }
             } else {
                 header.classList.remove("sticky-tab");
+                header.style.position = "unset";
+                header.style.top = "unset";
             }
         });
         return () => {
@@ -53,7 +66,7 @@ export default memo(function PSLComponent({ channel }) {
         }
     })
     useEffect(() => {
-        console.log("selectedTab: ",selectedTab);
+        console.log("selectedTab: ", selectedTab);
         var frameObj = document.getElementById('gameFrame');
         var contents = "";
 

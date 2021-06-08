@@ -121,7 +121,11 @@ export default function Player({ movies }) {
     const sticky = header.offsetTop + 100;
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
-        header.classList.add("sticky-value");
+        if (window.screen.width < 639) {
+          header.classList.add("sticky-value");
+        } else {
+          header.classList.remove("sticky-value");
+        }
       } else {
         header.classList.remove("sticky-value");
       }

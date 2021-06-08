@@ -73,7 +73,7 @@ export default function GameMain() {
                     <i className="fa fa-plus"></i>
                   </button>
                 </div>
-                <span className="mt-2 d-block mb-2 text-white">Your Bids</span>
+                <span className="mt-2 d-block mb-2 text-white">Your Games</span>
               </div>
               <div className="col-6 col-sm-6 col-md-6 col-lg-5">
                 <span
