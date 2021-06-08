@@ -21,9 +21,25 @@
 
 .sticky-tab {
   z-index: 900;
+     position: fixed;
+    left: 0px;
+    background-color: black;
+    max-width: 100%;
+    width: 100%;
+    height: 80px;
+}
+.sticky-value {
+  position: fixed;
+  margin: auto;
+  left: 2px;
+  top: 58px;
+  width: 99%;
+  -webkit-box-shadow: 0 4px 2px -2px rgb(0 0 0 / 93%);
+  box-shadow: 0px 7px 15px 0px rgb(0 0 0 / 93%);
+  z-index: 910;
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .sticky-value {
     position: fixed;
     margin: auto;
@@ -34,17 +50,16 @@
     box-shadow: 0px 7px 15px 0px rgb(0 0 0 / 93%);
     z-index: 910;
   }
-}
+} */
 
 .marg-chat {
   margin-top: 44%;
 }
 
-@media (max-width: 414px) {
+/* @media (max-width: 414px) {
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -71px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -56,7 +71,6 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -73px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -68,7 +82,6 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -91px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -80,7 +93,6 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -125px;
     background-color: black;
     max-width: 100%;
     width: 100%;
@@ -92,20 +104,24 @@
   .sticky-tab {
     position: fixed;
     left: 0px;
-    margin-top: -171px;
     background-color: black;
     max-width: 100%;
     width: 100%;
     height: 80px;
   }
+} */
+.margChat {
+  z-index: 1000;
+  width: 92%;
+  left: 15px;
+  background: black;
 }
-
 @media screen and (max-width: 576px) {
   .m-logo {
     margin: 5px 0px 0px 30px;
   }
 }
-
+/* 
 @media (max-width: 414px) {
   .margChat {
     margin-top: -2%;
@@ -159,4 +175,4 @@
     left: 15px;
     background: black;
   }
-}
+} */
