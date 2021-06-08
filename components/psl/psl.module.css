@@ -1,49 +1,46 @@
 .tabIcon_image {
-    width: 30px;
-    margin: 0px 10px 0px 0px;
+  width: 30px;
+  margin: 0px 10px 0px 0px;
 }
 
-.tabUnactive{
-    background: #000000;
-    border: 1px solid #222;
-    color: #535353;
-    font-size: 20px;
+.tabUnactive {
+  background: #000000;
+  border: 1px solid #222;
+  color: #535353;
+  font-size: 20px;
 }
 
-.tabUnactive:hover{
-    border: 1px solid #87c242;
-    color: #535353;
+.tabUnactive:hover {
+  border: 1px solid #87c242;
+  color: #535353;
 }
 
-.tabactive{
-    background: #87c242;
-    color: #000000;
-    font-size: 20px;
-    font-weight: 600;
+.tabactive {
+  background: #87c242;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 600;
 }
 
+.colorGreen {
+  color: #66aa33;
+}
 
 .nav-tabs .nav-link.active {
-    color: #495057;
-    background-color: #fff;
-    /* border-color: #dee2e6 #dee2e6 #fff; */
-    border-bottom: 2px solid #66aa33 !important;
+  color: #495057;
+  background-color: #fff;
+  /* border-color: #dee2e6 #dee2e6 #fff; */
+  border-bottom: 2px solid #66aa33 !important;
 }
 
 @media only screen and (max-width: 746px) {
-
-    .tabIcon_image {
-        width: 24px;
-        margin: 0px 10px 0px 0px;
-    }
-    
+  .tabIcon_image {
+    width: 24px;
+    margin: 0px 10px 0px 0px;
+  }
 }
 
-
-
-
-
 .roomChatText {
-    width: 160px;
-    margin: 0px 0 0 30px;
+  width: 160px;
+  margin: 0px 0 0 30px;
 }

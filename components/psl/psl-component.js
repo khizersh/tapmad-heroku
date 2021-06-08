@@ -4,6 +4,8 @@ import PSLChat from "./chat/PSLChat";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import { useRouter } from "next/router";
+import styles from "./psl.module.css"
+
 export default memo(function PSLComponent({ channel }) {
     const router = useRouter();
     const [tabs, setTabs] = useState([]);
@@ -51,6 +53,7 @@ export default memo(function PSLComponent({ channel }) {
         }
     })
     useEffect(() => {
+        console.log("selectedTab: ",selectedTab);
         var frameObj = document.getElementById('gameFrame');
         var contents = "";
 
@@ -84,7 +87,7 @@ export default memo(function PSLComponent({ channel }) {
                             title={
                                 <div>
                                     <img src={tab.TabIconUnActive} width={25} alt={tab.TabIconUnActive} />
-                                    <p className="text-white m-0">{tab.TabName}</p>
+                                    <p className={`${selectedTab == tab.TabId ? styles.colorGreen : "text-white"} m-0`}>{tab.TabName}</p>
                                 </div>
                             }
                         ></Tab>
