@@ -206,8 +206,8 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                             <div className="col-12">
                                 <div className={pslStyles.insideChat} style={{ flexDirection: chats[keyName].id == userId ? 'row-reverse' : '' }}>
                                     <div className={pslStyles.avatar}>
-                                        {/* <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : { userProfile }} width="40" style={{ borderRadius: '10px' }} /> */}
-                                        <img src={userProfile} width="40" style={{ borderRadius: '10px' }} />
+                                        <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : userProfile} width="40" style={{ borderRadius: '10px' }} />
+                                        {/* <img src={userProfile} width="40" style={{ borderRadius: '10px' }} /> */}
                                     </div> &nbsp;&nbsp;
                                 <div className="message">
                                         <div style={{ textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
