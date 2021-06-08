@@ -55,10 +55,10 @@ export default function LeftSidebar() {
           <div className="row">
             <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block">
               <div className="p-2 tm_btng_sidebar_btns">
-                <Link href="/my-bids">
+                <Link href="/my-game">
                   <a className="btn border-0 text-muted">
                     <i className="fa fa-btc d-block pb-1"></i>
-                    My Bids
+                    My Games
                   </a>
                 </Link>
               </div>
@@ -101,7 +101,7 @@ export default function LeftSidebar() {
           </div>
         </div>
         <div className="p-0 tm_btng_sidebar_btns2 d-block">
-          <Link href="/my-bids?channel=play">
+          <Link href="/my-game?channel=play">
             <a className="btn d-inline-block text-muted" target="_self">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/coin-white.png"
@@ -112,7 +112,7 @@ export default function LeftSidebar() {
               </p>
             </a>
           </Link>
-          <Link href="/my-bids?channel=won">
+          <Link href="/my-game?channel=won">
             <a className="btn d-inline-block text-muted" target="_self">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/trophy-white.png"
@@ -123,7 +123,7 @@ export default function LeftSidebar() {
               </p>
             </a>
           </Link>
-          <Link href="/my-bids?channel=lost">
+          <Link href="/my-game?channel=lost">
             <a className="btn d-inline-block text-muted" target="_self">
               <img
                 src="//d1s7wg2ne64q87.cloudfront.net/web/images/lost-white.png"
