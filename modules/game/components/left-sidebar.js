@@ -87,7 +87,7 @@ export default function LeftSidebar() {
           <div className="d-none d-md-block d-lg-block d-xl-block">
             <h6 className="mt-2 ng-binding"></h6>
             <p className="color-white user-coins ng-binding">
-              Coins : {gameState && gameState.userCoin ? gameState.userCoin : 0}{" "}
+              Coins : {gameState && gameState.userCoin > 0 ? gameState.userCoin : 0}{" "}
             </p>
             <a
               href="#"
