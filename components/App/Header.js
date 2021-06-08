@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../contexts/MainContext";
 // import "./Header.css";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
@@ -7,11 +7,12 @@ import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 import { loggingTags } from "../../services/apilinks";
 import { actionsRequestContent } from "../../services/http-service";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
+import { AuthService } from "../../modules/auth/auth.service";
 
 function HeaderBasic({ signout }) {
-  const { initialState, setSearch } = useContext(MainContext);
+  const [country, setCountry] = useState("PK");
+  const { initialState } = useContext(MainContext);
 
-  console.log("initialState: ", initialState);
   const onClick = () => {
     setSearch(true);
   };
@@ -23,6 +24,14 @@ function HeaderBasic({ signout }) {
     };
     actionsRequestContent(body);
   };
+
+  useEffect(async () => {
+    const country = await AuthService.getGeoInfo();
+    if (country) {
+      country.countryCode == "PK";
+      setCountry(country.countryCode);
+    }
+  }, []);
   return (
     <>
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
@@ -80,7 +89,7 @@ function HeaderBasic({ signout }) {
                   <i className="fa fa-search hov-green"></i>
                 </a>
               </li>
-              {initialState && initialState?.AuthDetails?.CountryCode == "PK" ? (
+              {country && country == "PK" ? (
                 <li className="nav-item">
                   <Link href="/game" passHref={true} shallow={true}>
                     <a>
