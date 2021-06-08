@@ -197,7 +197,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         </div>
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
-                {chats && Object.keys(chats).map(function (keyName, keyIndex) {
+                {chats && Object.keys(chats).slice(-100).map(function (keyName, keyIndex) {
                     setTimeout(() => {
                         document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
                     }, 100)
