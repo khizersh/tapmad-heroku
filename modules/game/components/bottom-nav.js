@@ -66,7 +66,7 @@ export default function BottomNav() {
               <Link key={i} href={m.link} className="text-light" target="_self">
                 <li
                   className={`list-group-item ${
-                    activeTab.id == m.id ? "border-bottom" : ""
+                    activeTab.id == m.id ? "border-bottom-game" : ""
                   } border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center`}
                   onClick={() => onClickTab(m)}
                 >
