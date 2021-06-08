@@ -37,7 +37,14 @@ const RightSidebar = ({ shop }) => {
             title: res.message,
             icon: "success",
           });
-        } else if (res && res.responseCode == 8) {
+        }
+        else if (res && res.responseCode == 1) {
+          swal({
+            title: res.message,
+            icon: "error",
+          });
+        }
+         else if (res && res.responseCode == 8) {
           swal({
             title: res.message,
             icon: "error",

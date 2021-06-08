@@ -14,7 +14,6 @@ export default function withLogin(Component, data) {
   return (props) => {
     const { checkUserAuthentication, setLoader, initialState } =
       useContext(MainContext);
-    const { updateUserCoin } = useContext(GameContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
@@ -46,7 +45,6 @@ export default function withLogin(Component, data) {
           Cookie.setCookies("isAuth", 1);
           Cookie.setCookies("userId", response.data.UserId);
           Cookie.setCookies("userCoins", response.response.UserTotalCoins);
-          updateUserCoin(response.data.UserTotalCoins);
           Cookie.setCookies(
             "userProfileName",
             response.response.UserProfile.UserProfileFullName

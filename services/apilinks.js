@@ -107,7 +107,7 @@ export const getLeaderBoardByLeagueId = BASEURLAPP + "api/getLeaderBoardByLeague
 export const getBuyCoinsPackages = BASEURL + "api/getBuyCoinsPackages/v1/en/web";
 export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
 export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
-export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreV2";
+export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";
 export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
 
 
