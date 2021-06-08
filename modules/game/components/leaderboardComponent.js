@@ -11,6 +11,7 @@ import { GlobalService } from "../../global-service";
 const leaderboardComponent = () => {
   const [data, setData] = useState([]);
   const [leaderBoard, setLeaderBoard] = useState([]);
+  const [limit, setLimit] = useState(null);
   const { gameState, updateSelectedTab } = useContext(GameContext);
   const { setLoader } = React.useContext(MainContext);
 
@@ -47,7 +48,7 @@ const leaderboardComponent = () => {
 
     getLeaderBoardByLeague(
       gameState.selectedTab.LeagueId,
-      gameState.selectedTab.offset + 50
+      gameState.selectedTab.offset + limit
     )
       .then((lead) => {
         if (lead && lead.responseCode == 1) {
@@ -76,7 +77,7 @@ const leaderboardComponent = () => {
     setLoader(true);
     updateSelectedTab({
       ...gameState.selectedTab,
-      offset: gameState.selectedTab.offset + 50,
+      offset: gameState.selectedTab.offset + limit,
     });
   };
 
@@ -87,6 +88,11 @@ const leaderboardComponent = () => {
         .then((lead) => {
           if (lead && lead.responseCode == 1) {
             if (lead.data.LeaderBoard.length) {
+              let limit = lead.data.Size / lead.data.Limit;
+              if (limit > 1) {
+                setLimit(lead.data.Limit);
+              }
+
               let array = lead.data.LeaderBoard.map((m) => {
                 return {
                   ...m,
@@ -190,7 +196,7 @@ const leaderboardComponent = () => {
                 </td>
               )}
             </tbody>
-            {leaderBoard.length ? (
+            {limit ? (
               <tfoot>
                 <tr>
                   <th colSpan="3" className="text-center">

@@ -9,12 +9,17 @@ import { MainContext } from "../../../contexts/MainContext";
 import { GameContext } from "../../../contexts/GameContext";
 import { Cookie } from "../../../services/cookies";
 import { basicSliderConfig } from "../../../services/utils";
-import styles from "../game.module.css"
-
+import styles from "../game.module.css";
+import { CenteredModal } from "../../../components/Modal";
+import VoucherBuyModal from "./VoucherBuyModal";
+import {  userProfile , logo } from "../../../services/imagesLink";
 
 const RightSidebar = ({ shop }) => {
   const setting = basicSliderConfig(2, 2);
   const [rewards, setRewards] = useState([]);
+  const [voucherModal, setVoucherModal] = useState(false);
+  const [voucherModalData, setVoucherModalData] = useState(null);
+  const [copyText, setCopyText] = useState("Copy");
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
 
@@ -32,19 +37,24 @@ const RightSidebar = ({ shop }) => {
     updateVoucher(body)
       .then((res) => {
         setLoader(false);
+        console.log(res);
         if (res && res.responseCode == 6) {
           swal({
             title: res.message,
             icon: "success",
           });
-        }
-        else if (res && res.responseCode == 1) {
-          swal({
-            title: res.message,
-            icon: "error",
-          });
-        }
-         else if (res && res.responseCode == 8) {
+        } else if (res && res.responseCode == 1) {
+          if (res.data.IsPopup) {
+            console.log(res);
+            setVoucherModal(true);
+            setVoucherModalData(res.data);
+          } else {
+            swal({
+              title: res.message,
+              icon: "success",
+            });
+          }
+        } else if (res && res.responseCode == 8) {
           swal({
             title: res.message,
             icon: "error",
@@ -66,6 +76,11 @@ const RightSidebar = ({ shop }) => {
     setLoader(false);
   };
 
+  const onClickCopy = (data) => {
+    navigator.clipboard.writeText(data);
+    setCopyText("Copied!");
+  };
+
   useEffect(() => {
     let body = {
       Language: "en",
@@ -83,6 +98,55 @@ const RightSidebar = ({ shop }) => {
 
   return (
     <>
+      <VoucherBuyModal
+        show={voucherModal}
+        onHide={() => setVoucherModal(false)}
+      >
+        {voucherModalData && (
+          <div className="container">
+            <div className="row">
+              <div className="col-6 text-center">
+                <img
+                  // src={voucherModalData.ProductImage}
+                  src={logo}
+                  alt="Tapmad logo"
+                  width="70px"
+                />
+              </div>
+              <div className="col-6 text-center">
+                <img
+                  src={voucherModalData.ProductImage}
+                  alt="Tapmad logo"
+                  width="70px"
+                />
+              </div>
+              <div className="col-12 mt-3 text-center">
+                <p>{voucherModalData.message}</p>
+                {/* <p>sdgaJHFDGAdfgjhaGDJKAfgdkjaG</p> */}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-9">
+                <input
+                  type="text"
+                  value={voucherModalData.PromoCode}
+                  // value={"WY78EQ8946TZXBDVFETY78"}
+                  className="form-control"
+                />
+              </div>
+              <div className="col-3">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => onClickCopy(voucherModalData.PromoCode)}
+                  // onClick={() => onClickCopy("safasfasfasf")}
+                >
+                  {copyText}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </VoucherBuyModal>
       <div>
         {rewards && rewards.length
           ? rewards.map((m, i) => (
@@ -106,7 +170,7 @@ const RightSidebar = ({ shop }) => {
                               <img
                                 onClick={() => onClickVoucher(n)}
                                 src={n.RewardProductImage}
-                                alt="reward" 
+                                alt="reward"
                                 className={`btn m-auto ${styles.discountImage}`}
                               />
                               <div
