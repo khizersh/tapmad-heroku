@@ -13,15 +13,16 @@ export default function CreateJoinRoomModalBody({
   const [currentRoomOption, setCurrentRoomOption] = useState(0);
   const [newRoom, setNewRoom] = useState(null);
   const [onLoad, setOnLoad] = useState(false);
+  const [btnDisable, setBtnDisable] = useState(false);
   const roomName = useRef();
   const chatRoomId = useRef();
   const [btnText, setBtnText] = useState("Copy");
 
   async function createRoom() {
+    setBtnDisable(true)
     setOnLoad(true);
     if (
-      roomName.current.value &&
-      !roomName.current.value.trim().length > 3 ||
+      (roomName.current.value && !roomName.current.value.trim().length > 3) ||
       roomName.current.value.trim().length > 12
     ) {
       setOnLoad(false);
@@ -79,10 +80,12 @@ export default function CreateJoinRoomModalBody({
         ChannelId: channelId,
         ChatLink: chatRoomId.current.value,
       };
+      setBtnDisable(true)
       const data = await joinAChatRoom(body);
       console.log("data ", data);
       if (data.UserChatRooms) {
         mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
+    
       } else {
         swal({
           title: data.Response.message,
@@ -90,6 +93,7 @@ export default function CreateJoinRoomModalBody({
           allowOutsideClick: false,
           closeOnClickOutside: false,
         });
+        setBtnDisable(false)
       }
     } else {
       swal({
@@ -98,6 +102,7 @@ export default function CreateJoinRoomModalBody({
         allowOutsideClick: false,
         closeOnClickOutside: false,
       });
+      setBtnDisable(false)
     }
   }
 
@@ -147,6 +152,7 @@ export default function CreateJoinRoomModalBody({
                 type="button"
                 className="btn btn-primary btn-sm"
                 onClick={createRoom}
+                disabled={btnDisable}
               >
                 Submit{" "}
                 {onLoad ? (
@@ -180,6 +186,7 @@ export default function CreateJoinRoomModalBody({
                 type="button"
                 className="btn btn-primary btn-sm"
                 onClick={joinChatRoom}
+                disabled={btnDisable}
               >
                 Submit
               </button>
