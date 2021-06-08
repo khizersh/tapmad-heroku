@@ -248,11 +248,12 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                     <div style={{ flex: "1" }}>
                         <textarea className={pslStyles.type_msg} ref={textMessage} placeholder="Type your message..."></textarea>
                     </div>
-                    <div style={{ textAlign: "center", paddingLeft: '10px', margin: 'auto' }}>
+                    {room != 1 ? <div style={{ textAlign: "center", paddingLeft: '10px', margin: 'auto' }}>
                         <button className={pslStyles.shareChat} onClick={shareOnSocial}>
                             <img className={pslStyles.shareIcon} src={shareIcon} />
                         </button>
-                    </div>
+                    </div> : null}
+
                     <div style={{ textAlign: "center", paddingLeft: '10px', margin: 'auto' }}>
                         <button className={pslStyles.sendMessage} onClick={sendMessage}>
                             <img className={pslStyles.shareIcon} src={sendMessageIcon} />
