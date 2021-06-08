@@ -25,7 +25,6 @@ export default function MatchBids({ game, filteredData }) {
       setMatches(filteredData);
     } else {
       const matches = await getAllMatchDetails();
-      console.log("matches ", matches);
       setMatches(matches.MatchOdds);
     }
   }

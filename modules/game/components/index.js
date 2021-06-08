@@ -18,7 +18,8 @@ export default function Game() {
             {/* <GameMain /> */}
             <div>
               <img
-                src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
+                // src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
+                src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
                 alt="psl image"
                 width="100%"
               />
