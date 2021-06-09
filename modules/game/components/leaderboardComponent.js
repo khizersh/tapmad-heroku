@@ -112,9 +112,17 @@ const leaderboardComponent = () => {
   return (
     <div className="container">
       <div className={`row ${styles.width}`}>
-        <div className="col-12">
+        <div className="col-12 mt-2">
+          <div className="">
+            <img
+              // src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
+              src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
+              alt="psl image"
+              width="100%"
+            />
+          </div>
           <ul
-            className={`list-group list-group-horizontal text-center  my-2 d-flex`}
+            className={`list-group list-group-horizontal text-center  mb-2 d-flex`}
           >
             {data.length
               ? data.map((m, i) => (
