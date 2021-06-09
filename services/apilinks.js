@@ -111,7 +111,8 @@ export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";
 export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
 
 
-
+// get all country
+export const getAllowRegions = BASEURL + "api/getAllCountry/v1/en/web"
 
 
 

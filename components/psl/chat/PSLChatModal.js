@@ -26,6 +26,7 @@ export default function CreateJoinRoomModalBody({
       roomName.current.value.trim().length > 12
     ) {
       setOnLoad(false);
+      setBtnDisable(false)
       swal({
         title: "Please enter valid title!",
         icon: "error",
@@ -50,6 +51,7 @@ export default function CreateJoinRoomModalBody({
           allowOutsideClick: false,
           closeOnClickOutside: false,
         });
+        setBtnDisable(false)
         setOnLoad(false);
       } else if (data.Response.responseCode == 1) {
         setCurrentRoomOption(3);
@@ -57,6 +59,7 @@ export default function CreateJoinRoomModalBody({
           setNewRoom(data.ChatRooms[data.ChatRooms.length - 1]);
         }
         mergeRoom(data.ChatRooms);
+        setBtnDisable(false)
         setOnLoad(false);
       }
     } else {
@@ -66,6 +69,7 @@ export default function CreateJoinRoomModalBody({
         allowOutsideClick: false,
         closeOnClickOutside: false,
       });
+      setBtnDisable(false)
       setOnLoad(false);
     }
   }
