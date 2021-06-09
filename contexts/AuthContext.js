@@ -43,11 +43,23 @@ export default function AuthProvider({ children }) {
   }, [initialState.AuthDetails]);
 
   function updateSelectedPaymentMethod(method) {
+    console.log(method);
     let stateClone = authState;
-    setAuthState({
-      ...stateClone,
-      selectedPaymentMethod: method,
-    });
+    if (method.PaymentId == 1) {
+      var dbcPackage = method.Packages[0];
+      setAuthState({
+        ...stateClone,
+        selectedPaymentMethod: method,
+        selectedPackageId: dbcPackage.ProductId,
+        selectedPackageAmount: dbcPackage.PackagePrice,
+        selectedPackageName: dbcPackage.PackageName
+      });
+    } else {
+      setAuthState({
+        ...stateClone,
+        selectedPaymentMethod: method,
+      });
+    }
   }
 
   function updateSelectedPackageId(id, amount, name) {
