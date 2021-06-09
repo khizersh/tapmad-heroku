@@ -108,21 +108,6 @@ export default function CatchupPlayer({ video, videoList }) {
     }
   }, [video]);
 
-  useEffect(() => {
-    const header = document.getElementById("player-div1");
-    const sticky = header.offsetTop;
-    const scrollCallBack = window.addEventListener("scroll", () => {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky-value");
-      } else {
-        header.classList.remove("sticky-value");
-      }
-    });
-    return () => {
-      window.removeEventListener("scroll", scrollCallBack);
-    };
-  }, []);
-
   return (
     <div>
       <div className="container-fluid">
@@ -142,44 +127,37 @@ export default function CatchupPlayer({ video, videoList }) {
                   </DFPSlotsProvider>
                 </div>
               )}
-              <div
-                id="player-div1"
-                className="player-div"
-                style={{ border: "1px solid white" }}
-              >
-                {console.log("videoLink.lowQuality: ", videoLink)}
-                {videoLink ? (
-                  <ReactJWPlayer
-                    playerId="my-unique-id"
-                    playerScript="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"
-                    isAutoPlay={true}
-                    file={
-                      videoLink
-                        ? videoLink.lowQuality
-                        : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
-                    }
-                    generatePrerollUrl={() =>
-                      ads.onVideo && ads.allow ? ads.onVideo : ""
-                    }
-                    customProps={{
-                      controls: true,
-                      sources: [
-                        {
-                          file: videoLink && videoLink.highQuality,
-                          label: "HD",
-                        },
-                        {
-                          file: videoLink && videoLink.lowQuality,
-                          label: "LQ",
-                        },
-                        {
-                          file: videoLink && videoLink.mediumQuality,
-                          label: "MQ",
-                        },
-                      ],
-                    }}
-                  />
-                ) : null}
+              <div id="player-div2" className="player-div2" style={{ border: "1px solid white" }}>
+                <ReactJWPlayer
+                  playerId="my-unique-id"
+                  playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                  isAutoPlay={true}
+                  file={
+                    videoLink
+                      ? videoLink.lowQuality
+                      : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
+                  }
+                  generatePrerollUrl={() =>
+                    ads.onVideo && ads.allow ? ads.onVideo : ""
+                  }
+                  customProps={{
+                    controls: true,
+                    sources: [
+                      {
+                        file: videoLink && videoLink.lowQuality,
+                        label: "HD",
+                      },
+                      {
+                        file: videoLink && videoLink.lowQuality,
+                        label: "LQ",
+                      },
+                      {
+                        file: videoLink && videoLink.lowQuality,
+                        label: "MQ",
+                      },
+                    ],
+                  }}
+                />
               </div>
             </div>
             <div className="col-lg-12 p-0">
