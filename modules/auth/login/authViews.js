@@ -36,8 +36,31 @@ export default function AuthViews(props) {
     }
   }
 
-  function sendToForgetPin() {
-    setViewToShow("forget-pin");
+   function sendToForgetPin() {
+    console.log("initialState ", initialState);
+    if (initialState.countryCode != "PK") {
+      var mobile = document.getElementById('mobileNo').value;
+      setLoader(true);
+      AuthService.forgetPin(mobile, initialState.User.OperatorId)
+        .then(res => {
+          setLoader(false);
+          if (res && res.responseCode == 1) {
+            swal({
+              title: res.message,
+              icon: "success",
+              timer: 2500
+            })
+          } else {
+            swal({
+              title: res.message,
+              icon: "error",
+              timer: 2500
+            })
+          }
+        }).catch(e => setLoader(false))
+    } else {
+      setViewToShow("forget-pin");
+    }
   }
 
   const RenderViews = useCallback(() => {
