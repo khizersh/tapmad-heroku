@@ -107,22 +107,6 @@ export default function CatchupPlayer({ video, videoList }) {
     }
   }, [video]);
 
-
-  useEffect(() => {
-    const header = document.getElementById("player-div1");
-    const sticky = header.offsetTop;
-    const scrollCallBack = window.addEventListener("scroll", () => {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky-value");
-      } else {
-        header.classList.remove("sticky-value");
-      }
-    });
-    return () => {
-      window.removeEventListener("scroll", scrollCallBack);
-    };
-  }, []);
-
   return (
     <div>
       <div className="container-fluid">
@@ -142,7 +126,7 @@ export default function CatchupPlayer({ video, videoList }) {
                   </DFPSlotsProvider>
                 </div>
               )}
-              <div id="player-div1" className="player-div" style={{ border: "1px solid white" }}>
+              <div id="player-div2" className="player-div2" style={{ border: "1px solid white" }}>
                 <ReactJWPlayer
                   playerId="my-unique-id"
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"

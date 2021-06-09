@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useContext, useEffect } from "react";
 import { AuthService } from "../auth.service";
 import ForgetPin from "./forget-pin";
-import Login from "./login";
 import SetPin from "./setPin";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
