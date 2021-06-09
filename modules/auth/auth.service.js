@@ -11,6 +11,7 @@ import {
   homepageAds,
   Logout,
   UserSignUpPromoCode,
+  getAllowRegions,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -335,6 +336,26 @@ async function GetCardUser(body) {
     return null;
   }
 }
+async function getAllowRegionsList(body) {
+  const resp = await get(getAllowRegions);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 
 function validateUser(data) {
   var user = data.User;
@@ -462,4 +483,5 @@ export const AuthService = {
   userPromoCode,
   checkUser,
   clearUserToken,
+  getAllowRegionsList
 };

@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { MainContext } from "../contexts/MainContext";
-import { loggingTags } from "../services/apilinks";
+import { getAllowRegions, loggingTags } from "../services/apilinks";
 import AuthenticatedSidebar from "./AuthenticatedSidebar";
 import NotAuthenticatedSidebar from "./NotAuthenticatedSidebar";
 import { actionsRequestContent } from "../services/http-service";
 import { tapmadLogo } from "../services/imagesLink";
+import { AuthService } from "../modules/auth/auth.service";
 
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -32,14 +33,21 @@ export default function SideBar() {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
     }
-    
+
+    AuthService.getAllowRegionsList()
+      .then((res) => {
+        console.log("res in auth:L ", res);
+      })
+      .catch((e) => console.log(e));
   }, [initialState.isAuthenticated]);
   return (
     <div className="primary-nav">
       <button
         className="hamburger hamburger-icon open-panel nav-toggle"
         onClick={toggleNavbar}
-      >&nbsp;</button>
+      >
+        &nbsp;
+      </button>
       <nav className="menu">
         <Link href="/" shallow={true} passHref={true}>
           <a className="logotype" onClick={() => onCLickContent("homepage")}>
