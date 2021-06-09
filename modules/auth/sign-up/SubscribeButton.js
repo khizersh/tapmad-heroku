@@ -25,7 +25,7 @@ export default function SubscribeButton() {
       OperatorId: initialState.User.OperatorId,
       cnic: initialState.User.Cnic,
       Email: initialState.User.Email,
-      FullName : initialState.User.FullName,
+      FullName: initialState.User.FullName,
     };
   }
   function updateApiData(status) {
@@ -82,6 +82,10 @@ export default function SubscribeButton() {
         const response = await AuthService.creditCardOrder(details);
         if (response.data.responseCode == 1) {
           window.location.href = response.data.CardPaymentUrl;
+          return
+        } else if (!response.data.IsSubscibe) {
+          window.location.href = response.data.CardPaymentUrl;
+          return;
         } else if (response.data.responseCode == 4) {
           swal({
             timer: 3000,
