@@ -23,6 +23,9 @@ function reducer(state, action) {
       return { ...state, AuthDetails: action.data };
     case "SET_AUTHENTICATION":
       return { ...state, isAuthenticated: action.data };
+    case "SET_COUNTRY_CODE":
+      console.log("State cloone ", state);
+      return { ...state, countryCode: action.data };
     case "SET_USER_NUMBER":
       return {
         ...state,
@@ -53,8 +56,14 @@ export default function MainProvider({ children }) {
     dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
 
     checkUserAuthentication();
+    const country = await AuthService.getGeoInfo();
+    updateCountryCode(country.countryCode);
+
   }, []);
 
+  function updateCountryCode(code) {
+    dispatch({ type: "SET_COUNTRY_CODE", data: code });
+  }
   function updateUserNumber(number) {
     dispatch({ type: "SET_USER_NUMBER", data: number });
   }
@@ -64,6 +73,7 @@ export default function MainProvider({ children }) {
   }
   function updateUserOperator(operator) {
     dispatch({ type: "UPDATE_OPERATOR", data: operator });
+    console.log(initialState);
   }
 
   function updateUserCnic(cnic) {
