@@ -88,7 +88,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
 
   const forgetClick = () => {
     if (mobileNo.length > 4) {
-      forgetPin();
+      forgetPin(initialState);
     }
   };
 
@@ -125,10 +125,12 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
           maxLength="20"
           minLength="5"
           className="form-control mb-2"
+          id="mobileNo"
           placeholder="xxxxxxxxxxx"
           inputMode="numeric"
           value={mobileNo}
           onChange={(e) => handleNumber(e)}
+          autoComplete={'off'}
         />
       </div>
       <div className="form-group">

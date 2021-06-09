@@ -1,7 +1,6 @@
 import React from "react";
 import { Cookie } from "../../../services/cookies";
 import { useRouter } from "next/router";
-import { signUpImage } from "../../../services/imagesLink";
 
 export default function SignUpLayout({ children, bgImage }) {
   const router = useRouter();
@@ -44,7 +43,7 @@ export default function SignUpLayout({ children, bgImage }) {
                 <i className="fa fa-arrow-left"></i> Back
               </button>
 
-              <img className="w-100 mb-0" alt="sign-up" src={signUpImage} />
+              <img className="w-100 mb-0" alt="sign-up" src={bgImage} />
               <button
                 type="button"
                 className="btn pull-right"

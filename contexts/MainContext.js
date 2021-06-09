@@ -8,7 +8,7 @@ export const MainContext = React.createContext(null);
 
 function reducer(state, action) {
 
-  console.log("action ::: ",action);
+  console.log("action ::: ", action);
   switch (action.type) {
     case "UPDATE_OPERATOR":
       return { ...state, User: { ...state.User, OperatorId: action.data } };
@@ -27,6 +27,7 @@ function reducer(state, action) {
     case "SET_AUTHENTICATION":
       return { ...state, isAuthenticated: action.data };
     case "SET_COUNTRY_CODE":
+      console.log("State cloone ", state);
       return { ...state, countryCode: action.data };
     case "SET_USER_NUMBER":
       return {
@@ -60,15 +61,11 @@ export default function MainProvider({ children }) {
 
     checkUserAuthentication();
     const country = await AuthService.getGeoInfo();
-    if (country) {
-      country.countryCode == "PK";
-      console.log("shikar: ",country);
-      updateCountryCode(country.countryCode);
-    }
+    updateCountryCode(country.countryCode);
+
   }, []);
 
   function updateCountryCode(code) {
-    console.log("Code: ",code);
     dispatch({ type: "SET_COUNTRY_CODE", data: code });
   }
   function updateUserNumber(number) {
@@ -80,6 +77,7 @@ export default function MainProvider({ children }) {
   }
   function updateUserOperator(operator) {
     dispatch({ type: "UPDATE_OPERATOR", data: operator });
+    console.log(initialState);
   }
 
   function updateUserCnic(cnic) {

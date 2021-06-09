@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
-import { actionsRequestContent, post } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
-import { loggingTags, verifyUserPinCode } from "../../../services/apilinks";
 import { tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
@@ -12,7 +10,7 @@ import withLogin from "../LoginHOC";
 function EnterPin({ forgetPin, login }) {
   const [userPin, seUserPin] = useState("");
   const router = useRouter();
-  const { setLoader } = useContext(MainContext);
+  const { initialState, setLoader } = useContext(MainContext);
   function handleNumber(e) {
     const pin = e.target.value;
     if (+pin === +pin) {
@@ -31,7 +29,7 @@ function EnterPin({ forgetPin, login }) {
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
               console.log(e);
-              forgetPin();
+              forgetPin(initialState);
             }
           })
         } else {

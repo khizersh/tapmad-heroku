@@ -15,7 +15,7 @@ export default function AuthViews(props) {
   const router = useRouter();
   const [bg, setBg] = useState(pslBackground);
 
-  const { initialState } = useContext(MainContext);
+  const { initialState, setLoader } = useContext(MainContext);
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
@@ -36,15 +36,44 @@ export default function AuthViews(props) {
     }
   }
 
-  function sendToForgetPin() {
-    setViewToShow("forget-pin");
+  function sendToForgetPin(state) {
+    if (state.countryCode != "PK") {
+      setLoader(true);
+      AuthService.forgetPin(state.User.MobileNo, state.User.OperatorId).then(res => {
+        setLoader(false);
+        if (res && res.responseCode == 1) {
+          swal({
+            title: res.message,
+            icon: "success",
+            timer: 2500
+          })
+        } else {
+          swal({
+            title: res.message,
+            icon: "error",
+            timer: 2500
+          })
+        }
+      }).catch(e => setLoader(false))
+
+    } else {
+      setViewToShow("forget-pin");
+    }
   }
 
   const RenderViews = useCallback(() => {
     if (viewToShow == "enter-pin") {
       return <EnhancedEnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
-      return <ForgetPin updateView={setViewToShow} />;
+      if (initialState.countryCode == "PK") {
+        return <ForgetPin updateView={setViewToShow} />;
+      } else {
+        return <EnhancedCombineLogin
+          forgetPin={sendToForgetPin}
+          loginResponse={processResponse}
+          ip={props.ip}
+        />
+      }
     } else if (viewToShow == "set-pin") {
       return <SetPin />;
     } else if (viewToShow == "login") {
@@ -63,7 +92,7 @@ export default function AuthViews(props) {
 
   useEffect(() => {
     // if (initialState.countryCode && initialState.countryCode == "PK") {
-      console.log("initialState: ",initialState);
+    console.log("initialState: ", initialState);
     if (
       initialState &&
       initialState.AuthDetails &&
@@ -71,7 +100,7 @@ export default function AuthViews(props) {
     ) {
       setBg(pslBackground);
     } else {
-      if (!initialState.AuthDetails  ) {
+      if (!initialState.AuthDetails) {
         setBg(signinBackground);
       }
     }

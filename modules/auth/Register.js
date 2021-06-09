@@ -13,8 +13,7 @@ export default memo(function Register(props) {
   const router = useRouter();
   const { code, number } = router.query;
   const { authState, updateResponseCode } = useContext(Authcontext);
-  const { updateUserNumber } = useContext(MainContext);
-
+  const { updateUserNumber, initialState } = useContext(MainContext);
   const RenderViews = useCallback(
     function () {
       var respCode = code || authState.subscribeResponseCode;
@@ -51,7 +50,7 @@ export default memo(function Register(props) {
 
   return (
     <div>
-      <SignUpLayout bgImage={signUpImage}>
+      <SignUpLayout bgImage={initialState?.AuthDetails?.PackageImage}>
         <RenderViews />
       </SignUpLayout>
     </div>
