@@ -18,7 +18,7 @@ export default function MatchBids({ game, filteredData }) {
   const database = FireBase.database();
   const [counter, setCounter] = useState(4);
   const [totalOdds, setTotalOdds] = useState(0.0);
-  const { updateBuyModal , updateUserCoin } = useContext(GameContext);
+  const { updateBuyModal, updateUserCoin } = useContext(GameContext);
 
   async function getMatchLiveDetails() {
     if (filteredData && filteredData.length) {
@@ -105,7 +105,7 @@ export default function MatchBids({ game, filteredData }) {
     const requestData = {
       Version: "V1",
       Language: "en",
-      Platform: "android",
+      Platform: "Android",
       ChannelId: channelId,
       QuestionId: questionId,
       UserId: userId,
@@ -384,30 +384,38 @@ export default function MatchBids({ game, filteredData }) {
                                                 </span>
                                               </button>
                                             </div>
-                                            <span
+                                            <div
                                               className={styles.bid_text}
                                             >
                                               Tukka
-                                                </span>
+                                                </div>
                                           </div>
 
                                           <div className="col-6 col-lg-6 col-sm-6">
-                                            <div className={styles.coins}>
-                                              <p>
-                                                {GlobalService.nFormatter(
-                                                  totalOdds,
-                                                  1
-                                                )}
-                                                <span>
-                                                  <img src={pslCoins} />
-                                                </span>
-                                              </p>
+                                            <div className="row">
+                                              <div className="col-12">
+                                                <div className={styles.coins}>
+                                                  <p>
+                                                    {GlobalService.nFormatter(
+                                                      totalOdds,
+                                                      1
+                                                    )}
+                                                    <span>
+                                                      <img src={pslCoins} />
+                                                    </span>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                              <div className="col-12 mt-2">
+
+                                                <div
+                                                  className={styles.coins_text}
+                                                >
+                                                  You'll Win
+                                                </div>
+
+                                              </div>
                                             </div>
-                                            <span
-                                              className={styles.coins_text}
-                                            >
-                                              You'll Win
-                                                </span>
                                           </div>
                                         </div>
                                         <div

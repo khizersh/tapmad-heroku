@@ -176,6 +176,7 @@ input.count:focus {
   color: white;
   margin: 10px 0px 0px 10px;
   font-size: 12px;
+  text-align: left;
 }
 .coins {
   text-align: center;
