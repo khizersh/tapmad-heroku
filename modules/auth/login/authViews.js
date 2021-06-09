@@ -36,28 +36,29 @@ export default function AuthViews(props) {
     }
   }
 
-   function sendToForgetPin() {
+  function sendToForgetPin() {
     console.log("initialState ", initialState);
     if (initialState.countryCode != "PK") {
-      var mobile = document.getElementById('mobileNo').value;
+      var mobile = document.getElementById("mobileNo").value;
       setLoader(true);
       AuthService.forgetPin(mobile, initialState.User.OperatorId)
-        .then(res => {
+        .then((res) => {
           setLoader(false);
           if (res && res.responseCode == 1) {
             swal({
               title: res.message,
               icon: "success",
-              timer: 2500
-            })
+              timer: 2500,
+            });
           } else {
             swal({
               title: res.message,
               icon: "error",
-              timer: 2500
-            })
+              timer: 2500,
+            });
           }
-        }).catch(e => setLoader(false))
+        })
+        .catch((e) => setLoader(false));
     } else {
       setViewToShow("forget-pin");
     }
@@ -86,7 +87,7 @@ export default function AuthViews(props) {
 
   useEffect(() => {
     // if (initialState.countryCode && initialState.countryCode == "PK") {
-      console.log("initialState: ",initialState);
+    console.log("initialState: ", initialState);
     if (
       initialState &&
       initialState.AuthDetails &&
@@ -94,7 +95,7 @@ export default function AuthViews(props) {
     ) {
       setBg(pslBackground);
     } else {
-      if (!initialState.AuthDetails  ) {
+      if (!initialState.AuthDetails) {
         setBg(signinBackground);
       }
     }
@@ -102,7 +103,8 @@ export default function AuthViews(props) {
 
   return (
     <div>
-      <div className="bg_dark" style={{ background: `url('${bg}')` }}>
+      {/* <div className="bg_dark" style={{ background: `url('${bg}')` }}> */}
+      <div className="bg_dark">
         <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-4">
