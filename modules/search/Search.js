@@ -59,19 +59,27 @@ const Search = () => {
 
   const onClickSearch = async () => {
     setLoader(true);
-    const data = await SearchService.getItemByKeyrwords(keyword);
-    if (data != null) {
-      if (data.responseCode == 1) {
-        setSearchedItem(data.data.Videos);
-        let allVideosName = data.data.Videos.map((e) => {
-          return e.VideoName;
-        })
-        try {
-          SearchTag({ term: keyword, data: data.data.Videos.length, result: allVideosName.toString() });
-        } catch (e) { console.log(e) }
-      } else {
-        setSearchedItem([]);
-        SearchTag({ term: keyword, data: 0, result: "" });
+    if (keyword) {
+      const data = await SearchService.getItemByKeyrwords(keyword);
+      if (data != null) {
+        if (data.responseCode == 1) {
+          setSearchedItem(data.data.Videos);
+          let allVideosName = data.data.Videos.map((e) => {
+            return e.VideoName;
+          });
+          try {
+            SearchTag({
+              term: keyword,
+              data: data.data.Videos.length,
+              result: allVideosName.toString(),
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        } else {
+          setSearchedItem([]);
+          SearchTag({ term: keyword, data: 0, result: "" });
+        }
       }
     }
     setLoader(false);
