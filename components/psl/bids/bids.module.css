@@ -129,7 +129,7 @@
   background: #8b8b8b88;
   padding: 4px;
   border-radius: 4px;
-  width: 150px;
+  width: 120px;
   margin: 10px 0px 0px 10px;
 }
 .minus {
@@ -183,7 +183,7 @@ input.count:focus {
   background: #ffffff;
   padding: 4px;
   border-radius: 4px;
-  width: 120px;
+  width: 100px;
   margin: 10px 10px 0px 0px;
   float: right;
 }
