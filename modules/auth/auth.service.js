@@ -337,23 +337,22 @@ async function GetCardUser(body) {
   }
 }
 async function getAllowRegionsList(body) {
-  const resp = await get(getAllowRegions);
+  const data = await get(getAllowRegions);
+
   if (data != null) {
-    if (data.responseCode == 1) {
+    if (data.data) {
       return {
-        data: data,
-        responseCode: data.responseCode,
-        message: data.message,
-      };
-    } else {
-      return {
-        data: data,
-        responseCode: data.responseCode,
-        message: data.message,
+        data: data.data.Countries,
+        responseCode: data.data.Response.responseCode,
+        message: data.data.Response.message,
       };
     }
   } else {
-    return null;
+    return {
+      data: "",
+      responseCode: 0,
+      message: "Something went wrong",
+    };
   }
 }
 
@@ -460,7 +459,7 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const AuthService = {
@@ -483,5 +482,5 @@ export const AuthService = {
   userPromoCode,
   checkUser,
   clearUserToken,
-  getAllowRegionsList
+  getAllowRegionsList,
 };

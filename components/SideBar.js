@@ -10,6 +10,7 @@ import { AuthService } from "../modules/auth/auth.service";
 
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
+  const [countries, setCountries] = useState([]);
   function toggleNavbar() {
     document
       .getElementsByClassName("nav-toggle")[0]
@@ -36,6 +37,9 @@ export default function SideBar() {
 
     AuthService.getAllowRegionsList()
       .then((res) => {
+        if(res.responseCode == 1){
+          setCountries(res.data)
+        }
         console.log("res in auth:L ", res);
       })
       .catch((e) => console.log(e));
@@ -113,9 +117,9 @@ export default function SideBar() {
             </li>
             {/* conditional menu */}
             {isAuth ? (
-              <AuthenticatedSidebar onClick={onCLickContent} />
+              <AuthenticatedSidebar onClick={onCLickContent} country={countries}/>
             ) : (
-              <NotAuthenticatedSidebar onClick={onCLickContent} />
+              <NotAuthenticatedSidebar onClick={onCLickContent} country={countries}/>
             )}
 
             <li onClick={() => onCLickContent("search")}>

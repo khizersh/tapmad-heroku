@@ -112,7 +112,7 @@ export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
 
 
 // get all country
-export const getAllowRegions = BASEURL + "api/getAllCountries/v1/en/web"
+export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web"
 
 
 

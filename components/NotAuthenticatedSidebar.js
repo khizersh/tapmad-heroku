@@ -3,14 +3,20 @@ import Link from "next/link";
 import { MainContext } from "../contexts/MainContext";
 import { AuthService } from "../modules/auth/auth.service";
 
-const NotAuthenticatedSidebar = ({ onClick }) => {
+const NotAuthenticatedSidebar = ({ onClick, country }) => {
   const { initialState } = useContext(MainContext);
   const [countryCode, setCountryCode] = useState(null);
+  const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
     AuthService.getGeoInfo()
       .then((res) => {
         setCountryCode(res.countryCode);
+        let count = null;
+        count = country.find((m) => m.ShortName == res.countryCode);
+        if (count == null) {
+          setSignIn(false);
+        }
       })
       .catch((e) => console.log(e));
   }, []);
@@ -39,16 +45,20 @@ const NotAuthenticatedSidebar = ({ onClick }) => {
         </li>
       ) : null}
 
-      <li className="sign-out">
-        <Link href="/sign-in" shallow={true} passHref={true}>
-          <a>
-            Sign In
-            <span className="icon">
-              <i className="fa fa-sign-in"></i>
-            </span>
-          </a>
-        </Link>
-      </li>
+      {signIn ? (
+        <li className="sign-out">
+          <Link href="/sign-in" shallow={true} passHref={true}>
+            <a>
+              Sign In
+              <span className="icon">
+                <i className="fa fa-sign-in"></i>
+              </span>
+            </a>
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
     </>
   );
 };
