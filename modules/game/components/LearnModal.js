@@ -11,78 +11,45 @@ const LearnModal = ({ open, toggle }) => {
         </Modal.Header>
         <Modal.Body className={styles.bgBlack} style={{ color: "#fff" }}>
           <p>
-            <b>Khelian Jhatt Sawal Patt Jawab aur jeetain dheeroon coins</b>
+            <b>Tukka Lagao!</b>
           </p>
           <ul className={styles.learnList}>
-            <li>Reward section mein jain aur khelian Jhat Sawal Patt Jawab.</li>
+            <li>Reward section mein ja ke Tukka Lagao khelein.</li>
             <li>
-              Es khel mein ao ko sawalo ke jawab dene hain kuch seconds mein.
+              Saath saath HBL PSL 6 ki live stream ka intekhaab karein, aur apne tukkay lagayein!
             </li>
             <li>
-              Mukhtalif sawalaat ki nouiyat ki hisaab se Coins jeete ya haare.
-              Khelne ke liye aap ke paas utne hi coins hone chahiye jitney ka
-              sawaal hai.
+              Sahi tukkay ki surat mein apkelagaye hue coins teen gunna ziada hojayenge.
             </li>
             <li>
-              Sawalaat ki mukhtalif categories hain jesay ke Pakistani, Indian
-              movies aur Sports.
+              Ghalat tukke ki surat mein apne jitne coins lagaye thay, who minus hojayenge.
             </li>
-            <li>Apna jawab ka intikhaab kijiye.</li>
+            <li>Ziada se ziada coins jeetain, leaderboard pe awwal position hasil karein for daily, weekly and monthly prizes!</li>
             <li>
-              Sahi Jawab ki surat mein lagaye gaye coins ho jain gay double jab
-              ke galat pe utne hi coins ho jain ain miuns.
+              Agar apkay coins khatam horahe hain, tou aap apne mobile balance ke zariye aur coins khareed sakte hain.
             </li>
           </ul>
 
           <p>
-            <b>Lagain Tukka Coins ke sath aur karain un ko teen gunna</b>
+            <b>Leaderboard</b>
           </p>
           <ul className={styles.learnList}>
-            <li>Reward section mein jain aur khelian Tukka Lagao.</li>
-            <li>Bid lagane ke liye match ka intekhaab kijiye.</li>
+            <li>Jitnay ziada coins lagayenge, utna ziada chance milega leaderboard pe top rehne ka! </li>
+            <li>Jitnay coins aap jeetainge, woh apke leaderboard pe display hojayenge.</li>
             <li>
-              Muktalif sawalaat pe apne pasandeeda jawab ka intekhaab kijiye aur
-              apne jama shuda coins se bid lagaiye.
+              Mahinay ke akhir mei, top 100 users ko milenge beshumar inamat!
             </li>
             <li>
-              Sahi tukke ki surat mein ap ke bid kiye hue coins ho jain teen
-              gunna.
+              Rank 100 to rank 50 ko milega <b>Rs. 50</b> ka mobile balance.
             </li>
             <li>
-              Ghalat tukke ki surat mein ap ke bid kiye hue Coins ho jain gay
-              minus.
+              Rank 49 to rank 10 ko milega <b>Rs. 100</b> ka mobile balance.
             </li>
-          </ul>
-
-          <p>
-            <b>Khareediye Coins apne Mobile balance se</b>
-          </p>
-          <ul className={styles.learnList}>
             <li>
-              Coins khatam hone ki surat mein ap apne mobile balance se bhi
-              Coins khareed sakte hain.
+              Rank 100 to rank 50 ko milega <b>Rs. 100 </b> ka mobile balance aur <b>free tapmad weekly subscription.</b>
             </li>
-          </ul>
-
-          <p>
-            <b>Ziada se zaida coins jeetain, aur leader board pe aain.</b>
-          </p>
-          <ul className={styles.learnList}>
-            <li>Har roz Top 10 users ko mile gay Rs.500 ke mobile balances.</li>
-            <li>Har hafte ke Top user ko milay ga Rs.10000 ka cash prize.</li>
             <li>
-              Jab ke Tournament ke Top user ko milay ga Rs.100000 ka cash prize.
-              2nd place ko 50000 aur 3rd place ko 25000.
-            </li>
-          </ul>
-
-          <p>
-            <b>Coins istemaal kijiye apna mobile balance kareedne ke liye</b>
-          </p>
-          <ul className={styles.learnList}>
-            <li>
-              Agar mobile balance ho gaya ha khatam tou ap apne jama shuda Coins
-              se apna mobile balance bhi kareed sakte hain.
+              Top 3 jeeten ge <b>smart phone.</b>
             </li>
           </ul>
 
@@ -103,6 +70,12 @@ const LearnModal = ({ open, toggle }) => {
             <li>
               The coins will expire if the user unsubscribes or remains inactive
               for over 7 days.
+            </li>
+            <li>
+              Prizes for the leaderboard will be announced every month.
+            </li>
+            <li>
+              At the end of each month the winnings will be reset and a new leaderboard will be created.
             </li>
           </ul>
         </Modal.Body>
