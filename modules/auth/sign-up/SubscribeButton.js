@@ -12,7 +12,6 @@ export default function SubscribeButton() {
   const { initialState, setLoader, updateUserPassword } =
     useContext(MainContext);
 
-  console.log("initialState: ", initialState);
   const { authState, updateResponseCode } = useContext(Authcontext);
 
   function handleBody() {

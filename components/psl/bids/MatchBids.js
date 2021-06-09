@@ -18,7 +18,7 @@ export default function MatchBids({ game, filteredData }) {
   const database = FireBase.database();
   const [counter, setCounter] = useState(4);
   const [totalOdds, setTotalOdds] = useState(0.0);
-  const { updateBuyModal } = useContext(GameContext);
+  const { updateBuyModal , updateUserCoin } = useContext(GameContext);
 
   async function getMatchLiveDetails() {
     if (filteredData && filteredData.length) {
@@ -387,7 +387,7 @@ export default function MatchBids({ game, filteredData }) {
                                             <span
                                               className={styles.bid_text}
                                             >
-                                              Your Bid
+                                              Tukka
                                                 </span>
                                           </div>
 

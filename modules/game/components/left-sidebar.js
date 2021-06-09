@@ -48,12 +48,14 @@ export default function LeftSidebar() {
       {/* <BuyCoinModal /> */}
       <LearnModal open={learnMore} toggle={onClickLearnMore} />
       <div className="tm_btng_sidebar mb-3 text-center">
-        <div className="tm_btng_sidebar_hdr mb-2 d-none d-lg-block d-md-none">
+        {/* <div className="tm_btng_sidebar_hdr mb-2 d-none d-lg-block d-md-none"> */}
+        <div className="tm_btng_sidebar_hdr mb-2">
           <h5>User Profile</h5>
         </div>
         <div className="tm_btn_usr_img_nme">
           <div className="row">
-            <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block">
+            {/* <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block"> */}
+            <div className="col-4">
               <div className="p-2 tm_btng_sidebar_btns">
                 <Link href="/my-game">
                   <a className="btn border-0 text-muted">
@@ -63,7 +65,7 @@ export default function LeftSidebar() {
                 </Link>
               </div>
             </div>
-            <div className="col-12 col-lg-4 col-md-4 ">
+            <div className="col-4">
               <img
                 src="/static/ava.png"
                 className="img-fluid pb-0 mt-2 mb-2 rounded-circle"
@@ -72,7 +74,8 @@ export default function LeftSidebar() {
                 alt=""
               />
             </div>
-            <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block">
+            {/* <div className="col-lg-4 col-md-4 d-none d-lg-block d-md-block"> */}
+            <div className="col-4">
               <div className="p-2 tm_btng_sidebar_btns">
                 <a
                   id="buy_coins"
@@ -84,7 +87,8 @@ export default function LeftSidebar() {
               </div>
             </div>
           </div>
-          <div className="d-none d-md-block d-lg-block d-xl-block">
+          {/* <div className="d-none d-md-block d-lg-block d-xl-block"> */}
+          <div >
             <h6 className="mt-2 ng-binding"></h6>
             <p className="color-white user-coins ng-binding">
               Coins : {gameState && gameState.userCoin > 0 ? gameState.userCoin : 0}{" "}

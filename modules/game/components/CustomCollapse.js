@@ -29,7 +29,7 @@ const CustomCollapse = ({ data, onChange }) => {
         <Card.Body className={styles.cardBody}>
           {data.content.length > 0 ? (
             <div className="overflow-auto">
-              <table className="table table-striped table-dark tm_btng_tble">
+              <table className="table table-responsive table-striped table-dark tm_btng_tble">
                 <thead className="thead-light">
                   <tr>
                     <th>Date</th>
@@ -37,7 +37,7 @@ const CustomCollapse = ({ data, onChange }) => {
                     <th>Answers</th>
                     <th>Odds</th>
                     <th>Games</th>
-                    <th>You can win</th>
+                    <th style={{width:'50%'}}>You can win</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -50,7 +50,6 @@ export default function BottomNav() {
   useEffect(() => {
     if (tabs.length) {
       let path = tabs.find((m) => m.link == asPath);
-      console.log("pathpath: ", path);
       setActiveTab(path)
     }
   }, []);
@@ -65,13 +64,13 @@ export default function BottomNav() {
           ? tabs.map((m, i) => (
             <Link key={i} href={m.link} className="text-light" target="_self">
               <li
-                className={`list-group-item ${activeTab.id == m.id ? "border-bottom-game" : ""
+                className={`list-group-item ${activeTab && activeTab.id == m.id ? "border-bottom-game" : ""
                   } border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center`}
                 onClick={() => onClickTab(m)}
               >
                 <a className="text-light" id="g_home" target="_self">
                   <img src={m.image} width="30" alt="" />{" "}
-                  <span className={`d-block mt-1 mb-0 ${activeTab.id == m.id ? "color-green" : ""}`}>{m.title}</span>
+                  <span className={`d-block mt-1 mb-0 ${activeTab && activeTab.id == m.id ? "color-green" : ""}`}>{m.title}</span>
                 </a>
               </li>
             </Link>

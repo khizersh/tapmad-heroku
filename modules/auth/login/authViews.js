@@ -108,7 +108,8 @@ export default function AuthViews(props) {
 
   return (
     <div>
-      <div className="bg_dark" style={{ background: `url('${bg}')` }}>
+      {/* <div className="bg_dark" style={{ background: `url('${bg}')` }}> */}
+      <div className="bg_dark">
         <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-4">
