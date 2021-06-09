@@ -9,12 +9,14 @@ import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
-const PSLComponent = dynamic(() => import("../../../components/psl/psl-component"));
+const PSLComponent = dynamic(() =>
+  import("../../../components/psl/psl-component")
+);
 
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [adDuration, setAdDuration] = useState(200000);
+  const [adDuration, setAdDuration] = useState(2000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
@@ -82,6 +84,7 @@ export default function Player({ movies }) {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
+      console.log("data: ", data);
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,
@@ -96,7 +99,7 @@ export default function Player({ movies }) {
     }
     setTimeout(() => {
       VideoWatched(movie);
-    }, 3000)
+    }, 3000);
   }, [router]);
 
   useEffect(() => {
@@ -246,7 +249,9 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
-                      file={"https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"}
+                      file={
+                        "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                      }
                       onAdComplete={onRestartAd}
                       generatePrerollUrl={() =>
                         ads.rightAd && ads.allow ? ads.rightAd : ""
@@ -276,7 +281,9 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
-                      file={"https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"}
+                      file={
+                        "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                      }
                       onAdComplete={onRestartAd}
                       generatePrerollUrl={() =>
                         ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
@@ -309,7 +316,9 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
-                      file={"https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"}
+                      file={
+                        "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                      }
                       onAdComplete={onRestartAd}
                       generatePrerollUrl={() => ads.bottomBannerAdMobile}
                       customProps={{

@@ -32,6 +32,7 @@ export default function SideBar() {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
     }
+    
   }, [initialState.isAuthenticated]);
   return (
     <div className="primary-nav">

@@ -13,6 +13,7 @@ import CatchupPlayer from "../../modules/catchup/CatchupPlayer";
 import { CatchupContext } from "../../contexts/CatchupContext";
 
 const watch = (props) => {
+  console.log("props:::: ",props);
   const router = useRouter();
   const { catchupState } = useContext(CatchupContext);
   const [related, setRelated] = useState([]);
@@ -37,7 +38,7 @@ const watch = (props) => {
 
   return (
     <div>
-      {props.allowUser && (
+      {props.allowUser && props.video && (
         <CatchupPlayer video={props.video} videoList={related} />
       )}
     </div>

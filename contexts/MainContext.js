@@ -8,7 +8,6 @@ export const MainContext = React.createContext(null);
 
 function reducer(state, action) {
 
-  console.log("action ::: ",action);
   switch (action.type) {
     case "UPDATE_OPERATOR":
       return { ...state, User: { ...state.User, OperatorId: action.data } };
