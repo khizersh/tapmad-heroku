@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
+import { AuthService } from "../modules/auth/auth.service";
 
 export const MainContext = React.createContext(null);
 
