@@ -29,18 +29,6 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
     ) {
       setGame(true);
     }
-
-    AuthService.getGeoInfo()
-      .then((res) => {
-        let count = null;
-        count = country.find((m) => m.ShortName == res.countryCode);
-        if (count == null) {
-          setSignOut(false);
-        }
-      })
-      .catch((e) => console.log(e));
-
-
   }, [initialState.AuthDetails, country]);
 
   return (
@@ -73,19 +61,14 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
       ) : (
         ""
       )}
-
-      {signoutValue ? (
-        <li className="sign-out">
-          <a onClick={signout}>
-            Signout
+      <li className="sign-out">
+        <a onClick={signout}>
+          Signout
             <span className="icon">
-              <i className="fa fa-sign-in"></i>
-            </span>
-          </a>
-        </li>
-      ) : (
-        ""
-      )}
+            <i className="fa fa-sign-in"></i>
+          </span>
+        </a>
+      </li>
     </>
   );
 };

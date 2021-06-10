@@ -6,7 +6,7 @@ import { AuthService } from "../modules/auth/auth.service";
 const NotAuthenticatedSidebar = ({ onClick, country }) => {
   const { initialState } = useContext(MainContext);
   const [countryCode, setCountryCode] = useState(null);
-  const [signIn, setSignIn] = useState(false);
+  const [signIn, setSignIn] = useState(true);
 
   useEffect(() => {
     AuthService.getGeoInfo()
@@ -14,8 +14,11 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         setCountryCode(res.countryCode);
         let count = null;
         count = country.find((m) => m.ShortName == res.countryCode);
+        console.log("Count ", count);
         if (count == null) {
           setSignIn(false);
+        } else {
+          setSignIn(true);
         }
       })
       .catch((e) => console.log(e));
