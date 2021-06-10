@@ -12,6 +12,19 @@ const AuthenticatedSidebarBasic = ({ signout }) => {
     };
     actionsRequestContent(body);
   };
+
+  useEffect(() => {
+    // if (initialState.countryCode && initialState.countryCode == "PK") {
+    console.log("initialState: ", initialState);
+    if (
+      initialState &&
+      initialState.AuthDetails &&
+      initialState.AuthDetails.CountryCode == "PK"
+    ) {
+      setGame(true);
+    }
+  }, [initialState.AuthDetails, country]);
+
   return (
     <>
       <li className="logouts_contain" onClick={() => onCLickContent("profile")}>
@@ -24,24 +37,28 @@ const AuthenticatedSidebarBasic = ({ signout }) => {
           </a>
         </Link>
       </li>
-      <li
-        className="sideBarGame"
-        style={{ display: "list-item" }}
-        onClick={() => onCLickContent("game")}
-      >
-        <Link href="/game" shallow={true} passHref={true}>
-          <a>
-            Game
-            <span className="icon">
-              <i className="fa fa-gamepad"></i>
-            </span>
-          </a>
-        </Link>
-      </li>
+      {game ? (
+        <li
+          className="sideBarGame"
+          style={{ display: "list-item" }}
+          onClick={() => onCLickContent("game")}
+        >
+          <Link href="/game" shallow={true} passHref={true}>
+            <a>
+              Game
+              <span className="icon">
+                <i className="fa fa-gamepad"></i>
+              </span>
+            </a>
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
       <li className="sign-out">
         <a onClick={signout}>
           Signout
-          <span className="icon">
+            <span className="icon">
             <i className="fa fa-sign-in"></i>
           </span>
         </a>
