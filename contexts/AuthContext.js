@@ -43,7 +43,6 @@ export default function AuthProvider({ children }) {
   }, [initialState.AuthDetails]);
 
   function updateSelectedPaymentMethod(method) {
-    console.log(method);
     let stateClone = authState;
     if (method.PaymentId == 1) {
       var dbcPackage = method.Packages[0];
