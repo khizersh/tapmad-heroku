@@ -53,6 +53,12 @@ const leaderboardComponent = () => {
       .then((lead) => {
         if (lead && lead.responseCode == 1) {
           if (lead.data.LeaderBoard.length) {
+            let limit = lead.data.Size / lead.data.Limit;
+            if (limit >= 1) {
+              setLimit(lead.data.Limit);
+            } else {
+              setLimit(0);
+            }
             lead.data.LeaderBoard.map((m) => {
               let obj = {
                 ...m,
@@ -83,14 +89,17 @@ const leaderboardComponent = () => {
 
   useEffect(() => {
     if (gameState && gameState.tabs.length) {
+      setLoader(true);
       setData(gameState.tabs);
       getLeaderBoardByLeague(gameState.selectedTab.LeagueId, 0)
         .then((lead) => {
           if (lead && lead.responseCode == 1) {
             if (lead.data.LeaderBoard.length) {
               let limit = lead.data.Size / lead.data.Limit;
-              if (limit > 1) {
+              if (limit >= 1) {
                 setLimit(lead.data.Limit);
+              } else {
+                setLimit(0);
               }
 
               let array = lead.data.LeaderBoard.map((m) => {
@@ -102,10 +111,13 @@ const leaderboardComponent = () => {
                 };
               });
               setLeaderBoard(array);
+              setLoader(false);
             }
+          } else {
+            setLoader(false);
           }
         })
-        .catch((e) => console.log(e));
+        .catch((e) => setLoader(false));
     }
   }, [gameState.tabs]);
 
