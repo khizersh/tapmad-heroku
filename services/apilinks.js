@@ -40,7 +40,7 @@ export const getMoviesWithPagination = (from, to) => {
   return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
 };
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
-  return `https://api.tapmad.com/api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
+  return `${BASEURL}api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 export const getFeaturedHomepageWithRE = (from, to) => {
   return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/16`;
