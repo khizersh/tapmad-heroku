@@ -77,6 +77,7 @@ export const getCredentials = "/api/credentials";
 export const homepageAds = "/api/homepage-ads";
 
 export const adCsvFile = "public/ads.csv";
+export const campaignFCsvFile = "public/campaign-pages.csv";
 export const faqCsvFile = "public/faq.csv";
 export const aboutUsCsvFile = "public/about-us.csv";
 export const credentialsCsvFile = "public/credentials.csv";
