@@ -20,7 +20,12 @@ export default memo(function PSLComponent({ channel }) {
         const header = document.getElementById("tab-btn");
         const scrollCallBack = window.addEventListener("scroll", () => {
             const player = document.getElementById('player-div1');
-            const playerHeight = player.getBoundingClientRect().height;
+            var playerHeight = 0;
+            if (player) {
+                playerHeight = player.getBoundingClientRect().height;
+            } else {
+                return;
+            }
             const sticky = 100 + 0;
             console.log("sticky ", sticky)
             if (window.pageYOffset > sticky) {
