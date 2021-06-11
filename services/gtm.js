@@ -19,7 +19,7 @@ export function SignUpTag(body, resp) {
     try {
         dataLayer.push({
             event: "sign_up",
-            product_id: resp.UserActiveSubscription[0].UserPackageType,
+            product_id: body.ProductId,
             device_category: "Web_Mobile",
             response: resp.Response.message,
             user_id: resp.User.UserId,
