@@ -62,7 +62,7 @@ export default function Player({ movies }) {
       movie.Video.VideoEntityId,
       movie.Video.IsVideoChannel ? 1 : 0
     );
-    if (res.data && res.responseCode == 1) {
+    if (res.data && res.data.Sections.length > 0 && res.responseCode == 1) {
       setRelatedVideos(res.data.Sections[0].Videos);
     }
   }
