@@ -13,8 +13,7 @@ function get(url, ip) {
   try {
     let headers = {
       "Content-Type": "application/json",
-      // "X-Forwarded-For": ip ? ip : "",
-      "X-Forwarded-For": "198.16.66.157",
+      "X-Forwarded-For": ip ? ip : "",
     };
     return axios.get(url, { headers: headers });
   } catch (error) {
