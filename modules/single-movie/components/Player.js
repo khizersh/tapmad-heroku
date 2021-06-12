@@ -79,8 +79,10 @@ export default function Player({ movies }) {
       if (country.countryCode == "PK") {
         data = PlayerService.checkAds(resp, "local");
         setLocal(true);
+        console.log("local");
       } else {
         data = PlayerService.checkAds(resp, "international");
+        console.log("inter");
         setLocal(false);
       }
     } else {
@@ -154,14 +156,19 @@ export default function Player({ movies }) {
                     <div className="desktop-ads d-none d-lg-block d-md-block">
                       <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
                     </div>
-                    {local ? (
-                      <div className="desktops-ads text-center d-lg-none d-md-none">
-                        <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
-                      </div>
-                    ) : (
+                     { ads.topAdMobile  && local == true  ? (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
                         <AdSlot sizes={[[300, 100]]} adUnit={ads.topAdMobile} />
                       </div>
+                    ) : (
+                      ads.topAdMobile && local == false &&(
+                        <div className="desktops-ads text-center d-lg-none d-md-none">
+                          <AdSlot
+                            sizes={[[300, 100]]}
+                            adUnit={ads.topAdMobile}
+                          />
+                        </div>
+                      )
                     )}
                   </DFPSlotsProvider>
                 </div>
