@@ -12,12 +12,13 @@ import { AuthService } from "../../auth/auth.service";
 import dynamic from "next/dynamic";
 
 const HomepageSlider = dynamic(() => import("./HomepageSlider"));
-const HomePageAd = dynamic(() => import('./HomePageAd'));
+const HomePageAd = dynamic(() => import("./HomePageAd"));
 const HomepageFeatured = dynamic(() => import("./FeaturedSlider"));
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
+  const [local, setLocal] = useState(null);
   const [ad, setAd] = useState(null);
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
 
@@ -29,7 +30,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setCurrentRow(rowData.rowsTo);
 
     try {
-    } catch (error) { }
+    } catch (error) {}
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
       rowData.rowsTo,
@@ -56,11 +57,9 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const checAd = async () => {
     AuthService.getHomePageAdsDetail()
       .then((res) => {
-
         if (res.data.responseCode == 1) {
           let data = res.data.data.filter((m) => m.row == "0")[0];
           if (data) {
-
             setAd(data);
           }
         }
@@ -68,6 +67,13 @@ export default function HomePage({ movies, banner, featured, ip }) {
       .catch((e) => console.log(e));
   };
   React.useEffect(async () => {
+    const country = await AuthService.getGeoInfo();
+    if (country && country.countryCode == "PK") {
+      console.log("country: ", country);
+      setLocal(true);
+    } else {
+      setLocal(false);
+    }
     await checAd();
     setLocalMovies(modifiedResponse);
     let body = {
@@ -111,7 +117,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
               </div>
             </div>
 
-            {ad && (
+            {ad && local == true ? (
               <div className="zero-add">
                 <HomePageAd
                   desktop={ad.desktop}
@@ -120,6 +126,17 @@ export default function HomePage({ movies, banner, featured, ip }) {
                   sizeMobile={ad.mobileSize}
                 />
               </div>
+            ) : (
+              ad && local == false && (
+                <div className="zero-add">
+                  <HomePageAd
+                    desktop={ad.desktop}
+                    mobile={"300x100MWBanner"}
+                    sizeDesktop={ad.desktopSize}
+                    sizeMobile={"300,100"}
+                  />
+                </div>
+              )
             )}
             {localMovies && localMovies.Sections && (
               <HomepageSlider movies={localMovies.Sections.Movies} ads={true} />

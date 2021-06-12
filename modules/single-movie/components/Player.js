@@ -20,6 +20,7 @@ export default function Player({ movies }) {
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
+  const [local, setLocal] = useState(null);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -77,14 +78,15 @@ export default function Player({ movies }) {
     if (country) {
       if (country.countryCode == "PK") {
         data = PlayerService.checkAds(resp, "local");
+        setLocal(true);
       } else {
         data = PlayerService.checkAds(resp, "international");
+        setLocal(false);
       }
     } else {
       data = PlayerService.checkAds(resp, "local");
     }
     if (data != null) {
-      console.log("data: ", data);
       setAdDuration(data.videoAdDuration);
       setAds({
         allow: data.allow,
@@ -102,6 +104,7 @@ export default function Player({ movies }) {
     }, 3000);
   }, [router]);
 
+  // video links
   useEffect(() => {
     setMovie(movies);
     if (movies.Video && movies.Video.IsVideoChannel) {
@@ -151,9 +154,15 @@ export default function Player({ movies }) {
                     <div className="desktop-ads d-none d-lg-block d-md-block">
                       <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
                     </div>
-                    <div className="desktops-ads text-center d-lg-none d-md-none">
-                      <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
-                    </div>
+                    {local ? (
+                      <div className="desktops-ads text-center d-lg-none d-md-none">
+                        <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
+                      </div>
+                    ) : (
+                      <div className="desktops-ads text-center d-lg-none d-md-none">
+                        <AdSlot sizes={[[300, 100]]} adUnit={ads.topAdMobile} />
+                      </div>
+                    )}
                   </DFPSlotsProvider>
                 </div>
               )}
