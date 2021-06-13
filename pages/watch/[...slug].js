@@ -15,12 +15,17 @@ import Player from "../../modules/single-movie/components/Player";
 import { GlobalService } from "../../modules/global-service";
 import swal from "sweetalert";
 import { MainContext } from "../../contexts/MainContext";
-import { getSEOData, getSEODataForLiveChannel } from "../../services/seo.service";
+import {
+  getSEOData,
+  getSEODataForLiveChannel,
+} from "../../services/seo.service";
 
 const watch = (props) => {
   const router = useRouter();
-  const { setisAuthenticateFalse } = useContext(MainContext)
+  const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
+  console.log("props in watch: ", props);
+
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
@@ -59,33 +64,41 @@ const watch = (props) => {
           setisAuthenticateFalse();
           router.push("/");
         });
-      })
+      });
     }
-  }, [url])
+  }, [url]);
   return (
     <div>
       <Head>
         <title>{props.schema.metaData[0].title}</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content={props.schema.metaData[0].title} />
-        <meta property="og:description" content={props.schema.metaData[0].description} />
-        <meta property="og:image" content={props.schema.metaData[0].image.url} />
+        <meta
+          property="og:description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
+          property="og:image"
+          content={props.schema.metaData[0].image.url}
+        />
         <meta property="og:url" content={props.schema.url} />
         <link rel="canonical" href={props.schema.url} />
 
         <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema.Channels ? props.schema.Channels[0] : props.schema.Vod[0]) }}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              props.schema.Channels
+                ? props.schema.Channels[0]
+                : props.schema.Vod[0]
+            ),
+          }}
         />
       </Head>
       {props.allowUser && props.data && props.data.responseCode != 401 && (
         <Player movies={props.data} />
       )}
-      {
-        props.data && props.data.responseCode == 401 && (
-          <></>
-        )
-      }
+      {props.data && props.data.responseCode == 401 && <></>}
     </div>
   );
 };
@@ -106,11 +119,14 @@ export async function getServerSideProps(context) {
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
     headers: GlobalService.authHeaders(cookies["content-token"]),
-  };;
+  };
   var isFree = "1";
   isFree = chanelDetail.isFree;
   if (chanelDetail.isChannel == "1") {
-    var seo = await getSEODataForLiveChannel(chanelDetail.CleanVideoId, context.resolvedUrl);
+    var seo = await getSEODataForLiveChannel(
+      chanelDetail.CleanVideoId,
+      context.resolvedUrl
+    );
   } else {
     var seo = await getSEOData(chanelDetail.CleanVideoId, context.resolvedUrl);
   }
@@ -122,7 +138,7 @@ export async function getServerSideProps(context) {
           props: response(res.data, chanelDetail, allowUser, seo),
         };
       } else {
-        return { props: response(res.data, chanelDetail, true, seo) }
+        return { props: response(res.data, chanelDetail, true, seo) };
       }
     }
   } else {
@@ -135,8 +151,8 @@ export async function getServerSideProps(context) {
         };
       } else if (res && res.responseCode == 401) {
         return {
-          props: response(res.data, chanelDetail, true, seo)
-        }
+          props: response(res.data, chanelDetail, true, seo),
+        };
       } else {
         // authenticated
         return {
@@ -155,11 +171,10 @@ export async function getServerSideProps(context) {
 export default watch;
 
 const response = (data, channel, allowUser, seo) => {
-  console.log(data);
   return {
     data,
     channel,
     allowUser,
-    schema: seo
+    schema: seo,
   };
 };

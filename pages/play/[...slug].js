@@ -2,19 +2,28 @@ import React, { useEffect, useState } from "react";
 import { manipulateUrls } from "../../services/utils";
 import { get, post } from "../../services/http-service";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
-import { getRelatedChannelsOrVODs, SEOTvSeriesData } from "../../services/apilinks";
+import {
+  getRelatedChannelsOrVODs,
+  SEOTvSeriesData,
+} from "../../services/apilinks";
 import requestIp from "request-ip";
 import Head from "next/head";
 import { getSEOData } from "../../services/seo.service";
 
 const Syno = (props) => {
+  console.log("props in play: ", props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
   if (!mount) {
     if (!video) {
-      setVideo(props.data.Video);
+      if (Array.isArray(props.data.Video)) {
+        setVideo(props.data.Video[0]);
+      } else {
+        setVideo(props.data.Video);
+      }
+
       setVideoList(props.data.Sections);
       setMount(true);
     }
@@ -30,14 +39,26 @@ const Syno = (props) => {
         <title>{props.schema.metaData[0].title}</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content={props.schema.metaData[0].title} />
-        <meta property="og:description" content={props.schema.metaData[0].description} />
-        <meta property="og:image" content={props.schema.metaData[0].image.url} />
+        <meta
+          property="og:description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
+          property="og:image"
+          content={props.schema.metaData[0].image.url}
+        />
         <meta property="og:url" content={props.schema.url} />
         <link rel="canonical" href={props.schema.url} />
 
         <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema.Channels ? props.schema.Channels[0] : props.schema.Vod[0]) }}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              props.schema.Channels
+                ? props.schema.Channels[0]
+                : props.schema.Vod[0]
+            ),
+          }}
         />
       </Head>
       <div className="container-fluid">
@@ -55,7 +76,6 @@ export async function getServerSideProps(context) {
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
-
 
   if (data != null) {
     let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);

@@ -104,7 +104,7 @@ export default function Player({ movies }) {
     setTimeout(() => {
       VideoWatched(movie);
     }, 3000);
-  }, [router]);
+  }, [router , local]);
 
   // video links
   useEffect(() => {
@@ -156,12 +156,12 @@ export default function Player({ movies }) {
                     <div className="desktop-ads d-none d-lg-block d-md-block">
                       <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
                     </div>
-                     { ads.topAdMobile  && local == true  ? (
+                     { ads.topAdMobile  && local  ? (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
-                        <AdSlot sizes={[[300, 100]]} adUnit={ads.topAdMobile} />
+                        <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
                       </div>
                     ) : (
-                      ads.topAdMobile && local == false &&(
+                      ads.topAdMobile && !local  && (
                         <div className="desktops-ads text-center d-lg-none d-md-none">
                           <AdSlot
                             sizes={[[300, 100]]}
