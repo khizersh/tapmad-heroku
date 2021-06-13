@@ -16,6 +16,10 @@ const PSLComponent = dynamic(() =>
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [mobileTopAdSize, setmobileTopAdSize] = useState({
+    width: null,
+    height: null,
+  });
   const [adDuration, setAdDuration] = useState(2000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
@@ -31,7 +35,7 @@ export default function Player({ movies }) {
     bottomBannerAdMobile: "",
     rightVideoAd: "",
   });
-
+  // topAdMobileSize.trim().split(',')[0]
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
@@ -71,13 +75,14 @@ export default function Player({ movies }) {
   useEffect(async () => {
     await getRelatedChannels();
 
-    const resp = await DashboardService.getAdData();
     const country = await AuthService.getGeoInfo();
+    const resp = await DashboardService.getAdData();
     let data;
 
     if (country) {
       if (country.countryCode == "PK") {
         data = PlayerService.checkAds(resp, "local");
+        console.log("resp in ad: ", data);
         setLocal(true);
       } else {
         data = PlayerService.checkAds(resp, "international");
@@ -98,6 +103,8 @@ export default function Player({ movies }) {
         bottomBannerAd: data.bottomBannerAd,
         rightVideoAd: data.rightVideoAd,
         bottomBannerAdMobile: data.bottomBannerAdMobile,
+        topMobileAdHieght: data.topMobileAdHieght,
+        topMobileAdWidth: data.topMobileAdWidth,
       });
     }
     setTimeout(() => {
@@ -157,23 +164,10 @@ export default function Player({ movies }) {
                         <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
                       </div>
                     )}
-                    {ads.topAdMobile &&
-                    local &&
-                    console.log("local ads: ", ads) ? (
+                    {ads.topAdMobile && (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
-                        <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
+                        <AdSlot sizes={[[ads.topMobileAdWidth, ads.topMobileAdHieght]]} adUnit={ads.topAdMobile} />
                       </div>
-                    ) : (
-                      ads.topAdMobile &&
-                      !local &&
-                      console.log("international ads: ", ads) && (
-                        <div className="desktops-ads text-center d-lg-none d-md-none">
-                          <AdSlot
-                            sizes={[[300, 100]]}
-                            adUnit={ads.topAdMobile}
-                          />
-                        </div>
-                      )
                     )}
                   </DFPSlotsProvider>
                 </div>

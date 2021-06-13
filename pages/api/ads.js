@@ -14,6 +14,7 @@ export default async (req, res) => {
       { id: "type", title: "type" },
       { id: "topAdDesktop", title: "topAdDesktop" },
       { id: "topAdMobile", title: "topAdMobile" },
+      { id: "topAdMobileSize", title: "topAdMobileSize" },
       { id: "onVideo", title: "onVideo" },
       { id: "rightVideoAd", title: "rightVideoAd" },
       { id: "rightAd", title: "rightAd" },

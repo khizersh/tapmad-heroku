@@ -12,11 +12,12 @@ export default function ads() {
       type: "",
       topAdDesktop: "",
       topAdMobile: "",
+      topAdMobileSize: "",
       onVideo: "",
       rightVideoAd: "",
       rightAd: "",
       bottomBannerAd: "",
-      bottomBannerAdMobile:"",
+      bottomBannerAdMobile: "",
       videoAdDuration: 200000,
       allow: true,
     },
@@ -24,11 +25,12 @@ export default function ads() {
       type: "",
       topAdDesktop: "",
       topAdMobile: "",
+      topAdMobileSize: "",
       onVideo: "",
       rightVideoAd: "",
       rightAd: "",
       bottomBannerAd: "",
-      bottomBannerAdMobile:"",
+      bottomBannerAdMobile: "",
       videoAdDuration: 200000,
       allow: true,
     },
@@ -37,11 +39,12 @@ export default function ads() {
     type: "",
     topAdDesktop: "",
     topAdMobile: "",
+    topAdMobileSize: "",
     onVideo: "",
     rightVideoAd: "",
     rightAd: "",
     bottomBannerAd: "",
-    bottomBannerAdMobile:"",
+    bottomBannerAdMobile: "",
     videoAdDuration: 2000,
     allow: true,
   });
@@ -49,21 +52,24 @@ export default function ads() {
     type: "",
     topAdDesktop: "",
     topAdMobile: "",
+    topAdMobileSize: "",
     onVideo: "",
     rightVideoAd: "",
     rightAd: "",
     bottomBannerAd: "",
-    bottomBannerAdMobile:"",
+    bottomBannerAdMobile: "",
     videoAdDuration: 2000,
     allow: true,
   });
   const { setLoader } = useContext(MainContext);
+
   useEffect(async () => {
     const data = await DashboardService.getAdData();
     if (data.length == 2) {
       const resp = DashboardService.customizeData(data);
 
       setData(resp);
+ console.log("width: ", resp[0].topAdMobileSize.trim().split(',')[0]); 
       setLocal({ ...local, ...resp[0] });
       setInternational({ ...international, ...resp[1] });
     }
@@ -74,7 +80,7 @@ export default function ads() {
     let array = [];
     array.push(local);
     array.push(international);
-    console.log("array: ",array);
+    console.log("array: ", array);
     const resp = await DashboardService.editAdDetails(array);
     if (resp && resp.data && resp.data.statusCode == 200) {
       swal({ title: "Update succesfully!", timer: 3000, icon: "success" });
@@ -143,10 +149,25 @@ export default function ads() {
                   id="exampleInputEmail1"
                   name="topAdMobile"
                   aria-describedby="emailHelp"
-                  placeholder="Enter email"
                 />
                 <small className="form-text text-muted">
                   Ad unit for top ad Mobile view
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label>Top Ad Mobile Size</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={local.topAdMobileSize}
+                  onChange={onChangeLocal}
+                  id="exampleInputEmail1"
+                  name="topAdMobileSize"
+                />
+                <small className="form-text text-muted">
+                  Size for mobile top Ad e.g : 320,100
                 </small>
               </div>
             </div>
@@ -317,6 +338,22 @@ export default function ads() {
                 />
                 <small className="form-text text-muted">
                   Ad unit for top ad Mobile view
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label>Top Ad Mobile Size</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={international.topAdMobileSize}
+                  onChange={onChangeInternatioanl}
+                  name="topAdMobileSize"
+                  aria-describedby="emailHelp"
+                />
+                <small className="form-text text-muted">
+                  Size for mobile top Ad e.g : 320,100
                 </small>
               </div>
             </div>

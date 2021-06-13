@@ -61,10 +61,14 @@ function checkAds(data, type) {
           rightAd: local.rightAd ? local.rightAd : null,
           rightVideoAd: local.rightVideoAd ? local.rightVideoAd : null,
           bottomBannerAd: local.bottomBannerAd ? local.bottomBannerAd : null,
-          bottomBannerAdMobile: local.bottomBannerAdMobile ? local.bottomBannerAdMobile : null,
+          bottomBannerAdMobile: local.bottomBannerAdMobile
+            ? local.bottomBannerAdMobile
+            : null,
           videoAdDuration: local.videoAdDuration
             ? +local.videoAdDuration
             : 200000,
+          topMobileAdWidth: +local.topAdMobileSize.trim().split(",")[0] || 320,
+          topMobileAdHieght: +local.topAdMobileSize.trim().split(",")[1] || 100,
         };
       } else {
         return null;
@@ -82,7 +86,11 @@ function checkAds(data, type) {
           rightAd: int.rightAd ? int.rightAd : null,
           rightVideoAd: int.rightVideoAd ? int.rightVideoAd : null,
           bottomBannerAd: int.bottomBannerAd ? int.bottomBannerAd : null,
-          bottomBannerAdMobile: int.bottomBannerAdMobile ? int.bottomBannerAdMobile : null,
+          bottomBannerAdMobile: int.bottomBannerAdMobile
+            ? int.bottomBannerAdMobile
+            : null,
+          topMobileAdWidth: +int.topAdMobileSize.trim().split(",")[0] || 320,
+          topMobileAdHieght: +int.topAdMobileSize.trim().split(",")[1] || 100,
           videoAdDuration: int.videoAdDuration ? +int.videoAdDuration : 200000,
         };
       } else {
