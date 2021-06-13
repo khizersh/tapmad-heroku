@@ -103,7 +103,7 @@ export default function Player({ movies }) {
     setTimeout(() => {
       VideoWatched(movie);
     }, 3000);
-  }, [router, local]);
+  }, [router]);
 
   // video links
   useEffect(() => {
@@ -149,19 +149,24 @@ export default function Player({ movies }) {
           <div className="col-lg-9">
             <div className="col-12 p-0">
               {/* Top Ad */}
-              {ads.allow && ads.topAdDesktop && (
+              {ads.allow ? (
                 <div className="text-center my-3">
                   <DFPSlotsProvider dfpNetworkId="28379801">
-                    <div className="desktop-ads d-none d-lg-block d-md-block">
-                      <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
-                    </div>
-                    {ads.topAdMobile && local && console.log("local ads: ", ads) ? (
+                    {ads.topAdDesktop && (
+                      <div className="desktop-ads d-none d-lg-block d-md-block">
+                        <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
+                      </div>
+                    )}
+                    {ads.topAdMobile &&
+                    local &&
+                    console.log("local ads: ", ads) ? (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
                         <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
                       </div>
                     ) : (
-                      ads.topAdMobile && 
-                      !local && console.log("international ads: ", ads)  && (
+                      ads.topAdMobile &&
+                      !local &&
+                      console.log("international ads: ", ads) && (
                         <div className="desktops-ads text-center d-lg-none d-md-none">
                           <AdSlot
                             sizes={[[300, 100]]}
@@ -172,7 +177,7 @@ export default function Player({ movies }) {
                     )}
                   </DFPSlotsProvider>
                 </div>
-              )}
+              ) : null}
               <div
                 id="player-div1"
                 className="player-div"
