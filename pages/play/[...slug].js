@@ -11,7 +11,7 @@ import Head from "next/head";
 import { getSEOData } from "../../services/seo.service";
 
 const Syno = (props) => {
-  console.log("props in play: ", props);
+
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);

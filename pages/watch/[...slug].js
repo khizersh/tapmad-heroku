@@ -24,7 +24,6 @@ const watch = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
-  console.log("props in watch: ", props);
 
   useEffect(() => {
     if (!props.allowUser) {

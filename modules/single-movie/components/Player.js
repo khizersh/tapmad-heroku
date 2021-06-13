@@ -79,14 +79,13 @@ export default function Player({ movies }) {
       if (country.countryCode == "PK") {
         data = PlayerService.checkAds(resp, "local");
         setLocal(true);
-        console.log("local");
       } else {
         data = PlayerService.checkAds(resp, "international");
-        console.log("inter");
         setLocal(false);
       }
     } else {
       data = PlayerService.checkAds(resp, "local");
+      setLocal(true);
     }
     if (data != null) {
       setAdDuration(data.videoAdDuration);
@@ -104,7 +103,7 @@ export default function Player({ movies }) {
     setTimeout(() => {
       VideoWatched(movie);
     }, 3000);
-  }, [router , local]);
+  }, [router, local]);
 
   // video links
   useEffect(() => {
@@ -156,12 +155,13 @@ export default function Player({ movies }) {
                     <div className="desktop-ads d-none d-lg-block d-md-block">
                       <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
                     </div>
-                     { ads.topAdMobile  && local  ? (
+                    {ads.topAdMobile && local && console.log("local ads: ", ads) ? (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
                         <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
                       </div>
                     ) : (
-                      ads.topAdMobile && !local  && (
+                      ads.topAdMobile && 
+                      !local && console.log("international ads: ", ads)  && (
                         <div className="desktops-ads text-center d-lg-none d-md-none">
                           <AdSlot
                             sizes={[[300, 100]]}
