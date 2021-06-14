@@ -39,6 +39,11 @@ export default function Footer() {
                     FAQs
                   </a>
                 </li>
+                <li className="list-group-item pt-0">
+                  <a href="/refund-policy" target="_blank">
+                    Refund Policy
+                  </a>
+                </li>
               </ul>
 
               <p className="pt-1">

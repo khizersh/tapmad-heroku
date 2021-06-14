@@ -9,9 +9,15 @@ import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
+<<<<<<< HEAD
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import { Link } from "next/link";
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
+=======
+import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
+import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import Link from "next/link";
+>>>>>>> 8b6c1f2082edeac835b399637e2eff63db0e4383
 
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
@@ -322,7 +328,7 @@ export default function Player({ movies }) {
             </div>
             {/* side add desktop end */}
 
-            {/* <div
+            <div
               className="text-left mt-3 related-video"
               style={{ height: "100vh", overflow: "scroll" }}
             >
@@ -330,8 +336,9 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video);
-                      return (
+                    let slug = SEOFriendlySlugsForVideo(video);
+                    return (
+                      <>
                         <Link
                           href={slug}
                           replace={true}
@@ -342,11 +349,12 @@ export default function Player({ movies }) {
                             <RelatedProductCard video={video} />
                           </a>
                         </Link>
-                      );
-                    })
+                      </>
+                    );
+                  })
                   : null}
               </div>
-            </div> */}
+            </div>
           </div>
           <div className="m-auto d-block d-sm-none">
             <div className="d-block">
