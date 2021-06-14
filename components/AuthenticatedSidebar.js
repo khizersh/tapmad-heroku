@@ -20,7 +20,6 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
   };
 
   useEffect(() => {
-    // if (initialState.countryCode && initialState.countryCode == "PK") {
     if (
       initialState &&
       initialState.AuthDetails &&
@@ -63,7 +62,7 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
       <li className="sign-out">
         <a onClick={signout}>
           Signout
-            <span className="icon">
+          <span className="icon">
             <i className="fa fa-sign-in"></i>
           </span>
         </a>
