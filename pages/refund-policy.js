@@ -22,10 +22,10 @@ export default function About() {
                 <div>
                     <ul>
                         <li>
-                            To unsubscribe, go to the User Profile page and click on the 'unsubscribe' button under the 'Current Status' info. If you have a monthly subscription, your subscription will be cancelled for the next monthly billing cycle. You will not receive any refund for the remainder of your billing period.
+                            To unsubscribe, the user logs in to Tapmad and navigates to the User Profile page and click on the 'unsubscribe' button under the 'Current Status' info. A confirmation pops up and after confirming the unsubscription the user is no longer subscribed to the Tapmad's services until the next billing period. If you have a monthly subscription, your subscription will be cancelled for the next monthly billing cycle. You will not receive any refund for the remainder of your billing period.
                         </li>
                         <li>
-                            021-35155511
+                            Office Landline: 021-35155511
                         </li>
                         <li>
                             After getting subscription to Tapmad premium service by paying through the chosen payment method, you'll get the digital access to the content listed on that package on Tapmad for the time period for which you paid i.e. weekly, monthly.
