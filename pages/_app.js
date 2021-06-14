@@ -17,7 +17,7 @@ import "../modules/samsungtv/samsung.css";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useLayoutEffect , useState} from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import Loader from "../components/Loader";
 import { Cookie } from "../services/cookies";
@@ -36,7 +36,7 @@ const Footer = dynamic(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps, test }) {
   const router = useRouter();
-  const [showHeader , setShowHeader] = useState(true)
+  const [showHeader, setShowHeader] = useState(true)
 
   function checkUserAuthentication() {
     if (pageProps.auth) {
@@ -100,12 +100,14 @@ function MyApp({ Component, pageProps, test }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        {/* <meta name="robots" content="noindex" /> */}
+        {process.env.TAPENV == 'production' ? <meta name="robots" content="noindex" />
+          : null
+        }
         <meta
           name="keywords"
           content="Watch LIVE TV channels online, live psl, live cricket, watch live psl streaming, ad free stream, live sports, live sports, watch adfree psl online, hd stream, Pakistan cricket match, live cricket, live sports"
         />
-        {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
+        <link rel="canonical" href="https://www.tapmad.com" />
 
         <link
           rel="icon"
