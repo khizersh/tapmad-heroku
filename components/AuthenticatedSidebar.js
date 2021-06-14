@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState, useContext } from "react";
 import { MainContext } from "../contexts/MainContext";
-import { AuthService } from "../modules/auth/auth.service";
 import withSignout from "../modules/auth/signout/SignoutHOC";
 import { loggingTags } from "../services/apilinks";
 import { actionsRequestContent } from "../services/http-service";
@@ -9,7 +8,6 @@ import { actionsRequestContent } from "../services/http-service";
 const AuthenticatedSidebarBasic = ({ signout, country }) => {
   const { initialState } = useContext(MainContext);
   const [game, setGame] = useState(false);
-  const [signoutValue, setSignOut] = useState(true);
 
   const onCLickContent = (page) => {
     let body = {
