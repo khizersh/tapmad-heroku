@@ -9,15 +9,9 @@ import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
-<<<<<<< HEAD
-import { SEOFriendlySlugsForVideo } from "../../../services/utils";
-import { Link } from "next/link";
-import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
-=======
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 import Link from "next/link";
->>>>>>> 8b6c1f2082edeac835b399637e2eff63db0e4383
 
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
