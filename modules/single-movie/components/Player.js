@@ -9,6 +9,10 @@ import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
+import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { Link } from "next/link";
+import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
+
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
 );
@@ -16,10 +20,6 @@ const PSLComponent = dynamic(() =>
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [mobileTopAdSize, setmobileTopAdSize] = useState({
-    width: null,
-    height: null,
-  });
   const [adDuration, setAdDuration] = useState(2000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
@@ -35,7 +35,6 @@ export default function Player({ movies }) {
     bottomBannerAdMobile: "",
     rightVideoAd: "",
   });
-  // topAdMobileSize.trim().split(',')[0]
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
@@ -82,7 +81,6 @@ export default function Player({ movies }) {
     if (country) {
       if (country.countryCode == "PK") {
         data = PlayerService.checkAds(resp, "local");
-        console.log("resp in ad: ", data);
         setLocal(true);
       } else {
         data = PlayerService.checkAds(resp, "international");
@@ -110,7 +108,7 @@ export default function Player({ movies }) {
     setTimeout(() => {
       VideoWatched(movie);
     }, 3000);
-  }, [router]);
+  }, [router, ads.topMobileAdHieght]);
 
   // video links
   useEffect(() => {
@@ -164,9 +162,14 @@ export default function Player({ movies }) {
                         <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
                       </div>
                     )}
-                    {ads.topAdMobile && (
+                    {ads.topAdMobile && ads.topMobileAdWidth && (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
-                        <AdSlot sizes={[[ads.topMobileAdWidth, ads.topMobileAdHieght]]} adUnit={ads.topAdMobile} />
+                        <AdSlot
+                          sizes={[
+                            [ads.topMobileAdWidth, ads.topMobileAdHieght],
+                          ]}
+                          adUnit={ads.topAdMobile}
+                        />
                       </div>
                     )}
                   </DFPSlotsProvider>
@@ -318,42 +321,6 @@ export default function Player({ movies }) {
               ) : null}
             </div>
             {/* side add desktop end */}
-            {/* bottom banner add mobile start*/}
-            <div className="d-block  d-sm-none">
-              {ads.allow && ads.bottomBannerAdMobile ? (
-                ads.bottomBannerAdMobile.includes("http") ? (
-                  <div style={{ marginTop: "10px" }}>
-                    <ReactJWPlayer
-                      playerId="my-unique-id1"
-                      playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                      isAutoPlay={true}
-                      isMuted={true}
-                      isSkipable={false}
-                      onOneHundredPercent={onRestartAd}
-                      onAdSkipped={onRestartAd}
-                      file={
-                        "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
-                      }
-                      onAdComplete={onRestartAd}
-                      generatePrerollUrl={() => ads.bottomBannerAdMobile}
-                      customProps={{
-                        controls: true,
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <DFPSlotsProvider dfpNetworkId="28379801">
-                    <div className="desktop-ads">
-                      <AdSlot
-                        sizes={[[300, 250]]}
-                        adUnit={ads.bottomBannerAdMobile}
-                      />
-                    </div>
-                  </DFPSlotsProvider>
-                )
-              ) : null}
-            </div>
-            {/* bottom banner add mobile end*/}
 
             {/* <div
               className="text-left mt-3 related-video"
@@ -380,6 +347,49 @@ export default function Player({ movies }) {
                   : null}
               </div>
             </div> */}
+          </div>
+          <div className="m-auto d-block d-sm-none">
+            <div className="d-block">
+              {ads.allow && ads.bottomBannerAdMobile ? (
+                ads.bottomBannerAdMobile.includes("http") ? (
+                  <div style={{ marginTop: "10px" }}>
+                    {console.log("video bottom ad: ", ads.bottomBannerAdMobile)}
+                    <ReactJWPlayer
+                      playerId="my-unique-id1"
+                      playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                      isAutoPlay={true}
+                      isMuted={true}
+                      isSkipable={false}
+                      onOneHundredPercent={onRestartAd}
+                      onAdSkipped={onRestartAd}
+                      file={
+                        "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                      }
+                      onAdComplete={onRestartAd}
+                      generatePrerollUrl={() => ads.bottomBannerAdMobile}
+                      customProps={{
+                        controls: true,
+                      }}
+                    />
+                  </div>
+                ) : (
+                  ads.bottomBannerAdMobile && (
+                    <DFPSlotsProvider dfpNetworkId="28379801">
+                      <div className="desktop-ads">
+                        {ads.bottomBannerAdMobile != "" ? (
+                          <AdSlot
+                            adUnit={ads.bottomBannerAdMobile}
+                            sizes={[[300, 250]]}
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </DFPSlotsProvider>
+                  )
+                )
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
