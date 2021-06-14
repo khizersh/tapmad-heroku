@@ -21,7 +21,6 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
 
   useEffect(() => {
     // if (initialState.countryCode && initialState.countryCode == "PK") {
-    console.log("initialState: ", initialState);
     if (
       initialState &&
       initialState.AuthDetails &&
