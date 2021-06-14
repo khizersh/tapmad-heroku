@@ -1,6 +1,6 @@
 import React from "react";
 
-const RelatedProductCard = ({ video }) => {
+export default function RelatedProductCard({ video }) {
   return (
     <div className="col-12 p-1 img-hov">
       <div className="d-flex">
@@ -28,4 +28,3 @@ const RelatedProductCard = ({ video }) => {
   );
 };
 
-export default RelatedProductCard;

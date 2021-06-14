@@ -9,6 +9,10 @@ import { useRouter } from "next/router";
 import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
+import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
+import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import Link from "next/link";
+
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
 );
@@ -355,7 +359,7 @@ export default function Player({ movies }) {
             </div>
             {/* bottom banner add mobile end*/}
 
-            {/* <div
+            <div
               className="text-left mt-3 related-video"
               style={{ height: "100vh", overflow: "scroll" }}
             >
@@ -363,8 +367,9 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video);
-                      return (
+                    let slug = SEOFriendlySlugsForVideo(video);
+                    return (
+                      <>
                         <Link
                           href={slug}
                           replace={true}
@@ -375,11 +380,12 @@ export default function Player({ movies }) {
                             <RelatedProductCard video={video} />
                           </a>
                         </Link>
-                      );
-                    })
+                      </>
+                    );
+                  })
                   : null}
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
