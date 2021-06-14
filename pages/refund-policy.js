@@ -18,6 +18,7 @@ export default function About() {
                 }}
             >
                 <hr />
+                <h1>Refund Policy</h1>
                 <div>
                     <ul>
                         <li>

@@ -1,10 +1,14 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { MainContext } from "../contexts/MainContext";
 import withSignout from "../modules/auth/signout/SignoutHOC";
 import { loggingTags } from "../services/apilinks";
 import { actionsRequestContent } from "../services/http-service";
 
-const AuthenticatedSidebarBasic = ({ signout }) => {
+const AuthenticatedSidebarBasic = ({ signout, country }) => {
+  const { initialState } = useContext(MainContext);
+  const [game, setGame] = useState(false);
+
   const onCLickContent = (page) => {
     let body = {
       event: loggingTags.fetch,
@@ -57,7 +61,7 @@ const AuthenticatedSidebarBasic = ({ signout }) => {
       <li className="sign-out">
         <a onClick={signout}>
           Signout
-            <span className="icon">
+          <span className="icon">
             <i className="fa fa-sign-in"></i>
           </span>
         </a>
