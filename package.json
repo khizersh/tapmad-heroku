@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "export $(cat .env) && TAPENV=production && next start -p 3000",
     "prod": "export $(cat .env) && TAPENV=production && npm run dev",
-    "staging": "export $(cat .env) && TAPENV=local && next start -p 3000",
+    "staging": "export $(cat .env) && TAPENV=staging && next start -p 3000",
     "local": "export $(cat .env) && TAPENV=local && npm run dev",
     "heroku-postbuild": "npm run build"
   },
