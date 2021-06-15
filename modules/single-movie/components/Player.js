@@ -365,9 +365,8 @@ export default function Player({ movies }) {
               </div>
             </div>
           </div>
-          <div className="m-auto">
-            <div className="d-block">
-              <h1>Bottom banner</h1>
+          <div className="m-auto d-block d-sm-none">
+            <div>
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
                   <div style={{ marginTop: "10px" }}>
