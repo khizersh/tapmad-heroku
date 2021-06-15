@@ -4,7 +4,7 @@ image: node:15.11.0
 pipelines:
   branches:
     # run this on every commit to the branch "staging"
-    Staging:
+    psl-chat:
       - step:
           name: buildAndDeploy
           # define which caches to use
