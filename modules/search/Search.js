@@ -27,7 +27,7 @@ const Search = () => {
 
   useEffect(async () => {
     if (debouncedSearchKeyWord) {
-      // setisSearched(true);
+      setisSearched(true);
       // setLoader(true);
       // const data = await searchHandler(debouncedSearchKeyWord);
       // setSearchedItem(data);
