@@ -1,9 +1,10 @@
 # Using the node image provided by bitbucket
 image: node:15.11.0
+
 pipelines:
   branches:
     # run this on every commit to the branch "staging"
-    psl-chat:
+    Staging:
       - step:
           name: buildAndDeploy
           # define which caches to use
@@ -24,9 +25,9 @@ pipelines:
             - cp -a node_modules ./deploy
             - cp -a public ./deploy
             # rsync to a temp directory on remote server
-            - rsync -arz --delete git@bitbucket.org:alimemonsd/tapmad-revamp.git/deploy/ ubuntu@18.136.101.189:/var/www/html
+            - rsync -arz --delete $BITBUCKET_CLONE_DIR/deploy/ ubuntu@18.136.101.189:/var/www/staging
             # clear current serving directory, sync from temp directory to serving directory, restart next server
-            - ssh ubuntu@18.136.101.189 "rsync -ar --delete /var/www/html/ /var/www/tapmad/tapmad-revamp && pm2 restart 0 && rm -r /var/www/html"
+            - ssh ubuntu@18.136.101.189 "rsync -ar --delete /var/www/staging/ /var/www/tapmad/tapmad-revamp && /home/ubuntu/.nvm/versions/node/v15.11.0/bin/pm2 restart 0 && rm -r /var/www/staging"
 definitions:
   caches:
     nextcache: .next/cache
