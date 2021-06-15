@@ -20,7 +20,7 @@ const PSLComponent = dynamic(() =>
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [adDuration, setAdDuration] = useState(2000);
+  const [adDuration, setAdDuration] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
@@ -58,7 +58,7 @@ export default function Player({ movies }) {
     setIsAutoPlay(false);
     setTimeout(() => {
       setIsAutoPlay(true);
-    }, adDuration * 1000);
+    }, adDuration * 60000);
   }
 
   async function getRelatedChannels() {
@@ -103,7 +103,9 @@ export default function Player({ movies }) {
           bottomBannerAdMobile: data.bottomBannerAdMobile,
           topMobileAdHieght: data.topMobileAdHieght,
           topMobileAdWidth: data.topMobileAdWidth,
+          videoAdDuration: data.videoAdDuration,
         });
+        setAdDuration(data.videoAdDuration);
       } else {
         setAds({
           allow: data.allow,
@@ -116,13 +118,15 @@ export default function Player({ movies }) {
           bottomBannerAdMobile: "",
           topMobileAdHieght: data.topMobileAdHieght,
           topMobileAdWidth: data.topMobileAdWidth,
+          videoAdDuration: data.videoAdDuration,
         });
+        setAdDuration(data.videoAdDuration);
       }
-      setAdDuration(data.videoAdDuration);
     }
     setTimeout(() => {
       VideoWatched(movie);
     }, 3000);
+    console.log("ads sata: ", data);
   }, [router, ads.topMobileAdHieght]);
 
   // video links

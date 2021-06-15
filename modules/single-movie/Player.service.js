@@ -49,6 +49,7 @@ async function getRelatedChannelsOrVODData(id, channel) {
 }
 
 function checkAds(data, type) {
+  console.log("data  datadata:  ",data);
   if (type == "local") {
     const local = data.filter((f) => f.type == "local")[0];
     if (local != null) {
@@ -66,7 +67,7 @@ function checkAds(data, type) {
             : null,
           videoAdDuration: local.videoAdDuration
             ? +local.videoAdDuration
-            : 200000,
+            : 2,
           topMobileAdWidth: +local.topAdMobileSize.trim().split(",")[0] || 320,
           topMobileAdHieght: +local.topAdMobileSize.trim().split(",")[1] || 100,
         };
@@ -91,7 +92,7 @@ function checkAds(data, type) {
             : null,
           topMobileAdWidth: +int.topAdMobileSize.trim().split(",")[0] || 320,
           topMobileAdHieght: +int.topAdMobileSize.trim().split(",")[1] || 100,
-          videoAdDuration: int.videoAdDuration ? +int.videoAdDuration : 200000,
+          videoAdDuration: int.videoAdDuration ? +int.videoAdDuration : 2,
         };
       } else {
         return null;
