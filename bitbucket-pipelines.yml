@@ -1,0 +1,32 @@
+# Using the node image provided by bitbucket
+image: node:15.11.0
+pipelines:
+  branches:
+    # run this on every commit to the branch "staging"
+    psl-chat:
+      - step:
+          name: buildAndDeploy
+          # define which caches to use
+          caches:
+            - node # provided by bitbucket to cache node_modules
+            - nextcache # see definitions section below
+          script:
+            # install rsync
+            - apt-get update && apt-get -qq install rsync
+            # install node modules
+            - npm install
+            # build Next.js app
+            - npx next build
+            # create deploy directory (to contain .next folder, package.json, node_modules, public)
+            - mkdir deploy
+            - cp -a .next ./deploy
+            - cp package.json ./deploy
+            - cp -a node_modules ./deploy
+            - cp -a public ./deploy
+            # rsync to a temp directory on remote server
+            - rsync -arz --delete git@bitbucket.org:alimemonsd/tapmad-revamp.git/deploy/ ubuntu@18.136.101.189:/var/www/html
+            # clear current serving directory, sync from temp directory to serving directory, restart next server
+            - ssh ubuntu@18.136.101.189 "rsync -ar --delete /var/www/html/ /var/www/tapmad/tapmad-revamp && pm2 restart 0 && rm -r /var/www/html"
+definitions:
+  caches:
+    nextcache: .next/cache
