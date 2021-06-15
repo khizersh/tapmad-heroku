@@ -92,8 +92,8 @@ function MyApp({ Component, pageProps, test }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        {process.env.TAPENV == 'production' ? <meta name="robots" content="noindex" />
-          : null
+        {process.env.TAPENV == 'production' ? null
+          : <meta name="robots" content="noindex" />
         }
         <meta
           name="keywords"
