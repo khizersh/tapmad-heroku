@@ -8,7 +8,8 @@ const { Cookie } = require("./cookies");
 
 function get(url, ip) {
   if (process.env.TAPENV == "local") {
-    ip = "39.44.217.70";
+    // ip = "39.44.217.70";
+    ip = "198.16.66.141";
   }
   try {
     let headers = {
@@ -23,7 +24,8 @@ function get(url, ip) {
 
 function post(url, body, ip, credentialAllowed = false) {
   if (process.env.TAPENV == "local") {
-    ip = "39.44.217.70";
+    // ip = "39.44.217.70";
+    ip = "198.16.66.141";
   }
   let headers = {
     "Content-Type": "application/json",

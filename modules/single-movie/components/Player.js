@@ -91,19 +91,34 @@ export default function Player({ movies }) {
       setLocal(true);
     }
     if (data != null) {
+      if (window.screen.width < 800) {
+        setAds({
+          allow: data.allow,
+          onVideo: data.onVideo,
+          topAdDesktop: data.topAdDesktop,
+          topAdMobile: data.topAdMobile,
+          rightAd: "",
+          rightVideoAd: "",
+          bottomBannerAd: data.bottomBannerAd,
+          bottomBannerAdMobile: data.bottomBannerAdMobile,
+          topMobileAdHieght: data.topMobileAdHieght,
+          topMobileAdWidth: data.topMobileAdWidth,
+        });
+      } else {
+        setAds({
+          allow: data.allow,
+          onVideo: data.onVideo,
+          topAdDesktop: data.topAdDesktop,
+          topAdMobile: data.topAdMobile,
+          rightAd: data.rightAd,
+          bottomBannerAd: data.bottomBannerAd,
+          rightVideoAd: data.rightVideoAd,
+          bottomBannerAdMobile: "",
+          topMobileAdHieght: data.topMobileAdHieght,
+          topMobileAdWidth: data.topMobileAdWidth,
+        });
+      }
       setAdDuration(data.videoAdDuration);
-      setAds({
-        allow: data.allow,
-        onVideo: data.onVideo,
-        topAdDesktop: data.topAdDesktop,
-        topAdMobile: data.topAdMobile,
-        rightAd: data.rightAd,
-        bottomBannerAd: data.bottomBannerAd,
-        rightVideoAd: data.rightVideoAd,
-        bottomBannerAdMobile: data.bottomBannerAdMobile,
-        topMobileAdHieght: data.topMobileAdHieght,
-        topMobileAdWidth: data.topMobileAdWidth,
-      });
     }
     setTimeout(() => {
       VideoWatched(movie);
@@ -330,28 +345,29 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                    let slug = SEOFriendlySlugsForVideo(video);
-                    return (
-                      <>
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      </>
-                    );
-                  })
+                      let slug = SEOFriendlySlugsForVideo(video);
+                      return (
+                        <>
+                          <Link
+                            href={slug}
+                            replace={true}
+                            shallow={false}
+                            key={i}
+                          >
+                            <a>
+                              <RelatedProductCard video={video} />
+                            </a>
+                          </Link>
+                        </>
+                      );
+                    })
                   : null}
               </div>
             </div>
           </div>
-          <div className="m-auto d-block d-sm-none">
+          <div className="m-auto">
             <div className="d-block">
+              <h1>Bottom banner</h1>
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
                   <div style={{ marginTop: "10px" }}>
@@ -377,6 +393,10 @@ export default function Player({ movies }) {
                 ) : (
                   ads.bottomBannerAdMobile && (
                     <DFPSlotsProvider dfpNetworkId="28379801">
+                      {console.log(
+                        "ads.bottomBannerAdMobile: ",
+                        ads.bottomBannerAdMobile
+                      )}
                       <div className="desktop-ads">
                         {ads.bottomBannerAdMobile != "" ? (
                           <AdSlot
