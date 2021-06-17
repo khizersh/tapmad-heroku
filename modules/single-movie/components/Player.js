@@ -20,7 +20,7 @@ const PSLComponent = dynamic(() =>
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [adDuration, setAdDuration] = useState(2000);
+  const [adDuration, setAdDuration] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
@@ -58,7 +58,7 @@ export default function Player({ movies }) {
     setIsAutoPlay(false);
     setTimeout(() => {
       setIsAutoPlay(true);
-    }, adDuration * 1000);
+    }, adDuration * 60000);
   }
 
   async function getRelatedChannels() {
@@ -91,23 +91,42 @@ export default function Player({ movies }) {
       setLocal(true);
     }
     if (data != null) {
-      setAdDuration(data.videoAdDuration);
-      setAds({
-        allow: data.allow,
-        onVideo: data.onVideo,
-        topAdDesktop: data.topAdDesktop,
-        topAdMobile: data.topAdMobile,
-        rightAd: data.rightAd,
-        bottomBannerAd: data.bottomBannerAd,
-        rightVideoAd: data.rightVideoAd,
-        bottomBannerAdMobile: data.bottomBannerAdMobile,
-        topMobileAdHieght: data.topMobileAdHieght,
-        topMobileAdWidth: data.topMobileAdWidth,
-      });
+      if (window.screen.width < 800) {
+        setAds({
+          allow: data.allow,
+          onVideo: data.onVideo,
+          topAdDesktop: data.topAdDesktop,
+          topAdMobile: data.topAdMobile,
+          rightAd: "",
+          rightVideoAd: "",
+          bottomBannerAd: data.bottomBannerAd,
+          bottomBannerAdMobile: data.bottomBannerAdMobile,
+          topMobileAdHieght: data.topMobileAdHieght,
+          topMobileAdWidth: data.topMobileAdWidth,
+          videoAdDuration: data.videoAdDuration,
+        });
+        setAdDuration(data.videoAdDuration);
+      } else {
+        setAds({
+          allow: data.allow,
+          onVideo: data.onVideo,
+          topAdDesktop: data.topAdDesktop,
+          topAdMobile: data.topAdMobile,
+          rightAd: data.rightAd,
+          bottomBannerAd: data.bottomBannerAd,
+          rightVideoAd: data.rightVideoAd,
+          bottomBannerAdMobile: "",
+          topMobileAdHieght: data.topMobileAdHieght,
+          topMobileAdWidth: data.topMobileAdWidth,
+          videoAdDuration: data.videoAdDuration,
+        });
+        setAdDuration(data.videoAdDuration);
+      }
     }
     setTimeout(() => {
       VideoWatched(movie);
     }, 3000);
+    console.log("ads sata: ", data);
   }, [router, ads.topMobileAdHieght]);
 
   // video links
@@ -330,28 +349,28 @@ export default function Player({ movies }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                    let slug = SEOFriendlySlugsForVideo(video);
-                    return (
-                      <>
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      </>
-                    );
-                  })
+                      let slug = SEOFriendlySlugsForVideo(video);
+                      return (
+                        <>
+                          <Link
+                            href={slug}
+                            replace={true}
+                            shallow={false}
+                            key={i}
+                          >
+                            <a>
+                              <RelatedProductCard video={video} />
+                            </a>
+                          </Link>
+                        </>
+                      );
+                    })
                   : null}
               </div>
             </div>
           </div>
           <div className="m-auto d-block d-sm-none">
-            <div className="d-block">
+            <div>
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
                   <div style={{ marginTop: "10px" }}>
@@ -377,6 +396,10 @@ export default function Player({ movies }) {
                 ) : (
                   ads.bottomBannerAdMobile && (
                     <DFPSlotsProvider dfpNetworkId="28379801">
+                      {console.log(
+                        "ads.bottomBannerAdMobile: ",
+                        ads.bottomBannerAdMobile
+                      )}
                       <div className="desktop-ads">
                         {ads.bottomBannerAdMobile != "" ? (
                           <AdSlot
