@@ -107,7 +107,7 @@ function MyApp({ Component, pageProps, test }) {
           name="keywords"
           content="Watch LIVE TV channels online, live psl, live cricket, watch live psl streaming, ad free stream, live sports, live sports, watch adfree psl online, hd stream, Pakistan cricket match, live cricket, live sports"
         />
-        <link rel="canonical" href="https://www.tapmad.com" />
+        {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
 
         <link
           rel="icon"
