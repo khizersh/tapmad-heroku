@@ -14,7 +14,6 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         setCountryCode(res.countryCode);
         let count = null;
         count = country.find((m) => m.ShortName == res.countryCode);
-        console.log("Count ", count);
         if (count == null) {
           setSignIn(false);
         } else {
@@ -22,7 +21,7 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         }
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [country]);
   return (
     <>
       <li className="subs_contain" id="signUpMenu">
