@@ -3,10 +3,13 @@ import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
 
 export const getSingleRoomChat = (database, roomId, cb) => {
-    database.ref(`GroupChat`).on("value", (snapshot) => {
+    database.ref(`GroupChat/${roomId}`).limitToLast(100).on("value", (snapshot) => {
         const vals = snapshot.val();
         cb(vals);
     })
+}
+export const removeListenerOfNonActiveChat = (database, roomId) => {
+    database.ref(`GroupChat/${roomId}`).off("value");
 }
 export const sendGroupChatMessage = (database, chatDetails) => {
     const userId = Cookie.getCookies('userId');
@@ -21,6 +24,7 @@ export const sendGroupChatMessage = (database, chatDetails) => {
         type: chatDetails.type ? chatDetails.type : 3
 
     })
+    // database.ref(`GroupChat/${chatDetails.roomID}`).set({});
 }
 
 export const createAChatRoom = async (body) => {

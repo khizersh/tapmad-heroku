@@ -7,7 +7,7 @@ import { get } from "../../../services/http-service";
 import { sendMessageIcon, shareIcon, userProfile } from "../../../services/imagesLink";
 import { CenteredModal } from "../../Modal";
 import pslStyles from "./PSLChat.module.css";
-import { deleteAChatRoom, getSingleRoomChat, sendGroupChatMessage } from "./PSLChat.service";
+import { deleteAChatRoom, getSingleRoomChat, removeListenerOfNonActiveChat, sendGroupChatMessage } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
 export default function PSLChat({ channel }) {
@@ -84,10 +84,12 @@ export default function PSLChat({ channel }) {
         }
     }
     function selectRoom(e) {
+        removeListenerOfNonActiveChat(database, room);
         let roomId = e;
+        console.log(roomId);
         setRoom(roomId);
         getSingleRoomChat(database, roomId, (list) => {
-            setChats(list[roomId]);
+            setChats(list);
         })
     }
 
@@ -207,7 +209,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         </div>
         <div className={pslStyles.chatBox}>
             <div className={pslStyles.all_messages}>
-                {chats && Object.keys(chats).slice(-100).map(function (keyName, keyIndex) {
+                {chats && Object.keys(chats).map(function (keyName, keyIndex) {
                     setTimeout(() => {
                         // document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth' });
                         var target = document.getElementsByClassName('lastDiv')[0];
@@ -221,7 +223,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                                         <img src={chats[keyName].userProfile != "" ? chats[keyName].userProfile : userProfile} width="40" style={{ borderRadius: '10px' }} />
                                         {/* <img src={userProfile} width="40" style={{ borderRadius: '10px' }} /> */}
                                     </div> &nbsp;&nbsp;
-                                <div className="message">
+                                    <div className="message">
                                         <div style={{ textAlign: chats[keyName].id == userId ? 'right' : 'left' }}>
                                             {chats[keyName].id == userId ? <>
                                                 <small className={pslStyles.msgProfile}>{chats[keyName].senderName}</small> &nbsp; <small className={pslStyles.msgTime}>{getDayTime(chats[keyName].date)}</small></> : <> <small className={pslStyles.msgTime}>{getDayTime(chats[keyName].date)}</small> &nbsp; <small className={pslStyles.msgProfile}>{chats[keyName].senderName}</small></>
