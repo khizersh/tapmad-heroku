@@ -10,6 +10,7 @@ import { post } from "../../../services/http-service";
 import { GlobalService } from "../../../modules/global-service";
 import { FireBase } from "../../../services/firebase";
 import { GameContext } from "../../../contexts/GameContext";
+import { MainContext } from "../../../contexts/MainContext";
 
 export default function MatchBids({ game, filteredData }) {
   const [match, setMatches] = useState();
@@ -19,7 +20,7 @@ export default function MatchBids({ game, filteredData }) {
   const [counter, setCounter] = useState(4);
   const [totalOdds, setTotalOdds] = useState(0.0);
   const { updateBuyModal, updateUserCoin } = useContext(GameContext);
-
+  const { initialState } = useContext(MainContext);
   async function getMatchLiveDetails() {
     if (filteredData && filteredData.length) {
       setMatches(filteredData);
@@ -101,6 +102,9 @@ export default function MatchBids({ game, filteredData }) {
     console.log(team);
   }
   async function submitBid(channelId, questionId) {
+    if (!initialState.isAuthenticated) {
+      return;
+    }
     var userId = Cookie.getCookies("userId");
     const requestData = {
       Version: "V1",
@@ -268,7 +272,7 @@ export default function MatchBids({ game, filteredData }) {
                                                   style={{ margin: "0px" }}
                                                 >
                                                   VS
-                                                    </h6>
+                                                </h6>
                                               </div>
                                             </div>
                                           </div>
@@ -388,7 +392,7 @@ export default function MatchBids({ game, filteredData }) {
                                               className={styles.bid_text}
                                             >
                                               Tukka
-                                                </div>
+                                            </div>
                                           </div>
 
                                           <div className="col-6 col-lg-6 col-sm-6">
