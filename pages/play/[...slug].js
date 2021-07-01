@@ -33,7 +33,6 @@ const Syno = (props) => {
 
   useEffect(() => {
     setMount(true);
-    console.log("asfasf: ",props.data);
   }, []);
 
   return (

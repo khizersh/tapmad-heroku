@@ -19,7 +19,6 @@ export default function CategoryDetail({ video, videoList, syno }) {
       } else {
         vid = videoList[0].Videos[videoList[0].Videos.length - 1];
       }
-      console.log("vid::: ",vid);
       let slugPlay = SEOFriendlySlugsForVideo(vid);
       setSlug(slugPlay);
       ContentViewed(video);
@@ -81,7 +80,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
         </div>
       </div>
       <div className="row mt-3">
-        {/* {videoList && videoList.length > 0 && videoList[0].Videos
+        {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
             let type = "";
             if (!vid.IsVideoFree) {
@@ -89,7 +88,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
             }
             return <Card key={i} video={vid} type={type} />;
           })
-          : null} */}
+          : null}
       </div>
     </>
   );
