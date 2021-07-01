@@ -57,7 +57,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
                         >
                           <a className="btn tm_wishlst_btn">
                             <i className="fa fa-play rounded-circle pr-2"></i>
-                            PlayasdaD
+                            Play
                           </a>
                         </Link>
                       )}
