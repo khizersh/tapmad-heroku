@@ -40,7 +40,6 @@ export default function SideBar() {
         if(res.responseCode == 1){
           setCountries(res.data)
         }
-        console.log("res in auth:L ", res);
       })
       .catch((e) => console.log(e));
   }, [initialState.isAuthenticated]);

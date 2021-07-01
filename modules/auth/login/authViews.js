@@ -91,7 +91,6 @@ export default function AuthViews(props) {
 
   useEffect(() => {
     // if (initialState.countryCode && initialState.countryCode == "PK") {
-    console.log("initialState: ", initialState);
     if (
       initialState &&
       initialState.AuthDetails &&

@@ -23,7 +23,6 @@ export default async (req, res) => {
     if (req.method == "POST") {
         // post request
         let body = req.body;
-        console.log(body);
         csvWriter
             .writeRecords(body)
             .then((e) => {

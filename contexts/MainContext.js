@@ -26,7 +26,6 @@ function reducer(state, action) {
     case "SET_AUTHENTICATION":
       return { ...state, isAuthenticated: action.data };
     case "SET_COUNTRY_CODE":
-      console.log("State cloone ", state);
       return { ...state, countryCode: action.data };
     case "SET_USER_NUMBER":
       return {
@@ -76,7 +75,6 @@ export default function MainProvider({ children }) {
   }
   function updateUserOperator(operator) {
     dispatch({ type: "UPDATE_OPERATOR", data: operator });
-    console.log(initialState);
   }
 
   function updateUserCnic(cnic) {

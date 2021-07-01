@@ -27,14 +27,13 @@ export default memo(function PSLComponent({ channel }) {
                 return;
             }
             const sticky = 100 + 0;
-            console.log("sticky ", sticky)
             if (window.pageYOffset > sticky) {
                 if (window.screen.width < 639) {
                     header.classList.add("sticky-tab");
                     header.style.position = "fixed";
                     header.style.top = Number(playerHeight) + 58 + "px";
                     header.style.marginTop = "0px";
-                    console.log(playerHeight);
+                 
                 } else {
                     header.classList.remove("sticky-tab");
                 }
@@ -71,11 +70,9 @@ export default memo(function PSLComponent({ channel }) {
         }
     })
     useEffect(() => {
-        console.log("selectedTab: ", selectedTab);
         var frameObj = document.getElementById('gameFrame');
         var contents = "";
 
-        console.log("on .oad");
         if (frameObj) {
             frameObj.onload = (() => {
                 document.getElementById('loader').style.display = "none";

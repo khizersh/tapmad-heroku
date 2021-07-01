@@ -49,7 +49,6 @@ async function getRelatedChannelsOrVODData(id, channel) {
 }
 
 function checkAds(data, type) {
-  console.log("data  datadata:  ",data);
   if (type == "local") {
     const local = data.filter((f) => f.type == "local")[0];
     if (local != null) {

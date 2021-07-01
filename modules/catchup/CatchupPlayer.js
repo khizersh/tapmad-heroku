@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 
 export default function CatchupPlayer({ video, videoList }) {
-  console.log("video: ", video);
+
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [adDuration, setAdDuration] = useState(200000);
@@ -103,7 +103,7 @@ export default function CatchupPlayer({ video, videoList }) {
       setVideoLink({
         highQuality: video.VideoStreamUrlHQ,
         mediumQuality: video.VideoStreamUrlMQ,
-        lowQuality: movie.VideoStreamUrlLQ,
+        lowQuality: video.VideoStreamUrlLQ,
       });
     }
   }, [video]);

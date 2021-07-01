@@ -51,7 +51,6 @@ export default memo(function Register(props) {
 
   useEffect(() => {
     var selectedPayment = payment;
-    console.log(authState);
     if (authState.paymentMethods.length > 1) {
       if (selectedPayment == "credit") {
         document.getElementsByClassName("Credit/Debit Card")[0].click();
@@ -84,7 +83,6 @@ export default memo(function Register(props) {
       }
     }
   }, [authState.paymentMethods]);
-  console.log("initialState: ", initialState);
 
   return (
     <div>

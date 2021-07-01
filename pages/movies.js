@@ -28,7 +28,6 @@ export async function getServerSideProps(context) {
     ip = "39.44.217.70";
   }
   var moviesList = await get(getMoviesWithPaginationInitial, ip);
-  console.log(moviesList);
   var movies = await moviesList.data;
   return {
     props: {

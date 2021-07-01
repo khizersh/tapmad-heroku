@@ -41,7 +41,6 @@ export default function MatchBids({ game, filteredData }) {
         }
       }
       setQuestions(_records);
-      console.log(_records);
     });
   }
 
@@ -89,7 +88,6 @@ export default function MatchBids({ game, filteredData }) {
       odds: innerQues.Options[0].odds,
     });
     setTotalOdds(counter * innerQues.Options[0].odds);
-    console.log(team);
   }
   function answerB(innerQues) {
     var teamClone = { ...team };
@@ -99,7 +97,6 @@ export default function MatchBids({ game, filteredData }) {
       odds: innerQues.Options[1].odds,
     });
     setTotalOdds(counter * innerQues.Options[1].odds);
-    console.log(team);
   }
   async function submitBid(channelId, questionId) {
     if (!initialState.isAuthenticated) {

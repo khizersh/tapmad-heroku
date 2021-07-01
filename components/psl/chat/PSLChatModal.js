@@ -86,7 +86,6 @@ export default function CreateJoinRoomModalBody({
       };
       setBtnDisable(true)
       const data = await joinAChatRoom(body);
-      console.log("data ", data);
       if (data.UserChatRooms) {
         mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
     

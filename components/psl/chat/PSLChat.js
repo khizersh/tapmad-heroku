@@ -31,7 +31,6 @@ export default function PSLChat({ channel }) {
   useEffect(() => {
     const header = document.getElementById("tab-chat");
     const sticky = 100;
-    console.log("Header ", header);
     const scrollCallBack = window.addEventListener("scroll", () => {
       const player = document.getElementById("player-div1");
       const playerHeight = player.getBoundingClientRect().height;
@@ -93,7 +92,6 @@ export default function PSLChat({ channel }) {
   function selectRoom(e) {
     removeListenerOfNonActiveChat(database, room);
     let roomId = e;
-    console.log(roomId);
     setRoom(roomId);
     getSingleRoomChat(database, roomId, (list) => {
       setChats(list);

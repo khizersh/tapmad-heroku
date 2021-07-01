@@ -41,7 +41,6 @@ export default function withLogin(Component, data) {
             text: "Redirecting you...",
             icon: "success",
           });
-          console.log("response: in user: ", response);
           Cookie.setCookies("isAuth", 1);
           Cookie.setCookies("userId", response.data.UserId);
           Cookie.setCookies("userCoins", response.response.UserTotalCoins);

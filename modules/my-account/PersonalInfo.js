@@ -43,7 +43,6 @@ const PersonalInfo = ({ data }) => {
   };
   const onSubmit = async () => {
     var formData = new FormData();
-    // console.log("profileData: ", profileData);
     for (var property in profileData) {
       if (profileData.hasOwnProperty(property)) {
         formData.append(property, profileData[property]);

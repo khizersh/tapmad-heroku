@@ -35,6 +35,7 @@ export default function Player({ movies }) {
     bottomBannerAdMobile: "",
     rightVideoAd: "",
   });
+
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
@@ -123,7 +124,7 @@ export default function Player({ movies }) {
         setAdDuration(data.videoAdDuration);
       }
     }
-  }, [router, ads.topMobileAdHieght]);
+  }, [router , ads.topMobileAdHieght]);
 
 
   // video links
@@ -380,7 +381,6 @@ export default function Player({ movies }) {
               {ads.allow && ads.bottomBannerAdMobile ? (
                 ads.bottomBannerAdMobile.includes("http") ? (
                   <div style={{ marginTop: "10px" }}>
-                    {console.log("video bottom ad: ", ads.bottomBannerAdMobile)}
                     <ReactJWPlayer
                       playerId="my-unique-id1"
                       playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
