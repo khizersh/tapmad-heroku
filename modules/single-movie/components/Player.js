@@ -253,13 +253,13 @@ export default function Player({ movies }) {
             </div>
 
             <div className="col-lg-12 p-0">
-              {/* {movie && movie.IsPsl ? (
+              {movie && movie.IsPsl ? (
                 <div className="the-shop">
-                   <PlayerShop /> 
+                   {/* <PlayerShop />  */}
                   <PSLComponent channel={movie.Video} />
                   <br />
                 </div>
-              ) : null} */}
+              ) : null}
 
               {/* Banner bottom Ad */}
 
