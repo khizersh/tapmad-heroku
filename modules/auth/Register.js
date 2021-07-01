@@ -12,7 +12,8 @@ import { MainContext } from "../../contexts/MainContext";
 export default memo(function Register(props) {
   const router = useRouter();
   const { code, number, payment } = router.query;
-  const { authState, updateResponseCode, updateSelectedPaymentMethod } = useContext(Authcontext);
+  const { authState, updateResponseCode, updateSelectedPaymentMethod } =
+    useContext(Authcontext);
   const { updateUserNumber, initialState } = useContext(MainContext);
   const RenderViews = useCallback(
     function () {
@@ -53,28 +54,28 @@ export default memo(function Register(props) {
     console.log(authState);
     if (authState.paymentMethods.length > 1) {
       if (selectedPayment == "credit") {
-        document.getElementsByClassName('Credit/Debit Card')[0].click();
+        document.getElementsByClassName("Credit/Debit Card")[0].click();
         return (
           <>
             <SignUpComponent />
           </>
         );
       } else if (selectedPayment == "dcb") {
-        document.getElementsByClassName('Sim Card')[0].click();
+        document.getElementsByClassName("Sim Card")[0].click();
         return (
           <>
             <SignUpComponent />
           </>
         );
       } else if (selectedPayment == "easypaisa") {
-        document.getElementsByClassName('Easypaisa')[0].click();
+        document.getElementsByClassName("Easypaisa")[0].click();
         return (
           <>
             <SignUpComponent />
           </>
         );
       } else if (selectedPayment == "jazzcash") {
-        document.getElementsByClassName('JazzCash')[0].click();
+        document.getElementsByClassName("JazzCash")[0].click();
         return (
           <>
             <SignUpComponent />
@@ -82,7 +83,8 @@ export default memo(function Register(props) {
         );
       }
     }
-  }, [authState.paymentMethods])
+  }, [authState.paymentMethods]);
+  console.log("initialState: ", initialState);
 
   return (
     <div>

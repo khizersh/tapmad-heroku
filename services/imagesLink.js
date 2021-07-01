@@ -1,7 +1,9 @@
 export const tapmadLogo = "/icons/tm-logo.png";
+export const newBg = "/icons/background/newBackground.jpg";
 export const signinBackground= "/icons/background/background1.jpg";
 // export const pslBackground = "https://www.tapmad.com/psl6/images/front-background.jpg"; old wala psl
 export const pslBackground = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623166451SigninPage-min.jpg";
+// export const newBg = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623166451SigninPage-min.jpg";
 
 
 export const usernameIcon =

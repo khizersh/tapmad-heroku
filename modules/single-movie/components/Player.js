@@ -66,7 +66,7 @@ export default function Player({ movies }) {
       movie.Video.VideoEntityId,
       movie.Video.IsVideoChannel ? 1 : 0
     );
-    if (res.data && res.data.Sections.length > 0 && res.responseCode == 1) {
+    if (res.data && res?.data?.Sections?.length > 0 && res.responseCode == 1) {
       setRelatedVideos(res.data.Sections[0].Videos);
     }
   }
@@ -253,13 +253,13 @@ export default function Player({ movies }) {
             </div>
 
             <div className="col-lg-12 p-0">
-              {movie && movie.IsPsl ? (
+              {/* {movie && movie.IsPsl ? (
                 <div className="the-shop">
-                  {/* <PlayerShop /> */}
+                   <PlayerShop /> 
                   <PSLComponent channel={movie.Video} />
                   <br />
                 </div>
-              ) : null}
+              ) : null} */}
 
               {/* Banner bottom Ad */}
 

@@ -19,11 +19,12 @@ export default function CategoryDetail({ video, videoList, syno }) {
       } else {
         vid = videoList[0].Videos[videoList[0].Videos.length - 1];
       }
+      console.log("vid::: ",vid);
       let slugPlay = SEOFriendlySlugsForVideo(vid);
       setSlug(slugPlay);
       ContentViewed(video);
     }
-  }, [videoList]);
+  }, [video]);
   return (
     <>
       <div className="row">
@@ -57,7 +58,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
                         >
                           <a className="btn tm_wishlst_btn">
                             <i className="fa fa-play rounded-circle pr-2"></i>
-                            Play
+                            PlayasdaD
                           </a>
                         </Link>
                       )}
@@ -80,7 +81,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
         </div>
       </div>
       <div className="row mt-3">
-        {videoList && videoList.length > 0 && videoList[0].Videos
+        {/* {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
             let type = "";
             if (!vid.IsVideoFree) {
@@ -88,7 +89,7 @@ export default function CategoryDetail({ video, videoList, syno }) {
             }
             return <Card key={i} video={vid} type={type} />;
           })
-          : null}
+          : null} */}
       </div>
     </>
   );

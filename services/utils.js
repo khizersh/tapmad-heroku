@@ -2,7 +2,6 @@ const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
 const { Cookie } = require("./cookies");
 const CryptoJS = require("crypto-js");
 
-
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
   let isChannel = movieId.charAt(movieId.length - 1);
@@ -61,9 +60,17 @@ function basicSliderConfig(slidesToShow, mobileView) {
 }
 
 function SEOFriendlySlugsForVideo(event, catchup = false) {
+  let vidChannel;
+  if (event.IsVideoChannel == "0") {
+    vidChannel = 0;
+  } else {
+    vidChannel = 1;
+  }
+
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
-    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
+    event.IsVideoFree ? "1" : "0"
+  }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -71,8 +78,9 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
-    }`;
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+    event.IsVideoChannel ? "1" : "0"
+  }`;
   return slug;
 }
 
@@ -101,16 +109,18 @@ function setUrlAccordingToVideoType(movie, type) {
 // catchup
 function SEOFriendlySlugsForCatchupVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
-    }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
 
 function SEOFriendlySlugsForCatchup(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
-    }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -188,21 +198,19 @@ function getUserDetails() {
     return { mobile: "", userId: "" };
   }
 }
-function SignOutUser() {
-
-}
+function SignOutUser() {}
 function addScriptUrlInDom(src) {
   var script = document.createElement("script");
   script.type = "text/javascript";
   script.src = src;
-  document.getElementsByTagName('head')[0].appendChild(script);
+  document.getElementsByTagName("head")[0].appendChild(script);
 }
 function addScriptCodeInDom(src) {
   var script = document.createElement("script");
   script.type = "text/javascript";
-  script.setAttribute('defer', true);
+  script.setAttribute("defer", true);
   script.innerHTML = src;
-  document.getElementsByTagName('head')[0].appendChild(script);
+  document.getElementsByTagName("head")[0].appendChild(script);
 }
 module.exports = {
   manipulateUrls,
@@ -222,5 +230,5 @@ module.exports = {
   getUserDetails,
   SignOutUser,
   addScriptCodeInDom,
-  addScriptUrlInDom
+  addScriptUrlInDom,
 };

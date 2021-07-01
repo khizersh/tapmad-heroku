@@ -18,12 +18,14 @@ const Syno = (props) => {
 
   if (!mount) {
     if (!video) {
+ 
       if (Array.isArray(props.data.Video)) {
         setVideo(props.data.Video[0]);
       } else {
         setVideo(props.data.Video);
       }
 
+  
       setVideoList(props.data.Sections);
       setMount(true);
     }
@@ -31,6 +33,7 @@ const Syno = (props) => {
 
   useEffect(() => {
     setMount(true);
+    console.log("asfasf: ",props.data);
   }, []);
 
   return (
