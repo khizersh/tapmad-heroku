@@ -10,7 +10,7 @@ import { VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
-import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { isAuthentictedUser, SEOFriendlySlugsForVideo } from "../../../services/utils";
 import Link from "next/link";
 var fired = false;
 const PSLComponent = dynamic(() =>
@@ -124,7 +124,7 @@ export default function Player({ movies }) {
         setAdDuration(data.videoAdDuration);
       }
     }
-  }, [router , ads.topMobileAdHieght]);
+  }, [router, ads.topMobileAdHieght]);
 
 
   // video links
@@ -164,7 +164,13 @@ export default function Player({ movies }) {
       window.removeEventListener("scroll", scrollCallBack);
     };
   }, []);
-
+  useEffect(() => {
+    if (!movies.IsVideoFree) {
+      if (!isAuthentictedUser()) {
+        router.push("/sign-up");
+      }
+    }
+  }, [])
   return (
     <div>
       <div className="container-fluid">
@@ -256,7 +262,7 @@ export default function Player({ movies }) {
             <div className="col-lg-12 p-0">
               {movie && movie.IsPsl ? (
                 <div className="the-shop">
-                   {/* <PlayerShop />  */}
+                  {/* <PlayerShop />  */}
                   <PSLComponent channel={movie.Video} />
                   <br />
                 </div>
