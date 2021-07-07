@@ -4,6 +4,7 @@ import { getUserRooms } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { FireBase } from "../../../services/firebase";
 import { get } from "../../../services/http-service";
+import { useRouter } from "next/router";
 import {
   sendMessageIcon,
   shareIcon,
@@ -19,7 +20,9 @@ import {
 } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
+
 export default function PSLChat({ channel }) {
+  const router = useRouter();
   const [chatRoom, setChatRooms] = useState([]);
   const [chats, setChats] = useState({});
   const database = FireBase.database();
@@ -33,7 +36,9 @@ export default function PSLChat({ channel }) {
     const sticky = 100;
     const scrollCallBack = window.addEventListener("scroll", () => {
       const player = document.getElementById("player-div1");
-      const playerHeight = player.getBoundingClientRect().height;
+      if (player) {
+        const playerHeight = player.getBoundingClientRect().height;
+      }
       if (window.pageYOffset > sticky) {
         if (window.screen.width < 639) {
           header.classList.add("margChat");
@@ -99,6 +104,19 @@ export default function PSLChat({ channel }) {
   }
 
   function sendMessage() {
+    let name = Cookie.getCookies("userProfileName");
+    if (!name || name.toLowerCase() == "anonymous") {
+      return swal({
+        title: "Please update your Profile Name before entering the chat",
+        timer: 2500,
+        icon: "error",
+      }).then((res) => {
+        router.push(
+          { pathname: "/myaccount", query: { redirect : true } },
+          "/myaccount"
+        );
+      });
+    }
     var message = {
       message: textMessage.current.value,
       channelID: channel.VideoEntityId,

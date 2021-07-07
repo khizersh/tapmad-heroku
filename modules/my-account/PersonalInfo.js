@@ -13,8 +13,11 @@ import {
 import { MyAccountService } from "./myaccount.service";
 import { ProfileViewed, UpdateProfile } from "../../services/gtm";
 import { Cookie } from "../../services/cookies";
+import { useRouter } from "next/router";
 
 const PersonalInfo = ({ data }) => {
+  const router = useRouter();
+  const { redirect } = router.query;
   const [userImage, setUserImage] = useState(null);
   const [btnEnable, setBtnEnable] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -55,16 +58,20 @@ const PersonalInfo = ({ data }) => {
       if (data.data.UserProfile.UserProfilePicture != userImage) {
         setUserImage(data.data.UserProfile.UserProfilePicture);
       }
-      Cookie.setCookies("userProfileName" , profileData.FullName)
-      console.log("name: " ,profileData.FullName);
+      Cookie.setCookies("userProfileName", profileData.FullName);
 
+      setBtnEnable(false);
+      UpdateProfile(profileData);
       swal({
         title: data.data.Response.message,
         timer: 2000,
         icon: "success",
+      }).then((res) => {
+        if (redirect) {
+          const back = Cookie.getCookies("backUrl")
+          router.push(back)
+        }
       });
-      setBtnEnable(false);
-      UpdateProfile(profileData);
     } else {
       swal({
         title: "Something went wrong!",
@@ -189,7 +196,7 @@ const PersonalInfo = ({ data }) => {
             required
             name="Email"
             onChange={onChange}
-            value={profileData.Email || "" }
+            value={profileData.Email || ""}
             className="form-control"
             placeholder="Email Address"
           />

@@ -5,6 +5,7 @@ import UserStatus from "../modules/my-account/UserStatus";
 import { Cookie } from "../services/cookies";
 
 const MyAccount = () => {
+
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [formData, setFormData] = useState({
     Version: "V1",

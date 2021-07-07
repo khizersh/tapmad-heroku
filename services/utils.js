@@ -150,7 +150,7 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  if (url != "/sign-up" && url != "/sign-in") {
+  if (url != "/sign-up" && url != "/sign-in" && url != "/myaccount" ) {
     Cookie.setCookies("backUrl", url);
   }
 }
