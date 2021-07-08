@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { AuthService } from "../../../modules/auth/auth.service";
 import HomePageAd from "./HomePageAd";
 import Image from "next/image";
+import { UserEngagemnent } from "../../../services/gtm";
 
 const HomepageSlider = ({ movies, ads }) => {
   const router = useRouter();
@@ -45,7 +46,10 @@ const HomepageSlider = ({ movies, ads }) => {
     setClientXonMouseDown(e.clientX);
     setClientYonMouseDown(e.clientY);
   }
+  function sendToAnalytics(sectionName, index, videoName) {
+    UserEngagemnent("HomePage", sectionName, index + 1, videoName);
 
+  }
   function handleOnClick(e, mov) {
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
@@ -100,7 +104,7 @@ const HomepageSlider = ({ movies, ads }) => {
                           >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => handleOnClick(e, mov)}
+                              onClick={(e) => (handleOnClick(e, mov), sendToAnalytics(movieSection.SectionName, index, mov.VideoName))}
                             >
                               <div
                                 className="tm-mv-bx"
