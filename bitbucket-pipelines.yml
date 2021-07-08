@@ -27,7 +27,7 @@ pipelines:
             # rsync to a temp directory on remote server
             - rsync -arz --delete $BITBUCKET_CLONE_DIR/deploy/ ubuntu@18.136.101.189:/var/www/staging
             # clear current serving directory, sync from temp directory to serving directory, restart next server
-            - ssh ubuntu@18.136.101.189 "rsync -ar --delete /var/www/staging/ /var/www/tapmad/tapmad-revamp && /home/ubuntu/.nvm/versions/node/v15.11.0/bin/pm2 restart 0 && rm -r /var/www/staging"
+            - ssh ubuntu@18.136.101.189 "rsync -ar --delete /var/www/staging/ /var/www/tapmad/tapmad-revamp && /home/ubuntu/.nvm/versions/node/v15.11.0/bin/pm2 restart 0 && rm -r /var/www/staging && rm -r /var/www/tapmad/tapmad-revamp/public/robots.txt"
 definitions:
   caches:
     nextcache: .next/cache

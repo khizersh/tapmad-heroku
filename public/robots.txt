@@ -10,4 +10,4 @@ Disallow: /*campaign*
 Disallow: /?*
 Disallow: /#!player?*
 
-Sitemap: https://tapmad.com/sitemap.xml
+Sitemap: https://www.tapmad.com/sitemap.xml
