@@ -1,9 +1,13 @@
 User-agent: *
+Allow: /
+
 Disallow: /syno?*
 Disallow: /player?*
 Disallow: /vodlist?*
 Disallow: /*.php
+Disallow: /verify-user
+Disallow: /*campaign*
+Disallow: /?*
+Disallow: /#!player?*
 
-Allow: /
-User-agent: Googlebot-Image
-Allow: /
+Sitemap: https://tapmad.com/sitemap.xml
