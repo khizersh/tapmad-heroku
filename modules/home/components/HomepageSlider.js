@@ -164,7 +164,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                           >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => handleOnClick(e, mov)}
+                              onClick={(e) => (handleOnClick(e, mov), sendToAnalytics(movieSection.SectionName, index, mov.CategoryName))}
                             >
                               <div
                                 className="tm-mv-bx"
