@@ -69,7 +69,7 @@ export default function Movies({ movies }) {
             );
           })}
       </Slider>{" "}
-      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} />
+      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} name={"Movies"} />
       {currentRow !== movies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />
       )}

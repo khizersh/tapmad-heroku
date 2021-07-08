@@ -122,7 +122,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
               </div>
             )}
             {localMovies && localMovies.Sections && (
-              <HomepageSlider movies={localMovies.Sections.Movies} ads={true} />
+              <HomepageSlider movies={localMovies.Sections.Movies} ads={true} name={"Homepage"} />
             )}
             {currentRow !== movies.totalSections && (
               <ScrollComponent loadMore={fetchNewMovies} />

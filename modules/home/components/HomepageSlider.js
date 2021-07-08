@@ -14,7 +14,7 @@ import HomePageAd from "./HomePageAd";
 import Image from "next/image";
 import { UserEngagemnent } from "../../../services/gtm";
 
-const HomepageSlider = ({ movies, ads }) => {
+const HomepageSlider = ({ movies, ads, name }) => {
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
@@ -47,7 +47,7 @@ const HomepageSlider = ({ movies, ads }) => {
     setClientYonMouseDown(e.clientY);
   }
   function sendToAnalytics(sectionName, index, videoName) {
-    UserEngagemnent("HomePage", sectionName, index + 1, videoName);
+    UserEngagemnent(name, sectionName, index + 1, videoName);
 
   }
   function handleOnClick(e, mov) {

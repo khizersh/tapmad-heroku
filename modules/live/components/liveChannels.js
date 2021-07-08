@@ -12,7 +12,7 @@ import { getChannelsWithPagination } from "../../../services/apilinks";
 import Link from "next/link";
 
 export default function LiveChannels({ channel }) {
-  console.log("channel in comp: ",channel);
+  console.log("channel in comp: ", channel);
   var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(channel);
   const [currentRow, setCurrentRow] = useState(5);
@@ -57,7 +57,7 @@ export default function LiveChannels({ channel }) {
       <Slider {...bannerSettings}>
         {channel.Banner.map((e, index) => {
           return (
-            <Link href={e.BannerURL ? e.BannerURL : "/live" } key={index} passHref>
+            <Link href={e.BannerURL ? e.BannerURL : "/live"} key={index} passHref>
               <a>
                 <img
                   src={e.WebBannerImage}
@@ -69,7 +69,7 @@ export default function LiveChannels({ channel }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} />
+      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} name={"Live"} />
       {currentRow !== localMovies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />
       )}
