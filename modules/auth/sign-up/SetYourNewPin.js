@@ -1,22 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
-import { actionsRequestContent } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import { Authcontext } from "../../../contexts/AuthContext";
-import { loggingTags } from "../../../services/apilinks";
 import withLogin from "../LoginHOC";
 
 function SetYourNewPinSignUp({ login, ip }) {
   const router = useRouter();
-  const { initialState, checkUserAuthentication, setLoader } = useContext(
-    MainContext
-  );
+  const { initialState, checkUserAuthentication, setLoader } =
+    useContext(MainContext);
   const { authState } = useContext(Authcontext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
+  const [username, setUsername] = useState("");
+  const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
     if (!pin.length) {
@@ -54,7 +53,7 @@ function SetYourNewPinSignUp({ login, ip }) {
       Cookie.setCookies("content-token", status.data.User.UserPassword);
     }
 
-    const response = await AuthService.setNewPin(pin);
+    const response = await AuthService.setNewPin(pin , username);
 
     if (response != null) {
       if (response.responseCode == 0) {
@@ -76,9 +75,39 @@ function SetYourNewPinSignUp({ login, ip }) {
       });
     }
   };
+
+  useEffect(() => {
+    let num = initialState?.User?.MobileNo;
+    let body = { Language: "en", MobileNo: num };
+    AuthService.GetCardUser(body)
+      .then((res) => {
+        if (res?.data?.User?.IsProfileNameSet) {
+          setShowUsername(false);
+        } else {
+          setShowUsername(true);
+        }
+        Cookie.setCookies("userId", res.data.User.UserId);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <div>
-      <p className="text-center mt-4">Please set your 4 digit PIN</p>
+      {showUsername ? (
+        <>
+          <p className="text-center mt-4">Please enter your User Name</p>
+          <div className="px-3 pb-2">
+            <input
+              type="text"
+              placeholder="Enter username"
+              className="form-control"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+        </>
+      ) : null}
+
+      <p className={`text-center ${showUsername ? "mt-2" : "mt-4"}`}>Please set your 4 digit PIN</p>
       <div className="px-3 pb-2">
         <input
           type="text"

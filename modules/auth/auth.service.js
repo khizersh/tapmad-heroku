@@ -16,18 +16,25 @@ import {
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
 
-async function setUserPin(pin) {
+async function setUserPin(pin , username) {
   let resp;
-  try {
-    var userId = Cookie.getCookies("userId");
 
-    resp = await post(setUserPinCode, {
+  try {
+    const userId = Cookie.getCookies("userId");
+    console.log("userId: ",userId);
+    let body = {
       Version: "V1",
       Language: "en",
       Platform: "Web",
       UserId: userId,
       UserPinCode: pin,
-    });
+      ProfileUserName:username
+    }
+    if(!username){
+      delete body.ProfileUserName
+    }
+
+    resp = await post(setUserPinCode, body );
   } catch (error) {
     resp = null;
   }
@@ -52,15 +59,19 @@ async function setUserPin(pin) {
   }
 }
 
-async function setNewPin(pin) {
+async function setNewPin(pin , username) {
   const userId = Cookie.getCookies("userId");
   let body = {
+    Version: "V1",
     Language: "en",
-    Platform: "web",
+    Platform: "Web",
     UserId: userId,
     UserPinCode: pin,
-    Version: "V1",
-  };
+    ProfileUserName:username
+  }
+  if(!username){
+    delete body.ProfileUserName
+  }
 
   let resp;
   try {
