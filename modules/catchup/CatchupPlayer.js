@@ -133,14 +133,14 @@ export default function CatchupPlayer({ video, videoList }) {
                 <ReactJWPlayer
                   onTime={(e) => {
                     if (e.currentTime > 3 && !fired) {
-                      VideoWatched(video);
+                      VideoWatched({ Video: video });
                       fired = true;
                     } else {
                       return
                     }
                   }}
                   playerId="my-unique-id"
-                  playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                  playerScript="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"
                   isAutoPlay={true}
                   file={
                     videoLink
