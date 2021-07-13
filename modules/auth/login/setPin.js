@@ -114,12 +114,12 @@ function SetUserPin({ login, ip }) {
       {showUsername ? (
         <div className="form-group" style={{ marginBottom: "0.3rem" }}>
           <label style={{ color: "#fff", fontSize: "14px" }}>
-            Please enter your User Name
+            Please enter your Full Name
           </label>
           <input
             type="text"
             className="text-center form-control numeric"
-            placeholder="Enter username"
+            placeholder="Enter Full Name"
             name="pin"
             onChange={onChangeUsername}
           />
