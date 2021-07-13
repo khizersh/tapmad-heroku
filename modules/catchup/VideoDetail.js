@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Card from "../category/components/card/Card";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
+import { ContentViewed } from "../../services/gtm";
 
 export default function VideoDetail({ video, videoList }) {
   const [slug, setSlug] = useState(null);
@@ -10,6 +11,7 @@ export default function VideoDetail({ video, videoList }) {
     if (video) {
       let slugPlay = SEOFriendlySlugsForVideo(video, true);
       setSlug(slugPlay);
+      ContentViewed(video);
     }
   }, [video, videoList]);
 
@@ -29,8 +31,8 @@ export default function VideoDetail({ video, videoList }) {
                     <h2>{video && video.VideoName}</h2>
                     <div className="text-dark">
                       {video &&
-                      video.VideoDescription &&
-                      video.VideoDescription.length > 200
+                        video.VideoDescription &&
+                        video.VideoDescription.length > 200
                         ? video.VideoDescription.slice(0, 220) + "..."
                         : video.VideoDescription}
                     </div>
@@ -65,12 +67,12 @@ export default function VideoDetail({ video, videoList }) {
       <div className="row mt-5">
         {videoList && videoList.length > 0
           ? videoList.map((vid, i) => {
-              let type = "";
-              if (!vid.IsVideoFree) {
-                type = vid.PackageName ? vid.PackageName : "";
-              }
-              return <Card catchup={true} key={i} video={vid} type={type} />;
-            })
+            let type = "";
+            if (!vid.IsVideoFree) {
+              type = vid.PackageName ? vid.PackageName : "";
+            }
+            return <Card catchup={true} key={i} video={vid} type={type} />;
+          })
           : null}
       </div>
     </>

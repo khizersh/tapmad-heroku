@@ -10,7 +10,8 @@ import PlayerShop from "../player-shop/player-shop";
 import { PlayerService } from "../../modules/single-movie/Player.service";
 import { useRouter } from "next/router";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
-
+import { VideoWatched } from "../../services/gtm";
+var fired = false;
 export default function CatchupPlayer({ video, videoList }) {
 
   const router = useRouter();
@@ -92,6 +93,7 @@ export default function CatchupPlayer({ video, videoList }) {
   }, [router, videoList]);
 
   useEffect(() => {
+    fired = false;
     setMovie(video);
     if (video.IsVideoChannel) {
       setVideoLink({
@@ -129,6 +131,14 @@ export default function CatchupPlayer({ video, videoList }) {
               )}
               <div id="player-div2" className="player-div2" style={{ border: "1px solid white" }}>
                 <ReactJWPlayer
+                  onTime={(e) => {
+                    if (e.currentTime > 3 && !fired) {
+                      VideoWatched(video);
+                      fired = true;
+                    } else {
+                      return
+                    }
+                  }}
                   playerId="my-unique-id"
                   playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
                   isAutoPlay={true}
@@ -229,20 +239,20 @@ export default function CatchupPlayer({ video, videoList }) {
               <div>
                 {relatedVideo.length
                   ? relatedVideo.map((video, i) => {
-                      let slug = SEOFriendlySlugsForVideo(video, true);
-                      return (
-                        <Link
-                          href={slug}
-                          replace={true}
-                          shallow={false}
-                          key={i}
-                        >
-                          <a>
-                            <RelatedProductCard video={video} />
-                          </a>
-                        </Link>
-                      );
-                    })
+                    let slug = SEOFriendlySlugsForVideo(video, true);
+                    return (
+                      <Link
+                        href={slug}
+                        replace={true}
+                        shallow={false}
+                        key={i}
+                      >
+                        <a>
+                          <RelatedProductCard video={video} />
+                        </a>
+                      </Link>
+                    );
+                  })
                   : null}
               </div>
             </div>
