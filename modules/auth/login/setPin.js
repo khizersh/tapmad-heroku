@@ -11,8 +11,27 @@ import withLogin from "../LoginHOC";
 function SetUserPin({ login, ip }) {
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
+  const [username, setUsername] = useState("");
+  const [showUsername, setShowUsername] = useState(false);
   const { setLoader } = useContext(MainContext);
   const { initialState } = useContext(MainContext);
+
+  useEffect(() => {
+    if (initialState?.User?.MobileNo) {
+      let num = initialState?.User?.MobileNo;
+      let body = { Language: "en", MobileNo: num };
+      AuthService.GetCardUser(body)
+        .then((res) => {
+          if (res?.data?.User?.IsProfileNameSet) {
+            setShowUsername(false);
+          } else {
+            setShowUsername(true);
+          }
+          Cookie.setCookies("userId", res.data.User.UserId);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, []);
 
   async function setUserPin() {
     if (!pin) {
@@ -31,9 +50,11 @@ function SetUserPin({ login, ip }) {
     } else {
       setLoader(true);
     }
-    const resp = await AuthService.setUserPin(pin);
+    const resp = await AuthService.setUserPin(pin, username);
     if (resp.responseCode == 1) {
-      const clearCache = await AuthService.clearUserToken(initialState?.User?.MobileNo);
+      const clearCache = await AuthService.clearUserToken(
+        initialState?.User?.MobileNo
+      );
 
       // logging start
       let body = {
@@ -70,6 +91,10 @@ function SetUserPin({ login, ip }) {
     }
   }
 
+  function onChangeUsername(e) {
+    setUsername(e.target.value);
+  }
+
   function onChangeCPin(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -86,6 +111,20 @@ function SetUserPin({ login, ip }) {
       <h5>Please set your 4 digit PIN</h5>
       <br />
 
+      {showUsername ? (
+        <div className="form-group" style={{ marginBottom: "0.3rem" }}>
+          <label style={{ color: "#fff", fontSize: "14px" }}>
+            Please enter your Full Name
+          </label>
+          <input
+            type="text"
+            className="text-center form-control numeric"
+            placeholder="Enter Full Name"
+            name="pin"
+            onChange={onChangeUsername}
+          />
+        </div>
+      ) : null}
       <div className="form-group" style={{ marginBottom: "0.3rem" }}>
         <input
           type="text"
@@ -97,38 +136,39 @@ function SetUserPin({ login, ip }) {
       </div>
       <div className="form-group" style={{ marginBottom: "0.3rem" }}>
         <label style={{ color: "#fff", fontSize: "14px" }}>
-          Enter your new pin for login{" "}
+          Enter your new PIN for login{" "}
         </label>
         <input
           type="password"
           className="text-center form-control numeric"
           minLength="4"
           maxLength="4"
-          placeholder="4 digit PIN"
+          placeholder="Enter your 4 digit Pin Code"
           name="pin"
           onChange={onChangePin}
         />
       </div>
       <div className="form-group" style={{ marginBottom: "0.3rem" }}>
-        <label style={{ color: "#fff", fontSize: "14px" }}>
+        {/* <label style={{ color: "#fff", fontSize: "14px" }}>
           Confirm your new pin
-        </label>
+        </label> */}
         <input
           type="password"
           className="text-center form-control numeric"
           minLength="4"
           maxLength="4"
-          placeholder="4 digit PIN"
+          placeholder="Re-enter your Pin code"
           name="pin"
           onChange={onChangeCPin}
         />
       </div>
+
       <div className="form-group text-center mb-0">
         <button
           className="btn btn-block btn-success req_pin_cde_btn req_pin_cde_btn2"
           onClick={setUserPin}
         >
-          Set Your Pin
+          SUBMIT
         </button>
       </div>
     </div>
