@@ -54,31 +54,36 @@ export function ContentViewed(video) {
     }
 }
 export function VideoWatched(response) {
-    if (response.Video && response.Video.getProductiongenreName) {
-        var Genre = [];
-        var newGenre = [];
-        response.Video.getProductiongenreName.forEach((e) => {
-            Genre.push(e.genraName);
-        });
-        response.Video.getProductionNewgenreName.forEach((e) => {
-            newGenre.push(e.newGenraName);
-        });
-        const { mobile, userId } = getUserDetails();
+    try {
+        if (response.Video && response.Video.getProductiongenreName) {
+            var Genre = [];
+            var newGenre = [];
+            response.Video.getProductiongenreName.forEach((e) => {
+                Genre.push(e.genraName);
+            });
+            response.Video.getProductionNewgenreName.forEach((e) => {
+                newGenre.push(e.newGenraName);
+            });
+            const { mobile, userId } = getUserDetails();
 
-        dataLayer.push({
-            event: "video_watched",
-            ID: response.Video.VideoEntityId,
-            Name: response.Video.VideoName,
-            Genre: Genre.toString(),
-            NewGenre: newGenre.toString(),
-            Category: response.Video.productioncategoryName,
-            Productionhouse: response.Video.productionhouseName,
-            msisdn: mobile,
-            user_id: userId,
-            Region: response.Video.RegionName,
-            Format: response.Video.FormatName
-        });
+            dataLayer.push({
+                event: "video_watched",
+                ID: response.Video.VideoEntityId,
+                Name: response.Video.VideoName,
+                Genre: Genre.toString(),
+                NewGenre: newGenre.toString(),
+                Category: response.Video.productioncategoryName,
+                Productionhouse: response.Video.productionhouseName,
+                msisdn: mobile,
+                user_id: userId,
+                Region: response.Video.RegionName,
+                Format: response.Video.FormatName
+            });
+        }
+    } catch (e) {
+        console.log(e);
     }
+
 }
 export function ProfileViewed() {
     const { mobile, userId } = getUserDetails();
