@@ -3,6 +3,7 @@ import ItemCard from "../../modules/search/ItemCard";
 import { viewMoreContent } from "../../services/apilinks";
 import { get } from "../../services/http-service";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
+import requestIp from "request-ip";
 
 export default function ViewMore(props) {
     console.log("props ", props);
@@ -18,6 +19,10 @@ export default function ViewMore(props) {
 
 export async function getServerSideProps(context) {
     var slug = context.query.slug;
-    var response = await get(viewMoreContent(0, 5, slug[1], slug[2]));
+    var ip = requestIp.getClientIp(context.req);
+    if (process.env.TAPENV == "local") {
+        ip = "39.44.217.70";
+    }
+    var response = await get(viewMoreContent(0, 5, slug[1], slug[2]), ip);
     return { props: { data: response.data } };
 }
