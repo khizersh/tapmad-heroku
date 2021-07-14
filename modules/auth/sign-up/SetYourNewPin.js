@@ -18,6 +18,15 @@ function SetYourNewPinSignUp({ login, ip }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
+    if(showUsername){
+      if(username.trim().length < 1){
+        return swal({
+          timer: 3000,
+          title: "Please enter your Full Name!",
+          icon: "error",
+        });
+      }
+    }
     if (!pin.length) {
       return swal({
         timer: 3000,
@@ -101,6 +110,7 @@ function SetYourNewPinSignUp({ login, ip }) {
               type="text"
               placeholder="Enter Full Name"
               className="form-control"
+              maxLength="20"
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>

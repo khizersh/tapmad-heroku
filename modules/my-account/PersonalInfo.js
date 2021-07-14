@@ -59,7 +59,6 @@ const PersonalInfo = ({ data }) => {
         setUserImage(data.data.UserProfile.UserProfilePicture);
       }
       Cookie.setCookies("userProfileName", profileData.FullName);
-
       setBtnEnable(false);
       UpdateProfile(profileData);
       swal({

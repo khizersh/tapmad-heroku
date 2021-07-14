@@ -48,7 +48,6 @@ const HomepageSlider = ({ movies, ads, name }) => {
   }
   function sendToAnalytics(sectionName, index, videoName) {
     UserEngagemnent(name, sectionName, index + 1, videoName);
-
   }
   function handleOnClick(e, mov) {
     e.stopPropagation();
@@ -87,38 +86,45 @@ const HomepageSlider = ({ movies, ads, name }) => {
                 <div>
                   <Slider {...settings}>
                     {movieSection &&
-                      !movieSection.IsCategories &&
-                      movieSection.Videos &&
-                      movieSection.Videos.length > 0
+                    !movieSection.IsCategories &&
+                    movieSection.Videos &&
+                    movieSection.Videos.length > 0
                       ? movieSection.Videos.map((mov, index) => {
-                        let slug = setUrlAccordingToVideoType(
-                          mov,
-                          IsLiveChannel
-                        );
-                        return (
-                          <Link
-                            href={slug}
-                            key={index}
-                            passHref={true}
-                            shallow={true}
-                          >
-                            <a
-                              onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => (handleOnClick(e, mov), sendToAnalytics(movieSection.SectionName, index, mov.VideoName))}
+                          let slug = setUrlAccordingToVideoType(
+                            mov,
+                            IsLiveChannel
+                          );
+                          return (
+                            <Link
+                              href={slug}
+                              key={index}
+                              passHref={true}
+                              shallow={true}
                             >
-                              <div
-                                className="tm-mv-bx"
-                                key={index}
-                                onMouseOver={() => handleMouseOver(row)}
-                                onMouseOut={() => handleMouseOut(row)}
+                              <a
+                                onMouseDown={(e) => handleOnMouseDown(e)}
+                                onClick={(e) => (
+                                  handleOnClick(e, mov),
+                                  sendToAnalytics(
+                                    movieSection.SectionName,
+                                    index,
+                                    mov.VideoName
+                                  )
+                                )}
                               >
-                                <div className="movies-images">
-                                  <img
-                                    src={mov.NewChannelThumbnailPath}
-                                    style={{ width: "100%" }}
-                                    alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                <div
+                                  className="tm-mv-bx"
+                                  key={index}
+                                  onMouseOver={() => handleMouseOver(row)}
+                                  onMouseOut={() => handleMouseOut(row)}
+                                >
+                                  <div className="movies-images">
+                                    <img
+                                      src={mov.NewChannelThumbnailPath}
+                                      style={{ width: "100%" }}
+                                      alt={"tapmad-" + mov.VideoName}
+                                    />
+                                    {/* <Image
                                     src={mov.NewChannelThumbnailPath}
                                     // style={{ width: "100%" }}
                                     height={304}
@@ -127,106 +133,117 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
                                   /> */}
-                                  {mov.IsVideoFree ? null : (
-                                    <div className="live_side">Premium</div>
-                                  )}
-                                </div>
-                                <div className="tm-mv-items">
-                                  <div className="tm-mv-name">
-                                    <div
-                                      style={{
-                                        fontSize: "10px",
-                                        color: "white",
-                                      }}
-                                    >
-                                      {mov.VideoName}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </Link>
-                        );
-                      })
-                      : movieSection &&
-                      movieSection.Categories &&
-                      movieSection.Categories.map((mov, index) => {
-                        let slug = setUrlAccordingToVideoType(
-                          mov,
-                          IsCategory
-                        );
-                        return (
-                          <Link
-                            href={slug}
-                            key={index}
-                            passHref={true}
-                            shallow={true}
-                          >
-                            <a
-                              onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => (handleOnClick(e, mov), sendToAnalytics(movieSection.SectionName, index, mov.CategoryName))}
-                            >
-                              <div
-                                className="tm-mv-bx"
-                                onMouseOver={() => handleMouseOver(row)}
-                                onMouseOut={() => handleMouseOut(row)}
-                                key={index}
-                              >
-                                <div className="movies-images">
-                                  <img
-                                    src={mov.NewCategoryImage}
-                                    style={{ width: "100%" }}
-                                    alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
-                                    src={mov.NewCategoryImage}
-                                    // style={{ width: "100%" }}
-                                    loading={'eager'}
-                                    height={304}
-                                    width={228}
-                                    // layout='fill'
-                                    alt={"tapmad-" + mov.VideoName}
-                                  /> */}
-                                  {mov.IsVideoFree
-                                    ? null
-                                    : mov.PackageName && (
-                                      <div className="live_side">
-                                        {mov.PackageName}
-                                      </div>
+                                    {mov.IsVideoFree ? (
+                                      mov.IsVideoChannel == true || mov.IsVideoChannel == "1" ? (
+                                        <div className="live_side">Live</div>
+                                      ) : null
+                                    ) : (
+                                      <div className="live_side">Premium</div>
                                     )}
-                                </div>
-                                <div className="tm-mv-items">
-                                  <div className="tm-mv-name">
-                                    <div
-                                      style={{
-                                        fontSize: "10px",
-                                        color: "white",
-                                      }}
-                                    >
-                                      {mov.CategoryName}
+                                  </div>
+                                  <div className="tm-mv-items">
+                                    <div className="tm-mv-name">
+                                      <div
+                                        style={{
+                                          fontSize: "10px",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {mov.VideoName}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </a>
-                          </Link>
-                        );
-                      })}
+                              </a>
+                            </Link>
+                          );
+                        })
+                      : movieSection &&
+                        movieSection.Categories &&
+                        movieSection.Categories.map((mov, index) => {
+                          let slug = setUrlAccordingToVideoType(
+                            mov,
+                            IsCategory
+                          );
+                          return (
+                            <Link
+                              href={slug}
+                              key={index}
+                              passHref={true}
+                              shallow={true}
+                            >
+                              <a
+                                onMouseDown={(e) => handleOnMouseDown(e)}
+                                onClick={(e) => (
+                                  handleOnClick(e, mov),
+                                  sendToAnalytics(
+                                    movieSection.SectionName,
+                                    index,
+                                    mov.CategoryName
+                                  )
+                                )}
+                              >
+                                <div
+                                  className="tm-mv-bx"
+                                  onMouseOver={() => handleMouseOver(row)}
+                                  onMouseOut={() => handleMouseOut(row)}
+                                  key={index}
+                                >
+                                  <div className="movies-images">
+                                    <img
+                                      src={mov.NewCategoryImage}
+                                      style={{ width: "100%" }}
+                                      alt={"tapmad-" + mov.VideoName}
+                                    />
+                                    {/* <Image
+                                    src={mov.NewCategoryImage}
+                                    // style={{ width: "100%" }}
+                                    loading={'eager'}
+                                    height={304}
+                                    width={228}
+                                    // layout='fill'
+                                    alt={"tapmad-" + mov.VideoName}
+                                  /> */}
+                                    {mov.IsVideoFree
+                                      ? null
+                                      : mov.PackageName && (
+                                          <div className="live_side">
+                                            {mov.PackageName}
+                                          </div>
+                                        )}
+                                  </div>
+                                  <div className="tm-mv-items">
+                                    <div className="tm-mv-name">
+                                      <div
+                                        style={{
+                                          fontSize: "10px",
+                                          color: "white",
+                                        }}
+                                      >
+                                        {mov.CategoryName}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </Link>
+                          );
+                        })}
                   </Slider>
                 </div>
               </div>
               {ads && adsRow.length
                 ? adsRow.map((m, i) =>
-                  m.row == row + 1 ? (
-                    <HomePageAd
-                      key={i}
-                      desktop={m.desktop}
-                      mobile={m.mobile}
-                      sizeDesktop={m.desktopSize}
-                      sizeMobile={m.mobileSize}
-                    />
-                  ) : null
-                )
+                    m.row == row + 1 ? (
+                      <HomePageAd
+                        key={i}
+                        desktop={m.desktop}
+                        mobile={m.mobile}
+                        sizeDesktop={m.desktopSize}
+                        sizeMobile={m.mobileSize}
+                      />
+                    ) : null
+                  )
                 : null}
             </>
           );

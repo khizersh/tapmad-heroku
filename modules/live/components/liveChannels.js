@@ -12,7 +12,6 @@ import { getChannelsWithPagination } from "../../../services/apilinks";
 import Link from "next/link";
 
 export default function LiveChannels({ channel }) {
-  console.log("channel in comp: ", channel);
   var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(channel);
   const [currentRow, setCurrentRow] = useState(5);
