@@ -73,8 +73,14 @@ function SetYourNewPinSignUp({ login, ip }) {
         });
       } else if (response.responseCode == 1) {
         await AuthService.clearUserToken(initialState.User.MobileNo);
-
         await login(ip);
+      }else{
+        setLoader(false)
+       return swal({
+          timer: 3000,
+          title: response.message,
+          icon: "error",
+        });
       }
     } else {
       return swal({

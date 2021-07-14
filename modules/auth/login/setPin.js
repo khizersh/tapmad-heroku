@@ -34,8 +34,8 @@ function SetUserPin({ login, ip }) {
   }, []);
 
   async function setUserPin() {
-    if(showUsername){
-      if(username.trim().length < 1){
+    if (showUsername) {
+      if (username.trim().length < 1) {
         return swal({
           timer: 3000,
           title: "Please enter your Full Name!",
@@ -80,6 +80,13 @@ function SetUserPin({ login, ip }) {
       });
       await AuthService.checkUser(initialState.User.MobileNo);
       await login(ip);
+    } else if (resp.responseCode == 2) {
+      setLoader(false);
+      return swal({
+        timer: 3000,
+        title: resp.message,
+        icon: "error",
+      });
     } else {
       swal({
         title: "something went wrong!",
