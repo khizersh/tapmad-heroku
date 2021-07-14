@@ -34,6 +34,15 @@ function SetUserPin({ login, ip }) {
   }, []);
 
   async function setUserPin() {
+    if(showUsername){
+      if(username.trim().length < 1){
+        return swal({
+          timer: 3000,
+          title: "Please enter your Full Name!",
+          icon: "error",
+        });
+      }
+    }
     if (!pin) {
       return swal({
         title: "Please enter pin!",
