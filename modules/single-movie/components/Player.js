@@ -165,9 +165,10 @@ export default function Player({ movies }) {
     };
   }, []);
   useEffect(() => {
-    if (!movies.IsVideoFree) {
+    if (movies.Video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
         router.push("/sign-up");
+        alert('Yooo')
       }
     }
   }, [])
