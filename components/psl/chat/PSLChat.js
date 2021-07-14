@@ -109,7 +109,7 @@ export default function PSLChat({ channel }) {
 
   function sendMessage() {
     let name = Cookie.getCookies("userProfileName");
-    if (!name || name.toLowerCase() == "anonymous") {
+    if (!name || name.trim().toLowerCase() == "anonymous") {
      msg = textMessage.current.value;
       return swal({
         title: "Please update your Profile Name before entering the chat",
