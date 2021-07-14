@@ -93,7 +93,7 @@ function SetYourNewPinSignUp({ login, ip }) {
 
   return (
     <div>
-      {showUsername ? (
+      {!showUsername ? (
         <>
           <p className="text-center mt-4">Please enter your Full Name</p>
           <div className="px-3 pb-2">
@@ -101,6 +101,7 @@ function SetYourNewPinSignUp({ login, ip }) {
               type="text"
               placeholder="Enter Full Name"
               className="form-control"
+              maxLength="20"
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>

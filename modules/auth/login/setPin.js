@@ -121,6 +121,7 @@ function SetUserPin({ login, ip }) {
             className="text-center form-control numeric"
             placeholder="Enter Full Name"
             name="pin"
+            maxLength="20"
             onChange={onChangeUsername}
           />
         </div>
