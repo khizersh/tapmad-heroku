@@ -165,7 +165,8 @@ export default function Player({ movies }) {
     };
   }, []);
   useEffect(() => {
-    if (!movies.IsVideoFree) {
+    console.log("movies ", movies);
+    if (!movies.Video.IsVideoFree) {
       if (!isAuthentictedUser()) {
         router.push("/sign-up");
       }
