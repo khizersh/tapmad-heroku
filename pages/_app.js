@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps, env }) {
   } else {
     webEnv = "local";
   }
-  console.log("Envsss is ", webEnv)
+  console.log("Envsss is ", process.env.TAPENV)
 
   useLayoutEffect(() => {
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
