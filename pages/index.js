@@ -6,7 +6,6 @@ import requestIp from "request-ip";
 import { HomeService } from "../modules/home/components/home.service";
 
 export default function Home(props) {
-  console.log("Homepage env ", props.env);
   return (
     <div>
       <Head>
@@ -19,7 +18,6 @@ export default function Home(props) {
           name="description"
           content="Enjoy Live TV channels and watch AdFREE PSL Live streaming online exclusively on Tapmad TV. Latest sports, movies, tv shows, live score and cricket highlights."
         />
-        {props.env == 'staging' ? <meta name="robots" content="noindex" /> : null}
         <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
         <meta
           name="keywords"
