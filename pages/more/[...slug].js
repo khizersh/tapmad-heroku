@@ -24,5 +24,9 @@ export async function getServerSideProps(context) {
         ip = "39.44.217.70";
     }
     var response = await get(viewMoreContent(0, 5, slug[1], slug[2]), ip);
-    return { props: { data: response.data } };
+    return {
+        props: {
+            data: response.data, env: process.env.TAPENV
+        }
+    };
 }

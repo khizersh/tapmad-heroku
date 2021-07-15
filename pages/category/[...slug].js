@@ -62,5 +62,9 @@ export async function getServerSideProps(context) {
   const data = await get(getSeasonVodByCategoryId + categoryId, ip);
   let seo = await getSEODataByCategory(categoryId, context.resolvedUrl)
 
-  return { props: { data: data.data, schema: seo } };
+  return {
+    props: {
+      data: data.data, schema: seo, env: process.env.TAPENV
+    }
+  };
 }

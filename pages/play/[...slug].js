@@ -18,14 +18,14 @@ const Syno = (props) => {
 
   if (!mount) {
     if (!video) {
- 
+
       if (Array.isArray(props.data.Video)) {
         setVideo(props.data.Video[0]);
       } else {
         setVideo(props.data.Video);
       }
 
-  
+
       setVideoList(props.data.Sections);
       setMount(true);
     }
@@ -83,5 +83,9 @@ export async function getServerSideProps(context) {
     let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
     return { props: { data: data.data, schema: seo } };
   }
-  return { props: { data: data } };
+  return {
+    props: {
+      data: data, env: process.env.TAPENV
+    }
+  };
 }

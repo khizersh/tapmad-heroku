@@ -107,5 +107,5 @@ const samsungtv = () => {
 export default samsungtv;
 
 export async function getStaticProps() {
-  return { props: { noSideBar: true } };
+  return { props: { noSideBar: true, env: process.env.TAPENV } };
 }

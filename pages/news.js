@@ -149,5 +149,5 @@ export async function getServerSideProps(context) {
       };
     }
   }
-  return { props: { news: null, newsArray: [], protected: false } };
+  return { props: { news: null, newsArray: [], protected: false, env: process.env.TAPENV } };
 }
