@@ -34,48 +34,19 @@ const Skeleton = dynamic(() => import("../components/MainSkeleton"));
 const Header = dynamic(() => import("../components/App/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
 
-function MyApp({ Component, pageProps, test }) {
+function MyApp({ Component, pageProps, env }) {
   const router = useRouter();
-  const [showHeader, setShowHeader] = useState(true)
-
-  function checkUserAuthentication() {
-    if (pageProps.auth) {
-      const token = Cookie.getCookies("content-token");
-      if (token && token.length > 50) {
-        router.push("/");
-        return false;
-      } else {
-        return false;
-      }
-    }
-    if (pageProps.protected) {
-      const token = Cookie.getCookies("content-token");
-      if (token && token.length > 50) {
-        return true;
-      } else {
-        router.push("/sign-in");
-        return false;
-      }
-    }
-    if (pageProps.dashboard) {
-      let value = DashboardService.checkCredentials();
-      if (value) {
-        return true;
-      } else {
-        router.push("/dashboard/login");
-        return false;
-      }
-    }
+  var webEnv = "";
+  if (process.env.TAPENV == 'staging') {
+    webEnv = "staging";
+  } else if (process.env.TAPENV == 'production') {
+    webEnv = "production";
+  } else if (process.env.TAPENV == 'local') {
+    webEnv = "local";
+  } else {
+    webEnv = "local";
   }
-
-  // useEffect(() => {
-  //   checkUserAuthentication();
-  //   if(window.innerWidth <= 800){
-  //     if(window.parent && window.parent.location && window.parent.location.pathname.includes("watch")){
-  //       setShowHeader(false)
-  //     }
-  //   }
-  // }, []);
+  console.log("Envsss is ", webEnv)
 
   useLayoutEffect(() => {
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
