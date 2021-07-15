@@ -100,9 +100,9 @@ function MyApp({ Component, pageProps, test }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        {process.env.TAPENV == 'production' ? null
+        {/* {process.env.TAPENV == 'production' ? null
           : <meta name="robots" content="noindex" />
-        }
+        } */}
         <meta
           name="keywords"
           content="Watch LIVE TV channels online, live psl, live cricket, watch live psl streaming, ad free stream, live sports, live sports, watch adfree psl online, hd stream, Pakistan cricket match, live cricket, live sports"
