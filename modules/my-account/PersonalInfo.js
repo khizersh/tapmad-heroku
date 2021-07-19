@@ -148,6 +148,7 @@ const PersonalInfo = ({ data }) => {
             type="text"
             className="form-control"
             placeholder="Full name"
+            maxLength="20"
             name="FullName"
             onChange={onChange}
             value={profileData.FullName}
