@@ -1,19 +1,19 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { AuthService } from "../../../modules/auth/auth.service";
 import { loggingTags } from "../../../services/apilinks";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
+import { UserEngagemnent } from "../../../services/gtm";
 import { actionsRequestContent } from "../../../services/http-service";
 import {
   basicSliderConfig,
+  log,
   setUrlAccordingToVideoType,
-  viewMoreCleanUrls,
+  viewMoreCleanUrls
 } from "../../../services/utils";
-import { useRouter } from "next/router";
-import { AuthService } from "../../../modules/auth/auth.service";
 import HomePageAd from "./HomePageAd";
-import Image from "next/image";
-import { UserEngagemnent } from "../../../services/gtm";
 
 const HomepageSlider = ({ movies, ads, name }) => {
   const router = useRouter();
@@ -42,7 +42,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
     }
   }
   function getMoreSections(sectionDetails) {
-    console.log(sectionDetails);
+    // console.log(sectionDetails);
   }
   function handleOnMouseDown(e) {
     e.preventDefault(); // stops weird link dragging effect
@@ -89,11 +89,16 @@ const HomepageSlider = ({ movies, ads, name }) => {
               <div className="col-12 p-lg-1 p-0" key={row}>
                 <div className="d-flex justify-content-between align-items-center">
                   <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
-                  {name != 'Homepage' ? <Link
-                    href={viewMoreSlug}
-                    passHref={true}
-                    shallow={true}
-                  ><a><span className="badge badge-primary" onClick={() => getMoreSections(movieSection)}>View More</span></a></Link> : null}
+                  {name != 'Homepage' ?
+                    movieSection.Videos.length > 8 ? <Link
+                      href={viewMoreSlug}
+                      passHref={true}
+                      shallow={true}
+                    ><a>
+                        <span className="badge badge-primary" onClick={() => getMoreSections(movieSection)}>View More</span>
+                      </a>
+                    </Link> : null
+                    : null}
                 </div>
                 <div>
                   <Slider {...settings}>
