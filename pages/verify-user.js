@@ -83,7 +83,8 @@ export function getServerSideProps(context) {
   return {
     props: {
       noSideBar: true,
-      ip: ip
+      ip: ip,
+      env: process.env.TAPENV
     },
   };
 }

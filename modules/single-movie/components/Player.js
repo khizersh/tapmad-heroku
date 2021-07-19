@@ -165,10 +165,10 @@ export default function Player({ movies }) {
     };
   }, []);
   useEffect(() => {
-    console.log("movies ", movies);
-    if (!movies.Video.IsVideoFree) {
+    if (movies.Video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
         router.push("/sign-up");
+        alert('Yooo')
       }
     }
   }, [])

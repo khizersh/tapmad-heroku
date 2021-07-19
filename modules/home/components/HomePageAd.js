@@ -4,7 +4,6 @@ import { DFPSlotsProvider } from "react-dfp";
 
 const HomePageAd = ({ desktop, mobile, sizeDesktop, sizeMobile }) => {
   let widthDesktop, widthMobile, heightDesktop, heightMobile;
-  console.log("sizeMobile: ",sizeMobile);
 
   let sizeDesk = sizeDesktop.trim();
   let sizeMob = sizeMobile.trim();

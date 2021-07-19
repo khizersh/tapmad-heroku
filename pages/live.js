@@ -33,6 +33,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       channel: channel,
+      env: process.env.TAPENV
     },
   };
 }

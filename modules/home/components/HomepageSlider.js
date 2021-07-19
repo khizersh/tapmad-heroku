@@ -1,18 +1,19 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { AuthService } from "../../../modules/auth/auth.service";
 import { loggingTags } from "../../../services/apilinks";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
+import { UserEngagemnent } from "../../../services/gtm";
 import { actionsRequestContent } from "../../../services/http-service";
 import {
   basicSliderConfig,
+  log,
   setUrlAccordingToVideoType,
+  viewMoreCleanUrls
 } from "../../../services/utils";
-import { useRouter } from "next/router";
-import { AuthService } from "../../../modules/auth/auth.service";
 import HomePageAd from "./HomePageAd";
-import Image from "next/image";
-import { UserEngagemnent } from "../../../services/gtm";
 
 const HomepageSlider = ({ movies, ads, name }) => {
   const router = useRouter();
@@ -40,7 +41,9 @@ const HomepageSlider = ({ movies, ads, name }) => {
       document.getElementsByTagName("body")[0].style.overflowX = "hidden";
     }
   }
-
+  function getMoreSections(sectionDetails) {
+    // console.log(sectionDetails);
+  }
   function handleOnMouseDown(e) {
     e.preventDefault(); // stops weird link dragging effect
     setClientXonMouseDown(e.clientX);
@@ -48,8 +51,8 @@ const HomepageSlider = ({ movies, ads, name }) => {
   }
   function sendToAnalytics(sectionName, index, videoName) {
     UserEngagemnent(name, sectionName, index + 1, videoName);
-
   }
+
   function handleOnClick(e, mov) {
     e.stopPropagation();
     if (clientXonMouseDown !== e.clientX || clientYonMouseDown !== e.clientY) {
@@ -80,10 +83,23 @@ const HomepageSlider = ({ movies, ads, name }) => {
       {movies &&
         movies.length > 0 &&
         movies.map((movieSection, row) => {
+          let viewMoreSlug = viewMoreCleanUrls(movieSection.SectionName, movieSection.SectionId, name);
           return (
             <>
               <div className="col-12 p-lg-1 p-0" key={row}>
-                <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
+                <div className="d-flex justify-content-between align-items-center">
+                  <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
+                  {name != 'Homepage' ?
+                    movieSection.Videos.length > 8 ? <Link
+                      href={viewMoreSlug}
+                      passHref={true}
+                      shallow={true}
+                    ><a>
+                        <span className="badge badge-primary" onClick={() => getMoreSections(movieSection)}>View More</span>
+                      </a>
+                    </Link> : null
+                    : null}
+                </div>
                 <div>
                   <Slider {...settings}>
                     {movieSection &&
@@ -104,7 +120,14 @@ const HomepageSlider = ({ movies, ads, name }) => {
                           >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => (handleOnClick(e, mov), sendToAnalytics(movieSection.SectionName, index, mov.VideoName))}
+                              onClick={(e) => (
+                                handleOnClick(e, mov),
+                                sendToAnalytics(
+                                  movieSection.SectionName,
+                                  index,
+                                  mov.VideoName
+                                )
+                              )}
                             >
                               <div
                                 className="tm-mv-bx"
@@ -127,7 +150,11 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
                                   /> */}
-                                  {mov.IsVideoFree ? null : (
+                                  {mov.IsVideoFree ? (
+                                    mov.IsVideoChannel == true || mov.IsVideoChannel == "1" ? (
+                                      <div className="live_side">Live</div>
+                                    ) : null
+                                  ) : (
                                     <div className="live_side">Premium</div>
                                   )}
                                 </div>
@@ -164,7 +191,14 @@ const HomepageSlider = ({ movies, ads, name }) => {
                           >
                             <a
                               onMouseDown={(e) => handleOnMouseDown(e)}
-                              onClick={(e) => (handleOnClick(e, mov), sendToAnalytics(movieSection.SectionName, index, mov.CategoryName))}
+                              onClick={(e) => (
+                                handleOnClick(e, mov),
+                                sendToAnalytics(
+                                  movieSection.SectionName,
+                                  index,
+                                  mov.CategoryName
+                                )
+                              )}
                             >
                               <div
                                 className="tm-mv-bx"

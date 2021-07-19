@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-
+  console.log("Env is ", process.env.TAPENV)
   let movie, banner, featured;
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
@@ -53,6 +53,7 @@ export async function getServerSideProps(context) {
       banner: banner,
       featured: featured,
       ip: ip,
+      env: process.env.TAPENV
     },
   };
 }

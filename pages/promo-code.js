@@ -144,6 +144,7 @@ export function getStaticProps() {
   return {
     props: {
       auth: true,
+      env: process.env.TAPENV
     },
   };
 }

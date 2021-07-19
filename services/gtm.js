@@ -54,24 +54,36 @@ export function ContentViewed(video) {
     }
 }
 export function VideoWatched(response) {
-    if (response.Video && response.Video.getProductiongenreName) {
-        var Genre = [];
-        response.Video.getProductiongenreName.forEach((e) => {
-            Genre.push(e.genraName);
-        });
-        const { mobile, userId } = getUserDetails();
+    try {
+        if (response.Video && response.Video.getProductiongenreName) {
+            var Genre = [];
+            var newGenre = [];
+            response.Video.getProductiongenreName.forEach((e) => {
+                Genre.push(e.genraName);
+            });
+            response.Video.getProductionNewgenreName.forEach((e) => {
+                newGenre.push(e.newGenraName);
+            });
+            const { mobile, userId } = getUserDetails();
 
-        dataLayer.push({
-            event: "video_watched",
-            ID: response.Video.VideoEntityId,
-            Name: response.Video.VideoName,
-            Genre: Genre.toString(),
-            Category: response.Video.productioncategoryName,
-            Productionhouse: response.Video.productionhouseName,
-            msisdn: mobile,
-            user_id: userId
-        });
+            dataLayer.push({
+                event: "video_watched",
+                ID: response.Video.VideoEntityId,
+                Name: response.Video.VideoName,
+                Genre: Genre.toString(),
+                NewGenre: newGenre.toString(),
+                Category: response.Video.productioncategoryName,
+                Productionhouse: response.Video.productionhouseName,
+                msisdn: mobile,
+                user_id: userId,
+                Region: response.Video.RegionName,
+                Format: response.Video.FormatName
+            });
+        }
+    } catch (e) {
+        console.log(e);
     }
+
 }
 export function ProfileViewed() {
     const { mobile, userId } = getUserDetails();
@@ -83,7 +95,6 @@ export function ProfileViewed() {
 }
 export function UserEngagemnent(pageName, sectionName, index, vodName) {
     const { mobile, userId } = getUserDetails();
-    console.log("Yolo ", pageName, sectionName, index, vodName);
     dataLayer.push({ "event": "User_Engagement", "Row Name": sectionName, "Page Name": pageName, "Icon Number": index, "Icon Name": vodName, "user_id": userId, "msisdn": mobile })
 }
 export function UpdateProfile(profile) {

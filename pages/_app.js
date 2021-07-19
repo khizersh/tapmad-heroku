@@ -1,81 +1,37 @@
-import "../styles/globals.css";
-import "../styles/globals.scss";
-import "../styles/game.css";
-import "../modules/home/sliderCard.css";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import Router from "next/router";
+import React, { useLayoutEffect } from "react";
 import "../components/App/Header.css";
-import "../modules/dashboard/dashboard.style.css";
-import "../modules/category/css/card-hor.style.css";
-import "../modules/player-shop/player-shop.css";
+import Loader from "../components/Loader";
+import AuthProvider from "../contexts/AuthContext";
+import CatchupProvider from "../contexts/CatchupContext";
+import GameProvider from "../contexts/GameContext";
+import MainProvider, { MainContext } from "../contexts/MainContext";
+import "../styles/globals.scss";
 import "../modules/auth/auth.css";
-import "../modules/search/search.css";
-import "../modules/my-account/myaccount.css";
-import "../modules/movies/movie.css";
 import "../modules/catchup/catchup.css";
+import "../modules/category/css/card-hor.style.css";
+import "../modules/dashboard/dashboard.style.css";
+import "../modules/home/sliderCard.css";
+import "../modules/movies/movie.css";
+import "../modules/my-account/myaccount.css";
 import "../modules/news/news.style.css";
+import "../modules/player-shop/player-shop.css";
 import "../modules/promo-code/promo-code.css";
 import "../modules/samsungtv/samsung.css";
-
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import MainProvider, { MainContext } from "../contexts/MainContext";
-import Loader from "../components/Loader";
-import { Cookie } from "../services/cookies";
-import { DashboardService } from "../modules/dashboard/Dashboard.Service";
-import Router from "next/router";
+import "../modules/search/search.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
-import CatchupProvider from "../contexts/CatchupContext";
-import AuthProvider from "../contexts/AuthContext";
-import dynamic from "next/dynamic";
-import GameProvider from "../contexts/GameContext";
+import "../styles/game.css";
+import "../styles/globals.css";
+
 
 const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
 const Skeleton = dynamic(() => import("../components/MainSkeleton"));
 const Header = dynamic(() => import("../components/App/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
 
-function MyApp({ Component, pageProps, test }) {
-  const router = useRouter();
-  const [showHeader, setShowHeader] = useState(true)
-
-  function checkUserAuthentication() {
-    if (pageProps.auth) {
-      const token = Cookie.getCookies("content-token");
-      if (token && token.length > 50) {
-        router.push("/");
-        return false;
-      } else {
-        return false;
-      }
-    }
-    if (pageProps.protected) {
-      const token = Cookie.getCookies("content-token");
-      if (token && token.length > 50) {
-        return true;
-      } else {
-        router.push("/sign-in");
-        return false;
-      }
-    }
-    if (pageProps.dashboard) {
-      let value = DashboardService.checkCredentials();
-      if (value) {
-        return true;
-      } else {
-        router.push("/dashboard/login");
-        return false;
-      }
-    }
-  }
-
-  // useEffect(() => {
-  //   checkUserAuthentication();
-  //   if(window.innerWidth <= 800){
-  //     if(window.parent && window.parent.location && window.parent.location.pathname.includes("watch")){
-  //       setShowHeader(false)
-  //     }
-  //   }
-  // }, []);
+function MyApp({ Component, pageProps }) {
 
   useLayoutEffect(() => {
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -100,13 +56,12 @@ function MyApp({ Component, pageProps, test }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        {process.env.TAPENV == 'staging' ? <meta name="robots" content="noindex" />
-          : null
-        }
         <meta
           name="keywords"
           content="Watch LIVE TV channels online, live psl, live cricket, watch live psl streaming, ad free stream, live sports, live sports, watch adfree psl online, hd stream, Pakistan cricket match, live cricket, live sports"
         />
+        {pageProps.env == 'staging' ? <meta name="robots" content="noindex" /> : null}
+
         {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
 
         <link

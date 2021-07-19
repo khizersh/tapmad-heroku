@@ -25,7 +25,7 @@ const watch = (props) => {
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
 
-  
+
 
   useEffect(() => {
     if (!props.allowUser) {
@@ -177,5 +177,6 @@ const response = (data, channel, allowUser, seo) => {
     channel,
     allowUser,
     schema: seo,
+    env: process.env.TAPENV
   };
 };

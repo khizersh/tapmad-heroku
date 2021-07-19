@@ -20,7 +20,7 @@ import {
 } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
 var userId = "";
-
+var msg = "";
 export default function PSLChat({ channel }) {
   const router = useRouter();
   const [chatRoom, setChatRooms] = useState([]);
@@ -53,6 +53,10 @@ export default function PSLChat({ channel }) {
         header.style.top = "unset";
       }
     });
+    console.log("var msg: ", msg);
+    if(msg){
+      textMessage.current.value = msg;
+    }
     return () => {
       window.removeEventListener("scroll", scrollCallBack);
     };
@@ -105,7 +109,8 @@ export default function PSLChat({ channel }) {
 
   function sendMessage() {
     let name = Cookie.getCookies("userProfileName");
-    if (!name || name.toLowerCase() == "anonymous") {
+    if (!name || name.trim().toLowerCase() == "anonymous") {
+     msg = textMessage.current.value;
       return swal({
         title: "Please update your Profile Name before entering the chat",
         timer: 2500,

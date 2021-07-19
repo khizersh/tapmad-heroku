@@ -74,6 +74,7 @@ export default function AuthViews(props) {
         />
       }
     } else if (viewToShow == "set-pin") {
+      // here we will check username and update if anonymous 
       return <SetPin />;
     } else if (viewToShow == "login") {
       return (

@@ -68,9 +68,8 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
   }
 
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
-    event.IsVideoFree ? "1" : "0"
-  }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -78,12 +77,35 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
-    event.IsVideoChannel ? "1" : "0"
-  }`;
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
+    }`;
+  return slug;
+}
+function viewMoreCleanUrls(sectionName, sectionId, name) {
+  var pageId = "";
+  if (name == "Live") {
+    pageId = 1;
+  } else if (name == "Movies") {
+    pageId = 2;
+  } else if (name == "Shows") {
+    pageId = 3;
+  }
+  var cleanName = sectionName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  var slug = `/more/${cleanName}/${sectionId}/${pageId}`;
   return slug;
 }
 
+function findImageInVODObject(video) {
+  if (video.hasOwnProperty('VideoImageThumbnail')) {
+    return video.VideoImageThumbnail;
+  } else if (video.hasOwnProperty('ChannelTVImage')) {
+    return video.ChannelTVImage;
+  } else if (video.hasOwnProperty('VideoOnDemandThumb')) {
+    return video.VideoOnDemandThumb;
+  } else {
+    return video.NewChannelThumbnailPath;
+  }
+}
 function SEOFriendlySlugsIsCategoryTrue(event) {
   let prefix = "category";
   let name = event.VideoName ? event.VideoName : event.CategoryName;
@@ -109,18 +131,16 @@ function setUrlAccordingToVideoType(movie, type) {
 // catchup
 function SEOFriendlySlugsForCatchupVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
-    event.VideoEntityId
-  }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
+    }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
 
 function SEOFriendlySlugsForCatchup(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
-    event.VideoEntityId
-  }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
+    }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -150,7 +170,7 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  if (url != "/sign-up" && url != "/sign-in" && url != "/myaccount" ) {
+  if (url != "/sign-up" && url != "/sign-in" && url != "/myaccount") {
     Cookie.setCookies("backUrl", url);
   }
 }
@@ -198,7 +218,7 @@ function getUserDetails() {
     return { mobile: "", userId: "" };
   }
 }
-function SignOutUser() {}
+function SignOutUser() { }
 function addScriptUrlInDom(src) {
   var script = document.createElement("script");
   script.type = "text/javascript";
@@ -211,6 +231,9 @@ function addScriptCodeInDom(src) {
   script.setAttribute("defer", true);
   script.innerHTML = src;
   document.getElementsByTagName("head")[0].appendChild(script);
+}
+function log() {
+  console.log(arguments);
 }
 module.exports = {
   manipulateUrls,
@@ -231,4 +254,7 @@ module.exports = {
   SignOutUser,
   addScriptCodeInDom,
   addScriptUrlInDom,
+  viewMoreCleanUrls,
+  findImageInVODObject,
+  log
 };

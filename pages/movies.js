@@ -32,6 +32,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       movies: movies,
+      env: process.env.TAPENV
     },
   };
 }

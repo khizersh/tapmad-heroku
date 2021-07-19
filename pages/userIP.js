@@ -10,6 +10,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       isServer,
+      env: process.env.TAPENV
       // clientIP: context.req ? context.req.clientIP : null,
     },
   };

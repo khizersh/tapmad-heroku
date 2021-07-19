@@ -101,5 +101,6 @@ const response = (video, videoList, channel, allowUser) => {
     videoList,
     channel,
     allowUser,
+    env: process.env.TAPENV
   };
 };

@@ -110,7 +110,6 @@ const Search = () => {
         {searchedItem.length > 0 ? (
           searchedItem.map((item, i) => {
             let slug = SEOFriendlySlugsForVideo(item);
-
             return <ItemCard item={item} key={i} slug={slug} />;
           })
         ) : isSearched ? (

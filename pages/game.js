@@ -16,6 +16,7 @@ export function getStaticProps() {
   return {
     props: {
       protected: true,
+      env: process.env.TAPENV
     },
   };
 }

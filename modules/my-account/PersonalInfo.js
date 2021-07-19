@@ -59,7 +59,6 @@ const PersonalInfo = ({ data }) => {
         setUserImage(data.data.UserProfile.UserProfilePicture);
       }
       Cookie.setCookies("userProfileName", profileData.FullName);
-
       setBtnEnable(false);
       UpdateProfile(profileData);
       swal({
@@ -149,6 +148,7 @@ const PersonalInfo = ({ data }) => {
             type="text"
             className="form-control"
             placeholder="Full name"
+            maxLength="20"
             name="FullName"
             onChange={onChange}
             value={profileData.FullName}
