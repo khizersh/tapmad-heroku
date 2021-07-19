@@ -51,7 +51,6 @@ const PersonalInfo = ({ data }) => {
         formData.append(property, profileData[property]);
       }
     }
-
     const data = await MyAccountService.updateUserProfileData(formData);
 
     if (data != null) {
