@@ -232,6 +232,9 @@ function addScriptCodeInDom(src) {
   script.innerHTML = src;
   document.getElementsByTagName("head")[0].appendChild(script);
 }
+function log() {
+  console.log(arguments);
+}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -252,5 +255,6 @@ module.exports = {
   addScriptCodeInDom,
   addScriptUrlInDom,
   viewMoreCleanUrls,
-  findImageInVODObject
+  findImageInVODObject,
+  log
 };

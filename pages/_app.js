@@ -8,6 +8,7 @@ import AuthProvider from "../contexts/AuthContext";
 import CatchupProvider from "../contexts/CatchupContext";
 import GameProvider from "../contexts/GameContext";
 import MainProvider, { MainContext } from "../contexts/MainContext";
+import "../styles/globals.scss";
 import "../modules/auth/auth.css";
 import "../modules/catchup/catchup.css";
 import "../modules/category/css/card-hor.style.css";
@@ -23,7 +24,6 @@ import "../modules/search/search.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
 import "../styles/globals.css";
-import "../styles/globals.scss";
 
 
 const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
