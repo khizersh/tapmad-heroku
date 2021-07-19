@@ -30,7 +30,7 @@ function SetYourNewPinSignUp({ login, ip }) {
     if (!pin.length) {
       return swal({
         timer: 3000,
-        title: "Invalid pin code!",
+        title: "Please set your PIN!",
         icon: "error",
       });
     }

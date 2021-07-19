@@ -33,6 +33,7 @@ function EnterPin({ forgetPin, login }) {
             }
           })
         } else {
+          console.log("data in check: ", data);
           setLoader(false);
           swal({
             title: data.message,
