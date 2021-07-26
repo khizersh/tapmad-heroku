@@ -57,7 +57,6 @@ export default function SubscribeButton() {
       if (authState.selectedPaymentMethod.PaymentType == 4) {
         details = handleBody();
       }
-      console.log(details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
@@ -107,6 +106,7 @@ export default function SubscribeButton() {
           setLoader(false);
         }
         // for other payment methods
+      
         const status = await AuthService.checkUser(initialState.User.MobileNo);
 
         var data;

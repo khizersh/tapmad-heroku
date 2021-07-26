@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import SignUpLayout from "./SignUpLayout";
 import TaxView from "./TaxView";
 import PaymentMethodComponent from "./PaymentMethod";
 import PaymentInfo from "./PaymentInfo";

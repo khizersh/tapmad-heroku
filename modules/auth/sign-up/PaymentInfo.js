@@ -7,7 +7,6 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import DropdownWithImage from "./DropdownWithImage";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
