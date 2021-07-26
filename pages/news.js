@@ -30,7 +30,6 @@ const news = ({ news, newsArray }) => {
       let sport = {
         color: "#28a745",
       };
-
       sport = {
         ...sport,
         ...newsArray.filter((m) => m.CategoryTitle == "Sports")[0],

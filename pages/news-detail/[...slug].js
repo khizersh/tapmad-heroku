@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
-
-import { useRouter } from "next/router";
 import { getNewsById } from "../../modules/news/news.service";
 import NewsDetailCard from "../../modules/news/NewsDetailCard";
 import { DFPSlotsProvider } from "react-dfp";
 import { AdSlot } from "react-dfp/lib/adslot";
 
-const NewsDetail = () => {
-  const router = useRouter();
+const NewsDetail = ({ id , data }) => {
   const [news, setNews] = useState(null);
 
   useEffect(async () => {
-    if (router.query && router.query.slug) {
-      let id = router.query.slug[0];
-      const data = await getNewsById(id);
+    if (id) {
       if (data && data.responseCode == 1) {
         setNews(data.data.TnnNews);
       }
     }
-  }, [router.query]);
+  }, [data]);
 
   return (
     <div className="container-fluid">
@@ -54,3 +49,20 @@ const NewsDetail = () => {
 };
 
 export default NewsDetail;
+
+export async function getServerSideProps(context) {
+  let id = "";
+  if (context.query) {
+    id = context.query.slug[0];
+  }
+
+  const data = await getNewsById(id);
+  if(data && data.responseCode == 1){
+    return {
+      props: { id: id, data: data },
+    };
+  }
+  return {
+    props: { id: id, data: null },
+  };
+}
