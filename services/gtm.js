@@ -49,7 +49,7 @@ export function ContentViewed(video) {
     console.log(video);
     const { mobile, userId } = getUserDetails();
     try {
-        dataLayer.push({ event: "content_viewed", Name: video.VideoName, Image: video.VideoImagePathLarge, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
+        dataLayer.push({ event: "content_viewed", Name: video.VideoName, SmallImage: video.VideoImagePath, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
     } catch (e) {
         console.log(e);
     }
@@ -80,7 +80,6 @@ export function VideoWatched(response) {
                 user_id: userId,
                 Region: response.Video.RegionName,
                 Format: response.Video.FormatName,
-                Image: response.Video.VideoImagePathLarge,
                 SmallImage: response.Video.VideoImagePath,
             });
         }
