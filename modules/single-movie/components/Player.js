@@ -168,7 +168,6 @@ export default function Player({ movies }) {
     if (movies.Video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
         router.push("/sign-up");
-        alert('Yooo')
       }
     }
   }, [])

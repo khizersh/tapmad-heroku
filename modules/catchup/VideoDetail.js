@@ -8,6 +8,7 @@ export default function VideoDetail({ video, videoList }) {
   const [slug, setSlug] = useState(null);
 
   useEffect(() => {
+    console.log("Content Viewed ", video);
     if (video) {
       let slugPlay = SEOFriendlySlugsForVideo(video, true);
       setSlug(slugPlay);

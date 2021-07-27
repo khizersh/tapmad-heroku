@@ -48,7 +48,7 @@ export function SearchTag(body) {
 export function ContentViewed(video) {
     const { mobile, userId } = getUserDetails();
     try {
-        dataLayer.push({ event: "content_viewed", Name: video.VideoName, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
+        dataLayer.push({ event: "content_viewed", Name: video.VideoName, Image: video.NewVideoImageThumbnail ? video.NewVideoImageThumbnail : video.VideoImagePathLarge, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
     } catch (e) {
         console.log(e);
     }
@@ -77,7 +77,8 @@ export function VideoWatched(response) {
                 msisdn: mobile,
                 user_id: userId,
                 Region: response.Video.RegionName,
-                Format: response.Video.FormatName
+                Format: response.Video.FormatName,
+                Image: response.Video.VideoImagePathLarge
             });
         }
     } catch (e) {

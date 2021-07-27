@@ -5,7 +5,6 @@ import Cookies from "universal-cookie";
 function setCookies(name, val) {
   var expiryDate = new Date();
   let maxAges = expiryDate.setMonth(expiryDate.getMonth() + 1);
-  console.log(maxAges)
   return initializeCookes().set(name, val, { path: "/", maxAge: maxAges });
 }
 
