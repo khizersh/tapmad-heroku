@@ -55,6 +55,7 @@ export function ContentViewed(video) {
     }
 }
 export function VideoWatched(response) {
+    console.log(response.Video);
     try {
         if (response.Video && response.Video.getProductiongenreName) {
             var Genre = [];
@@ -79,7 +80,8 @@ export function VideoWatched(response) {
                 user_id: userId,
                 Region: response.Video.RegionName,
                 Format: response.Video.FormatName,
-                Image: response.Video.VideoImagePathLarge
+                Image: response.Video.VideoImagePathLarge,
+                SmallImage: response.Video.VideoImagePath,
             });
         }
     } catch (e) {
