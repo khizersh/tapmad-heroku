@@ -64,11 +64,11 @@ export default function CategoryDetail({ video, videoList, syno }) {
                     </div>
                   </div>
                   <div className="col-lg-6 col-md-6 col-12 d-none d-sm-block pr-0 ">
-                    {video && video["NewVideoImageThumbnail"] ? (
+                    {video && video["VideoImagePathLarge"] ? (
                       <div
                         className="category-bg-img"
                         style={{
-                          background: `url('${video["NewVideoImageThumbnail"]}')`,
+                          background: `url('${video["VideoImagePathLarge"]}')`,
                         }}
                       ></div>
                     ) : null}

@@ -46,9 +46,10 @@ export function SearchTag(body) {
     }
 }
 export function ContentViewed(video) {
+    console.log(video);
     const { mobile, userId } = getUserDetails();
     try {
-        dataLayer.push({ event: "content_viewed", Name: video.VideoName, Image: video.NewVideoImageThumbnail ? video.NewVideoImageThumbnail : video.VideoImagePathLarge, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
+        dataLayer.push({ event: "content_viewed", Name: video.VideoName, Image: video.VideoImagePathLarge, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
     } catch (e) {
         console.log(e);
     }

@@ -17,7 +17,7 @@ const Category = (props) => {
       let vid = {
         VideoName: props.data.CategoryName,
         VideoDescription: props.data.CategoryDescription,
-        NewVideoImageThumbnail: props.data.CategoryMobileLargeImage,
+        VideoImagePathLarge: props.data.CategoryMobileLargeImage
       };
       setVideo(vid);
       setVideoList([{ Videos: props?.data?.Videos }]);
