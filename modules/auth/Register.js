@@ -50,7 +50,7 @@ export default memo(function Register(props) {
 
   useEffect(() => {
     var selectedPayment = payment;
-    if (authState.paymentMethods.length > 1) {
+    if (authState?.paymentMethods.length > 1) {
       if (selectedPayment == "credit") {
         document.getElementsByClassName("Credit/Debit Card")[0].click();
         return (
@@ -85,7 +85,7 @@ export default memo(function Register(props) {
 
   return (
     <div>
-      <SignUpLayout bgImage={initialState?.AuthDetails?.PackageImage}>
+      <SignUpLayout bgImage={initialState?.currentPackage?.PackageImage}>
         <RenderViews />
       </SignUpLayout>
     </div>

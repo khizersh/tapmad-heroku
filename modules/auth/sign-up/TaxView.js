@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import paymentMethod from "./PaymentMethod";
 
-export default function TaxView() {
+export default function TaxView({ onChange }) {
   const { authState, updateSelectedPackageId } = useContext(Authcontext);
 
   const [packageId, setPackageId] = useState(null);
@@ -20,8 +20,7 @@ export default function TaxView() {
   }, [authState.selectedPaymentMethod]);
 
   const onChangePackage = (id, amount, name) => {
-    updateSelectedPackageId(id, amount, name);
-
+    onChange({ id: id, amount: amount, name: name })
   };
 
   return (

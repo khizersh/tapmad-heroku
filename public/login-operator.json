@@ -1,0 +1,230 @@
+{
+    "Response": {
+        "responseCode": 1,
+        "status": "Success",
+        "message": "Data Returned Successfully."
+    },
+    "CountryCode": "PK",
+    "MobileCode": "+92",
+    "PaymentPackages": [
+        {
+            "PackageImage": "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandCategorythumb/SubscriuberImage2.jpg",
+            "PaymentTabId": "1",
+            "PackageName": "All In One",
+            "PaymentMethods": [
+                {
+                    "PaymentId": 1,
+                    "PaymentType": 1,
+                    "PaymentMethodName": "Sim Card",
+                    "PaymentDescription": "Subscribe button press karne pe pain 1 din ka Free Trial. Ek din baad Rs.25/week subscription charges lagon honge\r\n\r\n",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/mobile-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1009",
+                            "PackagePrice": "25",
+                            "PackageDescription": "Rs "
+                        },
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1008",
+                            "PackagePrice": "100",
+                            "PackageDescription": "Rs Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "Jazz/Warid",
+                            "OperatorId": 100001,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/jazz-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Telenor",
+                            "OperatorId": 100002,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/telenor-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Zong",
+                            "OperatorId": 100003,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/zong-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Ufone",
+                            "OperatorId": 100005,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/ufone-logo.jpg"
+                        }
+                    ]
+                },
+                {
+                    "PaymentId": 2,
+                    "PaymentType": 2,
+                    "PaymentMethodName": "Credit/Debit Card",
+                    "PaymentDescription": "Subscribe button press karnay par Rs.100 aap k Credit Card say kat jaengy Ye subscription 1 month ke leye hai",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/credit-card-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1008",
+                            "PackagePrice": "100",
+                            "PackageDescription": "Rs + Tax Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "Jazz/Warid",
+                            "OperatorId": 100001,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/jazz-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Telenor",
+                            "OperatorId": 100002,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/telenor-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Zong",
+                            "OperatorId": 100003,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/zong-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Ufone",
+                            "OperatorId": 100005,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/ufone-logo.jpg"
+                        }
+                    ]
+                },
+                {
+                    "PaymentId": 3,
+                    "PaymentType": 3,
+                    "PaymentMethodName": "Easypaisa",
+                    "PaymentDescription": "Pay now button press karnay par Rs.5 aap ke easypaisa account say kat jaengy. Yeh subscription 1 month ke liye hai jis ke baad Rs.100+tax/month charge ho ga.",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/wallet-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1214",
+                            "PackagePrice": "5",
+                            "PackageDescription": "Rs + Tax Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "Easypaisa",
+                            "OperatorId": 100007,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/EasypaisaE.png"
+                        }
+                    ]
+                },
+                {
+                    "PaymentId": 4,
+                    "PaymentType": 4,
+                    "PaymentMethodName": "JazzCash",
+                    "PaymentDescription": "Pay now button press karnay par Rs.100 aap k jazzcash account say kat jaengy Ye subscription 1 month ke leye hai",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/wallet-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1258",
+                            "PackagePrice": "100",
+                            "PackageDescription": "Rs + Tax Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "JazzCash",
+                            "OperatorId": 100008,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/jazz-cash-logo.jpg"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "PackageImage": "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandCategorythumb/SubscriuberImage2.jpg",
+            "PackageName": "EPL",
+            "PaymentTabId": "2",
+            "PaymentMethods": [
+                {
+                    "PaymentId": 2,
+                    "PaymentType": 2,
+                    "PaymentMethodName": "Credit/Debit Card",
+                    "PaymentDescription": "Subscribe button press karnay par Rs.100 aap k Credit Card say kat jaengy Ye subscription 1 month ke leye hai",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/credit-card-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1008",
+                            "PackagePrice": "100",
+                            "PackageDescription": "Rs + Tax Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "Jazz/Warid",
+                            "OperatorId": 100001,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/jazz-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Telenor",
+                            "OperatorId": 100002,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/telenor-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Zong",
+                            "OperatorId": 100003,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/zong-logo.jpg"
+                        },
+                        {
+                            "OperatorName": "Ufone",
+                            "OperatorId": 100005,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/ufone-logo.jpg"
+                        }
+                    ]
+                },
+                {
+                    "PaymentId": 3,
+                    "PaymentType": 3,
+                    "PaymentMethodName": "Easypaisa",
+                    "PaymentDescription": "Pay now button press karnay par Rs.5 aap ke easypaisa account say kat jaengy. Yeh subscription 1 month ke liye hai jis ke baad Rs.100+tax/month charge ho ga.",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/wallet-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1214",
+                            "PackagePrice": "5",
+                            "PackageDescription": "Rs + Tax Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "Easypaisa",
+                            "OperatorId": 100007,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/EasypaisaE.png"
+                        }
+                    ]
+                },
+                {
+                    "PaymentId": 4,
+                    "PaymentType": 4,
+                    "PaymentMethodName": "JazzCash",
+                    "PaymentDescription": "Pay now button press karnay par Rs.100 aap k jazzcash account say kat jaengy Ye subscription 1 month ke leye hai",
+                    "PaymentImage": "https://images.tapmad.com/images/Payments/wallet-icon128.png",
+                    "Packages": [
+                        {
+                            "PackageName": "All In 1",
+                            "ProductId": "1258",
+                            "PackagePrice": "100",
+                            "PackageDescription": "Rs + Tax Per Month"
+                        }
+                    ],
+                    "MobileNetworks": [
+                        {
+                            "OperatorName": "JazzCash",
+                            "OperatorId": 100008,
+                            "OperatorImage": "https://d34080pnh6e62j.cloudfront.net/images/jazz-cash-logo.jpg"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

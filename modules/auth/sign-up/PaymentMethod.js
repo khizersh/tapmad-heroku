@@ -12,7 +12,7 @@ export default function PaymentMethod() {
   return (
     <div className="col-md-12 col-sm-12 pt-2">
       <div className="row py-3" style={{ flexWrap: "nowrap" }}>
-        {authState.paymentMethods.length
+        {authState && authState.paymentMethods && authState.paymentMethods.length
           ? authState.paymentMethods.map((m, i) => (
             <div
               className="btn bg-transparent"
@@ -40,8 +40,8 @@ export default function PaymentMethod() {
                 />
                 <i
                   className={`text-center text-muted d-block mbl-13px  ${authState.selectedPaymentMethod.PaymentId == m.PaymentId
-                      ? "text-white"
-                      : ""
+                    ? "text-white"
+                    : ""
                     }`}
                   style={{ fontStyle: "normal" }}
                 >

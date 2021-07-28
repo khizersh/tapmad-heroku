@@ -22,25 +22,26 @@ export default function AuthProvider({ children }) {
   });
 
   React.useEffect(() => {
+    console.log(initialState);
     if (initialState && initialState.AuthDetails) {
       let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
-        paymentMethods: initialState.AuthDetails.PaymentMethods,
-        selectedPaymentMethod: initialState.AuthDetails.PaymentMethods[0],
+        paymentMethods: initialState.currentPackage?.PaymentMethods,
+        selectedPaymentMethod: initialState.currentPackage?.PaymentMethods[0],
         MobileCode: initialState.AuthDetails.MobileCode,
-        PackageImage: initialState.AuthDetails.PackageImage,
+        PackageImage: initialState.currentPackage?.PackageImage,
         signUpComponent: "signUp",
         selectedPackageId:
-          initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]?.ProductId,
+          initialState.currentPackage?.PaymentMethods[0]?.Packages[0]?.ProductId,
         selectedPackageAmount:
-          initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]
+          initialState.currentPackage?.PaymentMethods[0]?.Packages[0]
             ?.PackagePrice,
         selectedPackageName:
-          initialState.AuthDetails?.PaymentMethods[0]?.Packages[0]?.PackageName,
+          initialState.currentPackage?.PaymentMethods[0]?.Packages[0]?.PackageName,
       };
       setAuthState({ ...authState, ...AuthStateWithData });
     }
-  }, [initialState.AuthDetails]);
+  }, [initialState.currentPackage]);
 
   function updateSelectedPaymentMethod(method) {
     let stateClone = authState;

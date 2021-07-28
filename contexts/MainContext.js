@@ -3,6 +3,7 @@ import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
 import { AuthService } from "../modules/auth/auth.service";
+import { getAllPackages } from "../services/apilinks";
 
 export const MainContext = React.createContext(null);
 
@@ -27,6 +28,8 @@ function reducer(state, action) {
       return { ...state, isAuthenticated: action.data };
     case "SET_COUNTRY_CODE":
       return { ...state, countryCode: action.data };
+    case "UPDATE_PAYMENT_PACKAGE":
+      return { ...state, currentPackage: action.data };
     case "SET_USER_NUMBER":
       return {
         ...state,
@@ -53,14 +56,15 @@ export default function MainProvider({ children }) {
   });
   useEffect(async () => {
     var operators = await get(
-      "https://api.tapmad.com/api/getAllPaymentMethodsPackages/V1/en/web"
+      // getAllPackages
+      'login-operator.json'
     );
     dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
 
     checkUserAuthentication();
     const country = await AuthService.getGeoInfo();
     updateCountryCode(country.countryCode);
-
+    updatePaymentPackage(operators.data.PaymentPackages[0]);
   }, []);
 
   function updateCountryCode(code) {
@@ -85,6 +89,9 @@ export default function MainProvider({ children }) {
   }
   function updateUserEmail(email) {
     dispatch({ type: "UPDATE_EMAIL", data: email });
+  }
+  function updatePaymentPackage(packageDetails) {
+    dispatch({ type: "UPDATE_PAYMENT_PACKAGE", data: packageDetails });
   }
   function checkUserAuthentication() {
     const token = Cookie.getCookies("content-token");
@@ -134,6 +141,7 @@ export default function MainProvider({ children }) {
     setisAuthenticateFalse,
     getCountryCode,
     updateCountryCode,
+    updatePaymentPackage
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }

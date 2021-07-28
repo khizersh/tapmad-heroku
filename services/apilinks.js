@@ -1,6 +1,6 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
-
+export const getAllPackages = BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web"
 export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
 export const getUserByUserId = BASEURL + "api/CheckUserByUserId";
