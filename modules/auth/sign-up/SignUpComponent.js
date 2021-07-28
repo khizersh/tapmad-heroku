@@ -3,12 +3,13 @@ import TaxView from "./TaxView";
 import PaymentMethodComponent from "./PaymentMethod";
 import PaymentInfo from "./PaymentInfo";
 import { Authcontext } from "../../../contexts/AuthContext";
+import PackageSelectView from "./packages/PackageSelectView";
+import { MainContext } from "../../../contexts/MainContext";
 
 const SignUpComponent = () => {
   const { authState, updateSelectedPackageId } = useContext(Authcontext);
-
+  const { updatePaymentPackage } = useContext(MainContext)
   function taxChangeView(params) {
-    console.log(authState.selectedPaymentMethod);
     const PackageId = authState.selectedPaymentMethod.PaymentId;
     const { id, amount, name } = (params);
     if (PackageId == 1) {
@@ -17,8 +18,15 @@ const SignUpComponent = () => {
 
     }
   }
+  function changeMainPackage(MainPack) {
+    updatePaymentPackage(MainPack);
+  }
+
   return (
     <div>
+      <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
+        <PackageSelectView onChange={changeMainPackage} />
+      </ul>
       <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
         <TaxView onChange={taxChangeView} />
       </ul>

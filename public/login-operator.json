@@ -10,7 +10,7 @@
         {
             "PackageImage": "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandCategorythumb/SubscriuberImage2.jpg",
             "PaymentTabId": "1",
-            "PackageName": "All In One",
+            "PaymentTabName": "All In One",
             "PaymentMethods": [
                 {
                     "PaymentId": 1,
@@ -140,7 +140,7 @@
         },
         {
             "PackageImage": "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandCategorythumb/SubscriuberImage2.jpg",
-            "PackageName": "EPL",
+            "PaymentTabName": "EPL",
             "PaymentTabId": "2",
             "PaymentMethods": [
                 {

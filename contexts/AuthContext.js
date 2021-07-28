@@ -22,10 +22,10 @@ export default function AuthProvider({ children }) {
   });
 
   React.useEffect(() => {
-    console.log(initialState);
     if (initialState && initialState.AuthDetails) {
       let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
+        AllPackages: initialState.AuthDetails,
         paymentMethods: initialState.currentPackage?.PaymentMethods,
         selectedPaymentMethod: initialState.currentPackage?.PaymentMethods[0],
         MobileCode: initialState.AuthDetails.MobileCode,
