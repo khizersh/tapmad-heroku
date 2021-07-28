@@ -6,6 +6,7 @@ export default function TaxView() {
   const { authState, updateSelectedPackageId } = useContext(Authcontext);
 
   const [packageId, setPackageId] = useState(null);
+
   useEffect(() => {
     if (authState.selectedPaymentMethod) {
       updateSelectedPackageId(
@@ -15,7 +16,7 @@ export default function TaxView() {
       );
       // setPackageId(authState.selectedPaymentMethod.Packages[0].ProductId);
     }
- 
+
   }, [authState.selectedPaymentMethod]);
 
   const onChangePackage = (id, amount, name) => {
@@ -31,9 +32,8 @@ export default function TaxView() {
           return (
             <li
               key={i}
-              className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${
-                authState.selectedPackageId ? (authState.selectedPackageId == m.ProductId ? "pr_active" : "") : ""
-              }`}
+              className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${authState.selectedPackageId ? (authState.selectedPackageId == m.ProductId ? "pr_active" : "") : ""
+                }`}
               onClick={() =>
                 onChangePackage(m.ProductId, m.PackagePrice, m.PackageName)
               }

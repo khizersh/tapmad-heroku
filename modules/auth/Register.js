@@ -5,7 +5,6 @@ import SignUpLayout from "./sign-up/SignUpLayout";
 import Pin from "./sign-up/VerifyOTP";
 import EnterPinToVerify from "./sign-up/EnterPinToVerify";
 import SetYourNewPin from "./sign-up/SetYourNewPin";
-import { signUpImage } from "../../services/imagesLink";
 import { useRouter } from "next/router";
 import { MainContext } from "../../contexts/MainContext";
 
