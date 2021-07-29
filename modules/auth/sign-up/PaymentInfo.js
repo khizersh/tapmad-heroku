@@ -34,7 +34,8 @@ function PaymentInfo() {
   );
 
   const RenderMethod = useCallback(() => {
-    if (authState.selectedPaymentMethod.PaymentId == 1) {
+    const PaymentId = authState.selectedPaymentMethod.PaymentId;
+    if (PaymentId == 1) {
       return (
         <>
           <SimCardForm
@@ -45,7 +46,7 @@ function PaymentInfo() {
           />
         </>
       );
-    } else if (authState.selectedPaymentMethod.PaymentId == 2) {
+    } else if (PaymentId == 2 || PaymentId == 5) {
       return (
         <>
           <CreditCardForm
@@ -58,7 +59,7 @@ function PaymentInfo() {
           />
         </>
       );
-    } else if (authState.selectedPaymentMethod.PaymentId == 3) {
+    } else if (PaymentId == 3 || PaymentId == 6) {
       return (
         <>
           <EasypaisaForm
@@ -68,7 +69,7 @@ function PaymentInfo() {
           />
         </>
       );
-    } else if (authState.selectedPaymentMethod.PaymentId == 4) {
+    } else if (PaymentId == 4 || PaymentId == 7) {
       return (
         <>
           <JazzCashForm
@@ -78,8 +79,11 @@ function PaymentInfo() {
           />
         </>
       );
+    } else {
+      return <></>
     }
   }, [authState.selectedPaymentMethod]);
+
   const operators = useMemo(() => authState.loginOperators);
 
   function handleCnic(e) {
