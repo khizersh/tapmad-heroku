@@ -85,7 +85,7 @@ export default memo(function Register(props) {
 
   return (
     <div>
-      <SignUpLayout bgImage={initialState?.currentPackage?.PackageImage}>
+      <SignUpLayout bgImage={initialState?.currentPackage?.PaymentTabImage}>
         <RenderViews />
       </SignUpLayout>
     </div>

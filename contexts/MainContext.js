@@ -3,7 +3,7 @@ import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
 import { AuthService } from "../modules/auth/auth.service";
-import { getAllPackages } from "../services/apilinks";
+import { EPLPaymentUrl } from "../services/apilinks";
 
 export const MainContext = React.createContext(null);
 
@@ -56,8 +56,7 @@ export default function MainProvider({ children }) {
   });
   useEffect(async () => {
     var operators = await get(
-      // getAllPackages
-      'login-operator.json'
+      EPLPaymentUrl
     );
     dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
 

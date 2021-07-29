@@ -26,18 +26,18 @@ export default function AuthProvider({ children }) {
       let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
         AllPackages: initialState.AuthDetails,
-        paymentMethods: initialState.currentPackage?.PaymentMethods,
-        selectedPaymentMethod: initialState.currentPackage?.PaymentMethods[0],
+        paymentMethods: initialState.currentPackage?.PaymentTabMethods,
+        selectedPaymentMethod: initialState.currentPackage?.PaymentTabMethods[0],
         MobileCode: initialState.AuthDetails.MobileCode,
         PackageImage: initialState.currentPackage?.PackageImage,
         signUpComponent: "signUp",
         selectedPackageId:
-          initialState.currentPackage?.PaymentMethods[0]?.Packages[0]?.ProductId,
+          initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.ProductId,
         selectedPackageAmount:
-          initialState.currentPackage?.PaymentMethods[0]?.Packages[0]
+          initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]
             ?.PackagePrice,
         selectedPackageName:
-          initialState.currentPackage?.PaymentMethods[0]?.Packages[0]?.PackageName,
+          initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.PackageName,
       };
       setAuthState({ ...authState, ...AuthStateWithData });
     }
