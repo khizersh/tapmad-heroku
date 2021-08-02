@@ -33,7 +33,7 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
       <li className="logouts_contain" onClick={() => onCLickContent("profile")}>
         <Link href="/myaccount" shallow={true} passHref={true}>
           <a>
-            Profile
+            User Profile
             <span className="icon">
               <i className="fa fa-user-plus"></i>
             </span>
@@ -60,7 +60,7 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
       )}
       <li className="sign-out">
         <a onClick={signout}>
-          Signout
+          Log Out
           <span className="icon">
             <i className="fa fa-sign-in"></i>
           </span>

@@ -12,7 +12,7 @@ import { AuthService } from "../modules/auth/auth.service";
 import SimCardForm from "../modules/auth/sign-up/payment-info-components/SimCardForm";
 import { useRouter } from "next/router";
 import PromoCodeLayout from "../modules/promo-code/PromoCodeLayout";
-
+import { isAuthentictedUser } from "../services/utils";
 const promoCode = () => {
   const router = useRouter();
   const [promoCode, setPromoCode] = useState("");
@@ -21,6 +21,13 @@ const promoCode = () => {
   const { updateUserOperator, initialState, setLoader, updateUserNumber } =
     useContext(MainContext);
 
+
+  useEffect(() => {
+    const isAuthenticated = isAuthentictedUser();
+    if (isAuthenticated) {
+      router.push('/')
+    }
+  }, [])
   const handleNumber = (e) => {
     let num = e.target.value;
     if (+num === +num) {

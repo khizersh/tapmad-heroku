@@ -51,7 +51,7 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         <li className="sign-out">
           <Link href="/sign-in" shallow={true} passHref={true}>
             <a>
-              Sign In
+              Login
               <span className="icon">
                 <i className="fa fa-sign-in"></i>
               </span>
