@@ -34,14 +34,14 @@ export async function getServerSideProps(context) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  try {
-    const isGoogleDNS = await isGoogle(ip);
-    if (isGoogleDNS == true) {
-      ip = "39.44.217.70";
-    }
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   const isGoogleDNS = await isGoogle(ip);
+  //   if (isGoogleDNS == true) {
+  //     ip = "39.44.217.70";
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  // }
   console.log("Env is ", process.env.TAPENV)
   let movie, banner, featured;
   var movieList = await HomeService.getFeaturedHomePageData(ip);
