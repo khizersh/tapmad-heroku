@@ -24,7 +24,7 @@ const SignUpComponent = () => {
 
   return (
     <div>
-      <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
+      <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0 pb-1">
         <PackageSelectView onChange={changeMainPackage} />
       </ul>
       <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
