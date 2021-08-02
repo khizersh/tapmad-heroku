@@ -4,7 +4,7 @@ import HomePage from "../modules/home/components/HomePage";
 import requestIp from "request-ip";
 
 import { HomeService } from "../modules/home/components/home.service";
-import isGoogle from "../services/google-dns-lookup";
+// import isGoogle from "../services/google-dns-lookup";
 
 export default function Home(props) {
   return (
