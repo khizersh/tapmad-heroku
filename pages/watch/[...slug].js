@@ -24,14 +24,12 @@ const watch = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
-
-
-
+  var renderPlayer = shouldRenderPlayer(props);
   useEffect(() => {
     if (!props.allowUser) {
       router.push("/sign-up");
     } else {
-      if (props.data.responseCode != "401") {
+      if (props.data.responseCode != "401" && props.data.responseCode != '8') {
         let cId = props.data.Video.VideoEntityId
           ? props.data.Video.VideoEntityId
           : "";
@@ -66,8 +64,27 @@ const watch = (props) => {
           router.push("/");
         });
       });
+    } else if (props.data && props.data.responseCode == 8) {
+      swal({
+        text: props.data.message,
+        timer: 3000,
+        icon: "error",
+      }).then((res) => {
+        Cookie.setCookies("isAuth", 0);
+        setisAuthenticateFalse();
+        router.push("/sign-up?subspack=epl");
+      });
     }
   }, [url]);
+  function shouldRenderPlayer() {
+    if (props.data && props.data.responseCode == 8) {
+      return false;
+    } else if (props.data && props.data.responseCode == 401) {
+      return false;
+    } else {
+      return true
+    }
+  }
   return (
     <div>
       <Head>
@@ -96,7 +113,7 @@ const watch = (props) => {
           }}
         />
       </Head>
-      {props.allowUser && props.data && props.data.responseCode != 401 && (
+      {props.allowUser && props.data && renderPlayer && (
         <Player movies={props.data} />
       )}
       {props.data && props.data.responseCode == 401 && <></>}
@@ -154,7 +171,8 @@ export async function getServerSideProps(context) {
         return {
           props: response(res.data, chanelDetail, true, seo),
         };
-      } else {
+      }
+      else {
         // authenticated
         return {
           props: response(res.data, chanelDetail, true, seo),

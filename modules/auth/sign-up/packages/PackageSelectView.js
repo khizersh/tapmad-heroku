@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Authcontext } from "../../../../contexts/AuthContext";
 import { MainContext } from "../../../../contexts/MainContext";
 
 export default function PackageSelectView({ onChange }) {
     const { authState, updateSelectedPackageId } = useContext(Authcontext)
     const { initialState } = useContext(MainContext);
+    const router = useRouter();
+    const { subspack } = router.query;
 
     useEffect(() => {
         if (initialState.currentPackage) {
@@ -15,12 +18,23 @@ export default function PackageSelectView({ onChange }) {
             );
             // setPackageId(authState.selectedPaymentMethod.Packages[0].ProductId);
         }
+        if (authState?.AllPackages) {
+            console.log(authState);
+            var selectedPackage = subspack;
+            console.log(selectedPackage);
+            if (selectedPackage == 'epl') {
+                onChange(authState?.AllPackages?.PaymentPackages[1]);
+            } else if (selectedPackage == 'allin1') {
+                onChange(authState?.AllPackages?.PaymentPackages[0]);
+            }
+        }
 
-    }, [initialState.currentPackage]);
+    }, [authState.AllPackages]);
 
     const onChangePackage = (MainPack) => {
-        onChange(MainPack)
-    };
+        onChange(MainPack);
+    }
+
 
     return (
         <>

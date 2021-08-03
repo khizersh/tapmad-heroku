@@ -50,9 +50,7 @@ export default memo(function Register(props) {
 
   useEffect(() => {
     var selectedPayment = payment;
-    var selectedPackage = subspack;
-    if (authState?.paymentMethods.length > 1) {
-      selectPackage(selectedPackage);
+    if (authState?.paymentMethods?.length > 1) {
       if (selectedPayment == "credit") {
         document.getElementsByClassName("Credit/Debit Card")[0].click();
         return (
@@ -85,13 +83,6 @@ export default memo(function Register(props) {
     }
   }, [authState.paymentMethods]);
 
-  function selectPackage(pack) {
-    if (pack == 'epl') {
-      document.getElementsByClassName('package2')[0].click();
-    } else if (pack == 'allin1') {
-      document.getElementsByClassName('package1')[0].click();
-    }
-  }
   return (
     <div>
       <SignUpLayout bgImage={initialState?.currentPackage?.PaymentTabImage}>

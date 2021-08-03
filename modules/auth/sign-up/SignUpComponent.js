@@ -24,9 +24,9 @@ const SignUpComponent = () => {
 
   return (
     <div>
-      {/* <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
+      <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
         <PackageSelectView onChange={changeMainPackage} />
-      </ul> */}
+      </ul>
       <ul className="list-group-horizontal list-group pymnt_pge_pr_list p-0">
         <TaxView onChange={taxChangeView} />
       </ul>
