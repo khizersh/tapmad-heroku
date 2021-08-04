@@ -12,7 +12,7 @@ export default function SignUp(props) {
                     document.getElementsByClassName('package1')[0].addEventListener('click', function (event) {
                         event.stopPropagation();
                     })
-                }, 2000)
+                }, 1000)
 
             } catch (err) {
                 console.log(err);
