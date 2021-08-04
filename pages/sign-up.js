@@ -1,9 +1,17 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import AuthProvider from "../contexts/AuthContext";
 import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
+import { isAuthentictedUser } from "../services/utils";
+import { useRouter } from "next/router";
 
 export default function SignUp(props) {
+  const router = useRouter();
+  useEffect(() => {
+    if (isAuthentictedUser()) {
+      router.push('/');
+    }
+  }, [])
   return (
     <div>
       <AuthProvider>

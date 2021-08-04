@@ -25,9 +25,15 @@ const watch = (props) => {
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
+
   useEffect(() => {
+    console.log(props);
     if (!props.allowUser) {
-      router.push("/sign-up");
+      if (props.data != null) {
+        router.push("/sign-up?subspack=epl");
+      } else {
+        router.push("/sign-up");
+      }
     } else {
       if (props.data.responseCode != "401" && props.data.responseCode != '8') {
         let cId = props.data.Video.VideoEntityId
@@ -45,6 +51,7 @@ const watch = (props) => {
       }
     }
   }, [props.allowUser, url]);
+
   useEffect(() => {
     if (props.data && props.data.responseCode == 401) {
       swal({
@@ -70,9 +77,7 @@ const watch = (props) => {
         timer: 3000,
         icon: "error",
       }).then((res) => {
-        Cookie.setCookies("isAuth", 0);
-        setisAuthenticateFalse();
-        router.push("/sign-up?subspack=epl");
+        router.push("/subscribe-to-epl?subspack=epl");
       });
     }
   }, [url]);

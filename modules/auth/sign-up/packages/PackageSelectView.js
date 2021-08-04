@@ -44,7 +44,7 @@ export default function PackageSelectView({ onChange }) {
                     return (
                         <li
                             key={i}
-                            className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted package${i + 1} ${(initialState.currentPackage?.PaymentTabId == m.PaymentTabId ? "pr_active" : "")
+                            className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 pb-1 text-muted package${i + 1} ${(initialState.currentPackage?.PaymentTabId == m.PaymentTabId ? "pr_active" : "")
                                 }`}
                             onClick={() =>
                                 onChangePackage(m)
