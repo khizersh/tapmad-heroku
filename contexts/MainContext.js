@@ -37,6 +37,9 @@ function reducer(state, action) {
       };
     case "SET_LOADER":
       return { ...state, loading: action.data };
+    // will remove after epl
+    case "SIGN_UP_LOADED":
+      return { ...state, SignUpRendered: action.data };
   }
 }
 export default function MainProvider({ children }) {
@@ -46,6 +49,7 @@ export default function MainProvider({ children }) {
     loading: false,
     isSearch: false,
     countryCode: "",
+    SignUpRendered: false,
     User: {
       FullName: "",
       MobileNo: "",
@@ -126,6 +130,10 @@ export default function MainProvider({ children }) {
   function setSearch(bool) {
     dispatch({ type: "SET_SEARCH", data: bool });
   }
+  // will remove after epl
+  function renderSignUp(bool) {
+    dispatch({ type: "SIGN_UP_LOADED", data: bool })
+  }
   let data = {
     initialState,
     setSearch,
@@ -140,7 +148,8 @@ export default function MainProvider({ children }) {
     setisAuthenticateFalse,
     getCountryCode,
     updateCountryCode,
-    updatePaymentPackage
+    updatePaymentPackage,
+    renderSignUp // will remove after epl
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }

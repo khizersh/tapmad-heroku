@@ -5,7 +5,7 @@ import { MainContext } from "../../../../contexts/MainContext";
 
 export default function PackageSelectView({ onChange }) {
     const { authState, updateSelectedPackageId } = useContext(Authcontext)
-    const { initialState } = useContext(MainContext);
+    const { initialState, renderSignUp } = useContext(MainContext);
     const router = useRouter();
     const { subspack } = router.query;
 
@@ -27,6 +27,8 @@ export default function PackageSelectView({ onChange }) {
             } else if (selectedPackage == 'allin1') {
                 onChange(authState?.AllPackages?.PaymentPackages[0]);
             }
+            // will remove after epl
+            renderSignUp(true);
         }
 
     }, [authState.AllPackages]);

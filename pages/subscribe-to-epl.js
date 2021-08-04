@@ -1,24 +1,28 @@
-import React, { useEffect, useRef } from "react";
-import AuthProvider from "../contexts/AuthContext";
+// will remove after epl
+
+import React, { useContext, useEffect, useRef } from "react";
+import AuthProvider, { Authcontext } from "../contexts/AuthContext";
 import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
 import { isAuthentictedUser } from "../services/utils";
+import { MainContext } from "../contexts/MainContext";
 
-export default function SignUp(props) {
+export default function SubscribeToEpl(props) {
+    const { initialState } = useContext(MainContext);
     useEffect(() => {
-        if (isAuthentictedUser()) {
-            try {
-                setTimeout(() => {
+        if (initialState.SignUpRendered) {
+            if (isAuthentictedUser()) {
+                try {
                     document.getElementsByClassName('package1')[0].addEventListener('click', function (event) {
                         event.stopPropagation();
                     })
-                }, 1000)
-
-            } catch (err) {
-                console.log(err);
+                } catch (err) {
+                    console.log(err);
+                }
             }
         }
-    }, [props.auth])
+    }, [initialState.SignUpRendered])
+
     return (
         <div>
             <AuthProvider>
