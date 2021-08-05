@@ -12,9 +12,10 @@ export const getFeaturedHomePage =
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURL + "api/getCardUser";
+export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
-export const paymentProcess = BASEURL + "api/processPaymentTransaction";
+export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const UserSignUpPromoCode = BASEURL + "api/UserSignUpPromoCode";
@@ -33,7 +34,7 @@ export const getEventPredicationGameChannel =
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
-  BASEURL + "api/initiatePaymentTransaction";
+  BASEURLAPP + "api/initiateEplPaymentTransaction";
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";
 export const unsubscribePaymentTransaction =

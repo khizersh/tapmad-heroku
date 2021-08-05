@@ -106,8 +106,11 @@ export default function SubscribeButton() {
           setLoader(false);
         }
         // for other payment methods
-      
-        const status = await AuthService.checkUser(initialState.User.MobileNo);
+        if (details.ProductId == 1265 || details.ProductId == 1360) {
+          var status = await AuthService.checkEPLUser(initialState.User.MobileNo);
+        } else {
+          var status = await AuthService.checkUser(initialState.User.MobileNo);
+        }
 
         var data;
         if (status.code == 0) {

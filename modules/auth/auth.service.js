@@ -12,29 +12,30 @@ import {
   Logout,
   UserSignUpPromoCode,
   getAllowRegions,
+  getEPLCardUser,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
 
-async function setUserPin(pin , username) {
+async function setUserPin(pin, username) {
   let resp;
 
   try {
     const userId = Cookie.getCookies("userId");
-    console.log("userId: ",userId);
+    console.log("userId: ", userId);
     let body = {
       Version: "V1",
       Language: "en",
       Platform: "Web",
       UserId: userId,
       UserPinCode: pin,
-      ProfileUserName:username
+      ProfileUserName: username
     }
-    if(!username){
+    if (!username) {
       delete body.ProfileUserName
     }
 
-    resp = await post(setUserPinCode, body );
+    resp = await post(setUserPinCode, body);
   } catch (error) {
     resp = null;
   }
@@ -59,7 +60,7 @@ async function setUserPin(pin , username) {
   }
 }
 
-async function setNewPin(pin , username) {
+async function setNewPin(pin, username) {
   const userId = Cookie.getCookies("userId");
   let body = {
     Version: "V1",
@@ -67,9 +68,9 @@ async function setNewPin(pin , username) {
     Platform: "Web",
     UserId: userId,
     UserPinCode: pin,
-    ProfileUserName:username
+    ProfileUserName: username
   }
-  if(!username){
+  if (!username) {
     delete body.ProfileUserName
   }
 
@@ -347,6 +348,27 @@ async function GetCardUser(body) {
     return null;
   }
 }
+async function GetEPLCardUser(body) {
+  const resp = await post(getEPLCardUser, body);
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 async function getAllowRegionsList(body) {
   const data = await get(getAllowRegions);
 
@@ -470,9 +492,40 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) {}
+  } catch (error) { }
 };
-
+const checkEPLUser = async (num) => {
+  let body = { Language: "en", MobileNo: num };
+  try {
+    const data = await GetEPLCardUser(body);
+    if (data) {
+      if (data.data) {
+        if (data.data.User) {
+          Cookie.setCookies("userId", data.data.User.UserId);
+          Cookie.setCookies("content-token", data.data.User.UserPassword);
+          console.log("Epl ", data.data.User);
+          if (data.data.User.EplSubscribe) {
+            if (data.data.User.IsPinSet) {
+              return {
+                code: 11,
+                message: "Already subscribed!",
+                data: data.data,
+              };
+            } else {
+              return { code: 34, message: "Set your pin!", data: data.data };
+            }
+          } else {
+            return { code: 0, message: "Go!", data: data.data };
+          }
+        } else {
+          return { code: 0, message: "Go!", data: data.data };
+        }
+      }
+    } else {
+      return 0;
+    }
+  } catch (error) { }
+}
 export const AuthService = {
   validateUser,
   setUserPin,
@@ -494,4 +547,5 @@ export const AuthService = {
   checkUser,
   clearUserToken,
   getAllowRegionsList,
+  checkEPLUser
 };
