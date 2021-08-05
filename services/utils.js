@@ -170,7 +170,7 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  if (url != "/sign-up" && url != "/sign-in" && url != "/myaccount") {
+  if (url != "/sign-up" && url != "/sign-in" && url != "/myaccount" && url != "/subscribe-to-epl?subspack=epl") {
     Cookie.setCookies("backUrl", url);
   }
 }

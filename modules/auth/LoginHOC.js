@@ -57,7 +57,7 @@ export default function withLogin(Component, data) {
           setLoader(false);
           checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
-          if (backURL == "sign-in" || backURL.includes('subscribe-to')) {
+          if (backURL == "sign-in") {
             router.push("/");
           } else {
             router.push(backURL);
