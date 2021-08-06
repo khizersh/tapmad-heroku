@@ -70,6 +70,7 @@ const watch = (props) => {
           setisAuthenticateFalse();
           router.push("/");
         });
+        
       });
     } else if (props.data && props.data.responseCode == 8) {
       swal({

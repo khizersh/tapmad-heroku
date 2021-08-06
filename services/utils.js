@@ -178,7 +178,7 @@ function setUrlToCookies(key, url) {
 function isAuthentictedUser() {
   let userId = Cookie.getCookies("userId");
   let isAuth = Cookie.getCookies("isAuth");
-  if (userId && isAuth == 1) {
+  if ((userId != undefined || userId != 'undefined') && isAuth == 1) {
     return true;
   } else {
     return false;
