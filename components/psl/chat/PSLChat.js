@@ -54,7 +54,7 @@ export default function PSLChat({ channel }) {
       }
     });
     console.log("var msg: ", msg);
-    if(msg){
+    if (msg) {
       textMessage.current.value = msg;
     }
     return () => {
@@ -110,14 +110,14 @@ export default function PSLChat({ channel }) {
   function sendMessage() {
     let name = Cookie.getCookies("userProfileName");
     if (!name || name.trim().toLowerCase() == "anonymous") {
-     msg = textMessage.current.value;
+      msg = textMessage.current.value;
       return swal({
         title: "Please update your Profile Name before entering the chat",
         timer: 2500,
         icon: "error",
       }).then((res) => {
         router.push(
-          { pathname: "/myaccount", query: { redirect : true } },
+          { pathname: "/myaccount", query: { redirect: true } },
           "/myaccount"
         );
       });
@@ -133,9 +133,9 @@ export default function PSLChat({ channel }) {
         textMessage.current.style.border = "0px";
       }, 2000);
     } else {
-      if (message.message.trim().length > 220) {
+      if (message.message.trim().length > 99) {
         return swal({
-          title: "Please enter your message below 220 characters",
+          title: "Please enter your message below 99 characters",
           icon: "warning",
           timer: 2500,
         });
@@ -208,9 +208,8 @@ export default function PSLChat({ channel }) {
       var chatIndex = chatRoom.find((_room) => _room.ChatRoomId == room);
       let shareText = `${Cookie.getCookies(
         "userProfileName"
-      )} is inviting you to stream ${channel.VideoName} and join the room ${
-        chatIndex.RoomName
-      } on Tapmad! Click the link below to join:
+      )} is inviting you to stream ${channel.VideoName} and join the room ${chatIndex.RoomName
+        } on Tapmad! Click the link below to join:
 Link: ${window.location.href}
 Room ID: ${chatIndex.ChatLink}
 It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to join now!`;
@@ -233,34 +232,34 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         <ul className={`nav nav-tabs  d-flex ${pslStyles.noBorders}`}>
           {chatRoom.length > 0
             ? chatRoom.map((roomData, index) => {
-                return (
-                  <li
-                    className={`nav-item ${pslStyles.chatRoomList}`}
-                    key={index}
-                    onClick={() => selectRoom(roomData.ChatRoomId)}
+              return (
+                <li
+                  className={`nav-item ${pslStyles.chatRoomList}`}
+                  key={index}
+                  onClick={() => selectRoom(roomData.ChatRoomId)}
+                >
+                  <a
+                    className={pslStyles.chatRoomName}
+                    style={{
+                      border:
+                        room == roomData.ChatRoomId
+                          ? null
+                          : "1px solid #66aa33",
+                      backgroundColor:
+                        room == roomData.ChatRoomId ? null : "#231f20",
+                    }}
                   >
-                    <a
-                      className={pslStyles.chatRoomName}
-                      style={{
-                        border:
-                          room == roomData.ChatRoomId
-                            ? null
-                            : "1px solid #66aa33",
-                        backgroundColor:
-                          room == roomData.ChatRoomId ? null : "#231f20",
-                      }}
-                    >
-                      {roomData.RoomName}
-                      {room == roomData.ChatRoomId && room != 1 ? (
-                        <i
-                          className={`fa fa-times ${pslStyles.crossIcon}`}
-                          onClick={() => deleteRoom(roomData)}
-                        ></i>
-                      ) : null}
-                    </a>
-                  </li>
-                );
-              })
+                    {roomData.RoomName}
+                    {room == roomData.ChatRoomId && room != 1 ? (
+                      <i
+                        className={`fa fa-times ${pslStyles.crossIcon}`}
+                        onClick={() => deleteRoom(roomData)}
+                      ></i>
+                    ) : null}
+                  </a>
+                </li>
+              );
+            })
             : null}
           <li className={pslStyles.plusBtn} onClick={() => setModalShow(true)}>
             <a className={`btn btn-dark btn-sm ${pslStyles.addGroup}`}></a>
