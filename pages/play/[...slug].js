@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { manipulateUrls } from "../../services/utils";
+import { log, manipulateUrls } from "../../services/utils";
 import { get, post } from "../../services/http-service";
 import CategoryDetail from "../../modules/category/components/CategoryDetail";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../services/apilinks";
 import requestIp from "request-ip";
 import Head from "next/head";
-import { getSEOData } from "../../services/seo.service";
+import { getSEOData, getSEODataForLiveChannel } from "../../services/seo.service";
 
 const Syno = (props) => {
 
@@ -80,8 +80,13 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
-    let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
-    return { props: { data: data.data, schema: seo } };
+    if (data.data.Video[0].IsVideoChannel) {
+      let seo = await getSEODataForLiveChannel(OriginalMovieId, context.resolvedUrl);
+      return { props: { data: data.data, schema: seo } };
+    } else {
+      let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
+      return { props: { data: data.data, schema: seo } };
+    }
   }
   return {
     props: {
