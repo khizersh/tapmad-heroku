@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-
 Disallow: /syno?*
 Disallow: /player?*
 Disallow: /vodlist?*
@@ -9,5 +8,5 @@ Disallow: /verify-user
 Disallow: /*campaign*
 Disallow: /?*
 Disallow: /#!player?*
-
+Disallow: /*jwsource
 Sitemap: https://www.tapmad.com/sitemap.xml

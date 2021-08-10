@@ -48,7 +48,7 @@ export default function SubscribeButton() {
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         details = handleBody();
         delete details.cnic;
-        delete details.ProductId;
+        // delete details.ProductId;
       }
       if (authState.selectedPaymentMethod.PaymentType == 3) {
         details = handleBody();
@@ -66,6 +66,13 @@ export default function SubscribeButton() {
           buttons: false,
         });
       }
+
+      if (details.ProductId == 1265 || details.ProductId == 1360) {
+        var status = await AuthService.checkEPLUser(initialState.User.MobileNo);
+      } else {
+        var status = await AuthService.checkUser(initialState.User.MobileNo);
+      }
+
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         // for credit card specific only
         if (!initialState.User.Email || !initialState.User.FullName) {
@@ -77,23 +84,36 @@ export default function SubscribeButton() {
             buttons: false,
           });
         }
-
-        const response = await AuthService.creditCardOrder(details);
-        if (response.data.responseCode == 1) {
-          window.location.href = response.data.CardPaymentUrl;
-          return
-        } else if (!response.data.IsSubscibe) {
-          window.location.href = response.data.CardPaymentUrl;
-          return;
-        } else if (response.data.responseCode == 4) {
+        if (status.code == 0) {
+          updateApiData(status);
+          const response = await AuthService.creditCardOrder(details);
+          if (response.data.responseCode == 1) {
+            window.location.href = response.data.CardPaymentUrl;
+            return
+          } else if (!response.data.IsSubscibe) {
+            window.location.href = response.data.CardPaymentUrl;
+            return;
+          } else if (response.data.responseCode == 4) {
+            swal({
+              timer: 3000,
+              text: response.data.message,
+              icon: "info",
+              buttons: true,
+            }).then((e) => {
+              router.push("/sign-in");
+            });
+          } else {
+            return 0;
+          }
+        } else {
           swal({
-            timer: 3000,
-            text: response.data.message,
+            timer: 2000,
+            text: status.message,
             icon: "info",
-            buttons: true,
-          }).then((e) => {
-            router.push("/sign-in");
+            buttons: false,
           });
+          setLoader(false);
+          updateApiData(status);
         }
       } else {
         if (!details.OperatorId) {
@@ -106,12 +126,6 @@ export default function SubscribeButton() {
           setLoader(false);
         }
         // for other payment methods
-        if (details.ProductId == 1265 || details.ProductId == 1360) {
-          var status = await AuthService.checkEPLUser(initialState.User.MobileNo);
-        } else {
-          var status = await AuthService.checkUser(initialState.User.MobileNo);
-        }
-
         var data;
         if (status.code == 0) {
           updateApiData(status);
