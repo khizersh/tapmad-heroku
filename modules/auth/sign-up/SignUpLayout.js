@@ -28,7 +28,7 @@ export default function SignUpLayout({ children, bgImage }) {
     <div className="mt-0 mt-sm-2">
       <div className="container-fluid p-0 p-sm-2 p-md-3 p-lg-3">
         <div className="">
-          <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-4 offset-lg-4 p-0">
+          <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-10 offset-md-1 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 p-0">
             <div className="pymnt_pge_bx">
               <button
                 className="btn float-left "
