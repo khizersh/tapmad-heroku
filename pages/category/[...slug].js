@@ -18,7 +18,8 @@ const Category = (props) => {
         VideoName: props.data.CategoryName,
         VideoDescription: props.data.CategoryDescription,
         VideoImagePathLarge: props.data.CategoryMobileLargeImage,
-        VideoImagePath: props.data.CategoryMobileSmallImage
+        VideoImagePath: props.data.CategoryMobileSmallImage,
+        VideoEntityId: props.data.VideoEntityId
       };
       setVideo(vid);
       setVideoList([{ Videos: props?.data?.Videos }]);
@@ -65,7 +66,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      data: data.data, schema: seo, env: process.env.TAPENV
+      data: { ...data.data, VideoEntityId: categoryId }, schema: seo, env: process.env.TAPENV
     }
   };
 }
