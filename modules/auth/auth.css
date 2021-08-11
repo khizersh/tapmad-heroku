@@ -48,6 +48,7 @@
 .pymnt_pge_pr_list li > span {
   font-size: 30px;
   color: #87c242;
+  text-transform: uppercase;
 }
 .pymnt_pge_pr_list li {
   font-size: 14px;
