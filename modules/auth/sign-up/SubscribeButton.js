@@ -69,6 +69,7 @@ export default function SubscribeButton() {
 
       if (details.ProductId == 1265 || details.ProductId == 1360) {
         var status = await AuthService.checkEPLUser(initialState.User.MobileNo);
+        console.log(status);
       } else {
         var status = await AuthService.checkUser(initialState.User.MobileNo);
       }
@@ -156,7 +157,17 @@ export default function SubscribeButton() {
               // setting responseCode and new user true for payment process
               updateResponseCode(data.responseCode, true);
             } else if (data.responseCode == 6) {
-              updateResponseCode(34, true);
+              if (status.data.User.IsPinSet) {
+                swal({
+                  title: data.message,
+                  icon: "success",
+                  timer: 3000,
+                }).then((e) => {
+                  router.push("/");
+                })
+              } else {
+                updateResponseCode(34, true);
+              }
             } else if (data.responseCode == 13) {
               swal({
                 title: data.message,
