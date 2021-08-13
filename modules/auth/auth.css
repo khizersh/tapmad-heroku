@@ -241,6 +241,11 @@
     overflow: hidden;
     overflow-y: hidden;
   }
+  .pymnt_pge_pr_list li > span {
+    font-size: 4vw;
+    color: #87c242;
+    text-transform: uppercase;
+  }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -250,7 +255,11 @@
     overflow: hidden;
     overflow-y: hidden;
   }
-
+  .pymnt_pge_pr_list li > span {
+    font-size: 3vw;
+    color: #87c242;
+    text-transform: uppercase;
+  }
 }
 
 /* Smartphones (portrait) ----------- */
@@ -273,6 +282,11 @@
   .tm_login_pg {
     overflow: hidden;
     overflow-y: hidden;
+  }
+  .pymnt_pge_pr_list li > span {
+    font-size: 4vw;
+    color: #87c242;
+    text-transform: uppercase;
   }
   .bg_dark {
     background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
