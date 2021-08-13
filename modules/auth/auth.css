@@ -255,11 +255,6 @@
     overflow: hidden;
     overflow-y: hidden;
   }
-  .pymnt_pge_pr_list li > span {
-    font-size: 3vw;
-    color: #87c242;
-    text-transform: uppercase;
-  }
 }
 
 /* Smartphones (portrait) ----------- */
