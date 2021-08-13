@@ -42,6 +42,9 @@ export default function AuthProvider({ children }) {
       setAuthState({ ...authState, ...AuthStateWithData });
     }
   }, [initialState.currentPackage]);
+  React.useEffect(() => {
+    setAuthState({ ...authState, selectedPaymentMethod: authState.selectedPaymentMethod });
+  }, [authState.selectedPaymentMethod])
 
   function updateSelectedPaymentMethod(method) {
     let stateClone = authState;
@@ -58,6 +61,7 @@ export default function AuthProvider({ children }) {
       setAuthState({
         ...stateClone,
         selectedPaymentMethod: method,
+        selectedPackageId: method.Packages[0].ProductId
       });
     }
   }
