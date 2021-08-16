@@ -17,7 +17,6 @@ export default function SubscribeButton() {
   const [formReady, setFormReady] = useState(false);
   useEffect(() => {
     on("tokenSuccess", async (event) => {
-      console.log("Event ", event);
       if (formReady) {
         await submitCardDetails(event)
       }
@@ -51,7 +50,7 @@ export default function SubscribeButton() {
     const response = await AuthService.creditCardOrder(details);
     setLoader(false);
     if (response.data.responseCode == 1 || response.data.responseCode == 4) {
-      Swal.fire({
+      swal({
         text: "Transaction Successful. Redirecting you",
         icon: "success",
         timer: 2000,

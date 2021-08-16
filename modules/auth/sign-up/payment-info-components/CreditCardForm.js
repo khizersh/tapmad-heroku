@@ -16,11 +16,6 @@ const CreditCardForm = ({
   useEffect(() => {
     new Checkout("pk_test_d81bca5a-5937-4d45-b5dc-0bc0e25c30d9");
   }, [])
-  useEffect(() => {
-    on("tokenSuccess", (event) => {
-      console.log("Event ", event);
-    })
-  }, [])
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
