@@ -1,23 +1,21 @@
+import { trigger } from "./linkers";
+
 export default class Checkout {
     constructor(publicKey) {
-        this.publicKey = publicKey;
-        initializeCheckout();
+        Checkout.initializeCheckout(publicKey);
+        this.listenForToken();
     }
-
-    initializeCheckout() {
-        Frames.init(this.publicKey);
+    static initializeCheckout(key) {
+        Frames.init(key.toString());
     }
 
     listenForToken() {
-        var promise = new Promise((resovle, reject) => {
-            Frames.addEventHandler(
-                Frames.Events.CARD_TOKENIZED,
-                function (event) {
-                    resovle(event)
-                }
-            );
-        });
-        return promise;
+        Frames.addEventHandler(
+            Frames.Events.CARD_TOKENIZED,
+            (event) => {
+                trigger("tokenSuccess", event);
+            }
+        );
     }
     sumbitCardTransaction() {
         Frames.submitCard();
