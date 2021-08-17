@@ -32,7 +32,7 @@ export const getShowsWithPagination =
 export const getEventPredicationGameChannel =
   BASEURLAPP + "api/getEventPredicationGameChannelToken";
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
-export const creditCard = BASEPAYMENTURL + "api/CardUserOrderTest";
+export const creditCard = BASEURLAPP + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 export const getSeasonVodByCategoryId =
