@@ -6,7 +6,7 @@ import { DashboardService } from "../../dashboard/Dashboard.Service";
 // import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 import { useRouter } from "next/router";
-import { VideoWatched } from "../../../services/gtm";
+import { VideoQuartile, VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
@@ -145,7 +145,22 @@ export default function Player({ movies }) {
       });
     }
   }, [movies]);
-
+  function videoQuartile(movie) {
+    return {
+      onTwentyFivePercent: (event) => {
+        VideoQuartile(movie, "25%")
+      },
+      onFiftyPercent: (event) => {
+        VideoQuartile(movie, "50%")
+      },
+      onSeventyFivePercent: (event) => {
+        VideoQuartile(movie, "75%")
+      },
+      onNinetyFivePercent: () => {
+        VideoQuartile(movie, "95%")
+      }
+    }
+  }
   useEffect(() => {
     const header = document.getElementById("player-div1");
     const sticky = header.offsetTop + 100;
@@ -224,6 +239,7 @@ export default function Player({ movies }) {
                   generatePrerollUrl={() =>
                     ads.onVideo && ads.allow ? ads.onVideo : ""
                   }
+                  {...videoQuartile(movies)}
                   customProps={{
                     mediaid: movies && movies.Video.JWMediaId,
                     controls: true,

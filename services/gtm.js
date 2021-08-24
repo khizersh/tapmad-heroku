@@ -46,6 +46,7 @@ export function SearchTag(body) {
     }
 }
 export function ContentViewed(video) {
+    console.log("Content Viewed ", video);
     const { mobile, userId } = getUserDetails();
     try {
         dataLayer.push({ event: "content_viewed", Name: video.VideoName, SmallImage: video.VideoImagePath, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });
@@ -54,7 +55,6 @@ export function ContentViewed(video) {
     }
 }
 export function VideoWatched(response) {
-    console.log(response.Video);
     try {
         if (response.Video && response.Video.getProductiongenreName) {
             var Genre = [];
@@ -115,4 +115,24 @@ export function SignOut() {
         event: "sign_out",
         Platform: "web"
     });
+}
+
+export function VideoQuartile(response, percent) {
+    const { mobile, userId } = getUserDetails();
+    const duration = jwplayer().getDuration();
+    try {
+        if (response.Video && response.Video.getProductiongenreName) {
+            var Genre = [];
+            var newGenre = [];
+            response.Video.getProductiongenreName.forEach((e) => {
+                Genre.push(e.genraName);
+            });
+            response.Video.getProductionNewgenreName.forEach((e) => {
+                newGenre.push(e.newGenraName);
+            });
+            dataLayer.push({ event: "videoQuartile", ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile });
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
