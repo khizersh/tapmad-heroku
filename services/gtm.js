@@ -130,7 +130,9 @@ export function VideoQuartile(response, percent) {
             response.Video.getProductionNewgenreName.forEach((e) => {
                 newGenre.push(e.newGenraName);
             });
-            dataLayer.push({ event: "videoQuartile", ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile });
+            dataLayer.push({
+                event: "videoQuartile", ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile, NewGenre: newGenre.toString(),
+            });
         }
     } catch (e) {
         console.log(e)
