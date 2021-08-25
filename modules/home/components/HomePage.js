@@ -121,6 +121,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
                 />
               </div>
             )}
+            {/* Rendering 2 homepage component for SEO and Users when they scroll */}
             {movies && movies.Sections && !localMovies.Sections.Movies && (
               <HomepageSlider movies={movies.Sections} ads={true} name={"Homepage"} />
             )}
