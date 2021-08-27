@@ -6,7 +6,7 @@ import { DashboardService } from "../../dashboard/Dashboard.Service";
 // import PlayerShop from "../../player-shop/player-shop";
 import { PlayerService } from "../Player.service";
 import { useRouter } from "next/router";
-import { VideoQuartile, VideoWatched } from "../../../services/gtm";
+import { AdImpression, VideoQuartile, VideoWatched } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
@@ -198,7 +198,7 @@ export default function Player({ movies }) {
                   <DFPSlotsProvider dfpNetworkId="28379801">
                     {ads.topAdDesktop && (
                       <div className="desktop-ads d-none d-lg-block d-md-block">
-                        <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
+                        <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} onSlotIsViewable={dfpEventData => AdImpression()} />
                       </div>
                     )}
                     {ads.topAdMobile && ads.topMobileAdWidth && (
@@ -208,6 +208,7 @@ export default function Player({ movies }) {
                             [ads.topMobileAdWidth, ads.topMobileAdHieght],
                           ]}
                           adUnit={ads.topAdMobile}
+                          onSlotIsViewable={dfpEventData => AdImpression()}
                         />
                       </div>
                     )}
@@ -293,6 +294,7 @@ export default function Player({ movies }) {
                       <AdSlot
                         sizes={[[970, 250]]}
                         adUnit={ads.bottomBannerAd}
+                        onSlotIsViewable={dfpEventData => AdImpression()}
                       />
                     </div>
                   </DFPSlotsProvider>
@@ -330,7 +332,7 @@ export default function Player({ movies }) {
                 ) : (
                   <DFPSlotsProvider dfpNetworkId="28379801">
                     <div className="desktop-ads">
-                      <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
+                      <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} onSlotIsViewable={dfpEventData => AdImpression()} />
                     </div>
                   </DFPSlotsProvider>
                 )
@@ -362,7 +364,7 @@ export default function Player({ movies }) {
                 ) : (
                   <DFPSlotsProvider dfpNetworkId="28379801">
                     <div className="desktop-ads">
-                      <AdSlot sizes={[[300, 250]]} adUnit={ads.rightVideoAd} />
+                      <AdSlot sizes={[[300, 250]]} adUnit={ads.rightVideoAd} onSlotIsViewable={dfpEventData => AdImpression()} />
                     </div>
                   </DFPSlotsProvider>
                 )
@@ -433,6 +435,7 @@ export default function Player({ movies }) {
                           <AdSlot
                             adUnit={ads.bottomBannerAdMobile}
                             sizes={[[300, 250]]}
+                            onSlotIsViewable={dfpEventData => AdImpression()}
                           />
                         ) : (
                           ""

@@ -138,3 +138,7 @@ export function VideoQuartile(response, percent) {
         console.log(e)
     }
 }
+
+export function AdImpression() {
+    dataLayer.push({ "event": "adImpression" })
+}
