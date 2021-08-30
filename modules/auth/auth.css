@@ -337,10 +337,6 @@
 
 /* Checkout CSS */
 
-iframe {
-  width: 100%
-}
-
 .one-liner {
   display: flex;
   flex-direction: column
