@@ -67,8 +67,8 @@ export default function SubscribeButton() {
       }).then((e) => {
         router.push("/sign-in");
       });
-    } else if (response.Response && resp.Response.responseCode == 2) {
-      window.location.href = resp.User.redirectUrl;
+    } else if (response.data.Response && response.data.Response.responseCode == 2) {
+      window.location.href = response.data.User.redirectUrl;
     } else {
       swal({
         timer: 3000,
