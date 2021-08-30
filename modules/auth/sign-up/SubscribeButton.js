@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { useRouter } from "next/router";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
+import { on } from "../../../public/static/js/linkers";
 
 export default function SubscribeButton() {
   const router = useRouter();
@@ -13,6 +14,14 @@ export default function SubscribeButton() {
     useContext(MainContext);
 
   const { authState, updateResponseCode } = useContext(Authcontext);
+  const [formReady, setFormReady] = useState(false);
+  useEffect(() => {
+    on("tokenSuccess", async (event) => {
+      if (formReady) {
+        await submitCardDetails(event)
+      }
+    })
+  }, [formReady])
 
   function handleBody() {
     return {
@@ -32,6 +41,43 @@ export default function SubscribeButton() {
     Cookie.setCookies("userId", status.data.User.UserId);
     updateUserPassword(status.data.User.UserPassword);
     updateResponseCode(status.code);
+  }
+  async function submitCardDetails(event) {
+    var details = handleBody();
+    details = { ...details, Token: event.token };
+    delete details.cnic;
+    console.log(details);
+    const response = await AuthService.creditCardOrder(details);
+    setLoader(false);
+    if (response.data.responseCode == 1 || response.data.responseCode == 4) {
+      swal({
+        text: "Transaction Successful. Redirecting you",
+        icon: "success",
+        timer: 2000,
+      }).then(() => {
+        router.push(`/sign-up?code=34&number=${details.MobileNo}`);
+      });
+      return
+    } else if (response.data.responseCode == 4) {
+      swal({
+        timer: 3000,
+        text: response.data.message,
+        icon: "info",
+        buttons: true,
+      }).then((e) => {
+        router.push("/sign-in");
+      });
+    } else {
+      swal({
+        timer: 3000,
+        text: response.data.message,
+        icon: "info",
+        buttons: true,
+      }).then((e) => {
+        window.location.reload();
+      })
+      return 0;
+    }
   }
   async function SubscribeUser() {
     setLoader(true);
@@ -76,6 +122,7 @@ export default function SubscribeButton() {
 
       if (authState.selectedPaymentMethod.PaymentType == 2) {
         // for credit card specific only
+
         if (!initialState.User.Email || !initialState.User.FullName) {
           setLoader(false);
           return swal({
@@ -85,27 +132,12 @@ export default function SubscribeButton() {
             buttons: false,
           });
         }
+        console.log("Hey ", status);
         if (status.code == 0) {
-          updateApiData(status);
-          const response = await AuthService.creditCardOrder(details);
-          if (response.data.responseCode == 1) {
-            window.location.href = response.data.CardPaymentUrl;
-            return
-          } else if (!response.data.IsSubscibe) {
-            window.location.href = response.data.CardPaymentUrl;
-            return;
-          } else if (response.data.responseCode == 4) {
-            swal({
-              timer: 3000,
-              text: response.data.message,
-              icon: "info",
-              buttons: true,
-            }).then((e) => {
-              router.push("/sign-in");
-            });
-          } else {
-            return 0;
-          }
+          Frames.submitCard();
+          setFormReady(true);
+          // updateApiData(status);
+          return
         } else {
           swal({
             timer: 2000,

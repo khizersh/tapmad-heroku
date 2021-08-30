@@ -34,7 +34,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
         className="form-control"
         placeholder="3xxxxxxxxxx"
         inputMode="numeric"
-        autoComplete={false}
+        autoComplete={'false'}
         value={num}
         onChange={(e) => onChange(e)}
       />
