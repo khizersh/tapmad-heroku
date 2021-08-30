@@ -102,9 +102,11 @@ function MyApp({ Component, pageProps }) {
             </>
           ) : (
             <MainProvider>
-              <NoSideBarSkeleton>
-                <Component {...pageProps} />
-              </NoSideBarSkeleton>
+              <AuthProvider>
+                <NoSideBarSkeleton>
+                  <Component {...pageProps} />
+                </NoSideBarSkeleton>
+              </AuthProvider>
             </MainProvider>
           )
         ) : (

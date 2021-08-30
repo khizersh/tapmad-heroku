@@ -14,9 +14,7 @@ export default function SignUp(props) {
   }, [])
   return (
     <div>
-      <AuthProvider>
-        <Register {...props} />
-      </AuthProvider>
+      <Register {...props} />
     </div>
   );
 }
