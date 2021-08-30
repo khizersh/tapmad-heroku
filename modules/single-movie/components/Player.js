@@ -237,6 +237,9 @@ export default function Player({ movies }) {
                       ? videoLink.lowQuality
                       : "https://vodss.tapmad.com/vods/CokeFest/Day1/AbdullahSong01DiamondDynamite/master.m3u8?"
                   }
+                  onAdPlay={() => {
+                    AdImpression()
+                  }}
                   generatePrerollUrl={() =>
                     ads.onVideo && ads.allow ? ads.onVideo : ""
                   }
@@ -317,6 +320,9 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
+                      onAdPlay={() => {
+                        AdImpression()
+                      }}
                       file={
                         "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
                       }
@@ -347,6 +353,9 @@ export default function Player({ movies }) {
                       isAutoPlay={true}
                       isMuted={true}
                       isSkipable={false}
+                      onAdPlay={() => {
+                        AdImpression()
+                      }}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
                       file={
@@ -413,6 +422,9 @@ export default function Player({ movies }) {
                       isSkipable={false}
                       onOneHundredPercent={onRestartAd}
                       onAdSkipped={onRestartAd}
+                      onAdPlay={() => {
+                        AdImpression()
+                      }}
                       file={
                         "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
                       }
