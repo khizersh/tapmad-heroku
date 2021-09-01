@@ -99,10 +99,10 @@ export default function PSLChat({ channel }) {
     }
   }
   function selectRoom(e) {
-    removeListenerOfNonActiveChat(database, room);
+    removeListenerOfNonActiveChat(database, channel.VideoEntityId, room);
     let roomId = e;
     setRoom(roomId);
-    getSingleRoomChat(database, roomId, (list) => {
+    getSingleRoomChat(database, channel.VideoEntityId, roomId, (list) => {
       setChats(list);
     });
   }
