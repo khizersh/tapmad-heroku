@@ -139,7 +139,7 @@ export default function FAQ() {
                         <h3>{m.answer}</h3>
                       </div>
                     ) : m.anchor != null ? (
-                      <p
+                      <p 
                         dangerouslySetInnerHTML={{
                           __html: m.answer.replace(m.changeFrom, m.changeTo),
                         }}
