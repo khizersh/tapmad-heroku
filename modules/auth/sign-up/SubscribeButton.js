@@ -6,6 +6,7 @@ import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { on } from "../../../public/static/js/linkers";
+import { SignUpTag } from "../../../services/gtm";
 
 export default function SubscribeButton() {
   const router = useRouter();
@@ -50,6 +51,7 @@ export default function SubscribeButton() {
     const response = await AuthService.creditCardOrder(details);
     setLoader(false);
     if (response.data.responseCode == 1 || response.data.responseCode == 4) {
+      SignUpTag(details, response.data);
       swal({
         text: "Transaction Successful. Redirecting you",
         icon: "success",
