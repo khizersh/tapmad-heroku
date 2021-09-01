@@ -128,7 +128,8 @@ const leaderboardComponent = () => {
           <div className="">
             <img
               // src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
-              src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
+              // src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
+              src="https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630490978Game-GameBanner(660x230)(1).jpg"
               alt="psl image"
               width="100%"
             />
