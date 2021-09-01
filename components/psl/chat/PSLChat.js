@@ -53,13 +53,19 @@ export default function PSLChat({ channel }) {
         header.style.top = "unset";
       }
     });
-    console.log("var msg: ", msg);
     if (msg) {
       textMessage.current.value = msg;
     }
+    textMessage.current.addEventListener('keyup', function (e) {
+      if (e.key === 'Enter' || e.keyCode === 13) {
+        // Do something
+        sendMessage();
+      }
+    });
     return () => {
       window.removeEventListener("scroll", scrollCallBack);
     };
+
   }, []);
 
   useEffect(() => {
