@@ -10,7 +10,7 @@ import { AdImpression, VideoQuartile, VideoWatched } from "../../../services/gtm
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
-import { isAuthentictedUser, SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { isAuthentictedUser, SEOFriendlySlugsForVideo, verifyURL } from "../../../services/utils";
 import Link from "next/link";
 var fired = false;
 const PSLComponent = dynamic(() =>
@@ -73,6 +73,11 @@ export default function Player({ movies }) {
   }
 
   useEffect(async () => {
+    var isURLSame = verifyURL(router, movies.Video.VideoName);
+    if (!isURLSame) {
+      router.push('../404');
+    }
+
     await getRelatedChannels();
 
     const country = await AuthService.getGeoInfo();

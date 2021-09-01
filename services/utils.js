@@ -59,7 +59,15 @@ function basicSliderConfig(slidesToShow, mobileView) {
     ],
   };
 }
-
+function verifyURL(url, vodName) {
+  var convertedVodName = vodName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  var cleanURLName = url.asPath.split('/', 3)[2];
+  if (cleanURLName == convertedVodName) {
+    return true;
+  } else {
+    return false;
+  }
+}
 function SEOFriendlySlugsForVideo(event, catchup = false) {
   let vidChannel;
   if (event.IsVideoChannel == "0") {
@@ -257,5 +265,6 @@ module.exports = {
   addScriptUrlInDom,
   viewMoreCleanUrls,
   findImageInVODObject,
-  log
+  log,
+  verifyURL
 };
