@@ -25,7 +25,7 @@ export default function PSLChat({ channel }) {
   const router = useRouter();
   const [chatRoom, setChatRooms] = useState([]);
   const [chats, setChats] = useState({});
-  const [database, setDatabase] = useState(null)
+  const database = FireBase.database();
   const [room, setRoom] = useState(1);
   const textMessage = useRef();
   const [modalShow, setModalShow] = useState(false);
@@ -99,17 +99,17 @@ export default function PSLChat({ channel }) {
     }
   }
   function selectRoom(e) {
-    removeListenerOfNonActiveChat(database, room);
+    removeListenerOfNonActiveChat(database, channel.VideoEntityId, room);
     let roomId = e;
     setRoom(roomId);
-    getSingleRoomChat(database, roomId, (list) => {
+    getSingleRoomChat(database, channel.VideoEntityId, roomId, (list) => {
       setChats(list);
     });
   }
 
   function sendMessage() {
     let name = Cookie.getCookies("userProfileName");
-    if (!name || name.trim().toLowerCase() == "anonymous" || name.trim().toLowerCase() == "subscriber") {
+    if (!name || name.trim().toLowerCase() == "anonymous") {
       msg = textMessage.current.value;
       return swal({
         title: "Please update your Profile Name before entering the chat",
