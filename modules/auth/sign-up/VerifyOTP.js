@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { actionsRequestContent } from "../../../services/http-service";
 import { loggingTags, verifyOtp } from "../../../services/apilinks";
 import { MainContext } from "../../../contexts/MainContext";
 import { Authcontext } from "../../../contexts/AuthContext";

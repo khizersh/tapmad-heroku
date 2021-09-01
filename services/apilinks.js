@@ -8,7 +8,7 @@ export const getItemsByKeyword =
 export const getUserByUserId = BASEURL + "api/CheckUserByUserId";
 export const getUserPaymentHistory = BASEURL + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
-  BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/16";
+  BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURL + "api/getCardUser";
@@ -46,7 +46,7 @@ export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `${BASEURL}api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 export const getFeaturedHomepageWithRE = (from, to) => {
-  return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/16`;
+  return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`;
 };
 export const getChannelsWithPagination = (from, to) => {
   return BASEURL + `api/getChannelWithPagination/${from}/${to - from}/0/16`;
