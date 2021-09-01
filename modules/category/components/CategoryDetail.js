@@ -1,13 +1,15 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Card from "./card/Card";
-import { SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { SEOFriendlySlugsForVideo, verifyURL } from "../../../services/utils";
 import { ContentViewed } from "../../../services/gtm";
+import { useRouter } from "next/router";
 
 export default function CategoryDetail({ video, videoList, syno }) {
   const [slug, setSlug] = useState(null);
-
+  const router = useRouter();
   useEffect(() => {
+    verifyURL(router, video.VideoName);
     if (
       videoList.length > 0 &&
       videoList[0].Videos &&

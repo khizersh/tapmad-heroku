@@ -73,10 +73,7 @@ export default function Player({ movies }) {
   }
 
   useEffect(async () => {
-    var isURLSame = verifyURL(router, movies.Video.VideoName);
-    if (!isURLSame) {
-      router.push('../404');
-    }
+    verifyURL(router, movies.Video.VideoName);
 
     await getRelatedChannels();
 

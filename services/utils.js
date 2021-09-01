@@ -65,7 +65,7 @@ function verifyURL(url, vodName) {
   if (cleanURLName == convertedVodName) {
     return true;
   } else {
-    return false;
+    url.push('../404');
   }
 }
 function SEOFriendlySlugsForVideo(event, catchup = false) {
