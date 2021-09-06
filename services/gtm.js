@@ -57,6 +57,8 @@ export function ContentViewed(video) {
 }
 export function VideoWatched(response) {
     try {
+        const duration = jwplayer().getDuration() / 60;
+
         if (response.Video && response.Video.getProductiongenreName) {
             var Genre = [];
             var newGenre = [];
@@ -81,6 +83,7 @@ export function VideoWatched(response) {
                 Region: response.Video.RegionName,
                 Format: response.Video.FormatName,
                 SmallImage: response.Video.VideoImagePath,
+                Duration: duration
             });
         }
     } catch (e) {
@@ -120,7 +123,7 @@ export function SignOut() {
 
 export function VideoQuartile(response, percent) {
     const { mobile, userId } = getUserDetails();
-    const duration = jwplayer().getDuration();
+    const duration = jwplayer().getDuration() / 60;
     try {
         if (response.Video && response.Video.getProductiongenreName) {
             var Genre = [];

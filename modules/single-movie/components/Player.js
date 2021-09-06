@@ -13,6 +13,7 @@ import RelatedProductCard from "../../../modules/movies/components/RelatedProduc
 import { isAuthentictedUser, SEOFriendlySlugsForVideo, verifyURL } from "../../../services/utils";
 import Link from "next/link";
 var fired = false;
+var fired5percent = false;
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
 );
@@ -62,6 +63,14 @@ export default function Player({ movies }) {
     }, adDuration * 60000);
   }
 
+  function fivePercentQuartile(video) {
+    var duration = video.duration;
+    duration = duration / 100 * 5;
+    if (video.currentTime > duration && !fired5percent) {
+      VideoQuartile(movie, "25%");
+      fired5percent = true;
+    }
+  }
   async function getRelatedChannels() {
     const res = await PlayerService.getRelatedChannelsOrVODData(
       movie.Video.VideoEntityId,
@@ -147,20 +156,21 @@ export default function Player({ movies }) {
       });
     }
   }, [movies]);
+
   function videoQuartile(movie) {
     return {
       onTwentyFivePercent: (event) => {
-        VideoQuartile(movie, "25%")
-      },
-      onFiftyPercent: (event) => {
         VideoQuartile(movie, "50%")
       },
-      onSeventyFivePercent: (event) => {
+      onFiftyPercent: (event) => {
         VideoQuartile(movie, "75%")
       },
-      onNinetyFivePercent: () => {
+      onSeventyFivePercent: (event) => {
         VideoQuartile(movie, "95%")
       }
+      // onNinetyFivePercent: () => {
+      //   VideoQuartile(movie, "95%")
+      // }
     }
   }
   useEffect(() => {
@@ -224,6 +234,7 @@ export default function Player({ movies }) {
               >
                 <ReactJWPlayer
                   onTime={(e) => {
+                    fivePercentQuartile(e);
                     if (e.currentTime > 3 && !fired) {
                       VideoWatched(movies);
                       fired = true;
