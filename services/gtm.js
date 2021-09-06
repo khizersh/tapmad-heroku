@@ -10,6 +10,7 @@ export function LoginTag(body, resp) {
             user_id: resp.User.UserId,
             telco: body.OperatorId,
             msisdn: resp.UserProfile.UserProfileMobile,
+            name: resp.UserProfile.UserProfileFullName
         });
     } catch (e) {
         console.log(e);
