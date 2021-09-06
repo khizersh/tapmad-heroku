@@ -18,7 +18,6 @@ const Syno = (props) => {
 
   if (!mount) {
     if (!video) {
-
       if (Array.isArray(props.data.Video)) {
         setVideo(props.data.Video[0]);
       } else {

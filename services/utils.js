@@ -117,7 +117,7 @@ function findImageInVODObject(video) {
 }
 function SEOFriendlySlugsIsCategoryTrue(event) {
   let prefix = "category";
-  let name = event.VideoName ? event.VideoName : event.CategoryName;
+  let name = event.CategoryName ? event.CategoryName : event.VideoName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
   return slug;
