@@ -82,7 +82,7 @@ export default function Player({ movies }) {
   }
 
   useEffect(async () => {
-    verifyURL(router, movies.Video.VideoName);
+    // verifyURL(router, movies.Video.VideoName);
 
     await getRelatedChannels();
 
