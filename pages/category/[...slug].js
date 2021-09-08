@@ -47,7 +47,7 @@ const Category = (props) => {
         />
       </Head>
       <div className="container-fluid">
-        <CategoryDetail video={video} videoList={videoList} />
+        <CategoryDetail video={video} videoList={videoList} page={'category'} />
       </div>
     </>
   );

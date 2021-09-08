@@ -5,11 +5,17 @@ import { SEOFriendlySlugsForVideo, verifyURL } from "../../../services/utils";
 import { ContentViewed } from "../../../services/gtm";
 import { useRouter } from "next/router";
 
-export default function CategoryDetail({ video, videoList, syno }) {
+export default function CategoryDetail({ video, videoList, syno, page }) {
   const [slug, setSlug] = useState(null);
   const router = useRouter();
   useEffect(() => {
-    // verifyURL(router, video.VideoName);
+    if (page == 'play') {
+      verifyURL(router, videoList[0].SectionName);
+    } else if (page == 'category') {
+      verifyURL(router, video.VideoName);
+    } else {
+      verifyURL(router, video.VideoName);
+    }
     if (
       videoList.length > 0 &&
       videoList[0].Videos &&
