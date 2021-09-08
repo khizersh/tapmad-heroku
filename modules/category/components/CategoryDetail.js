@@ -9,13 +9,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
   const [slug, setSlug] = useState(null);
   const router = useRouter();
   useEffect(() => {
-    if (page == 'play') {
-      verifyURL(router, videoList[0].SectionName);
-    } else if (page == 'category') {
-      verifyURL(router, video.VideoName);
-    } else {
-      verifyURL(router, video.VideoName);
-    }
+    verifyURL(router, videoList[0].SectionName, video.VideoName);
     if (
       videoList.length > 0 &&
       videoList[0].Videos &&

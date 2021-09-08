@@ -59,10 +59,17 @@ function basicSliderConfig(slidesToShow, mobileView) {
     ],
   };
 }
-function verifyURL(url, vodName) {
-  var convertedVodName = vodName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+function verifyURL(url, sectionName, vodName) {
+  if (sectionName) {
+    var convertedSectionName = sectionName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
+  if (vodName) {
+    var convertedVodName = vodName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
   var cleanURLName = url.asPath.split('/', 3)[2];
-  if (cleanURLName == convertedVodName) {
+  if (convertedSectionName == cleanURLName) {
+    return true;
+  } else if (convertedVodName == cleanURLName) {
     return true;
   } else {
     url.push('../404');
