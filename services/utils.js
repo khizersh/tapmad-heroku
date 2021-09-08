@@ -112,10 +112,13 @@ function viewMoreCleanUrls(sectionName, sectionId, name) {
 }
 
 function findImageInVODObject(video) {
+
   if (video.hasOwnProperty('VideoImageThumbnail')) {
     return video.VideoImageThumbnail;
   } else if (video.hasOwnProperty('ChannelTVImage')) {
     return video.ChannelTVImage;
+  } else if (video.hasOwnProperty('NewChannelThumbnailPath')) {
+    return video.NewChannelThumbnailPath;
   } else if (video.hasOwnProperty('VideoOnDemandThumb')) {
     return video.VideoOnDemandThumb;
   } else {
