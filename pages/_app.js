@@ -24,6 +24,7 @@ import "../modules/search/search.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
 import "../styles/globals.css";
+import { UserSessions } from "../services/gtm";
 
 
 const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
@@ -34,6 +35,7 @@ const Footer = dynamic(() => import("../components/Footer"));
 function MyApp({ Component, pageProps }) {
 
   useLayoutEffect(() => {
+    UserSessions();
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=

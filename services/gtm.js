@@ -142,7 +142,18 @@ export function VideoQuartile(response, percent) {
         console.log(e)
     }
 }
-
+export function UserSessions() {
+    const { mobile, userId } = getUserDetails();
+    window.onload = function () {
+        var isSessionTrue = sessionStorage.getItem('session');
+        if (isSessionTrue) {
+            return;
+        } else {
+            dataLayer.push({ event: 'Session Start', "Landing Page URL": window.location.href, "UserId": userId, "Mobile No": mobile });
+            sessionStorage.setItem("session", true);
+        }
+    };
+}
 export function AdImpression() {
     dataLayer.push({ "event": "adImpression" })
 }
