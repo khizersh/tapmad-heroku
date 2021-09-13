@@ -128,8 +128,8 @@ const leaderboardComponent = () => {
           <div className="">
             <img
               // src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
-              // src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
-              src="https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630490978Game-GameBanner(660x230)(1).jpg"
+              src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
+              // src="https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630490978Game-GameBanner(660x230)(1).jpg"
               alt="psl image"
               width="100%"
             />
@@ -139,20 +139,19 @@ const leaderboardComponent = () => {
           >
             {data.length
               ? data.map((m, i) => (
-                  <li
-                    key={i}
-                    onClick={() => onClickTab(m)}
-                    className={`rounded-0 p-0 flex-fill ${styles.bgDark} ${
-                      m.LeagueId == gameState.selectedTab.LeagueId
-                        ? styles.active
-                        : ""
+                <li
+                  key={i}
+                  onClick={() => onClickTab(m)}
+                  className={`rounded-0 p-0 flex-fill ${styles.bgDark} ${m.LeagueId == gameState.selectedTab.LeagueId
+                    ? styles.active
+                    : ""
                     }`}
-                  >
-                    <div className="nav-link rounded-0 league_tab">
-                      {m.DisplayName}
-                    </div>
-                  </li>
-                ))
+                >
+                  <div className="nav-link rounded-0 league_tab">
+                    {m.DisplayName}
+                  </div>
+                </li>
+              ))
               : null}
           </ul>
 
@@ -193,8 +192,8 @@ const leaderboardComponent = () => {
                             i == 0
                               ? goldCrown
                               : i == 1
-                              ? brownCrown
-                              : silverCrown
+                                ? brownCrown
+                                : silverCrown
                           }
                           width="20px"
                           className="ml-1"
