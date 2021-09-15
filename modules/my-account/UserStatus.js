@@ -88,6 +88,7 @@ const UserStatus = ({ pdata, userId }) => {
               <th>Expiry Date</th>
               <th>Package ID</th>
               <th>Status</th>
+              <th>Price</th>
               <th>Unsubscribe</th>
             </tr>
           </thead>
@@ -104,6 +105,7 @@ const UserStatus = ({ pdata, userId }) => {
                       ? "Active"
                       : "Inactive"}
                   </td>
+                  <td>{m.Price + ' Rs'}</td>
                   <td>
                     {!deactivated ? (
                       m.IsSubscribe == "0" ? (
