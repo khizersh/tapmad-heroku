@@ -1,19 +1,32 @@
-import React, { useContext } from "react";
-import { Authcontext } from "../../../contexts/AuthContext";
-import { MainContext } from "../../../contexts/MainContext";
+import React, { useContext, useEffect, useState } from "react";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_PAYMENT_METHOD } from "../../../contexts/auth/SignUpReducer";
 
 export default function PaymentMethod() {
-  const { authState, updateSelectedPaymentMethod } = useContext(Authcontext);
-  const { updateUserOperator } = useContext(MainContext);
-  function UpdatePaymenthMethod(m) {
-    updateSelectedPaymentMethod(m);
-    updateUserOperator(m.MobileNetworks[0].OperatorId);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
+  const [CurrentPackage, setCurrentPackage] = useState({});
+  const [CurrentMethod, setCurrentMethod] = useState({});
+  function UpdatePaymenthMethod(paymentMethod) {
+    dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod })
   }
+  useEffect(() => {
+    if (SignUpState.SelectedPrice.PaymentMethods) {
+      setCurrentPackage(SignUpState.SelectedPrice);
+      UpdatePaymenthMethod(SignUpState.SelectedPrice.PaymentMethods[0]);
+    }
+  }, [SignUpState.SelectedPrice]);
+
+  useEffect(() => {
+    if (SignUpState.SelectedMethod.PaymentMethodName) {
+      setCurrentMethod(SignUpState.SelectedMethod);
+    }
+  }, [SignUpState.SelectedMethod])
+
   return (
     <div className="col-md-12 col-sm-12 pt-2">
       <div className="row py-3" style={{ flexWrap: "nowrap" }}>
-        {authState && authState.paymentMethods && authState.paymentMethods.length
-          ? authState.paymentMethods.map((m, i) => (
+        {CurrentPackage && CurrentPackage.PaymentMethods
+          ? CurrentPackage.PaymentMethods.map((m, i) => (
             <div
               className="btn bg-transparent"
               style={{ margin: "auto" }}
@@ -22,8 +35,8 @@ export default function PaymentMethod() {
               <div className="row">
                 <div className="col-12" style={{ height: 25 }}>
                   <span>
-                    {authState.selectedPaymentMethod.PaymentId ==
-                      m.PaymentId ? (
+                    {CurrentMethod.PaymentOperatorId ==
+                      m.PaymentOperatorId ? (
                       <i className="fa fa-check-circle clr-green"></i>
                     ) : (
                       ""
@@ -39,7 +52,7 @@ export default function PaymentMethod() {
                   style={{ minWidth: "50px", height: "60px" }}
                 />
                 <i
-                  className={`text-center text-muted d-block mbl-13px  ${authState.selectedPaymentMethod.PaymentId == m.PaymentId
+                  className={`text-center text-muted d-block mbl-13px  ${CurrentMethod.PaymentOperatorId == m.PaymentOperatorId
                     ? "text-white"
                     : ""
                     }`}

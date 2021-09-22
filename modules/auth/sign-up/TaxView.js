@@ -1,43 +1,43 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Authcontext } from "../../../contexts/AuthContext";
-import paymentMethod from "./PaymentMethod";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_PAYMENT_PRICE } from "../../../contexts/auth/SignUpReducer";
 
 export default function TaxView({ onChange }) {
-  const { authState, updateSelectedPackageId } = useContext(Authcontext);
-
-  const [packageId, setPackageId] = useState(null);
+  const { dispatch, SignUpState } = useContext(SignUpContext);
+  const [PackagePrice, setPackagePrice] = useState([]);
+  const [SelectedPrice, setSelectedPrice] = useState({});
 
   useEffect(() => {
-    if (authState.selectedPaymentMethod) {
-      updateSelectedPackageId(
-        authState.selectedPaymentMethod.Packages[0].ProductId,
-        authState.selectedPaymentMethod.Packages[0].PackagePrice,
-        authState.selectedPaymentMethod.Packages[0].PackageName
-      );
-      // setPackageId(authState.selectedPaymentMethod.Packages[0].ProductId);
+    if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+      setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
+      dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
     }
+  }, [SignUpState.SelectedPackage]);
 
-  }, [authState.selectedPaymentMethod]);
+  useEffect(() => {
+    if (SignUpState.SelectedPrice.PackageId) {
+      setSelectedPrice(SignUpState.SelectedPrice);
+    }
+  }, [SignUpState.SelectedPrice])
 
-  const onChangePackage = (id, amount, name) => {
-    onChange({ id: id, amount: amount, name: name })
+  const onChangePackage = (m) => {
+    onChange(m);
   };
 
   return (
     <>
-      {authState.selectedPaymentMethod &&
-        authState.selectedPaymentMethod.Packages.length > 0 &&
-        authState.selectedPaymentMethod.Packages.map((m, i) => {
+      {PackagePrice &&
+        PackagePrice.length > 0 &&
+        PackagePrice.map((m, i) => {
           return (
             <li
               key={i}
-              className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${authState.selectedPackageId ? (authState.selectedPackageId == m.ProductId ? "pr_active" : "") : ""
+              className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${SelectedPrice.ProductId ? (SelectedPrice.ProductId == m.ProductId ? "pr_active" : "") : ""
                 }`}
               onClick={() =>
-                onChangePackage(m.ProductId, m.PackagePrice, m.PackageName)
-              }
-            >
-              <span className="font-weight-bold">{m.PackagePrice}</span>
+                onChangePackage(m)
+              }>
+              <span className="font-weight-bold">{m.PackageName}</span>
               <span className="d-block d-md-none"></span>
               {m.PackageDescription}
             </li>

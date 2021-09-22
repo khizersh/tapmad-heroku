@@ -4,6 +4,7 @@ import Router from "next/router";
 import React, { useLayoutEffect } from "react";
 import Loader from "../components/Loader";
 import AuthProvider from "../contexts/AuthContext";
+import AuthProviderNew from "../contexts/auth/AuthContext";
 import CatchupProvider from "../contexts/CatchupContext";
 import GameProvider from "../contexts/GameContext";
 import MainProvider, { MainContext } from "../contexts/MainContext";
@@ -25,6 +26,7 @@ import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
 import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
+import SignUpProvider from "../contexts/auth/SignUpContext";
 
 
 const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
@@ -105,9 +107,13 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <MainProvider>
               <AuthProvider>
-                <NoSideBarSkeleton>
-                  <Component {...pageProps} />
-                </NoSideBarSkeleton>
+                <AuthProviderNew>
+                  <SignUpProvider>
+                    <NoSideBarSkeleton>
+                      <Component {...pageProps} />
+                    </NoSideBarSkeleton>
+                  </SignUpProvider>
+                </AuthProviderNew>
               </AuthProvider>
             </MainProvider>
           )

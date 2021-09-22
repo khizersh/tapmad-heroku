@@ -129,3 +129,8 @@ export const loggingTags = {
   click: "click",
   signup: "signup",
 };
+
+
+// New login design apis
+
+export const PaymentPackages = BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";

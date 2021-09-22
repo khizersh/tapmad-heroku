@@ -3,16 +3,14 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import SubscribeButton from "./SubscribeButton";
 
-export default function SignMessage() {
-  const { authState } = useContext(Authcontext);
-  const { initialState } = useContext(MainContext);
-
+export default function SignMessage({ price }) {
+  console.log(price);
   return (
     <div className="form-group text-center pt-2 mb-0">
       <SubscribeButton />
       <p style={{ color: "#fff", padding: "10px" }}>
-        {authState.selectedPaymentMethod &&
-          authState.selectedPaymentMethod.PaymentDescription}
+        {price &&
+          price.ContentDescription}
       </p>
     </div>
   );
