@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Checkout from "../../../../public/static/js/checkout";
-import { on } from "../../../../public/static/js/linkers";
 import DropdownWithImage from "../DropdownWithImage";
 
 const CreditCardForm = ({
