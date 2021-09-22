@@ -30,18 +30,32 @@ export default function TaxView({ onChange }) {
         PackagePrice.length > 0 &&
         PackagePrice.map((m, i) => {
           return (
-            <li
-              key={i}
-              className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${SelectedPrice.ProductId ? (SelectedPrice.ProductId == m.ProductId ? "pr_active" : "") : ""
-                }`}
-              onClick={() =>
-                onChangePackage(m)
-              }>
-              <span className="font-weight-bold">{m.PackageName}</span>
-              <span className="d-block d-md-none"></span>
-              {m.PackageDescription}
-            </li>
+            <div className="w-100">
+              <li
+                key={i}
+                className={`w-100 p-1 f-20 text-center cursor-pointer border-0 text-base ${SelectedPrice.ProductId ? (SelectedPrice.ProductId == m.ProductId ? "price-active" : "") : ""
+                  }`}
+                onClick={() =>
+                  onChangePackage(m)
+                }>
+
+                <span className="font-weight-bold">{m.PackageName}</span>
+                <div className="d-flex justify-content-center">
+                  <div className="text-white per-month mt-2">
+                    Rs
+                  </div>
+                  <div className="f-40 font-weight-bold text-white">100</div>
+                  <div className="text-white d-flex flex-column justify-content-end per-month">
+                    <span> &nbsp;&nbsp;  per</span> <span>&nbsp;&nbsp;  month</span>
+                  </div>
+                </div>
+                <span className="d-block d-md-none"></span>
+                {m.PackageDescription}
+              </li>
+              {SelectedPrice.ProductId ? (SelectedPrice.ProductId == m.ProductId ? <div class="triangle-down"></div> : "") : ""}
+            </div>
           );
+
         })}
     </>
   );

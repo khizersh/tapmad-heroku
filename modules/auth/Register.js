@@ -7,13 +7,16 @@ import EnterPinToVerify from "./sign-up/EnterPinToVerify";
 import SetYourNewPin from "./sign-up/SetYourNewPin";
 import { useRouter } from "next/router";
 import { MainContext } from "../../contexts/MainContext";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 export default memo(function Register(props) {
   const router = useRouter();
   const { code, number, payment, subspack } = router.query;
   const { authState, updateResponseCode, updateSelectedPaymentMethod } =
     useContext(Authcontext);
+    
   const { updateUserNumber, initialState } = useContext(MainContext);
+  const { SignUpState } = useContext(SignUpContext);
   const RenderViews = useCallback(
     function () {
       var respCode = code || authState.subscribeResponseCode;
@@ -85,7 +88,7 @@ export default memo(function Register(props) {
 
   return (
     <div>
-      <SignUpLayout bgImage={initialState?.currentPackage?.PaymentTabImage}>
+      <SignUpLayout bgImage={SignUpState.SelectedPackage.PaymentTabImage}>
         <RenderViews />
       </SignUpLayout>
     </div>

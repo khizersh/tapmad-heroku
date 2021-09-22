@@ -2,8 +2,19 @@
 :root{
   --mobile:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg');
   --desktop:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg');
+  --basecolor: #87C242;
 }
-
+.text-base {
+  color: var(--basecolor);
+}
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid var(--basecolor);
+  margin: auto;
+}
 .bg_dark {
   /* background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg"); */
   background: var(--desktop);
@@ -54,32 +65,29 @@
 
 .pymnt_pge_pr_list li > span {
   font-size: 20px;
-  color: #87c242;
   text-transform: uppercase;
 }
 .pymnt_pge_pr_list li {
   font-size: 14px;
-  color: #fff;
-  border-radius: 0 !important;
-  background-color: #222;
+  color: #000;
+  border-radius: 0 ;
+  background-color: #fff;
   cursor: pointer;
   transition: 0.3s;
+  opacity: 0.9;
 }
-
+.bit-top{
+  position: relative;
+  bottom: 5rem;
+}
 .pr_active {
-  background-color: #fff !important;
-  color: #000 !important;
-  background-image: url(//d1s7wg2ne64q87.cloudfront.net/web/images/payment/check.png);
   background-position: 100% -15px;
   background-size: 5rem;
   background-repeat: no-repeat;
+  border-bottom: 5px solid var(--basecolor);
 }
-.list-group-item-action:focus,
-.list-group-item-action:hover {
-  z-index: 1;
-  color: black !important;
-  text-decoration: none;
-  background-color: #f8f9fa;
+.pr_active span {
+  color: var(--basecolor);
 }
 
 .req_pin_cde_btn:hover {
@@ -206,7 +214,7 @@
 }
 
 .cursor-pointer:hover {
-  background-color: #a9a9a9b0;
+  
 }
 .font-weight {
   font-weight: 700;
@@ -366,7 +374,25 @@
   border: solid 1px #13395E;
   box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15)
 }
+.f-20{
+  font-size: 20px;
+}
+.f-40{
+  font-size: 40px;
+}
+.per-month{
+  font-size: 12px;
+  text-align: left;
+}
 
+.price-active {
+  background: var(--basecolor);
+  color: white;
+  border-radius: 10px;
+}
+.price-active span {
+  color: white;
+}
 .card-frame.frame--rendered.frame--invalid {
   border: solid 1px #D96830;
   box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15)
@@ -382,4 +408,13 @@
       width: 100%;
       margin-bottom: 0
   }
+}
+
+.rounded-sides:first-child{
+  border-top-left-radius: 1.25rem;
+  border-bottom-left-radius: 1.25rem;
+}
+.rounded-sides:last-child{
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
 }

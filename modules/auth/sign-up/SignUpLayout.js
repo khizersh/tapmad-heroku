@@ -30,36 +30,34 @@ export default function SignUpLayout({ children, bgImage }) {
         <div className="">
           <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-10 offset-md-1 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 p-0">
             <div className="pymnt_pge_bx">
-              <button
-                className="btn float-left "
-                style={{
-                  position: "absolute",
-                  background: "#ffffff",
-                  fontSize: "13px",
-                  color: "black",
-                }}
-                onClick={onClickBack}
-              >
-                <i className="fa fa-arrow-left"></i> Back
-              </button>
+              <div className="bg-green p-1 d-flex justify-content-between">
+                <button
+                  className="btn"
+                  style={{
+                    fontSize: "13px",
+                    color: "black",
+                  }}
+                  onClick={onClickBack}
+                >
+                  <img src="/icons/login-back.svg" />
+                </button>
 
+                <button
+                  type="button"
+                  className="btn"
+                  style={{
+                    textTransform: "uppercase",
+                    fontSize: "13px",
+                    border: "none",
+                    color: "#fff",
+                    fontWeight: "bolder"
+                  }}
+                  onClick={onClickLogin}
+                >
+                  Login
+                </button>
+              </div>
               <img className="w-100 mb-0" alt="sign-up" src={bgImage} />
-              <button
-                type="button"
-                className="btn pull-right"
-                style={{
-                  textTransform: "uppercase",
-                  fontSize: "13px",
-                  border: "none",
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  background: "#ffffff",
-                }}
-                onClick={onClickLogin}
-              >
-                Login <i className="fa fa-sign-in"></i>
-              </button>
               {children}
             </div>
           </div>
