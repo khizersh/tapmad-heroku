@@ -17,19 +17,19 @@ const Syno = (props) => {
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
-  if (!mount) {
-    if (!video) {
-      if (Array.isArray(props.data.Video)) {
-        setVideo(props.data.Video[0]);
-      } else {
-        setVideo(props.data.Video);
-      }
+  // if (!mount) {
+  //   if (!video) {
+  //     if (Array.isArray(props.data.Video)) {
+  //       setVideo(props.data.Video[0]);
+  //     } else {
+  //       setVideo(props.data.Video);
+  //     }
 
 
-      setVideoList(props.data.Sections);
-      setMount(true);
-    }
-  }
+  //     setVideoList(props.data.Sections);
+  //     setMount(true);
+  //   }
+  // }
 
   useEffect(() => {
     setMount(true);
