@@ -63,7 +63,7 @@ const Syno = (props) => {
         />
       </Head>
       <div className="container-fluid">
-        <CategoryDetail video={video} videoList={videoList} syno={true} page={'play'} />
+        {/* <CategoryDetail video={video} videoList={videoList} syno={true} page={'play'} /> */}
       </div>
     </>
   );
