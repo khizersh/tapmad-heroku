@@ -80,17 +80,18 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
-    // if (data?.data?.Video[0].IsVideoChannel) {
-    //   let seo = await getSEODataForLiveChannel(OriginalMovieId, context.resolvedUrl);
-    //   return { props: { data: data.data, schema: seo } };
-    // } else {
-    //   let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
-    //   return { props: { data: data.data, schema: seo } };
-    // }
+    if (data?.data?.Video[0].IsVideoChannel) {
+      let seo = await getSEODataForLiveChannel(OriginalMovieId, context.resolvedUrl);
+      return { props: { data: data.data, schema: seo } };
+    } else {
+      let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
+      return { props: { data: data.data, schema: seo } };
+    }
   }
   return {
     props: {
-      data: data, env: process.env.TAPENV
+      data: data,
+      env: process.env.TAPENV
     }
   };
 }
