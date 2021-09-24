@@ -67,7 +67,7 @@ export default function Player({ movies }) {
     var duration = video.duration;
     duration = duration / 100 * 5;
     if (video.currentTime > duration && !fired5percent) {
-      VideoQuartile(movie, "25%");
+      VideoQuartile(movie, "25%", "video1");
       fired5percent = true;
     }
   }
@@ -161,13 +161,13 @@ export default function Player({ movies }) {
   function videoQuartile(movie) {
     return {
       onTwentyFivePercent: (event) => {
-        VideoQuartile(movie, "50%")
+        VideoQuartile(movie, "50%", "video2")
       },
       onFiftyPercent: (event) => {
-        VideoQuartile(movie, "75%")
+        VideoQuartile(movie, "75%", "video3")
       },
       onSeventyFivePercent: (event) => {
-        VideoQuartile(movie, "95%")
+        VideoQuartile(movie, "95%", "video4")
       }
       // onNinetyFivePercent: () => {
       //   VideoQuartile(movie, "95%")
@@ -286,7 +286,7 @@ export default function Player({ movies }) {
                   {/* <span className="text-secondary">
                     {movie.Video.VideoTotalViews} views
                   </span> */}
-                  <p style={{ color: "#aaa" }}>
+                  <p className="line-clamp" style={{ color: "#aaa" }}>
                     {movie.Video.VideoDescription}
                   </p>
                 </>

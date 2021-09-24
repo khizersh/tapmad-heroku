@@ -40,7 +40,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
                     <div className="font-20">
                       {video && video.VideoCategoryName}
                     </div>
-                    <div className="text-dark line-height">
+                    <div className="text-dark line-height line-clamp">
                       {video
                         ? video.VideoDescription &&
                           video.VideoDescription.length > 200
