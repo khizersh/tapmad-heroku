@@ -21,7 +21,9 @@
   background-size: cover;
   background-blend-mode: multiply;
 }
-
+.bg-dark-cstm{
+background-color: rgba(112, 112, 112, 1);
+}
 .tm_login_pg {
   display: table;
   width: 100%;
@@ -418,3 +420,47 @@
   border-top-right-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
 }
+
+
+/* Custom CSS for Radio Buttons Start*/
+
+input[type="radio"] {
+  display: none;
+}
+label:before {
+  width: 30px;
+  height: 30px;
+  border: 3px solid white;
+  content: '';
+  border-radius: 50%;
+  display: inline-block;
+  margin:-8px 20px;
+}
+label:after {
+  width: 18px;
+  height: 18px;
+  background-color: rgb(255, 255, 255);
+  content: '';
+  border-radius: 50%;
+  display: inline-block;
+  margin: -7px 36px;
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  transition: all 0.4s;
+}
+input[type="radio"]:checked + label::after {
+  background-color: rgba(135, 194, 66, 1);
+}
+input[type="radio"]:checked + label::before {
+  border: 3px solid rgba(135, 194, 66, 1);;
+}
+label{
+  padding-right: 32px;
+  cursor: pointer;
+  font-weight: bold;
+}
+label:nth-last-child(1){
+  padding-right: 0px;
+}
+/* Custom CSS for Radio Buttons End*/

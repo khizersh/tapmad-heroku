@@ -28,7 +28,7 @@ const SignUpComponent = () => {
         <TaxView onChange={taxChangeView} />
       </ul>
 
-      <div className="">
+      <div className="m-4">
         <PaymentMethodComponent />
       </div>
       <PaymentInfo />
