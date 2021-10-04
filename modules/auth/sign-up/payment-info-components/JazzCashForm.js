@@ -1,7 +1,7 @@
 import React from "react";
 import { jazzIcon } from "../../../../services/imagesLink";
 
-const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
+const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic , logo }) => {
   const [num, setNum] = React.useState("");
   const [cnic, setCnic] = React.useState("");
 
@@ -23,7 +23,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
   return (
     <>
       <div className="form-control text-center">
-        <img src={jazzIcon} width="20" alt={'jazzcash'} />{" "}
+        <img src={logo} width="20" alt={'jazzcash'} />{" "}
         <span className="font-weight">JazzCash</span>
       </div>
       <span>
