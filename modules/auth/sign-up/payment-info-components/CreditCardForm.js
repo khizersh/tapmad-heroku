@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Checkout from "../../../../public/static/js/checkout";
-import { on } from "../../../../public/static/js/linkers";
 import DropdownWithImage from "../DropdownWithImage";
 
 const CreditCardForm = ({
@@ -14,7 +13,7 @@ const CreditCardForm = ({
   const [num, setNum] = React.useState("");
 
   useEffect(() => {
-    new Checkout("pk_4efbb3d2-00b9-4860-95bf-329b4801644d");
+    // new Checkout("pk_4efbb3d2-00b9-4860-95bf-329b4801644d");
   }, [])
   const onChange = (e) => {
     const mobileNum = e.target.value;
@@ -55,10 +54,10 @@ const CreditCardForm = ({
         required={true}
         onChange={(e) => onChangeEmail(e)}
       />
-      <div className="one-liner w-100">
+      {/* <div className="one-liner w-100">
         <div className="card-frame">
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

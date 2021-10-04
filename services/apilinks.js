@@ -33,6 +33,7 @@ export const getEventPredicationGameChannel =
   BASEURLAPP + "api/getEventPredicationGameChannelToken";
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/makeCheckOutPayment";
+export const UBLCard = BASEURLAPP + "api/CardUserOrder";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 export const getSeasonVodByCategoryId =
