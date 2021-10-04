@@ -10,18 +10,18 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       setNum(mobileNum);
       onChangeNumber(e);
     }
-  };
+  }; ``
   return (
     <>
       {data && data.length ? (
         <>
           {" "}
           <DropdownWithImage data={data} onChange={onChangeNetwork} />
-          <span>
+          <div className="">
             <label className="form-control cntry_cde border-0">
               {mobileCode}
             </label>
-          </span>
+          </div>
         </>
       ) : (
         ""

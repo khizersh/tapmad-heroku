@@ -22,7 +22,7 @@
   background-blend-mode: multiply;
 }
 .bg-dark-cstm{
-background-color: rgba(112, 112, 112, 1);
+background-color: #262626;
 }
 .tm_login_pg {
   display: table;
@@ -182,7 +182,7 @@ background-color: rgba(112, 112, 112, 1);
   border-bottom: 1px solid #ddd;
 }
 .width-11rem {
-  width: 11rem;
+  width: 100%;
   cursor: pointer;
 }
 .dropdown-width {
@@ -235,12 +235,10 @@ background-color: rgba(112, 112, 112, 1);
   }
 
   .pr_active {
-    background-color: #fff !important;
-    color: #000 !important;
-    background-image: url(//d1s7wg2ne64q87.cloudfront.net/web/images/payment/check.png);
     background-position: 100% -15px;
-    background-size: 4rem !important;
+    background-size: 5rem;
     background-repeat: no-repeat;
+    border-bottom: 5px solid var(--basecolor);
   }
   .mbl-13px {
     font-size: 13px;
@@ -320,7 +318,13 @@ background-color: rgba(112, 112, 112, 1);
     background-blend-mode: multiply;
   }
 }
-
+.f-40{
+  font-size: 40px;
+}
+.per-month{
+  font-size: 12px;
+  text-align: left;
+}
 /* iPhone 5 (portrait)----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
   .bg_dark,
@@ -332,6 +336,12 @@ background-color: rgba(112, 112, 112, 1);
     background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
+  }
+  .f-40{
+    font-size: 30px;
+  }
+  .per-month{
+    font-size: 10px;
   }
 }
 
@@ -379,14 +389,6 @@ background-color: rgba(112, 112, 112, 1);
 .f-20{
   font-size: 20px;
 }
-.f-40{
-  font-size: 40px;
-}
-.per-month{
-  font-size: 12px;
-  text-align: left;
-}
-
 .price-active {
   background: var(--basecolor);
   color: white;
@@ -427,40 +429,50 @@ background-color: rgba(112, 112, 112, 1);
 input[type="radio"] {
   display: none;
 }
-label:before {
+.radio-cstm:before {
   width: 30px;
   height: 30px;
   border: 3px solid white;
   content: '';
   border-radius: 50%;
-  display: inline-block;
-  margin:-8px 20px;
+  display: block;
+  margin:-4px 20px;
 }
-label:after {
+.radio-cstm:after {
   width: 18px;
   height: 18px;
   background-color: rgb(255, 255, 255);
   content: '';
   border-radius: 50%;
-  display: inline-block;
-  margin: -7px 36px;
+  display: block;
+  margin: -7px 21px;
   position: absolute;
   left: 5px;
   top: 9px;
   transition: all 0.4s;
 }
-input[type="radio"]:checked + label::after {
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+
+  .radio-cstm:before {
+    width: 25px;
+    height: 25px;
+  }
+  .radio-cstm:after {
+    width: 13px;
+    height: 13px;
+  }
+}
+input[type="radio"]:checked + .radio-cstm::after {
   background-color: rgba(135, 194, 66, 1);
 }
-input[type="radio"]:checked + label::before {
+input[type="radio"]:checked + .radio-cstm::before {
   border: 3px solid rgba(135, 194, 66, 1);;
 }
-label{
-  padding-right: 32px;
+.radio-cstm{
   cursor: pointer;
   font-weight: bold;
 }
-label:nth-last-child(1){
+.radio-cstm:nth-last-child(1){
   padding-right: 0px;
 }
 /* Custom CSS for Radio Buttons End*/

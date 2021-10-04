@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_PAYMENT_METHOD } from "../../../contexts/auth/SignUpReducer";
+import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethod() {
   const { SignUpState, dispatch } = useContext(SignUpContext);
@@ -23,7 +24,7 @@ export default function PaymentMethod() {
   }, [SignUpState.SelectedMethod])
 
   return (
-    <div className="col-md-12 col-sm-12 pt-2 rounded bg-dark-cstm">
+    <div className="col-md-12 col-sm-12 pt-2">
       <div className="row">
         <div className="col-4"></div>
         <div className="col-4"></div>
@@ -39,68 +40,54 @@ export default function PaymentMethod() {
         <div className="col-12">
           <h3 className="text-base">Payment Option</h3>
         </div>
-        <div className="col-12">
-
-          <div className="row position-relative">
-            <div className="col-3 position-relative">
-              <input type="radio" name="radio" id="one" />
-              <label for="one">&nbsp;</label>
-            </div>
-            <div className="col-3 position-relative">
-              <input type="radio" name="radio" id="two" />
-              <label for="two">&nbsp;</label>
-            </div>
-            <div className="col-3 position-relative">
-              <input type="radio" name="radio" id="three" />
-              <label for="three">&nbsp;</label>
-            </div>
-            <div className="col-3 position-relative">
-              <input type="radio" name="radio" id="four" />
-              <label for="four">&nbsp;</label>
-            </div>
-          </div>
-        </div>
       </div>
-      <div className="row py-3" style={{ flexWrap: "nowrap" }}>
+      <div className="row py-3 flex-nowrap">
         {CurrentPackage && CurrentPackage.PaymentMethods
           ? CurrentPackage.PaymentMethods.map((m, i) => (
-            <div
-              className="btn bg-transparent"
-              style={{ margin: "auto" }}
-              key={i}
-            >
-              <div className="row">
-                <div className="col-12" style={{ height: 25 }}>
-                  <span>
+            <div className="col text-center p-0">
+              <div
+                className="btn bg-transparent"
+                style={{ margin: "auto" }}
+                key={i}
+              >
+                <div className="position-relative">
+                  <input type="radio" name="radio" onClick={() => UpdatePaymenthMethod(m)} id={m.PaymentMethodName} />
+                  <label className="radio-cstm" htmlFor={m.PaymentMethodName}>
+                    <div onClick={() => UpdatePaymenthMethod(m)} className={`${m.PaymentMethodName} mt-4`}>
+                      <img
+                        src={m.PaymentImage}
+                        alt={m.PaymentMethodName}
+                        className="img-fluid mb-2 "
+                        style={{ minWidth: "50px", height: "60px" }}
+                      />
+                      <i
+                        className={`text-center text-muted d-block mbl-13px  ${CurrentMethod.PaymentOperatorId == m.PaymentOperatorId
+                          ? "text-white"
+                          : ""
+                          }`}
+                        style={{ fontStyle: "normal" }}
+                      >
+                        {m.PaymentMethodName}
+                      </i>
+                    </div>
+                  </label>
+                  {/* <span>
                     {CurrentMethod.PaymentOperatorId ==
                       m.PaymentOperatorId ? (
                       <i className="fa fa-check-circle clr-green"></i>
                     ) : (
                       ""
                     )}
-                  </span>
+                  </span> */}
                 </div>
-              </div>
-              <div onClick={() => UpdatePaymenthMethod(m)} className={`${m.PaymentMethodName}`}>
-                <img
-                  src={m.PaymentImage}
-                  alt={m.PaymentMethodName}
-                  className="img-fluid mb-2 "
-                  style={{ minWidth: "50px", height: "60px" }}
-                />
-                <i
-                  className={`text-center text-muted d-block mbl-13px  ${CurrentMethod.PaymentOperatorId == m.PaymentOperatorId
-                    ? "text-white"
-                    : ""
-                    }`}
-                  style={{ fontStyle: "normal" }}
-                >
-                  {m.PaymentMethodName}
-                </i>
               </div>
             </div>
           ))
           : null}
+      </div>
+      <div>
+
+        <PaymentInfo />
       </div>
     </div>
   );

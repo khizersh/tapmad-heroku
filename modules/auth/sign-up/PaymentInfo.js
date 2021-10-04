@@ -110,12 +110,10 @@ function PaymentInfo() {
 
   return (
     <div>
-      <div className="pymnt_pge_phne pr-3 pl-3 pb-3 pt-0 mthd_active">
+      <div className="pymnt_pge_phne px-lg-3 pb-3 pt-0 mthd_active">
         <div className="form-group mb-0">
           <div className="">
-            <div className="input-group ng-scope">
-              {SignUpState && SignUpState.SelectedMethod && <RenderMethod />}
-            </div>
+            {SignUpState && SignUpState.SelectedMethod && <RenderMethod />}
           </div>
         </div>
         <SignMessage price={SignUpState.SelectedPrice} />
