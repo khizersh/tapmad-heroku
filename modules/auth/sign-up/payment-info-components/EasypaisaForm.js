@@ -1,7 +1,7 @@
 import React from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
 
-const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
+const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber , logo }) => {
   const [num, setNum] = React.useState("");
 
   const onChange = (e) => {
@@ -14,7 +14,7 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
   return (
     <>
       <div className="form-control text-center">
-        <img src={easyPaisaIcon} width="20" alt={'easypaisa'} />{" "}
+        <img src={logo} width="20" alt={'easypaisa'} />{" "}
         <span className="font-weight">{methodName}</span>
       </div>
       <span>
