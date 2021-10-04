@@ -1,6 +1,5 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
-export const BASEURLADS = "https://thawing-coast-10047.herokuapp.com/";
 const BASEPAYMENTURL = "https://payments.tapmad.com/api/";
 export const EPLPaymentUrl = BASEPAYMENTURL + "getAllPaymentMethods/V1/en/android";
 export const getAllPackages = BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web"
@@ -119,12 +118,9 @@ export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
 // get all country
 export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web"
 
+
 export const viewMoreContent = (from, to, sectionId, pageId) => (BASEURLAPP + `api/getMoreContentWithPagination/${from}/${to}/${sectionId}/${pageId}`)
 
-
-// Ads portal 
-
-export const playerPageAds = BASEURLADS + "api/SearchById"
 
 export const loggingTags = {
   search: "search",
