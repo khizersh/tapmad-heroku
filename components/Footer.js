@@ -67,7 +67,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li className="list-group-item">
-                  <a href="https://www.instagram.com/tapmadtv/" rel="noreferrer" target="_blank">
+                  <a href="https://www.instagram.com/tapmad.entertainment/" rel="noreferrer" target="_blank">
                     <i className="fa fa-instagram"></i>
                   </a>
                 </li>
