@@ -29,6 +29,21 @@ background-color: #262626;
   width: 100%;
 }
 
+.border-curve{
+  border-radius: 5px !important;
+}
+
+.text-box{
+  background-color: white;
+
+}
+
+.payment-icon{
+  background-color: white;
+  color: black;
+  padding: 4px;
+}
+
 .login_slct_oprtr {
   /* padding-top: 50px; */
   transition: 0.3s;
@@ -66,7 +81,7 @@ background-color: #262626;
 }
 
 .pymnt_pge_pr_list li > span {
-  font-size: 20px;
+  font-size: 14px;
   text-transform: uppercase;
 }
 .pymnt_pge_pr_list li {
@@ -86,7 +101,15 @@ background-color: #262626;
   background-position: 100% -15px;
   background-size: 5rem;
   background-repeat: no-repeat;
-  border-bottom: 5px solid var(--basecolor);
+  /* border-bottom: 5px solid var(--basecolor); */
+}
+
+.green-bar{
+  border: 3px solid var(--basecolor);
+  position: relative;
+  bottom: -16px;
+  left: 23px;
+  width: 70%;
 }
 .pr_active span {
   color: var(--basecolor);
@@ -165,6 +188,36 @@ background-color: #262626;
   background-color: #87c242;
   border-radius: 0;
 }
+
+.checkbox-term{
+  width: 20px; 
+  height: 20px;
+  border-radius: 10px !important;
+}
+
+/* term and condition checkbox */
+.container-term {
+  display: block;
+  padding-left: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #878787;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container-term span{
+  text-decoration: underline;
+}
+
+.pymnt_pge_sbscrbe_btn{
+  width: 100%;
+  border-radius: 23px;
+  font-size: 20px;
+  color: white;
+}
+
+
 .text-white {
   color: white !important;
 }
@@ -215,9 +268,7 @@ background-color: #262626;
   cursor: pointer;
 }
 
-.cursor-pointer:hover {
-  
-}
+
 .font-weight {
   font-weight: 700;
 }
@@ -238,7 +289,7 @@ background-color: #262626;
     background-position: 100% -15px;
     background-size: 5rem;
     background-repeat: no-repeat;
-    border-bottom: 5px solid var(--basecolor);
+    /* border-bottom: 5px solid var(--basecolor); */
   }
   .mbl-13px {
     font-size: 13px;
@@ -257,7 +308,7 @@ background-color: #262626;
     overflow-y: hidden;
   }
   .pymnt_pge_pr_list li > span {
-    font-size: 4vw;
+    font-size: 3.5vw;
     color: #87c242;
     text-transform: uppercase;
   }
@@ -294,7 +345,7 @@ background-color: #262626;
     overflow-y: hidden;
   }
   .pymnt_pge_pr_list li > span {
-    font-size: 4vw;
+    font-size: 3.5vw;
     color: #87c242;
     text-transform: uppercase;
   }
@@ -319,11 +370,19 @@ background-color: #262626;
   }
 }
 .f-40{
-  font-size: 40px;
+  font-size: 32px;
 }
 .per-month{
   font-size: 12px;
   text-align: left;
+}
+.monthly {
+  font-size: 12px;
+  text-align: left;
+  line-height: 9px;
+  position: relative;
+  left: 3px;
+  top: 18px;
 }
 /* iPhone 5 (portrait)----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
@@ -343,6 +402,22 @@ background-color: #262626;
   .per-month{
     font-size: 10px;
   }
+  .monthly {
+    font-size: 12px;
+    text-align: left;
+    line-height: 9px;
+    position: relative;
+    left: 3px;
+    top: 7px;
+}
+
+.green-bar{
+  border: 3px solid var(--basecolor);
+  position: relative;
+  bottom: -16px;
+  left: 21px;
+  width: 70%;
+}
 }
 
 /* Desktops and laptops ----------- */
@@ -415,12 +490,12 @@ background-color: #262626;
 }
 
 .rounded-sides:first-child{
-  border-top-left-radius: 1.25rem;
-  border-bottom-left-radius: 1.25rem;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
 }
 .rounded-sides:last-child{
-  border-top-right-radius: 1.25rem;
-  border-bottom-right-radius: 1.25rem;
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
 }
 
 
@@ -430,22 +505,22 @@ input[type="radio"] {
   display: none;
 }
 .radio-cstm:before {
-  width: 30px;
-  height: 30px;
-  border: 3px solid white;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
   content: '';
   border-radius: 50%;
   display: block;
-  margin:-4px 20px;
+  margin: -2px 20px;
 }
 .radio-cstm:after {
-  width: 18px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   background-color: rgb(255, 255, 255);
   content: '';
   border-radius: 50%;
   display: block;
-  margin: -7px 21px;
+  margin: -6px 20px;
   position: absolute;
   left: 5px;
   top: 9px;

@@ -42,7 +42,7 @@ export default function PackageSelectView({ onChange }) {
                             }
                         >
                             <span className="font-weight-bold">{m.PaymentTabName}</span>
-                            <span className="d-block d-md-none"></span>
+                            <div className={`${SignUpState?.SelectedPackage?.PaymentTabId == m.PaymentTabId ? "green-bar" : ""} `}></div>
                             {/* {m.PackageDescription} */}
                         </li>
                     );

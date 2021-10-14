@@ -22,33 +22,38 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
   };
   return (
     <>
-      <div className="form-control text-center">
-        <img src={jazzIcon} width="20" alt={'jazzcash'} />{" "}
+      {/* <div className="payment-icon border-curve text-center w-100 mb-2">
+        <img src={jazzIcon} width="20" alt={"jazzcash"} />{" "}
         <span className="font-weight">JazzCash</span>
-      </div>
-      <span>
-        <label className="form-control cntry_cde border-0">{mobileCode}</label>
-      </span>
-      <input
-        type="text"
-        maxLength="20"
-        minLength="5"
-        className="form-control"
-        placeholder="3xxxxxxxxxx"
-        inputMode="numeric"
-        value={num}
-        onChange={(e) => onChange(e)}
-      />
+      </div> */}
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span className="payment-icon border-curve">
+          {mobileCode}
+          </span>
+        </div>
+        <input
+          type="text"
+          maxLength="20"
+          minLength="5"
+          className="form-control ml-3 border-curve"
+          placeholder="3xxxxxxxxxx"
+          inputMode="numeric"
+          value={num}
+          onChange={(e) => onChange(e)}
+        />
       <input
         type="text"
         maxLength="6"
         minLength="6"
-        className="form-control w-100 mb-2 pl-2"
+        className="form-control border-curve w-100 mt-3"
         placeholder="Last 6 digits of your CNIC"
         inputMode="numeric"
         value={cnic}
         onChange={(e) => onChangeNic(e)}
       />
+      </div>
     </>
   );
 };

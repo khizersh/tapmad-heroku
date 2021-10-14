@@ -24,7 +24,7 @@ const SignUpComponent = () => {
           <PackageSelectView onChange={changeMainPackage} />
         </ul>
       </div>
-      <ul className="list-group-horizontal list-group p-0 mt-5 mx-lg-5 mx-md-5 mx-2">
+      <ul className="list-group-horizontal list-group p-0 mt-5 mx-lg-4 mx-md-4 mx-2">
         <TaxView onChange={taxChangeView} />
       </ul>
 

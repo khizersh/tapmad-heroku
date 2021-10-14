@@ -22,6 +22,7 @@ import "../modules/player-shop/player-shop.css";
 import "../modules/promo-code/promo-code.css";
 import "../modules/samsungtv/samsung.css";
 import "../modules/search/search.css";
+import "../components/component-styles/component.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
 import "../styles/globals.css";

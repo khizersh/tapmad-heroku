@@ -25,7 +25,6 @@ function PaymentInfo() {
   );
   function updateUserData(userData) {
     dispatch({ type: UPDATE_USER_DETAILS, data: userData });
-    console.log(SignUpState);
   }
   const RenderMethod = useCallback(() => {
     const PaymentId = SignUpState.SelectedMethod.PaymentId;

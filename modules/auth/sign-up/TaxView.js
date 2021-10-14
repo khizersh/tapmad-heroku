@@ -45,8 +45,10 @@ export default function TaxView({ onChange }) {
                     Rs
                   </div>
                   <div className="f-40 font-weight-bold text-white">100</div>
-                  <div className="text-white d-flex flex-column justify-content-end per-month">
-                    <span> &nbsp;&nbsp;  per</span> <span>&nbsp;&nbsp;  month</span>
+                  <div className="text-white  monthly">
+                  {/* <div className="text-white d-flex flex-column justify-content-end per-month"> */}
+                    {/* <span> &nbsp;&nbsp;  per</span><span>&nbsp;&nbsp;  month</span> */}
+                    <span className="d-block">per </span>month
                   </div>
                 </div>
                 <span className="d-block d-md-none"></span>

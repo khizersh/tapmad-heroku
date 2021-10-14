@@ -7,22 +7,22 @@ import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { on } from "../../../public/static/js/linkers";
 import { SignUpTag } from "../../../services/gtm";
+import GeneralModal from '../../../components/GeneralModal';
+import TermsAndCondition from './TermsAndCondition';
 
 export default function SubscribeButton() {
   const router = useRouter();
-
-  const { initialState, setLoader, updateUserPassword } =
-    useContext(MainContext);
-
+  const { initialState, setLoader, updateUserPassword } = useContext(MainContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
   const [formReady, setFormReady] = useState(false);
+  const [open , setOpen] = useState(false)
   useEffect(() => {
     on("tokenSuccess", async (event) => {
       if (formReady) {
-        await submitCardDetails(event)
+        await submitCardDetails(event);
       }
-    })
-  }, [formReady])
+    });
+  }, [formReady]);
 
   function handleBody() {
     return {
@@ -39,7 +39,6 @@ export default function SubscribeButton() {
     };
   }
   function updateApiData(status) {
-    Cookie.setCookies("userId", status.data.User.UserId);
     updateUserPassword(status.data.User.UserPassword);
     updateResponseCode(status.code);
   }
@@ -59,7 +58,7 @@ export default function SubscribeButton() {
       }).then(() => {
         router.push(`/sign-up?code=34&number=${details.MobileNo}`);
       });
-      return
+      return;
     } else if (response.data.responseCode == 4) {
       swal({
         timer: 3000,
@@ -69,7 +68,10 @@ export default function SubscribeButton() {
       }).then((e) => {
         router.push("/sign-in");
       });
-    } else if (response.data.Response && response.data.Response.responseCode == 2) {
+    } else if (
+      response.data.Response &&
+      response.data.Response.responseCode == 2
+    ) {
       window.location.href = response.data.User.redirectUrl;
     } else {
       swal({
@@ -79,7 +81,7 @@ export default function SubscribeButton() {
         buttons: true,
       }).then((e) => {
         window.location.reload();
-      })
+      });
       return 0;
     }
   }
@@ -136,12 +138,11 @@ export default function SubscribeButton() {
             buttons: false,
           });
         }
-        console.log("Hey ", status);
         if (status.code == 0) {
           Frames.submitCard();
           setFormReady(true);
           // updateApiData(status);
-          return
+          return;
         } else {
           swal({
             timer: 2000,
@@ -200,7 +201,7 @@ export default function SubscribeButton() {
                   timer: 3000,
                 }).then((e) => {
                   router.push("/");
-                })
+                });
               } else {
                 updateResponseCode(34, true);
               }
@@ -235,13 +236,26 @@ export default function SubscribeButton() {
       }
     }
   }
+  function onClickTerm() {
+    setOpen(true)
+  }
+
+ 
   return (
     <div>
+      <GeneralModal component={TermsAndCondition} title="Test Modal" open={open} toggle={() => setOpen(!open)}/>
+      <div className="form-check float-left my-3 termdiv">
+        <label className="container-term">
+          <input type="checkbox" />I agree to Tapmad's{" "}
+          <span onClick={onClickTerm}>term and condition</span>
+          <span className="checkmark"></span>
+        </label>
+      </div>
       <button
         className="btn pymnt_pge_sbscrbe_btn bg-green"
         onClick={SubscribeUser}
       >
-        Subscribe
+        Subscribe Now
       </button>
     </div>
   );
