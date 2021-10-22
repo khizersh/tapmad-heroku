@@ -82,10 +82,15 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
   } else {
     vidChannel = 1;
   }
-
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
-    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = ""
+  if (event.IsVideoFree) {
+    slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+      }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  } else {
+    slug = `${catchup ? "/catchup-watch" : "/play"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+      }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  }
 
   return slug;
 }
