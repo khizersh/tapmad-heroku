@@ -91,7 +91,14 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
     slug = `${catchup ? "/catchup-watch" : "/play"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
       }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   }
+  return slug;
+}
 
+function SEOFriendlySlugsForWatch(event, catchup = false) {
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   return slug;
 }
 
@@ -271,6 +278,7 @@ module.exports = {
   setUrlToCookies,
   isAuthentictedServerSide,
   SEOFriendlySlugsForCatchupVideo,
+  SEOFriendlySlugsForWatch,
   closeNavBar,
   encryptWithAES,
   decryptWithAES,
