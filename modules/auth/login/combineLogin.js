@@ -100,6 +100,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   );
 
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
+  
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
       <img src={tapmadLogo} width="200" alt="Tapmad logo" />
