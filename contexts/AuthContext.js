@@ -23,28 +23,40 @@ export default function AuthProvider({ children }) {
 
   React.useEffect(() => {
     if (initialState && initialState.AuthDetails) {
+      console.log("initialState : ", initialState);
       let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
         AllPackages: initialState.AuthDetails,
         paymentMethods: initialState.currentPackage?.PaymentTabMethods,
-        selectedPaymentMethod: initialState.currentPackage?.PaymentTabMethods[0],
+        selectedPaymentMethod:
+          initialState.currentPackage?.PaymentTabMethods[0],
         MobileCode: initialState.AuthDetails.MobileCode,
         PackageImage: initialState.currentPackage?.PackageImage,
         signUpComponent: "signUp",
         selectedPackageId:
-          initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.ProductId,
+          initialState.currentPackage?.PaymentTabMethods[0]?.ProductId,
         selectedPackageAmount:
-          initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]
-            ?.PackagePrice,
+          initialState.currentPackage?.PaymentTabMethods[0]?.PackagePrice,
         selectedPackageName:
-          initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.PackageName,
+          initialState.currentPackage?.PaymentTabMethods[0]?.PackageName,
       };
+      // old
+      //   selectedPackageId:
+      //   initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.ProductId,
+      // selectedPackageAmount:
+      //   initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]
+      //     ?.PackagePrice,
+      // selectedPackageName:
+      //   initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.PackageName,
       setAuthState({ ...authState, ...AuthStateWithData });
     }
   }, [initialState.currentPackage]);
   React.useEffect(() => {
-    setAuthState({ ...authState, selectedPaymentMethod: authState.selectedPaymentMethod });
-  }, [authState.selectedPaymentMethod])
+    setAuthState({
+      ...authState,
+      selectedPaymentMethod: authState.selectedPaymentMethod,
+    });
+  }, [authState.selectedPaymentMethod]);
 
   function updateSelectedPaymentMethod(method) {
     let stateClone = authState;
@@ -55,13 +67,13 @@ export default function AuthProvider({ children }) {
         selectedPaymentMethod: method,
         selectedPackageId: dbcPackage.ProductId,
         selectedPackageAmount: dbcPackage.PackagePrice,
-        selectedPackageName: dbcPackage.PackageName
+        selectedPackageName: dbcPackage.PackageName,
       });
     } else {
       setAuthState({
         ...stateClone,
         selectedPaymentMethod: method,
-        selectedPackageId: method.Packages[0].ProductId
+        selectedPackageId: method.Packages[0].ProductId,
       });
     }
   }

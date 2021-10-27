@@ -3,7 +3,7 @@ import { get } from "../services/http-service";
 import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
 import { AuthService } from "../modules/auth/auth.service";
-import { EPLPaymentUrl } from "../services/apilinks";
+import { EPLPaymentUrl, PaymentPackages } from "../services/apilinks";
 
 export const MainContext = React.createContext(null);
 
@@ -59,15 +59,20 @@ export default function MainProvider({ children }) {
     },
   });
   useEffect(async () => {
-    var operators = await get(
-      EPLPaymentUrl
-    );
-    dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
+    try {
+      var operators = await get(
+        PaymentPackages
+      );
+      dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
+      checkUserAuthentication();
+      const country = await AuthService.getGeoInfo();
+      updateCountryCode(country.countryCode);
+      updatePaymentPackage(operators?.data?.PaymentPackages[0]); 
+    } catch (error) {
+      console.log(error);
+    }
+   
 
-    checkUserAuthentication();
-    const country = await AuthService.getGeoInfo();
-    updateCountryCode(country.countryCode);
-    updatePaymentPackage(operators.data.PaymentPackages[0]);
   }, []);
 
   function updateCountryCode(code) {

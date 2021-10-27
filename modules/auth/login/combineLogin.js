@@ -1,11 +1,11 @@
 import Link from "next/link";
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useCallback, useMemo, memo, useEffect } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { actionsRequestContent } from "../../../services/http-service";
-import { tapmadLogo } from "../../../services/imagesLink";
+import { mobileIcon, tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
@@ -21,6 +21,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   const [mobileNo, setMobileNo] = React.useState("");
   const [pin, setPin] = React.useState("");
   const [btnDisabled, setbtnDisabled] = React.useState(true);
+  const [CurrentMethod, setCurrentMethod] = React.useState(null);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
@@ -99,39 +100,113 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
     [updateUserOperator]
   );
 
+  const opp = ["jazzCash", "telenor", "zong", "ufone"];
+
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
-  
+
+  const UpdatePaymenthMethod = (operator) =>{
+    console.log(operator);
+    setCurrentMethod(operator)
+    
+  }
+
+  useEffect(() => {
+    console.log("operators: ", operators);
+    if(operators){
+      setCurrentMethod(operators[0])
+    }
+  }, [operators]);
+
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
-      <h4>Enter your Mobile Number</h4>
-      <p>Please Enter your Mobile Number to login</p>
+      {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
+      <div className="operators">
+
+      {operators && operators.length
+        ? operators.map((m, i) => (
+            <div className="col text-center p-0">
+              <div
+                className="btn bg-transparent"
+                style={{ margin: "auto" }}
+                key={i}
+              >
+                <div className="position-relative">
+                  <input
+                    type="radio"
+                    name="radio"
+                    onClick={() => UpdatePaymenthMethod(m)}
+                    id={m.OperatorName}
+                  />
+                  <label className="radio-cstm" htmlFor={m.OperatorName}>
+                    <div
+                      onClick={() => UpdatePaymenthMethod(m)}
+                      className={`${m.OperatorName} mt-4`}
+                    >
+                      <img
+                        src={m.OperatorImage}
+                        alt={m.OperatorName}
+                        className="img-fluid "
+                        width="30"
+                      />
+                      <i
+                        // className={`text-center text-muted d-block mbl-13px  ${
+                        //   CurrentMethod.OperatorId == m.OperatorId
+                        //     ? "text-white"
+                        //     : ""
+                        // }`}
+                        style={{ fontStyle: "normal" }}
+                      ></i>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          ))
+        : null}
+      </div>
+
+      <p>
+        <img src={mobileIcon} className="pr-2" /> Enter your Mobile Number to
+        login
+      </p>
       <div className="input-group">
-        {initialState.AuthDetails && (
+        {/* drop down option */}
+        {/* {initialState.AuthDetails && (
           <>
             {operators && operators.length ? (
               <DropdownWithImage data={operators} onChange={onChangeNetwork} />
             ) : null}
             <input type="hidden" id="CountryMobileCode" value="+92" />
             <span>
-              <label className="form-control" style={{ fontSize: "14px" }}>
+              <label
+                className="form-control custom-input"
+                style={{ fontSize: "14px" }}
+              >
                 {initialState.AuthDetails.MobileCode}
               </label>
             </span>
           </>
-        )}
+        )} */}
 
+        <div>
+          <label
+            className="form-control border-round custom-input"
+            style={{ fontSize: "14px" }}
+          >
+            +92
+          </label>
+        </div>
         <input
           type="text"
           maxLength="20"
           minLength="5"
-          className="form-control mb-2"
+          className="form-control border-round mb-4 ml-3 custom-input"
           id="mobileNo"
           placeholder="xxxxxxxxxxx"
           inputMode="numeric"
           value={mobileNo}
           onChange={(e) => handleNumber(e)}
-          autoComplete={'off'}
+          autoComplete={"off"}
         />
       </div>
       <div className="form-group">
@@ -140,33 +215,33 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
           maxLength="4"
           minLength="4"
           value={pin}
-          className="text-center form-control"
+          className="form-control border-round custom-input"
           placeholder="Enter your PIN"
           onChange={handlePin}
         />
+      </div>
+      <div className="text-right mb-2">
+        <Link href="/sign-up" shallow={true} passHref={true}>
+          <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
+        </Link>
+        <span
+          className="mt-2 mr-2 text-light"
+          onClick={forgetClick}
+          style={{ color: "#fff", cursor: "pointer" }}
+        >
+          | &nbsp;&nbsp;Forgot PIN?
+        </span>
       </div>
       <div className="form-group">
         <button
           type="button"
           disabled={btnDisabled ? true : false}
-          className="btn btn-block  req_pin_cde_btn-blue"
+          className="btn pymnt_pge_sbscrbe_btn bg-green"
           onClick={async () => await loginUser()}
         >
           LOGIN
         </button>
         <br />
-        <>
-          <Link href="/sign-up" shallow={true} passHref={true}>
-            <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
-          </Link>
-          <span
-            className="mt-2 mr-2 text-light"
-            onClick={forgetClick}
-            style={{ color: "#fff", cursor: "pointer" }}
-          >
-            | &nbsp;&nbsp;Forgot Passcode?
-          </span>
-        </>
       </div>
     </div>
   );

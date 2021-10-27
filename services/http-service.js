@@ -8,7 +8,7 @@ const { Cookie } = require("./cookies");
 
 function get(url, ip) {
   if (process.env.TAPENV == "local") {
-    ip = "39.44.217.70";
+    // ip = "39.44.217.70";
   }
   try {
     let headers = {

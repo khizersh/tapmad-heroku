@@ -7,6 +7,7 @@ export default function PaymentMethod() {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [CurrentPackage, setCurrentPackage] = useState({});
   const [CurrentMethod, setCurrentMethod] = useState({});
+  
   function UpdatePaymenthMethod(paymentMethod) {
     dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod })
   }
@@ -57,8 +58,8 @@ export default function PaymentMethod() {
                       <img
                         src={m.PaymentImage}
                         alt={m.PaymentMethodName}
-                        className="img-fluid mb-2 "
-                        style={{ minWidth: "50px", height: "60px" }}
+                        className="img-fluid "
+                        width="70"
                       />
                       <i
                         className={`text-center text-muted d-block mbl-13px  ${CurrentMethod.PaymentOperatorId == m.PaymentOperatorId
@@ -67,7 +68,7 @@ export default function PaymentMethod() {
                           }`}
                         style={{ fontStyle: "normal" }}
                       >
-                        {m.PaymentMethodName}
+                        {/* {m.PaymentMethodName} */}
                       </i>
                     </div>
                   </label>
