@@ -43,6 +43,9 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
     }
   }
   async function loginUser() {
+    if (!CurrentMethod) {
+      return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
+    }
     let body = {
       event: loggingTags.login,
       action: "login_attempt",
@@ -104,65 +107,55 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
 
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
 
-  const UpdatePaymenthMethod = (operator) =>{
+  const UpdatePaymenthMethod = (operator) => {
     console.log(operator);
-    setCurrentMethod(operator)
-    
-  }
+    setCurrentMethod(operator);
+  };
 
-  useEffect(() => {
-    console.log("operators: ", operators);
-    if(operators){
-      setCurrentMethod(operators[0])
-    }
-  }, [operators]);
+  useEffect(() => {}, []);
 
   return (
-    <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
+    <div className=" login_slct_oprtr_active">
       {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
-      <div className="operators">
-
-      {operators && operators.length
-        ? operators.map((m, i) => (
-            <div className="col text-center p-0">
-              <div
-                className="btn bg-transparent"
-                style={{ margin: "auto" }}
-                key={i}
-              >
-                <div className="position-relative">
-                  <input
-                    type="radio"
-                    name="radio"
-                    onClick={() => UpdatePaymenthMethod(m)}
-                    id={m.OperatorName}
-                  />
-                  <label className="radio-cstm" htmlFor={m.OperatorName}>
-                    <div
+      <h3 className="select-network">Select Your Network</h3>
+      <div className="d-flex justify-content-around mb-3">
+        {operators && operators.length
+          ? operators.map((m, i) => (
+              <div>
+                <div style={{ margin: "auto" }} key={i}>
+                  <div className="position-relative">
+                    <input
+                      type="radio"
+                      name="radio"
                       onClick={() => UpdatePaymenthMethod(m)}
-                      className={`${m.OperatorName} mt-4`}
-                    >
-                      <img
-                        src={m.OperatorImage}
-                        alt={m.OperatorName}
-                        className="img-fluid "
-                        width="30"
-                      />
-                      <i
-                        // className={`text-center text-muted d-block mbl-13px  ${
-                        //   CurrentMethod.OperatorId == m.OperatorId
-                        //     ? "text-white"
-                        //     : ""
-                        // }`}
-                        style={{ fontStyle: "normal" }}
-                      ></i>
-                    </div>
-                  </label>
+                      id={m.OperatorName}
+                    />
+                    <label className="radio-cstm" htmlFor={m.OperatorName}>
+                      <div
+                        onClick={() => UpdatePaymenthMethod(m)}
+                        className={` mt-3 text-center`}
+                      >
+                        <img
+                          src={m.OperatorImage}
+                          alt={m.OperatorName}
+                          className="img-fluid "
+                          width="30"
+                        />
+                        <i
+                          // className={`text-center text-muted d-block mbl-13px  ${
+                          //   CurrentMethod.OperatorId == m.OperatorId
+                          //     ? "text-white"
+                          //     : ""
+                          // }`}
+                          style={{ fontStyle: "normal" }}
+                        ></i>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        : null}
+            ))
+          : null}
       </div>
 
       <p>
@@ -173,20 +166,20 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
         {/* drop down option */}
         {/* {initialState.AuthDetails && (
           <>
-            {operators && operators.length ? (
-              <DropdownWithImage data={operators} onChange={onChangeNetwork} />
+          {operators && operators.length ? (
+            <DropdownWithImage data={operators} onChange={onChangeNetwork} />
             ) : null}
             <input type="hidden" id="CountryMobileCode" value="+92" />
             <span>
-              <label
-                className="form-control custom-input"
-                style={{ fontSize: "14px" }}
-              >
-                {initialState.AuthDetails.MobileCode}
-              </label>
+            <label
+            className="form-control custom-input"
+            style={{ fontSize: "14px" }}
+            >
+            {initialState.AuthDetails.MobileCode}
+            </label>
             </span>
-          </>
-        )} */}
+            </>
+          )} */}
 
         <div>
           <label
@@ -220,7 +213,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
           onChange={handlePin}
         />
       </div>
-      <div className="text-right mb-2">
+      <div className="text-right mb-3">
         <Link href="/sign-up" shallow={true} passHref={true}>
           <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
         </Link>

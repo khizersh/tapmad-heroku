@@ -4,7 +4,6 @@ import { MainContext } from "../../../contexts/MainContext";
 import SubscribeButton from "./SubscribeButton";
 
 export default function SignMessage({ price }) {
-  console.log(price);
   return (
     <div className="form-group text-center pt-2 mb-0">
       <SubscribeButton />

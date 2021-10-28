@@ -10,7 +10,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       setNum(mobileNum);
       onChangeNumber(e);
     }
-  }; ``
+  }; 
   return (
     <>
       {data && data.length ? (

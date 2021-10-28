@@ -19,6 +19,7 @@
   /* background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg"); */
   background: var(--desktop);
   background-size: cover;
+  height: 100vh;
   background-blend-mode: multiply;
 }
 .bg-dark-cstm{
@@ -511,6 +512,7 @@ input[type="radio"] {
   content: '';
   border-radius: 50%;
   display: block;
+  /* margin: -5px 21px; */
   margin: -6px 20px;
   position: absolute;
   left: 5px;
@@ -526,6 +528,22 @@ input[type="radio"] {
   .radio-cstm:after {
     width: 13px;
     height: 13px;
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  .radio-cstm:after {
+    width: 11px;
+    height: 11px;
+    background-color: rgb(255, 255, 255);
+    content: '';
+    border-radius: 50%;
+    display: block;
+    margin: -4px 22px;
+    position: absolute;
+    left: 5px;
+    top: 9px;
+    transition: all 0.4s;
   }
 }
 input[type="radio"]:checked + .radio-cstm::after {

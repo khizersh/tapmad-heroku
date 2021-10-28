@@ -9,6 +9,7 @@ export default function PaymentMethod() {
   const [CurrentMethod, setCurrentMethod] = useState({});
   
   function UpdatePaymenthMethod(paymentMethod) {
+    console.log("paymentMethod: ",paymentMethod);
     dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod })
   }
   useEffect(() => {
