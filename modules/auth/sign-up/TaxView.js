@@ -42,13 +42,13 @@ export default function TaxView({ onChange }) {
                 <span className="font-weight-bold">{m.PackageName}</span>
                 <div className="d-flex justify-content-center">
                   <div className="text-white per-month mt-2">
-                    Rs
+                  {m.PackagePrices[0]}
                   </div>
-                  <div className="f-40 font-weight-bold text-white">100</div>
+                  <div className="f-40 font-weight-bold text-white">{m.PackagePrices[1]}</div>
                   <div className="text-white  monthly">
                   {/* <div className="text-white d-flex flex-column justify-content-end per-month"> */}
                     {/* <span> &nbsp;&nbsp;  per</span><span>&nbsp;&nbsp;  month</span> */}
-                    <span className="d-block">per </span>month
+                    <span className="d-block">{m.PackagePrices[2].split(" ")[0]}</span>{m.PackagePrices[2].split(" ")[1]}
                   </div>
                 </div>
                 <span className="d-block d-md-none"></span>

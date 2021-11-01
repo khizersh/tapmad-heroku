@@ -7,7 +7,7 @@ export default function SignMessage({ price }) {
   return (
     <div className="form-group text-center pt-2 mb-0">
       <SubscribeButton />
-      <p style={{ color: "#fff", padding: "10px" }}>
+      <p style={{ color: "#fff", padding: "10px" , position : "inherit"}}>
         {price &&
           price.ContentDescription}
       </p>

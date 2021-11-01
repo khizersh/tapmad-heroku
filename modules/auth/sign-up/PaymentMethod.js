@@ -4,12 +4,11 @@ import { UPDATE_PAYMENT_METHOD } from "../../../contexts/auth/SignUpReducer";
 import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethod() {
-  const { SignUpState, dispatch } = useContext(SignUpContext);
+  const { SignUpState , dispatch } = useContext(SignUpContext);
   const [CurrentPackage, setCurrentPackage] = useState({});
   const [CurrentMethod, setCurrentMethod] = useState({});
   
   function UpdatePaymenthMethod(paymentMethod) {
-    console.log("paymentMethod: ",paymentMethod);
     dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod })
   }
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function PaymentMethod() {
         50 Live channels & video on demand. Entertainment, kids content, & cricket bilaterals.
       </div>
       <div className="mt-3" style={{ 'color': '#FC5656' }}>
-        *On subscribing to this package PKR 100 will be deducted from your account on a monthly basis. In order to avoid deduction, you may cancel at any time.
+        {CurrentPackage?.HighlightDescription}
       </div>
       <div className="row mt-3">
         <div className="col-12">
