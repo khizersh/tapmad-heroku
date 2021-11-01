@@ -90,6 +90,7 @@ export default memo(function Register(props) {
     <div>
       <SignUpLayout bgImage={SignUpState.SelectedPackage.PaymentTabImage}>
         <RenderViews />
+        {/* <Pin newUser={authState.newUser ? true : false} /> */}
       </SignUpLayout>
     </div>
   );

@@ -23,11 +23,19 @@
   pointer-events: none;
 }
 
-
 .select-network {
   font-weight: 100 !important;
   text-align: center;
   margin-bottom: 2.5rem !important;
+}
+.component-title {
+  font-weight: 100;
+  text-align: center;
+}
+
+.center-div {
+  width: 75%;
+  margin: 0 auto;
 }
 
 .custom-bg {
@@ -137,5 +145,9 @@
     width: 126% !important;
     position: relative;
     left: -20px;
+  }
+  .center-div {
+    width: 70%;
+    margin: 0 auto;
   }
 }

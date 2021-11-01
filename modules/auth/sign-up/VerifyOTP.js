@@ -8,15 +8,18 @@ import { AuthService } from "../auth.service";
 import { Cookie } from "../../../services/cookies";
 import { useRouter } from "next/router";
 import { SignUpTag } from "../../../services/gtm";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
 const Pin = ({ newUser }) => {
   const { initialState, setLoader } = useContext(MainContext);
+  const { SignUpState } = useContext(SignUpContext);
   const { authState, updateResponseCode } = useContext(Authcontext);
   const otp = useRef("");
   const router = useRouter();
 
   async function verifyOTPPinCode() {
-    if (initialState && initialState.User) {
+    console.log("SignUpState : ",SignUpState);
+    if (SignUpState && SignUpState.UserDetails) {
       if (otp.current.value.length < 4) {
         swal({
           timer: 5000,
@@ -27,7 +30,7 @@ const Pin = ({ newUser }) => {
       }
       setLoader(true);
       let body = {
-        MobileNo: "0" + initialState.User.MobileNo,
+        MobileNo: "0" + SignUpState.UserDetails.MobileNo,
         otpCode: otp.current.value,
       };
       var data;
@@ -36,10 +39,10 @@ const Pin = ({ newUser }) => {
           body = {
             CodeOTP: otp.current.value,
             Language: "en",
-            MobileNo: initialState.User.MobileNo,
-            OperatorId: initialState.User.OperatorId,
+            MobileNo: SignUpState.UserDetails.MobileNo,
+            OperatorId: SignUpState.UserDetails.Operator,
             Platform: "web",
-            ProductId: authState.selectedPackageId,
+            ProductId: SignUpState.SelectedPrice.ProductId,
             Version: "V1",
           };
           data = await AuthService.paymentProcessTransaction(body);
@@ -53,7 +56,7 @@ const Pin = ({ newUser }) => {
         }
       } else {
         body = {
-          MobileNo: "0" + initialState.User.MobileNo,
+          MobileNo: "0" + SignUpState.UserDetails.MobileNo,
           otpCode: otp.current.value,
         };
         data = await AuthService.verifyOTP(body);
@@ -67,7 +70,7 @@ const Pin = ({ newUser }) => {
           });
           setLoader(false);
         } else if (data.responseCode == 1) {
-          AuthService.clearUserToken(initialState.User.MobileNo).then((e) => {
+          AuthService.clearUserToken(SignUpState.UserDetails.MobileNo).then((e) => {
             swal({
               timer: 2500,
               title: data.message,
@@ -100,8 +103,9 @@ const Pin = ({ newUser }) => {
   }
   return (
     <div className="text-center">
+      <h3 className="component-title">Enter your OTP</h3>
       <div className="py-3">
-        <label className="text-muted">Please enter code provided into 4 digit verification code</label>
+        <label className="text-muted center-div">Please enter code provided into 4 digit verification code</label>
       </div>
       <div className="px-3 pb-4">
         <input
