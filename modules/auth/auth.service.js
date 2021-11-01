@@ -144,7 +144,7 @@ async function forgetPin(mobile, OperatorId) {
     MobileNo: mobile,
     OperatorId: OperatorId,
   };
-
+console.log("body forget: ",body);
   let resp;
   try {
     resp = await post(sendOTP, body);

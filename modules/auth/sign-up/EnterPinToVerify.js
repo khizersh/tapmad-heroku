@@ -12,22 +12,23 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
 const EnterPinToVerifyUser = ({ login }) => {
   const router = useRouter();
   const { checkUserAuthentication, setLoader, initialState } = useContext(
     MainContext
   );
-  const { updateResponseCode, authState } = useContext(Authcontext);
+  const { updateResponseCode } = useContext(Authcontext);
+  const { SignUpState } = useContext(SignUpContext);
   const pinCode = useRef("");
+
 
   async function forgetPin() {
     setLoader(true);
-    let mobileNo = initialState.User.MobileNo,
-      opId = initialState.User.OperatorId;
-
+    let mobileNo = SignUpState.UserDetails?.MobileNo,
+      opId = SignUpState.UserDetails?.Operator;
     const data = await AuthService.forgetPin(mobileNo, opId);
-
     if (data != null) {
       if (data.responseCode == 1) {
         updateResponseCode(data.responseCode);
@@ -57,15 +58,6 @@ const EnterPinToVerifyUser = ({ login }) => {
       if (data != null) {
         if (data.responseCode == 1) {
           // logging start
-          if (authState && authState.selectedPackageId) {
-            let body = {
-              event: loggingTags.signup,
-              amount: authState.selectedPackageAmount,
-              operatorName: authState.selectedPackageName,
-              mobileNumber: initialState.User.MobileNo,
-            };
-            actionsRequestContent(body);
-          }
           var loginResp = login();
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
@@ -109,8 +101,8 @@ const EnterPinToVerifyUser = ({ login }) => {
         <div className="p-3">
           <input
             type="password"
-            className="form-control"
-            placeholder="Enter your PIN"
+            className="form-control border-curve"
+            placeholder="Enter PIN"
             maxLength={4}
             minLength={4}
             ref={pinCode}
@@ -119,7 +111,8 @@ const EnterPinToVerifyUser = ({ login }) => {
         <div className="text-center py-2">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary pymnt_pge_sbscrbe_btn"
+            style={{width:'50%'}}
             onClick={verifyPinCode}
           >
             Verify PIN

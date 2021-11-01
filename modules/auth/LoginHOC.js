@@ -8,6 +8,7 @@ import { encryptWithAES } from "../../services/utils";
 // import dynamic from "next/dynamic";
 import swal from "sweetalert";
 import { GameContext } from "../../contexts/GameContext";
+import { setCookiesForLogin } from "./sign-up/authHelper";
 // const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
 
 export default function withLogin(Component, data) {
@@ -33,6 +34,7 @@ export default function withLogin(Component, data) {
         userIp,
         false
       );
+      console.log("response in mbl: ",response);
       try {
         if (response && response.data && response.data.UserId) {
           swal({
@@ -41,18 +43,7 @@ export default function withLogin(Component, data) {
             text: "Redirecting you...",
             icon: "success",
           });
-          Cookie.setCookies("isAuth", 1);
-          Cookie.setCookies("userId", response.data.UserId);
-          Cookie.setCookies("userCoins", response.response.UserTotalCoins);
-          Cookie.setCookies(
-            "userProfileName",
-            response.response.UserProfile.UserProfileFullName
-          );
-          Cookie.setCookies(
-            "userProfilePicture",
-            response.response.UserProfile.UserProfilePicture
-          );
-          Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
+          setCookiesForLogin(response);
           LoginTag(obj, response.response);
           setLoader(false);
           checkUserAuthentication();
@@ -65,6 +56,7 @@ export default function withLogin(Component, data) {
           setLoader(false);
           return null;
         } else {
+          console.log("else condition ",response.message);
           setLoader(false);
           swal({
             title: response.message,
@@ -80,6 +72,7 @@ export default function withLogin(Component, data) {
     async function verifyPinCode(ip, pin, forgetPin) {
       setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);
+      console.log("pinResponse : ",pinResponse);
       if (pinResponse && pinResponse.responseCode == 1) {
         var loginResp = loginUser(ip);
         loginResp.then((e) => {

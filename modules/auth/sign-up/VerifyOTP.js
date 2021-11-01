@@ -101,23 +101,23 @@ const Pin = ({ newUser }) => {
   return (
     <div className="text-center">
       <div className="py-3">
-        <label className="text-muted">Please verify your OTP Code</label>
+        <label className="text-muted">Please enter code provided into 4 digit verification code</label>
       </div>
       <div className="px-3 pb-4">
         <input
           type="text"
-          placeholder="Enter OTP Code"
-          className="form-control"
+          placeholder="Enter OTP"
+          className="form-control border-curve"
           ref={otp}
           maxLength="4"
           minLength="4"
           inputMode="numeric"
         />
       </div>
-      <div className="pb-4">
+      <div className="px-3 pb-4">
         <button
           type="button"
-          className="btn btn-primary "
+          className="btn btn-primary pymnt_pge_sbscrbe_btn"
           onClick={verifyOTPPinCode}
         >
           Verify OTP
