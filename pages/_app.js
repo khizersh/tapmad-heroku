@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV</title>
+        <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
