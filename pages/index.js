@@ -12,18 +12,20 @@ export default function Home(props) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <title>
-          Watch Live TV - Enjoy AdFree PSL Live Streaming - Tapmad TV
-        </title>
+        <title>Tapmad - Watch LIVE TV Channels Online </title>
         <meta
           name="description"
-          content="Enjoy Live TV channels and watch AdFREE PSL Live streaming online exclusively on Tapmad TV. Latest sports, movies, tv shows, live score and cricket highlights."
+          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
         />
-        <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
+        <meta
+          name="title"
+          content="Tapmad - Watch LIVE TV Channels Online "
+        />
         <meta
           name="keywords"
-          content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"
+          content="Live tv channel, watch live tv, watch epl in Pakistan, live epl, premier league, english premier league pakistan,  watch pakistani tv channels free, indian movies, watch free indian movies, live sports, live cricket stream"
         />
+        <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
       </Head>
       <HomePage {...props} />
     </div>
