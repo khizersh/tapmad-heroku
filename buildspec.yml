@@ -12,10 +12,11 @@ phases:
    post_build:
       commands:
          - echo Build completed on `date`
+         - npm install
 # Include only the files required for your application to run.
+
 artifacts:
    files:
       - .next/**/*
       - public/**/*
       - package.json
-      - node_modules/**/*
