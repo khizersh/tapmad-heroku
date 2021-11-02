@@ -9,12 +9,14 @@ import { encryptWithAES } from "../../services/utils";
 import swal from "sweetalert";
 import { GameContext } from "../../contexts/GameContext";
 import { setCookiesForLogin } from "./sign-up/authHelper";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 // const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
 
 export default function withLogin(Component, data) {
   return (props) => {
     const { checkUserAuthentication, setLoader, initialState } =
       useContext(MainContext);
+    const { SignUpState } = useContext(SignUpContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
@@ -23,18 +25,15 @@ export default function withLogin(Component, data) {
         Language: "en",
         Platform: "web",
         Version: "V1",
-        MobileNo: initialState.User.MobileNo,
-        OperatorId: initialState.User.OperatorId,
-        UserPassword:
-          initialState.User.Password || Cookie.getCookies("content-token"),
+        MobileNo: SignUpState.UserDetails.MobileNo,
+        OperatorId: SignUpState.UserDetails.Operator,
+        UserPassword: Cookie.getCookies("content-token"),
       };
-
       let response = await AuthService.signInOrSignUpMobileOperator(
         obj,
         userIp,
         false
       );
-      console.log("response in mbl: ",response);
       try {
         if (response && response.data && response.data.UserId) {
           swal({
@@ -46,6 +45,7 @@ export default function withLogin(Component, data) {
           setCookiesForLogin(response);
           LoginTag(obj, response.response);
           setLoader(false);
+          Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
           checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
           if (backURL == "sign-in") {
@@ -56,7 +56,7 @@ export default function withLogin(Component, data) {
           setLoader(false);
           return null;
         } else {
-          console.log("else condition ",response.message);
+          console.log("else condition ", response.message);
           setLoader(false);
           swal({
             title: response.message,
@@ -72,7 +72,7 @@ export default function withLogin(Component, data) {
     async function verifyPinCode(ip, pin, forgetPin) {
       setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);
-      console.log("pinResponse : ",pinResponse);
+      console.log("pinResponse : ", pinResponse);
       if (pinResponse && pinResponse.responseCode == 1) {
         var loginResp = loginUser(ip);
         loginResp.then((e) => {

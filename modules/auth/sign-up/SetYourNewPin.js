@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import { Authcontext } from "../../../contexts/AuthContext";
 import withLogin from "../LoginHOC";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
 function SetYourNewPinSignUp({ login, ip }) {
-  const router = useRouter();
   const { initialState, checkUserAuthentication, setLoader } =
     useContext(MainContext);
   const { authState } = useContext(Authcontext);
+  const { SignUpState } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [username, setUsername] = useState("");
@@ -41,13 +42,13 @@ function SetYourNewPinSignUp({ login, ip }) {
         icon: "error",
       });
     }
-    let obj = {
+    var obj = {
       Language: "en",
       Platform: "web",
       Version: "V1",
-      MobileNo: initialState.User.MobileNo,
-      OperatorId: initialState.User.OperatorId,
-      UserPassword: initialState.User.Password,
+      MobileNo: SignUpState.UserDetails.MobileNo,
+      OperatorId: SignUpState.UserDetails.Operator,
+      UserPassword: "",
     };
     setLoader(true);
 
@@ -72,10 +73,10 @@ function SetYourNewPinSignUp({ login, ip }) {
           icon: "success",
         });
       } else if (response.responseCode == 1) {
-        await AuthService.clearUserToken(initialState.User.MobileNo);
+        await AuthService.clearUserToken(SignUpState.UserDetails.MobileNo);
         await login(ip);
       } else {
-        setLoader(false)
+        setLoader(false);
         return swal({
           timer: 3000,
           title: response.message,
@@ -111,14 +112,15 @@ function SetYourNewPinSignUp({ login, ip }) {
 
   return (
     <div>
+      <h3 className="pb-3 component-title">Set Your New PIN</h3>
       {showUsername ? (
         <>
-          <p className="text-center mt-4">Please enter your Full Name</p>
-          <div className="px-3 pb-2">
+          <p className="mt-4 px-3">Enter your full name</p>
+          <div className="px-3 pb-3">
             <input
               type="text"
               placeholder="Enter Full Name"
-              className="form-control"
+              className="form-control border-curve"
               maxLength="20"
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -126,8 +128,10 @@ function SetYourNewPinSignUp({ login, ip }) {
         </>
       ) : null}
 
-      <p className={`text-center ${showUsername ? "mt-2" : "mt-4"}`}>Please set your 4 digit PIN</p>
-      <div className="px-3 pb-2">
+      <p className={`px-3 ${showUsername ? "mt-3" : "mt-4"}`}>
+        Set your 4 digit PIN
+      </p>
+      {/* <div className="px-3 pb-2">
         <input
           type="text"
           placeholder="Mobile number"
@@ -135,28 +139,28 @@ function SetYourNewPinSignUp({ login, ip }) {
           disabled={true}
           value={initialState.User.MobileNo}
         />
-      </div>
-      <div className="px-3 pb-2">
+      </div> */}
+      <div className="px-3 pb-3">
         <input
           type="text"
-          className="form-control"
+          className="form-control border-curve"
           placeholder={"Set PIN code"}
           minLength={4}
           maxLength={4}
           onChange={(e) => setPin(e.target.value)}
         />
       </div>
-      <div className="px-3 pb-2">
+      <div className="px-3 pb-3">
         <input
           type="text"
-          className="form-control"
+          className="form-control border-curve"
           placeholder={"Confirm PIN code"}
           minLength={4}
           maxLength={4}
           onChange={(e) => setConfirmPin(e.target.value)}
         />
       </div>
-      <div className="text-center ">
+      <div className="text-center px-3">
         <button
           className="btn pymnt_pge_sbscrbe_btn bg-green mb-4"
           onClick={onClick}

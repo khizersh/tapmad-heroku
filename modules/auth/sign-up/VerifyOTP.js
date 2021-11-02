@@ -10,15 +10,14 @@ import { useRouter } from "next/router";
 import { SignUpTag } from "../../../services/gtm";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
-const Pin = ({ newUser }) => {
-  const { initialState, setLoader } = useContext(MainContext);
+const VerifyOTP = ({ newUser }) => {
+  const {  setLoader } = useContext(MainContext);
   const { SignUpState } = useContext(SignUpContext);
-  const { authState, updateResponseCode } = useContext(Authcontext);
+  const {  updateResponseCode } = useContext(Authcontext);
   const otp = useRef("");
   const router = useRouter();
 
   async function verifyOTPPinCode() {
-    console.log("SignUpState : ",SignUpState);
     if (SignUpState && SignUpState.UserDetails) {
       if (otp.current.value.length < 4) {
         swal({
@@ -61,6 +60,7 @@ const Pin = ({ newUser }) => {
         };
         data = await AuthService.verifyOTP(body);
       }
+      console.log("data otttppp : " , body  ,data );
       if (data != null) {
         if (data.responseCode == 0) {
           swal({
@@ -131,4 +131,4 @@ const Pin = ({ newUser }) => {
   );
 };
 
-export default Pin;
+export default VerifyOTP;

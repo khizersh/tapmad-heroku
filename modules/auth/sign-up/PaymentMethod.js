@@ -4,12 +4,12 @@ import { UPDATE_PAYMENT_METHOD } from "../../../contexts/auth/SignUpReducer";
 import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethod() {
-  const { SignUpState , dispatch } = useContext(SignUpContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const [CurrentPackage, setCurrentPackage] = useState({});
   const [CurrentMethod, setCurrentMethod] = useState({});
-  
+
   function UpdatePaymenthMethod(paymentMethod) {
-    dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod })
+    dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod });
   }
   useEffect(() => {
     if (SignUpState.SelectedPrice.PaymentMethods) {
@@ -22,7 +22,7 @@ export default function PaymentMethod() {
     if (SignUpState.SelectedMethod.PaymentMethodName) {
       setCurrentMethod(SignUpState.SelectedMethod);
     }
-  }, [SignUpState.SelectedMethod])
+  }, [SignUpState.SelectedMethod]);
 
   return (
     <div className="col-md-12 col-sm-12 pt-2">
@@ -32,9 +32,10 @@ export default function PaymentMethod() {
         <div className="col-4"></div>
       </div>
       <div>
-        50 Live channels & video on demand. Entertainment, kids content, & cricket bilaterals.
+        50 Live channels & video on demand. Entertainment, kids content, &
+        cricket bilaterals.
       </div>
-      <div className="mt-3" style={{ 'color': '#FC5656' }}>
+      <div className="mt-3" style={{ color: "#FC5656" }}>
         {CurrentPackage?.HighlightDescription}
       </div>
       <div className="row mt-3">
@@ -45,34 +46,49 @@ export default function PaymentMethod() {
       <div className="row py-3 flex-nowrap">
         {CurrentPackage && CurrentPackage.PaymentMethods
           ? CurrentPackage.PaymentMethods.map((m, i) => (
-            <div className="col text-center p-0">
-              <div
-                className="btn bg-transparent"
-                style={{ margin: "auto" }}
-                key={i}
-              >
-                <div className="position-relative">
-                  <input type="radio" name="radio" onClick={() => UpdatePaymenthMethod(m)} id={m.PaymentMethodName} />
-                  <label className="radio-cstm" htmlFor={m.PaymentMethodName}>
-                    <div onClick={() => UpdatePaymenthMethod(m)} className={`${m.PaymentMethodName} mt-4`}>
-                      <img
-                        src={m.PaymentImage}
-                        alt={m.PaymentMethodName}
-                        className="img-fluid "
-                        width="70"
-                      />
-                      <i
-                        className={`text-center text-muted d-block mbl-13px  ${CurrentMethod.PaymentOperatorId == m.PaymentOperatorId
-                          ? "text-white"
-                          : ""
-                          }`}
-                        style={{ fontStyle: "normal" }}
+              <div className="col text-center p-0">
+                <div
+                  className="btn bg-transparent"
+                  style={{ margin: "auto" }}
+                  key={i}
+                >
+                  <div className="position-relative">
+                    <input
+                      type="radio"
+                      name="radio"
+                      checked={
+                        CurrentMethod.PaymentOperatorId == m.PaymentOperatorId
+                          ? true
+                          : false
+                      }
+                      onClick={() => UpdatePaymenthMethod(m)}
+                      id={m.PaymentMethodName}
+                    />
+                    <label className="radio-cstm" htmlFor={m.PaymentMethodName}>
+                      <div
+                        onClick={() => UpdatePaymenthMethod(m)}
+                        className={`${m.PaymentMethodName} mt-4`}
                       >
-                        {/* {m.PaymentMethodName} */}
-                      </i>
-                    </div>
-                  </label>
-                  {/* <span>
+                        <img
+                          src={m.PaymentImage}
+                          alt={m.PaymentMethodName}
+                          className="img-fluid "
+                          width="70"
+                        />
+                        <i
+                          className={`text-center text-muted d-block mbl-13px  ${
+                            CurrentMethod.PaymentOperatorId ==
+                            m.PaymentOperatorId
+                              ? "text-muted"
+                              : ""
+                          }`}
+                          style={{ fontStyle: "normal" }}
+                        >
+                          {/* {m.PaymentMethodName} */}
+                        </i>
+                      </div>
+                    </label>
+                    {/* <span>
                     {CurrentMethod.PaymentOperatorId ==
                       m.PaymentOperatorId ? (
                       <i className="fa fa-check-circle clr-green"></i>
@@ -80,14 +96,13 @@ export default function PaymentMethod() {
                       ""
                     )}
                   </span> */}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))
           : null}
       </div>
       <div>
-
         <PaymentInfo />
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { useContext, memo, useCallback, useRef, useEffect } from "react";
 import { Authcontext } from "../../contexts/AuthContext";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";
-import Pin from "./sign-up/VerifyOTP";
+import VerifyOTP from "./sign-up/VerifyOTP";
 import EnterPinToVerify from "./sign-up/EnterPinToVerify";
 import SetYourNewPin from "./sign-up/SetYourNewPin";
 import { useRouter } from "next/router";
@@ -23,7 +23,7 @@ export default memo(function Register(props) {
       if (respCode == 1) {
         return (
           <>
-            <Pin newUser={authState.newUser ? true : false} />
+            <VerifyOTP newUser={authState.newUser ? true : false} />
           </>
         );
       } else if (!respCode) {
@@ -90,7 +90,7 @@ export default memo(function Register(props) {
     <div>
       <SignUpLayout bgImage={SignUpState.SelectedPackage.PaymentTabImage}>
         <RenderViews />
-        {/* <Pin newUser={authState.newUser ? true : false} /> */}
+        {/* <SetYourNewPin {...props} /> */}
       </SignUpLayout>
     </div>
   );

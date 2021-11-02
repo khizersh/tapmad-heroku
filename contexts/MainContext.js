@@ -104,6 +104,7 @@ export default function MainProvider({ children }) {
   function checkUserAuthentication() {
     const token = Cookie.getCookies("content-token");
     const isAuth = Cookie.getCookies("isAuth");
+    console.log("token : ",token);
     if (token && token.length > 50 && isAuth == 1) {
       dispatch({ type: "SET_AUTHENTICATION", data: true });
     } else {

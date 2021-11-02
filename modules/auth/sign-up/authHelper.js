@@ -39,6 +39,7 @@ function handleBody(SignUpState) {
 
 
 export function setCookiesForLogin(response){
+  console.log("response :",response);
   Cookie.setCookies("isAuth", 1);
   Cookie.setCookies("userId", response.data.UserId);
   Cookie.setCookies("userCoins", response.response.UserTotalCoins);
@@ -50,5 +51,5 @@ export function setCookiesForLogin(response){
     "userProfilePicture",
     response.response.UserProfile.UserProfilePicture
   );
-  Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
+
 }
