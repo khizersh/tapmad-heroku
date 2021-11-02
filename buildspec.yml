@@ -16,5 +16,6 @@ phases:
 artifacts:
    files:
       - .next/**/*
+      - public/**/*
       - package.json
       - node_modules/**/*
