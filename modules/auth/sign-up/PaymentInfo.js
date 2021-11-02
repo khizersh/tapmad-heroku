@@ -15,7 +15,7 @@ import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 
 function PaymentInfo() {
   const { SignUpState, dispatch } = useContext(SignUpContext);
-  const { CountryCode } = useContext(AuthContext);
+  const { AuthState } = useContext(AuthContext);
 
   const onChangeNetwork = useCallback(
     (data) => {
@@ -35,7 +35,7 @@ function PaymentInfo() {
             data={operators}
             onChangeNetwork={onChangeNetwork}
             onChangeNumber={handleNumber}
-            mobileCode={CountryCode}
+            mobileCode={AuthState.CountryCode}
           />
         </>
       );
@@ -46,7 +46,7 @@ function PaymentInfo() {
             data={operators}
             onChangeName={handleFullName}
             onChangeNetwork={onChangeNetwork}
-            mobileCode={CountryCode}
+            mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeEmail={handleEmail}
           />
@@ -57,7 +57,7 @@ function PaymentInfo() {
         <>
           <EasypaisaForm
             methodName={SignUpState.SelectedMethod.PaymentMethodName}
-            mobileCode={CountryCode}
+            mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
           />
         </>
@@ -66,7 +66,7 @@ function PaymentInfo() {
       return (
         <>
           <JazzCashForm
-            mobileCode={CountryCode}
+            mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeCnic={handleCnic}
           />

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import React, { useCallback, useMemo, memo, useEffect } from "react";
 import swal from "sweetalert";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
@@ -18,10 +21,13 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
     updateUserOperator,
     setLoader,
   } = React.useContext(MainContext);
+  const { AuthState } = React.useContext(AuthContext);
+  const { SignUpState, dispatch } = React.useContext(SignUpContext);
   const [mobileNo, setMobileNo] = React.useState("");
   const [pin, setPin] = React.useState("");
   const [btnDisabled, setbtnDisabled] = React.useState(true);
   const [CurrentMethod, setCurrentMethod] = React.useState(null);
+  const [viewsToRender, setViewsToRender] = React.useState(false);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
@@ -32,7 +38,10 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
         setbtnDisabled(true);
       }
       setMobileNo(mobileNum.trim());
-      updateUserNumber(mobileNum.trim());
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { MobileNo: mobileNum.trim() },
+      });
     }
   }
 
@@ -42,34 +51,36 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
       setPin(userPin);
     }
   }
+  useEffect(() => {
+    if (viewsToRender) {
+      if (SignUpState.UserDetails.MobileNo) {
+        verifyPin(ip, pin, forgetPin);
+      }
+    }
+  }, [SignUpState, viewsToRender == true]);
+
   async function loginUser() {
     if (!CurrentMethod) {
       return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
     }
-    let body = {
-      event: loggingTags.login,
-      action: "login_attempt",
-    };
-    actionsRequestContent(body);
-
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
       let body = {
         Language: "en",
         MobileNo: mobileNo,
       };
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { MobileNo: mobileNo, Operator: CurrentMethod.OperatorId },
+      });
       const data = await AuthService.GetCardUser(body);
       if (data != null) {
         if (data.data.User) {
-          updateUserNumber(mobileNo);
-          updateUserPassword(data.data.User.UserPassword);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
           Cookie.setCookies("userId", data.data.User.UserId);
           let viewToRendor = loginResponse(data.data);
-          if (viewToRendor == true) {
-            verifyPin(ip, pin, forgetPin);
-            setLoader(false);
-          }
+          setViewsToRender(viewToRendor);
+          setLoader(false);
         }
       } else {
         swal({
@@ -96,37 +107,49 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
     }
   };
 
-  const onChangeNetwork = useCallback(
-    (data) => {
-      updateUserOperator(data.OperatorId);
-    },
-    [updateUserOperator]
-  );
+  // const onChangeNetwork = useCallback(
+  //   (data) => {
+  //     updateUserOperator(data.OperatorId);
+  //   },
+  //   [updateUserOperator]
+  // );
 
-  const opp = ["jazzCash", "telenor", "zong", "ufone"];
-
-  const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
+  // const operators = useMemo(() => AuthState?.LoginOperators);
 
   const UpdatePaymenthMethod = (operator) => {
-    console.log(operator);
     setCurrentMethod(operator);
+    dispatch({
+      type: UPDATE_USER_DETAILS,
+      data: { Operator: operator.OperatorId },
+    });
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setCurrentMethod(AuthState.LoginOperators[0]);
+    if (AuthState?.LoginOperators[0]?.OperatorId) {
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { Operator: AuthState.LoginOperators[0].OperatorId },
+      });
+    }
+  }, [AuthState]);
 
   return (
     <div className=" login_slct_oprtr_active">
       {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
       <h3 className="select-network">Select Your Network</h3>
       <div className="d-flex justify-content-around mb-3">
-        {operators && operators.length
-          ? operators.map((m, i) => (
+        {AuthState && AuthState.LoginOperators.length
+          ? AuthState.LoginOperators.map((m, i) => (
               <div>
                 <div style={{ margin: "auto" }} key={i}>
                   <div className="position-relative">
                     <input
                       type="radio"
                       name="radio"
+                      checked={
+                        CurrentMethod?.OperatorId == m.OperatorId ? true : false
+                      }
                       onClick={() => UpdatePaymenthMethod(m)}
                       id={m.OperatorName}
                     />
@@ -186,7 +209,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
             className="form-control border-round custom-input"
             style={{ fontSize: "14px" }}
           >
-            +92
+            {AuthState?.CountryCode}
           </label>
         </div>
         <input
@@ -230,7 +253,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
           type="button"
           disabled={btnDisabled ? true : false}
           className="btn pymnt_pge_sbscrbe_btn bg-green"
-          onClick={async () => await loginUser()}
+          onClick={loginUser}
         >
           LOGIN
         </button>

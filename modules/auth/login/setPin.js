@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import swal from "sweetalert";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
@@ -15,11 +16,11 @@ function SetUserPin({ login, ip }) {
   const [showUsername, setShowUsername] = useState(false);
   const { setLoader } = useContext(MainContext);
   const { initialState } = useContext(MainContext);
+  const { SignUpState } = useContext(SignUpContext);
 
   useEffect(() => {
-    if (initialState?.User?.MobileNo) {
-      let num = initialState?.User?.MobileNo;
-      let body = { Language: "en", MobileNo: num };
+    if (SignUpState?.UserDetails?.MobileNo) {
+      let body = { Language: "en", MobileNo: SignUpState.UserDetails.MobileNo };
       AuthService.GetCardUser(body)
         .then((res) => {
           if (res?.data?.User?.IsProfileNameSet) {
@@ -62,16 +63,9 @@ function SetUserPin({ login, ip }) {
     const resp = await AuthService.setUserPin(pin, username);
     if (resp.responseCode == 1) {
       const clearCache = await AuthService.clearUserToken(
-        initialState?.User?.MobileNo
+        SignUpState.UserDetails.MobileNo
       );
 
-      // logging start
-      let body = {
-        event: loggingTags.login,
-        action: "set_pin",
-      };
-      actionsRequestContent(body);
-      // logging end
       Cookie.setCookies("isAuth", 1);
       swal({
         title: resp.message,
@@ -119,22 +113,14 @@ function SetUserPin({ login, ip }) {
   }
 
   return (
-    <div className="login_slct_oprtr login_set_pin_card login_slct_oprtr_active">
-      <img
-        src="//d1s7wg2ne64q87.cloudfront.net/web/images/tm-logo.png"
-        width="200"
-      />
-      <h5>Please set your 4 digit PIN</h5>
-      <br />
-
-      {showUsername ? (
-        <div className="form-group" style={{ marginBottom: "0.3rem" }}>
-          <label style={{ color: "#fff", fontSize: "14px" }}>
-            Please enter your Full Name
-          </label>
+    <div className=" login_set_pin_card login_slct_oprtr_active">
+      <h3 className="component-title mb-5">Set Your New PIN</h3>
+      {true ? (
+        <div className="form-group text-grey">
+          <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
           <input
             type="text"
-            className="text-center form-control numeric"
+            className="form-control border-curve"
             placeholder="Enter Full Name"
             name="pin"
             maxLength="20"
@@ -142,50 +128,39 @@ function SetUserPin({ login, ip }) {
           />
         </div>
       ) : null}
-      <div className="form-group" style={{ marginBottom: "0.3rem" }}>
-        <input
-          type="text"
-          className="text-center form-control numeric"
-          readonly=""
-          placeholder="Enter mobile number"
-          value={0 + initialState?.User?.MobileNo}
-        />
-      </div>
-      <div className="form-group" style={{ marginBottom: "0.3rem" }}>
-        <label style={{ color: "#fff", fontSize: "14px" }}>
-          Enter your new PIN for login{" "}
-        </label>
+
+      <div className="form-group text-grey">
+        <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
         <input
           type="password"
-          className="text-center form-control numeric"
+          className="form-control numeric border-curve"
           minLength="4"
           maxLength="4"
-          placeholder="Enter your 4 digit Pin Code"
+          value={pin}
+          placeholder="Set PIN Code"
           name="pin"
           onChange={onChangePin}
         />
       </div>
-      <div className="form-group" style={{ marginBottom: "0.3rem" }}>
-        {/* <label style={{ color: "#fff", fontSize: "14px" }}>
-          Confirm your new pin
-        </label> */}
+      <div className="form-group">
         <input
           type="password"
-          className="text-center form-control numeric"
+          className="form-control numeric border-curve"
           minLength="4"
           maxLength="4"
-          placeholder="Re-enter your Pin code"
+          placeholder="Confirm PIN Code"
           name="pin"
+          value={cpin}
           onChange={onChangeCPin}
         />
       </div>
 
       <div className="form-group text-center mb-0">
         <button
-          className="btn btn-block btn-success req_pin_cde_btn req_pin_cde_btn2"
+          className="btn btn-block bg-green pymnt_pge_sbscrbe_btn"
           onClick={setUserPin}
         >
-          SUBMIT
+          Login
         </button>
       </div>
     </div>

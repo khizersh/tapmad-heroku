@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags, sendOTP, verifyOtp } from "../../../services/apilinks";
 import { post, actionsRequestContent } from "../../../services/http-service";
@@ -8,28 +9,22 @@ import { AuthService } from "../auth.service";
 
 export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
-  const { initialState, setLoader, getCountryCode } = React.useContext(
-    MainContext
-  );
+  const { initialState, setLoader, getCountryCode } =
+    React.useContext(MainContext);
+  const { SignUpState } = React.useContext(SignUpContext);
 
   React.useEffect(async () => {
-    var resp = await post(sendOTP, {
-      MobileNo: initialState.User.MobileNo,
-      OperatorId: initialState.User.OperatorId,
-    });
-    // logging start
-    let body = {
-      event: loggingTags.login,
-      action: "forget_pin",
+    let otpBody = {
+      MobileNo: SignUpState.UserDetails.MobileNo,
+      OperatorId: SignUpState.UserDetails.Operator,
     };
-    actionsRequestContent(body);
-    // logging end
+    var resp = await post(sendOTP, otpBody);
   }, []);
 
   async function verifyOTP() {
     setLoader(true);
     let body = {
-      MobileNo: 0 + initialState.User.MobileNo,
+      MobileNo: 0 + SignUpState.UserDetails.MobileNo,
       otpCode: userOtp,
     };
     const data = await AuthService.verifyOTP(body);
@@ -43,7 +38,7 @@ export default function ForgetPin({ updateView }) {
             timer: 3000,
             icon: "success",
           });
-        })
+        });
       } else {
         swal({
           title: data.message,
@@ -61,27 +56,31 @@ export default function ForgetPin({ updateView }) {
     setLoader(false);
   }
   return (
-    <div className="login_slct_oprtr login_slct_oprtr2 login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
-      <h4>Enter your code</h4>
-      <p>We have sent a 4-digits code</p>
+    <div className=" login_slct_oprtr2 login_slct_oprtr_active">
+      {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
+      <div className="mb-3">
+        <h3 className="component-title">Enter Your OTP</h3>
+        <p className="text-center text-grey center-div">
+          Please enter the code provided into 4 digit verfiication code
+        </p>
+      </div>
       <div className="form-group">
         <input
           type="text"
           maxLength="4"
           minLength="4"
-          className="text-center form-control"
-          placeholder="Enter your OTP"
+          className="form-control border-curve"
+          placeholder="Enter OTP"
           onChange={(e) => setUserOtp(e.target.value)}
         />
       </div>
       <div className="form-group" style={{ marginBottom: "10px" }}>
         <button
           type="button"
-          className="btn btn-block btn-success req_pin_cde_btn"
+          className="btn btn-block bg-green pymnt_pge_sbscrbe_btn"
           onClick={async () => await verifyOTP()}
         >
-          Verify OTP Code
+          Verify OTP
         </button>
       </div>
     </div>

@@ -20,6 +20,7 @@ export default function withLogin(Component, data) {
     const router = useRouter();
 
     async function loginUser(userIp) {
+      console.log("before login ", SignUpState);
       setLoader(true);
       let obj = {
         Language: "en",
@@ -56,7 +57,6 @@ export default function withLogin(Component, data) {
           setLoader(false);
           return null;
         } else {
-          console.log("else condition ", response.message);
           setLoader(false);
           swal({
             title: response.message,

@@ -10,7 +10,6 @@ const SignUpComponent = () => {
   const { dispatch } = useContext(SignUpContext);
 
   function taxChangeView(PricePoint) {
-    console.log("PricePoint : ",PricePoint);
     dispatch({ type: UPDATE_PAYMENT_PRICE, data: PricePoint })
   }
 

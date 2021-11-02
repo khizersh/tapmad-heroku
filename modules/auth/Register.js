@@ -90,7 +90,6 @@ export default memo(function Register(props) {
     <div>
       <SignUpLayout bgImage={SignUpState.SelectedPackage.PaymentTabImage}>
         <RenderViews />
-        {/* <SetYourNewPin {...props} /> */}
       </SignUpLayout>
     </div>
   );

@@ -5,7 +5,7 @@ import { SignUpReducer, UPDATE_PACKAGE } from "./SignUpReducer";
 export const SignUpContext = React.createContext(null);
 
 export default function SignUpProvider({ children }) {
-    const { PaymentPackages } = useContext(AuthContext);
+    const { AuthState } = useContext(AuthContext);
     const [SignUpState, dispatch] = useReducer(SignUpReducer, {
         SelectedPackage: {},
         SelectedPrice: {},
@@ -14,10 +14,10 @@ export default function SignUpProvider({ children }) {
     });
 
     useEffect(() => {
-        if (PaymentPackages.length > 0) {
-            dispatch({ type: UPDATE_PACKAGE, data: PaymentPackages[0] })
+        if (AuthState?.PaymentPackages?.length > 0) {
+            dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] })
         }
-    }, [PaymentPackages])
+    }, [AuthState])
 
     const data = {
         dispatch,
