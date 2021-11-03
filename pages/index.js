@@ -12,14 +12,14 @@ export default function Home(props) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <title>Tapmad - Watch LIVE TV Channels Online </title>
+        <title>Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV</title>
         <meta
           name="description"
           content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
         />
         <meta
           name="title"
-          content="Tapmad - Watch LIVE TV Channels Online "
+          content="Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV"
         />
         <meta
           name="keywords"
