@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
+import Slider from "@ant-design/react-slick";
 import ScrollComponent from "../../../components/scrollComponent";
 import { getMoviesWithPagination } from "../../../services/apilinks";
 import { get } from "../../../services/http-service";

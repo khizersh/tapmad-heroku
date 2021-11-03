@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Slider from "react-slick";
+import Slider from "@ant-design/react-slick";
 import { basicSliderConfig } from "../../../services/utils";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
@@ -23,7 +23,7 @@ export default function Shows({ shows }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={shows.Sections.Shows} ads={false} name={"Shows"}/>
+      <HomepageSlider movies={shows.Sections.Shows} ads={false} name={"Shows"} />
     </div>
   );
 }
