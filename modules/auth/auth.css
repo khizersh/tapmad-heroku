@@ -415,14 +415,14 @@ background-color: #262626;
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
   .bg_dark {
-    margin-left: -4%;
+    /* margin-left: -4%; */
   }
 }
 
 /* Large screens ----------- */
 @media only screen and (min-width: 1824px) {
   .bg_dark {
-    margin-left: -4%;
+    /* margin-left: -4%; */
   }
 }
 

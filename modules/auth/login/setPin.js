@@ -113,55 +113,57 @@ function SetUserPin({ login, ip }) {
   }
 
   return (
-    <div className=" login_set_pin_card login_slct_oprtr_active">
-      <h3 className="component-title mb-5">Set Your New PIN</h3>
-      {true ? (
+    <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
+      <div className="custom-bg">
+        <h3 className="component-title mb-5">Set Your New PIN</h3>
+        {true ? (
+          <div className="form-group text-grey">
+            <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
+            <input
+              type="text"
+              className="form-control border-curve"
+              placeholder="Enter Full Name"
+              name="pin"
+              maxLength="20"
+              onChange={onChangeUsername}
+            />
+          </div>
+        ) : null}
+
         <div className="form-group text-grey">
-          <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
+          <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
           <input
-            type="text"
-            className="form-control border-curve"
-            placeholder="Enter Full Name"
+            type="password"
+            className="form-control numeric border-curve"
+            minLength="4"
+            maxLength="4"
+            value={pin}
+            placeholder="Set PIN Code"
             name="pin"
-            maxLength="20"
-            onChange={onChangeUsername}
+            onChange={onChangePin}
           />
         </div>
-      ) : null}
+        <div className="form-group">
+          <input
+            type="password"
+            className="form-control numeric border-curve"
+            minLength="4"
+            maxLength="4"
+            placeholder="Confirm PIN Code"
+            name="pin"
+            value={cpin}
+            onChange={onChangeCPin}
+          />
+        </div>
 
-      <div className="form-group text-grey">
-        <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
-        <input
-          type="password"
-          className="form-control numeric border-curve"
-          minLength="4"
-          maxLength="4"
-          value={pin}
-          placeholder="Set PIN Code"
-          name="pin"
-          onChange={onChangePin}
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="password"
-          className="form-control numeric border-curve"
-          minLength="4"
-          maxLength="4"
-          placeholder="Confirm PIN Code"
-          name="pin"
-          value={cpin}
-          onChange={onChangeCPin}
-        />
-      </div>
-
-      <div className="form-group text-center mb-0">
-        <button
-          className="btn btn-block bg-green pymnt_pge_sbscrbe_btn"
-          onClick={setUserPin}
-        >
-          Login
-        </button>
+        <div className="form-group text-center mb-0">
+          <button
+            className="btn btn-block bg-green pymnt_pge_sbscrbe_btn"
+            onClick={setUserPin}
+          >
+            Login
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -112,8 +112,8 @@ export default function AuthViews(props) {
       <div className="bg_dark">
         <div className="container">
           <div className="row">
-            <div className="col-sm-12 col-md-4">
-              <div className="tm_login_pg custom-bg">
+            <div className="col-sm-12 col-md-5">
+              <div className="tm_login_pg ">
                 <RenderViews />
                 {/* <SetPin /> */}
               </div>
