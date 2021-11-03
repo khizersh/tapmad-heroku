@@ -6,18 +6,18 @@ import { MainContext } from "../../../../contexts/MainContext";
 
 export default function PackageSelectView({ onChange }) {
     const { renderSignUp } = useContext(MainContext);
-    const { PaymentPackages } = useContext(AuthContext);
+    const { AuthState } = useContext(AuthContext);
     const { SignUpState } = useContext(SignUpContext);
     const router = useRouter();
     const { subspack } = router.query;
 
     useEffect(() => {
-        if (PaymentPackages) {
+        if (AuthState.PaymentPackages) {
             var selectedPackage = subspack;
             if (selectedPackage == 'epl') {
-                onChange(PaymentPackages[1]);
+                onChange(AuthState.PaymentPackages[1]);
             } else if (selectedPackage == 'allin1') {
-                onChange(PaymentPackages[0]);
+                onChange(AuthState.PaymentPackages[0]);
             }
             // will remove after epl
             renderSignUp(true);
@@ -29,9 +29,9 @@ export default function PackageSelectView({ onChange }) {
     }
     return (
         <>
-            {PaymentPackages &&
-                PaymentPackages.length > 0 &&
-                PaymentPackages.map((m, i) => {
+            {AuthState.PaymentPackages &&
+                AuthState.PaymentPackages.length > 0 &&
+                AuthState.PaymentPackages.map((m, i) => {
                     return (
                         <li
                             key={i}
