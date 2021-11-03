@@ -57,7 +57,8 @@ export default function AuthViews(props) {
 
     } else {
       AuthService.GetCardUser({ Language: 'en', MobileNo: state.User.MobileNo }).then((res) => {
-        if (res.data.responseCode == 0) {
+        console.log(res);
+        if (!res?.data?.User?.IsSubscribe) {
           swal({
             title: res.data.message,
             icon: "error",
