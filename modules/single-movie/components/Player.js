@@ -10,9 +10,10 @@ import { AdImpression, VideoQuartile, VideoWatched } from "../../../services/gtm
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
 import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
-import { isAuthentictedUser, SEOFriendlySlugsForVideo } from "../../../services/utils";
+import { isAuthentictedUser, SEOFriendlySlugsForVideo, verifyURL } from "../../../services/utils";
 import Link from "next/link";
 var fired = false;
+var fired5percent = false;
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
 );
@@ -62,6 +63,14 @@ export default function Player({ movies }) {
     }, adDuration * 60000);
   }
 
+  function fivePercentQuartile(video) {
+    var duration = video.duration;
+    duration = duration / 100 * 5;
+    if (video.currentTime > duration && !fired5percent) {
+      VideoQuartile(movie, "25%", "video1");
+      fired5percent = true;
+    }
+  }
   async function getRelatedChannels() {
     const res = await PlayerService.getRelatedChannelsOrVODData(
       movie.Video.VideoEntityId,
@@ -73,6 +82,9 @@ export default function Player({ movies }) {
   }
 
   useEffect(async () => {
+    console.log(movies.Video);
+    verifyURL(router, movies.Video.VideoName);
+
     await getRelatedChannels();
 
     const country = await AuthService.getGeoInfo();
@@ -145,20 +157,21 @@ export default function Player({ movies }) {
       });
     }
   }, [movies]);
+
   function videoQuartile(movie) {
     return {
       onTwentyFivePercent: (event) => {
-        VideoQuartile(movie, "25%")
+        VideoQuartile(movie, "50%", "video2")
       },
       onFiftyPercent: (event) => {
-        VideoQuartile(movie, "50%")
+        VideoQuartile(movie, "75%", "video3")
       },
       onSeventyFivePercent: (event) => {
-        VideoQuartile(movie, "75%")
-      },
-      onNinetyFivePercent: () => {
-        VideoQuartile(movie, "95%")
+        VideoQuartile(movie, "95%", "video4")
       }
+      // onNinetyFivePercent: () => {
+      //   VideoQuartile(movie, "95%")
+      // }
     }
   }
   useEffect(() => {
@@ -222,6 +235,7 @@ export default function Player({ movies }) {
               >
                 <ReactJWPlayer
                   onTime={(e) => {
+                    fivePercentQuartile(e);
                     if (e.currentTime > 3 && !fired) {
                       VideoWatched(movies);
                       fired = true;
@@ -272,7 +286,7 @@ export default function Player({ movies }) {
                   {/* <span className="text-secondary">
                     {movie.Video.VideoTotalViews} views
                   </span> */}
-                  <p style={{ color: "#aaa" }}>
+                  <p className="line-clamp" style={{ color: "#aaa" }}>
                     {movie.Video.VideoDescription}
                   </p>
                 </>

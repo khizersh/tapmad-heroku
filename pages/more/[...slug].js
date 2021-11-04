@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import ItemCard from "../../modules/search/ItemCard";
 import { viewMoreContent } from "../../services/apilinks";
 import { get } from "../../services/http-service";
-import { SEOFriendlySlugsForVideo } from "../../services/utils";
+import { setUrlAccordingToVideoType } from "../../services/utils";
 import requestIp from "request-ip";
+import { IsLiveChannel } from "../../services/constants";
 
 export default function ViewMore(props) {
     console.log("props ", props);
@@ -11,7 +12,7 @@ export default function ViewMore(props) {
         {props.data.Sections == null ?
             <div className="col-12"><h3 className="text-center">No data found</h3></div>
             : props.data.Sections.Videos.map((video, i) => {
-                let slug = SEOFriendlySlugsForVideo(video);
+                let slug = setUrlAccordingToVideoType(video, IsLiveChannel);
                 return <ItemCard item={video} key={i} slug={slug} />;
             })}
     </div>

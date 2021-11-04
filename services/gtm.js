@@ -10,6 +10,7 @@ export function LoginTag(body, resp) {
             user_id: resp.User.UserId,
             telco: body.OperatorId,
             msisdn: resp.UserProfile.UserProfileMobile,
+            name: resp.UserProfile.UserProfileFullName
         });
     } catch (e) {
         console.log(e);
@@ -56,6 +57,8 @@ export function ContentViewed(video) {
 }
 export function VideoWatched(response) {
     try {
+        const duration = jwplayer().getDuration() / 60;
+
         if (response.Video && response.Video.getProductiongenreName) {
             var Genre = [];
             var newGenre = [];
@@ -80,6 +83,7 @@ export function VideoWatched(response) {
                 Region: response.Video.RegionName,
                 Format: response.Video.FormatName,
                 SmallImage: response.Video.VideoImagePath,
+                Duration: duration
             });
         }
     } catch (e) {
@@ -117,9 +121,9 @@ export function SignOut() {
     });
 }
 
-export function VideoQuartile(response, percent) {
+export function VideoQuartile(response, percent, vOd) {
     const { mobile, userId } = getUserDetails();
-    const duration = jwplayer().getDuration();
+    const duration = jwplayer().getDuration() / 60;
     try {
         if (response.Video && response.Video.getProductiongenreName) {
             var Genre = [];
@@ -133,12 +137,24 @@ export function VideoQuartile(response, percent) {
             dataLayer.push({
                 event: "videoQuartile", ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile, NewGenre: newGenre.toString(),
             });
+            dataLayer.push({ "event": vOd, ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile, NewGenre: newGenre.toString(), })
         }
     } catch (e) {
         console.log(e)
     }
 }
-
+export function UserSessions() {
+    const { mobile, userId } = getUserDetails();
+    window.onload = function () {
+        var isSessionTrue = sessionStorage.getItem('session');
+        if (isSessionTrue) {
+            return;
+        } else {
+            dataLayer.push({ event: 'Session Start', "Landing Page URL": window.location.href, "UserId": userId, "Mobile No": mobile });
+            sessionStorage.setItem("session", true);
+        }
+    };
+}
 export function AdImpression() {
     dataLayer.push({ "event": "adImpression" })
 }

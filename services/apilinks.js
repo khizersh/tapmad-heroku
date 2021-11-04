@@ -1,14 +1,14 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
 const BASEPAYMENTURL = "https://payments.tapmad.com/api/";
-export const EPLPaymentUrl = BASEPAYMENTURL + "getAllPaymentMethods/V1/en/android";
+export const EPLPaymentUrl = BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
 export const getAllPackages = BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web"
 export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
-export const getUserByUserId = BASEURL + "api/CheckUserByUserId";
+export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
 export const getUserPaymentHistory = BASEURL + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
-  BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/16";
+  BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURL + "api/getCardUser";
@@ -33,6 +33,7 @@ export const getEventPredicationGameChannel =
   BASEURLAPP + "api/getEventPredicationGameChannelToken";
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/makeCheckOutPayment";
+export const UBLCard = BASEURLAPP + "api/CardUserOrder";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 export const getSeasonVodByCategoryId =
@@ -46,7 +47,7 @@ export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `${BASEURL}api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 export const getFeaturedHomepageWithRE = (from, to) => {
-  return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/16`;
+  return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`;
 };
 export const getChannelsWithPagination = (from, to) => {
   return BASEURL + `api/getChannelWithPagination/${from}/${to - from}/0/16`;

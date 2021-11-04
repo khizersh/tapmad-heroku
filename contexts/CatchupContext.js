@@ -14,9 +14,17 @@ export default function CatchupProvider({ children }) {
 
   React.useEffect(async () => {
     let data = await CatchupService.getCatchupTvData();
+    var convertedTabs = [];
+    data.data.Tabs.forEach(element => {
+      if (element.TabName == "Tensports") {
+        convertedTabs.unshift(element);
+      } else {
+        convertedTabs.push(element);
+      }
+    });
     let tabArray = [];
     if (data) {
-      tabArray = data.data.Tabs.map((m) => {
+      tabArray = convertedTabs.map((m) => {
         return {
           TabId: m.TabId,
           TabName: m.TabName,

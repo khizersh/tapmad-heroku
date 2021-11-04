@@ -26,6 +26,7 @@ function basicSliderConfig(slidesToShow, mobileView) {
     dots: false,
     infinite: false,
     draggable: true,
+    lazyLoad: 'ondemand',
     speed: 500,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToShow,
@@ -58,7 +59,22 @@ function basicSliderConfig(slidesToShow, mobileView) {
     ],
   };
 }
-
+function verifyURL(url, sectionName, vodName) {
+  if (sectionName) {
+    var convertedSectionName = sectionName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
+  if (vodName) {
+    var convertedVodName = vodName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
+  var cleanURLName = url.asPath.split('/', 3)[2];
+  if (convertedSectionName == cleanURLName) {
+    return true;
+  } else if (convertedVodName == cleanURLName) {
+    return true;
+  } else {
+    url.push('../404');
+  }
+}
 function SEOFriendlySlugsForVideo(event, catchup = false) {
   let vidChannel;
   if (event.IsVideoChannel == "0") {
@@ -66,11 +82,23 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
   } else {
     vidChannel = 1;
   }
-
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  let slug = ""
+  if (event.IsVideoFree) {
+    slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+      }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  } else {
+    slug = `${catchup ? "/catchup-watch" : "/play"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
+      }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  }
+  return slug;
+}
+
+function SEOFriendlySlugsForWatch(event, catchup = false) {
+  let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
   let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
     }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
-
   return slug;
 }
 
@@ -96,10 +124,13 @@ function viewMoreCleanUrls(sectionName, sectionId, name) {
 }
 
 function findImageInVODObject(video) {
+
   if (video.hasOwnProperty('VideoImageThumbnail')) {
     return video.VideoImageThumbnail;
   } else if (video.hasOwnProperty('ChannelTVImage')) {
     return video.ChannelTVImage;
+  } else if (video.hasOwnProperty('NewChannelThumbnailPath')) {
+    return video.NewChannelThumbnailPath;
   } else if (video.hasOwnProperty('VideoOnDemandThumb')) {
     return video.VideoOnDemandThumb;
   } else {
@@ -108,7 +139,7 @@ function findImageInVODObject(video) {
 }
 function SEOFriendlySlugsIsCategoryTrue(event) {
   let prefix = "category";
-  let name = event.VideoName ? event.VideoName : event.CategoryName;
+  let name = event.CategoryName ? event.CategoryName : event.VideoName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
   return slug;
@@ -247,6 +278,7 @@ module.exports = {
   setUrlToCookies,
   isAuthentictedServerSide,
   SEOFriendlySlugsForCatchupVideo,
+  SEOFriendlySlugsForWatch,
   closeNavBar,
   encryptWithAES,
   decryptWithAES,
@@ -256,5 +288,6 @@ module.exports = {
   addScriptUrlInDom,
   viewMoreCleanUrls,
   findImageInVODObject,
-  log
+  log,
+  verifyURL
 };

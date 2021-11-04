@@ -12,7 +12,7 @@ import { basicSliderConfig } from "../../../services/utils";
 import styles from "../game.module.css";
 import { CenteredModal } from "../../../components/Modal";
 import VoucherBuyModal from "./VoucherBuyModal";
-import {  userProfile , logo } from "../../../services/imagesLink";
+import { userProfile, logo } from "../../../services/imagesLink";
 
 const RightSidebar = ({ shop }) => {
   const setting = basicSliderConfig(2, 2);
@@ -138,7 +138,7 @@ const RightSidebar = ({ shop }) => {
                 <button
                   className="btn btn-primary"
                   onClick={() => onClickCopy(voucherModalData.PromoCode)}
-                  // onClick={() => onClickCopy("safasfasfasf")}
+                // onClick={() => onClickCopy("safasfasfasf")}
                 >
                   {copyText}
                 </button>
@@ -150,50 +150,50 @@ const RightSidebar = ({ shop }) => {
       <div>
         {rewards && rewards.length
           ? rewards.map((m, i) => (
-              <>
-                {" "}
-                <div className={`row mt-2`} key={i}>
-                  <div className="col">
-                    <div className="tm_btng_sidebar_hdr pl-2">
-                      <h5 className="ng-binding">{m.RewardCategoryName}</h5>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div
-                      className="p-2"
-                      style={{ marginRight: "0px", backgroundColor: "#121117" }}
-                    >
-                      <Slider {...setting}>
-                        {m.StoreProducts &&
-                          m.StoreProducts.map((n, j) => (
-                            <div className="p-2 text-center">
-                              <img
-                                onClick={() => onClickVoucher(n)}
-                                src={n.RewardProductImage}
-                                alt="reward"
-                                className={`btn m-auto ${styles.discountImage}`}
-                              />
-                              <div
-                                className="card-body p-2 text-light"
-                                onClick={() => onClickVoucher(n)}
-                              >
-                                <h5
-                                  style={{
-                                    fontSize: "14px",
-                                    cursor: "pointer",
-                                  }}
-                                >
-                                  {n.RewardProductName}
-                                </h5>
-                              </div>
-                            </div>
-                          ))}
-                      </Slider>
-                    </div>
+            <>
+              {" "}
+              <div className={`row mt-2`} key={i}>
+                <div className="col">
+                  <div className="tm_btng_sidebar_hdr pl-2">
+                    <h5 className="ng-binding">{m.RewardCategoryName}</h5>
                   </div>
                 </div>
-              </>
-            ))
+                <div className="col-12">
+                  <div
+                    className="p-2"
+                    style={{ marginRight: "0px", backgroundColor: "#121117" }}
+                  >
+                    <Slider {...setting}>
+                      {m.StoreProducts &&
+                        m.StoreProducts.map((n, j) => (
+                          <div className="p-2 text-center">
+                            <img
+                              onClick={() => onClickVoucher(n)}
+                              src={n.RewardProductImage}
+                              alt="reward"
+                              className={`btn m-auto ${styles.discountImage}`}
+                            />
+                            <div
+                              className="card-body p-2 text-light"
+                              onClick={() => onClickVoucher(n)}
+                            >
+                              <h5
+                                style={{
+                                  fontSize: "14px",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                {n.RewardProductName}
+                              </h5>
+                            </div>
+                          </div>
+                        ))}
+                    </Slider>
+                  </div>
+                </div>
+              </div>
+            </>
+          ))
           : null}
       </div>
     </>

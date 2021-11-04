@@ -18,8 +18,8 @@ function SetYourNewPinSignUp({ login, ip }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
-    if(showUsername){
-      if(username.trim().length < 1){
+    if (showUsername) {
+      if (username.trim().length < 1) {
         return swal({
           timer: 3000,
           title: "Please enter your Full Name!",
@@ -62,7 +62,7 @@ function SetYourNewPinSignUp({ login, ip }) {
       Cookie.setCookies("content-token", status.data.User.UserPassword);
     }
 
-    const response = await AuthService.setNewPin(pin , username);
+    const response = await AuthService.setNewPin(pin, username);
 
     if (response != null) {
       if (response.responseCode == 0) {
@@ -74,9 +74,9 @@ function SetYourNewPinSignUp({ login, ip }) {
       } else if (response.responseCode == 1) {
         await AuthService.clearUserToken(initialState.User.MobileNo);
         await login(ip);
-      }else{
+      } else {
         setLoader(false)
-       return swal({
+        return swal({
           timer: 3000,
           title: response.message,
           icon: "error",
@@ -92,19 +92,22 @@ function SetYourNewPinSignUp({ login, ip }) {
   };
 
   useEffect(() => {
-    let num = initialState?.User?.MobileNo;
-    let body = { Language: "en", MobileNo: num };
-    AuthService.GetCardUser(body)
-      .then((res) => {
-        if (res?.data?.User?.IsProfileNameSet) {
-          setShowUsername(false);
-        } else {
-          setShowUsername(true);
-        }
-        Cookie.setCookies("userId", res.data.User.UserId);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    if (initialState.User.MobileNo) {
+      let num = initialState?.User?.MobileNo;
+      console.log(initialState);
+      let body = { Language: "en", MobileNo: num };
+      AuthService.GetCardUser(body)
+        .then((res) => {
+          if (res?.data?.User?.IsProfileNameSet) {
+            setShowUsername(false);
+          } else {
+            setShowUsername(true);
+          }
+          Cookie.setCookies("userId", res.data.User.UserId);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [initialState.User.MobileNo]);
 
   return (
     <div>

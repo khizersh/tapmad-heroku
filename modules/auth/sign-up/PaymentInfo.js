@@ -25,6 +25,7 @@ function PaymentInfo() {
     updateUserEmail,
   } = useContext(MainContext);
 
+
   const onChangeNetwork = useCallback(
     (data) => {
       updateUserOperator(data.OperatorId);
@@ -64,6 +65,7 @@ function PaymentInfo() {
         <>
           <EasypaisaForm
             methodName={authState.selectedPaymentMethod.PaymentMethodName}
+            logo={authState.selectedPaymentMethod?.MobileNetworks[0]?.OperatorImage}
             mobileCode={authState.MobileCode}
             onChangeNumber={handleNumber}
           />
@@ -72,7 +74,8 @@ function PaymentInfo() {
     } else if (PaymentId == 4 || PaymentId == 7) {
       return (
         <>
-          <JazzCashForm
+        <JazzCashForm
+            logo={authState.selectedPaymentMethod?.MobileNetworks[0]?.OperatorImage}
             mobileCode={authState.MobileCode}
             onChangeNumber={handleNumber}
             onChangeCnic={handleCnic}

@@ -18,6 +18,9 @@
   width: 100%;
   opacity: 0;
   transition: linear 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 /* .horizontal-card {
@@ -45,7 +48,9 @@
   opacity: 1;
   padding-left: 10px !important;
   bottom: 0;
-  padding-top: 100px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 .synopsis_card:hover .img-square-wrapper > img {
   /* transform: translate3d(-00px, 0, 0); */

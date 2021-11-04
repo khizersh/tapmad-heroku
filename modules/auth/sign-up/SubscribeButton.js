@@ -6,6 +6,7 @@ import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { on } from "../../../public/static/js/linkers";
+import { SignUpTag } from "../../../services/gtm";
 
 export default function SubscribeButton() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function SubscribeButton() {
     return {
       Version: "V1",
       Language: "en",
-      Platform: "android",
+      Platform: "web",
       // ProductId: 1214,
       ProductId: authState.selectedPackageId,
       MobileNo: initialState.User.MobileNo,
@@ -49,7 +50,12 @@ export default function SubscribeButton() {
     console.log(details);
     const response = await AuthService.creditCardOrder(details);
     setLoader(false);
+    // checkouPayment(response);
+    UBLPayment(response);
+  }
+  function checkouPayment(response) {
     if (response.data.responseCode == 1 || response.data.responseCode == 4) {
+      SignUpTag(details, response.data);
       swal({
         text: "Transaction Successful. Redirecting you",
         icon: "success",
@@ -69,6 +75,33 @@ export default function SubscribeButton() {
       });
     } else if (response.data.Response && response.data.Response.responseCode == 2) {
       window.location.href = response.data.User.redirectUrl;
+    } else {
+      swal({
+        timer: 3000,
+        text: response.data.message,
+        icon: "info",
+        buttons: true,
+      }).then((e) => {
+        window.location.reload();
+      })
+      return 0;
+    }
+  }
+  function UBLPayment(response) {
+    if (response.data.Response.responseCode == 1) {
+      window.location.href = response.data.CardPaymentUrl;
+      return
+    } else if (response.data.Response.responseCode == 4) {
+      swal({
+        timer: 3000,
+        text: response.data.message,
+        icon: "info",
+        buttons: true,
+      }).then((e) => {
+        router.push("/sign-in");
+      });
+    } else if (response.data.Response && response.data.Response.responseCode == 2) {
+      window.location.href = response.data.CardPaymentUrl;
     } else {
       swal({
         timer: 3000,
@@ -134,10 +167,12 @@ export default function SubscribeButton() {
             buttons: false,
           });
         }
-        console.log("Hey ", status);
         if (status.code == 0) {
-          Frames.submitCard();
-          setFormReady(true);
+          // Uncomment to open checkout
+          // Frames.submitCard();
+          // setFormReady(true);
+
+          submitCardDetails({ Token: '' })
           // updateApiData(status);
           return
         } else {

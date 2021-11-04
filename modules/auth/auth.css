@@ -1,5 +1,12 @@
+
+:root{
+  --mobile:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg');
+  --desktop:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg');
+}
+
 .bg_dark {
-  background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg");
+  /* background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg"); */
+  background: var(--desktop);
   background-size: cover;
   background-blend-mode: multiply;
 }
@@ -265,7 +272,7 @@
     overflow-y: hidden;
   }
   .bg_dark {
-    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg") !important;
+    background: var(--mobile) !important;
     background-size: cover;
     background-blend-mode: multiply;
   }
@@ -284,7 +291,7 @@
     text-transform: uppercase;
   }
   .bg_dark {
-    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
   }
@@ -298,7 +305,7 @@
     overflow-y: hidden;
   }
   .bg_dark {
-    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
   }
@@ -312,7 +319,7 @@
     overflow-y: hidden;
   }
   .bg_dark {
-    background: url("https://www.tapmad.com/psl6/images/front-background-mobile.jpg");
+    background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
   }
