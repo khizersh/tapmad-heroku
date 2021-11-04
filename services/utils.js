@@ -26,7 +26,6 @@ function basicSliderConfig(slidesToShow, mobileView) {
     dots: false,
     infinite: false,
     draggable: true,
-    lazyLoad: 'ondemand',
     speed: 500,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToShow,
