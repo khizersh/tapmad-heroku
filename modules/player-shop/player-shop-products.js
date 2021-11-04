@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "@ant-design/react-slick";
+import Slider from "react-slick";
 import { basicSliderConfig } from "../../services/utils";
 export default function PlayerShopProducts({ MerchantProducts }) {
   var settings = basicSliderConfig(6);

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Slider from "@ant-design/react-slick";
+import Slider from "react-slick";
 import { AuthService } from "../../../modules/auth/auth.service";
 import { loggingTags } from "../../../services/apilinks";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";

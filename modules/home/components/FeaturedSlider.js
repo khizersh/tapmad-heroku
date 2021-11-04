@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Slider from "@ant-design/react-slick";
+import Slider from "react-slick";
 import { basicSliderConfig } from "../../../services/utils";
 
 export default function HomepageFeatured({ featured }) {

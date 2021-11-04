@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Slider from "@ant-design/react-slick";
+import Slider from "react-slick";
 import ScrollComponent from "../../../components/scrollComponent";
 import {
   basicSliderConfig,

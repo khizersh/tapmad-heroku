@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Slider from "@ant-design/react-slick";
+import Slider from "react-slick";
 import swal from "sweetalert";
 import {
   rewardPredication,

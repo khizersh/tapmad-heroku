@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Slider from "@ant-design/react-slick";
+import Slider from "react-slick";
 import { CatchupContext } from "../../contexts/CatchupContext";
 import { basicSliderConfig } from "../../services/utils";
 
