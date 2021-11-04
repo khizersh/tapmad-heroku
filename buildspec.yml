@@ -19,3 +19,4 @@ artifacts:
       - .next/**/*
       - public/**/*
       - package.json
+      - .platform/**/*
