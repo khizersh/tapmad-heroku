@@ -1,9 +1,10 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
-import Slider from "react-slick";
 import { basicSliderConfig } from "../../../services/utils";
-
+const Slider = dynamic(() => import('react-slick'));
 export default function HomepageFeatured({ featured }) {
+
   var settings = basicSliderConfig(3, 2);
 
   return (

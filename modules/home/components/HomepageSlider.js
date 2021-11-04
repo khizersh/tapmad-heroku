@@ -1,19 +1,16 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import { AuthService } from "../../../modules/auth/auth.service";
-import { loggingTags } from "../../../services/apilinks";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
-import { UserEngagemnent } from "../../../services/gtm";
-import { actionsRequestContent } from "../../../services/http-service";
 import {
   basicSliderConfig,
-  log,
   setUrlAccordingToVideoType,
   viewMoreCleanUrls
 } from "../../../services/utils";
-import HomePageAd from "./HomePageAd";
+
+const Slider = dynamic(() => import('react-slick'));
+const HomePageAd = dynamic(() => import('./HomePageAd'), { ssr: false });
 
 const HomepageSlider = ({ movies, ads, name }) => {
   const router = useRouter();
@@ -49,7 +46,8 @@ const HomepageSlider = ({ movies, ads, name }) => {
     setClientXonMouseDown(e.clientX);
     setClientYonMouseDown(e.clientY);
   }
-  function sendToAnalytics(sectionName, index, videoName) {
+  async function sendToAnalytics(sectionName, index, videoName) {
+    const { UserEngagemnent } = (await import('../../../services/gtm'));
     UserEngagemnent(name, sectionName, index + 1, videoName);
   }
 
@@ -59,17 +57,13 @@ const HomepageSlider = ({ movies, ads, name }) => {
       e.preventDefault();
       // prevent link click if the element was dragged
     } else {
-      let body = {
-        event: loggingTags.click,
-        clickedItemId: mov.VideoEntityId,
-        clickedItemName: mov.VideoName,
-      };
-      actionsRequestContent(body);
+
     }
   }
 
-  useEffect(() => {
-    AuthService.getHomePageAdsDetail()
+  useEffect(async () => {
+    const { getHomePageAdsDetail } = (await import('../../../modules/auth/auth.service')).AuthService
+    getHomePageAdsDetail()
       .then((res) => {
         if (res.data.responseCode == 1) {
           setAdsRow(res.data.data);
@@ -126,7 +120,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                   movieSection.SectionName,
                                   index,
                                   mov.VideoName
-                                )
+                                ).then(() => { })
                               )}
                             >
                               <div

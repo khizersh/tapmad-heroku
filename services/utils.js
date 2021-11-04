@@ -1,4 +1,4 @@
-const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
+const { IsLiveChannel, IsCategory } = require("./constants");
 const { Cookie } = require("./cookies");
 const CryptoJS = require("crypto-js");
 

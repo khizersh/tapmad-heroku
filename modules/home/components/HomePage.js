@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import ScrollComponent from "../../../components/scrollComponent";
-import {
-  calculateRowsToFetch,
-  pushNewMoviesIntoList,
-} from "../../../services/utils";
-import { actionsRequestContent } from "../../../services/http-service";
 import Link from "next/link";
 import { HomeService } from "./home.service";
-import { loggingTags } from "../../../services/apilinks";
-import { AuthService } from "../../auth/auth.service";
 import dynamic from "next/dynamic";
 
 const HomepageSlider = dynamic(() => import("./HomepageSlider"));
 const HomePageAd = dynamic(() => import('./HomePageAd'));
 const HomepageFeatured = dynamic(() => import("./FeaturedSlider"));
+const ScrollComponent = dynamic(() => import("../../../components/scrollComponent"));
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
@@ -22,6 +15,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
 
   async function fetchNewMovies() {
+    const { calculateRowsToFetch, pushNewMoviesIntoList } = (await import('../../../services/utils')).default;
     if (currentRow == movies.totalSections) {
       return;
     }
@@ -53,10 +47,11 @@ export default function HomePage({ movies, banner, featured, ip }) {
     }
   }
 
-  const checAd = async () => {
-    AuthService.getHomePageAdsDetail()
-      .then((res) => {
+  async function checAd() {
+    const { getHomePageAdsDetail } = (await import('../../auth/auth.service')).AuthService;
 
+    getHomePageAdsDetail()
+      .then((res) => {
         if (res.data.responseCode == 1) {
           let data = res.data.data.filter((m) => m.row == "0")[0];
           if (data) {
@@ -70,12 +65,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
   React.useEffect(async () => {
     await checAd();
     setLocalMovies(modifiedResponse);
-    let body = {
-      event: loggingTags.fetch,
-      pageName: "homepage",
-    };
-    actionsRequestContent(body);
-  }, [movies]);
+  }, []);
 
   return (
     <div>
