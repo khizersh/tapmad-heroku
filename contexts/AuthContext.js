@@ -23,7 +23,6 @@ export default function AuthProvider({ children }) {
 
   React.useEffect(() => {
     if (initialState && initialState.AuthDetails) {
-      console.log("initialState : ", initialState);
       let AuthStateWithData = {
         loginOperators: initialState.AuthDetails.LoginOperators,
         AllPackages: initialState.AuthDetails,

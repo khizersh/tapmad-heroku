@@ -73,7 +73,6 @@ const UserStatus = ({ pdata, userId }) => {
       })
       .catch((e) => {
         setLoader(false);
-        console.log(e);
       });
   };
   return (

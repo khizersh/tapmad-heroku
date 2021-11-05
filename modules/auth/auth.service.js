@@ -22,7 +22,6 @@ async function setUserPin(pin, username) {
 
   try {
     const userId = Cookie.getCookies("userId");
-    console.log("userId: ", userId);
     let body = {
       Version: "V1",
       Language: "en",
@@ -144,7 +143,6 @@ async function forgetPin(mobile, OperatorId) {
     MobileNo: mobile,
     OperatorId: OperatorId,
   };
-console.log("body forget: ",body);
   let resp;
   try {
     resp = await post(sendOTP, body);
@@ -503,7 +501,6 @@ const checkEPLUser = async (num) => {
         if (data.data.User) {
           Cookie.setCookies("userId", data.data.User.UserId);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
-          console.log("Epl ", data.data.User);
           if (data.data.User.EplSubscribe) {
             if (data.data.User.IsPinSet) {
               return {

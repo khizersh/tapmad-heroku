@@ -37,7 +37,6 @@ const RightSidebar = ({ shop }) => {
     updateVoucher(body)
       .then((res) => {
         setLoader(false);
-        console.log(res);
         if (res && res.responseCode == 6) {
           swal({
             title: res.message,
@@ -45,7 +44,6 @@ const RightSidebar = ({ shop }) => {
           });
         } else if (res && res.responseCode == 1) {
           if (res.data.IsPopup) {
-            console.log(res);
             setVoucherModal(true);
             setVoucherModalData(res.data);
           } else {

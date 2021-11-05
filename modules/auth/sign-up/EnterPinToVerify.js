@@ -61,7 +61,6 @@ const EnterPinToVerifyUser = ({ login }) => {
           var loginResp = login();
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
-              console.log(e);
               forgetPin()
                 .then((re) => { })
                 .catch((e) => console.log(e));

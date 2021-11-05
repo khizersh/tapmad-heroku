@@ -83,8 +83,6 @@ export default function SubscribeButton() {
       SignUpState.SelectedPrice?.ProductId
     ) {
       var details = handleRegisterPayload(SignUpState);
-      console.log("SignUpState: ",SignUpState);
-      console.log("detailsdetails: ",details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
@@ -96,7 +94,6 @@ export default function SubscribeButton() {
       }
         if (details.ProductId == 1265 || details.ProductId == 1360) {
           var status = await AuthService.checkEPLUser(details.MobileNo);
-          console.log(status);
         } else {
           var status = await AuthService.checkUser(details.MobileNo);
         }

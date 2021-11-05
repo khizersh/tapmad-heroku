@@ -452,10 +452,7 @@ export default function Player({ movies }) {
                 ) : (
                   ads.bottomBannerAdMobile && (
                     <DFPSlotsProvider dfpNetworkId="28379801">
-                      {console.log(
-                        "ads.bottomBannerAdMobile: ",
-                        ads.bottomBannerAdMobile
-                      )}
+                     
                       <div className="desktop-ads">
                         {ads.bottomBannerAdMobile != "" ? (
                           <AdSlot

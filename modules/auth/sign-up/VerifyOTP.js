@@ -60,7 +60,6 @@ const VerifyOTP = ({ newUser }) => {
         };
         data = await AuthService.verifyOTP(body);
       }
-      console.log("data otttppp : " , body  ,data );
       if (data != null) {
         if (data.responseCode == 0) {
           swal({

@@ -42,7 +42,6 @@ const HomepageSlider = ({ movies, ads, name }) => {
     }
   }
   function getMoreSections(sectionDetails) {
-    // console.log(sectionDetails);
   }
   function handleOnMouseDown(e) {
     e.preventDefault(); // stops weird link dragging effect

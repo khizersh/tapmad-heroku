@@ -20,7 +20,6 @@ export default function withLogin(Component, data) {
     const router = useRouter();
 
     async function loginUser(userIp) {
-      console.log("before login ", SignUpState);
       setLoader(true);
       let obj = {
         Language: "en",
@@ -72,7 +71,6 @@ export default function withLogin(Component, data) {
     async function verifyPinCode(ip, pin, forgetPin) {
       setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);
-      console.log("pinResponse : ", pinResponse);
       if (pinResponse && pinResponse.responseCode == 1) {
         var loginResp = loginUser(ip);
         loginResp.then((e) => {

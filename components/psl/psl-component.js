@@ -77,7 +77,6 @@ export default memo(function PSLComponent({ channel }) {
             frameObj.onload = (() => {
                 document.getElementById('loader').style.display = "none";
                 contents = frameObj.contentDocument || frameObj.contentWindow.document;
-                console.log(contents);
                 contents.getElementsByClassName('fixed-bottom')[0].style.display = "none";
                 contents.getElementsByClassName('scrolling-navbar')[0].style.display = "none";
                 contents.getElementsByClassName('primary-nav')[0].style.display = "none";

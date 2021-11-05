@@ -53,7 +53,6 @@ export default function PSLChat({ channel }) {
         header.style.top = "unset";
       }
     });
-    console.log("var msg: ", msg);
     if (msg) {
       textMessage.current.value = msg;
     }
