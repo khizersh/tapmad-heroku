@@ -56,20 +56,7 @@ export default function AuthViews(props) {
       }).catch(e => setLoader(false))
 
     } else {
-      AuthService.GetCardUser({ Language: 'en', MobileNo: state.User.MobileNo }).then((res) => {
-        console.log(res);
-        if (!res?.data?.User?.IsSubscribe) {
-          swal({
-            title: res.data.message,
-            icon: "error",
-            timer: 2500
-          }).then(() => {
-            router.push('/sign-up')
-          })
-        } else {
-          setViewToShow("forget-pin");
-        }
-      })
+      setViewToShow("forget-pin");
     }
   }
 

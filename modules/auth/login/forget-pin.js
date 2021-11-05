@@ -17,6 +17,13 @@ export default function ForgetPin({ updateView }) {
       MobileNo: initialState.User.MobileNo,
       OperatorId: initialState.User.OperatorId,
     });
+    // logging start
+    let body = {
+      event: loggingTags.login,
+      action: "forget_pin",
+    };
+    actionsRequestContent(body);
+    // logging end
   }, []);
 
   async function verifyOTP() {
