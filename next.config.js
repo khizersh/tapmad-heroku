@@ -16,6 +16,9 @@ module.exports = {
 const withCSS = require("@zeit/next-css");
 // const withSCSS = require("@zeit/next-sass");
 const withImages = require("next-images");
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 module.exports = withImages();
 module.exports = withCSS();
 
@@ -37,3 +40,5 @@ module.exports = {
     // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 }
+
+module.exports = withBundleAnalyzer({})

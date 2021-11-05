@@ -6,7 +6,7 @@ import Game from "../modules/game/components";
 function Games() {
   return (
     <div>
-      <Game />
+      {/* <Game /> */}
     </div>
   );
 }
