@@ -199,8 +199,11 @@ export const rewardPredication = async (body) => {
 };
 
 export const getAllMatchQuestions = (database, cb) => {
-  database.ref("Game").on("value", (snapshot) => {
-    const vals = snapshot.val();
-    cb(vals);
-  });
+  if (database) {
+    console.log("database in ref : ", database);
+    database.ref("Game").on("value", (snapshot) => {
+      const vals = snapshot.val();
+      cb(vals);
+    });
+  }
 };

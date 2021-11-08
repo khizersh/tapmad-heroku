@@ -92,7 +92,7 @@ function HeaderBasic({ signout }) {
               </li>
               {country && country == "PK" ? (
                 <li className="nav-item">
-                  <Link href="/game" passHref={true} shallow={true}>
+                  <Link href="/game" passHref={true} prefetch={false} shallow={true}>
                     <a>
                       <img
                         src={tapmadCoin}

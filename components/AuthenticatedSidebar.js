@@ -46,7 +46,7 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
           style={{ display: "list-item" }}
           onClick={() => onCLickContent("game")}
         >
-          <Link href="/game" shallow={true} passHref={true}>
+          <Link href="/game" shallow={true} prefetch={false} passHref={true}>
             <a>
               Game
               <span className="icon">
