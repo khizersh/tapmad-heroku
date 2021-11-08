@@ -70,7 +70,7 @@ const watch = (props) => {
           setisAuthenticateFalse();
           router.push("/");
         });
-        
+
       });
     } else if (props.data && props.data.responseCode == 8) {
       swal({
@@ -99,6 +99,10 @@ const watch = (props) => {
         <meta property="og:title" content={props.schema.metaData[0].title} />
         <meta
           property="og:description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
+          name="description"
           content={props.schema.metaData[0].description}
         />
         <meta

@@ -46,6 +46,10 @@ const Syno = (props) => {
           content={props.schema.metaData[0].description}
         />
         <meta
+          name="description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
           property="og:image"
           content={props.schema?.metaData[0]?.image.url}
         />
