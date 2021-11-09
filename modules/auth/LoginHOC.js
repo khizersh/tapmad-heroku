@@ -8,8 +8,6 @@ import { encryptWithAES } from "../../services/utils";
 // import dynamic from "next/dynamic";
 import swal from "sweetalert";
 import { GameContext } from "../../contexts/GameContext";
-import { setCookiesForLogin } from "./sign-up/authHelper";
-import { SignUpContext } from "../../contexts/auth/SignUpContext";
 // const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
 
 export default function withLogin(Component, data) {

@@ -1,19 +1,17 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import { AuthService } from "../../../modules/auth/auth.service";
-import { loggingTags } from "../../../services/apilinks";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
-import { UserEngagemnent } from "../../../services/gtm";
-import { actionsRequestContent } from "../../../services/http-service";
 import {
   basicSliderConfig,
-  log,
   setUrlAccordingToVideoType,
   viewMoreCleanUrls
 } from "../../../services/utils";
-import HomePageAd from "./HomePageAd";
+import Image from 'next/image'
+
+const Slider = dynamic(() => import('react-slick'));
+const HomePageAd = dynamic(() => import('./HomePageAd'), { ssr: false });
 
 const HomepageSlider = ({ movies, ads, name }) => {
   const router = useRouter();
@@ -48,7 +46,8 @@ const HomepageSlider = ({ movies, ads, name }) => {
     setClientXonMouseDown(e.clientX);
     setClientYonMouseDown(e.clientY);
   }
-  function sendToAnalytics(sectionName, index, videoName) {
+  async function sendToAnalytics(sectionName, index, videoName) {
+    const { UserEngagemnent } = (await import('../../../services/gtm'));
     UserEngagemnent(name, sectionName, index + 1, videoName);
   }
 
@@ -58,17 +57,14 @@ const HomepageSlider = ({ movies, ads, name }) => {
       e.preventDefault();
       // prevent link click if the element was dragged
     } else {
-      let body = {
-        event: loggingTags.click,
-        clickedItemId: mov.VideoEntityId,
-        clickedItemName: mov.VideoName,
-      };
-      actionsRequestContent(body);
+
     }
   }
 
-  useEffect(() => {
-    AuthService.getHomePageAdsDetail()
+
+  useEffect(async () => {
+    const { getHomePageAdsDetail } = (await import('../../../modules/auth/auth.service')).AuthService
+    getHomePageAdsDetail()
       .then((res) => {
         if (res.data.responseCode == 1) {
           setAdsRow(res.data.data);
@@ -125,7 +121,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                   movieSection.SectionName,
                                   index,
                                   mov.VideoName
-                                )
+                                ).then(() => { })
                               )}
                             >
                               <div
@@ -135,20 +131,20 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                 onMouseOut={() => handleMouseOut(row)}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  {/* <img
                                     src={mov.NewChannelThumbnailPath}
                                     style={{ width: "100%" }}
-                                    alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                    alt={"tapmad-" + mov.VideoName} 
+                                  />*/}
+                                  <Image
                                     src={mov.NewChannelThumbnailPath}
-                                    // style={{ width: "100%" }}
                                     height={304}
                                     width={228}
+                                    loader={() =>  mov.NewChannelThumbnailPath}
                                     loading={'eager'}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
-                                  /> */}
+                                  />
                                   {mov.IsVideoFree ? (
                                     mov.IsVideoChannel == true || mov.IsVideoChannel == "1" ? (
                                       <div className="live_side">Live</div>
@@ -206,20 +202,20 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                 key={index}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  {/* <img
                                     src={mov.NewCategoryImage}
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                  /> */}
+                                    <Image
                                     src={mov.NewCategoryImage}
-                                    // style={{ width: "100%" }}
-                                    loading={'eager'}
                                     height={304}
                                     width={228}
+                                    loader={() =>  mov.NewCategoryImage}
+                                    loading={'eager'}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
-                                  /> */}
+                                  />
                                   {mov.IsVideoFree
                                     ? null
                                     : mov.PackageName && (

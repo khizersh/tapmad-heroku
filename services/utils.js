@@ -1,6 +1,6 @@
-const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
+const { IsLiveChannel, IsCategory } = require("./constants");
 const { Cookie } = require("./cookies");
-const CryptoJS = require("crypto-js");
+// const CryptoJS = require("crypto-js");
 
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
@@ -230,14 +230,16 @@ function closeNavBar() {
 }
 const encryptWithAES = (text) => {
   const passphrase = "My Secret Passphrase";
-  return CryptoJS.AES.encrypt(text, passphrase).toString();
+  // return CryptoJS.AES.encrypt(text, passphrase).toString();
+  return ""
 };
 //The Function Below To Decrypt Text
 const decryptWithAES = (ciphertext) => {
-  const passphrase = "My Secret Passphrase";
-  const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
-  const originalText = bytes.toString(CryptoJS.enc.Utf8);
-  return originalText;
+  // const passphrase = "My Secret Passphrase";
+  // const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
+  // const originalText = bytes.toString(CryptoJS.enc.Utf8);
+  // return originalText;
+  return "";
 };
 function getUserDetails() {
   var mobile = Cookie.getCookies("user_mob");

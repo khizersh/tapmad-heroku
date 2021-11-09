@@ -3,9 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import swal from "sweetalert";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { MainContext } from "../../../contexts/MainContext";
-import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
-import { actionsRequestContent } from "../../../services/http-service";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 

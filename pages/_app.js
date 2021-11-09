@@ -30,10 +30,10 @@ import { UserSessions } from "../services/gtm";
 import SignUpProvider from "../contexts/auth/SignUpContext";
 
 
-const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
-const Skeleton = dynamic(() => import("../components/MainSkeleton"));
-const Header = dynamic(() => import("../components/App/Header"));
-const Footer = dynamic(() => import("../components/Footer"));
+const DashboardLayout = loadable(() => import("../modules/dashboard/DashboardLayout"));
+const Skeleton = loadable(() => import("../components/MainSkeleton"));
+const Header = loadable(() => import("../components/App/Header"));
+const Footer = loadable(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
 
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }) {
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
 
-        <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+        {/* <script src="https://cdn.checkout.com/js/framesv2.min.js"></script> */}
       </Head>
       <>
         <noscript>

@@ -16,9 +16,6 @@ import DropdownWithImage from "../sign-up/DropdownWithImage";
 function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   const {
     initialState,
-    updateUserNumber,
-    updateUserPassword,
-    updateUserOperator,
     setLoader,
   } = React.useContext(MainContext);
   const { AuthState } = React.useContext(AuthContext);
