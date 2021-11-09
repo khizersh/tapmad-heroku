@@ -20,8 +20,8 @@ const TabSlider = () => {
               <div
                 key={i}
                 className={`tab p-3 btn m-2 ${catchupState.selectedTab.TabId == m.TabId
-                    ? "active-tab"
-                    : ""
+                  ? "active-tab"
+                  : ""
                   }`}
                 onClick={() => onClickTab(m)}
               >

@@ -1,7 +1,7 @@
 import React from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
 
-const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber }) => {
+const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber , logo }) => {
   const [num, setNum] = React.useState("");
 
   const onChange = (e) => {

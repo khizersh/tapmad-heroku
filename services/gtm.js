@@ -121,7 +121,7 @@ export function SignOut() {
     });
 }
 
-export function VideoQuartile(response, percent) {
+export function VideoQuartile(response, percent, vOd) {
     const { mobile, userId } = getUserDetails();
     const duration = jwplayer().getDuration() / 60;
     try {
@@ -137,6 +137,7 @@ export function VideoQuartile(response, percent) {
             dataLayer.push({
                 event: "videoQuartile", ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile, NewGenre: newGenre.toString(),
             });
+            dataLayer.push({ "event": vOd, ID: response.Video.VideoEntityId, Name: response.Video.VideoName, duration: duration, watchedQuartile: percent, Category: response.Video.productioncategoryName, Productionhouse: response.Video.productionhouseName, Format: response.Video.FormatName, Region: response.Video.RegionName, Genre: Genre.toString(), user_id: userId, msisdn: mobile, NewGenre: newGenre.toString(), })
         }
     } catch (e) {
         console.log(e)

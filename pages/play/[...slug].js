@@ -37,16 +37,20 @@ const Syno = (props) => {
   return (
     <>
       <Head>
-        <title>{props.schema.metaData[0].title}</title>
+        <title>{props?.schema?.metaData[0]?.title}</title>
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={props.schema.metaData[0].title} />
+        <meta property="og:title" content={props?.schema?.metaData[0]?.title} />
         <meta
           property="og:description"
           content={props.schema.metaData[0].description}
         />
         <meta
+          name="description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
           property="og:image"
-          content={props.schema.metaData[0].image.url}
+          content={props.schema?.metaData[0]?.image.url}
         />
         <meta property="og:url" content={props.schema.url} />
         <link rel="canonical" href={props.schema.url} />
@@ -56,8 +60,8 @@ const Syno = (props) => {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
               props.schema.Channels
-                ? props.schema.Channels[0]
-                : props.schema.Vod[0]
+                ? props.schema?.Channels[0]
+                : props.schema?.Vod[0]
             ),
           }}
         />
@@ -79,7 +83,7 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
-    if (data.data.Video[0].IsVideoChannel) {
+    if (data?.data?.Video[0].IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(OriginalMovieId, context.resolvedUrl);
       return { props: { data: data.data, schema: seo } };
     } else {
@@ -89,7 +93,8 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      data: data, env: process.env.TAPENV
+      data: data,
+      env: process.env.TAPENV
     }
   };
 }

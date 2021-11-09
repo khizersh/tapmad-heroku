@@ -13,6 +13,7 @@ import {
   UserSignUpPromoCode,
   getAllowRegions,
   getEPLCardUser,
+  UBLCard,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -173,7 +174,7 @@ async function forgetPin(mobile, OperatorId) {
 async function creditCardOrder(body) {
   let resp;
   try {
-    resp = await post(creditCard, body);
+    resp = await post(UBLCard, body);
   } catch (error) {
     resp = null;
   }

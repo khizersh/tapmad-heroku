@@ -1,7 +1,7 @@
 import React from "react";
 import { jazzIcon } from "../../../../services/imagesLink";
 
-const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic }) => {
+const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic , logo }) => {
   const [num, setNum] = React.useState("");
   const [cnic, setCnic] = React.useState("");
 

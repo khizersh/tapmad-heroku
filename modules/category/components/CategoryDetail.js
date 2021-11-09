@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Card from "./card/Card";
-import { SEOFriendlySlugsForVideo, verifyURL } from "../../../services/utils";
+import { SEOFriendlySlugsForWatch, verifyURL } from "../../../services/utils";
 import { ContentViewed } from "../../../services/gtm";
 import { useRouter } from "next/router";
 
@@ -21,7 +21,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
       } else {
         vid = videoList[0].Videos[videoList[0].Videos.length - 1];
       }
-      let slugPlay = SEOFriendlySlugsForVideo(vid);
+      let slugPlay = SEOFriendlySlugsForWatch(vid);
       setSlug(slugPlay);
       ContentViewed(video);
     }
@@ -40,7 +40,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
                     <div className="font-20">
                       {video && video.VideoCategoryName}
                     </div>
-                    <div className="text-dark line-height">
+                    <div className="text-dark line-height line-clamp">
                       {video
                         ? video.VideoDescription &&
                           video.VideoDescription.length > 200

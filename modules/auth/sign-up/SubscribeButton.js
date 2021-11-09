@@ -38,6 +38,10 @@ export default function SubscribeButton() {
     delete detailsdetails.cnic;
     const response = await AuthService.creditCardOrder(detailsdetails);
     setLoader(false);
+    // checkouPayment(response);
+    UBLPayment(response);
+  }
+  function checkouPayment(response) {
     if (response.data.responseCode == 1 || response.data.responseCode == 4) {
       SignUpTag(detailsdetails, response.data);
       swal({
@@ -71,6 +75,33 @@ export default function SubscribeButton() {
       }).then((e) => {
         window.location.reload();
       });
+      return 0;
+    }
+  }
+  function UBLPayment(response) {
+    if (response.data.Response.responseCode == 1) {
+      window.location.href = response.data.CardPaymentUrl;
+      return
+    } else if (response.data.Response.responseCode == 4) {
+      swal({
+        timer: 3000,
+        text: response.data.message,
+        icon: "info",
+        buttons: true,
+      }).then((e) => {
+        router.push("/sign-in");
+      });
+    } else if (response.data.Response && response.data.Response.responseCode == 2) {
+      window.location.href = response.data.CardPaymentUrl;
+    } else {
+      swal({
+        timer: 3000,
+        text: response.data.message,
+        icon: "info",
+        buttons: true,
+      }).then((e) => {
+        window.location.reload();
+      })
       return 0;
     }
   }

@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /news-detail/*
+Disallow: /watch/ep-*
+Disallow: /watch/episode*
+Disallow: /episode*
 Disallow: /syno?*
 Disallow: /player?*
 Disallow: /vodlist?*
@@ -9,4 +13,13 @@ Disallow: /*campaign*
 Disallow: /?*
 Disallow: /#!player?*
 Disallow: /*jwsource
+Disallow: /vodlist?*
+Disallow: /promo-code
+Disallow: /freetrial*
+Disallow: /careem*
+Disallow: /campaign*
+Disallow: /my-game
+Disallow: /leaderboard
+Disallow: /all-games
+Disallow: /myaccount
 Sitemap: https://www.tapmad.com/sitemap.xml

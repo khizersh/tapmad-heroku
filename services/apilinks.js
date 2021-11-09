@@ -1,6 +1,7 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
-export const EPLPaymentUrl = BASEURL + "getAllPaymentMethods/V1/en/android";
+const BASEPAYMENTURL = "https://payments.tapmad.com/api/";
+export const EPLPaymentUrl = BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
 export const getAllPackages = BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web"
 export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
@@ -32,6 +33,7 @@ export const getEventPredicationGameChannel =
   BASEURLAPP + "api/getEventPredicationGameChannelToken";
 export const updateUserProfile = BASEURL + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/makeCheckOutPayment";
+export const UBLCard = BASEURLAPP + "api/CardUserOrder";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 export const getSeasonVodByCategoryId =

@@ -56,14 +56,15 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <title>Tapmad - Watch LIVE TV Channels Online </title>
+        <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <meta name="description" content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com" />
         <meta
           name="keywords"
-          content="Watch LIVE TV channels online, live psl, live cricket, watch live psl streaming, ad free stream, live sports, live sports, watch adfree psl online, hd stream, Pakistan cricket match, live cricket, live sports"
+          content="live tv channel, live tv, live sports, watch free cricket, subscribe to tapmad, live EPL streaming, watch epl, premier league live streaming, pakistani tv channels, watch live tv free, watch live news, watch full hd movies online"
         />
         {pageProps.env == 'staging' ? <meta name="robots" content="noindex" /> : null}
 
