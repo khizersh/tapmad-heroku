@@ -8,6 +8,7 @@ import {
   setUrlAccordingToVideoType,
   viewMoreCleanUrls
 } from "../../../services/utils";
+import Image from 'next/image'
 
 const Slider = dynamic(() => import('react-slick'));
 const HomePageAd = dynamic(() => import('./HomePageAd'), { ssr: false });
@@ -60,6 +61,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
 
     }
   }
+
 
   useEffect(async () => {
     const { getHomePageAdsDetail } = (await import('../../../modules/auth/auth.service')).AuthService
@@ -130,20 +132,20 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                 onMouseOut={() => handleMouseOut(row)}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  {/* <img
                                     src={mov.NewChannelThumbnailPath}
                                     style={{ width: "100%" }}
-                                    alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                    alt={"tapmad-" + mov.VideoName} 
+                                  />*/}
+                                  <Image
                                     src={mov.NewChannelThumbnailPath}
-                                    // style={{ width: "100%" }}
                                     height={304}
                                     width={228}
+                                    loader={() =>  mov.NewChannelThumbnailPath}
                                     loading={'eager'}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
-                                  /> */}
+                                  />
                                   {mov.IsVideoFree ? (
                                     mov.IsVideoChannel == true || mov.IsVideoChannel == "1" ? (
                                       <div className="live_side">Live</div>
@@ -201,20 +203,20 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                 key={index}
                               >
                                 <div className="movies-images">
-                                  <img
+                                  {/* <img
                                     src={mov.NewCategoryImage}
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName}
-                                  />
-                                  {/* <Image
+                                  /> */}
+                                    <Image
                                     src={mov.NewCategoryImage}
-                                    // style={{ width: "100%" }}
-                                    loading={'eager'}
                                     height={304}
                                     width={228}
+                                    loader={() =>  mov.NewCategoryImage}
+                                    loading={'eager'}
                                     // layout='fill'
                                     alt={"tapmad-" + mov.VideoName}
-                                  /> */}
+                                  />
                                   {mov.IsVideoFree
                                     ? null
                                     : mov.PackageName && (

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { HomeService } from "./home.service";
 import dynamic from "next/dynamic";
+import loadable from '@loadable/component'
 
-const HomepageSlider = dynamic(() => import("./HomepageSlider"));
-const HomePageAd = dynamic(() => import('./HomePageAd'));
-const HomepageFeatured = dynamic(() => import("./FeaturedSlider"));
-const ScrollComponent = dynamic(() => import("../../../components/scrollComponent"));
+const HomepageSlider = loadable(() => import("./HomepageSlider"));
+const HomePageAd = loadable(() => import('./HomePageAd'));
+const HomepageFeatured = loadable(() => import("./FeaturedSlider"));
+const ScrollComponent = loadable(() => import("../../../components/scrollComponent"));
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
@@ -75,7 +76,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
             <div>
               <img
                 src={banner?.Video[0]?.bannerPoster}
-                style={{ width: "100%" }}
+                width="100%"
                 alt="homepage-banner"
               />
             </div>

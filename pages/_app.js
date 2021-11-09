@@ -25,12 +25,13 @@ import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
 import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
+import loadable from '@loadable/component'
 
 
-const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
-const Skeleton = dynamic(() => import("../components/MainSkeleton"));
-const Header = dynamic(() => import("../components/App/Header"));
-const Footer = dynamic(() => import("../components/Footer"));
+const DashboardLayout = loadable(() => import("../modules/dashboard/DashboardLayout"));
+const Skeleton = loadable(() => import("../components/MainSkeleton"));
+const Header = loadable(() => import("../components/App/Header"));
+const Footer = loadable(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
 
