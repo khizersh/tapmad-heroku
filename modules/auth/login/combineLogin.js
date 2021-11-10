@@ -14,10 +14,7 @@ import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
 function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
-  const {
-    initialState,
-    setLoader,
-  } = React.useContext(MainContext);
+  const { initialState, setLoader } = React.useContext(MainContext);
   const { AuthState } = React.useContext(AuthContext);
   const { SignUpState, dispatch } = React.useContext(SignUpContext);
   const [mobileNo, setMobileNo] = React.useState("");
@@ -100,7 +97,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
 
   const forgetClick = () => {
     if (mobileNo.length > 4) {
-      forgetPin(initialState);
+      forgetPin(SignUpState);
     }
   };
 
@@ -139,43 +136,45 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
         <div className="d-flex justify-content-around mb-3">
           {AuthState && AuthState.LoginOperators.length
             ? AuthState.LoginOperators.map((m, i) => (
-              <div>
-                <div style={{ margin: "auto" }} key={i}>
-                  <div className="position-relative">
-                    <input
-                      type="radio"
-                      name="radio"
-                      checked={
-                        CurrentMethod?.OperatorId == m.OperatorId ? true : false
-                      }
-                      onClick={() => UpdatePaymenthMethod(m)}
-                      id={m.OperatorName}
-                    />
-                    <label className="radio-cstm" htmlFor={m.OperatorName}>
-                      <div
+                <div>
+                  <div style={{ margin: "auto" }} key={i}>
+                    <div className="position-relative">
+                      <input
+                        type="radio"
+                        name="radio"
+                        checked={
+                          CurrentMethod?.OperatorId == m.OperatorId
+                            ? true
+                            : false
+                        }
                         onClick={() => UpdatePaymenthMethod(m)}
-                        className={` mt-3 text-center`}
-                      >
-                        <img
-                          src={m.OperatorImage}
-                          alt={m.OperatorName}
-                          className="img-fluid "
-                          width="30"
-                        />
-                        <i
-                          // className={`text-center text-muted d-block mbl-13px  ${
-                          //   CurrentMethod.OperatorId == m.OperatorId
-                          //     ? "text-white"
-                          //     : ""
-                          // }`}
-                          style={{ fontStyle: "normal" }}
-                        ></i>
-                      </div>
-                    </label>
+                        id={m.OperatorName}
+                      />
+                      <label className="radio-cstm" htmlFor={m.OperatorName}>
+                        <div
+                          onClick={() => UpdatePaymenthMethod(m)}
+                          className={` mt-3 text-center`}
+                        >
+                          <img
+                            src={m.OperatorImage}
+                            alt={m.OperatorName}
+                            className="img-fluid "
+                            width="30"
+                          />
+                          <i
+                            // className={`text-center text-muted d-block mbl-13px  ${
+                            //   CurrentMethod.OperatorId == m.OperatorId
+                            //     ? "text-white"
+                            //     : ""
+                            // }`}
+                            style={{ fontStyle: "normal" }}
+                          ></i>
+                        </div>
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              ))
             : null}
         </div>
 

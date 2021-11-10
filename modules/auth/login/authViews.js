@@ -15,7 +15,7 @@ export default function AuthViews(props) {
   const router = useRouter();
   const [bg, setBg] = useState(pslBackground);
 
-  const {  setLoader } = useContext(MainContext);
+  const { setLoader } = useContext(MainContext);
   const { AuthState } = useContext(AuthContext);
 
   function processResponse(response) {
@@ -40,7 +40,10 @@ export default function AuthViews(props) {
   function sendToForgetPin(state) {
     if (state.countryCode != "PK") {
       setLoader(true);
-      AuthService.forgetPin(state.User.MobileNo, state.User.OperatorId)
+      AuthService.forgetPin(
+        state.UserDetails.MobileNo,
+        state.UserDetails.Operator
+      )
         .then((res) => {
           setLoader(false);
           if (res && res.responseCode == 1) {
