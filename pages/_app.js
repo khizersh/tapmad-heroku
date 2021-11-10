@@ -28,6 +28,7 @@ import "../styles/game.css";
 import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
 import SignUpProvider from "../contexts/auth/SignUpContext";
+import loadable from '@loadable/component'
 
 
 const DashboardLayout = loadable(() => import("../modules/dashboard/DashboardLayout"));

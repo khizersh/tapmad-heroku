@@ -106,7 +106,7 @@ export default function SubscribeButton() {
     }
   }
   async function SubscribeUser() {
-    setLoader(true);
+    // setLoader(true);
 
     if (
       SignUpState &&
@@ -114,129 +114,130 @@ export default function SubscribeButton() {
       SignUpState.SelectedPrice?.ProductId
     ) {
       var details = handleRegisterPayload(SignUpState);
-      if (!details.MobileNo) {
-        setLoader(false);
-        return swal({
-          timer: 3000,
-          text: "Please enter mobile number",
-          icon: "error",
-          buttons: false,
-        });
-      }
-        if (details.ProductId == 1265 || details.ProductId == 1360) {
-          var status = await AuthService.checkEPLUser(details.MobileNo);
-        } else {
-          var status = await AuthService.checkUser(details.MobileNo);
-        }
+      console.log("details : ",details);
+      // if (!details.MobileNo) {
+      //   setLoader(false);
+      //   return swal({
+      //     timer: 3000,
+      //     text: "Please enter mobile number",
+      //     icon: "error",
+      //     buttons: false,
+      //   });
+      // }
+      //   if (details.ProductId == 1265 || details.ProductId == 1360) {
+      //     var status = await AuthService.checkEPLUser(details.MobileNo);
+      //   } else {
+      //     var status = await AuthService.checkUser(details.MobileNo);
+      //   }
 
-        if (SignUpState.SelectedMethod.PaymentId == 2) {
-          // for credit card specific only
+      //   if (SignUpState.SelectedMethod.PaymentId == 2) {
+      //     // for credit card specific only
 
-          if (!details.Email || !details.FullName) {
-            setLoader(false);
-            return swal({
-              timer: 3000,
-              text: "Enter all fields",
-              icon: "error",
-              buttons: false,
-            });
-          }
-          if (status.code == 0) {
-            Frames.submitCard();
-            setFormReady(true);
-            // updateApiData(status);
-            return;
-          } else {
-            swal({
-              timer: 2000,
-              text: status.message,
-              icon: "info",
-              buttons: false,
-            });
-            setLoader(false);
-            updateApiData(status);
-          }
-        } else {
-          if (!details.OperatorId) {
-            swal({
-              timer: 3000,
-              text: "Please select operator",
-              icon: "info",
-              buttons: false,
-            });
-            setLoader(false);
-          }
-          // for other payment methods
-          var data;
-          if (status.code == 0) {
-            updateApiData(status);
-            data = await AuthService.initialTransaction(details);
-            setLoader(false);
-            if (data != null) {
-              if (data.responseCode == 11) {
-                updateUserPassword(data.data.User.UserPassword);
-                swal({
-                  timer: 3000,
-                  text: "You are already subscribed user, please enter your PIN for login",
-                  icon: "info",
-                  buttons: false,
-                });
-                Cookie.setCookies("userId", data.data.User.UserId);
-                updateResponseCode(data.responseCode);
-              } else if (data.responseCode == 0) {
-                swal({
-                  title: data.message,
-                  icon: "error",
-                  timer: 3000,
-                });
-              } else if (data.responseCode == 1) {
-                swal({
-                  title: "OTP code send successfully, please enter your code!",
-                  icon: "success",
-                });
-                // setting responseCode and new user true for payment process
-                updateResponseCode(data.responseCode, true);
-              } else if (data.responseCode == 6) {
-                if (status.data.User.IsPinSet) {
-                  swal({
-                    title: data.message,
-                    icon: "success",
-                    timer: 3000,
-                  }).then((e) => {
-                    router.push("/");
-                  });
-                } else {
-                  updateResponseCode(34, true);
-                }
-              } else if (data.responseCode == 13) {
-                swal({
-                  title: data.message,
-                  icon: "error",
-                });
-              } else {
-                swal({
-                  title: data.message,
-                  icon: "error",
-                });
-              }
-            } else {
-              swal({
-                title: "Something went wrong!",
-                icon: "error",
-              });
-              setLoader(false);
-            }
-          } else {
-            swal({
-              timer: 2000,
-              text: status.message,
-              icon: "info",
-              buttons: false,
-            });
-            setLoader(false);
-            updateApiData(status);
-          }
-        }
+      //     if (!details.Email || !details.FullName) {
+      //       setLoader(false);
+      //       return swal({
+      //         timer: 3000,
+      //         text: "Enter all fields",
+      //         icon: "error",
+      //         buttons: false,
+      //       });
+      //     }
+      //     if (status.code == 0) {
+      //       Frames.submitCard();
+      //       setFormReady(true);
+      //       // updateApiData(status);
+      //       return;
+      //     } else {
+      //       swal({
+      //         timer: 2000,
+      //         text: status.message,
+      //         icon: "info",
+      //         buttons: false,
+      //       });
+      //       setLoader(false);
+      //       updateApiData(status);
+      //     }
+      //   } else {
+      //     if (!details.OperatorId) {
+      //       swal({
+      //         timer: 3000,
+      //         text: "Please select operator",
+      //         icon: "info",
+      //         buttons: false,
+      //       });
+      //       setLoader(false);
+      //     }
+      //     // for other payment methods
+      //     var data;
+      //     if (status.code == 0) {
+      //       updateApiData(status);
+      //       data = await AuthService.initialTransaction(details);
+      //       setLoader(false);
+      //       if (data != null) {
+      //         if (data.responseCode == 11) {
+      //           updateUserPassword(data.data.User.UserPassword);
+      //           swal({
+      //             timer: 3000,
+      //             text: "You are already subscribed user, please enter your PIN for login",
+      //             icon: "info",
+      //             buttons: false,
+      //           });
+      //           Cookie.setCookies("userId", data.data.User.UserId);
+      //           updateResponseCode(data.responseCode);
+      //         } else if (data.responseCode == 0) {
+      //           swal({
+      //             title: data.message,
+      //             icon: "error",
+      //             timer: 3000,
+      //           });
+      //         } else if (data.responseCode == 1) {
+      //           swal({
+      //             title: "OTP code send successfully, please enter your code!",
+      //             icon: "success",
+      //           });
+      //           // setting responseCode and new user true for payment process
+      //           updateResponseCode(data.responseCode, true);
+      //         } else if (data.responseCode == 6) {
+      //           if (status.data.User.IsPinSet) {
+      //             swal({
+      //               title: data.message,
+      //               icon: "success",
+      //               timer: 3000,
+      //             }).then((e) => {
+      //               router.push("/");
+      //             });
+      //           } else {
+      //             updateResponseCode(34, true);
+      //           }
+      //         } else if (data.responseCode == 13) {
+      //           swal({
+      //             title: data.message,
+      //             icon: "error",
+      //           });
+      //         } else {
+      //           swal({
+      //             title: data.message,
+      //             icon: "error",
+      //           });
+      //         }
+      //       } else {
+      //         swal({
+      //           title: "Something went wrong!",
+      //           icon: "error",
+      //         });
+      //         setLoader(false);
+      //       }
+      //     } else {
+      //       swal({
+      //         timer: 2000,
+      //         text: status.message,
+      //         icon: "info",
+      //         buttons: false,
+      //       });
+      //       setLoader(false);
+      //       updateApiData(status);
+      //     }
+      //   }
     }
   }
 

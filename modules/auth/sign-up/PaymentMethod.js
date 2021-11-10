@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
-import { UPDATE_PAYMENT_METHOD } from "../../../contexts/auth/SignUpReducer";
+import { UPDATE_PAYMENT_METHOD, UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethod() {
@@ -10,6 +10,7 @@ export default function PaymentMethod() {
 
   function UpdatePaymenthMethod(paymentMethod) {
     dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod });
+    dispatch({ type: UPDATE_USER_DETAILS, data: {Operator : paymentMethod.PaymentOperatorId } });
   }
   useEffect(() => {
     if (SignUpState.SelectedPrice.PaymentMethods) {

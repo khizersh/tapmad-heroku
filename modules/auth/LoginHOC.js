@@ -5,10 +5,9 @@ import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { encryptWithAES } from "../../services/utils";
-// import dynamic from "next/dynamic";
 import swal from "sweetalert";
-import { GameContext } from "../../contexts/GameContext";
-// const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
+import { setCookiesForLogin } from "./sign-up/authHelper";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 export default function withLogin(Component, data) {
   return (props) => {

@@ -114,7 +114,7 @@ function SetUserPin({ login, ip }) {
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
       <div className="custom-bg">
         <h3 className="component-title mb-5">Set Your New PIN</h3>
-        {true ? (
+        {showUsername ? (
           <div className="form-group text-grey">
             <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
             <input
