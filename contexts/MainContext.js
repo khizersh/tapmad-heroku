@@ -8,7 +8,6 @@ import { EPLPaymentUrl, PaymentPackages } from "../services/apilinks";
 export const MainContext = React.createContext(null);
 
 function reducer(state, action) {
-
   switch (action.type) {
     case "UPDATE_OPERATOR":
       return { ...state, User: { ...state.User, OperatorId: action.data } };
@@ -60,19 +59,15 @@ export default function MainProvider({ children }) {
   });
   useEffect(async () => {
     try {
-      var operators = await get(
-        PaymentPackages
-      );
+      var operators = await get(PaymentPackages);
       dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
       checkUserAuthentication();
       const country = await AuthService.getGeoInfo();
       updateCountryCode(country.countryCode);
-      updatePaymentPackage(operators?.data?.PaymentPackages[0]); 
+      updatePaymentPackage(operators?.data?.PaymentPackages[0]);
     } catch (error) {
       console.log(error);
     }
-   
-
   }, []);
 
   function updateCountryCode(code) {
@@ -137,7 +132,7 @@ export default function MainProvider({ children }) {
   }
   // will remove after epl
   function renderSignUp(bool) {
-    dispatch({ type: "SIGN_UP_LOADED", data: bool })
+    dispatch({ type: "SIGN_UP_LOADED", data: bool });
   }
   let data = {
     initialState,
@@ -154,7 +149,7 @@ export default function MainProvider({ children }) {
     getCountryCode,
     updateCountryCode,
     updatePaymentPackage,
-    renderSignUp // will remove after epl
+    renderSignUp, // will remove after epl
   };
   return <MainContext.Provider value={data}>{children}</MainContext.Provider>;
 }
