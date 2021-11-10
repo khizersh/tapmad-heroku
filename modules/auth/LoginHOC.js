@@ -72,7 +72,7 @@ export default function withLogin(Component, data) {
         var loginResp = loginUser(ip);
         loginResp.then((e) => {
           if (e != null && e.responseCode == 401) {
-            forgetPin(initialState);
+            forgetPin(SignUpState);
             setLoader(false);
           }
         });

@@ -15,7 +15,7 @@ export default function AuthViews(props) {
   const router = useRouter();
   const [bg, setBg] = useState(pslBackground);
 
-  const {  setLoader } = useContext(MainContext);
+  const {  setLoader , initialState} = useContext(MainContext);
   const { AuthState } = useContext(AuthContext);
 
   function processResponse(response) {
@@ -37,10 +37,11 @@ export default function AuthViews(props) {
     }
   }
 
-  function sendToForgetPin(state) {
-    if (state.countryCode != "PK") {
-      setLoader(true);
-      AuthService.forgetPin(state.User.MobileNo, state.User.OperatorId)
+  async function sendToForgetPin(state) {
+    setLoader(true);
+    const country = await AuthService.getGeoInfo();
+    if (country.countryCode != "PK") {
+      AuthService.forgetPin(state.UserDetails.MobileNo, state.UserDetails.Operator)
         .then((res) => {
           setLoader(false);
           if (res && res.responseCode == 1) {
@@ -59,6 +60,7 @@ export default function AuthViews(props) {
         })
         .catch((e) => setLoader(false));
     } else {
+      setLoader(false);
       setViewToShow("forget-pin");
     }
   }
@@ -67,7 +69,7 @@ export default function AuthViews(props) {
     if (viewToShow == "enter-pin") {
       return <EnhancedEnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
-      if (AuthState.CountryCode == "PK") {
+      if (AuthState.CountryCode == "+92") {
         return <ForgetPin updateView={setViewToShow} />;
       } else {
         return (

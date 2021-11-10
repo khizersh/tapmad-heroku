@@ -15,7 +15,6 @@ import DropdownWithImage from "../sign-up/DropdownWithImage";
 
 function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   const {
-    initialState,
     setLoader,
   } = React.useContext(MainContext);
   const { AuthState } = React.useContext(AuthContext);
@@ -100,18 +99,9 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
 
   const forgetClick = () => {
     if (mobileNo.length > 4) {
-      forgetPin(initialState);
+      forgetPin(SignUpState);
     }
   };
-
-  // const onChangeNetwork = useCallback(
-  //   (data) => {
-  //     updateUserOperator(data.OperatorId);
-  //   },
-  //   [updateUserOperator]
-  // );
-
-  // const operators = useMemo(() => AuthState?.LoginOperators);
 
   const UpdatePaymenthMethod = (operator) => {
     setCurrentMethod(operator);

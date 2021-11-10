@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import swal from "sweetalert";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { MainContext } from "../../../contexts/MainContext";
-import { loggingTags, sendOTP, verifyOtp } from "../../../services/apilinks";
-import { post, actionsRequestContent } from "../../../services/http-service";
-import { tapmadLogo } from "../../../services/imagesLink";
+import { sendOTP } from "../../../services/apilinks";
+import { post } from "../../../services/http-service";
 import { AuthService } from "../auth.service";
 
 export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
-  const { initialState, setLoader, getCountryCode } =
-    React.useContext(MainContext);
+  const { setLoader } = React.useContext(MainContext);
   const { SignUpState } = React.useContext(SignUpContext);
 
   React.useEffect(async () => {
