@@ -15,9 +15,8 @@ import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer"
 
 export default function SubscribeButton() {
   const router = useRouter();
-  const { setLoader, updateUserPassword } = useContext(MainContext);
+  const { setLoader } = useContext(MainContext);
   const { SignUpState , dispatch } = useContext(SignUpContext);
-  const { updateResponseCode } = useContext(Authcontext);
   const [formReady, setFormReady] = useState(false);
   const [open, setOpen] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
@@ -112,14 +111,12 @@ export default function SubscribeButton() {
   }
   async function SubscribeUser() {
     setLoader(true);
-
     if (
       SignUpState &&
       SignUpState.SelectedMethod &&
       SignUpState.SelectedPrice?.ProductId
     ) {
       var details = handleRegisterPayload(SignUpState);
-      console.log("details : ",details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
@@ -159,16 +156,13 @@ export default function SubscribeButton() {
           setLoader(false);
           if (data != null) {
             if (data.responseCode == 11) {
-              // updateUserPassword(data.data.User.UserPassword);
               swal({ timer: 3000,text: "You are already subscribed user, please enter your PIN for login",icon: "info",buttons: false,});
               Cookie.setCookies("userId", data.data.User.UserId);
-              // updateResponseCode(data.responseCode);
               dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : data.responseCode , newUser : false}})
             } else if (data.responseCode == 0) {
               swal({  title: data.message, icon: "error", timer: 3000, });
             } else if (data.responseCode == 1) {  // setting responseCode and new user true for payment process
               swal({ title: "OTP code send successfully, please enter your code!",  icon: "success", });    
-              // updateResponseCode(data.responseCode, true); 
               dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : data.responseCode , newUser : true}})
             } else if (data.responseCode == 6) {
               if (status.data.User.IsPinSet) {
@@ -178,7 +172,6 @@ export default function SubscribeButton() {
                 });
               } else {
                 dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : 34 , newUser : true}})
-                // updateResponseCode(34, true);
               }
             } else if (data.responseCode == 13) {
               swal({ title: data.message,icon: "error",});

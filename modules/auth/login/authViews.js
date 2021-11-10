@@ -15,7 +15,7 @@ export default function AuthViews(props) {
   const router = useRouter();
   const [bg, setBg] = useState(pslBackground);
 
-  const { initialState, setLoader } = useContext(MainContext);
+  const {  setLoader } = useContext(MainContext);
   const { AuthState } = useContext(AuthContext);
 
   function processResponse(response) {
@@ -67,7 +67,7 @@ export default function AuthViews(props) {
     if (viewToShow == "enter-pin") {
       return <EnhancedEnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
-      if (initialState.countryCode == "PK") {
+      if (AuthState.CountryCode == "PK") {
         return <ForgetPin updateView={setViewToShow} />;
       } else {
         return (

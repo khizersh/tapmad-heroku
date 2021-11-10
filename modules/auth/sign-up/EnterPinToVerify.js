@@ -1,29 +1,16 @@
 import React, { useContext, useRef } from "react";
 import { MainContext } from "../../../contexts/MainContext";
-import { Cookie } from "../../../services/cookies";
-import { actionsRequestContent } from "../../../services/http-service";
-import {
-  loggingTags,
-  sendOTP,
-  verifyUserPinCode,
-} from "../../../services/apilinks";
 import swal from "sweetalert";
-import { Authcontext } from "../../../contexts/AuthContext";
-import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 
 const EnterPinToVerifyUser = ({ login }) => {
-  const router = useRouter();
-  const { checkUserAuthentication, setLoader, initialState } = useContext(
-    MainContext
-  );
-  const { updateResponseCode } = useContext(Authcontext);
-  const { SignUpState } = useContext(SignUpContext);
+  const { setLoader } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const pinCode = useRef("");
-
-
+  
   async function forgetPin() {
     setLoader(true);
     let mobileNo = SignUpState.UserDetails?.MobileNo,
@@ -31,7 +18,10 @@ const EnterPinToVerifyUser = ({ login }) => {
     const data = await AuthService.forgetPin(mobileNo, opId);
     if (data != null) {
       if (data.responseCode == 1) {
-        updateResponseCode(data.responseCode);
+        dispatch({
+          type: UPDATE_SUBSCRIBE_RESPONSE,
+          data: { code: data.responseCode, newUser: false },
+        });
       } else {
         swal({
           timer: 3000,
@@ -62,7 +52,7 @@ const EnterPinToVerifyUser = ({ login }) => {
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
               forgetPin()
-                .then((re) => { })
+                .then((re) => {})
                 .catch((e) => console.log(e));
             }
           });
@@ -111,7 +101,7 @@ const EnterPinToVerifyUser = ({ login }) => {
           <button
             type="button"
             className="btn btn-primary pymnt_pge_sbscrbe_btn"
-            style={{width:'50%'}}
+            style={{ width: "50%" }}
             onClick={verifyPinCode}
           >
             Verify PIN

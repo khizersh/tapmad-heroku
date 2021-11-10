@@ -1,21 +1,17 @@
 import React, { useContext, useEffect } from "react";
-import { loggingTags, verifyOtp } from "../../../services/apilinks";
 import { MainContext } from "../../../contexts/MainContext";
-import { Authcontext } from "../../../contexts/AuthContext";
 import { useRef } from "react";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { Cookie } from "../../../services/cookies";
-import { useRouter } from "next/router";
 import { SignUpTag } from "../../../services/gtm";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 
 const VerifyOTP = ({ newUser }) => {
   const {  setLoader } = useContext(MainContext);
-  const { SignUpState } = useContext(SignUpContext);
-  const {  updateResponseCode } = useContext(Authcontext);
+  const { SignUpState , dispatch } = useContext(SignUpContext);
   const otp = useRef("");
-  const router = useRouter();
 
   async function verifyOTPPinCode() {
     if (SignUpState && SignUpState.UserDetails) {
@@ -69,7 +65,7 @@ const VerifyOTP = ({ newUser }) => {
           });
           setLoader(false);
         } else if (data.responseCode == 1) {
-          AuthService.clearUserToken(SignUpState.UserDetails.MobileNo).then((e) => {
+          AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then((e) => {
             swal({
               timer: 2500,
               title: data.message,
@@ -78,7 +74,7 @@ const VerifyOTP = ({ newUser }) => {
               if (newUser) {
                 Cookie.setCookies("userId", data.data.User.UserId);
               }
-              updateResponseCode(34);
+              dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code : 34 , newUser : newUser} })
               setLoader(false);
             });
           });
