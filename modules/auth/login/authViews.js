@@ -52,6 +52,7 @@ export default function AuthViews(props) {
               icon: "success",
               timer: 2500,
             });
+            setViewToShow("forget-pin");
           } else {
             swal({
               title: res.message,
