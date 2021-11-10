@@ -19,6 +19,7 @@ import {
   getSEOData,
   getSEODataForLiveChannel,
 } from "../../services/seo.service";
+import isGoogle from "../../services/google-dns-lookup";
 
 const watch = (props) => {
   const router = useRouter();
@@ -137,6 +138,14 @@ export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
+  }
+  try {
+    const isGoogleDNS = await isGoogle(ip);
+    if (isGoogleDNS == true) {
+      ip = "39.44.217.70";
+    }
+  } catch (err) {
+    console.log(err);
   }
   let allowUser = true;
   let body = {
