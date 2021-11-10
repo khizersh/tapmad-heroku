@@ -10,7 +10,9 @@ export default function SignUpProvider({ children }) {
         SelectedPackage: {},
         SelectedPrice: {},
         SelectedMethod: {},
-        UserDetails: {}
+        UserDetails: {},
+        subscribeResponseCode: null,
+        newUser: false,
     });
 
     useEffect(() => {

@@ -8,22 +8,25 @@ import SetYourNewPin from "./sign-up/SetYourNewPin";
 import { useRouter } from "next/router";
 import { MainContext } from "../../contexts/MainContext";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
+import {
+  UPDATE_SUBSCRIBE_RESPONSE,
+  UPDATE_USER_DETAILS,
+} from "../../contexts/auth/SignUpReducer";
 
 export default memo(function Register(props) {
   const router = useRouter();
   const { code, number, payment, subspack } = router.query;
   const { authState, updateResponseCode, updateSelectedPaymentMethod } =
     useContext(Authcontext);
-    
-  const { updateUserNumber, initialState } = useContext(MainContext);
-  const { SignUpState } = useContext(SignUpContext);
+  const { updateUserNumber } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const RenderViews = useCallback(
     function () {
-      var respCode = code || authState.subscribeResponseCode;
+      var respCode = code || SignUpState.subscribeResponseCode;
       if (respCode == 1) {
         return (
           <>
-            <VerifyOTP newUser={authState.newUser ? true : false} />
+            <VerifyOTP newUser={SignUpState.newUser ? true : false} />
           </>
         );
       } else if (!respCode) {
@@ -43,48 +46,48 @@ export default memo(function Register(props) {
         );
       }
     },
-    [authState.subscribeResponseCode]
+    [SignUpState.subscribeResponseCode]
   );
 
   useEffect(() => {
-    updateResponseCode(code);
-    updateUserNumber(number);
+    // updateResponseCode(code);
+    // updateUserNumber(number);
+    dispatch({ type: UPDATE_USER_DETAILS, data: { Mobile: number } });
+    dispatch({ type: UPDATE_SUBSCRIBE_RESPONSE, data: { code: code , newUser : false} });
   }, [code, number]);
 
   useEffect(() => {
     var selectedPayment = payment;
-    if (authState?.paymentMethods?.length > 1) {
-      if (selectedPayment == "credit") {
-        document.getElementsByClassName("Credit/Debit Card")[0].click();
-        return (
-          <>
-            <SignUpComponent />
-          </>
-        );
-      } else if (selectedPayment == "dcb") {
-        document.getElementsByClassName("Sim Card")[0].click();
-        return (
-          <>
-            <SignUpComponent />
-          </>
-        );
-      } else if (selectedPayment == "easypaisa") {
-        document.getElementsByClassName("Easypaisa")[0].click();
-        return (
-          <>
-            <SignUpComponent />
-          </>
-        );
-      } else if (selectedPayment == "jazzcash") {
-        document.getElementsByClassName("JazzCash")[0].click();
-        return (
-          <>
-            <SignUpComponent />
-          </>
-        );
-      }
+    if (selectedPayment == "credit") {
+      document.getElementsByClassName("Credit/Debit Card")[0]?.click();
+      return (
+        <>
+          <SignUpComponent />
+        </>
+      );
+    } else if (selectedPayment == "dcb") {
+      document.getElementsByClassName("Sim Card")[0]?.click();
+      return (
+        <>
+          <SignUpComponent />
+        </>
+      );
+    } else if (selectedPayment == "easypaisa") {
+      document.getElementsByClassName("Easypaisa")[0]?.click();
+      return (
+        <>
+          <SignUpComponent />
+        </>
+      );
+    } else if (selectedPayment == "jazzcash") {
+      document.getElementsByClassName("JazzCash")[0]?.click();
+      return (
+        <>
+          <SignUpComponent />
+        </>
+      );
     }
-  }, [authState.paymentMethods]);
+  }, [SignUpState.SelectedPrice]);
 
   return (
     <div>

@@ -5,7 +5,6 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic , logo }) => {
   const [num, setNum] = React.useState("");
   const [cnic, setCnic] = React.useState("");
 
-  console.log("main live branch")
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
