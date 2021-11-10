@@ -38,7 +38,7 @@ export default function AuthViews(props) {
   }
 
   function sendToForgetPin(state) {
-    if (state.countryCode != "PK") {
+    if (AuthState.countryCode != "+92") {
       setLoader(true);
       AuthService.forgetPin(
         state.UserDetails.MobileNo,
@@ -52,7 +52,6 @@ export default function AuthViews(props) {
               icon: "success",
               timer: 2500,
             });
-            // setViewToShow("forget-pin");
           } else {
             swal({
               title: res.message,
@@ -71,7 +70,7 @@ export default function AuthViews(props) {
     if (viewToShow == "enter-pin") {
       return <EnhancedEnterPin forgetPin={sendToForgetPin} />;
     } else if (viewToShow == "forget-pin") {
-      if (AuthState.CountryCode == "PK") {
+      if (AuthState.CountryCode == "+92") {
         return <ForgetPin updateView={setViewToShow} />;
       } else {
         return (
