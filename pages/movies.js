@@ -3,6 +3,7 @@ import Movies from "../modules/movies/components/movies";
 import { getMoviesWithPaginationInitial } from "../services/apilinks";
 import { get } from "../services/http-service";
 import requestIp from "request-ip";
+import isGoogle from "../services/google-dns-lookup";
 export default function MoviesPage(props) {
   return (
     <div>
@@ -26,6 +27,14 @@ export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
+  }
+  try {
+    const isGoogleDNS = await isGoogle(ip);
+    if (isGoogleDNS == true) {
+      ip = "39.44.217.70";
+    }
+  } catch (err) {
+    console.log(err);
   }
   var moviesList = await get(getMoviesWithPaginationInitial, ip);
   var movies = await moviesList.data;

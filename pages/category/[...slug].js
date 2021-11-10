@@ -34,6 +34,8 @@ const Category = (props) => {
     <>
       <Head>
         <title>{props.schema.metaData[0].title}</title>
+        <meta name="description" content={props.schema.metaData[0].description} />
+        <meta property="title" content={props.schema.metaData[0].title} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={props.schema.metaData[0].title} />
         <meta property="og:description" content={props.schema.metaData[0].description} />
@@ -41,7 +43,7 @@ const Category = (props) => {
         <meta property="og:url" content={props.schema.url} />
         <meta name="description" content={props.schema.metaData[0].description} />
         <link rel="canonical" href={props.schema.url} />
-
+        <meta name="robots" content="noindex" />
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema.Channels ? props.schema.Channels[0] : props.schema.Vod[0]) }}
