@@ -4,16 +4,15 @@ import { useRouter } from "next/router";
 import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
-import { encryptWithAES } from "../../services/utils";
 import swal from "sweetalert";
 import { setCookiesForLogin } from "./sign-up/authHelper";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const { checkUserAuthentication, setLoader, initialState } =
+    const { checkUserAuthentication, setLoader } =
       useContext(MainContext);
-    const { SignUpState } = useContext(SignUpContext);
+    const { SignUpState} = useContext(SignUpContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
@@ -24,25 +23,21 @@ export default function withLogin(Component, data) {
         Version: "V1",
         MobileNo: SignUpState.UserDetails.MobileNo,
         OperatorId: SignUpState.UserDetails.Operator,
-        UserPassword: Cookie.getCookies("content-token"),
+        UserPin: SignUpState.UserDetails.UserPin || "1111",
       };
-      let response = await AuthService.signInOrSignUpMobileOperator(
-        obj,
-        userIp,
-        false
-      );
+      let response = await AuthService.signInOrSignUpMobileOperatorByPin(obj , userIp);
       try {
-        if (response && response.data && response.data.UserId) {
+        if (response?.data?.User?.UserId) {
           swal({
             timer: 2000,
             title: "Signed In Successfully",
             text: "Redirecting you...",
             icon: "success",
           });
-          setCookiesForLogin(response);
-          LoginTag(obj, response.response);
+          setCookiesForLogin(response.data);
+          LoginTag(obj, response.data);
           setLoader(false);
-          Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
+          Cookie.setCookies("user_mob", obj.MobileNo);
           checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
           if (backURL == "sign-in") {

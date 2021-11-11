@@ -50,8 +50,6 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
-    // updateResponseCode(code);
-    // updateUserNumber(number);
     dispatch({ type: UPDATE_USER_DETAILS, data: { Mobile: number } });
     dispatch({ type: UPDATE_SUBSCRIBE_RESPONSE, data: { code: code , newUser : false} });
   }, [code, number]);
