@@ -5,7 +5,6 @@ import UserStatus from "../modules/my-account/UserStatus";
 import { Cookie } from "../services/cookies";
 
 const MyAccount = () => {
-
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [formData, setFormData] = useState({
     Version: "V1",
@@ -30,6 +29,7 @@ const MyAccount = () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData(formData);
+      console.log(data, "DATA----");
       if (data != null) {
         if (data.responseCode == 1) {
           setAllData(data.data);
@@ -67,7 +67,7 @@ export function getStaticProps() {
   return {
     props: {
       protected: true,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }

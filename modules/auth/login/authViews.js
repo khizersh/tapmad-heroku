@@ -9,6 +9,7 @@ import EnhancedCombineLogin from "./combineLogin";
 import { pslBackground, signinBackground } from "../../../services/imagesLink";
 import { MainContext } from "../../../contexts/MainContext";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { initialState } from "../../../contexts/MainContext";
 
 export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
