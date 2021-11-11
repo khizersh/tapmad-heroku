@@ -16,7 +16,7 @@ export default function AuthViews(props) {
   const router = useRouter();
   const [bg, setBg] = useState(pslBackground);
 
-  const { setLoader } = useContext(MainContext);
+  const {  setLoader , initialState} = useContext(MainContext);
   const { AuthState } = useContext(AuthContext);
 
   function processResponse(response) {
@@ -38,13 +38,11 @@ export default function AuthViews(props) {
     }
   }
 
-  function sendToForgetPin(state) {
-    if (AuthState.countryCode != "+92") {
-      setLoader(true);
-      AuthService.forgetPin(
-        state.UserDetails.MobileNo,
-        state.UserDetails.Operator
-      )
+  async function sendToForgetPin(state) {
+    setLoader(true);
+    const country = await AuthService.getGeoInfo();
+    if (country.countryCode != "PK") {
+      AuthService.forgetPin(state.UserDetails.MobileNo, state.UserDetails.Operator)
         .then((res) => {
           setLoader(false);
           if (res && res.responseCode == 1) {
@@ -63,6 +61,7 @@ export default function AuthViews(props) {
         })
         .catch((e) => setLoader(false));
     } else {
+      setLoader(false);
       setViewToShow("forget-pin");
     }
   }
@@ -117,9 +116,8 @@ export default function AuthViews(props) {
         <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-5">
-              <div className="tm_login_pg ">
+              <div className="tm_login_pg">
                 <RenderViews />
-                {/* <SetPin /> */}
               </div>
             </div>
           </div>
