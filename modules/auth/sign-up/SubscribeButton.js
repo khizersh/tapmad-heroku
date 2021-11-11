@@ -117,6 +117,7 @@ export default function SubscribeButton() {
       SignUpState.SelectedPrice?.ProductId
     ) {
       var details = handleRegisterPayload(SignUpState);
+      console.log("details : ",details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({

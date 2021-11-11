@@ -14,6 +14,7 @@ import {
   getAllowRegions,
   getEPLCardUser,
   UBLCard,
+  SignUpORSignInMobileOperatorTokenByPin,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -368,6 +369,27 @@ async function GetEPLCardUser(body) {
     return null;
   }
 }
+async function signInOrSignUpMobileOperatorByPin(body , ip) {
+  const resp = await post(SignUpORSignInMobileOperatorTokenByPin, body , ip);
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 async function getAllowRegionsList(body) {
   const data = await get(getAllowRegions);
 
@@ -408,15 +430,8 @@ function validateUser(data) {
 }
 
 async function loginUserFetchApi(body) {
-  let options = {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      "X-Forwarded-For": body.userIp ? body.userIp : "",
-    },
-  };
-  const resp = await post(SignUpORSignInMobileOperatorToken, body, body.userIp);
+  // SignUpORSignInMobileOperatorToken
+  const resp = await post(SignUpORSignInMobileOperatorTokenByPin, body, body.userIp);
 
   if (resp.data && resp.data.Response) {
     return resp.data;
@@ -431,13 +446,15 @@ async function signInOrSignUpMobileOperator(
   withMultiCredentials
 ) {
   let obj = { ...body, userIp: ip };
-  const resp = await post("/api/authentication", obj, ip, withMultiCredentials);
+  const resp = await post(SignUpORSignInMobileOperatorTokenByPin, obj, ip, withMultiCredentials);
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);
   }
   return data;
 }
+
+
 async function clearUserToken(number) {
   const response = await get(
     `https://app.tapmad.com/api/ClearAllCache/T${number}`
@@ -545,5 +562,6 @@ export const AuthService = {
   checkUser,
   clearUserToken,
   getAllowRegionsList,
-  checkEPLUser
+  checkEPLUser,
+  signInOrSignUpMobileOperatorByPin
 };

@@ -13,10 +13,8 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
 
-function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
-  const {
-    setLoader,
-  } = React.useContext(MainContext);
+function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
+  const { setLoader } = React.useContext(MainContext);
   const { AuthState } = React.useContext(AuthContext);
   const { SignUpState, dispatch } = React.useContext(SignUpContext);
   const [mobileNo, setMobileNo] = React.useState("");
@@ -50,7 +48,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
   useEffect(() => {
     if (viewsToRender) {
       if (SignUpState.UserDetails.MobileNo) {
-        verifyPin(ip, pin, forgetPin);
+        login(ip);
       }
     }
   }, [SignUpState, viewsToRender == true]);
@@ -67,7 +65,11 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
       };
       dispatch({
         type: UPDATE_USER_DETAILS,
-        data: { MobileNo: mobileNo, Operator: CurrentMethod.OperatorId },
+        data: {
+          MobileNo: mobileNo,
+          Operator: CurrentMethod.OperatorId,
+          UserPin: pin,
+        },
       });
       const data = await AuthService.GetCardUser(body);
       if (data != null) {
