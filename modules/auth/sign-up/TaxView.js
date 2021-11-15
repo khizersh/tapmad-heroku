@@ -6,16 +6,37 @@ export default function TaxView({ onChange }) {
   const { dispatch, SignUpState } = useContext(SignUpContext);
   const [PackagePrice, setPackagePrice] = useState([]);
   const [SelectedPrice, setSelectedPrice] = useState({});
+  const [lines, setLines] = useState({
+    firstLine : "",
+    secondLine : ""
+  });
 
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+      // setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
       setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
+      let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
+       console.log(m.PackageName.split(" "));
+       let finalArray = [];
+       let pkgArray = m.PackageName.split(" ");  
+       finalArray.push(pkgArray[0])
+       if(pkgArray.length > 1){
+        finalArray.push(pkgArray.slice(1).join(" ")) 
+       }  
+       return {
+        ...m,
+        PackageNameArray : finalArray
+       }
+      })
+      console.log("finalArray: ",array); 
+
       dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
     }
   }, [SignUpState.SelectedPackage]);
 
   useEffect(() => {
     if (SignUpState.SelectedPrice.PackageId) {
+      console.log("SelectedPrice : ",SelectedPrice);
       setSelectedPrice(SignUpState.SelectedPrice);
     }
   }, [SignUpState.SelectedPrice])
@@ -38,8 +59,10 @@ export default function TaxView({ onChange }) {
                 onClick={() =>
                   onChangePackage(m)
                 }>
-
-                <span className="font-weight-bold">{m.PackageName}</span>
+                {m.PackageNameArray?.length > 1 ?  m.PackageNameArray.map((pkg,ind) => <>
+                  <span className="">{m.PackageNameArray[0]}</span>
+                <span className="font-weight-bold">{m.PackageNameArray[1]}</span>
+                </>) :  <span className="font-weight-bold">{m.PackageName}</span> }               
                 <div className="d-flex justify-content-center">
                   <div className="text-white per-month mt-2">
                   {m.PackagePrices[0]}

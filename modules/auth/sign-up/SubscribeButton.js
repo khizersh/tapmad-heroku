@@ -28,10 +28,8 @@ export default function SubscribeButton() {
     });
   }, [formReady]);
 
-  function updateApiData(status) {
-    dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : status.code , newUser : false}})
-    // updateUserPassword(status.data.User.UserPassword);
-    // updateResponseCode(status.code);
+  function updateApiData(code , newUser = false) {
+    dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : code , newUser : newUser}})
   }
   async function submitCardDetails(event) {
     var detailsdetails = handleBody();
@@ -110,14 +108,9 @@ export default function SubscribeButton() {
     }
   }
   async function SubscribeUser() {
-    setLoader(true);
-    if (
-      SignUpState &&
-      SignUpState.SelectedMethod &&
-      SignUpState.SelectedPrice?.ProductId
-    ) {
+    // setLoader(true);
+    if ( SignUpState?.SelectedPrice?.ProductId) {
       var details = handleRegisterPayload(SignUpState);
-      console.log("details : ",details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
@@ -127,67 +120,55 @@ export default function SubscribeButton() {
           buttons: false,
         });
       }
-      var status = null;
-      status = await AuthService.checkUser(details.MobileNo);
       if (SignUpState.SelectedMethod.PaymentId == 2) {
         // for credit card specific only
         if (!details.Email || !details.FullName) {
           setLoader(false);
           return swal({timer: 3000,text: "Enter all fields",icon: "error", buttons: false, });
         }
-        if (status.code == 0) {
-          Frames.submitCard();
-          setFormReady(true);
-          // updateApiData(status);
-          return;
-        } else {
-          swal({timer: 2000 , text : status.message, icon: "info",buttons: false, });
-          setLoader(false);
-          updateApiData(status);
-        }
+        Frames.submitCard();
+        setFormReady(true);
+       
       } else { // for other payment methods
         if (!details.OperatorId) {
           setLoader(false);
           return  swal({ timer: 3000, text: "Please select operator", icon: "info",buttons: false, });
         }
-        var data; 
-        if (status.code == 0) {
-          updateApiData(status);
-          data = await AuthService.initialTransaction(details);
+      
+         var data = await AuthService.initialTransaction(details);
           setLoader(false);
           if (data != null) {
-            if (data.responseCode == 11) {
-              swal({ timer: 3000,text: "You are already subscribed user, please enter your PIN for login",icon: "info",buttons: false,});
-              Cookie.setCookies("userId", data.data.User.UserId);
-              dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : data.responseCode , newUser : false}})
-            } else if (data.responseCode == 0) {
+            if (data.responseCode == 0) {
               swal({  title: data.message, icon: "error", timer: 3000, });
-            } else if (data.responseCode == 1) {  // setting responseCode and new user true for payment process
+            }
+            else if (data.responseCode == 11) { //user already subscribed checking PIN SET 
+              console.log("data in already : ",data);
+                 if(data.data.User.IsPinSet){
+                   swal({ timer: 3000,title: "You are already subscribed!" , text : "Enter your PIN for login",icon: "info",buttons: false,});
+                   Cookie.setCookies("userId", data.data.User.UserId);
+                   dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : 11 , newUser : false }})
+                 }else{
+                  swal({ timer: 3000, title: "You are already subscribed!" , text: "Set your PIN for login" , icon: "info"});
+                  dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : 34 , newUser : false}})
+                 }
+            } 
+            else if (data.responseCode == 1) {  // setting responseCode and new user true for payment process
               swal({ title: "OTP code send successfully, please enter your code!",  icon: "success", });    
               dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : data.responseCode , newUser : true}})
-            } else if (data.responseCode == 6) {
-              if (status.data.User.IsPinSet) {
+            } 
+            else if (data.responseCode == 6) {
                 swal({ title: data.message, icon: "success",  timer: 3000})
                 .then((e) => {
                   router.push("/");
                 });
-              } else {
-                dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : 34 , newUser : true}})
-              }
-            } else if (data.responseCode == 13) {
-              swal({ title: data.message,icon: "error",});
-            } else {
+            } 
+            else {
               swal({title: data.message, icon: "error" });
             }
           } else {
             swal({title: "Something went wrong!", icon: "error", });
             setLoader(false);
           }
-        } else {
-          swal({  timer: 2000, text: status.message,icon: "info",buttons: false, });
-          setLoader(false);
-          updateApiData(status);
-        }
       }
     }
   }

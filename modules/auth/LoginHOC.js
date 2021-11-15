@@ -7,15 +7,19 @@ import { MainContext } from "../../contexts/MainContext";
 import swal from "sweetalert";
 import { setCookiesForLogin } from "./sign-up/authHelper";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { setLoginViews } from "../../services/auth.service";
+import { SET_VIEW_TO_SHOW } from "../../contexts/auth/AuthReducers";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const { checkUserAuthentication, setLoader } =
-      useContext(MainContext);
-    const { SignUpState} = useContext(SignUpContext);
+    const { checkUserAuthentication, setLoader } = useContext(MainContext);
+    const { SignUpState } = useContext(SignUpContext);
+    const { AuthState, dispatch } = useContext(AuthContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
+      console.log("SignUpState : ",SignUpState);
       setLoader(true);
       let obj = {
         Language: "en",
@@ -23,43 +27,50 @@ export default function withLogin(Component, data) {
         Version: "V1",
         MobileNo: SignUpState.UserDetails.MobileNo,
         OperatorId: SignUpState.UserDetails.Operator,
-        UserPin: SignUpState.UserDetails.UserPin || "1111",
+        UserPin: SignUpState.UserDetails.UserPin || Cookie.getCookies('userPin'),
       };
-      let response = await AuthService.signInOrSignUpMobileOperatorByPin(obj , userIp);
+      const response = await AuthService.signInOrSignUpMobileOperatorByPin(
+        obj,
+        userIp
+      );
       try {
-        if (response?.data?.User?.UserId) {
+        const status = setLoginViews(response, obj);
+        setLoader(false);
+        if (status.code == 1) {
           swal({
             timer: 2000,
             title: "Signed In Successfully",
-            text: "Redirecting you...",
+            text: "Redirecting you..",
             icon: "success",
           });
-          setCookiesForLogin(response.data);
-          LoginTag(obj, response.data);
-          setLoader(false);
-          Cookie.setCookies("user_mob", obj.MobileNo);
-          checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
           if (backURL == "sign-in") {
             router.push("/");
           } else {
             router.push(backURL);
           }
-          setLoader(false);
-          return null;
-        } else {
-          setLoader(false);
+        } else if (status.code == 34) {
+          dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+        } else if (status.code == 31) {
           swal({
-            title: response.message,
+            timer: 2000,
+            title: "Please enter valid PIN!",
             icon: "error",
-            timer: 3000,
           });
-          return response;
+        } else if (status.code == 0) {
+          swal({
+            title: "You are not subscribed user. please subscribe!",
+            timer: 2500,
+            icon: "warning",
+          }).then(() => {
+            router.push("/sign-up");
+          });
         }
       } catch (err) {
         console.log(err);
       }
     }
+
     async function verifyPinCode(ip, pin, forgetPin) {
       setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);

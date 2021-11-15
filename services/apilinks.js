@@ -1,6 +1,7 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
 const BASEPAYMENTURL = "https://payments.tapmad.com/";
+
 export const EPLPaymentUrl =
   BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
 export const getAllPackages =
@@ -17,7 +18,9 @@ export const getCardUser = BASEURL + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
-export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
+// export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
+export const paymentProcess =
+  BASEPAYMENTURL + "api/processPaymentTransactionNewPackage";
 export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const UserSignUpPromoCode = BASEURL + "api/UserSignUpPromoCode";
@@ -40,6 +43,10 @@ export const creditCard = BASEURLAPP + "api/makeCheckOutPayment";
 export const UBLCard = BASEURLAPP + "api/CardUserOrder";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
+
+export const initialPaymentTransactionNew =
+  BASEPAYMENTURL + "api/initiatePaymentTransactionNewPackage";
+
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";
 export const unsubscribePaymentTransaction =
@@ -137,4 +144,4 @@ export const loggingTags = {
 // New login design apis
 
 export const PaymentPackages =
-  BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
+  BASEPAYMENTURL + "api/getPackagePaymentMethods/V1/en/android";

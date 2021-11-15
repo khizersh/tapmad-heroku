@@ -5,12 +5,13 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
+import { Cookie } from "../../../services/cookies";
 
 const EnterPinToVerifyUser = ({ login }) => {
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const pinCode = useRef("");
-  
+
   async function forgetPin() {
     setLoader(true);
     let mobileNo = SignUpState.UserDetails?.MobileNo,
@@ -42,6 +43,7 @@ const EnterPinToVerifyUser = ({ login }) => {
   }
 
   async function verifyPinCode() {
+    Cookie.setCookies("userPin", pinCode.current.value);
     if (pinCode.current.value.length == 4) {
       setLoader(true);
       const data = await AuthService.verifyPinCode(pinCode.current.value);

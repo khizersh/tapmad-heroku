@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import Router from "next/router";
 import React, { useLayoutEffect } from "react";
@@ -95,7 +94,6 @@ function MyApp({ Component, pageProps }) {
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
 
-        {/* <script src="https://cdn.checkout.com/js/framesv2.min.js"></script> */}
       </Head>
       <>
         <noscript>

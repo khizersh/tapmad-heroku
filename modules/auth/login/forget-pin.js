@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { SET_VIEW_TO_SHOW } from "../../../contexts/auth/AuthReducers";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { MainContext } from "../../../contexts/MainContext";
 import { sendOTP } from "../../../services/apilinks";
@@ -10,6 +12,7 @@ export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
   const { setLoader } = React.useContext(MainContext);
   const { SignUpState } = React.useContext(SignUpContext);
+  const {  dispatch} = React.useContext(AuthContext);
 
   React.useEffect(async () => {
     let otpBody = {
@@ -30,10 +33,10 @@ export default function ForgetPin({ updateView }) {
     if (data != null) {
       if (data.responseCode == 1) {
         AuthService.clearUserToken(body.MobileNo.substring(1)).then((e) => {
-          updateView("set-pin");
+          dispatch({type : SET_VIEW_TO_SHOW , data : "set-pin" })
           swal({
-            title: "Verified",
-            timer: 3000,
+            title: "OTP Verified",
+            timer: 2500,
             icon: "success",
           });
         });

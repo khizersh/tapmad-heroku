@@ -7,8 +7,9 @@ import { Cookie } from "../../../services/cookies";
 import { SignUpTag } from "../../../services/gtm";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
+import withLogin from "../LoginHOC";
 
-const VerifyOTP = ({ newUser }) => {
+const VerifyOTPComponent = ({ newUser , login }) => {
   const {  setLoader } = useContext(MainContext);
   const { SignUpState , dispatch } = useContext(SignUpContext);
   const otp = useRef("");
@@ -41,6 +42,7 @@ const VerifyOTP = ({ newUser }) => {
             Version: "V1",
           };
           data = await AuthService.paymentProcessTransaction(body);
+          console.log("data in process : ",data);
           SignUpTag(body, data.data);
         } catch (e) {
           swal({
@@ -72,7 +74,7 @@ const VerifyOTP = ({ newUser }) => {
               icon: "success",
             }).then((result) => {
               if (newUser) {
-                Cookie.setCookies("userId", data.data.User.UserId);
+             Cookie.setCookies("userId", data.data.User.UserId);
               }
               dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code : 34 , newUser : newUser} })
               setLoader(false);
@@ -126,4 +128,6 @@ const VerifyOTP = ({ newUser }) => {
   );
 };
 
+
+const VerifyOTP = withLogin(VerifyOTPComponent);
 export default VerifyOTP;

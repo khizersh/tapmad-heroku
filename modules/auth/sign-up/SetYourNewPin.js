@@ -7,12 +7,13 @@ import { AuthService } from "../auth.service";
 import { Authcontext } from "../../../contexts/AuthContext";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 
 function SetYourNewPinSignUp({ login, ip }) {
   const { initialState, checkUserAuthentication, setLoader } =
     useContext(MainContext);
   const { authState } = useContext(Authcontext);
-  const { SignUpState } = useContext(SignUpContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [username, setUsername] = useState("");
@@ -52,19 +53,24 @@ function SetYourNewPinSignUp({ login, ip }) {
     };
     setLoader(true);
 
-    const status = await AuthService.GetCardUser({
-      MobileNo: initialState.User.MobileNo,
+    const userStatus = await AuthService.GetCardUser({
+      MobileNo: SignUpState.UserDetails.MobileNo,
       Language: "en",
     });
 
-    if (status && status.data.User) {
-      obj.UserPassword = status.data.User.UserPassword;
-      Cookie.setCookies("userId", status.data.User.UserId);
-      Cookie.setCookies("content-token", status.data.User.UserPassword);
+    if (userStatus && userStatus.data.User) {
+      obj.UserPassword = userStatus.data.User.UserPassword;
+      Cookie.setCookies("userId", userStatus.data.User.UserId);
+      Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
     }
 
     const response = await AuthService.setNewPin(pin, username);
 
+    Cookie.setCookies("UserPin", pin);
+    dispatch({
+      type: UPDATE_USER_DETAILS,
+      data: { UserPin: pin },
+    });
     if (response != null) {
       if (response.responseCode == 0) {
         swal({
