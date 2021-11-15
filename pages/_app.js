@@ -25,27 +25,28 @@ import "../modules/search/search.css";
 import "../components/component-styles/component.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
+import "../modules/my-account/myaccounttest.css";
 import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
 import SignUpProvider from "../contexts/auth/SignUpContext";
-import loadable from '@loadable/component'
+import loadable from "@loadable/component";
 
-
-const DashboardLayout = loadable(() => import("../modules/dashboard/DashboardLayout"));
+const DashboardLayout = loadable(() =>
+  import("../modules/dashboard/DashboardLayout")
+);
 const Skeleton = loadable(() => import("../components/MainSkeleton"));
 const Header = loadable(() => import("../components/App/Header"));
 const Footer = loadable(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
-
   useLayoutEffect(() => {
     UserSessions();
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
-  }, [])
+    })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
+  }, []);
   // Hello
   return (
     <>
@@ -57,17 +58,24 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.</title>
+        <title>
+          Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.
+        </title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <meta name="description" content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com" />
+        <meta
+          name="description"
+          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
+        />
         <meta
           name="keywords"
           content="live tv channel, live tv, live sports, watch free cricket, subscribe to tapmad, live EPL streaming, watch epl, premier league live streaming, pakistani tv channels, watch live tv free, watch live news, watch full hd movies online"
         />
-        {pageProps.env == 'staging' ? <meta name="robots" content="noindex" /> : null}
+        {pageProps.env == "staging" ? (
+          <meta name="robots" content="noindex" />
+        ) : null}
 
         {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
 

@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "okomitomedium";
+  src: url("../../public/okomito-medium-webfont.woff2") format("woff2"),
+    url("../../public/okomito-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.h_style {
+  color: "#fff";
+  font-size: 20px;
+  font-family: "okomitomedium";
+}
+.Stan_container {
+  position: absolute;
+  right: 3rem;
+}
+.btn-gradient {
+  background: #56ab2f; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #37c673,
+    #109f69
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #37c673,
+    #109f69
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+}
+.border-style {
+  border-color: #37c673 !important;
+  border-radius: 1rem !important;
+}
+.std_txt {
+  font-size: 20px;
+  text-align: center;
+  right: 1rem;
+}
+.pm_txt {
+  font-size: 12px;
+  position: relative;
+  bottom: 1.5rem;
+  right: 0rem;
+  float: right;
+}
+.rs_style {
+  background-color: #37c673;
+  width: fit-content;
+  padding: 5px;
+}

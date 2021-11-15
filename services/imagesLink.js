@@ -1,18 +1,17 @@
 export const tapmadLogo = "/icons/tm-logo.png";
 export const newBg = "/icons/background/newBackground.jpg";
-export const signinBackground= "/icons/background/background1.jpg";
+export const signinBackground = "/icons/background/background1.jpg";
 export const mobileIcon = "/icons/mobile-icon.svg";
 // export const pslBackground = "https://www.tapmad.com/psl6/images/front-background.jpg"; old wala psl
-export const pslBackground = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623166451SigninPage-min.jpg";
+export const pslBackground =
+  "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623166451SigninPage-min.jpg";
 // export const newBg = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623166451SigninPage-min.jpg";
-
 
 export const usernameIcon =
   "http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/UserName.png";
 
 export const logo =
   "https://d1s7wg2ne64q87.cloudfront.net/web/images/tm-icon-logo.png";
-
 
 export const phoneIcon =
   "http://d1s7wg2ne64q87.cloudfront.net/web/images/icons/phone.png";
@@ -30,10 +29,11 @@ export const jazzIcon =
 export const tapmadCoin = "/icons/coint.png";
 export const tapmadNews = "/icons/news-btn.png";
 
-export const samsungTvLogo = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859275Samsung-smarttv-logo-white.png";
+export const samsungTvLogo =
+  "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859275Samsung-smarttv-logo-white.png";
 
-export const tapmadLogoBgWhite = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859428tm-logo-clr.png";
-
+export const tapmadLogoBgWhite =
+  "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859428tm-logo-clr.png";
 
 export const sendMessageIcon = "/icons/psl/sendBtn.svg";
 export const shareIcon = "/icons/psl/chatShare.svg";
@@ -46,4 +46,11 @@ export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const huaweiApp = "/icons/huawei-black.png";
 
-
+export const userIcon = "/icons/user.svg";
+export const infoIcon = "/icons/info.svg";
+export const gamingIcon = "/icons/gaming.svg";
+export const packageIcon = "/icons/package.svg";
+export const trophyIcon = "/icons/champion-winner-trophy.svg";
+export const stadiumIcon = "/icons/stadium.svg";
+export const playTrophyIcon = "/icons/trophy.svg";
+export const awardIcon = "/icons/award.svg";
