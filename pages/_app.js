@@ -36,21 +36,6 @@ function MyApp({ Component, pageProps }) {
 
   useLayoutEffect(() => {
     UserSessions();
-    addScriptCodeInDom(`(() => ({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Tapmad TV",
-      "alternateName": "Tapmad",
-      "url": "https://www.tapmad.com/",
-      "logo": "https://play-lh.googleusercontent.com/i8xVImpStVCQULwvGtfVkjQmdVLRMuTRfCC47CTaN_naZhk0wdwzplve7mloN0Z1iRM=s180-rw",
-      "sameAs": [
-        "https://www.facebook.com/TapmadTV/",
-        "https://twitter.com/tapmadtv",
-        "https://www.instagram.com/tapmad.entertainment/",
-        "https://www.youtube.com/channel/UCPHOf3lVS8bUSwR1h55EO6g",
-        "https://pk.linkedin.com/company/tapmad-tv"
-      ]
-    }))()`)
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -67,6 +52,27 @@ function MyApp({ Component, pageProps }) {
           type="image/png"
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Tapmad TV",
+              "alternateName": "Tapmad",
+              "url": "https://www.tapmad.com/",
+              "logo": "https://play-lh.googleusercontent.com/i8xVImpStVCQULwvGtfVkjQmdVLRMuTRfCC47CTaN_naZhk0wdwzplve7mloN0Z1iRM=s180-rw",
+              "sameAs": [
+                "https://www.facebook.com/TapmadTV/",
+                "https://twitter.com/tapmadtv",
+                "https://www.instagram.com/tapmad.entertainment/",
+                "https://www.youtube.com/channel/UCPHOf3lVS8bUSwR1h55EO6g",
+                "https://pk.linkedin.com/company/tapmad-tv"
+              ]
+            }
+            ),
+          }}
         />
         <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.</title>
         <meta
