@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import swal from "sweetalert";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import { AuthService } from "../auth.service";
@@ -13,8 +14,7 @@ function SetUserPin({ login, ip }) {
   const [username, setUsername] = useState("");
   const [showUsername, setShowUsername] = useState(false);
   const { setLoader } = useContext(MainContext);
-  const { initialState } = useContext(MainContext);
-  const { SignUpState } = useContext(SignUpContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   useEffect(() => {
     if (SignUpState?.UserDetails?.MobileNo) {
@@ -60,17 +60,15 @@ function SetUserPin({ login, ip }) {
     }
     const resp = await AuthService.setUserPin(pin, username);
     if (resp.responseCode == 1) {
-      const clearCache = await AuthService.clearUserToken(
-        SignUpState.UserDetails.MobileNo
-      );
-
+      await AuthService.clearUserToken(SignUpState.UserDetails.MobileNo);
+      Cookie.setCookies('userPin' , pin)
+      dispatch({ type: UPDATE_USER_DETAILS, data: { UserPin: pin } });
       Cookie.setCookies("isAuth", 1);
       swal({
         title: resp.message,
         timer: 2000,
         icon: "success",
       });
-      await AuthService.checkUser(initialState.User.MobileNo);
       await login(ip);
     } else if (resp.responseCode == 2) {
       setLoader(false);
@@ -88,7 +86,6 @@ function SetUserPin({ login, ip }) {
       Cookie.setCookies("isAuth", 0);
       setLoader(false);
     }
-
     setLoader(false);
   }
 

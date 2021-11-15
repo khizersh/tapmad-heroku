@@ -1,10 +1,11 @@
 import { getUserDetails } from "./utils";
 
 export function LoginTag(body, resp) {
+    console.log("resp in tag : ",resp);
     try {
         dataLayer.push({
             event: "login",
-            product_id: resp.UserActiveSubscription[0].UserPackageType,
+            product_id: resp?.UserActiveSubscription[0]?.UserPackageType || "",
             device_category: "Web_Mobile",
             response: resp.Response.message,
             user_id: resp.User.UserId,

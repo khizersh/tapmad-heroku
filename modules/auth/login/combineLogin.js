@@ -43,15 +43,19 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
     const userPin = e.target.value;
     if (+userPin === +userPin) {
       setPin(userPin);
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { UserPin: userPin },
+      });
     }
   }
-  useEffect(() => {
-    if (viewsToRender) {
-      if (SignUpState.UserDetails.MobileNo) {
-        login(ip);
-      }
-    }
-  }, [SignUpState, viewsToRender == true]);
+  // useEffect(() => {
+  //   if (viewsToRender) {
+  //     if (SignUpState.UserDetails.MobileNo) {
+  //       login(ip);
+  //     }
+  //   }
+  // }, [SignUpState, viewsToRender == true]);
 
   async function loginUser() {
     if (!CurrentMethod) {
@@ -59,10 +63,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
     }
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
-      let body = {
-        Language: "en",
-        MobileNo: mobileNo,
-      };
+     
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: {
@@ -71,23 +72,8 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
           UserPin: pin,
         },
       });
-      const data = await AuthService.GetCardUser(body);
-      if (data != null) {
-        if (data.data.User) {
-          Cookie.setCookies("content-token", data.data.User.UserPassword);
-          Cookie.setCookies("userId", data.data.User.UserId);
-          let viewToRendor = loginResponse(data.data);
-          setViewsToRender(viewToRendor);
-          setLoader(false);
-        }
-      } else {
-        swal({
-          title: "Something went wrong!",
-          timer: 3000,
-          icon: "error",
-        });
-        setLoader(false);
-      }
+      login(ip)
+     
     } else {
       swal({
         title: "Enter all fields!",

@@ -6,16 +6,37 @@ export default function TaxView({ onChange }) {
   const { dispatch, SignUpState } = useContext(SignUpContext);
   const [PackagePrice, setPackagePrice] = useState([]);
   const [SelectedPrice, setSelectedPrice] = useState({});
+  const [lines, setLines] = useState({
+    firstLine : "",
+    secondLine : ""
+  });
 
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+      // setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
       setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
+      let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
+       console.log(m.PackageName.split(" "));
+       let finalArray = [];
+       let pkgArray = m.PackageName.split(" ");  
+       finalArray.push(pkgArray[0])
+       if(pkgArray.length > 1){
+        finalArray.push(pkgArray.slice(1).join(" ")) 
+       }  
+       return {
+        ...m,
+        PackageNameArray : finalArray
+       }
+      })
+      console.log("finalArray: ",array); 
+
       dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
     }
   }, [SignUpState.SelectedPackage]);
 
   useEffect(() => {
     if (SignUpState.SelectedPrice.PackageId) {
+      console.log("SelectedPrice : ",SelectedPrice);
       setSelectedPrice(SignUpState.SelectedPrice);
     }
   }, [SignUpState.SelectedPrice])

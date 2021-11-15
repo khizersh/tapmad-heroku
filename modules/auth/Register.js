@@ -20,6 +20,7 @@ export default memo(function Register(props) {
     useContext(Authcontext);
   const { updateUserNumber } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
+
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;

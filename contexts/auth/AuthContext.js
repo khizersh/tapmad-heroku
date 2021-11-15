@@ -9,6 +9,7 @@ export default function AuthProviderNew({ children }) {
         PaymentPackages: [],
         LoginOperators: [],
         CountryCode: "",
+        ViewToShow : "sign-in"
     });
 
     useEffect(async () => {
