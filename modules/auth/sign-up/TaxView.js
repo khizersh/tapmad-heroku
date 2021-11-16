@@ -6,15 +6,11 @@ export default function TaxView({ onChange }) {
   const { dispatch, SignUpState } = useContext(SignUpContext);
   const [PackagePrice, setPackagePrice] = useState([]);
   const [SelectedPrice, setSelectedPrice] = useState({});
-  const [lines, setLines] = useState({
-    firstLine : "",
-    secondLine : ""
-  });
 
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
       // setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
-      setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
+    
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
        console.log(m.PackageName.split(" "));
        let finalArray = [];
@@ -27,21 +23,20 @@ export default function TaxView({ onChange }) {
         ...m,
         PackageNameArray : finalArray
        }
-      })
-      console.log("finalArray: ",array); 
-
+      });
+      setPackagePrice(array);
       dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
     }
   }, [SignUpState.SelectedPackage]);
 
   useEffect(() => {
     if (SignUpState.SelectedPrice.PackageId) {
-      console.log("SelectedPrice : ",SelectedPrice);
       setSelectedPrice(SignUpState.SelectedPrice);
     }
   }, [SignUpState.SelectedPrice])
 
   const onChangePackage = (m) => {
+  
     onChange(m);
   };
 
@@ -59,19 +54,19 @@ export default function TaxView({ onChange }) {
                 onClick={() =>
                   onChangePackage(m)
                 }>
-                {m.PackageNameArray?.length > 1 ?  m.PackageNameArray.map((pkg,ind) => <>
-                  <span className="">{m.PackageNameArray[0]}</span>
-                <span className="font-weight-bold">{m.PackageNameArray[1]}</span>
-                </>) :  <span className="font-weight-bold">{m.PackageName}</span> }               
+                {m.PackageNameArray?.length > 1 ?  <><div className="font-weight-600 line-1 text-left font-17">{m.PackageNameArray[0]}</div>
+                                                     <div className="font-weight-bold line-1 text-left">{m.PackageNameArray[1]}</div>
+                                                     </> : 
+                  <>
+                  <span className="font-weight-bold text-left line-2">{m.PackageName}</span>
+                  </> }               
                 <div className="d-flex justify-content-center">
                   <div className="text-white per-month mt-2">
                   {m.PackagePrices[0]}
                   </div>
                   <div className="f-40 font-weight-bold text-white">{m.PackagePrices[1]}</div>
                   <div className="text-white  monthly">
-                  {/* <div className="text-white d-flex flex-column justify-content-end per-month"> */}
-                    {/* <span> &nbsp;&nbsp;  per</span><span>&nbsp;&nbsp;  month</span> */}
-                    <span className="d-block">{m.PackagePrices[2].split(" ")[0]}</span>{m.PackagePrices[2].split(" ")[1]}
+                    <span className="d-block">{m.PackagePrices[2].split(" ")[0]}</span>{m.PackagePrices[2].split(" ").slice(1).join(" ")}
                   </div>
                 </div>
                 <span className="d-block d-md-none"></span>
