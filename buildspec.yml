@@ -2,6 +2,7 @@ version: 0.2
 
 phases:
    install:
+      runtime: - versions:
       nodejs: 14
       commands:
          - echo Installing dependency...
@@ -11,7 +12,7 @@ phases:
    build:
       commands:
          - echo Build completed on `date`
-         - echo Compiling the Node.js code
+         - echo Compiling the Node.js cod
          - npm run build
    post_build:
       commands:
