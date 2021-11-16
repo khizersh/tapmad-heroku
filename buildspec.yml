@@ -21,3 +21,4 @@ artifacts:
       - "/public"
       - ".next"
       - "package.json"
+      - "node_modules"
