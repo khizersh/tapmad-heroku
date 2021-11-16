@@ -2,15 +2,15 @@ version: 0.2
 
 phases:
    install:
+      nodejs: 14
       commands:
          - echo Installing dependency...
-         - npm install -g next
-         - npm install
    pre_build:
       commands:
-         - printenv > .env
+         - npm install
    build:
       commands:
+         - echo Build completed on `date`
          - echo Compiling the Node.js code
          - npm run build
    post_build:
