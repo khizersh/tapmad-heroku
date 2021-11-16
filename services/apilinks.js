@@ -8,7 +8,8 @@ export const getAllPackages =
   BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web";
 export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
-export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
+// export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
+export const getUserByUserId = BASEPAYMENTURL + "api/getUserProfileDetail";
 export const getUserPaymentHistory = BASEURL + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
   BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/100";

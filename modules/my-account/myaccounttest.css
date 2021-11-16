@@ -1,7 +1,7 @@
 @font-face {
   font-family: "okomitomedium";
-  src: url("../../public/okomito-medium-webfont.woff2") format("woff2"),
-    url("../../public/okomito-medium-webfont.woff") format("woff");
+  src: url("../../public/fonts/okomito-medium-webfont.woff") format("woff2"),
+    url("../../public/fonts/okomito-medium-webfont.woff2") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -10,11 +10,18 @@
   font-size: 20px;
   font-family: "okomitomedium";
 }
+/* .fnt{
+  font-family: seq;
+} */
 .Stan_container {
   position: absolute;
   right: 3rem;
 }
+.btn-light {
+  font-family: "okomitomedium";
+}
 .btn-gradient {
+  font-family: "okomitomedium";
   background: #56ab2f; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -33,9 +40,10 @@
   border-radius: 1rem !important;
 }
 .std_txt {
-  font-size: 20px;
+  font-size: 19px;
   text-align: center;
   right: 1rem;
+  font-family: "okomitomedium";
 }
 .pm_txt {
   font-size: 12px;
@@ -48,4 +56,12 @@
   background-color: #37c673;
   width: fit-content;
   padding: 5px;
+}
+.mygame_text {
+  font-family: "okomitomedium";
+  font-size: 16px;
+}
+.mygame_num {
+  font-family: "okomitomedium";
+  font-size: 20px;
 }

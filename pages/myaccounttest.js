@@ -45,11 +45,11 @@ const MyAccountTrial = () => {
             ...profileData,
             UserId: userId,
             Email: data.data.User.UserEmail || "--",
-            UserMobileNumebr: data.data.UserProfile.UserProfileMobile || "--",
-            FullName: data.data.UserProfile.UserProfileFullName || "--",
-            BirthDate: data.data.UserProfile.UserProfileDOB || "--",
-            ProfilePicture: data.data.UserProfile.UserProfilePicture || "--",
-            Gender: data.data.UserProfile.UserProfileGender || "--",
+            UserMobileNumebr: data.data.ProfileData.UserProfileMobile || "--",
+            FullName: data.data.ProfileData.UserProfileFullName || "--",
+            BirthDate: data.data.ProfileData.UserProfileDOB || "--",
+            ProfilePicture: data.data.ProfileData.UserProfilePicture || "--",
+            Gender: data.data.ProfileData.UserProfileGender || "--",
           });
         }
       }
@@ -81,10 +81,10 @@ const MyAccountTrial = () => {
         </div>
       </div>
       <div className="row offset-1">
-        <div className="col">
-          <div>Email</div>
-          <div>Mobile</div>
-          <div>Gender</div>
+        <div className="col ml-3">
+          <div className="m-1 fnt">Email:</div>
+          <div className="m-1 fnt">Mobile:</div>
+          <div className="m-1 fnt">Gender:</div>
         </div>
         <div className="col">
           <div>{profileData && profileData.Email}</div>
@@ -109,9 +109,10 @@ const MyAccountTrial = () => {
                 <img src={stadiumIcon} width="40" alt="User" />
               </div>
               <div className="col-6 mt-2 text-center">
-                <p>
+                <p className="mygame_text">
                   In Play
-                  <br />0
+                  <br />
+                  <p className="mygame_num">0</p>
                 </p>
               </div>
             </div>
@@ -124,9 +125,10 @@ const MyAccountTrial = () => {
                 <img src={trophyIcon} width="40" alt="User" />
               </div>
               <div className="col-6 mt-2 text-center">
-                <p>
+                <p className="mygame_text">
                   Won
-                  <br />0
+                  <br />
+                  <p className="mygame_num">0</p>
                 </p>
               </div>
             </div>
@@ -140,9 +142,10 @@ const MyAccountTrial = () => {
                 <img src={playTrophyIcon} width="40" alt="User" />
               </div>
               <div className="col-6 mt-2 text-center">
-                <p>
+                <p className="mygame_text">
                   Lost
-                  <br />0
+                  <br />
+                  <p className="mygame_num">0</p>
                 </p>
               </div>
             </div>
@@ -156,9 +159,10 @@ const MyAccountTrial = () => {
                 <img src={awardIcon} width="40" alt="User" />
               </div>
               <div className="col-6 mt-2 text-center">
-                <p>
+                <p className="mygame_text">
                   Rank
-                  <br />0
+                  <br />
+                  <p className="mygame_num">0</p>
                 </p>
               </div>
             </div>
