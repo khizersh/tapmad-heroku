@@ -1,25 +1,22 @@
 version: 0.2
-
 phases:
-   install:
-      runtime-versions:
-         nodejs: 14
-      commands:
-         - echo Installing dependency...
    pre_build:
       commands:
+         - echo Installing source NPM dependencies...
          - npm install
    build:
       commands:
-         - echo Build completed on `date`
-         - echo Compiling the Node.js cod
-         - npm run build
+         - echo Build started on `date`
+         - echo Compiling the dist folder
+         - npm run-script build
    post_build:
       commands:
          - echo Build completed on `date`
+# Include only the files required for your application to run.
+
 artifacts:
    files:
-      - "public/**/*"
-      - ".next/*"
-      - "package.json"
-      - "node_modules"
+      - .next/**/*
+      - public/**/*
+      - package.json
+      - .platform/**/*
