@@ -13,13 +13,12 @@ import { SET_VIEW_TO_SHOW } from "../../contexts/auth/AuthReducers";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const { checkUserAuthentication, setLoader } = useContext(MainContext);
+    const {  setLoader } = useContext(MainContext);
     const { SignUpState } = useContext(SignUpContext);
-    const { AuthState, dispatch } = useContext(AuthContext);
+    const { dispatch } = useContext(AuthContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
-      console.log("SignUpState : ",SignUpState);
       setLoader(true);
       let obj = {
         Language: "en",
@@ -29,10 +28,7 @@ export default function withLogin(Component, data) {
         OperatorId: SignUpState.UserDetails.Operator,
         UserPin: SignUpState.UserDetails.UserPin || Cookie.getCookies('userPin'),
       };
-      const response = await AuthService.signInOrSignUpMobileOperatorByPin(
-        obj,
-        userIp
-      );
+      const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);
         setLoader(false);

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_PAYMENT_METHOD, UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
+import { castingIcon , deviceIcon , qualityIcon} from "../../../services/imagesLink";
 import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethod() {
@@ -18,23 +19,36 @@ export default function PaymentMethod() {
       UpdatePaymenthMethod(SignUpState.SelectedPrice.PaymentMethods[0]);
     }
   }, [SignUpState.SelectedPrice]);
-
+console.log(CurrentPackage);
   useEffect(() => {
     if (SignUpState.SelectedMethod.PaymentMethodName) {
       setCurrentMethod(SignUpState.SelectedMethod);
     }
   }, [SignUpState.SelectedMethod]);
-
   return (
     <div className="col-md-12 col-sm-12 pt-2">
-      <div className="row">
-        <div className="col-4"></div>
-        <div className="col-4"></div>
-        <div className="col-4"></div>
+      <div className="row text-center">
+
+        {CurrentPackage?.PackageStream ? 
+        <div className="col-4">
+           <p><img src={qualityIcon}/></p>
+           <p className="text-grey">{CurrentPackage.PackageStream}</p>
+        </div> : " "}
+        
+        {CurrentPackage.PackageDevices ?
+         <div className="col-4">
+            <p><img src={deviceIcon}/></p>
+            <p className="text-grey">{CurrentPackage.PackageDevices}</p>
+          </div> : ""}
+        
+          {CurrentPackage?.IsCasting ?  <div className="col-4">
+          <p><img src={castingIcon}/></p> 
+          <p className="text-grey">Casting</p>
+        </div> : ""}
+       
       </div>
-      <div>
-        50 Live channels & video on demand. Entertainment, kids content, &
-        cricket bilaterals.
+      <div className="text-grey">
+       {CurrentPackage?.ContentDescription}
       </div>
       <div className="mt-3" style={{ color: "#FC5656" }}>
         {CurrentPackage?.HighlightDescription}

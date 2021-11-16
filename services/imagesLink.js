@@ -29,6 +29,9 @@ export const jazzIcon =
 
 export const tapmadCoin = "/icons/coint.png";
 export const tapmadNews = "/icons/news-btn.png";
+export const castingIcon = "/icons/auth/casting.svg";
+export const deviceIcon = "/icons/auth/device.svg";
+export const qualityIcon = "/icons/auth/quality.svg";
 
 export const samsungTvLogo = "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859275Samsung-smarttv-logo-white.png";
 
