@@ -371,10 +371,23 @@ background-color: #262626;
 .monthly {
   font-size: 12px;
   text-align: left;
-  line-height: 9px;
+  line-height: 5px;
   position: relative;
   left: 3px;
   top: 18px;
+}
+
+.line-1{
+  line-height: 1;
+}
+.line-2{
+  line-height: 2;
+}
+.font-17{
+  font-size: 20px;
+}
+.font-weight-600{
+  font-weight: 600;
 }
 /* iPhone 5 (portrait)----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
