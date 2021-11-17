@@ -133,11 +133,22 @@ const MyAccountTrial = () => {
       <div className={` ${show.package ? "row" : "d-none"}`}>
         <div className="col-6 ">
           <div className="row border border-style rounded text-center">
-            <div className="std_txt mt-1">
-              {profileData && profileData.Package}
+            <div className="col-8 p-0">
+              <div className="std_txt mt-1">
+                {profileData && profileData.Package}
+              </div>
+              <div className="sub-title text-grey">Per month</div>
+            </div>
+            <div className="col-4 p-0">
               <img src={priceIcon} width="45" alt="minus" />
             </div>
-            <span className="sub-title text-grey">Per month</span>
+
+            {/* <div className="std_txt mt-1">
+              {profileData && profileData.Package}
+              Basic
+              <img src={priceIcon} width="45" alt="minus" />
+            </div>
+            <span className="sub-title text-grey">Per month</span> */}
           </div>
         </div>
         <div className="col-6">
