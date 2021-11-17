@@ -8,19 +8,23 @@
 .h_style {
   color: "#fff";
   font-size: 20px;
+
   font-family: "okomitomedium";
 }
-/* .fnt{
-  font-family: seq;
-} */
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: #ccc;
+}
 .Stan_container {
-  position: absolute;
-  right: 3rem;
+  position: relative;
+  left: 5rem;
 }
 .btn-light {
   font-family: "okomitomedium";
+  font-size: 14px;
 }
 .btn-gradient {
+  font-size: 14px;
   font-family: "okomitomedium";
   background: #56ab2f; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -38,12 +42,23 @@
 .border-style {
   border-color: #37c673 !important;
   border-radius: 1rem !important;
+  height: 4rem;
+}
+.user_img {
+  width: "100%";
 }
 .std_txt {
-  font-size: 19px;
+  font-size: 17px;
   text-align: center;
-  right: 1rem;
   font-family: "okomitomedium";
+  margin: 0 auto;
+}
+
+.sub-title {
+  position: relative;
+  bottom: 22px;
+  left: 45px;
+  font-size: 13px;
 }
 .pm_txt {
   font-size: 12px;
@@ -64,4 +79,22 @@
 .mygame_num {
   font-family: "okomitomedium";
   font-size: 20px;
+}
+.block_play,
+.block_won,
+.block_lost,
+.block_rank {
+  border-radius: 12px !important;
+}
+.block_play {
+  background-color: #bf5db7;
+}
+.block_won {
+  background-color: #ffa700;
+}
+.block_lost {
+  background-color: #fe4646;
+}
+.block_rank {
+  background-color: #37c673;
 }

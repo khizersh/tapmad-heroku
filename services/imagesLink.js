@@ -46,6 +46,7 @@ export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const huaweiApp = "/icons/huawei-black.png";
 
+//My User Profile Assets
 export const userIcon = "/icons/user.svg";
 export const infoIcon = "/icons/info.svg";
 export const gamingIcon = "/icons/gaming.svg";
@@ -54,3 +55,6 @@ export const trophyIcon = "/icons/champion-winner-trophy.svg";
 export const stadiumIcon = "/icons/stadium.svg";
 export const playTrophyIcon = "/icons/trophy.svg";
 export const awardIcon = "/icons/award.svg";
+export const minusIcon = "/icons/minus.svg";
+export const plusIcon = "/icons/plus.svg";
+export const priceIcon = "/icons/price.png";
