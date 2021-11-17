@@ -27,9 +27,13 @@ console.log(CurrentPackage);
   }, [SignUpState.SelectedMethod]);
   return (
     <div className="col-md-12 col-sm-12 pt-2">
-      <div className="row text-center">
-
-        {CurrentPackage?.PackageStream ? 
+      <div className="d-flex justify-content-around">
+        {/* {CurrentPackage?.DeviceStream.map((m,ind) => 
+         <div key={ind}>
+           <p><img src={m.Image}/></p>
+           <p className="text-grey">{m.Name}</p>
+           </div>)} */}
+        {/* {CurrentPackage?.PackageStream ? 
         <div className="col-4">
            <p><img src={qualityIcon}/></p>
            <p className="text-grey">{CurrentPackage.PackageStream}</p>
@@ -44,7 +48,7 @@ console.log(CurrentPackage);
           {CurrentPackage?.IsCasting ?  <div className="col-4">
           <p><img src={castingIcon}/></p> 
           <p className="text-grey">Casting</p>
-        </div> : ""}
+        </div> : ""} */}
        
       </div>
       <div className="text-grey">

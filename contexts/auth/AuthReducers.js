@@ -2,6 +2,7 @@ export const SET_ALL_PACKAGES = "SET_ALL_PACKAGES";
 export const SET_COUNTRY_CODE = "SET_COUNTRY_CODE";
 export const SET_LOGIN_OPERATORS = "SET_LOGIN_OPERATORS";
 export const SET_VIEW_TO_SHOW = "SET_VIEW_TO_SHOW";
+export const CREDIT_CARD_TYPE = "CREDIT_CARD_TYPE";
 
 
 export function AuthReducer(state, action) {
@@ -14,5 +15,7 @@ export function AuthReducer(state, action) {
             return { ...state, LoginOperators: action.data }
         case SET_VIEW_TO_SHOW:
             return { ...state, ViewToShow: action.data }
+        case CREDIT_CARD_TYPE:
+            return { ...state, CreditCardType: action.data }
     }
 }

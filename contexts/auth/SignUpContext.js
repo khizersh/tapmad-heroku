@@ -6,6 +6,7 @@ export const SignUpContext = React.createContext(null);
 
 export default function SignUpProvider({ children }) {
     const { AuthState } = useContext(AuthContext);
+
     const [SignUpState, dispatch] = useReducer(SignUpReducer, {
         SelectedPackage: {},
         SelectedPrice: {},
@@ -18,6 +19,7 @@ export default function SignUpProvider({ children }) {
     useEffect(() => {
         if (AuthState?.PaymentPackages?.length > 0) {
             dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] })
+            console.log("AuthState : ",AuthState);
         }
     }, [AuthState])
 
