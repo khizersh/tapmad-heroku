@@ -74,16 +74,6 @@ function MyApp({ Component, pageProps }) {
             ),
           }}
         />
-        <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-        <meta name="description" content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com" />
-        <meta
-          name="keywords"
-          content="live tv channel, live tv, live sports, watch free cricket, subscribe to tapmad, live EPL streaming, watch epl, premier league live streaming, pakistani tv channels, watch live tv free, watch live news, watch full hd movies online"
-        />
         {pageProps.env == 'staging' ? <meta name="robots" content="noindex" /> : null}
 
         {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
