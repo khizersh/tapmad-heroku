@@ -22,7 +22,7 @@ export function handleRegisterPayload(SignUpState) {
   return details;
 }
 
-function handleBody(SignUpState) {
+export function handleBody(SignUpState) {
   return {
     Version: "V1",
     Language: "en",

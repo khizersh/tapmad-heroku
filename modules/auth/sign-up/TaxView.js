@@ -9,10 +9,7 @@ export default function TaxView({ onChange }) {
 
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
-      // setPackagePrice(SignUpState.SelectedPackage.PaymentTabMethods);
-    
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
-       console.log(m.PackageName.split(" "));
        let finalArray = [];
        let pkgArray = m.PackageName.split(" ");  
        finalArray.push(pkgArray[0])
@@ -36,7 +33,6 @@ export default function TaxView({ onChange }) {
   }, [SignUpState.SelectedPrice])
 
   const onChangePackage = (m) => {
-  
     onChange(m);
   };
 

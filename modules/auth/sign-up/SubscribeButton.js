@@ -10,7 +10,7 @@ import { SignUpTag } from "../../../services/gtm";
 import GeneralModal from "../../../components/GeneralModal";
 import TermsAndCondition from "./TermsAndCondition";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
-import { handleRegisterPayload } from "./authHelper";
+import { handleBody, handleRegisterPayload } from "./authHelper";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 
 export default function SubscribeButton() {
@@ -20,6 +20,8 @@ export default function SubscribeButton() {
   const [formReady, setFormReady] = useState(false);
   const [open, setOpen] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
+  
+
   useEffect(() => {
     on("tokenSuccess", async (event) => {
       if (formReady) {
@@ -32,12 +34,13 @@ export default function SubscribeButton() {
     dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code  : code , newUser : newUser}})
   }
   async function submitCardDetails(event) {
-    var detailsdetails = handleBody();
+    var detailsdetails = handleBody(SignUpState);
     detailsdetails = { ...detailsdetails, Token: event.token };
     delete detailsdetails.cnic;
     const response = await AuthService.creditCardOrder(detailsdetails);
     setLoader(false);
     // checkouPayment(response);
+    
     UBLPayment(response);
   }
   function checkouPayment(response) {
@@ -108,7 +111,7 @@ export default function SubscribeButton() {
     }
   }
   async function SubscribeUser() {
-    // setLoader(true);
+    setLoader(true);
     if ( SignUpState?.SelectedPrice?.ProductId) {
       var details = handleRegisterPayload(SignUpState);
       if (!details.MobileNo) {
@@ -120,15 +123,13 @@ export default function SubscribeButton() {
           buttons: false,
         });
       }
-      if (SignUpState.SelectedMethod.PaymentId == 2) {
-        // for credit card specific only
+      if (SignUpState.SelectedMethod.PaymentId == 2) {  // for credit card specific only
         if (!details.Email || !details.FullName) {
           setLoader(false);
           return swal({timer: 3000,text: "Enter all fields",icon: "error", buttons: false, });
         }
         Frames.submitCard();
         setFormReady(true);
-       
       } else { // for other payment methods
         if (!details.OperatorId) {
           setLoader(false);
@@ -142,7 +143,6 @@ export default function SubscribeButton() {
               swal({  title: data.message, icon: "error", timer: 3000, });
             }
             else if (data.responseCode == 11) { //user already subscribed checking PIN SET 
-              console.log("data in already : ",data);
                  if(data.data.User.IsPinSet){
                    swal({ timer: 3000,title: "You are already subscribed!" , text : "Enter your PIN for login",icon: "info",buttons: false,});
                    Cookie.setCookies("userId", data.data.User.UserId);
