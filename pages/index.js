@@ -13,11 +13,11 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <title>
-          Watch Live TV - Enjoy AdFree PSL Live Streaming - Tapmad TV
+          Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV
         </title>
         <meta
           name="description"
-          content="Enjoy Live TV channels and watch AdFREE PSL Live streaming online exclusively on Tapmad TV. Latest sports, movies, tv shows, live score and cricket highlights."
+          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com."
         />
         <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
         <meta
