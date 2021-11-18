@@ -46,10 +46,6 @@ const MyAccountTrial = () => {
     } else {
       setShow({ ...show, [key]: true });
     }
-    var gamediv = document.getElementsByClassName("games")[0];
-    // if (show.game == true) {
-    //   var gamediv = document.getElementsByClassName("games")[0];
-    // }
   };
   useEffect(async () => {
     if (userId) {
@@ -142,13 +138,6 @@ const MyAccountTrial = () => {
             <div className="col-4 p-0">
               <img src={priceIcon} width="45" alt="minus" />
             </div>
-
-            {/* <div className="std_txt mt-1">
-              {profileData && profileData.Package}
-              Basic
-              <img src={priceIcon} width="45" alt="minus" />
-            </div>
-            <span className="sub-title text-grey">Per month</span> */}
           </div>
         </div>
         <div className="col-6">
