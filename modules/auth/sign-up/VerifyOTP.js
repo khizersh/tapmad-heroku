@@ -42,7 +42,6 @@ const VerifyOTPComponent = ({ newUser , login }) => {
             Version: "V1",
           };
           data = await AuthService.paymentProcessTransaction(body);
-          console.log("data in process : ",data);
           SignUpTag(body, data.data);
         } catch (e) {
           swal({

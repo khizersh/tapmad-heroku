@@ -29,10 +29,10 @@ function SetYourNewPinSignUp({ login, ip }) {
         });
       }
     }
-    if (!pin.length) {
+    if (pin.length != 4) {
       return swal({
         timer: 3000,
-        title: "Please set your PIN!",
+        title: "Set 4 digit PIN!",
         icon: "error",
       });
     }
