@@ -20,6 +20,7 @@ import "../modules/news/news.style.css";
 import "../modules/player-shop/player-shop.css";
 import "../modules/promo-code/promo-code.css";
 import "../modules/samsungtv/samsung.css";
+import "../components/component-styles/newSignup.css";
 import "../modules/search/search.css";
 import "../components/component-styles/component.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
@@ -46,7 +47,7 @@ function MyApp({ Component, pageProps }) {
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
   }, []);
-  // Hello
+ 
   return (
     <>
       <Head>

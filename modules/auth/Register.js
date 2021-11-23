@@ -15,10 +15,7 @@ import {
 
 export default memo(function Register(props) {
   const router = useRouter();
-  const { code, number, payment, subspack } = router.query;
-  const { authState, updateResponseCode, updateSelectedPaymentMethod } =
-    useContext(Authcontext);
-  const { updateUserNumber } = useContext(MainContext);
+  const { code, number, payment } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const RenderViews = useCallback(

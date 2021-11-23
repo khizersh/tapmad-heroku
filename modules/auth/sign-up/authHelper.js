@@ -26,7 +26,7 @@ export function handleBody(SignUpState) {
   return {
     Version: "V1",
     Language: "en",
-    Platform: "android",
+    Platform: "web",
     ProductId: SignUpState?.SelectedPrice?.ProductId,
     MobileNo: SignUpState.UserDetails.MobileNo,
     OperatorId: SignUpState.UserDetails.Operator,

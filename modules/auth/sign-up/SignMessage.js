@@ -3,14 +3,15 @@ import { Authcontext } from "../../../contexts/AuthContext";
 import { MainContext } from "../../../contexts/MainContext";
 import SubscribeButton from "./SubscribeButton";
 
-export default function SignMessage({ price }) {
+export default function SignMessage({ price, creditCardType }) {
   return (
     <div className="form-group text-center pt-2 mb-0">
-      <SubscribeButton />
-      <p style={{ color: "#fff", padding: "10px" , position : "inherit"}}>
+      <SubscribeButton creditCardType={creditCardType} />
+
+      {/* <p style={{ color: "#fff", padding: "10px" , position : "inherit"}}>
         {price &&
           price.ContentDescription}
-      </p>
+      </p> */}
     </div>
   );
 }

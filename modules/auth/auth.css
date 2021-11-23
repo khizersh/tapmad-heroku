@@ -23,7 +23,8 @@
   background-blend-mode: multiply;
 }
 .bg-dark-cstm{
-background-color: #262626;
+/* background-color: #262626; */
+background-color: #3b3b3b;
 }
 .tm_login_pg {
   display: table;
@@ -94,10 +95,7 @@ background-color: #262626;
   transition: 0.3s;
   opacity: 0.9;
 }
-.bit-top{
-  position: relative;
-  bottom: 5rem;
-}
+
 .pr_active {
   background-position: 100% -15px;
   background-size: 5rem;
@@ -208,6 +206,7 @@ background-color: #262626;
   font-size: 20px;
   color: white;
 }
+
 
 
 .text-white {
@@ -545,6 +544,8 @@ input[type="radio"] {
 }
 
 @media only screen and (max-width: 799px) {
+
+  
   .radio-cstm:after {
     width: 11px;
     height: 11px;

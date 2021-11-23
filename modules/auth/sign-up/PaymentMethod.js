@@ -19,36 +19,28 @@ export default function PaymentMethod() {
       UpdatePaymenthMethod(SignUpState.SelectedPrice.PaymentMethods[0]);
     }
   }, [SignUpState.SelectedPrice]);
-console.log(CurrentPackage);
   useEffect(() => {
     if (SignUpState.SelectedMethod.PaymentMethodName) {
       setCurrentMethod(SignUpState.SelectedMethod);
     }
   }, [SignUpState.SelectedMethod]);
+
+  const imageArray = [
+    { Image: qualityIcon, Name: "1080 P" },
+    { Image: deviceIcon, Name: "Devices All" },
+    { Image: castingIcon, Name: "Casting" },
+  ];
   return (
     <div className="col-md-12 col-sm-12 pt-2">
       <div className="d-flex justify-content-around">
-        {/* {CurrentPackage?.DeviceStream.map((m,ind) => 
-         <div key={ind}>
-           <p><img src={m.Image}/></p>
-           <p className="text-grey">{m.Name}</p>
-           </div>)} */}
-        {/* {CurrentPackage?.PackageStream ? 
-        <div className="col-4">
-           <p><img src={qualityIcon}/></p>
-           <p className="text-grey">{CurrentPackage.PackageStream}</p>
-        </div> : " "}
-        
-        {CurrentPackage.PackageDevices ?
-         <div className="col-4">
-            <p><img src={deviceIcon}/></p>
-            <p className="text-grey">{CurrentPackage.PackageDevices}</p>
-          </div> : ""}
-        
-          {CurrentPackage?.IsCasting ?  <div className="col-4">
-          <p><img src={castingIcon}/></p> 
-          <p className="text-grey">Casting</p>
-        </div> : ""} */}
+      {imageArray.map((m, ind) => (
+              <div key={ind} className="text-center">
+                <p>
+                  <img src={m.Image} />
+                </p>
+                <p className="text-grey">{m.Name}</p>
+              </div>
+            ))}
        
       </div>
       <div className="text-grey">
