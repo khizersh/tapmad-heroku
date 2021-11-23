@@ -25,3 +25,25 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #121117; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #87c242;
+  border-radius: 20px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #87c242; 
+}

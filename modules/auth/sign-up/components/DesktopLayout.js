@@ -40,17 +40,17 @@ const DesktopLayout = ({ children, bgImage }) => {
             <img className="pl-3" src={tapmadLogo} width="130px" />
           </button>
         </div>
-        <div      style={{ margin: "auto 0px" }} className="pr-5">
-          <button
-            className="btn btn-login"
-            onClick={onClickLogin}
-       
-          >
+        <div
+          onClick={onClickLogin}
+          style={{ margin: "auto 0px" }}
+          className="pr-5"
+        >
+          <button className="btn btn-login">
             <div>
               <img width="10px" src={loginUserImage} alt="Login image" />
             </div>
           </button>
-          <span className="pl-2 font-weight-light ">Login</span>
+          <span  className="btn text-white pl-2 font-weight-light ">Login</span>
         </div>
       </div>
       <div className="grey-background"></div>
