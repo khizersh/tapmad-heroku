@@ -46,10 +46,6 @@ const MyAccountTrial = () => {
     } else {
       setShow({ ...show, [key]: true });
     }
-    var gamediv = document.getElementsByClassName("games")[0];
-    // if (show.game == true) {
-    //   var gamediv = document.getElementsByClassName("games")[0];
-    // }
   };
   useEffect(async () => {
     if (userId) {
@@ -133,11 +129,15 @@ const MyAccountTrial = () => {
       <div className={` ${show.package ? "row" : "d-none"}`}>
         <div className="col-6 ">
           <div className="row border border-style rounded text-center">
-            <div className="std_txt mt-1">
-              {profileData && profileData.Package}
+            <div className="col-8 p-0">
+              <div className="std_txt mt-1">
+                {profileData && profileData.Package}
+              </div>
+              <div className="sub-title text-grey">Per month</div>
+            </div>
+            <div className="col-4 p-0">
               <img src={priceIcon} width="45" alt="minus" />
             </div>
-            <span className="sub-title text-grey">Per month</span>
           </div>
         </div>
         <div className="col-6">
@@ -262,13 +262,3 @@ const MyAccountTrial = () => {
   );
 };
 export default MyAccountTrial;
-
-export function getStaticProps() {
-  return {
-    props: {
-      protected: true,
-      env: process.env.TAPENV
-    },
-  };
-}
-
