@@ -22,7 +22,8 @@
   background-blend-mode: multiply;
 }
 .bg-dark-cstm {
-  background-color: #262626;
+  /* background-color: #262626; */
+  background-color: #3b3b3b;
 }
 .tm_login_pg {
   display: table;
@@ -92,10 +93,6 @@
   transition: 0.3s;
   opacity: 1;
 }
-.bit-top {
-  position: relative;
-  bottom: 5rem;
-}
 .pr_active {
   background-position: 100% -15px;
   background-size: 5rem;
@@ -107,7 +104,7 @@
   border-bottom: 4px solid var(--basecolor);
   position: relative;
   bottom: -16px;
-  left: 16%;
+  margin: 0 auto;
   width: 70%;
 }
 .pr_active span {
@@ -207,7 +204,10 @@
   color: white;
 }
 
-.text-white {
+<<<<<<<
+  HEAD
+  =======>>>>>>>a63d5d4305656363942d1ce39f604c61dccb541a
+  .text-white {
   color: white !important;
 }
 .mbl-check-icon {
@@ -415,8 +415,7 @@
   .green-bar {
     border: 3px solid var(--basecolor);
     position: relative;
-    bottom: -16px;
-    left: 21px;
+    margin: 0 auto;
     width: 70%;
   }
 }

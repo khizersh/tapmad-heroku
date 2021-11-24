@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
-import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import { Authcontext } from "../../../contexts/AuthContext";
 import withLogin from "../LoginHOC";
@@ -29,10 +28,10 @@ function SetYourNewPinSignUp({ login, ip }) {
         });
       }
     }
-    if (!pin.length) {
+    if (pin.length != 4) {
       return swal({
         timer: 3000,
-        title: "Please set your PIN!",
+        title: "Set 4 digit PIN!",
         icon: "error",
       });
     }
@@ -52,20 +51,16 @@ function SetYourNewPinSignUp({ login, ip }) {
       UserPassword: "",
     };
     setLoader(true);
-
     const userStatus = await AuthService.GetCardUser({
       MobileNo: SignUpState.UserDetails.MobileNo,
       Language: "en",
     });
-
     if (userStatus && userStatus.data.User) {
       obj.UserPassword = userStatus.data.User.UserPassword;
       Cookie.setCookies("userId", userStatus.data.User.UserId);
       Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
     }
-
     const response = await AuthService.setNewPin(pin, username);
-
     Cookie.setCookies("UserPin", pin);
     dispatch({
       type: UPDATE_USER_DETAILS,
@@ -116,7 +111,7 @@ function SetYourNewPinSignUp({ login, ip }) {
   }, [initialState.User.MobileNo]);
 
   return (
-    <div>
+    <div className="desktop-size">
       <h3 className="pb-3 component-title">Set Your New PIN</h3>
       {showUsername ? (
         <>

@@ -28,6 +28,7 @@ export default function withLogin(Component, data) {
         OperatorId: SignUpState.UserDetails.Operator,
         UserPin: SignUpState.UserDetails.UserPin || Cookie.getCookies('userPin'),
       };
+      if(obj.UserPin.length  == 4){
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);
@@ -62,9 +63,17 @@ export default function withLogin(Component, data) {
             router.push("/sign-up");
           });
         }
+        
       } catch (err) {
         console.log(err);
       }
+    }else{
+      swal({
+        title: "Enter 4 digit PIN",
+        timer: 2500,
+        icon: "error",
+      })
+    }
     }
 
     async function verifyPinCode(ip, pin, forgetPin) {

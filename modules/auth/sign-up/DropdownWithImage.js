@@ -10,7 +10,7 @@ function DropdownWithImage({ data, onChange, placeHolder, width }) {
   };
   return (
     <div>
-      <div className="form-control cursor-pointer border-curve">
+      <div className="form-control cursor-pointer border-curve w-100 position-relative">
         <div onClick={() => setIsCaretOpen(!isCaretOpen)} className="textfirst">
           {selectedData ? (
             <div className="">
@@ -52,7 +52,7 @@ function DropdownWithImage({ data, onChange, placeHolder, width }) {
         className={`overflow-hidden position-absolute mt-1 ${
           isCaretOpen ? "translate-100" : "translate-0"
         } `}
-        style={{ zIndex: 100, width: width ? width : "100%" , left : '31px' }}
+        style={{ zIndex: 100, width: "100%" , left : '0px' }}
       >
         <div className={`clr-black`}>
           {data.length

@@ -1,0 +1,87 @@
+.grey-background {
+  background: #3b3b3b;
+  height: 210px;
+}
+
+.bit-top {
+  position: relative;
+  bottom: 2.5rem;
+}
+
+.btn-login {
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0px 8px;
+}
+
+.text-red{
+  color: #fc5656;
+}
+
+.subscribe-btn{
+  margin-top: 10px;
+  width: 50%;
+  border-radius: 23px;
+  font-size: 20px;
+  color: white;
+}
+
+.desktop-size{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.padding-signup-layout{
+  padding: 20px 20px 20px 20px;
+}
+.center-width{
+    margin: 0 auto;
+    width: 45%;
+}
+
+.border-dotted-left{
+  border-left: 1px solid grey;
+  border-left-style: dotted;
+}
+.center-width-product{
+    margin: 0 auto !important;
+    width: 40%;
+    margin-top: 35px !important;
+}
+
+@media only screen and (max-width: 799px) {
+  .bit-top {
+    position: relative;
+    bottom: 4rem;
+  }
+
+  .desktop-size{
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .mx-sm-2 {
+    margin: 0 10px;
+  }
+  .center-width{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.subscribe-btn{
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 23px;
+  font-size: 20px;
+  color: white;
+}
+
+.center-width-product{
+    margin: 0 auto !important;
+    width: 100%;
+    margin-top: 35px !important;
+}
+
+}

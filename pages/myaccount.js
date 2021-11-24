@@ -35,11 +35,11 @@ const MyAccount = () => {
           setProfileData({
             ...profileData,
             UserId: userId,
-            Email: data.data.User.UserEmail,
-            UserMobileNumebr: data.data.UserProfile.UserProfileMobile,
-            FullName: data.data.UserProfile.UserProfileFullName,
-            BirthDate: data.data.UserProfile.UserProfileDOB,
-            ProfilePicture: data.data.UserProfile.UserProfilePicture,
+            Email: data.data?.User?.UserEmail,
+            UserMobileNumebr: data.data.ProfileData.UserProfileMobile,
+            FullName: data.data.ProfileData.UserProfileFullName,
+            BirthDate: data.data.ProfileData.UserProfileDOB,
+            ProfilePicture: data.data.ProfileData.UserProfilePicture,
           });
         }
       }

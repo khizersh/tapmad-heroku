@@ -6,7 +6,6 @@ import VerifyOTP from "./sign-up/VerifyOTP";
 import EnterPinToVerify from "./sign-up/EnterPinToVerify";
 import SetYourNewPin from "./sign-up/SetYourNewPin";
 import { useRouter } from "next/router";
-import { MainContext } from "../../contexts/MainContext";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
 import {
   UPDATE_SUBSCRIBE_RESPONSE,
@@ -14,11 +13,10 @@ import {
 } from "../../contexts/auth/SignUpReducer";
 
 export default memo(function Register(props) {
+
+  const {update} = props;
   const router = useRouter();
-  const { code, number, payment, subspack } = router.query;
-  const { authState, updateResponseCode, updateSelectedPaymentMethod } =
-    useContext(Authcontext);
-  const { updateUserNumber } = useContext(MainContext);
+  const { code, number, payment } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const RenderViews = useCallback(

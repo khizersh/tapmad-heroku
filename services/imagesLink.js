@@ -1,4 +1,5 @@
 export const tapmadLogo = "/icons/tm-logo.png";
+export const loginUserImage = "/icons/auth/user.svg";
 export const newBg = "/icons/background/newBackground.jpg";
 export const signinBackground = "/icons/background/background1.jpg";
 export const mobileIcon = "/icons/mobile-icon.svg";
@@ -45,6 +46,12 @@ export const pslCongrats = "/icons/psl/psl-congrats.jpg";
 export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const huaweiApp = "/icons/huawei-black.png";
+
+
+// signup icons
+export const castingIcon ="/icons/auth/casting.svg"
+export const deviceIcon ="/icons/auth/device.svg"
+export const qualityIcon ="/icons/auth/quality.svg"
 
 //My User Profile Assets
 export const userIcon = "/icons/user.svg";

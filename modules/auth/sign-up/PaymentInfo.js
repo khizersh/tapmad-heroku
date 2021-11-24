@@ -50,6 +50,7 @@ function PaymentInfo() {
             mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeEmail={handleEmail}
+            creditCardType={AuthState.CreditCardType}
           />
         </>
       );
@@ -116,7 +117,7 @@ function PaymentInfo() {
             {SignUpState && SignUpState.SelectedMethod && <RenderMethod />}
           </div>
         </div>
-        <SignMessage price={SignUpState.SelectedPrice} />
+        <SignMessage price={SignUpState.SelectedPrice}   creditCardType={AuthState.CreditCardType} />
       </div>
     </div>
   );

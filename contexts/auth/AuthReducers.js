@@ -1,4 +1,5 @@
 export const SET_ALL_PACKAGES = "SET_ALL_PACKAGES";
+export const CURRENT_USER_PACKAGE = "CURRENT_USER_PACKAGE";
 export const SET_COUNTRY_CODE = "SET_COUNTRY_CODE";
 export const SET_LOGIN_OPERATORS = "SET_LOGIN_OPERATORS";
 export const SET_VIEW_TO_SHOW = "SET_VIEW_TO_SHOW";
@@ -16,5 +17,7 @@ export function AuthReducer(state, action) {
       return { ...state, ViewToShow: action.data };
     case CREDIT_CARD_TYPE:
       return { ...state, CreditCardType: action.data };
+    case CURRENT_USER_PACKAGE:
+      return { ...state, CurrentUserPackage: action.data };
   }
 }

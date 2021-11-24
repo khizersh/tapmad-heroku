@@ -20,7 +20,6 @@ export default function AuthViews(props) {
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
-    console.log("viewToRender : ", viewToRender);
     // if (viewToRender == true) {
     //   return true;
     // } else {
