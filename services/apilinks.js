@@ -11,7 +11,8 @@ export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
 export const getUserByUserId = BASEPAYMENTURL + "api/getUserProfileDetail";
-export const getUserPaymentHistory = BASEURL + "api/getUserPaymentHistory";
+export const getUserPaymentHistory =
+  BASEPAYMENTURL + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
   BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
@@ -146,4 +147,4 @@ export const loggingTags = {
 // New login design apis
 
 export const PaymentPackages =
-BASEPAYMENTURL + "api/getPackagePaymentMethods/V1/en/android";
+  BASEPAYMENTURL + "api/getPackagePaymentMethods/V1/en/android";

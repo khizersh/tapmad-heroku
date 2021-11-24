@@ -11,6 +11,15 @@
 
   font-family: "okomitomedium";
 }
+.parent_webdiv {
+  height: 100vh;
+}
+.profile_div {
+  height: 40vh;
+}
+.package_div {
+  height: 60vh;
+}
 .btn-primary-outline {
   background-color: transparent;
   border-color: #ccc;
@@ -19,6 +28,43 @@
   position: relative;
   left: 5rem;
 }
+.option_div {
+  background-color: #fff;
+  position: relative;
+  bottom: 3rem;
+  margin: auto;
+  width: 30rem;
+}
+.cont_style {
+  background-color: #3b3b3b;
+}
+.table_style tr td {
+  font-size: 13px;
+  text-align: center;
+}
+.table_style th {
+  background-color: #484948;
+  padding: 10px;
+  color: #37c673;
+  text-align: center;
+}
+table tr:nth-child(odd) td {
+  background-color: #333433;
+}
+table tr:nth-child(even) td {
+  background-color: #3d3e3d;
+}
+.table_style {
+  width: 70%;
+  margin: auto;
+  background-color: red;
+}
+.text {
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  padding: 4px;
+}
 .btn-light {
   font-family: "okomitomedium";
   font-size: 14px;
@@ -26,17 +72,11 @@
 .btn-gradient {
   font-size: 14px;
   font-family: "okomitomedium";
-  background: #56ab2f; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #37c673,
-    #109f69
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #37c673,
-    #109f69
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: transparent
+    linear-gradient(96deg, var(--primary-37c673) 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
+  background: transparent linear-gradient(96deg, #37c673 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
   color: #fff;
 }
 .border-style {
@@ -95,4 +135,16 @@
 }
 .block_rank {
   background-color: #37c673;
+}
+
+@media only screen and (max-width: 799px) {
+  .option_div {
+    background-color: white;
+    width: 100%;
+    position: relative;
+    bottom: 3rem;
+    margin: auto;
+    min-width: 70% !important;
+    max-width: 70% !important;
+  }
 }

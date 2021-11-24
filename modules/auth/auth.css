@@ -1,8 +1,7 @@
-
-:root{
-  --mobile:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg');
-  --desktop:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg');
-  --basecolor: #87C242;
+:root {
+  --mobile: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg");
+  --desktop: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg");
+  --basecolor: #87c242;
 }
 .text-base {
   color: var(--basecolor);
@@ -22,24 +21,23 @@
   height: 100vh;
   background-blend-mode: multiply;
 }
-.bg-dark-cstm{
-background-color: #262626;
+.bg-dark-cstm {
+  background-color: #262626;
 }
 .tm_login_pg {
   display: table;
   width: 100%;
 }
 
-.border-curve{
+.border-curve {
   border-radius: 5px !important;
 }
 
-.text-box{
+.text-box {
   background-color: white;
-
 }
 
-.payment-icon{
+.payment-icon {
   background-color: white;
   color: black;
   padding: 4px;
@@ -88,13 +86,13 @@ background-color: #262626;
 .pymnt_pge_pr_list li {
   font-size: 14px;
   color: #000;
-  border-radius: 0 ;
+  border-radius: 0;
   background-color: #fff;
   cursor: pointer;
   transition: 0.3s;
-  opacity: 0.9;
+  opacity: 1;
 }
-.bit-top{
+.bit-top {
   position: relative;
   bottom: 5rem;
 }
@@ -105,11 +103,11 @@ background-color: #262626;
   /* border-bottom: 5px solid var(--basecolor); */
 }
 
-.green-bar{
-  border: 3px solid var(--basecolor);
+.green-bar {
+  border-bottom: 4px solid var(--basecolor);
   position: relative;
   bottom: -16px;
-  left: 23px;
+  left: 16%;
   width: 70%;
 }
 .pr_active span {
@@ -181,8 +179,8 @@ background-color: #262626;
   border-radius: 0;
 }
 
-.checkbox-term{
-  width: 20px; 
+.checkbox-term {
+  width: 20px;
   height: 20px;
   border-radius: 10px !important;
 }
@@ -198,17 +196,16 @@ background-color: #262626;
   -ms-user-select: none;
   user-select: none;
 }
-.container-term span{
+.container-term span {
   text-decoration: underline;
 }
 
-.pymnt_pge_sbscrbe_btn{
+.pymnt_pge_sbscrbe_btn {
   width: 100%;
   border-radius: 23px;
   font-size: 20px;
   color: white;
 }
-
 
 .text-white {
   color: white !important;
@@ -259,7 +256,6 @@ background-color: #262626;
 .cursor-pointer {
   cursor: pointer;
 }
-
 
 .font-weight {
   font-weight: 700;
@@ -361,10 +357,10 @@ background-color: #262626;
     background-blend-mode: multiply;
   }
 }
-.f-40{
+.f-40 {
   font-size: 32px;
 }
-.per-month{
+.per-month {
   font-size: 12px;
   text-align: left;
 }
@@ -377,16 +373,16 @@ background-color: #262626;
   top: 18px;
 }
 
-.line-1{
+.line-1 {
   line-height: 1;
 }
-.line-2{
+.line-2 {
   line-height: 2;
 }
-.font-17{
+.font-17 {
   font-size: 20px;
 }
-.font-weight-600{
+.font-weight-600 {
   font-weight: 600;
 }
 /* iPhone 5 (portrait)----------- */
@@ -401,10 +397,10 @@ background-color: #262626;
     background-size: cover;
     background-blend-mode: multiply;
   }
-  .f-40{
+  .f-40 {
     font-size: 30px;
   }
-  .per-month{
+  .per-month {
     font-size: 10px;
   }
   .monthly {
@@ -414,15 +410,15 @@ background-color: #262626;
     position: relative;
     left: 3px;
     top: 7px;
-}
+  }
 
-.green-bar{
-  border: 3px solid var(--basecolor);
-  position: relative;
-  bottom: -16px;
-  left: 21px;
-  width: 70%;
-}
+  .green-bar {
+    border: 3px solid var(--basecolor);
+    position: relative;
+    bottom: -16px;
+    left: 21px;
+    width: 70%;
+  }
 }
 
 /* Desktops and laptops ----------- */
@@ -439,14 +435,11 @@ background-color: #262626;
   }
 }
 
-
-
-
 /* Checkout CSS */
 
 .one-liner {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .card-frame {
@@ -455,18 +448,18 @@ background-color: #262626;
   width: 100%;
   margin-bottom: 8px;
   height: 40px;
-  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.2)
+  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.2);
 }
 
 .card-frame.frame--rendered {
-  opacity: 1
+  opacity: 1;
 }
 
 .card-frame.frame--rendered.frame--focus {
-  border: solid 1px #13395E;
-  box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15)
+  border: solid 1px #13395e;
+  box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15);
 }
-.f-20{
+.f-20 {
   font-size: 20px;
 }
 .price-active {
@@ -478,31 +471,29 @@ background-color: #262626;
   color: white;
 }
 .card-frame.frame--rendered.frame--invalid {
-  border: solid 1px #D96830;
-  box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15)
+  border: solid 1px #d96830;
+  box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15);
 }
-
 
 @media screen and (min-width: 31rem) {
   .one-liner {
-      flex-direction: row
+    flex-direction: row;
   }
 
   .card-frame {
-      width: 100%;
-      margin-bottom: 0
+    width: 100%;
+    margin-bottom: 0;
   }
 }
 
-.rounded-sides:first-child{
+.rounded-sides:first-child {
   border-top-left-radius: 35px;
   border-bottom-left-radius: 35px;
 }
-.rounded-sides:last-child{
+.rounded-sides:last-child {
   border-top-right-radius: 35px;
   border-bottom-right-radius: 35px;
 }
-
 
 /* Custom CSS for Radio Buttons Start*/
 
@@ -513,7 +504,7 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
   border: 2px solid white;
-  content: '';
+  content: "";
   border-radius: 50%;
   display: block;
   margin: -2px 20px;
@@ -522,7 +513,7 @@ input[type="radio"] {
   width: 10px;
   height: 10px;
   background-color: rgb(255, 255, 255);
-  content: '';
+  content: "";
   border-radius: 50%;
   display: block;
   /* margin: -5px 21px; */
@@ -533,7 +524,6 @@ input[type="radio"] {
   transition: all 0.4s;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
-
   .radio-cstm:before {
     width: 25px;
     height: 25px;
@@ -549,7 +539,7 @@ input[type="radio"] {
     width: 11px;
     height: 11px;
     background-color: rgb(255, 255, 255);
-    content: '';
+    content: "";
     border-radius: 50%;
     display: block;
     margin: -4px 22px;
@@ -563,13 +553,13 @@ input[type="radio"]:checked + .radio-cstm::after {
   background-color: rgba(135, 194, 66, 1);
 }
 input[type="radio"]:checked + .radio-cstm::before {
-  border: 3px solid rgba(135, 194, 66, 1);;
+  border: 3px solid rgba(135, 194, 66, 1);
 }
-.radio-cstm{
+.radio-cstm {
   cursor: pointer;
   font-weight: bold;
 }
-.radio-cstm:nth-last-child(1){
+.radio-cstm:nth-last-child(1) {
   padding-right: 0px;
 }
 /* Custom CSS for Radio Buttons End*/

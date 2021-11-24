@@ -29,6 +29,7 @@ import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
 import SignUpProvider from "../contexts/auth/SignUpContext";
 import loadable from "@loadable/component";
+import ProfileProvider from "../contexts/profile/ProfileContext";
 
 const DashboardLayout = loadable(() =>
   import("../modules/dashboard/DashboardLayout")
@@ -93,7 +94,6 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-
       </Head>
       <>
         <noscript>
@@ -118,9 +118,11 @@ function MyApp({ Component, pageProps }) {
               <AuthProvider>
                 <AuthProviderNew>
                   <SignUpProvider>
-                    <NoSideBarSkeleton>
-                      <Component {...pageProps} />
-                    </NoSideBarSkeleton>
+                    <ProfileProvider>
+                      <NoSideBarSkeleton>
+                        <Component {...pageProps} />
+                      </NoSideBarSkeleton>
+                    </ProfileProvider>
                   </SignUpProvider>
                 </AuthProviderNew>
               </AuthProvider>
