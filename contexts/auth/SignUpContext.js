@@ -17,6 +17,7 @@ export default function SignUpProvider({ children }) {
     });
 
     useEffect(() => {
+        console.log("AuthState in signup : ",AuthState);
         if (AuthState?.PaymentPackages?.length > 0) {
             dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] })
         }

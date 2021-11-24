@@ -107,7 +107,7 @@ background-color: #3b3b3b;
   border: 3px solid var(--basecolor);
   position: relative;
   bottom: -16px;
-  left: 23px;
+  margin: 0 auto;
   width: 70%;
 }
 .pr_active span {
@@ -418,8 +418,7 @@ background-color: #3b3b3b;
 .green-bar{
   border: 3px solid var(--basecolor);
   position: relative;
-  bottom: -16px;
-  left: 21px;
+  margin: 0 auto;
   width: 70%;
 }
 }

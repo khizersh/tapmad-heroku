@@ -1,5 +1,5 @@
 import { setCookiesForLogin } from "../modules/auth/sign-up/authHelper";
-import { PaymentPackages } from "./apilinks";
+import { PaymentPackages, PaymentPackagesByUserId } from "./apilinks";
 import { Cookie } from "./cookies";
 import { LoginTag } from "./gtm";
 import { get } from "./http-service";
@@ -7,30 +7,45 @@ import { get } from "./http-service";
 export async function getAllPaymentPackages() {
   return (await get(PaymentPackages)).data;
 }
+export async function getAllPaymentPackagesByUserId(userID) {
+  return (await get(PaymentPackagesByUserId + userID)).data;
+}
 
-export function setLoginViews(response , obj) {
+export function setLoginViews(response, obj) {
   if (response?.responseCode == 11) {
-    if(response.data.UserActiveSubscription && response.data.UserActiveSubscription.length){
-    if (response.data.User.UserId) {
-      if (response.data.User.IsPinSet) {
-        setCookiesForLogin(response.data);
-        LoginTag(obj, response.data);
-        Cookie.setCookies("user_mob", obj.MobileNo);
-        return { code: 1, view: "home" };
+    if (
+      response.data.UserActiveSubscription &&
+      response.data.UserActiveSubscription.length
+    ) {
+      if (response.data.User.UserId) {
+        if (response.data.User.IsPinSet) {
+          setCookiesForLogin(response.data);
+          LoginTag(obj, response.data);
+          Cookie.setCookies("user_mob", obj.MobileNo);
+          return { code: 1, view: "home" };
+        } else {
+          return { code: 34, view: "send-otp" };
+        }
       } else {
-        return { code: 34, view: "send-otp" };
+        return { code: 0, view: "sign-up" };
       }
     } else {
       return { code: 0, view: "sign-up" };
     }
-  }else{
-    return { code: 0, view: "sign-up" };
-  }
-
   } else {
-      if(response.responseCode == 31){
-          return { code: 31, view: "sign-in" };
+    if (response.responseCode == 31) {
+      return { code: 31, view: "sign-in" };
+    }
+  }
+}
 
-      }
+export function checkUserIdAndToken() {
+  const token = Cookie.getCookies("content-token");
+  const isAuth = Cookie.getCookies("isAuth");
+  const backurl = Cookie.getCookies("backURL");
+  if (token && token.length > 50 && isAuth == 1) {
+    return {valid : true , url  : backurl};
+  } else {
+    return {valid : false , url  : backurl ? backurl : "/"};
   }
 }

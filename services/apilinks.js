@@ -147,3 +147,7 @@ export const loggingTags = {
 
 export const PaymentPackages =
 BASEPAYMENTURL + "api/getPackagePaymentMethods/V1/en/android";
+export const PaymentPackagesByUserId =
+BASEPAYMENTURL + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
+
+

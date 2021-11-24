@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Router from "next/router";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useEffect } from "react";
 import Loader from "../components/Loader";
 import AuthProvider from "../contexts/AuthContext";
 import AuthProviderNew from "../contexts/auth/AuthContext";
 import CatchupProvider from "../contexts/CatchupContext";
 import GameProvider from "../contexts/GameContext";
+import { useRouter } from "next/router";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import "../styles/globals.scss";
 import "../modules/auth/auth.css";
@@ -30,6 +31,7 @@ import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
 import SignUpProvider from "../contexts/auth/SignUpContext";
 import loadable from "@loadable/component";
+import { checkUserIdAndToken } from "../services/auth.service";
 
 const DashboardLayout = loadable(() =>
   import("../modules/dashboard/DashboardLayout")
@@ -39,6 +41,7 @@ const Header = loadable(() => import("../components/App/Header"));
 const Footer = loadable(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
   useLayoutEffect(() => {
     UserSessions();
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -47,7 +50,18 @@ function MyApp({ Component, pageProps }) {
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
   }, []);
- 
+
+  useEffect(() => {
+    if (pageProps.protected) {
+      console.log("pageProps : ",pageProps);
+      let check = checkUserIdAndToken();
+      console.log("check : ",check);
+      if (!check.valid) {
+        router.push(check.url);
+      }
+    }
+  }, [pageProps.protected]);
+
   return (
     <>
       <Head>
@@ -94,7 +108,6 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-
       </Head>
       <>
         <noscript>
