@@ -11,7 +11,7 @@ import {
   stadiumIcon,
   trophyIcon,
   userIcon,
-} from "../services/imagesLink";
+} from "../../services/imagesLink";
 
 const MyAccountMobile = ({ profileData, allData }) => {
   const [show, setShow] = useState({

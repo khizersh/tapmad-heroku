@@ -54,9 +54,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (pageProps.protected) {
-      console.log("pageProps : ", pageProps);
       let check = checkUserIdAndToken();
-      console.log("check : ", check);
       if (!check.valid) {
         router.push(check.url);
       }

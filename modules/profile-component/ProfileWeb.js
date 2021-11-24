@@ -11,7 +11,8 @@ import {
   qualityIcon,
   stadiumIcon,
   trophyIcon,
-} from "../services/imagesLink";
+} from "../../services/imagesLink";
+
 import Link from "next/link";
 const MyAccountWeb = ({ profileData, allData }) => {
   const [imageState, setImageState] = useState({

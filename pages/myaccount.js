@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { MyAccountService } from "../modules/my-account/myaccount.service";
-import PersonalInfo from "../modules/my-account/PersonalInfo";
-import UserStatus from "../modules/my-account/UserStatus";
 import { Cookie } from "../services/cookies";
+import requestIp from "request-ip";
+import MyAccountMobile from "../modules/profile-component/ProfileMobile";
+import MyAccountWeb from "../modules/profile-component/ProfileWeb";
+import { ProfileContext } from "../contexts/profile/ProfileContext";
+import { PROFILE_DATA } from "../contexts/profile/ProfileReducer";
 
-const MyAccount = () => {
+const MyAccountTrial = () => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
-  const [formData, setFormData] = useState({
+  const [postFormData, setPostFormData] = useState({
     Version: "V1",
     Language: "en",
     Platform: "web",
     UserId: userId,
   });
+
+  const [isMobile, setIsMobile] = useState(false);
   const [allData, setAllData] = useState(null);
   const [profileData, setProfileData] = useState({
     Version: "V1",
@@ -23,49 +28,69 @@ const MyAccount = () => {
     UserMobileNumebr: "",
     BirthDate: "",
     Email: "",
+    Package: "",
   });
-
+  const { ProfileState, dispatch } = useContext(ProfileContext);
   useEffect(async () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
-      const data = await MyAccountService.getUserData(formData);
+      const data = await MyAccountService.getUserData(postFormData);
+      if (ProfileState) {
+        dispatch({ type: PROFILE_DATA, data: data });
+      }
       if (data != null) {
         if (data.responseCode == 1) {
           setAllData(data.data);
           setProfileData({
             ...profileData,
             UserId: userId,
-            Email: data.data?.User?.UserEmail,
-            UserMobileNumebr: data.data.ProfileData.UserProfileMobile,
-            FullName: data.data.ProfileData.UserProfileFullName,
-            BirthDate: data.data.ProfileData.UserProfileDOB,
-            ProfilePicture: data.data.ProfileData.UserProfilePicture,
+            Email: data.data.ProfileData.UserEmail || "--",
+            UserMobileNumebr: data.data.ProfileData.UserProfileMobile || "--",
+            FullName: data.data.ProfileData.UserProfileFullName || "--",
+            BirthDate: data.data.ProfileData.UserProfileDOB || "--",
+            ProfilePicture: data.data.ProfileData.UserProfilePicture || "--",
+            Gender: data.data.ProfileData.UserProfileGender || "--",
+            Package: data.data.Package,
           });
         }
       }
     }
+
+    if (window.innerWidth < 799) {
+      setIsMobile(true);
+    }
   }, []);
 
+  const RenderViews = useCallback(
+    function () {
+      if (isMobile) {
+        return <MyAccountMobile profileData={profileData} allData={allData} />;
+      } else {
+        return <MyAccountWeb profileData={profileData} allData={allData} />;
+      }
+    },
+    [isMobile, profileData]
+  );
+
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-3 ">
-          {profileData && <PersonalInfo data={profileData} />}
-        </div>
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-          {allData && <UserStatus pdata={allData} userId={formData.UserId} />}
-        </div>
-      </div>
+    <div className="container">
+      <RenderViews />
     </div>
   );
 };
+export default MyAccountTrial;
 
-export default MyAccount;
-
-export function getStaticProps() {
+export function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   return {
     props: {
+      noSideBar: true,
       protected: true,
+      auth: true,
+      ip: ip,
       env: process.env.TAPENV,
     },
   };

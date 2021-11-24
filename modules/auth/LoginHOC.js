@@ -5,7 +5,6 @@ import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import swal from "sweetalert";
-import { setCookiesForLogin } from "./sign-up/authHelper";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { setLoginViews } from "../../services/auth.service";
@@ -28,7 +27,7 @@ export default function withLogin(Component, data) {
         OperatorId: SignUpState.UserDetails.Operator,
         UserPin: SignUpState.UserDetails.UserPin || Cookie.getCookies('userPin'),
       };
-      if(obj.UserPin.length  == 4){
+      if(obj.UserPin.length  === 4){
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);
@@ -68,6 +67,7 @@ export default function withLogin(Component, data) {
         console.log(err);
       }
     }else{
+      setLoader(false);
       swal({
         title: "Enter 4 digit PIN",
         timer: 2500,

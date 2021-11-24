@@ -69,6 +69,4 @@ export const coinIcon = "/icons/ico-coins.svg";
 export const colorPackage = "/icons/colorPackage.svg";
 export const blackPackage = "/icons/blackPackage.svg";
 export const colorGaming = "/icons/colorGaming.svg";
-export const qualityIcon = "/icons/quality.svg";
-export const deviceIcon = "/icons/device.svg";
 export const connectIcon = "/icons/connect.svg";
