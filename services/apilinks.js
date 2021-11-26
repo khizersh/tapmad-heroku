@@ -53,7 +53,7 @@ export const initialPaymentTransactionNew =
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";
 export const unsubscribePaymentTransaction =
-  BASEURL + "api/unsubscribePaymentTransaction";
+  BASEPAYMENTURL + "api/unsubscribePaymentTransaction";
 export const getMoviesWithPagination = (from, to) => {
   return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
 };

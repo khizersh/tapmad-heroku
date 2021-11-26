@@ -32,8 +32,10 @@ export default function AuthProviderNew({ children }) {
     const pathname = window?.location?.pathname;
     if (AuthState.UpdatePackage && userId || pathname.includes("change-package")) {
       packages = await getAllPaymentPackagesByUserId(userId);
+      console.log("packages if: ",packages);
       dispatch({type: CURRENT_USER_PACKAGE,data: packages.CurrentPackageDescription});
     } else {
+      console.log("packages else: ",packages);
       packages = await getAllPaymentPackages();
     }
     dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });

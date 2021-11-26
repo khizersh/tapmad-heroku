@@ -8,23 +8,24 @@ export default function TaxView({ onChange }) {
   const [SelectedPrice, setSelectedPrice] = useState({});
 
   useEffect(() => {
-    if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
-      console.log("SignUpState.SelectedPackage : ",SignUpState.SelectedPackage);
-      let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
-       let finalArray = [];
-       let pkgArray = m.PackageName?.split(" ");  
-       finalArray.push(pkgArray[0])
-       if(pkgArray.length > 1){
-        finalArray.push(pkgArray.slice(1).join(" ")) 
-       }  
-       return {
-        ...m,
-        PackageNameArray : finalArray
-       }
-      });
-      setPackagePrice(array);
-      dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
-    }
+    // if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+    //   console.log("SignUpState.SelectedPackage : ",SignUpState);
+    //   let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
+    //    let finalArray = [];
+    //    let pkgArray = m.PackageName?.split(" ");  
+    //    finalArray.push(pkgArray[0])
+    //    if(pkgArray.length > 1){
+    //     finalArray.push(pkgArray.slice(1).join(" ")) 
+    //    }  
+    //    return {
+    //     ...m,
+    //     PackageNameArray : finalArray
+    //    }
+    //   });
+    //   setPackagePrice(array);
+    //   dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
+    // }
+    console.log("SignUpState : ",SignUpState);
   }, [SignUpState.SelectedPackage]);
 
   useEffect(() => {

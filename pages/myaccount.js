@@ -66,14 +66,20 @@ const MyAccountTrial = () => {
       if (isMobile) {
         return <MyAccountMobile profileData={profileData} allData={allData} />;
       } else {
-        return <MyAccountWeb profileData={profileData} allData={allData} />;
+        return (
+          <MyAccountWeb
+            profileData={profileData}
+            allData={allData}
+            userId={postFormData.UserId}
+          />
+        );
       }
     },
     [isMobile, profileData]
   );
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <RenderViews />
     </div>
   );

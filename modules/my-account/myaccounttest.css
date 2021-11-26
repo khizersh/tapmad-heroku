@@ -17,6 +17,20 @@
 .profile_div {
   height: 40vh;
 }
+.optButtons {
+  background-color: #1d211f;
+  font-size: 14px;
+}
+.optButtons:focus {
+  font-size: 14px;
+  font-family: "okomitomedium";
+  background: transparent
+    linear-gradient(96deg, var(--primary-37c673) 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
+  background: transparent linear-gradient(96deg, #37c673 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
+  color: #fff;
+}
 .package_div {
   height: 60vh;
 }
@@ -55,9 +69,30 @@ table tr:nth-child(even) td {
   background-color: #3d3e3d;
 }
 .table_style {
-  width: 70%;
-  margin: auto;
-  background-color: red;
+  width: 100%;
+}
+.pagination {
+  display: inline-block;
+  width: 100%;
+}
+.mob_editProfile {
+  background-color: #fff;
+}
+.mob_editProfile input {
+  background-color: transparent;
+  border: 1px solid #707070;
+}
+.mob_editProfile input::placeholder {
+  color: #707070;
+}
+.pagination a {
+  color: red;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.table_text {
+  font-size: 31px;
 }
 .text {
   font-size: 14px;

@@ -47,11 +47,10 @@ export const appleApp = "/icons/appstore.png";
 export const androidApp = "/icons/gply.png";
 export const huaweiApp = "/icons/huawei-black.png";
 
-
 // signup icons
-export const castingIcon ="/icons/auth/casting.svg"
-export const deviceIcon ="/icons/auth/device.svg"
-export const qualityIcon ="/icons/auth/quality.svg"
+export const castingIcon = "/icons/auth/casting.svg";
+export const deviceIcon = "/icons/auth/device.svg";
+export const qualityIcon = "/icons/auth/quality.svg";
 
 //My User Profile Assets
 export const userIcon = "/icons/user.svg";
@@ -71,4 +70,8 @@ export const blackPackage = "/icons/blackPackage.svg";
 export const transparentBox = "/icons/auth/transparentbox.svg";
 export const upgradeIcon = "/icons/auth/upgrade.svg";
 export const colorGaming = "/icons/colorGaming.svg";
+export const blackGaming = "/icons/blackGaming.svg";
+export const creditcardIcon = "/icons/credit-card.svg";
+export const tableNextIcon = "/icons/tableNext.svg";
+export const tableBackIcon = "/icons/tableBack.svg";
 export const connectIcon = "/icons/connect.svg";
