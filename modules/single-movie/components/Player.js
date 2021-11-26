@@ -21,6 +21,7 @@ const PSLComponent = dynamic(() =>
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [adDuration, setAdDuration] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
@@ -192,7 +193,9 @@ export default function Player({ movies }) {
       window.removeEventListener("scroll", scrollCallBack);
     };
   }, []);
+
   useEffect(() => {
+    setIsMobile(window.screen.width < 639);
     if (movies.Video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
         router.push("/sign-up");
@@ -319,8 +322,7 @@ export default function Player({ movies }) {
               </div>
             </div>
           </div>
-
-          <div className="col-lg-3 text-center pt-5 d-none d-lg-block d-md-block">
+          {!isMobile ? <div className="col-lg-3 text-center pt-5 d-lg-block d-md-block">
             {/* Side Add desktop start*/}
             <div className="d-none d-lg-block d-md-block">
               {ads.allow && ads.rightAd ? (
@@ -422,7 +424,8 @@ export default function Player({ movies }) {
                   : null}
               </div>
             </div>
-          </div>
+          </div> : null}
+
           <div className="m-auto d-block d-sm-none">
             <div>
               {ads.allow && ads.bottomBannerAdMobile ? (
