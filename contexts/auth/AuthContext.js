@@ -22,28 +22,25 @@ export default function AuthProviderNew({ children }) {
     CountryCode: "",
     ViewToShow: "sign-in",
     CreditCardType: null,
-    UpdatePackage: true,
+    UpdatePackage: false,
     CurrentUserPackage: null,
   });
 
   useEffect(async () => {
     var packages;
     let userId = Cookie.getCookies("userId");
-    if (AuthState.UpdatePackage && userId) {
+    const pathname = window?.location?.pathname;
+    if (AuthState.UpdatePackage && userId || pathname.includes("change-package")) {
       packages = await getAllPaymentPackagesByUserId(userId);
-      dispatch({
-        type: CURRENT_USER_PACKAGE,
-        data: packages.CurrentPackageDescription,
-      });
+      dispatch({type: CURRENT_USER_PACKAGE,data: packages.CurrentPackageDescription});
     } else {
       packages = await getAllPaymentPackages();
     }
-
     dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
     dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
     dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
     dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
-  }, [AuthState.updatePackage]);
+  }, [AuthState.UpdatePackage]);
 
   const data = {
     AuthState,

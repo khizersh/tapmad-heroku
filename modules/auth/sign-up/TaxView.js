@@ -9,9 +9,10 @@ export default function TaxView({ onChange }) {
 
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+      console.log("SignUpState.SelectedPackage : ",SignUpState.SelectedPackage);
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
        let finalArray = [];
-       let pkgArray = m.PackageName.split(" ");  
+       let pkgArray = m.PackageName?.split(" ");  
        finalArray.push(pkgArray[0])
        if(pkgArray.length > 1){
         finalArray.push(pkgArray.slice(1).join(" ")) 
@@ -56,7 +57,7 @@ export default function TaxView({ onChange }) {
                   <>
                   <span className="font-weight-bold text-left line-2">{m.PackageName}</span>
                   </> }               
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-10px">
                   <div className="text-white per-month mt-2">
                   {m.PackagePrices[0]}
                   </div>

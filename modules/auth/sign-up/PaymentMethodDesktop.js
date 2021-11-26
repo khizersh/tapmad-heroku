@@ -67,10 +67,10 @@ export default function PaymentMethodDesktop() {
         <div className="col-7 border-dotted-left">
           <div className="row mt-3">
             <div className="col-12">
-              <h3 className="text-base text-center">Payment Option</h3>
+              <h3 className="text-base text-center">Payment Options</h3>
             </div>
           </div>
-          <div className="row py-3 flex-nowrap">
+          <div className="row py-3 flex-nowrap padding-x-100">
             {CurrentPackage && CurrentPackage.PaymentMethods
               ? CurrentPackage.PaymentMethods.map((m, i) => (
                   <div className="col text-center p-0">

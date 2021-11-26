@@ -10,10 +10,21 @@
 
 .btn-login {
   background-color: white;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  padding: 0px 8px;
+  padding: 0px 5px;
+}
+
+.mt-10px{
+  margin-top: -10px;
+}
+
+.rounded-lg{
+  border-radius: 1.25rem !important;
+}
+.bg-green-light{
+  background-color: rgb(55, 198, 115 , 0.2);
 }
 
 .text-red{

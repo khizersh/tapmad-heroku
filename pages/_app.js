@@ -12,6 +12,7 @@ import "../styles/globals.scss";
 import "../modules/auth/auth.css";
 import "../components/App/Header.css";
 import "../modules/catchup/catchup.css";
+import "../modules/profile-component/profile-component.css";
 import "../modules/category/css/card-hor.style.css";
 import "../modules/dashboard/dashboard.style.css";
 import "../modules/home/sliderCard.css";

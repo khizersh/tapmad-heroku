@@ -68,5 +68,7 @@ export const priceIcon = "/icons/price.png";
 export const coinIcon = "/icons/ico-coins.svg";
 export const colorPackage = "/icons/colorPackage.svg";
 export const blackPackage = "/icons/blackPackage.svg";
+export const transparentBox = "/icons/auth/transparentbox.svg";
+export const upgradeIcon = "/icons/auth/upgrade.svg";
 export const colorGaming = "/icons/colorGaming.svg";
 export const connectIcon = "/icons/connect.svg";

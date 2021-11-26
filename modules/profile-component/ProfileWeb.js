@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useRouter } from "next/router";
 import {
   awardIcon,
   blackPackage,
@@ -12,13 +13,17 @@ import {
   stadiumIcon,
   trophyIcon,
 } from "../../services/imagesLink";
-
 import Link from "next/link";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
+
 const MyAccountWeb = ({ profileData, allData }) => {
+  const router = useRouter();
   const [imageState, setImageState] = useState({
     pacakge: true,
     game: false,
   });
+  const { dispatch , AuthState} = useContext(AuthContext);
 
   const onSwitchImage = () => {
     console.log(imageState.pacakge);
@@ -28,6 +33,13 @@ const MyAccountWeb = ({ profileData, allData }) => {
       setImageState({ pacakge: true, game: false });
     }
   };
+
+  const onClickUpgradePackage = async () => {
+   await dispatch({ type: UPDATE_PACKAGE, data: true });
+    router.push("/change-package")
+  };
+
+
   return (
     <div className="d-none d-sm-block d-md-block d-lg-block d-xl-block parent_webdiv">
       <div className="profile_div">
@@ -39,6 +51,7 @@ const MyAccountWeb = ({ profileData, allData }) => {
             <button
               type="button"
               className="btn btn-gradient text-light rounded-pill w-100"
+              onClick={onClickUpgradePackage}
             >
               Update Package
             </button>
@@ -204,6 +217,7 @@ const MyAccountWeb = ({ profileData, allData }) => {
                       type="button"
                       className="btn w-100 px-2  text-light rounded-pill"
                       style={{ backgroundColor: "#1D211F", fontSize: "14px" }}
+                      onClick={onClickUpgradePackage}
                     >
                       Upgrade Package
                     </button>

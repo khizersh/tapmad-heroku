@@ -10,33 +10,14 @@ const DesktopLayout = ({ children, bgImage }) => {
   };
 
   const onClickBack = () => {
-    var backUrl = Cookie.getCookies("backUrl");
-    if (!backUrl) {
-      router.push("/");
-    } else {
-      if (
-        backUrl.split("/")[1] == "watch" ||
-        backUrl.split("/")[1] == "catchup-watch"
-      ) {
-        router.push("/");
-      } else {
-        router.push(backUrl);
-      }
-    }
+    router.push("/");
   };
 
   return (
     <>
       <div className="bg-green px-5 d-flex justify-content-between">
         <div className="pl-4">
-          <button
-            className="btn"
-            style={{
-              fontSize: "13px",
-              color: "black",
-            }}
-            onClick={onClickBack}
-          >
+          <button className="btn" onClick={onClickBack}>
             <img className="pl-3" src={tapmadLogo} width="130px" />
           </button>
         </div>
@@ -47,10 +28,10 @@ const DesktopLayout = ({ children, bgImage }) => {
         >
           <button className="btn btn-login">
             <div>
-              <img width="10px" src={loginUserImage} alt="Login image" />
+              <img width="11" src={loginUserImage} alt="Login image" />
             </div>
           </button>
-          <span  className="btn text-white pl-2 font-weight-light ">Login</span>
+          <span className="btn text-white pl-2 font-weight-light ">Login</span>
         </div>
       </div>
       <div className="grey-background"></div>
