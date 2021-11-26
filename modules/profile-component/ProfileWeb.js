@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   awardIcon,
+  blackGaming,
   blackPackage,
   coinIcon,
   colorGaming,
@@ -12,9 +13,14 @@ import {
   stadiumIcon,
   trophyIcon,
 } from "../../services/imagesLink";
+import { MainContext } from "../../contexts/MainContext";
 
 import Link from "next/link";
-const MyAccountWeb = ({ profileData, allData }) => {
+import { MyAccountService } from "../my-account/myaccount.service";
+import { GlobalService } from "../global-service";
+import swal from "sweetalert";
+const MyAccountWeb = ({ profileData, allData, userId }) => {
+  const { setLoader } = useContext(MainContext);
   const [imageState, setImageState] = useState({
     pacakge: true,
     game: false,
@@ -28,8 +34,47 @@ const MyAccountWeb = ({ profileData, allData }) => {
       setImageState({ pacakge: true, game: false });
     }
   };
+  const unSubscribe = () => {
+    setLoader(true);
+    let body = {
+      Language: "en",
+      Platform: "android",
+      ProductId: allData.MyPackage,
+      UserId: userId,
+      Version: "V1",
+      headers: GlobalService.authHeaders() || null,
+    };
+    MyAccountService.unsubcribeUser(body)
+      .then((res) => {
+        if (res.responseCode == 1) {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "success",
+          });
+          setdeactivated(true);
+          setLoader(false);
+        } else if (res.responseCode == 5) {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "success",
+          });
+        } else {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "error",
+          });
+          setLoader(false);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+      });
+  };
   return (
-    <div className="d-none d-sm-block d-md-block d-lg-block d-xl-block parent_webdiv">
+    <div className="d-none d-sm-block d-md-block d-lg-block d-xl-block parent_webdiv p-4">
       <div className="profile_div">
         <div className="row p-1">
           <div class="m-1">
@@ -72,28 +117,29 @@ const MyAccountWeb = ({ profileData, allData }) => {
               </div>
             </div>
           </div>
-          <div class="col-3">
-            <div class="col-12 float-right">
-              <div class="row">
-                <div>
-                  <img src={coinIcon} width="50" alt="user_back" />
+          <div class="col-5 float-right">
+            <div className="row">
+              <div className="col-5 text-right pr-1">
+                <img src={coinIcon} width="65" alt="user_back" />
+              </div>
+              <div className="col-7 text-left p-0">
+                <div className="row">
+                  <div className="col-12">My</div>
                 </div>
-                <div className="ml-2 mb-2">
-                  My
-                  <br />
-                  <span>
+                <div className="row">
+                  <div className="col-12">
                     Coins <strong>5.5k</strong>
-                  </span>
+                  </div>
                 </div>
               </div>
-              <div className="col-12">
-                <button
-                  type="button"
-                  className="btn btn-gradient text-light rounded-pill p-2 w-100"
-                >
-                  Buy More Coins
-                </button>
-              </div>
+            </div>
+            <div className="text-center mt-2 mr-5">
+              <button
+                type="button"
+                className="btn btn-gradient text-light rounded-pill px-3"
+              >
+                Buy More Coins
+              </button>
             </div>
           </div>
         </div>
@@ -116,7 +162,7 @@ const MyAccountWeb = ({ profileData, allData }) => {
         <div className="m-auto" onClick={onSwitchImage}>
           <span style={{ color: imageState.game ? "#87c242" : "#000" }}>
             <img
-              src={imageState.game ? colorGaming : blackPackage}
+              src={imageState.game ? colorGaming : blackGaming}
               width="35"
               alt="User"
               className="mx-3 logo-img"
@@ -189,11 +235,7 @@ const MyAccountWeb = ({ profileData, allData }) => {
                     <Link href="/billingtest">
                       <button
                         type="button"
-                        className="btn w-100 px-2  text-light rounded-pill"
-                        style={{
-                          backgroundColor: "#1D211F",
-                          fontSize: "14px",
-                        }}
+                        className="btn w-100 px-2  text-light rounded-pill optButtons"
                       >
                         Billing History
                       </button>
@@ -202,8 +244,8 @@ const MyAccountWeb = ({ profileData, allData }) => {
                   <div className="col-4 ">
                     <button
                       type="button"
-                      className="btn w-100 px-2  text-light rounded-pill"
-                      style={{ backgroundColor: "#1D211F", fontSize: "14px" }}
+                      className="btn w-100 px-2  text-light rounded-pill optButtons"
+                      // onClick={() => {dispatchEvent({type:CHANGEPACKAGE,data:true})}}
                     >
                       Upgrade Package
                     </button>
@@ -211,8 +253,8 @@ const MyAccountWeb = ({ profileData, allData }) => {
                   <div className="col-4 ">
                     <button
                       type="button"
-                      className="btn w-100 px-2  text-light rounded-pill"
-                      style={{ backgroundColor: "#1D211F", fontSize: "14px" }}
+                      className="btn w-100 px-2  text-light rounded-pill optButtons"
+                      onClick={() => unSubscribe()}
                     >
                       Unsubscribe
                     </button>
