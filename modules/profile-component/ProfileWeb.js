@@ -93,7 +93,6 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
             <button
               type="button"
               className="btn btn-gradient text-light rounded-pill w-100"
-            
             >
               Edit Profile
             </button>
