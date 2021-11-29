@@ -75,3 +75,5 @@ export const creditcardIcon = "/icons/credit-card.svg";
 export const tableNextIcon = "/icons/tableNext.svg";
 export const tableBackIcon = "/icons/tableBack.svg";
 export const connectIcon = "/icons/connect.svg";
+// export const userProfileIcon = "/icons/profile/user.svg";
+export const userProfileIcon = "/icons/profile/profile.png";

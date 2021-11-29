@@ -15,18 +15,35 @@ const BillingHistory = () => {
   });
   const [subscriptionData, setSubscriptionData] = useState([]);
   const [dataLimit, setDataLimit] = useState(10);
+  const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentPost, setCurrentPost] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
 
   useEffect(async () => {
-    const data = await MyAccountService.getUserPaymentHistoryData(form);
-    setSubscriptionData(data.data);
-    const indexOfLast = currentPage * dataLimit;
-    const indexOfNext = indexOfLast - dataLimit;
-    setCurrentPost(
-      subscriptionData.Transaction.slice(indexOfNext, indexOfLast)
-    );
-  }, [userId]);
+    // const data = await MyAccountService.getUserPaymentHistoryData(form);
+    // setSubscriptionData(data.data);
+    const page = Math.ceil(obj.Transaction.length / 10);
+    let pageArray = [];
+    for (let index = 0; index < page; index++) {
+      pageArray.push(index + 1);
+    }
+    setPages(pageArray);
+    setCurrentData(obj.Transaction.slice(1, 10));
+  }, [userId, currentPage]);
+
+  const onClickPage = (page) => {
+    console.log(page * 10);
+    let startingValue = 0,
+      endingValue = 10;
+    if (page == 1) {
+      startingValue = 0;
+      endingValue = 10;
+    } else {
+      startingValue = (page - 1) * 10;
+      endingValue = page * 10;
+    }
+    setCurrentData(obj.Transaction.slice(startingValue, endingValue))
+  };
   const obj = {
     Transaction: [
       {
@@ -175,27 +192,22 @@ const BillingHistory = () => {
       <div className="offset-1 col-10">
         <div className="row ml-2">
           <img src={creditcardIcon} width="20" alt="card" className="mr-2" />
-          <text
-            className="table_text"
-            onClick={() => console.log(currentPosts)}
-          >
-            Billing History
-          </text>
+          <text className="table_text">Billing History</text>
         </div>
-        <div>
-          <BillingTable subscriptions={subscriptionData} />
-          <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#" onClick={() => testFunction(1)}>
-              1
-            </a>
-            <a href="#" onClick={() => testFunction(2)}>
-              2
-            </a>
-            <a href="#" onClick={() => testFunction(3)}>
-              3
-            </a>
-            <a href="#">&raquo;</a>
+        <div className="row">
+          <div className="col-12">
+            <BillingTable subscriptions={currentData} />
+          </div>
+          <div className="col-12">
+            <div className="pagination float-right">
+              <a href="#">&laquo;</a>
+              {pages.map((pg, i) => (
+                <a className="btn btn-success" onClick={() => onClickPage(pg)}>
+                  {pg}
+                </a>
+              ))}
+              <a href="#">&raquo;</a>
+            </div>
           </div>
         </div>
       </div>

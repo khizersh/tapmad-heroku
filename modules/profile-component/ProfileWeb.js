@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
 import {
   awardIcon,
   blackGaming,
@@ -13,24 +12,25 @@ import {
   qualityIcon,
   stadiumIcon,
   trophyIcon,
+  userProfileIcon,
 } from "../../services/imagesLink";
 import { MainContext } from "../../contexts/MainContext";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { MyAccountService } from "../my-account/myaccount.service";
 import { GlobalService } from "../global-service";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 
-
 const MyAccountWeb = ({ profileData, allData, userId }) => {
   const { setLoader } = useContext(MainContext);
-  const router = useRouter()
+  const router = useRouter();
   const [imageState, setImageState] = useState({
     pacakge: true,
     game: false,
   });
-  const { dispatch , AuthState} = useContext(AuthContext);
+  const { dispatch, AuthState } = useContext(AuthContext);
   const onSwitchImage = () => {
     console.log(imageState.pacakge);
     if (imageState.pacakge == true) {
@@ -40,8 +40,8 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
     }
   };
   const onClickUpgradePackage = async () => {
-   await dispatch({ type: UPDATE_PACKAGE, data: true });
-    router.push("/change-package")
+    await dispatch({ type: UPDATE_PACKAGE, data: true });
+    router.push("/change-package");
   };
   const unSubscribe = () => {
     setLoader(true);
@@ -82,34 +82,41 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
         setLoader(false);
       });
   };
+
   return (
-    <div className="d-none d-sm-block d-md-block d-lg-block d-xl-block parent_webdiv p-4">
+    <div className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
       <div className="profile_div">
-        <div className="row p-1">
-          <div class="m-1">
-            <text style={{ fontSize: "26px" }}>My Profile</text>
+        <div className="row">
+          <div class="padding-left-65px">
+            <h4>My Profile</h4>
           </div>
-          <div class="mt-1 mx-3">
-            <button
-              type="button"
-              className="btn btn-gradient text-light rounded-pill w-100"
-            >
-              Edit Profile
-            </button>
+          <div class="ml-3">
+            <Link href="/editprofile">
+              <button
+                type="button"
+                className="btn btn-gradient text-light rounded-pill w-100 px-3 font-11"
+              >
+                Edit Profile
+              </button>
+            </Link>
           </div>
         </div>
-        <div class="row mt-3">
-          <div class="col-2">Image</div>
+        <div class="row mt-4">
+          <div class="col-2">
+            <div className="profile-user text-center">
+              <img src={userProfileIcon} className="profile-img"/>
+            </div>
+          </div>
           <div class="col-5">
             <div class="row">
-              <div class="col-5">
+              <div class="col-3 text-grey">
                 <text className="text">Name:</text>
                 <text className="text">Date of Birth:</text>
                 <text className="text">Gender:</text>
                 <text className="text">Email:</text>
                 <text className="text">Mobile:</text>
               </div>
-              <div class="col-6">
+              <div class="col-6 text-grey">
                 <text className="text">
                   {profileData && profileData.FullName}
                 </text>
@@ -126,29 +133,29 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
               </div>
             </div>
           </div>
-          <div class="col-5 float-right">
-            <div className="row">
-              <div className="col-5 text-right pr-1">
-                <img src={coinIcon} width="65" alt="user_back" />
+          <div class="col-5 coins-div">
+            <div className="row float-right">
+              <div className="col-6 text-right pr-1">
+                <img src={coinIcon} width="55" alt="user_back" />
               </div>
-              <div className="col-7 text-left p-0">
+              <div className="col-6 text-left">
                 <div className="row">
-                  <div className="col-12">My</div>
+                  <div className="col-12 font-14 text-grey">My</div>
                 </div>
                 <div className="row">
-                  <div className="col-12">
+                  <div className="col-12 font-14 text-grey">
                     Coins <strong>5.5k</strong>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="text-center mt-2 mr-5">
-              <button
-                type="button"
-                className="btn btn-gradient text-light rounded-pill px-3"
-              >
-                Buy More Coins
-              </button>
+              <div className="col-12 text-center mt-2">
+                <button
+                  type="button"
+                  className="btn font-11 btn-gradient text-light rounded-pill px-3"
+                >
+                  Buy more coins
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -156,25 +163,25 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
       <hr style={{ backgroundColor: "#FFFFFF" }} />
 
       <div class="container-sm rounded-pill row option_div p-3">
-        <div className="m-auto" onClick={onSwitchImage}>
+        <div className="m-auto cursor-pointer" onClick={onSwitchImage}>
           <span style={{ color: imageState.pacakge ? "#87c242" : "#000" }}>
             <img
               src={imageState.pacakge ? colorPackage : blackPackage}
               width="35"
               alt="User"
-              className="mx-3 logo-img"
+              className="pr-3 logo-img"
             />
             <strong>My Package</strong>
           </span>
           {imageState.pacakge ? <div class="green-bar"></div> : null}
         </div>
-        <div className="m-auto" onClick={onSwitchImage}>
+        <div className="m-auto cursor-pointer" onClick={onSwitchImage}>
           <span style={{ color: imageState.game ? "#87c242" : "#000" }}>
             <img
               src={imageState.game ? colorGaming : blackGaming}
-              width="35"
+              width="40"
               alt="User"
-              className="mx-3 logo-img"
+              className="pr-3 logo-img"
             />
             <strong>My Games</strong>
           </span>

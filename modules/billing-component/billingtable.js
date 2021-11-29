@@ -13,8 +13,8 @@ const BillingTable = ({ subscriptions }) => {
         </tr>
       </thead>
       <tbody>
-        {subscriptions.Transaction
-          ? subscriptions.Transaction.map((element) => {
+        {subscriptions
+          ? subscriptions.map((element) => {
               return (
                 <tr>
                   <td className="px-3">
