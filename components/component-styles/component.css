@@ -70,6 +70,8 @@
   border-radius: 4px;
 }
 
+
+
 /* On mouse-over, add a grey background color */
 .container-term:hover input ~ .checkmark {
   background-color: #ccc;

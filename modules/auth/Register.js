@@ -14,7 +14,6 @@ import {
 
 export default memo(function Register(props) {
 
-  const {update} = props;
   const router = useRouter();
   const { code, number, payment } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);

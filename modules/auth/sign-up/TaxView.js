@@ -8,22 +8,24 @@ export default function TaxView({ onChange }) {
   const [SelectedPrice, setSelectedPrice] = useState({});
 
   useEffect(() => {
-    if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
-      let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
-       let finalArray = [];
-       let pkgArray = m.PackageName.split(" ");  
-       finalArray.push(pkgArray[0])
-       if(pkgArray.length > 1){
-        finalArray.push(pkgArray.slice(1).join(" ")) 
-       }  
-       return {
-        ...m,
-        PackageNameArray : finalArray
-       }
-      });
-      setPackagePrice(array);
-      dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
-    }
+    // if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+    //   console.log("SignUpState.SelectedPackage : ",SignUpState);
+    //   let array = SignUpState.SelectedPackage.PaymentTabMethods.map(m => {
+    //    let finalArray = [];
+    //    let pkgArray = m.PackageName?.split(" ");  
+    //    finalArray.push(pkgArray[0])
+    //    if(pkgArray.length > 1){
+    //     finalArray.push(pkgArray.slice(1).join(" ")) 
+    //    }  
+    //    return {
+    //     ...m,
+    //     PackageNameArray : finalArray
+    //    }
+    //   });
+    //   setPackagePrice(array);
+    //   dispatch({ type: UPDATE_PAYMENT_PRICE, data: SignUpState.SelectedPackage.PaymentTabMethods[0] });
+    // }
+    console.log("SignUpState : ",SignUpState);
   }, [SignUpState.SelectedPackage]);
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function TaxView({ onChange }) {
                   <>
                   <span className="font-weight-bold text-left line-2">{m.PackageName}</span>
                   </> }               
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-10px">
                   <div className="text-white per-month mt-2">
                   {m.PackagePrices[0]}
                   </div>

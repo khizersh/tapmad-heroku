@@ -14,18 +14,21 @@ import {
   trophyIcon,
 } from "../../services/imagesLink";
 import { MainContext } from "../../contexts/MainContext";
-
 import Link from "next/link";
 import { MyAccountService } from "../my-account/myaccount.service";
 import { GlobalService } from "../global-service";
 import swal from "sweetalert";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
+
 const MyAccountWeb = ({ profileData, allData, userId }) => {
   const { setLoader } = useContext(MainContext);
+  const router = useRouter();
   const [imageState, setImageState] = useState({
     pacakge: true,
     game: false,
   });
-
+  const { dispatch, AuthState } = useContext(AuthContext);
   const onSwitchImage = () => {
     console.log(imageState.pacakge);
     if (imageState.pacakge == true) {
@@ -33,6 +36,10 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
     } else {
       setImageState({ pacakge: true, game: false });
     }
+  };
+  const onClickUpgradePackage = async () => {
+    await dispatch({ type: UPDATE_PACKAGE, data: true });
+    router.push("/change-package");
   };
   const unSubscribe = () => {
     setLoader(true);
