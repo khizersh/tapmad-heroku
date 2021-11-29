@@ -12,7 +12,7 @@ import {
   trophyIcon,
   userIcon,
 } from "../../services/imagesLink";
-
+import Link from "next/link";
 const MyAccountMobile = ({ profileData, allData }) => {
   const [show, setShow] = useState({
     games: false,
@@ -110,12 +110,14 @@ const MyAccountMobile = ({ profileData, allData }) => {
         </div>
       </div>
       <div className="row p-3">
-        <button
-          type="button"
-          className="w-100 btn btn-primary-outline text-light rounded-pill"
-        >
-          Unsubscribe
-        </button>
+        <Link href="/billingtest">
+          <button
+            type="button"
+            className="w-100 btn btn-primary-outline text-light rounded-pill"
+          >
+            Unsubscribe
+          </button>
+        </Link>
       </div>
       <div className="row  mt-3">
         <div className="col-2">

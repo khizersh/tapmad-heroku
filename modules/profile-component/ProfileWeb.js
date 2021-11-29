@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   awardIcon,
   blackGaming,
@@ -80,13 +80,15 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
           <div class="m-1">
             <text style={{ fontSize: "26px" }}>My Profile</text>
           </div>
-          <div class="mt-1 mx-3">
-            <button
-              type="button"
-              className="btn btn-gradient text-light rounded-pill w-100"
-            >
-              Update Package
-            </button>
+          <div class="mt-2 mx-3">
+            <Link href="/editprofile">
+              <button
+                type="button"
+                className="btn btn-gradient text-light rounded-pill w-100 px-3"
+              >
+                Edit Profile
+              </button>
+            </Link>
           </div>
         </div>
         <div class="row mt-3">
@@ -245,7 +247,6 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
                     <button
                       type="button"
                       className="btn w-100 px-2  text-light rounded-pill optButtons"
-                      // onClick={() => {dispatchEvent({type:CHANGEPACKAGE,data:true})}}
                     >
                       Upgrade Package
                     </button>
