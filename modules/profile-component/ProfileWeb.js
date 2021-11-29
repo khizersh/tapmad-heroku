@@ -21,6 +21,8 @@ import { GlobalService } from "../global-service";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
+
+
 const MyAccountWeb = ({ profileData, allData, userId }) => {
   const { setLoader } = useContext(MainContext);
   const router = useRouter()
