@@ -5,3 +5,10 @@
 .padding-left-65px{
     padding-left: 65px;
 }
+
+.margin-x-auto{
+ margin: 0px auto;   
+}
+.margin-y-auto{
+ margin: auto 0px;   
+}

@@ -1,4 +1,7 @@
 @import "../theming.scss";
+// global variable
+$greenColor  : #87c242;
+//  =========
 
 body {
   background: black;
@@ -17,6 +20,10 @@ body {
 .movies-images {
   position: relative;
   z-index: -1;
+}
+
+.text-green{
+  color: $greenColor;
 }
 .slick-next {
   right: 1.125rem;

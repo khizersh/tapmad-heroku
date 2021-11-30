@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useRouter} from "next/router";
 import {
   awardIcon,
   gamingIcon,
@@ -25,6 +26,12 @@ const MyAccountMobile = ({ profileData, allData }) => {
       setShow({ ...show, [key]: true });
     }
   };
+  const router = useRouter()
+
+  const clickEditProfile = () => {
+    router.push("/change-package");
+  };
+
   return (
     <div className="p-4 d-sm-none">
       <div className="row">
@@ -103,6 +110,7 @@ const MyAccountMobile = ({ profileData, allData }) => {
             <button
               type="button"
               className="btn btn-gradient text-light rounded-pill p-1 w-100"
+              onClick={clickEditProfile}
             >
               Update Package
             </button>

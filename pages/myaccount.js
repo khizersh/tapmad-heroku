@@ -2,12 +2,15 @@ import { useEffect, useState, useCallback, useContext } from "react";
 import { MyAccountService } from "../modules/my-account/myaccount.service";
 import { Cookie } from "../services/cookies";
 import requestIp from "request-ip";
+import {useRouter} from "next/router";
 import MyAccountMobile from "../modules/profile-component/ProfileMobile";
 import MyAccountWeb from "../modules/profile-component/ProfileWeb";
 import { ProfileContext } from "../contexts/profile/ProfileContext";
 import { PROFILE_DATA } from "../contexts/profile/ProfileReducer";
+import NavbarHOC from "../modules/navbar/NavbarHOC";
 
 const MyAccountTrial = () => {
+  const router = useRouter()
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [postFormData, setPostFormData] = useState({
     Version: "V1",
@@ -78,8 +81,33 @@ const MyAccountTrial = () => {
     [isMobile, profileData]
   );
 
+  const onClickBack = () => {
+    router.push("/");
+  };
+
+  const clickEditProfile = () => {
+    router.push("/editProfile");
+  };
+
   return (
-    <div className="container-fluid">
+    <div>
+       <NavbarHOC>
+        <div>
+          <button
+            className="btn"
+            style={{
+              fontSize: "13px",
+              color: "black",
+            }}
+            onClick={onClickBack}
+          >
+            <img src="/icons/login-back.svg" />
+          </button>
+        </div>
+        <div className="margin-y-auto">
+          <button onClick={clickEditProfile} className="btn bg-white rounded-lg py-1 text-green font-13">Edit Profile</button>
+        </div>
+      </NavbarHOC>
       <RenderViews />
     </div>
   );
