@@ -75,14 +75,17 @@ table tr:nth-child(even) td {
   display: inline-block;
   width: 100%;
 }
+.editprofile_lbl {
+  font-size: 14px;
+}
 .mob_editProfile {
-  background-color: #131C1F;
+  background-color: #131c1f;
+  border-radius: 15px;
 }
 .mob_editProfile input {
-  border-radius: 30px !important;
-  padding-left: 20px !important;
   background-color: #fff;
   border: 1px solid #707070;
+  font-size: 14px;
 }
 .mob_editProfile input::placeholder {
   color: #707070;
@@ -94,16 +97,16 @@ table tr:nth-child(even) td {
   text-decoration: none;
 }
 
-.font-14{
+.font-14 {
   font-size: 14px !important;
 }
 
-.profile-img{
+.profile-img {
   width: 60%;
 }
 
-.font-11{
-  font-size: 11px !important;  
+.font-11 {
+  font-size: 11px !important;
 }
 .table_text {
   font-size: 31px;
@@ -115,10 +118,8 @@ table tr:nth-child(even) td {
   top: 10px;
 } */
 
-.coins-div{
-
+.coins-div {
 }
-
 
 .text {
   font-size: 12px;

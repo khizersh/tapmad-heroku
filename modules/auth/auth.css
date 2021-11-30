@@ -41,7 +41,9 @@
 .payment-icon {
   background-color: white;
   color: black;
-  padding: 4px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
 }
 
 .login_slct_oprtr {
@@ -203,11 +205,7 @@
   font-size: 20px;
   color: white;
 }
-
-<<<<<<<
-  HEAD
-  =======>>>>>>>a63d5d4305656363942d1ce39f604c61dccb541a
-  .text-white {
+.text-white {
   color: white !important;
 }
 .mbl-check-icon {
@@ -419,7 +417,10 @@
     width: 70%;
   }
 }
-
+.sized-image {
+  height: 50px;
+  object-fit: contain;
+}
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
   .bg_dark {

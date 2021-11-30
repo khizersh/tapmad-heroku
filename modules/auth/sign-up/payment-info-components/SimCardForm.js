@@ -10,13 +10,13 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       setNum(mobileNum);
       onChangeNumber(e);
     }
-  }; 
+  };
   return (
     <>
       {data && data.length ? (
         <>
           {" "}
-          <DropdownWithImage data={data} onChange={onChangeNetwork} placeHolder="Select Network" width="84%"/>
+          <DropdownWithImage data={data} onChange={onChangeNetwork} placeHolder="Select Network" width="84%" />
           {/* <div className="">
             <label className="form-control cntry_cde border-0">
               {mobileCode}
@@ -35,7 +35,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
           type="text"
           maxLength="20"
           minLength="5"
-          className="form-control ml-3 border-curve"
+          className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
           autoComplete={'false'}
