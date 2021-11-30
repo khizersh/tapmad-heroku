@@ -86,7 +86,7 @@ const MyAccountTrial = () => {
   };
 
   const clickEditProfile = () => {
-    router.push("/editProfile");
+    router.push("/editprofile");
   };
 
   return (
