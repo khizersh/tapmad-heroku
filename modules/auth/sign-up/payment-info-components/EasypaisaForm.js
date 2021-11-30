@@ -1,7 +1,7 @@
 import React from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
 
-const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber , logo }) => {
+const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
   const [num, setNum] = React.useState("");
 
   const onChange = (e) => {
@@ -21,7 +21,7 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber , logo }) => {
           type="text"
           maxLength="20"
           minLength="5"
-          className="form-control ml-3 border-curve"
+          className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
           value={num}

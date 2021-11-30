@@ -41,7 +41,9 @@
 .payment-icon {
   background-color: white;
   color: black;
-  padding: 4px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
 }
 
 .login_slct_oprtr {
