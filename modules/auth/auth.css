@@ -417,7 +417,7 @@
     width: 70%;
   }
 }
-.sized-image{
+.sized-image {
   height: 50px;
   object-fit: contain;
 }
