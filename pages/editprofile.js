@@ -1,13 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import EditProfileMobile from "../modules/profile-component/EdiProfileMobile";
 import EditProfileWeb from "../modules/profile-component/EdiProfileWeb";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
 
 const EditProfile = () => {
-
   const router = useRouter();
   const [mobile, setIsMobile] = useState(false);
+  const [data, setData] = useState({ data: null });
+  const [save, setSave] = useState(false);
+
   useEffect(() => {
     if (window.innerWidth < 799) {
       setIsMobile(true);
@@ -17,10 +19,17 @@ const EditProfile = () => {
   const onClickBack = () => {
     router.push("/");
   };
+  // const onSubmitHandeler = () => {
+  //   set;
+  // };
+  const handleCallback = (childData) => {
+    console.log(save);
+    setData({ data: childData });
+  };
   const RenderViews = useCallback(
     function () {
       if (mobile) {
-        return <EditProfileMobile />;
+        return <EditProfileMobile parentCallback={handleCallback} />;
       } else {
         return <EditProfileWeb />;
       }
@@ -45,7 +54,15 @@ const EditProfile = () => {
         </div>
         <div className="margin-y-auto">
           {/* <img src={upgradeIcon} width="25" /> */}
-          <span className="pl-2">Upgrade Package</span>
+          <span className="pl-2">
+            <button
+              type="button"
+              onClick={() => setSave(true)}
+              class="rounded-pill py-1 px-4 btn btn-light"
+            >
+              Save
+            </button>
+          </span>
         </div>
       </NavbarHOC>
       <RenderViews />
@@ -59,9 +76,8 @@ export function getStaticProps() {
   return {
     props: {
       protected: true,
-      noSideBar : true,
-      env: process.env.TAPENV
+      noSideBar: true,
+      env: process.env.TAPENV,
     },
   };
 }
-

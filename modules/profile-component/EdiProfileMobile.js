@@ -5,7 +5,7 @@ import { MyAccountService } from "../../modules/my-account/myaccount.service";
 import requestIp from "request-ip";
 import { Cookie } from "../../services/cookies";
 
-const EditProfileMobile = () => {
+const EditProfileMobile = (props, save) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
@@ -17,6 +17,9 @@ const EditProfileMobile = () => {
   });
   const { ProfileState } = useContext(ProfileContext);
   useEffect(async () => {
+    console.log(props, "What");
+    console.log(save, "save");
+
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData({
@@ -26,10 +29,18 @@ const EditProfileMobile = () => {
         UserId: userId,
       });
       setProfile(data.data);
-      console.log(data);
       setGender(data.data.ProfileData.UserProfileGender);
     }
+    props.parentCallback(editProfile);
   }, []);
+
+  // useEffect(() => {
+  //   if (saveState == true) {
+  //     onUpdateHandeler();
+  //     console.log(editProfile, " inside Effect");
+  //   }
+  // }, [saveState]);
+
   const onPressGender = (param) => {
     setGender(param);
     setEditProfile({ ...editProfile, Gender: param });
@@ -83,22 +94,25 @@ const EditProfileMobile = () => {
             }}
           />
         </div>
-        <div className="row">
-          <div className="col-3" onClick={() => onPressGender("Male")}>
-            <input
-              type="radio"
-              name="radio"
-              checked={gender == "Male" ? true : false}
-            />
-            <label className="radio-cstm">Male</label>
-          </div>
-          <div className="col-3" onClick={() => onPressGender("Female")}>
-            <input
-              type="radio"
-              name="radio"
-              checked={gender == "Female" ? true : false}
-            />
-            <label className="radio-cstm">Female</label>
+        <div>
+          <label className="editprofile_lbl">Date of Birth:</label>
+          <div className="row">
+            <div className="col-3" onClick={() => onPressGender("Male")}>
+              <input
+                type="radio"
+                name="radio"
+                checked={gender == "Male" ? true : false}
+              />
+              <label className="radio-cstm">Male</label>
+            </div>
+            <div className="col-3" onClick={() => onPressGender("Female")}>
+              <input
+                type="radio"
+                name="radio"
+                checked={gender == "Female" ? true : false}
+              />
+              <label className="radio-cstm">Female</label>
+            </div>
           </div>
         </div>
       </div>

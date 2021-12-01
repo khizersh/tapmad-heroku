@@ -1,18 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
-import { UPDATE_PAYMENT_METHOD, UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
-import { castingIcon , deviceIcon , qualityIcon} from "../../../services/imagesLink";
+import {
+  UPDATE_PAYMENT_METHOD,
+  UPDATE_USER_DETAILS,
+} from "../../../contexts/auth/SignUpReducer";
+import {
+  castingIcon,
+  deviceIcon,
+  qualityIcon,
+} from "../../../services/imagesLink";
 import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethod() {
-
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [CurrentPackage, setCurrentPackage] = useState({});
   const [CurrentMethod, setCurrentMethod] = useState({});
 
   function UpdatePaymenthMethod(paymentMethod) {
     dispatch({ type: UPDATE_PAYMENT_METHOD, data: paymentMethod });
-    dispatch({ type: UPDATE_USER_DETAILS, data: {Operator : paymentMethod.PaymentOperatorId } });
+    dispatch({
+      type: UPDATE_USER_DETAILS,
+      data: { Operator: paymentMethod.PaymentOperatorId },
+    });
   }
   useEffect(() => {
     if (SignUpState.SelectedPrice.PaymentMethods) {
@@ -34,19 +43,16 @@ export default function PaymentMethod() {
   return (
     <div className="col-md-12 col-sm-12 pt-2">
       <div className="d-flex justify-content-around">
-      {imageArray.map((m, ind) => (
-              <div key={ind} className="text-center">
-                <p>
-                  <img src={m.Image} />
-                </p>
-                <p className="text-grey">{m.Name}</p>
-              </div>
-            ))}
-       
+        {imageArray.map((m, ind) => (
+          <div key={ind} className="text-center">
+            <p>
+              <img src={m.Image} />
+            </p>
+            <p className="text-grey">{m.Name}</p>
+          </div>
+        ))}
       </div>
-      <div className="text-grey">
-       {CurrentPackage?.ContentDescription}
-      </div>
+      <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
       <div className="mt-3" style={{ color: "#FC5656" }}>
         {CurrentPackage?.HighlightDescription}
       </div>
