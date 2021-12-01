@@ -34,7 +34,7 @@
   padding: 2px;
 }
 .cricle {
-  background: #87c242;
+  background: #87c242 ;
   border-radius: 50%;
   padding: 4px;
   text-align: center;
@@ -139,7 +139,7 @@
   height: 24px;
   font: 20px;
   border-radius: 2px;
-  background-color: #87c242;
+  background-color: #87c242 ;
   float: left;
   border: 0px;
 }
@@ -168,7 +168,7 @@ input.count:focus {
   height: 24px;
   font: 20px;
   border-radius: 2px;
-  background-color: #87c242;
+  background-color: #87c242 ;
   float: right;
   border: 0px;
 }
@@ -215,7 +215,7 @@ input.count:focus {
   font-weight: 700;
   line-height: 2.33;
   border-radius: 25px;
-  background: #87c242;
+  background: #87c242 ;
   position: absolute;
   top: -25px;
 }

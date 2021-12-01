@@ -1,5 +1,5 @@
 :root {
-  --green: #87c242;
+  --green: #87c242 ;
   --grey: #d0d4d7;
 }
 .loader-btn {
@@ -42,11 +42,11 @@
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #87c242;
+  background: #87c242 ;
   border-radius: 20px; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #87c242; 
+  background: #87c242 ; 
 }

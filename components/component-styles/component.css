@@ -101,7 +101,7 @@
   top: 5px;
   width: 8px;
   height: 15px;
-  border: 1px solid #87c242;
+  border: 1px solid #87c242 ;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -135,7 +135,7 @@
 
 .modal-component::-webkit-scrollbar-thumb,
 .TC-Modal::-webkit-scrollbar-thumb {
-  background-color: #87c242 !important;
+  background-color: #87c242  !important;
   border-radius: 8px;
 }
 

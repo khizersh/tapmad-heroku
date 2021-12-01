@@ -26,7 +26,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <NavbarHOC>
         <div>
           <button

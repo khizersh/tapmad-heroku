@@ -14,6 +14,7 @@ function get(url, ip) {
     let headers = {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",
+      "Access-Control-Allow-Origin": "*"
     };
     return axios.get(url, { headers: headers });
   } catch (error) {
