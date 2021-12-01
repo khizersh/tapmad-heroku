@@ -77,6 +77,7 @@ export const tableBackIcon = "/icons/tableBack.svg";
 export const connectIcon = "/icons/connect.svg";
 export const editUserProfileIcon = "/icons/editUser.svg";
 export const cameraIcon = "/icons/camera.svg";
+export const calendarIcon = "/icons/CalendarIcon.svg";
 // export const userProfileIcon = "/icons/profile/user.svg";
 export const userProfileIcon = "/icons/profile/profile.png";
 export const leftArrow = "/icons/profile/right-arrow.svg";

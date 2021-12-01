@@ -1,13 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import EditProfileMobile from "../modules/profile-component/EdiProfileMobile";
 import EditProfileWeb from "../modules/profile-component/EdiProfileWeb";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
 
 const EditProfile = () => {
-
   const router = useRouter();
   const [mobile, setIsMobile] = useState(false);
+  const [data, setData] = useState({ data: null });
+  const [save, setSave] = useState(false);
+
   useEffect(() => {
     if (window.innerWidth < 799) {
       setIsMobile(true);
@@ -17,16 +19,11 @@ const EditProfile = () => {
   const onClickBack = () => {
     router.push("/");
   };
-  const RenderViews = useCallback(
-    function () {
-      if (mobile) {
-        return <EditProfileMobile />;
-      } else {
-        return <EditProfileWeb />;
-      }
-    },
-    [mobile]
-  );
+
+  const handleCallback = () => {
+    console.log("Hello ");
+    setSave(!save)
+  };
 
   return (
     <div>
@@ -45,10 +42,18 @@ const EditProfile = () => {
         </div>
         <div className="margin-y-auto">
           {/* <img src={upgradeIcon} width="25" /> */}
-          <span className="pl-2">Upgrade Package</span>
+          <span className="pl-2">
+            <button
+              type="button"
+              onClick={() => handleCallback()}
+              class="rounded-pill py-1 px-4 btn btn-light"
+            >
+              Save
+            </button>
+          </span>
         </div>
       </NavbarHOC>
-      <RenderViews />
+      {mobile ? <EditProfileMobile isSave={save} /> : <EditProfileWeb />}
     </div>
   );
 };
@@ -59,9 +64,8 @@ export function getStaticProps() {
   return {
     props: {
       protected: true,
-      noSideBar : true,
-      env: process.env.TAPENV
+      noSideBar: true,
+      env: process.env.TAPENV,
     },
   };
 }
-
