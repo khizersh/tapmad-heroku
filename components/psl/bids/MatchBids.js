@@ -220,7 +220,7 @@ export default function MatchBids({ game, filteredData }) {
                                                       innerQues.Options[0]
                                                         .GameAnswer ==
                                                       team.answer
-                                                        ? "1px solid #87c242"
+                                                        ? "1px solid #87c242 "
                                                         : "1px solid #464646",
                                                   }}
                                                   onClick={() =>
@@ -240,7 +240,7 @@ export default function MatchBids({ game, filteredData }) {
                                                         innerQues.Options[0]
                                                           .GameAnswer ==
                                                         team.answer
-                                                          ? "#87c242"
+                                                          ? "#87c242 "
                                                           : "#2e2e2e",
                                                     }}
                                                   >
@@ -287,7 +287,7 @@ export default function MatchBids({ game, filteredData }) {
                                                       innerQues.Options[1]
                                                         .GameAnswer ==
                                                       team.answer
-                                                        ? "1px solid #87c242"
+                                                        ? "1px solid #87c242 "
                                                         : "1px solid #464646",
                                                   }}
                                                   onClick={() =>
@@ -307,7 +307,7 @@ export default function MatchBids({ game, filteredData }) {
                                                         innerQues.Options[1]
                                                           .GameAnswer ==
                                                         team.answer
-                                                          ? "#87c242"
+                                                          ? "#87c242 "
                                                           : "#2e2e2e",
                                                     }}
                                                   >

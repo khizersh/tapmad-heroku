@@ -1,6 +1,6 @@
 @import "../theming.scss";
 // global variable
-$tapmadColor  : #87c242;
+$tapmadColor  : #87c242 ;
 $darkColor  : #333433;
 //  =========
 
@@ -403,7 +403,7 @@ a:focus {
 .menu-tab.active #one {
   transform: translateY(7px) rotate(-135deg);
   transition: all 0.6s ease-in-out;
-  background-color: #87c242;
+  background-color: #87c242 ;
 }
 
 .active-nav {
@@ -418,7 +418,7 @@ a:focus {
 .menu-tab.active #three {
   transform: translateY(-5px) rotate(-45deg);
   transition: all 0.6s ease-in-out;
-  background-color: #87c242;
+  background-color: #87c242 ;
 }
 .menu-hide {
   right: -345px;
@@ -450,7 +450,7 @@ a:focus {
 .menu-hide.show {
   right: 0;
   background-color: #fff;
-  border-left: 3px solid #87c242;
+  border-left: 3px solid #87c242 ;
   transition: all 0.6s ease-in-out;
 }
 .tm_logo_whte {
@@ -487,7 +487,7 @@ a.nav-link i {
   top: 0;
   right: -200px;
   background-color: #fff;
-  border-left: 3px solid #87c242;
+  border-left: 3px solid #87c242 ;
   overflow-x: hidden;
   transition: linear 0.3s;
   z-index: 9999;
@@ -529,7 +529,7 @@ div#nav-tab {
   padding: 0;
 }
 .hamburger {
-  background: #87c242;
+  background: #87c242 ;
   position: relative;
   display: block;
   text-align: center;
@@ -572,7 +572,7 @@ div#nav-tab {
 
 .sign-out:hover a {
   // background-color: white !important;
-  color: #87c242 !important;
+  color: #87c242  !important;
 }
 .menu,
 .menu a,
@@ -680,7 +680,7 @@ input#menu[type="checkbox"] {
   position: relative;
   height: calc(100vh - 0px) !important;
   overflow-y: auto;
-  border-top: 53px solid #87c242;
+  border-top: 53px solid #87c242 ;
   z-index: -1;
   display: block;
 }
@@ -945,7 +945,7 @@ footer .list-group-item a {
   display: none;
 }
 .tm_stre_lnk {
-  color: #87c242;
+  color: #87c242 ;
 }
 .tm_stre_lnk {
   display: none;
@@ -961,7 +961,7 @@ label {
 // home page button
 
 .home-btn {
-  background-color: #87c242 !important;
+  background-color: #87c242  !important;
 }
 
 .home-banner-btn {
@@ -971,7 +971,7 @@ label {
 }
 
 .tm_wishlst_btn_active {
-  background-color: #87c242 !important;
+  background-color: #87c242  !important;
   color: black;
   padding: 12px 25px !important;
   font-size: 15px;

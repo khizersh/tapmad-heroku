@@ -1,7 +1,7 @@
 :root {
   --mobile: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg");
   --desktop: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg");
-  --basecolor: #87c242;
+  --basecolor: #87c242 ;
 }
 .text-base {
   color: var(--basecolor);
@@ -171,10 +171,10 @@
 }
 
 .clr-green {
-  color: #87c242;
+  color: #87c242 ;
 }
 .bg-green {
-  background-color: #87c242;
+  background-color: #87c242 ;
   border-radius: 0;
 }
 
@@ -295,7 +295,7 @@
   }
   .pymnt_pge_pr_list li > span {
     font-size: 3.5vw;
-    color: #87c242;
+    color: #87c242 ;
     text-transform: uppercase;
   }
 }
@@ -332,7 +332,7 @@
   }
   .pymnt_pge_pr_list li > span {
     font-size: 3.5vw;
-    color: #87c242;
+    color: #87c242 ;
     text-transform: uppercase;
   }
   .bg_dark {

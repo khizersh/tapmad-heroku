@@ -165,7 +165,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
 
       <div class="container-sm rounded-pill row option_div p-3">
         <div className="m-auto cursor-pointer" onClick={onSwitchImage}>
-          <span style={{ color: imageState.pacakge ? "#87c242" : "#000" }}>
+          <span style={{ color: imageState.pacakge ? "#87c242 " : "#000" }}>
             <img
               src={imageState.pacakge ? colorPackage : blackPackage}
               width="35"
@@ -177,7 +177,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
           {imageState.pacakge ? <div class="green-bar"></div> : null}
         </div>
         <div className="m-auto cursor-pointer" onClick={onSwitchImage}>
-          <span style={{ color: imageState.game ? "#87c242" : "#000" }}>
+          <span style={{ color: imageState.game ? "#87c242 " : "#000" }}>
             <img
               src={imageState.game ? colorGaming : blackGaming}
               width="40"
