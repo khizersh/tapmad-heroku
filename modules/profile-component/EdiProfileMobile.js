@@ -4,6 +4,9 @@ import { editUserProfileIcon, userIcon } from "../../services/imagesLink";
 import { MyAccountService } from "../../modules/my-account/myaccount.service";
 import requestIp from "request-ip";
 import { Cookie } from "../../services/cookies";
+import { UpdateProfile } from "../../services/gtm";
+import swal from "sweetalert";
+import { useRouter } from "next/router";
 
 const EditProfileMobile = ({ isSave }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
@@ -15,6 +18,8 @@ const EditProfileMobile = ({ isSave }) => {
     Mobile: "",
     Gender: "",
   });
+  const router = useRouter();
+  const { redirect } = router.query;
   const { ProfileState } = useContext(ProfileContext);
 
   useEffect(async () => {
@@ -27,19 +32,58 @@ const EditProfileMobile = ({ isSave }) => {
         UserId: userId,
       });
       setProfile(data.data);
+      setEditProfile({
+        ...editProfile,
+        Name: data.data.ProfileData.UserProfileFullName,
+        DOB: data.data.ProfileData.UserProfileDOB,
+        Mobile: data.data.ProfileData.UserProfileMobile,
+        Gender: data.data.ProfileData.UserProfileGender,
+      });
       setGender(data.data.ProfileData.UserProfileGender);
     }
   }, []);
-  useEffect(() => {
-    console.log(editProfile, " inside Effect");
-  }, [isSave])
 
-  // useEffect(() => {
-  //   if (saveState == true) {
-  //     onUpdateHandeler();
-  //     console.log(editProfile, " inside Effect");
-  //   }
-  // }, [saveState]);
+  const submitHandeler = async () => {
+    var formData = {
+      Version: "V1",
+      Language: "en",
+      Platform: "web",
+      UserId: userId,
+      ProfilePicture: null,
+      FullName: editProfile.Name,
+      UserMobileNumebr: editProfile.Mobile,
+      BirthDate: editProfile.DOB,
+      Email: null,
+    };
+    const data = await MyAccountService.updateUserProfileData(formData);
+
+    if (data != null) {
+      Cookie.setCookies("userProfileName", editProfile.Name);
+      UpdateProfile(editProfile);
+      swal({
+        title: data.data.Response.message,
+        timer: 2000,
+        icon: "success",
+      }).then((res) => {
+        router.push("/myaccount");
+      });
+    } else {
+      swal({
+        title: "Something went wrong!",
+        timer: 2000,
+        icon: "error",
+      });
+    }
+    console.log("API Hit", data);
+  };
+  if (isSave) {
+    submitHandeler();
+  }
+  useEffect(() => {
+    console.log(isSave);
+    console.log(profile);
+    console.log(editProfile, " inside Effect");
+  }, [isSave]);
 
   const onPressGender = (param) => {
     setGender(param);
