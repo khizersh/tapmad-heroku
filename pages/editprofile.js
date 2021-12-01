@@ -25,7 +25,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <NavbarHOC>
         <div>
           <button
@@ -52,7 +52,9 @@ const EditProfile = () => {
           </span>
         </div>
       </NavbarHOC>
-      {mobile ? <EditProfileMobile isSave={save} /> : <EditProfileWeb />}
+      <div className="profile-container">
+        {mobile ? <EditProfileMobile isSave={save} /> : <EditProfileWeb />}
+      </div>
     </div>
   );
 };

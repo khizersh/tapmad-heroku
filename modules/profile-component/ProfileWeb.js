@@ -249,7 +249,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
               <div className="offset-1 col-10">
                 <div className="row">
                   <div className="col-4 ">
-                    <Link href="/billingtest">
+                    <Link href="/billing-history">
                       <button
                         type="button"
                         className="btn w-100 px-2  text-light rounded-pill optButtons"

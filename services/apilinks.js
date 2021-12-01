@@ -1,7 +1,8 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
-const BASEPAYMENTURL = "https://payments.tapmad.com/";
-const BASEURLDEVELOPMENT = "http://developer.tapmad.com/payments/";
+// const BASEPAYMENTURL = "https://payments.tapmad.com/";
+const BASEPAYMENTURL = "http://developer.tapmad.com/payments/";
+const BASEURLDEVELOPMENT = "http://developer.tapmad.com/payments";
 
 export const EPLPaymentUrl =
   BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
