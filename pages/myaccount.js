@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useContext } from "react";
 import { MyAccountService } from "../modules/my-account/myaccount.service";
 import { Cookie } from "../services/cookies";
 import requestIp from "request-ip";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import MyAccountMobile from "../modules/profile-component/ProfileMobile";
 import MyAccountWeb from "../modules/profile-component/ProfileWeb";
 import { ProfileContext } from "../contexts/profile/ProfileContext";
@@ -10,7 +10,7 @@ import { PROFILE_DATA } from "../contexts/profile/ProfileReducer";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
 
 const MyAccountTrial = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [postFormData, setPostFormData] = useState({
     Version: "V1",
@@ -90,8 +90,8 @@ const MyAccountTrial = () => {
   };
 
   return (
-    <div>
-       <NavbarHOC>
+    <div className="container-fluid">
+      <NavbarHOC>
         <div>
           <button
             className="btn"
@@ -105,10 +105,17 @@ const MyAccountTrial = () => {
           </button>
         </div>
         <div className="margin-y-auto">
-          <button onClick={clickEditProfile} className="btn bg-white rounded-lg py-1 text-green font-13">Edit Profile</button>
+          <button
+            onClick={clickEditProfile}
+            className="btn bg-white rounded-lg py-1 text-green font-13"
+          >
+            Edit Profile
+          </button>
         </div>
       </NavbarHOC>
-      <RenderViews />
+      <div className="profile-container">
+        <RenderViews />
+      </div>
     </div>
   );
 };

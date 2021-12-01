@@ -26,3 +26,15 @@
 .border-bottom-left{
     border-radius: 0px 0px 0px 10px;
 }
+
+.navbar-position{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.profile-container{
+    position: relative;
+    top: 75px;
+}

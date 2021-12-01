@@ -63,6 +63,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
           });
           setdeactivated(true);
           setLoader(false);
+          router.push("/sign-up")
         } else if (res.responseCode == 5) {
           swal({
             title: res.message,

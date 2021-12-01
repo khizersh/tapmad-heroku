@@ -1,4 +1,7 @@
-
+:root {
+  --green: #87c242;
+  --grey: #d0d4d7;
+}
 .loader-btn {
   border: 16px solid #f3f3f3;
   border-radius: 50%;

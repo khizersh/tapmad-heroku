@@ -208,6 +208,10 @@ table tr:nth-child(even) td {
   background-color: #37c673;
 }
 
+.table_style td{
+  color: #d0d4d7;
+
+}
 @media only screen and (max-width: 799px) {
   .table_style th  {
     background-color: #484948;
@@ -218,6 +222,7 @@ table tr:nth-child(even) td {
   }
   .table_style td{
     font-size: 13px;
+
   }
   .option_div {
     background-color: white;
