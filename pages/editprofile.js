@@ -21,8 +21,7 @@ const EditProfile = () => {
   };
 
   const handleCallback = () => {
-    console.log("Hello ");
-    setSave(!save)
+    setSave(!save);
   };
 
   return (
