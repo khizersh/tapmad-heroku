@@ -11,7 +11,7 @@ import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 function SetYourNewPinSignUp({ login, ip }) {
   const { initialState, checkUserAuthentication, setLoader } =
     useContext(MainContext);
-  const { authState } = useContext(Authcontext);
+  // const { authState } = useContext(Authcontext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
@@ -19,6 +19,7 @@ function SetYourNewPinSignUp({ login, ip }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
+    console.log("SignUpState : ",SignUpState);
     if (showUsername) {
       if (username.trim().length < 1) {
         return swal({
@@ -50,6 +51,7 @@ function SetYourNewPinSignUp({ login, ip }) {
       OperatorId: SignUpState.UserDetails.Operator,
       UserPassword: "",
     };
+    console.log("objjj ",obj);
     setLoader(true);
     const userStatus = await AuthService.GetCardUser({
       MobileNo: SignUpState.UserDetails.MobileNo,

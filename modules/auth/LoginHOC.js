@@ -27,6 +27,7 @@ export default function withLogin(Component, data) {
         OperatorId: SignUpState.UserDetails.Operator,
         UserPin: SignUpState.UserDetails.UserPin || Cookie.getCookies('userPin'),
       };
+     
       if(obj.UserPin.length  === 4){
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
