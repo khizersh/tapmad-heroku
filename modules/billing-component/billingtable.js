@@ -6,23 +6,23 @@ const BillingTable = ({ subscriptions }) => {
     <table class="mt-3 table_style rounded">
       <thead>
         <tr>
-          <th scope="col">Status</th>
+          <th scope="col" className="border-top-left">Status</th>
           <th scope="col">Date</th>
           <th scope="col">Package</th>
-          <th scope="col">Mobile Number</th>
+          <th scope="col" className="border-top-right">Mobile Number</th>
         </tr>
       </thead>
       <tbody>
         {subscriptions
-          ? subscriptions.map((element) => {
+          ? subscriptions.map((element , ind) => {
               return (
                 <tr>
-                  <td className="px-3">
+                  <td className={`px-3 ${ind + 1 == subscriptions.length ? "border-bottom-left" :  ""}`}>
                     {element.UserPaymentStatus == 0 ? "Failure" : "Successful"}
                   </td>
                   <td className="px-3 py-2">{element.UserPaymentStartDate}</td>
                   <td>{element.UserPaymentPackageName}</td>
-                  <td>{element.UserPaymentMobileNumber}</td>
+                  <td className={`px-3 ${ind + 1 == subscriptions.length ? "border-bottom-right" :  ""}`}>{element.UserPaymentMobileNumber}</td>
                 </tr>
               );
             })

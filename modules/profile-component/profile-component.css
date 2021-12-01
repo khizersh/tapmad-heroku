@@ -12,3 +12,17 @@
 .margin-y-auto{
  margin: auto 0px;   
 }
+
+.border-top-left{
+    border-radius: 10px 0px 0px 0px;
+}
+
+.border-top-right{
+    border-radius: 0px 10px 0px 0px;
+}
+.border-bottom-right{
+    border-radius: 0px 0px 10px 0px;
+}
+.border-bottom-left{
+    border-radius: 0px 0px 0px 10px;
+}

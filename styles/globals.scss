@@ -1,6 +1,7 @@
 @import "../theming.scss";
 // global variable
-$greenColor  : #87c242;
+$tapmadColor  : #87c242;
+$darkColor  : #333433;
 //  =========
 
 body {
@@ -23,7 +24,13 @@ body {
 }
 
 .text-green{
-  color: $greenColor;
+  color: $tapmadColor;
+}
+.bg-green{
+  background-color: $tapmadColor !important;
+}
+.bg-dark{
+  background-color: $darkColor !important;
 }
 .slick-next {
   right: 1.125rem;

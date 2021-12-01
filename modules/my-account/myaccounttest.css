@@ -75,6 +75,15 @@ table tr:nth-child(even) td {
   display: inline-block;
   width: 100%;
 }
+
+.rotate-180{
+  transform: rotate(180deg);
+}
+
+.pagination-btn{
+  padding: 2px 7px;
+  border-radius: 5px;
+}
 .editprofile_lbl {
   font-size: 14px;
 }
@@ -200,6 +209,16 @@ table tr:nth-child(even) td {
 }
 
 @media only screen and (max-width: 799px) {
+  .table_style th  {
+    background-color: #484948;
+    padding: 10px;
+    color: #37c673;
+    text-align: center;
+    font-size: 13px;
+  }
+  .table_style td{
+    font-size: 13px;
+  }
   .option_div {
     background-color: white;
     width: 100%;
