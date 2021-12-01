@@ -5,7 +5,7 @@ import { MyAccountService } from "../../modules/my-account/myaccount.service";
 import requestIp from "request-ip";
 import { Cookie } from "../../services/cookies";
 
-const EditProfileMobile = (props, save) => {
+const EditProfileMobile = ({ isSave }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
@@ -16,10 +16,8 @@ const EditProfileMobile = (props, save) => {
     Gender: "",
   });
   const { ProfileState } = useContext(ProfileContext);
-  useEffect(async () => {
-    console.log(props, "What");
-    console.log(save, "save");
 
+  useEffect(async () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData({
@@ -31,8 +29,10 @@ const EditProfileMobile = (props, save) => {
       setProfile(data.data);
       setGender(data.data.ProfileData.UserProfileGender);
     }
-    props.parentCallback(editProfile);
   }, []);
+  useEffect(() => {
+    console.log(editProfile, " inside Effect");
+  }, [isSave])
 
   // useEffect(() => {
   //   if (saveState == true) {

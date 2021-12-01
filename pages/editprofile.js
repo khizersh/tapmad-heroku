@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import EditProfileMobile from "../modules/profile-component/EdiProfileMobile";
 import EditProfileWeb from "../modules/profile-component/EdiProfileWeb";
 import { useRouter } from "next/router";
@@ -19,23 +19,11 @@ const EditProfile = () => {
   const onClickBack = () => {
     router.push("/");
   };
-  // const onSubmitHandeler = () => {
-  //   set;
-  // };
-  const handleCallback = (childData) => {
-    console.log(save);
-    setData({ data: childData });
+
+  const handleCallback = () => {
+    console.log("Hello ");
+    setSave(!save)
   };
-  const RenderViews = useCallback(
-    function () {
-      if (mobile) {
-        return <EditProfileMobile parentCallback={handleCallback} />;
-      } else {
-        return <EditProfileWeb />;
-      }
-    },
-    [mobile]
-  );
 
   return (
     <div>
@@ -57,7 +45,7 @@ const EditProfile = () => {
           <span className="pl-2">
             <button
               type="button"
-              onClick={() => setSave(true)}
+              onClick={() => handleCallback()}
               class="rounded-pill py-1 px-4 btn btn-light"
             >
               Save
@@ -65,7 +53,7 @@ const EditProfile = () => {
           </span>
         </div>
       </NavbarHOC>
-      <RenderViews />
+      {mobile ? <EditProfileMobile isSave={save} /> : <EditProfileWeb />}
     </div>
   );
 };
