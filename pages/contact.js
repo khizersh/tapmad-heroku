@@ -19,10 +19,10 @@ export default function Contact(params) {
               <br />
               UAN: 0800-11133
               <br />
-              {/* Phone: 021-35155511
-              <br /> */}
+              Phone: 021-35155511
+              <br />
               Email:{" "}
-              <a href="mailto:info@pitelevision.com">
+              <a href="mailto:customerservice@tapmad.com">
                 customerservice@tapmad.com
               </a>
             </p>
