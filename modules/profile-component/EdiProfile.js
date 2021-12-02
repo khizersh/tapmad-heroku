@@ -8,7 +8,7 @@ import { UpdateProfile } from "../../services/gtm";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 
-const EdiProfile = ({ isSave }) => {
+const EdiProfileForm = ({ isSave, isMobile }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
@@ -90,57 +90,84 @@ const EdiProfile = ({ isSave }) => {
     setEditProfile({ ...editProfile, Gender: param });
   };
   return (
-    <div className="col-12 mt-3 ">
-      <div className="mob_editProfile p-2">
+    <div className="col-12 mt-2 ">
+      {isMobile ? <h3 className="mt-4">Edit Profile</h3> : null}
+
+      <div
+        className={`${
+          isMobile
+            ? "mob_editProfile p-2 "
+            : "desk_editProfile col-lg-8 m-lg-auto"
+        }`}
+      >
         <div className="row">
           <div className="col-12 text-center">
-            <img src={editUserProfileIcon} width="100" />
+            <img
+              src={editUserProfileIcon}
+              className={`${isMobile ? "" : "m-4"}`}
+              width={`${isMobile ? "100" : "150"}`}
+            />
           </div>
         </div>
-        <div className="my-3">
-          <label className="editprofile_lbl">Name:</label>
-          <input
-            defaultValue={profile && profile.ProfileData.UserProfileFullName}
-            placeholder="Enter Name"
-            className="col-12 p-2 rounded-pill"
-            onChange={(e) => {
-              setEditProfile({ ...editProfile, Name: e.target.value });
-            }}
-          />
+        <div className={`${isMobile ? "" : "row"}`}>
+          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
+            <label className="editprofile_lbl">Name:</label>
+            <input
+              defaultValue={profile && profile.ProfileData.UserProfileFullName}
+              placeholder="Enter Name"
+              className={`${
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+              }`}
+              onChange={(e) => {
+                setEditProfile({ ...editProfile, Name: e.target.value });
+              }}
+            />
+          </div>
+          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
+            <label className="editprofile_lbl">Date of Birth:</label>
+            <input
+              placeholder="Date of Birth"
+              className={`${
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+              }`}
+              defaultValue={profile && profile.ProfileData.UserProfileDOB}
+              onChange={(e) => {
+                setEditProfile({ ...editProfile, DOB: e.target.value });
+              }}
+            />
+          </div>
         </div>
-        <div className="my-3">
-          <label className="editprofile_lbl">Date of Birth:</label>
-          <input
-            placeholder="Date of Birth"
-            className="col-12 p-2 rounded-pill"
-            defaultValue={profile && profile.ProfileData.UserProfileDOB}
-            onChange={(e) => {
-              setEditProfile({ ...editProfile, DOB: e.target.value });
-            }}
-          />
-        </div>
-        {/* <div className="my-3">
-          <label className="editprofile_lbl">Email ID:</label>
-          <input
-            placeholder="Email ID"
-            className="col-12 p-2 rounded-pill"
-            defaultValue={profile && profile.ProfileData.UserProfileDOB}
-          />
-        </div> */}
-        <div className="my-3">
-          <label className="editprofile_lbl">Mobile:</label>
-          <input
-            placeholder="Mobile"
-            className="col-12 p-2 rounded-pill"
-            defaultValue={profile && profile.ProfileData.UserProfileMobile}
-            onChange={(e) => {
-              setEditProfile({ ...editProfile, Mobile: e.target.value });
-            }}
-          />
+        <div className={`${isMobile ? "" : "row"}`}>
+          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
+            <label className="editprofile_lbl">Mobile:</label>
+            <input
+              placeholder="Mobile"
+              className={`${
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+              }`}
+              defaultValue={profile && profile.ProfileData.UserProfileMobile}
+              onChange={(e) => {
+                setEditProfile({ ...editProfile, Mobile: e.target.value });
+              }}
+            />
+          </div>
+          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
+            <label className="editprofile_lbl">Email:</label>
+            <input
+              placeholder="Email"
+              className={`${
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+              }`}
+              // defaultValue={profile && profile.ProfileData.UserProfileMobile}
+              onChange={(e) => {
+                setEditProfile({ ...editProfile, Mobile: e.target.value });
+              }}
+            />
+          </div>
         </div>
         <div>
-          <label className="editprofile_lbl">Date of Birth:</label>
-          <div className="row">
+          <label className="editprofile_lbl">Gender:</label>
+          <div className={"row"}>
             <div className="col-3" onClick={() => onPressGender("Male")}>
               <input
                 type="radio"
@@ -159,11 +186,18 @@ const EdiProfile = ({ isSave }) => {
             </div>
           </div>
         </div>
+        {isMobile ? (
+          ""
+        ) : (
+          <button type="button" class="btn btn-light rounded-pill">
+            Light
+          </button>
+        )}
       </div>
     </div>
   );
 };
-export default EdiProfile;
+export default EdiProfileForm;
 
 export function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);

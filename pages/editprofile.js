@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import EditProfileMobile from "../modules/profile-component/EdiProfile";
-import EditProfileWeb from "../modules/profile-component/EdiProfileWeb";
+
 import { useRouter } from "next/router";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
 import EdiProfile from "../modules/profile-component/EdiProfile";
+import EdiProfileForm from "../modules/profile-component/EdiProfile";
 
 const EditProfile = () => {
   const router = useRouter();
@@ -53,7 +53,9 @@ const EditProfile = () => {
           </span>
         </div>
       </NavbarHOC>
-      <EdiProfile isSave={save} />
+      <div className="profile-container">
+        <EdiProfileForm isSave={save} isMobile={mobile} />
+      </div>
     </div>
   );
 };
