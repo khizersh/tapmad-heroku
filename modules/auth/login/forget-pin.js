@@ -12,7 +12,8 @@ export default function ForgetPin({ updateView }) {
   const [userOtp, setUserOtp] = useState("");
   const { setLoader } = React.useContext(MainContext);
   const { SignUpState } = React.useContext(SignUpContext);
-  const {  dispatch} = React.useContext(AuthContext);
+  const { dispatch } = React.useContext(AuthContext);
+  const [isMobile, setIsMobile] = useState(false);
 
   React.useEffect(async () => {
     let otpBody = {
@@ -21,6 +22,10 @@ export default function ForgetPin({ updateView }) {
     };
     var resp = await post(sendOTP, otpBody);
   }, []);
+
+  React.useEffect(() => {
+    setIsMobile(SignUpState.isMobile);
+  }, [SignUpState.isMobile]);
 
   async function verifyOTP() {
     setLoader(true);
@@ -33,7 +38,7 @@ export default function ForgetPin({ updateView }) {
     if (data != null) {
       if (data.responseCode == 1) {
         AuthService.clearUserToken(body.MobileNo.substring(1)).then((e) => {
-          dispatch({type : SET_VIEW_TO_SHOW , data : "set-pin" })
+          dispatch({ type: SET_VIEW_TO_SHOW, data: "set-pin" });
           swal({
             title: "OTP Verified",
             timer: 2500,
@@ -60,30 +65,34 @@ export default function ForgetPin({ updateView }) {
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
       {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
       <div className="custom-bg">
-        <div className="mb-3">
-          <h3 className="component-title">Enter Your OTP</h3>
-          <p className="text-center text-grey center-div">
-            Please enter the code provided into 4 digit verfiication code
-          </p>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            maxLength="4"
-            minLength="4"
-            className="form-control border-curve"
-            placeholder="Enter OTP"
-            onChange={(e) => setUserOtp(e.target.value)}
-          />
-        </div>
-        <div className="form-group" style={{ marginBottom: "10px" }}>
-          <button
-            type="button"
-            className="btn btn-block bg-green pymnt_pge_sbscrbe_btn"
-            onClick={async () => await verifyOTP()}
-          >
-            Verify OTP
-          </button>
+        <div className={`${isMobile ? "" : "margin-desktop"} `}>
+          <div className="mb-3">
+            <h3 className="component-title">Enter Your OTP</h3>
+            <p className="text-center text-grey center-div">
+              Please enter the code provided into 4 digit verfiication code
+            </p>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              maxLength="4"
+              minLength="4"
+              className="form-control border-curve"
+              placeholder="Enter OTP"
+              onChange={(e) => setUserOtp(e.target.value)}
+            />
+          </div>
+          <div className={`form-group text-center`} style={{ marginBottom: "10px" }}>
+            <button
+              type="button"
+              className={`btn bg-green pymnt_pge_sbscrbe_btn ${
+                isMobile ? "" : "width-35"
+              }`}
+              onClick={async () => await verifyOTP()}
+            >
+              Verify OTP
+            </button>
+          </div>
         </div>
       </div>
     </div>

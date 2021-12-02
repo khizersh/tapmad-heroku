@@ -12,6 +12,8 @@ import { mobileIcon, tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
+import CombineLoginDesktop from "./combine-login.js/CombineLoginDesktop";
+import CombineLoginMobile from "./combine-login.js/CombineLoginMobile";
 
 function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   const { setLoader } = React.useContext(MainContext);
@@ -19,6 +21,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   const { SignUpState, dispatch } = React.useContext(SignUpContext);
   const [mobileNo, setMobileNo] = React.useState("");
   const [pin, setPin] = React.useState("");
+  const [isMobile, setIsMobile] = React.useState(false);
   const [btnDisabled, setbtnDisabled] = React.useState(true);
   const [CurrentMethod, setCurrentMethod] = React.useState(null);
   const [viewsToRender, setViewsToRender] = React.useState(false);
@@ -49,13 +52,6 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       });
     }
   }
-  // useEffect(() => {
-  //   if (viewsToRender) {
-  //     if (SignUpState.UserDetails.MobileNo) {
-  //       login(ip);
-  //     }
-  //   }
-  // }, [SignUpState, viewsToRender == true]);
 
   async function loginUser() {
     if (!CurrentMethod) {
@@ -63,7 +59,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
     }
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
-     
+
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: {
@@ -72,8 +68,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
           UserPin: pin,
         },
       });
-      login(ip)
-     
+      login(ip);
     } else {
       swal({
         title: "Enter all fields!",
@@ -109,135 +104,42 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
     }
   }, [AuthState]);
 
+  useEffect(() => {
+    if (window.innerWidth < 799) {
+      setIsMobile(true);
+    }
+  }, []);
+
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
+      {/* AuthState , UpdatePaymenthMethod , handleNumber , handlePin , btnDisabled
+      , loginUser */}
       {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
-      <div className="custom-bg">
-        <h3 className="select-network">Select Your Network</h3>
-        <div className="d-flex justify-content-around mb-3">
-          {AuthState && AuthState.LoginOperators.length
-            ? AuthState.LoginOperators.map((m, i) => (
-                <div>
-                  <div style={{ margin: "auto" }} key={i}>
-                    <div className="position-relative">
-                      <input
-                        type="radio"
-                        name="radio"
-                        checked={
-                          CurrentMethod?.OperatorId == m.OperatorId
-                            ? true
-                            : false
-                        }
-                        onClick={() => UpdatePaymenthMethod(m)}
-                        id={m.OperatorName}
-                      />
-                      <label className="radio-cstm" htmlFor={m.OperatorName}>
-                        <div
-                          onClick={() => UpdatePaymenthMethod(m)}
-                          className={` mt-3 text-center`}
-                        >
-                          <img
-                            src={m.OperatorImage}
-                            alt={m.OperatorName}
-                            className="img-fluid "
-                            width="30"
-                          />
-                          <i
-                            // className={`text-center text-muted d-block mbl-13px  ${
-                            //   CurrentMethod.OperatorId == m.OperatorId
-                            //     ? "text-white"
-                            //     : ""
-                            // }`}
-                            style={{ fontStyle: "normal" }}
-                          ></i>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              ))
-            : null}
-        </div>
-
-        <p>
-          <img src={mobileIcon} className="pr-2" /> Enter your Mobile Number to
-          login
-        </p>
-        <div className="input-group">
-          {/* drop down option */}
-          {/* {initialState.AuthDetails && (
-          <>
-          {operators && operators.length ? (
-            <DropdownWithImage data={operators} onChange={onChangeNetwork} />
-            ) : null}
-            <input type="hidden" id="CountryMobileCode" value="+92" />
-            <span>
-            <label
-            className="form-control custom-input"
-            style={{ fontSize: "14px" }}
-            >
-            {initialState.AuthDetails.MobileCode}
-            </label>
-            </span>
-            </>
-          )} */}
-
-          <div>
-            <label
-              className="form-control border-round custom-input"
-              style={{ fontSize: "14px" }}
-            >
-              {AuthState?.CountryCode}
-            </label>
-          </div>
-          <input
-            type="text"
-            maxLength="20"
-            minLength="5"
-            className="form-control border-round mb-4 ml-3 custom-input"
-            id="mobileNo"
-            placeholder="xxxxxxxxxxx"
-            inputMode="numeric"
-            value={mobileNo}
-            onChange={(e) => handleNumber(e)}
-            autoComplete={"off"}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            maxLength="4"
-            minLength="4"
-            value={pin}
-            className="form-control border-round custom-input"
-            placeholder="Enter your PIN"
-            onChange={handlePin}
-          />
-        </div>
-        <div className="text-right mb-3">
-          <Link href="/sign-up" shallow={true} passHref={true}>
-            <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
-          </Link>
-          <span
-            className="mt-2 mr-2 text-light"
-            onClick={forgetClick}
-            style={{ color: "#fff", cursor: "pointer" }}
-          >
-            | &nbsp;&nbsp;Forgot PIN?
-          </span>
-        </div>
-        <div className="form-group">
-          <button
-            type="button"
-            disabled={btnDisabled ? true : false}
-            className="btn pymnt_pge_sbscrbe_btn bg-green"
-            onClick={loginUser}
-          >
-            LOGIN
-          </button>
-          <br />
-        </div>
-      </div>
+      {isMobile ? (
+        <CombineLoginMobile
+          AuthState={AuthState}
+          UpdatePaymenthMethod={UpdatePaymenthMethod}
+          handleNumber={handleNumber}
+          handlePin={handlePin}
+          btnDisabled={btnDisabled}
+          CurrentMethod={CurrentMethod}
+          mobileNo={mobileNo}
+          pin={pin}
+          forgetClick={forgetClick}
+        />
+      ) : (
+        <CombineLoginDesktop
+          AuthState={AuthState}
+          UpdatePaymenthMethod={UpdatePaymenthMethod}
+          handleNumber={handleNumber}
+          handlePin={handlePin}
+          btnDisabled={btnDisabled}
+          CurrentMethod={CurrentMethod}
+          mobileNo={mobileNo}
+          pin={pin}
+          forgetClick={forgetClick}
+        />
+      )}
     </div>
   );
 }

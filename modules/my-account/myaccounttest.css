@@ -93,7 +93,6 @@ table tr:nth-child(even) td {
 }
 .desk_editProfile {
   background-color: #333433;
-  border-radius: 15px;
 }
 .desk_editProfile input {
   background-color: #fff;

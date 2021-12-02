@@ -32,7 +32,6 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
   });
   const { dispatch, AuthState } = useContext(AuthContext);
   const onSwitchImage = () => {
-    console.log(imageState.pacakge);
     if (imageState.pacakge == true) {
       setImageState({ pacakge: false, game: true });
     } else {
@@ -44,44 +43,48 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
     router.push("/change-package");
   };
   const unSubscribe = () => {
-    setLoader(true);
+    // setLoader(true);
     let body = {
       Language: "en",
       Platform: "android",
-      ProductId: allData.MyPackage,
+      ProductId: allData.PackageDescription[0].PackageProductId,
       UserId: userId,
       Version: "V1",
       headers: GlobalService.authHeaders() || null,
     };
-    MyAccountService.unsubcribeUser(body)
-      .then((res) => {
-        if (res.responseCode == 1) {
-          swal({
-            title: res.message,
-            timer: 2500,
-            icon: "success",
-          });
-          setdeactivated(true);
-          setLoader(false);
-          router.push("/sign-up")
-        } else if (res.responseCode == 5) {
-          swal({
-            title: res.message,
-            timer: 2500,
-            icon: "success",
-          });
-        } else {
-          swal({
-            title: res.message,
-            timer: 2500,
-            icon: "error",
-          });
-          setLoader(false);
-        }
-      })
-      .catch((e) => {
-        setLoader(false);
-      });
+    console.log("allData : ", allData);
+    console.log("body in sub  : ", body);
+    // MyAccountService.unsubcribeUser(body)
+    //   .then((res) => {
+    //     console.log("resss in sub: ",res);
+    //     if (res.responseCode == 1) {
+    //       swal({
+    //         title: res.message,
+    //         timer: 2500,
+    //         icon: "success",
+    //       });
+    //       setdeactivated(true);
+    //       setLoader(false);
+    //       router.push("/sign-up")
+    //     } else if (res.responseCode == 5) {
+    //       swal({
+    //         title: res.message,
+    //         timer: 2500,
+    //         icon: "warning",
+    //       });
+    //       setLoader(false);
+    //     } else {
+    //       swal({
+    //         title: res.message,
+    //         timer: 2500,
+    //         icon: "error",
+    //       });
+    //       setLoader(false);
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     setLoader(false);
+    //   });
   };
 
   return (
@@ -105,7 +108,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
         <div class="row mt-4">
           <div class="col-2">
             <div className="profile-user text-center">
-              <img src={userProfileIcon} className="profile-img"/>
+              <img src={userProfileIcon} className="profile-img" />
             </div>
           </div>
           <div class="col-5">
@@ -248,7 +251,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
             <div className="row mt-3 pb-3">
               <div className="offset-1 col-10">
                 <div className="row">
-                  <div className="col-4 ">
+                  <div className="col-4">
                     <Link href="/billing-history">
                       <button
                         type="button"

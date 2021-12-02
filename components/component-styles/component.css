@@ -145,10 +145,11 @@
 
 .custom-input {
   background: #f1f1f1;
-  height: 45px;
-  padding: 10px 6px;
+  height: 35px;
+  padding: 10px 16px;
   box-shadow: none;
   font-weight: bold;
+  color: black;
 }
 
 /* .login-div{

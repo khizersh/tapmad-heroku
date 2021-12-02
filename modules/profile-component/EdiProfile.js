@@ -90,14 +90,14 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
     setEditProfile({ ...editProfile, Gender: param });
   };
   return (
-    <div className="col-12 mt-2 ">
-      {isMobile ? <h3 className="mt-4">Edit Profile</h3> : null}
+    <div className="col-12 mt-1 ">
+      {isMobile ? null : <h3 className="mt-1 offset-2">Edit Profile</h3>}
 
       <div
         className={`${
           isMobile
             ? "mob_editProfile p-2 "
-            : "desk_editProfile col-lg-8 m-lg-auto"
+            : "desk_editProfile col-lg-8 m-lg-auto rounded"
         }`}
       >
         <div className="row">
@@ -116,7 +116,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               defaultValue={profile && profile.ProfileData.UserProfileFullName}
               placeholder="Enter Name"
               className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
               }`}
               onChange={(e) => {
                 setEditProfile({ ...editProfile, Name: e.target.value });
@@ -128,7 +128,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <input
               placeholder="Date of Birth"
               className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
               }`}
               defaultValue={profile && profile.ProfileData.UserProfileDOB}
               onChange={(e) => {
@@ -143,7 +143,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <input
               placeholder="Mobile"
               className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
               }`}
               defaultValue={profile && profile.ProfileData.UserProfileMobile}
               onChange={(e) => {
@@ -156,7 +156,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <input
               placeholder="Email"
               className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-2 rounded"
+                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
               }`}
               // defaultValue={profile && profile.ProfileData.UserProfileMobile}
               onChange={(e) => {

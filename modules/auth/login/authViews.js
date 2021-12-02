@@ -118,7 +118,7 @@ export default function AuthViews(props) {
       <div className="bg_dark">
         <div className="container">
           <div className="row">
-            <div className="col-sm-12 col-md-5">
+            <div className="col-sm-12 offset-md-2 col-md-8">
               <div className="tm_login_pg">
                 <RenderViews />
               </div>

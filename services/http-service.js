@@ -8,13 +8,12 @@ const { Cookie } = require("./cookies");
 
 function get(url, ip) {
   if (process.env.TAPENV == "local") {
-    // ip = "39.44.217.70";
+    ip = "39.44.217.70";
   }
   try {
     let headers = {
       "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
-      "Access-Control-Allow-Origin": "*"
+      // "X-Forwarded-For": ip ? ip : "",
     };
     return axios.get(url, { headers: headers });
   } catch (error) {
