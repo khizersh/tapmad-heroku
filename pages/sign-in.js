@@ -12,7 +12,7 @@ export default function LoginPage(props) {
       router.push("/");
     }
 
-    fetch('https://developer.tapmad.com/dev/app/api/getMoreContentWithPagination/0/5/511/3').then(res => res.json()).then(data =>  console.log(data))
+    // fetch('https://developer.tapmad.com/dev/app/api/getMoreContentWithPagination/0/5/511/3').then(res => res.json()).then(data =>  console.log(data))
   }, [initialState.isAuthenticated]);
 
 
