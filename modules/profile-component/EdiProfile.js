@@ -97,7 +97,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         className={`${
           isMobile
             ? "mob_editProfile p-2 "
-            : "desk_editProfile col-lg-8 m-lg-auto rounded"
+            : "desk_editProfile col-lg-9 m-lg-auto rounded"
         }`}
       >
         <div className="row">
@@ -186,13 +186,18 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             </div>
           </div>
         </div>
-        {isMobile ? (
-          ""
-        ) : (
-          <button type="button" class="btn btn-light rounded-pill">
-            Light
-          </button>
-        )}
+        <div className="p-4 text-center">
+          {isMobile ? (
+            ""
+          ) : (
+            <button
+              type="button"
+              class="btn btn-light rounded-pill px-5 m-auto"
+            >
+              Save Profile
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
