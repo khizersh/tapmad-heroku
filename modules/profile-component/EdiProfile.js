@@ -90,113 +90,134 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
     setEditProfile({ ...editProfile, Gender: param });
   };
   return (
-    <div className="col-12 mt-1 ">
-      {isMobile ? null : <h3 className="mt-1 offset-2">Edit Profile</h3>}
+    <div className="container-fluid">
+      <div className="row">
+        <div className="container">
+          <div className="row">
+            <div className="col-4">
+              {isMobile ? null : <h3 className="mt-1 ">Edit Profile</h3>}
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div
-        className={`${
-          isMobile
-            ? "mob_editProfile p-2 "
-            : "desk_editProfile col-lg-9 m-lg-auto rounded"
-        }`}
-      >
-        <div className="row">
-          <div className="col-12 text-center">
-            <img
-              src={editUserProfileIcon}
-              className={`${isMobile ? "" : "m-4"}`}
-              width={`${isMobile ? "100" : "150"}`}
-            />
-          </div>
-        </div>
-        <div className={`${isMobile ? "" : "row"}`}>
-          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
-            <label className="editprofile_lbl">Name:</label>
-            <input
-              defaultValue={profile && profile.ProfileData.UserProfileFullName}
-              placeholder="Enter Name"
-              className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
-              }`}
-              onChange={(e) => {
-                setEditProfile({ ...editProfile, Name: e.target.value });
-              }}
-            />
-          </div>
-          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
-            <label className="editprofile_lbl">Date of Birth:</label>
-            <input
-              placeholder="Date of Birth"
-              className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
-              }`}
-              defaultValue={profile && profile.ProfileData.UserProfileDOB}
-              onChange={(e) => {
-                setEditProfile({ ...editProfile, DOB: e.target.value });
-              }}
-            />
-          </div>
-        </div>
-        <div className={`${isMobile ? "" : "row"}`}>
-          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
-            <label className="editprofile_lbl">Mobile:</label>
-            <input
-              placeholder="Mobile"
-              className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
-              }`}
-              defaultValue={profile && profile.ProfileData.UserProfileMobile}
-              onChange={(e) => {
-                setEditProfile({ ...editProfile, Mobile: e.target.value });
-              }}
-            />
-          </div>
-          <div className={`${isMobile ? "my-3" : "px-2 my-2 w-50"}`}>
-            <label className="editprofile_lbl">Email:</label>
-            <input
-              placeholder="Email"
-              className={`${
-                isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
-              }`}
-              // defaultValue={profile && profile.ProfileData.UserProfileMobile}
-              onChange={(e) => {
-                setEditProfile({ ...editProfile, Mobile: e.target.value });
-              }}
-            />
-          </div>
-        </div>
-        <div>
-          <label className="editprofile_lbl">Gender:</label>
-          <div className={"row"}>
-            <div className="col-3" onClick={() => onPressGender("Male")}>
-              <input
-                type="radio"
-                name="radio"
-                checked={gender == "Male" ? true : false}
+      <div className="row">
+        <div
+          className={`${
+            isMobile
+              ? "mob_editProfile p-2 "
+              : "desk_editProfile col-lg-9 m-lg-auto rounded"
+          }`}
+        >
+          <div className="row">
+            <div className="col-12 text-center">
+              <img
+                src={editUserProfileIcon}
+                className={`${isMobile ? "" : "m-4"}`}
+                width={`${isMobile ? "100" : "150"}`}
               />
-              <label className="radio-cstm">Male</label>
-            </div>
-            <div className="col-3" onClick={() => onPressGender("Female")}>
-              <input
-                type="radio"
-                name="radio"
-                checked={gender == "Female" ? true : false}
-              />
-              <label className="radio-cstm">Female</label>
             </div>
           </div>
-        </div>
-        <div className="p-4 text-center">
-          {isMobile ? (
-            ""
-          ) : (
-            <button
-              type="button"
-              class="btn btn-light rounded-pill px-5 m-auto"
-            >
-              Save Profile
-            </button>
-          )}
+          <div className={`${isMobile ? "" : "row px-5"}`}>
+            <div className={`${isMobile ? "my-3" : "col-6"}`}>
+              <label className="editprofile_lbl">Name:</label>
+              <input
+                defaultValue={
+                  profile && profile.ProfileData.UserProfileFullName
+                }
+                placeholder="Enter Name"
+                className={`${
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
+                }`}
+                onChange={(e) => {
+                  setEditProfile({ ...editProfile, Name: e.target.value });
+                }}
+              />
+            </div>
+            <div className={`${isMobile ? "my-3" : "col-6"}`}>
+              <label className="editprofile_lbl">Date of Birth:</label>
+              <input
+                placeholder="Date of Birth"
+                className={`${
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
+                }`}
+                defaultValue={profile && profile.ProfileData.UserProfileDOB}
+                onChange={(e) => {
+                  setEditProfile({ ...editProfile, DOB: e.target.value });
+                }}
+              />
+            </div>
+
+            <div className={`${isMobile ? "my-3" : "col-6"}`}>
+              <label className="editprofile_lbl">Mobile:</label>
+              <input
+                placeholder="Mobile"
+                className={`${
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
+                }`}
+                defaultValue={profile && profile.ProfileData.UserProfileMobile}
+                onChange={(e) => {
+                  setEditProfile({ ...editProfile, Mobile: e.target.value });
+                }}
+              />
+            </div>
+            <div className={`${isMobile ? "my-3" : "col-6"}`}>
+              <label className="editprofile_lbl">Email:</label>
+              <input
+                placeholder="Email"
+                className={`${
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
+                }`}
+                // defaultValue={profile && profile.ProfileData.UserProfileMobile}
+                onChange={(e) => {
+                  setEditProfile({ ...editProfile, Mobile: e.target.value });
+                }}
+              />
+            </div>
+            <div className="col-12">
+              <div className={`${isMobile ? "" : "px-4"}`}>
+                <label className="editprofile_lbl">Gender:</label>
+                <div className={"row"}>
+                  <div className="col-3" onClick={() => onPressGender("Male")}>
+                    <div className="row">
+                      <input
+                        type="radio"
+                        name="radio"
+                        checked={gender == "Male" ? true : false}
+                      />
+                      <label className="radio-cstm">Male</label>
+                    </div>
+                  </div>
+                  <div
+                    className="col-3"
+                    onClick={() => onPressGender("Female")}
+                  >
+                    <div className="row">
+                      <input
+                        type="radio"
+                        name="radio"
+                        checked={gender == "Female" ? true : false}
+                      />
+                      <label className="radio-cstm">Female</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 text-center">
+            {isMobile ? (
+              ""
+            ) : (
+              <button
+                type="button"
+                class="btn btn-light rounded-pill px-5 m-auto"
+              >
+                Save Profile
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
