@@ -1,8 +1,7 @@
 export const BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
-// const BASEPAYMENTURL = "https://payments.tapmad.com/";
-const BASEPAYMENTURL = "https://developer.tapmad.com/dev/app/";
-const BASEURLDEVELOPMENT = "https://developer.tapmad.com/payments";
+const BASEPAYMENTURL = "https://payments.tapmad.com/";
+const BASEURLDEVELOPMENT = "https://developer.tapmad.com/dev/app/";
 
 export const EPLPaymentUrl =
   BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
@@ -11,9 +10,9 @@ export const getAllPackages =
 export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
-export const getUserByUserId = BASEPAYMENTURL + "api/getUserProfileDetail";
+export const getUserByUserId = BASEURLDEVELOPMENT + "api/getUserProfileDetail";
 export const getUserPaymentHistory =
-  BASEPAYMENTURL + "api/getUserPaymentHistory";
+  BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
   BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
@@ -24,14 +23,14 @@ export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
-  BASEPAYMENTURL + "api/processPaymentTransactionNewPackage";
+  BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackage";
 export const setUserPinCode = BASEURL + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
 export const UserSignUpPromoCode = BASEURL + "api/UserSignUpPromoCode";
 export const SignUpORSignInMobileOperatorToken =
   BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
 export const SignUpORSignInMobileOperatorTokenByPin =
-  BASEPAYMENTURL + "api/SignUpORSignInMobileOperatorTokenByPin";
+  BASEURLDEVELOPMENT + "api/SignUpORSignInMobileOperatorTokenByPin";
 export const Logout = BASEURLAPP + "api/logout";
 
 export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/android";
@@ -49,12 +48,12 @@ export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 
 export const initialPaymentTransactionNew =
-  BASEPAYMENTURL + "api/initiatePaymentTransactionNewPackage";
+  BASEURLDEVELOPMENT + "api/initiatePaymentTransactionNewPackage";
 
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";
 export const unsubscribePaymentTransaction =
-  BASEPAYMENTURL + "api/unsubscribePaymentTransaction";
+  BASEURLDEVELOPMENT + "api/unsubscribePaymentTransaction";
 export const getMoviesWithPagination = (from, to) => {
   return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
 };
@@ -148,7 +147,7 @@ export const loggingTags = {
 // New login design apis
 
 export const PaymentPackages =
-  BASEPAYMENTURL + "api/getPackagePaymentMethods/V1/en/android";
-BASEPAYMENTURL + "api/getPackagePaymentMethods/V1/en/android";
+  BASEURLDEVELOPMENT + "api/getPackagePaymentMethods/V1/en/android";
+BASEURLDEVELOPMENT + "api/getPackagePaymentMethods/V1/en/android";
 export const PaymentPackagesByUserId =
-  BASEPAYMENTURL + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
+  BASEURLDEVELOPMENT + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
