@@ -100,18 +100,19 @@ const CombineLoginDesktop = ({
           </div>
         </div>
       </div>
-
-      <div className="text-right mb-3">
-        <Link href="/sign-up" shallow={true} passHref={true}>
-          <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
-        </Link>
-        <span
-          className="mt-2 mr-2 text-light"
-          onClick={forgetClick}
-          style={{ color: "#fff", cursor: "pointer" }}
-        >
-          | &nbsp;&nbsp;Forgot PIN?
-        </span>
+      <div className="d-flex justify-content-end">
+        <div className="mb-3 mx-5 pr-3">
+          <Link href="/sign-up" shallow={true} passHref={true}>
+            <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
+          </Link>
+          <span
+            className="mt-2 mr-2 text-light"
+            onClick={forgetClick}
+            style={{ color: "#fff", cursor: "pointer" }}
+          >
+            | &nbsp;&nbsp;Forgot PIN?
+          </span>
+        </div>
       </div>
       <div className="form-group text-center">
         <button

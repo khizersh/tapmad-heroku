@@ -36,6 +36,9 @@ export function setLoginViews(response, obj) {
     if (response.responseCode == 31) {
       return { code: 31, view: "sign-in" };
     }
+    else if(response.responseCode == 32){
+      return { code: 0, view: "sign-up" };
+    }
   }
 }
 

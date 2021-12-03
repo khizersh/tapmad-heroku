@@ -54,7 +54,9 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   }
 
   async function loginUser() {
+    setLoader(true);
     if (!CurrentMethod) {
+      setLoader(false);
       return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
     }
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
