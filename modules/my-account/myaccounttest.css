@@ -15,7 +15,7 @@
   height: 100vh;
 }
 .profile_div {
-  height: 40vh;
+  /* height: 40vh; */
 }
 .optButtons {
   background-color: #1d211f;
@@ -44,10 +44,7 @@
 }
 .option_div {
   background-color: #fff;
-  position: relative;
-  bottom: 3rem;
-  margin: auto;
-  width: 30rem;
+  width: auto;
 }
 .cont_style {
   background-color: #3b3b3b;
@@ -223,14 +220,5 @@ table tr:nth-child(even) td {
   .table_style td{
     font-size: 13px;
 
-  }
-  .option_div {
-    background-color: white;
-    width: 100%;
-    position: relative;
-    bottom: 3rem;
-    margin: auto;
-    min-width: 70% !important;
-    max-width: 70% !important;
   }
 }
