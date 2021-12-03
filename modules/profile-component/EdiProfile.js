@@ -47,7 +47,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
     var formData = {
       Version: "V1",
       Language: "en",
-      Platform: "web",
+      Platform: "android",
       UserId: userId,
       ProfilePicture: null,
       FullName: editProfile.Name,
@@ -76,14 +76,10 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
     }
     console.log("API Hit", data);
   };
-  if (isSave) {
+  if (isSave && isMobile) {
     submitHandeler();
   }
-  useEffect(() => {
-    console.log(isSave);
-    console.log(profile);
-    console.log(editProfile, " inside Effect");
-  }, [isSave]);
+  useEffect(() => {}, [isSave]);
 
   const onPressGender = (param) => {
     setGender(param);
@@ -211,6 +207,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               ""
             ) : (
               <button
+                onClick={submitHandeler}
                 type="button"
                 class="btn btn-light rounded-pill px-5 m-auto"
               >

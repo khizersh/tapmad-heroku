@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   awardIcon,
   blackGaming,
@@ -25,6 +25,7 @@ import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 
 const MyAccountWeb = ({ profileData, allData, userId }) => {
   const { setLoader } = useContext(MainContext);
+  const [splitValue, setSplitValue] = useState(null);
   const router = useRouter();
   const [imageState, setImageState] = useState({
     pacakge: true,
@@ -42,8 +43,12 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
     await dispatch({ type: UPDATE_PACKAGE, data: true });
     router.push("/change-package");
   };
+  useEffect(() => {
+    if (allData) {
+      setSplitValue(allData.PackageDescription[0].PackagePrice.split("-"));
+    }
+  }, [allData]);
   const unSubscribe = () => {
-    // setLoader(true);
     let body = {
       Language: "en",
       Platform: "android",
@@ -164,7 +169,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
           </div>
         </div>
       </div>
-      {/* <hr style={{ backgroundColor: "#FFFFFF" }} /> */}
+
       <div className="row mt-3">
         <div className="col-3 px-0">
           <div className="mt-2 pt-1">
@@ -212,22 +217,30 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
               <div style={{ display: imageState.pacakge ? "block" : "none" }}>
                 <div className="row px-5 pt-3">
                   <div className="col-6">
-                    <text
-                      style={{
-                        fontSize: "20px",
-                        color: "#37C673",
-                        fontWeight: "650",
-                      }}
-                    >
+                    <span className="font-32 package_style">
+                      <img
+                        className="mx-3"
+                        src={
+                          allData && allData.PackageDescription[0].packageImage
+                        }
+                        width="20"
+                      />
                       {allData && allData.MyPackage}
-                    </text>
-                    <text>
-                      <br />
-                      {allData && allData.PackageDescription[0].PackagePrice}
-                    </text>
+                    </span>
                     <br />
-                    <text style={{ fontSize: "13px" }}>
-                      {allData && allData.PackageDescription[0].ContentDescription}
+
+                    <div className="font-20">
+                      {splitValue && splitValue[0]}&nbsp;
+                      <strong className="font-32">
+                        {splitValue && splitValue[1]}
+                      </strong>
+                      &nbsp;
+                      <text>{splitValue && splitValue[2]}</text>
+                    </div>
+
+                    <text className="mb-3 font-13">
+                      {allData &&
+                        allData.PackageDescription[0].ContentDescription}
                     </text>
                   </div>
                   <div className="container col-2">
