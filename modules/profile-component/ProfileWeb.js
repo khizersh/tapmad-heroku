@@ -24,7 +24,6 @@ import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 
 const MyAccountWeb = ({ profileData, allData, userId }) => {
-
   const { setLoader } = useContext(MainContext);
   const router = useRouter();
   const [imageState, setImageState] = useState({
@@ -33,7 +32,6 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
   });
   const { dispatch, AuthState } = useContext(AuthContext);
   const onSwitchImage = () => {
-    console.log(imageState.pacakge);
     if (imageState.pacakge == true) {
       setImageState({ pacakge: false, game: true });
     } else {

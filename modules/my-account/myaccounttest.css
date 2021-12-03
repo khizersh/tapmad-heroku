@@ -73,11 +73,11 @@ table tr:nth-child(even) td {
   width: 100%;
 }
 
-.rotate-180{
+.rotate-180 {
   transform: rotate(180deg);
 }
 
-.pagination-btn{
+.pagination-btn {
   padding: 2px 7px;
   border-radius: 5px;
 }
@@ -87,6 +87,16 @@ table tr:nth-child(even) td {
 .mob_editProfile {
   background-color: #131c1f;
   border-radius: 15px;
+}
+.desk_editProfile {
+  background-color: #333433;
+}
+.desk_editProfile input {
+  background-color: #fff;
+  border: 0px solid #707070;
+}
+.desk_editProfile input::placeholder {
+  color: #898d8f;
 }
 .mob_editProfile input {
   background-color: #fff;
@@ -205,20 +215,18 @@ table tr:nth-child(even) td {
   background-color: #37c673;
 }
 
-.table_style td{
+.table_style td {
   color: #d0d4d7;
-
 }
 @media only screen and (max-width: 799px) {
-  .table_style th  {
+  .table_style th {
     background-color: #484948;
     padding: 10px;
     color: #37c673;
     text-align: center;
     font-size: 13px;
   }
-  .table_style td{
+  .table_style td {
     font-size: 13px;
-
   }
 }

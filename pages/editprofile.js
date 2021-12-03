@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import EditProfileMobile from "../modules/profile-component/EdiProfileMobile";
-import EditProfileWeb from "../modules/profile-component/EdiProfileWeb";
+
 import { useRouter } from "next/router";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
+import EdiProfile from "../modules/profile-component/EdiProfile";
+import EdiProfileForm from "../modules/profile-component/EdiProfile";
 
 const EditProfile = () => {
   const router = useRouter();
@@ -26,34 +27,36 @@ const EditProfile = () => {
 
   return (
     <div className="container-fluid">
-      <NavbarHOC>
-        <div>
-          <button
-            className="btn"
-            style={{
-              fontSize: "13px",
-              color: "black",
-            }}
-            onClick={onClickBack}
-          >
-            <img src="/icons/login-back.svg" />
-          </button>
-        </div>
-        <div className="margin-y-auto">
-          {/* <img src={upgradeIcon} width="25" /> */}
-          <span className="pl-2">
+      {mobile ? (
+        <NavbarHOC>
+          <div>
             <button
-              type="button"
-              onClick={() => handleCallback()}
-              class="rounded-pill py-1 px-4 btn btn-light"
+              className="btn"
+              style={{
+                fontSize: "13px",
+                color: "black",
+              }}
+              onClick={onClickBack}
             >
-              Save
+              <img src="/icons/login-back.svg" />
             </button>
-          </span>
-        </div>
-      </NavbarHOC>
+          </div>
+          <div className="margin-y-auto">
+            {/* <img src={upgradeIcon} width="25" /> */}
+            <span className="pl-2">
+              <button
+                type="button"
+                onClick={() => handleCallback()}
+                class="rounded-pill py-1 px-4 btn btn-light"
+              >
+                Save
+              </button>
+            </span>
+          </div>
+        </NavbarHOC>
+      ) : null}
       <div className="profile-container">
-        {mobile ? <EditProfileMobile isSave={save} /> : <EditProfileWeb />}
+        <EdiProfileForm isSave={save} isMobile={mobile} />
       </div>
     </div>
   );
