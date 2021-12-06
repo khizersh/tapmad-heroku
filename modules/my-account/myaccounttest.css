@@ -124,6 +124,19 @@ table tr:nth-child(even) td {
 .font-11 {
   font-size: 11px !important;
 }
+.font-13 {
+  font-size: 13px !important;
+}
+.font-20 {
+  font-size: 20px;
+}
+.font-32 {
+  font-size: 32px !important;
+}
+.package_style {
+  color: #37c673;
+  font-weight: 650;
+}
 .table_text {
   font-size: 31px;
 }
@@ -151,7 +164,7 @@ table tr:nth-child(even) td {
   font-size: 14px;
   font-family: "okomitomedium";
   background: transparent
-    linear-gradient(96deg, var(--primary-37c673) 0%, #109f69 100%) 0% 0%
+    linear-gradient(96deg, var(--primary-#37c673) 0%, #109f69 100%) 0% 0%
     no-repeat padding-box;
   background: transparent linear-gradient(96deg, #37c673 0%, #109f69 100%) 0% 0%
     no-repeat padding-box;

@@ -42,6 +42,7 @@ const MyAccountTrial = () => {
         dispatch({ type: PROFILE_DATA, data: data });
       }
       if (data != null) {
+        console.log(data);
         if (data.responseCode == 1) {
           setAllData(data.data);
           setProfileData({
