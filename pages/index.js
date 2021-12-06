@@ -5,6 +5,7 @@ import requestIp from "request-ip";
 
 import { HomeService } from "../modules/home/components/home.service";
 import isGoogle from "../services/google-dns-lookup";
+import { UpdateBase } from "../services/apilinks";
 
 export default function Home(props) {
   console.log(props);
@@ -32,6 +33,7 @@ export default function Home(props) {
   );
 }
 export async function getServerSideProps(context) {
+  UpdateBase(process.env.API_ENDPOINT);
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";

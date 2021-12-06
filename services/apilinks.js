@@ -1,4 +1,4 @@
-export const BASEURL = "https://api.tapmad.com/";
+export var BASEURL = "https://api.tapmad.com/";
 export const BASEURLAPP = "https://app.tapmad.com/";
 const BASEPAYMENTURL = "https://payments.tapmad.com/api/";
 export const EPLPaymentUrl = BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
@@ -122,7 +122,9 @@ export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web"
 
 export const viewMoreContent = (from, to, sectionId, pageId) => (BASEURLAPP + `api/getMoreContentWithPagination/${from}/${to}/${sectionId}/${pageId}`)
 
-
+export const UpdateBase = (URL) => {
+  BASEURL = URL
+}
 export const loggingTags = {
   search: "search",
   fetch: "fetch",
