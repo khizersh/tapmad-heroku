@@ -1,3 +1,8 @@
+:root{
+  --signup_background_color : #1a1a1a;
+}
+
+
 .close-round {
   padding: 10px 10px 10px 10px;
   border-radius: 50%;
@@ -47,6 +52,16 @@
   margin-top: 5rem;
   border-radius: 20px;
   background-color: #1a1a1a;
+}
+.custom-bg-signup {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: var(--signup_background_color);
+}
+
+.custom-bg-signup button{
+  width: 50%;
+  text-align: center;
 }
 /* custom checkbox start */
 
@@ -157,6 +172,10 @@
 } */
 
 @media only screen and (max-width: 799px) {
+  .custom-bg-signup button{
+    width: 100%;
+    text-align: center;
+  }
   .operators {
     width: 126% !important;
     position: relative;

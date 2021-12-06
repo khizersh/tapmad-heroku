@@ -113,7 +113,7 @@ function SetYourNewPinSignUp({ login, ip }) {
   }, [initialState.User.MobileNo]);
 
   return (
-    <div className="desktop-size">
+    <div className="desktop-size custom-bg-signup">
       <h3 className="pb-3 component-title">Set Your New PIN</h3>
       {showUsername ? (
         <>

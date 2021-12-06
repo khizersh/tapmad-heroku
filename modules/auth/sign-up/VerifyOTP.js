@@ -98,7 +98,7 @@ const VerifyOTPComponent = ({ newUser , login }) => {
     setLoader(false);
   }
   return (
-    <div className="text-center desktop-size">
+    <div className="text-center desktop-size custom-bg-signup">
       <h3 className="component-title">Enter your OTP</h3>
       <div className="py-3">
         <label className="text-muted center-div">Please enter code provided into 4 digit verification code</label>

@@ -83,7 +83,7 @@ const EnterPinToVerifyUser = ({ login }) => {
   }
   return (
     <>
-      <div className="desktop-size">
+      <div className="desktop-size custom-bg-signup">
         <div className="py-3">
           <div className="text-center">
             <small className="text-dark">Enter your four digit PIN</small>

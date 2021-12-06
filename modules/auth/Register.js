@@ -1,5 +1,4 @@
 import React, { useContext, memo, useCallback, useRef, useEffect } from "react";
-import { Authcontext } from "../../contexts/AuthContext";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";
 import VerifyOTP from "./sign-up/VerifyOTP";
