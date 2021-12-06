@@ -7,6 +7,8 @@ import { HomeService } from "../modules/home/components/home.service";
 import isGoogle from "../services/google-dns-lookup";
 
 export default function Home(props) {
+  console.log(props);
+
   return (
     <div>
       <Head>
@@ -61,7 +63,8 @@ export async function getServerSideProps(context) {
       banner: banner,
       featured: featured,
       ip: ip,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
+      prodEnv: process.env.API_ENDPOINT
     },
   };
 }
