@@ -57,39 +57,36 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
       Version: "V1",
       headers: GlobalService.authHeaders() || null,
     };
-    console.log("allData : ", allData);
-    console.log("body in sub  : ", body);
-    // MyAccountService.unsubcribeUser(body)
-    //   .then((res) => {
-    //     console.log("resss in sub: ",res);
-    //     if (res.responseCode == 1) {
-    //       swal({
-    //         title: res.message,
-    //         timer: 2500,
-    //         icon: "success",
-    //       });
-    //       setdeactivated(true);
-    //       setLoader(false);
-    //       router.push("/sign-up")
-    //     } else if (res.responseCode == 5) {
-    //       swal({
-    //         title: res.message,
-    //         timer: 2500,
-    //         icon: "warning",
-    //       });
-    //       setLoader(false);
-    //     } else {
-    //       swal({
-    //         title: res.message,
-    //         timer: 2500,
-    //         icon: "error",
-    //       });
-    //       setLoader(false);
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     setLoader(false);
-    //   });
+    MyAccountService.unsubcribeUser(body)
+      .then((res) => {
+        if (res.responseCode == 1) {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "success",
+          });
+          setdeactivated(true);
+          setLoader(false);
+          router.push("/sign-up");
+        } else if (res.responseCode == 5) {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "warning",
+          });
+          setLoader(false);
+        } else {
+          swal({
+            title: res.message,
+            timer: 2500,
+            icon: "error",
+          });
+          setLoader(false);
+        }
+      })
+      .catch((e) => {
+        setLoader(false);
+      });
   };
 
   return (
