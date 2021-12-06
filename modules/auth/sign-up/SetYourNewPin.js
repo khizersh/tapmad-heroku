@@ -3,15 +3,11 @@ import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
 import { AuthService } from "../auth.service";
-import { Authcontext } from "../../../contexts/AuthContext";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
-import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 
 function SetYourNewPinSignUp({ login, ip }) {
-  const { initialState, checkUserAuthentication, setLoader } =
-    useContext(MainContext);
-  // const { authState } = useContext(Authcontext);
+  const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
@@ -19,7 +15,7 @@ function SetYourNewPinSignUp({ login, ip }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
-    console.log("SignUpState : ",SignUpState);
+    setLoader(true);
     if (showUsername) {
       if (username.trim().length < 1) {
         return swal({
@@ -43,6 +39,7 @@ function SetYourNewPinSignUp({ login, ip }) {
         icon: "error",
       });
     }
+    Cookie.setCookies("UserPin", pin);
     var obj = {
       Language: "en",
       Platform: "web",
@@ -51,29 +48,25 @@ function SetYourNewPinSignUp({ login, ip }) {
       OperatorId: SignUpState.UserDetails.Operator,
       UserPassword: "",
     };
-    console.log("objjj ",obj);
-    setLoader(true);
-    const userStatus = await AuthService.GetCardUser({
-      MobileNo: SignUpState.UserDetails.MobileNo,
-      Language: "en",
-    });
-    if (userStatus && userStatus.data.User) {
-      obj.UserPassword = userStatus.data.User.UserPassword;
-      Cookie.setCookies("userId", userStatus.data.User.UserId);
-      Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
-    }
+
+    // setLoader(true);
+    // const userStatus = await AuthService.GetCardUser({
+    //   MobileNo: SignUpState.UserDetails.MobileNo,
+    //   Language: "en",
+    // });
+    // if (userStatus && userStatus.data.User) {
+    //   obj.UserPassword = userStatus.data.User.UserPassword;
+    //   Cookie.setCookies("userId", userStatus.data.User.UserId);
+    //   Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
+    // }
     const response = await AuthService.setNewPin(pin, username);
-    Cookie.setCookies("UserPin", pin);
-    dispatch({
-      type: UPDATE_USER_DETAILS,
-      data: { UserPin: pin },
-    });
+
     if (response != null) {
       if (response.responseCode == 0) {
         swal({
           timer: 3000,
           title: response.message,
-          icon: "success",
+          icon: "error",
         });
       } else if (response.responseCode == 1) {
         await AuthService.clearUserToken(SignUpState.UserDetails.MobileNo);
@@ -93,11 +86,12 @@ function SetYourNewPinSignUp({ login, ip }) {
         icon: "error",
       });
     }
+    setLoader(false);
   };
 
   useEffect(() => {
-    if (initialState.User.MobileNo) {
-      let num = initialState?.User?.MobileNo;
+    if (SignUpState.UserDetails.MobileNo) {
+      let num = SignUpState.UserDetails.MobileNo;
       let body = { Language: "en", MobileNo: num };
       AuthService.GetCardUser(body)
         .then((res) => {
@@ -110,7 +104,7 @@ function SetYourNewPinSignUp({ login, ip }) {
         })
         .catch((e) => console.log(e));
     }
-  }, [initialState.User.MobileNo]);
+  }, [SignUpState.UserDetails.MobileNo]);
 
   return (
     <div className="desktop-size custom-bg-signup">

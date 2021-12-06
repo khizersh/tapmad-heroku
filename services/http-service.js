@@ -13,7 +13,7 @@ function get(url, ip) {
   try {
     let headers = {
       "Content-Type": "application/json",
-      // "X-Forwarded-For": ip ? ip : "",
+      "X-Forwarded-For": ip ? ip : "",
     };
     return axios.get(url, { headers: headers });
   } catch (error) {
@@ -30,6 +30,7 @@ function post(url, body, ip, credentialAllowed = false) {
     "X-Forwarded-For": ip ? ip : "",
     ...body.headers,
   };
+  console.log("body.headers : ",body , url);
   delete body.headers;
   try {
     return axios.post(url, body, {

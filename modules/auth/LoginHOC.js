@@ -19,16 +19,16 @@ export default function withLogin(Component, data) {
 
     async function loginUser(userIp) {
       setLoader(true);
-      let obj = {
+      const userPin = Cookie.getCookies('UserPin') || SignUpState.UserDetails.UserPin 
+      var obj = {
         Language: "en",
         Platform: "web",
         Version: "V1",
         MobileNo: SignUpState.UserDetails.MobileNo,
         OperatorId: SignUpState.UserDetails.Operator,
-        UserPin: SignUpState.UserDetails.UserPin || Cookie.getCookies('userPin'),
+        UserPin: userPin,
       };
-     
-      if(obj.UserPin.length  === 4){
+      if(userPin.length  === 4){
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);

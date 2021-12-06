@@ -145,18 +145,19 @@ export default function Player({ movies }) {
     setMovie(movies);
     if (movies.Video && movies.Video.IsVideoChannel) {
       setVideoLink({
-        highQuality: movies.Video.ChannelStreamUrlWHQ,
-        mediumQuality: movies.Video.ChannelStreamUrlWMQ,
-        lowQuality: movies.Video.ChannelStreamUrlWLQ,
+        highQuality: movies.Video.ContentStreamUrlWHQ,
+        mediumQuality: movies.Video.ContentStreamUrlWMQ,
+        lowQuality: movies.Video.ContentStreamUrlWLQ,
       });
     } else {
       setVideoLink({
-        highQuality: movies.Video.VideoStreamUrlHQ,
-        mediumQuality: movies.Video.VideoStreamUrlMQ,
-        lowQuality: movies.Video.VideoStreamUrlLQ,
+        highQuality: movies.Video.ContentStreamUrlHQ,
+        mediumQuality: movies.Video.ContentStreamUrlMQ,
+        lowQuality: movies.Video.ContentStreamUrlLQ,
       });
     }
   }, [movies]);
+
 
   function videoQuartile(movie) {
     return {

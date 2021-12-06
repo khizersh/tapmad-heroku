@@ -43,7 +43,7 @@ const EnterPinToVerifyUser = ({ login }) => {
   }
 
   async function verifyPinCode() {
-    Cookie.setCookies("userPin", pinCode.current.value);
+    Cookie.setCookies("UserPin", pinCode.current.value);
     if (pinCode.current.value.length == 4) {
       setLoader(true);
       const data = await AuthService.verifyPinCode(pinCode.current.value);

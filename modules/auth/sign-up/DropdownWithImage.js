@@ -9,7 +9,7 @@ function DropdownWithImage({ data, onChange, placeHolder, width }) {
     setSelectedData(data);
   };
   return (
-    <div>
+    <div className={`${width ? "w-100" : ""}`}>
       <div className="form-control cursor-pointer border-curve w-100 position-relative">
         <div onClick={() => setIsCaretOpen(!isCaretOpen)} className="textfirst">
           {selectedData ? (

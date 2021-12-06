@@ -14,19 +14,19 @@ export const getUserByUserId = BASEURLDEVELOPMENT + "api/getUserProfileDetail";
 export const getUserPaymentHistory =
   BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
 export const getFeaturedHomePage =
-  BASEURL + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
+BASEURLDEVELOPMENT + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
-export const getCardUser = BASEURL + "api/getCardUser";
+export const getCardUser = BASEURLDEVELOPMENT + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
   BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackage";
-export const setUserPinCode = BASEURL + "api/setUserPinCode";
-export const verifyUserPinCode = BASEURL + "api/verifyUserPinCode";
-export const UserSignUpPromoCode = BASEURL + "api/UserSignUpPromoCode";
+export const setUserPinCode = BASEURLDEVELOPMENT + "api/setUserPinCode";
+export const verifyUserPinCode = BASEURLDEVELOPMENT + "api/verifyUserPinCode";
+export const UserSignUpPromoCode = BASEURLDEVELOPMENT + "api/UserSignUpPromoCode";
 export const SignUpORSignInMobileOperatorToken =
   BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
 export const SignUpORSignInMobileOperatorTokenByPin =
@@ -39,11 +39,16 @@ export const getNewsDetailBId =
 
 export const getShowsWithPagination =
   BASEURL + "api/getShowsWithPagination/0/5/0/16";
+  // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
-  BASEURLAPP + "api/getEventPredicationGameChannelToken";
+BASEURLDEVELOPMENT + "api/getUserStreamWithPackages";
+
+// export const getEventPredicationGameChannel =
+// BASEURLDEVELOPMENT + "api/getEventPredicationGameChannelToken";
+
 export const updateUserProfile = BASEURLDEVELOPMENT + "api/updateUserProfile";
 export const creditCard = BASEURLAPP + "api/makeCheckOutPayment";
-export const UBLCard = BASEURLAPP + "api/CardUserOrder";
+export const UBLCard = BASEURLDEVELOPMENT + "api/CardUserOrder";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 

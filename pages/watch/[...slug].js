@@ -28,27 +28,11 @@ const watch = (props) => {
   var renderPlayer = shouldRenderPlayer(props);
 
   useEffect(() => {
-    console.log(props);
     if (!props.allowUser) {
       if (props.data != null) {
         router.push("/sign-up?subspack=epl");
       } else {
         router.push("/sign-up");
-      }
-    } else {
-      if (props.data.responseCode != "401" && props.data.responseCode != '8') {
-        let cId = props.data.Video.VideoEntityId
-          ? props.data.Video.VideoEntityId
-          : "";
-        let cName = props.data.Video.VideoName
-          ? props.data.Video.VideoName
-          : "";
-        let body = {
-          event: "view",
-          contentId: cId,
-          contentName: cName,
-        };
-        actionsRequestContent(body);
       }
     }
   }, [props.allowUser, url]);
