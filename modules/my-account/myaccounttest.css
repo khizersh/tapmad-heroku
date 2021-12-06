@@ -86,7 +86,7 @@ table tr:nth-child(even) td {
 }
 .mob_editProfile {
   background-color: #131c1f;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 .desk_editProfile {
   background-color: #333433;
@@ -116,6 +116,9 @@ table tr:nth-child(even) td {
 .font-14 {
   font-size: 14px !important;
 }
+.font-16 {
+  font-size: 16px !important;
+}
 
 .profile-img {
   width: 60%;
@@ -140,16 +143,14 @@ table tr:nth-child(even) td {
 .table_text {
   font-size: 31px;
 }
-/* 
-.buy-coin-btn{
-  position: relative;
-  left: 17%;
-  top: 10px;
-} */
-
-.coins-div {
+.editpr_heading {
+  margin-left: 4rem !important;
 }
 
+.btn_submit {
+  background-color: #87c242 !important;
+  color: white;
+}
 .text {
   font-size: 12px;
   flex-direction: column;

@@ -18,14 +18,15 @@ import { MainContext } from "../../contexts/MainContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MyAccountService } from "../my-account/myaccount.service";
-import { GlobalService } from "../global-service";
 import swal from "sweetalert";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
+import { GameContext } from "../../contexts/GameContext";
 
 const MyAccountWeb = ({ profileData, allData, userId }) => {
   const { setLoader } = useContext(MainContext);
-  const [splitValue, setSplitValue] = useState(null);
+  const { updateBuyModal } = useContext(GameContext);
+  const [price, setPrice] = useState(null);
   const router = useRouter();
   const [imageState, setImageState] = useState({
     pacakge: true,
@@ -45,50 +46,62 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
   };
   useEffect(() => {
     if (allData) {
-      setSplitValue(allData.PackageDescription[0].PackagePrice.split("-"));
+      setPrice(allData.PackageDescription[0].PackagePrice);
     }
   }, [allData]);
   const unSubscribe = () => {
+    swal({
+      title: "Are you sure?",
+      text: "You want to unsubscribe",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        MyAccountService.unsubcribeUser(body)
+          .then((res) => {
+            if (res.responseCode == 1) {
+              swal({
+                title: res.message,
+                timer: 2500,
+                icon: "success",
+              });
+              setdeactivated(true);
+              setLoader(false);
+              router.push("/sign-up");
+            } else if (res.responseCode == 5) {
+              swal({
+                title: res.message,
+                timer: 2500,
+                icon: "warning",
+              });
+              setLoader(false);
+            } else {
+              swal({
+                title: res.message,
+                timer: 2500,
+                icon: "error",
+              });
+              setLoader(false);
+            }
+          })
+          .catch((e) => {
+            setLoader(false);
+          });
+      }
+    });
     let body = {
       Language: "en",
       Platform: "android",
       ProductId: allData.PackageDescription[0].PackageProductId,
       UserId: userId,
       Version: "V1",
-      headers: GlobalService.authHeaders() || null,
     };
-    MyAccountService.unsubcribeUser(body)
-      .then((res) => {
-        if (res.responseCode == 1) {
-          swal({
-            title: res.message,
-            timer: 2500,
-            icon: "success",
-          });
-          setdeactivated(true);
-          setLoader(false);
-          router.push("/sign-up");
-        } else if (res.responseCode == 5) {
-          swal({
-            title: res.message,
-            timer: 2500,
-            icon: "warning",
-          });
-          setLoader(false);
-        } else {
-          swal({
-            title: res.message,
-            timer: 2500,
-            icon: "error",
-          });
-          setLoader(false);
-        }
-      })
-      .catch((e) => {
-        setLoader(false);
-      });
   };
-
+  const onClickBuy = () => {
+    console.log(updateBuyModal);
+    updateBuyModal(true);
+  };
   return (
     <div className="container">
       <div className="profile_div">
@@ -150,7 +163,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
                 </div>
                 <div className="row">
                   <div className="col-12 font-14 text-grey">
-                    Coins <strong>5.5k</strong>
+                    Coins <strong>{allData && allData.UserCoins}</strong>
                   </div>
                 </div>
               </div>
@@ -158,6 +171,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
                 <button
                   type="button"
                   className="btn font-11 btn-gradient text-light rounded-pill px-3"
+                  onClick={onClickBuy}
                 >
                   Buy more coins
                 </button>
@@ -226,15 +240,14 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
                     </span>
                     <br />
 
-                    <div className="font-20">
-                      {splitValue && splitValue[0]}&nbsp;
-                      <strong className="font-32">
-                        {splitValue && splitValue[1]}
-                      </strong>
+                    <span>
+                      <text className="font-16">{price && price[0]}</text>
                       &nbsp;
-                      <text>{splitValue && splitValue[2]}</text>
-                    </div>
-
+                      <strong className="font-32">{price && price[1]}</strong>
+                      &nbsp;
+                      <text className="font-16">{price && price[2]}</text>
+                    </span>
+                    <br />
                     <text className="mb-3 font-13">
                       {allData &&
                         allData.PackageDescription[0].ContentDescription}
