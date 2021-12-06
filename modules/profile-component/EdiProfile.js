@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../contexts/profile/ProfileContext";
-import { editUserProfileIcon, userIcon } from "../../services/imagesLink";
+import {
+  editUserProfileIcon,
+  userFemaleProfileIcon,
+  userIcon,
+} from "../../services/imagesLink";
 import { MyAccountService } from "../my-account/myaccount.service";
 import requestIp from "request-ip";
 import { Cookie } from "../../services/cookies";
@@ -54,6 +58,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
       UserMobileNumebr: editProfile.Mobile,
       BirthDate: editProfile.DOB,
       Email: null,
+      Gender: gender,
     };
     const data = await MyAccountService.updateUserProfileData(formData);
 
@@ -91,7 +96,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         <div className="container">
           <div className="row">
             <div className="col-4">
-              {isMobile ? null : <h3 className="mt-1 ">Edit Profile</h3>}
+              {isMobile ? null : (
+                <h3 className="editpr_heading">Edit Profile</h3>
+              )}
             </div>
           </div>
         </div>
@@ -101,15 +108,17 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         <div
           className={`${
             isMobile
-              ? "mob_editProfile p-2 "
+              ? "col-12 mob_editProfile"
               : "desk_editProfile col-lg-9 m-lg-auto rounded"
           }`}
         >
           <div className="row">
             <div className="col-12 text-center">
               <img
-                src={editUserProfileIcon}
-                className={`${isMobile ? "" : "m-4"}`}
+                src={
+                  gender == "Male" ? editUserProfileIcon : userFemaleProfileIcon
+                }
+                className={`${isMobile ? "mt-3" : "m-4"}`}
                 width={`${isMobile ? "100" : "150"}`}
               />
             </div>
@@ -135,7 +144,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               <input
                 placeholder="Date of Birth"
                 className={`${
-                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
                 }`}
                 defaultValue={profile && profile.ProfileData.UserProfileDOB}
                 onChange={(e) => {
@@ -149,7 +158,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               <input
                 placeholder="Mobile"
                 className={`${
-                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
                 }`}
                 defaultValue={profile && profile.ProfileData.UserProfileMobile}
                 onChange={(e) => {
@@ -162,9 +171,8 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               <input
                 placeholder="Email"
                 className={`${
-                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 p-1 rounded"
+                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
                 }`}
-                // defaultValue={profile && profile.ProfileData.UserProfileMobile}
                 onChange={(e) => {
                   setEditProfile({ ...editProfile, Mobile: e.target.value });
                 }}
@@ -209,7 +217,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               <button
                 onClick={submitHandeler}
                 type="button"
-                class="btn btn-light rounded-pill px-5 m-auto"
+                class="btn btn_submit rounded-pill px-5 m-auto"
               >
                 Save Profile
               </button>

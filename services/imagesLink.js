@@ -80,5 +80,6 @@ export const cameraIcon = "/icons/camera.svg";
 export const calendarIcon = "/icons/CalendarIcon.svg";
 // export const userProfileIcon = "/icons/profile/user.svg";
 export const userProfileIcon = "/icons/profile/profile.png";
+export const userFemaleProfileIcon = "/icons/femaleIcon.png";
 export const leftArrow = "/icons/profile/right-arrow.svg";
 export const rightArrow = "/icons/profile/left-arrow.svg";

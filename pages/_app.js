@@ -32,6 +32,7 @@ import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
 import SignUpProvider from "../contexts/auth/SignUpContext";
 import loadable from "@loadable/component";
+import BuyCoinModal from "../modules/game/components/BuyCoinModal";
 import ProfileProvider from "../contexts/profile/ProfileContext";
 import { checkUserIdAndToken } from "../services/auth.service";
 
@@ -132,11 +133,13 @@ function MyApp({ Component, pageProps }) {
               <AuthProvider>
                 <AuthProviderNew>
                   <SignUpProvider>
-                    <ProfileProvider>
-                      <NoSideBarSkeleton>
-                        <Component {...pageProps} />
-                      </NoSideBarSkeleton>
-                    </ProfileProvider>
+                    <GameProvider>
+                      <ProfileProvider>
+                        <NoSideBarSkeleton>
+                          <Component {...pageProps} />
+                        </NoSideBarSkeleton>
+                      </ProfileProvider>
+                    </GameProvider>
                   </SignUpProvider>
                 </AuthProviderNew>
               </AuthProvider>
@@ -183,6 +186,7 @@ export const NoSideBarSkeleton = ({ children }) => {
   };
   return (
     <div>
+      <BuyCoinModal />
       {initialState.loading ? <Loader /> : null}
       {children}
     </div>
