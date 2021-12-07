@@ -7,12 +7,11 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 export default function SignUp(props) {
-  console.log("props in submit : ",props);
   const router = useRouter();
   useEffect(() => {
-    if (isAuthentictedUser()) {
-      router.push("/");
-    }
+    // if (isAuthentictedUser()) {
+    //   router.push("/");
+    // }
   }, []);
   return (
     <div>

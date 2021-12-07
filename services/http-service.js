@@ -30,7 +30,6 @@ function post(url, body, ip, credentialAllowed = false) {
     "X-Forwarded-For": ip ? ip : "",
     ...body.headers,
   };
-  console.log("body.headers : ",body , url);
   delete body.headers;
   try {
     return axios.post(url, body, {

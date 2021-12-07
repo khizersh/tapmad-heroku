@@ -23,7 +23,7 @@ export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
-  BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackage";
+  BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackageStaging";
 export const setUserPinCode = BASEURLDEVELOPMENT + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURLDEVELOPMENT + "api/verifyUserPinCode";
 export const UserSignUpPromoCode = BASEURLDEVELOPMENT + "api/UserSignUpPromoCode";
@@ -53,7 +53,7 @@ export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 
 export const initialPaymentTransactionNew =
-  BASEURLDEVELOPMENT + "api/initiatePaymentTransactionNewPackage";
+  BASEURLDEVELOPMENT + "api/initiatePaymentTransactionNewPackageStaging";
 
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";

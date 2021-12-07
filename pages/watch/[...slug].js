@@ -26,6 +26,7 @@ const watch = (props) => {
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
+console.log("props  in wathc: ",props);
 
   useEffect(() => {
     if (!props.allowUser) {
@@ -36,9 +37,10 @@ const watch = (props) => {
       }
     }
   }, [props.allowUser, url]);
-
+// checking token and packages for stream
   useEffect(() => {
-    if (props.data && props.data.responseCode == 401) {
+    console.log("props in wathc :",props.data.responseCode);
+    if (props.data && props.data.responseCode === 401) {
       swal({
         text: props.data.message,
         timer: 3000,
@@ -55,9 +57,8 @@ const watch = (props) => {
           setisAuthenticateFalse();
           router.push("/");
         });
-
       });
-    } else if (props.data && props.data.responseCode == 8) {
+    } else if (props.data && props.data.responseCode === 8) {
       swal({
         text: props.data.message,
         timer: 3000,
@@ -66,11 +67,21 @@ const watch = (props) => {
         router.push("/subscribe-to-epl?subspack=epl");
       });
     }
+    else if (props.data && props.data.responseCode === 110) {
+      router.push(
+        { pathname: "/sign-up", query: { tab : props.data.Video.PaymentTabId , packageId : props.data.Video.PackageId  } },
+        "/sign-up"
+      );
+    }
   }, [url]);
+
   function shouldRenderPlayer() {
     if (props.data && props.data.responseCode == 8) {
       return false;
     } else if (props.data && props.data.responseCode == 401) {
+      return false;
+    }
+    else if (props.data && props.data.responseCode == 110) {
       return false;
     } else {
       return true
@@ -171,6 +182,13 @@ export async function getServerSideProps(context) {
           props: response(res.data, chanelDetail, false, seo),
         };
       } else if (res && res.responseCode == 401) {
+        // logging out 
+        return {
+          props: response(res.data, chanelDetail, true, seo),
+        };
+      }
+      else if (res && res.responseCode == 110) {
+        // send to change package screen with auto package selected
         return {
           props: response(res.data, chanelDetail, true, seo),
         };
