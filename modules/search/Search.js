@@ -8,7 +8,7 @@ import { loggingTags } from "../../services/apilinks";
 import { SearchService } from "./Search.service";
 import { SearchTag } from "../../services/gtm";
 
-const Search = () => {
+const Search = (props) => {
   const { setSearch, setLoader, getCountryCode } = useContext(MainContext);
   const [keyword, setKeyword] = useState("");
   const [isSearched, setisSearched] = useState(false);
@@ -41,7 +41,7 @@ const Search = () => {
   }, [debouncedSearchKeyWord]);
 
   const searchHandler = async (keyword) => {
-    const data = await SearchService.getItemByKeyrwords(keyword, ip);
+    const data = await SearchService.getItemByKeyrwords(keyword);
 
     let body = {
       event: loggingTags.search,
@@ -60,7 +60,7 @@ const Search = () => {
   const onClickSearch = async () => {
     setLoader(true);
     if (keyword) {
-      const data = await SearchService.getItemByKeyrwords(keyword);
+      const data = await SearchService.getItemByKeyrwords(keyword, props.ip);
       if (data != null) {
         if (data.responseCode == 1) {
           setSearchedItem(data.data.Videos);
