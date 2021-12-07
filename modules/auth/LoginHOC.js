@@ -54,7 +54,16 @@ export default function withLogin(Component, data) {
             title: "Please enter valid PIN!",
             icon: "error",
           });
-        } else if (status.code == 0) {
+        } else if (status.code == 401) {
+          swal({
+            title: "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
+            timer: 2500,
+            icon: "warning",
+          }).then(() => {
+            dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+          });
+        }
+        else if (status.code == 0) {
           swal({
             title: "You are not subscribed user. please subscribe!",
             timer: 2500,

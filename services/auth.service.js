@@ -39,6 +39,9 @@ export function setLoginViews(response, obj) {
     else if(response.responseCode == 32){
       return { code: 0, view: "sign-up" };
     }
+    else if(response.responseCode == 401){
+      return { code: 0, view: "send-otp" };
+    }
   }
 }
 
