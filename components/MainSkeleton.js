@@ -7,7 +7,8 @@ import Search from "../modules/search/Search";
 import { closeNavBar, setUrlToCookies } from "../services/utils";
 import { Authcontext } from "../contexts/AuthContext";
 
-export default function Skeleton({ children }) {
+export default function Skeleton({ children, ip }) {
+  console.log("Ip ", ip);
   const { initialState, setLoader } = React.useContext(MainContext);
   // const { authState } = React.useContext(Authcontext);
 
@@ -31,7 +32,7 @@ export default function Skeleton({ children }) {
     <div className="pages_header">
       {initialState.loading ? <Loader /> : null}
       {initialState.isSearch ? (
-        <Search />
+        <Search ip={ip} />
       ) : (
         <>
           <SideBar />

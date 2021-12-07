@@ -130,7 +130,7 @@ function MyApp({ Component, pageProps }) {
               <AuthProvider>
                 <CatchupProvider>
                   <GameProvider>
-                    <Skeleton>
+                    <Skeleton {...pageProps}>
                       <Header />
                       <Component {...pageProps} />
                       <Footer />

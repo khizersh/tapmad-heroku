@@ -41,7 +41,7 @@ const Search = () => {
   }, [debouncedSearchKeyWord]);
 
   const searchHandler = async (keyword) => {
-    const data = await SearchService.getItemByKeyrwords(keyword);
+    const data = await SearchService.getItemByKeyrwords(keyword, ip);
 
     let body = {
       event: loggingTags.search,
