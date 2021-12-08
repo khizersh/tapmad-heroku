@@ -24,7 +24,6 @@ export default function PaymentMethodDesktop() {
     });
   }
   useEffect(() => {
-    console.log(SignUpState, "PamentMEthod");
     if (SignUpState.SelectedPrice.PaymentMethods) {
       setCurrentPackage(SignUpState.SelectedPrice);
       UpdatePaymenthMethod(SignUpState.SelectedPrice.PaymentMethods[0]);

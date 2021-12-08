@@ -46,8 +46,8 @@ const CreditCardForm = ({
         ) : null}
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
+      <div className="input-group mb-3">
+        <div className="input-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
         <input

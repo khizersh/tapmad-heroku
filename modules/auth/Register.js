@@ -22,8 +22,6 @@ import { UPDATE_PACKAGE } from "../../contexts/auth/SignUpReducer";
 export default memo(function Register(props) {
   const router = useRouter();
   const { code, number, payment, operator, tab, packageId } = router.query;
-  console.log("router.query : ", router.query);
-  console.log("query : ", router.query);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
   const RenderViews = useCallback(
@@ -103,19 +101,10 @@ export default memo(function Register(props) {
 
   // selecting package and product tab by default
   useEffect(() => {
-    if (SignUpState.signupRender === true && tab && packageId) {
-      const tabs = document.getElementsByClassName("package" + tab);
-      const product = document.getElementById(packageId);
-      console.log("packageId  : ", packageId);
-      console.log("product : ", product);
-      if (tabs.length > 0) {
-        setTimeout(() => {
-          tabs[0].click();
-          product.click();
-        }, 10);
-      }
+    if (SignUpState.signupRender) {
+      dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[1] });
     }
-  }, [SignUpState.signupRender === true]);
+  }, [SignUpState.signupRender]);
 
   return (
     <div>

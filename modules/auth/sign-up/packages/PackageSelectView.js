@@ -28,14 +28,20 @@ export default function PackageSelectView({ onChange }) {
         onChange(AuthState.PaymentPackages[0]);
       }
       // will remove after epl
-    
+
       renderSignUp(true);
     }
     if (AuthState.CurrentUserPackage) {
       setCurrentPackage(AuthState.CurrentUserPackage);
     }
-    if(SignUpState?.SelectedPackage?.PaymentTabId != null){
-      dispatch({ type: SIGNUP_RENDER, data: true });
+    if (
+      SignUpState.SelectedPackage &&
+      SignUpState.SelectedPackage.PaymentTabId != null
+    ) {
+      console.log("Pakcage is ", SignUpState.SelectedPackage);
+      setTimeout(() => {
+        dispatch({ type: SIGNUP_RENDER, data: true });
+      });
     }
   }, [SignUpState?.SelectedPackage?.PaymentTabId]);
 
