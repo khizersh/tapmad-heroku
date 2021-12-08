@@ -7,7 +7,7 @@ import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_PACKAGE, UPDATE_PAYMENT_PRICE } from "../../../contexts/auth/SignUpReducer";
 import PaymentMethodDesktop from "./PaymentMethodDesktop";
 
-const SignUpComponent = () => {
+const SignUpComponent = ({tab , packageId}) => {
   const [isMobile , setIsMobile] = useState(false)
   const { dispatch } = useContext(SignUpContext);
 

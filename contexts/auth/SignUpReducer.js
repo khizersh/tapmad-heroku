@@ -4,6 +4,7 @@ export const UPDATE_PAYMENT_METHOD = "UPDATE_PAYMENT_METHOD";
 export const UPDATE_SUBSCRIBE_RESPONSE = "UPDATE_SUBSCRIBE_RESPONSE";
 export const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
 export const UPDATE_ISMOBILE = "UPDATE_ISMOBILE";
+export const SIGNUP_RENDER = "SIGNUP_RENDER";
 
 export function SignUpReducer(state, action) {
     switch (action.type) {
@@ -19,5 +20,7 @@ export function SignUpReducer(state, action) {
             return { ...state, subscribeResponseCode: action.data.code , newUser : action.data.newUser };
         case UPDATE_USER_DETAILS:
             return { ...state, UserDetails: { ...state.UserDetails, ...action.data } }
+        case SIGNUP_RENDER:
+            return { ...state, signupRender: action.data }
     }
 }

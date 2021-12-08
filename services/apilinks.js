@@ -24,7 +24,6 @@ export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
   BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackageStaging";
-
 export const setUserPinCode = BASEURLDEVELOPMENT + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURLDEVELOPMENT + "api/verifyUserPinCode";
 export const UserSignUpPromoCode =

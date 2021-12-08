@@ -1,4 +1,10 @@
-import React, { useContext, memo, useCallback, useRef, useEffect } from "react";
+import React, {
+  useContext,
+  memo,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";
 import VerifyOTP from "./sign-up/VerifyOTP";
@@ -10,12 +16,16 @@ import {
   UPDATE_SUBSCRIBE_RESPONSE,
   UPDATE_USER_DETAILS,
 } from "../../contexts/auth/SignUpReducer";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { UPDATE_PACKAGE } from "../../contexts/auth/SignUpReducer";
 
 export default memo(function Register(props) {
   const router = useRouter();
-  const { code, number, payment, operator } = router.query;
+  const { code, number, payment, operator, tab, packageId } = router.query;
+  console.log("router.query : ", router.query);
+  console.log("query : ", router.query);
   const { SignUpState, dispatch } = useContext(SignUpContext);
-
+  const { AuthState } = useContext(AuthContext);
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;
@@ -28,7 +38,7 @@ export default memo(function Register(props) {
       } else if (!respCode) {
         return (
           <>
-            <SignUpComponent />
+            <SignUpComponent tab={tab} packageId={packageId} />
           </>
         );
       } else if (respCode == 11) {
@@ -57,6 +67,7 @@ export default memo(function Register(props) {
     });
   }, [code, number]);
 
+  // select payment methods by query param
   useEffect(() => {
     var selectedPayment = payment;
     if (selectedPayment == "credit") {
@@ -90,9 +101,25 @@ export default memo(function Register(props) {
     }
   }, [SignUpState.SelectedPrice]);
 
+  // selecting package and product tab by default
+  useEffect(() => {
+    if (SignUpState.signupRender === true && tab && packageId) {
+      const tabs = document.getElementsByClassName("package" + tab);
+      const product = document.getElementById(packageId);
+      console.log("packageId  : ", packageId);
+      console.log("product : ", product);
+      if (tabs.length > 0) {
+        setTimeout(() => {
+          tabs[0].click();
+          product.click();
+        }, 10);
+      }
+    }
+  }, [SignUpState.signupRender === true]);
+
   return (
     <div>
-      <SignUpLayout bgImage={SignUpState.SelectedPackage.PaymentTabImage}>
+      <SignUpLayout bgImage={SignUpState?.SelectedPackage?.PaymentTabImage}>
         <RenderViews />
       </SignUpLayout>
     </div>

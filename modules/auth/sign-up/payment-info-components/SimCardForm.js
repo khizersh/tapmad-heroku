@@ -11,9 +11,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       onChangeNumber(e);
     }
   };
-  useEffect(() => {
-    console.log(data, "TIS DATA");
-  }, []);
+
   return (
     <>
       {data && data.length ? (

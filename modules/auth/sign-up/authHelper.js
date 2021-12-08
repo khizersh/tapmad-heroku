@@ -41,6 +41,6 @@ export function setCookiesForLogin(data) {
   Cookie.setCookies("isAuth", 1);
   Cookie.setCookies("userId", data.User.UserId);
   Cookie.setCookies("userCoins", data.UserTotalCoins);
-  Cookie.setCookies("userProfileName", data.UserProfile.UserProfileFullName );
-  Cookie.setCookies( "userProfilePicture",data.UserProfile.UserProfilePicture);
+  Cookie.setCookies("userProfileName", data.UserProfile.UserProfileFullName);
+  Cookie.setCookies("userProfilePicture", data.UserProfile.UserProfilePicture);
 }

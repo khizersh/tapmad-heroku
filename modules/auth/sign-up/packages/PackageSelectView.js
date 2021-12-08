@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/auth/AuthContext";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
+import { SIGNUP_RENDER } from "../../../../contexts/auth/SignUpReducer";
 import { MainContext } from "../../../../contexts/MainContext";
 import {
   blackPackage,
@@ -13,7 +14,7 @@ import UpdatePackage from "./UpdatePackage";
 export default function PackageSelectView({ onChange }) {
   const { renderSignUp } = useContext(MainContext);
   const { AuthState } = useContext(AuthContext);
-  const { SignUpState } = useContext(SignUpContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const [currentPackage, setCurrentPackage] = useState(null);
   const router = useRouter();
   const { subspack } = router.query;
@@ -27,12 +28,16 @@ export default function PackageSelectView({ onChange }) {
         onChange(AuthState.PaymentPackages[0]);
       }
       // will remove after epl
+    
       renderSignUp(true);
     }
     if (AuthState.CurrentUserPackage) {
       setCurrentPackage(AuthState.CurrentUserPackage);
     }
-  }, [SignUpState?.SelectedPackage]);
+    if(SignUpState?.SelectedPackage?.PaymentTabId != null){
+      dispatch({ type: SIGNUP_RENDER, data: true });
+    }
+  }, [SignUpState?.SelectedPackage?.PaymentTabId]);
 
   const onChangePackage = (MainPack) => {
     onChange(MainPack);
@@ -40,7 +45,7 @@ export default function PackageSelectView({ onChange }) {
   return (
     <>
       {currentPackage ? (
-        <UpdatePackage currentPackage={currentPackage}/>
+        <UpdatePackage currentPackage={currentPackage} />
       ) : (
         <>
           {AuthState.PaymentPackages?.length > 0 &&
