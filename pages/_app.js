@@ -149,15 +149,19 @@ function MyApp({ Component, pageProps }) {
           <>
             <MainProvider>
               <AuthProvider>
-                <CatchupProvider>
-                  <GameProvider>
-                    <Skeleton>
-                      <Header />
-                      <Component {...pageProps} />
-                      <Footer />
-                    </Skeleton>
-                  </GameProvider>
-                </CatchupProvider>
+                <AuthProviderNew>
+                  <SignUpProvider>
+                    <CatchupProvider>
+                      <GameProvider>
+                        <Skeleton>
+                          <Header />
+                          <Component {...pageProps} />
+                          <Footer />
+                        </Skeleton>
+                      </GameProvider>
+                    </CatchupProvider>
+                  </SignUpProvider>
+                </AuthProviderNew>
               </AuthProvider>
             </MainProvider>
           </>

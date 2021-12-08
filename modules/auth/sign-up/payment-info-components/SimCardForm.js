@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DropdownWithImage from "../DropdownWithImage";
 
 const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
@@ -11,12 +11,20 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       onChangeNumber(e);
     }
   };
+  useEffect(() => {
+    console.log(data, "TIS DATA");
+  }, []);
   return (
     <>
       {data && data.length ? (
         <>
           {" "}
-          <DropdownWithImage data={data} onChange={onChangeNetwork} placeHolder="Select Network" width="100%" />
+          <DropdownWithImage
+            data={data}
+            onChange={onChangeNetwork}
+            placeHolder="Select Network"
+            width="100%"
+          />
           {/* <div className="">
             <label className="form-control cntry_cde border-0">
               {mobileCode}
@@ -38,7 +46,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
-          autoComplete={'false'}
+          autoComplete={"false"}
           value={num}
           onChange={(e) => onChange(e)}
         />

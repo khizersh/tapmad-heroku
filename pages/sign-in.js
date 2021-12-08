@@ -11,8 +11,6 @@ export default function LoginPage(props) {
     if (initialState.isAuthenticated) {
       router.push("/");
     }
-
-    // fetch('https://developer.tapmad.com/dev/app/api/getMoreContentWithPagination/0/5/511/3').then(res => res.json()).then(data =>  console.log(data))
   }, [initialState.isAuthenticated]);
 
   return (

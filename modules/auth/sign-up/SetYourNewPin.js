@@ -15,7 +15,8 @@ function SetYourNewPinSignUp({ login, ip }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
-    setLoader(true);
+    console.log(SignUpState, "Why Data");
+    // setLoader(true);
     if (showUsername) {
       if (username.trim().length < 1) {
         return swal({
@@ -49,16 +50,16 @@ function SetYourNewPinSignUp({ login, ip }) {
       UserPassword: "",
     };
 
-    // setLoader(true);
-    // const userStatus = await AuthService.GetCardUser({
-    //   MobileNo: SignUpState.UserDetails.MobileNo,
-    //   Language: "en",
-    // });
-    // if (userStatus && userStatus.data.User) {
-    //   obj.UserPassword = userStatus.data.User.UserPassword;
-    //   Cookie.setCookies("userId", userStatus.data.User.UserId);
-    //   Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
-    // }
+    setLoader(true);
+    const userStatus = await AuthService.GetCardUser({
+      MobileNo: SignUpState.UserDetails.MobileNo,
+      Language: "en",
+    });
+    if (userStatus && userStatus.data.User) {
+      obj.UserPassword = userStatus.data.User.UserPassword;
+      Cookie.setCookies("userId", userStatus.data.User.UserId);
+      Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
+    }
     const response = await AuthService.setNewPin(pin, username);
 
     if (response != null) {

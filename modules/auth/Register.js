@@ -12,9 +12,8 @@ import {
 } from "../../contexts/auth/SignUpReducer";
 
 export default memo(function Register(props) {
-
   const router = useRouter();
-  const { code, number, payment } = router.query;
+  const { code, number, payment, operator } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const RenderViews = useCallback(
@@ -47,8 +46,15 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
-    dispatch({ type: UPDATE_USER_DETAILS, data: { Mobile: number } });
-    dispatch({ type: UPDATE_SUBSCRIBE_RESPONSE, data: { code: code , newUser : false} });
+    console.log("SignUpState in register : ", SignUpState);
+    dispatch({
+      type: UPDATE_USER_DETAILS,
+      data: { MobileNo: number, Operator: operator },
+    });
+    dispatch({
+      type: UPDATE_SUBSCRIBE_RESPONSE,
+      data: { code: code, newUser: false },
+    });
   }, [code, number]);
 
   useEffect(() => {
