@@ -102,7 +102,11 @@ export default memo(function Register(props) {
   // selecting package and product tab by default
   useEffect(() => {
     if (SignUpState.signupRender) {
-      dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[1] });
+      if (tab == 2) {
+        dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[1] });
+      } else if (tab == 1) {
+        dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] });
+      }
     }
   }, [SignUpState.signupRender]);
 
