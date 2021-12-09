@@ -23,15 +23,20 @@ const BillingHistory = () => {
   const [currentData, setCurrentData] = useState([]);
 
   useEffect(async () => {
-    // const data = await MyAccountService.getUserPaymentHistoryData(form);
-    // setSubscriptionData(data.data);
-    const page = Math.ceil(obj.Transaction.length / 10);
-    let pageArray = [];
-    for (let index = 0; index < page; index++) {
-      pageArray.push(index + 1);
-    }
-    setPages(pageArray);
-    setCurrentData(obj.Transaction.slice(1, 10));
+    try {
+      const data = await MyAccountService.getUserPaymentHistoryData(form);
+      if (data.responseCode === 1) {
+        setSubscriptionData(data.data);
+        console.log("data in history : ", data);
+        const page = Math.ceil(data.data.Transaction.length / 10);
+        let pageArray = [];
+        for (let index = 0; index < page; index++) {
+          pageArray.push(index + 1);
+        }
+        setPages(pageArray);
+        setCurrentData(obj.Transaction.slice(1, 10));
+      }
+    } catch (error) {}
   }, [userId]);
 
   const onClickPage = (page) => {
@@ -237,7 +242,7 @@ const BillingHistory = () => {
         </div>
         <div className="row">
           <div className="col-12">
-            <BillingTable subscriptions={currentData} />
+            <BillingTable subscriptions={subscriptionData.Transaction} />
           </div>
           <div className="col-12 text-right">
             <div className="mt-3 float-right">
