@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../contexts/profile/ProfileContext";
 import {
-  editUserProfileIcon,
+  editUserMale,
   userFemaleProfileIcon,
   userIcon,
 } from "../../services/imagesLink";
@@ -21,6 +21,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
     DOB: "",
     Mobile: "",
     Gender: "",
+    Email: ""
   });
   const router = useRouter();
   const { redirect } = router.query;
@@ -57,7 +58,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
       FullName: editProfile.Name,
       UserMobileNumebr: editProfile.Mobile,
       BirthDate: editProfile.DOB,
-      Email: null,
+      Email: editProfile.Email,
       Gender: gender,
     };
     const data = await MyAccountService.updateUserProfileData(formData);
@@ -116,9 +117,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <div className="col-12 text-center">
               <img
                 src={
-                  gender == "Male" ? editUserProfileIcon : userFemaleProfileIcon
+                  gender == "Male" ? editUserMale : userFemaleProfileIcon
                 }
-                className={`${isMobile ? "mt-3" : "m-4"}`}
+                className={`${isMobile ? "mt-3" : "m-4"} border-50`}
                 width={`${isMobile ? "100" : "150"}`}
               />
             </div>
@@ -143,6 +144,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               <label className="editprofile_lbl">Date of Birth:</label>
               <input
                 placeholder="Date of Birth"
+                type="date"
                 className={`${
                   isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
                 }`}
@@ -173,8 +175,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                 className={`${
                   isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
                 }`}
+                defaultValue={profile && profile.ProfileData.UserEmail}
                 onChange={(e) => {
-                  setEditProfile({ ...editProfile, Mobile: e.target.value });
+                  setEditProfile({ ...editProfile, Email: e.target.value });
                 }}
               />
             </div>

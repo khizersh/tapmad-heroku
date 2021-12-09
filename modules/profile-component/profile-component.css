@@ -39,3 +39,7 @@
     position: relative;
     top: 75px;
 }
+
+.border-50{
+    border-radius: 50%;
+}

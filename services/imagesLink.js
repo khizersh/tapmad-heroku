@@ -75,12 +75,12 @@ export const creditcardIcon = "/icons/credit-card.svg";
 export const tableNextIcon = "/icons/tableNext.svg";
 export const tableBackIcon = "/icons/tableBack.svg";
 export const connectIcon = "/icons/connect.svg";
-export const editUserProfileIcon = "/icons/editUser.svg";
+export const editUserMale = "/icons/editUser.svg";
 export const cameraIcon = "/icons/camera.svg";
 export const calendarIcon = "/icons/CalendarIcon.svg";
 // export const userProfileIcon = "/icons/profile/user.svg";
 export const userProfileIcon = "/icons/profile/profile.png";
-export const userFemaleProfileIcon = "/icons/femaleIcon.png";
+export const userFemaleProfileIcon = "/icons/profileFemale.png";
 export const leftArrow = "/icons/profile/right-arrow.svg";
 export const rightArrow = "/icons/profile/left-arrow.svg";
 
