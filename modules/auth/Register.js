@@ -54,7 +54,6 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
-    console.log("SignUpState in register : ", SignUpState);
     dispatch({
       type: UPDATE_USER_DETAILS,
       data: { MobileNo: number, Operator: operator },
