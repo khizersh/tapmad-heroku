@@ -27,7 +27,11 @@ export default function EnterOTP({ forgetPin }) {
           router.push("/");
         } else {
           setLoader(false);
-          alert("Invalid OTP");
+          swal({
+            title: "Invalid OTP!",
+            timer: 3000,
+            icon: "error",
+          });
           Cookie.setCookies("isAuth", 0);
         }
       } else {

@@ -4,11 +4,6 @@ import { AuthContext } from "../../../../contexts/auth/AuthContext";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 import { SIGNUP_RENDER } from "../../../../contexts/auth/SignUpReducer";
 import { MainContext } from "../../../../contexts/MainContext";
-import {
-  blackPackage,
-  transparentBox,
-  upgradeIcon,
-} from "../../../../services/imagesLink";
 import UpdatePackage from "./UpdatePackage";
 
 export default function PackageSelectView({ onChange }) {

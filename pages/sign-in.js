@@ -12,7 +12,6 @@ export default function LoginPage(props) {
       router.push("/");
     }
   }, [initialState.isAuthenticated]);
-
   return (
     <div>
       <AuthViews {...props} />

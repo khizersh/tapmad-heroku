@@ -28,6 +28,10 @@ function EnterPin({ forgetPin, login }) {
           var loginResp = login();
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
+<<<<<<< HEAD
+=======
+              console.log(e);
+>>>>>>> main
               forgetPin(initialState);
             }
           })
@@ -57,6 +61,7 @@ function EnterPin({ forgetPin, login }) {
   }
 
   return (
+<<<<<<< HEAD
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
       <div className="custom-bg">
         <img src={tapmadLogo} width="200" alt="Tapmad logo" />
@@ -91,6 +96,40 @@ function EnterPin({ forgetPin, login }) {
             Forgot PIN?
           </a>
         </div>
+=======
+    <div className="login_slct_oprtr login_pin_card login_slct_oprtr_active">
+      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
+      <h4>Enter your PIN</h4>
+      <p>Enter four digit PIN for login</p>
+      <div className="form-group">
+        <input
+          type="password"
+          maxLength="4"
+          minLength="4"
+          value={userPin}
+          className="text-center form-control"
+          placeholder="Enter your PIN"
+          onChange={handleNumber}
+        />
+      </div>
+      <div className="form-group" style={{ marginBottom: "10px" }}>
+        <button
+          type="button"
+          className="btn btn-block btn-success req_pin_cde_btn"
+          onClick={async () => await verifyPin()}
+        >
+          Enter PIN
+        </button>
+      </div>
+      <div className="form-group">
+        <a
+          className="d-block mt-2 text-muted"
+          style={{ color: "#fff", cursor: "pointer" }}
+          onClick={forgetPin}
+        >
+          Forgot PIN?
+        </a>
+>>>>>>> main
       </div>
     </div>
   );

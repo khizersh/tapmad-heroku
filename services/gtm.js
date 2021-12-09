@@ -1,7 +1,6 @@
 import { getUserDetails } from "./utils";
 
 export function LoginTag(body, resp) {
-    console.log("resp in tag : ",resp);
     try {
         dataLayer.push({
             event: "login",

@@ -73,20 +73,26 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <title>
-          Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.
-        </title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-        <meta
-          name="description"
-          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
-        />
-        <meta
-          name="keywords"
-          content="live tv channel, live tv, live sports, watch free cricket, subscribe to tapmad, live EPL streaming, watch epl, premier league live streaming, pakistani tv channels, watch live tv free, watch live news, watch full hd movies online"
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Tapmad TV",
+              "alternateName": "Tapmad",
+              "url": "https://www.tapmad.com/",
+              "logo": "https://play-lh.googleusercontent.com/i8xVImpStVCQULwvGtfVkjQmdVLRMuTRfCC47CTaN_naZhk0wdwzplve7mloN0Z1iRM=s180-rw",
+              "sameAs": [
+                "https://www.facebook.com/TapmadTV/",
+                "https://twitter.com/tapmadtv",
+                "https://www.instagram.com/tapmad.entertainment/",
+                "https://www.youtube.com/channel/UCPHOf3lVS8bUSwR1h55EO6g",
+                "https://pk.linkedin.com/company/tapmad-tv"
+              ]
+            }
+            ),
+          }}
         />
         {pageProps.env == "staging" ? (
           <meta name="robots" content="noindex" />
@@ -111,6 +117,7 @@ function MyApp({ Component, pageProps }) {
         ></link>
       </Head>
       <>
+
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
@@ -153,7 +160,7 @@ function MyApp({ Component, pageProps }) {
                   <SignUpProvider>
                     <CatchupProvider>
                       <GameProvider>
-                        <Skeleton>
+                        <Skeleton {...pageProps}>
                           <Header />
                           <Component {...pageProps} />
                           <Footer />

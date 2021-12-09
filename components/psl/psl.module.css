@@ -11,12 +11,12 @@
 }
 
 .tabUnactive:hover {
-  border: 1px solid #87c242 ;
+  border: 1px solid #87c242;
   color: #535353;
 }
 
 .tabactive {
-  background: #87c242 ;
+  background: #87c242;
   color: #000000;
   font-size: 20px;
   font-weight: 600;

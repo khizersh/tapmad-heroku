@@ -23,7 +23,7 @@ export default function Shows({ shows }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={shows.Sections.Shows} ads={false} name={"Shows"} />
+      <HomepageSlider movies={shows.Sections.Shows} ads={false} name={"Shows"}/>
     </div>
   );
 }

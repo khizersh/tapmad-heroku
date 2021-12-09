@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import swal from "sweetalert";
 import { getUserRooms } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
+import { FireBase } from "../../../services/firebase";
 import { get } from "../../../services/http-service";
 import { useRouter } from "next/router";
 import {
@@ -52,6 +53,7 @@ export default function PSLChat({ channel }) {
         header.style.top = "unset";
       }
     });
+    console.log("var msg: ", msg);
     if (msg) {
       textMessage.current.value = msg;
     }
@@ -65,11 +67,6 @@ export default function PSLChat({ channel }) {
       getUserAllRooms();
     }
   }, [database]);
- 
-  useEffect(async () => {
-    const { FireBase } = await import("../../../services/firebase");
-    setDatabase(FireBase.database())
-  }, []);
 
   function appendChatRoom(newRoom) {
     if (Array.isArray(newRoom)) {
