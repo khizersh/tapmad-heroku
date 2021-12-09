@@ -43,6 +43,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         DOB: data.data.ProfileData.UserProfileDOB,
         Mobile: data.data.ProfileData.UserProfileMobile,
         Gender: data.data.ProfileData.UserProfileGender,
+        Email: "",
       });
       setGender(data.data.ProfileData.UserProfileGender);
     }
@@ -158,6 +159,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <div className={`${isMobile ? "my-3" : "col-6"}`}>
               <label className="editprofile_lbl">Mobile:</label>
               <input
+                readOnly
                 placeholder="Mobile"
                 className={`${
                   isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"

@@ -69,12 +69,15 @@ export const getFeaturedHomepageWithRE = (from, to) => {
   return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`;
 };
 export const getChannelsWithPagination = (from, to) => {
-  return BASEURL + `api/getChannelWithPagination/${from}/${to - from}/0/16`;
+  return (
+    BASEURLDEVELOPMENT +
+    `api/getChannelWithPagination/${from}/${to - from}/0/16`
+  );
 };
 export const getMoviesWithPaginationInitial =
   BASEURL + "api/getMoviesWithPagination/0/5/0/16";
 export const getChannelWithPaginationInitial =
-  BASEURL + "api/getChannelWithPagination/0/5/0/16";
+  BASEURLDEVELOPMENT + "api/getChannelWithPagination/0/5/0/16";
 
 // catchup
 

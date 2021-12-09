@@ -31,6 +31,7 @@ export default function LiveChannels({ channel }) {
       getChannelsWithPagination(rowData.rowFrom, rowData.rowsTo)
     );
     var newMovies = await moviesList.data;
+
     if (
       localMovies.Sections.Channels &&
       localMovies.Sections.Channels.length > 0
@@ -40,6 +41,7 @@ export default function LiveChannels({ channel }) {
         localMovies,
         modifiedNewMovies
       );
+
       setLocalMovies(updatedListOfMovies);
     }
   }
@@ -56,7 +58,11 @@ export default function LiveChannels({ channel }) {
       <Slider {...bannerSettings}>
         {channel.Banner.map((e, index) => {
           return (
-            <Link href={e.BannerURL ? e.BannerURL : "/live"} key={index} passHref>
+            <Link
+              href={e.BannerURL ? e.BannerURL : "/live"}
+              key={index}
+              passHref
+            >
               <a>
                 <img
                   src={e.WebBannerImage}
@@ -68,7 +74,11 @@ export default function LiveChannels({ channel }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} name={"Live"} />
+      <HomepageSlider
+        movies={localMovies.Sections.Movies}
+        ads={false}
+        name={"Live"}
+      />
       {currentRow !== localMovies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />
       )}
