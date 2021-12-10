@@ -9,7 +9,7 @@ import { ProfileContext } from "../contexts/profile/ProfileContext";
 import { PROFILE_DATA } from "../contexts/profile/ProfileReducer";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
 
-const MyAccountTrial = () => {
+const MyAccountTrial = ({ signout }) => {
   const router = useRouter();
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [postFormData, setPostFormData] = useState({

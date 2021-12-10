@@ -22,6 +22,7 @@ import swal from "sweetalert";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
+import { SignOut } from "../../services/gtm";
 
 const MyAccountWeb = ({ profileData, allData, userId }) => {
   const { setLoader } = useContext(MainContext);
@@ -68,6 +69,8 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
               });
               setdeactivated(true);
               setLoader(false);
+              SignOut();
+              console.log("HEEE");
               router.push("/sign-up");
             } else if (res.responseCode == 5) {
               swal({

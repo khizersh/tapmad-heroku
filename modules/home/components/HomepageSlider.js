@@ -109,8 +109,6 @@ const HomepageSlider = ({ movies, ads, name }) => {
                     movieSection.Videos &&
                     movieSection.Videos.length > 0
                       ? movieSection.Videos.map((mov, index) => {
-                          console.log(mov.PackageImage);
-                          console.log(mov.VideoName);
                           let slug = setUrlAccordingToVideoType(
                             mov,
                             IsLiveChannel
@@ -154,16 +152,16 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       // layout='fill'
                                       alt={"tapmad-" + mov.VideoName}
                                     />
-                                    {/* {mov.IsVideoFree ? (
+
+                                    {mov.IsVideoFree ? (
                                       mov.IsVideoChannel == true ||
                                       mov.IsVideoChannel == "1" ? (
                                         <div className="live_side">Live</div>
                                       ) : null
                                     ) : (
                                       <div className="live_side">Premium</div>
-                                    )} */}
-                                    <div className="live_side">
-                                      {/* {mov.PackageName} */}
+                                    )}
+                                    <div className={mov.IsVideoFree ? "" : ""}>
                                       <img src={mov.PackageImage} width={20} />
                                     </div>
                                   </div>
