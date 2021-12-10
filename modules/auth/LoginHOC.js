@@ -32,6 +32,8 @@ export default function withLogin(Component, data) {
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);
+        console.log("status 401 : ",status);
+
         setLoader(false);
         if (status.code == 1) {
           swal({
@@ -55,6 +57,7 @@ export default function withLogin(Component, data) {
             icon: "error",
           });
         } else if (status.code == 401) {
+          console.log("inside 401");
           swal({
             title: "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
             timer: 2500,

@@ -50,7 +50,6 @@ function VerifyUser({ login, ip }) {
   useEffect(() => {
     let userNumber = Cookie.getCookies("unum");
     if (initialState.User.Password) {
-      console.log("userNumber Inside condition: ", userNumber);
       let loginResp = login(ip);
       setLoader(false);
     }

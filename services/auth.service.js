@@ -12,6 +12,7 @@ export async function getAllPaymentPackagesByUserId(userID) {
 }
 
 export function setLoginViews(response, obj) {
+  console.log("response : ",response);
   if (response?.responseCode == 11) {
     if (
       response.data.UserActiveSubscription &&
@@ -40,7 +41,7 @@ export function setLoginViews(response, obj) {
       return { code: 0, view: "sign-up" };
     }
     else if(response.responseCode == 401){
-      return { code: 0, view: "send-otp" };
+      return { code: 401, view: "send-otp" };
     }
   }
 }

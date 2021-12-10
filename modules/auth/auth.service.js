@@ -16,6 +16,7 @@ import {
   UBLCard,
   SignUpORSignInMobileOperatorTokenByPin,
   initialPaymentTransactionNew,
+  clearTokens,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -465,9 +466,7 @@ async function signInOrSignUpMobileOperator(
 }
 
 async function clearUserToken(number) {
-  const response = await get(
-    `https://app.tapmad.com/api/ClearAllCache/T${number}`
-  );
+  const response = await get(clearTokens + number);
   return response;
 }
 async function getGeoInfo() {
@@ -499,8 +498,8 @@ const checkUser = async (num) => {
           Cookie.setCookies("content-token", data.data.User.UserPassword);
           if (data.data.User.IsPinSet) {
             return { code: 34, message: "Set your pin!", data: data.data };
-          }else{
-            return { code: 0, message: "Go!", data: data.data };  
+          } else {
+            return { code: 0, message: "Go!", data: data.data };
           }
         }
       }

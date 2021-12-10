@@ -21,6 +21,7 @@ export const getCardUser = BASEURLDEVELOPMENT + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURL + "api/sendOTP/V1/en/web";
 export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
+export const clearTokens = BASEURLDEVELOPMENT + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
   BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackageStaging";

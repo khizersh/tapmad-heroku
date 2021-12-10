@@ -27,6 +27,7 @@ export default memo(function Register(props) {
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;
+      console.log("SignUpState.subscribeResponseCode : ",SignUpState.subscribeResponseCode);
       if (respCode == 1) {
         return (
           <>
