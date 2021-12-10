@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
-import { UPDATE_PAYMENT_PRICE } from "../../../contexts/auth/SignUpReducer";
+import { useRouter } from "next/router";
 
+
+var isDefaultSet = false;
 export default function TaxView({ onChange }) {
-  const { dispatch, SignUpState } = useContext(SignUpContext);
+  const {  SignUpState } = useContext(SignUpContext);
   const [PackagePrice, setPackagePrice] = useState([]);
-  const [SelectedPrice, setSelectedPrice] = useState({});
+  const [SelectedPrice, setSelectedPrice] = useState(null);
+  const router = useRouter();
+  const { packageId  } = router.query;
 
+  // set all products
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map((m) => {
@@ -22,23 +27,29 @@ export default function TaxView({ onChange }) {
         };
       });
       setPackagePrice(array);
-      dispatch({
-        type: UPDATE_PAYMENT_PRICE,
-        data: SignUpState.SelectedPackage.PaymentTabMethods[0],
-      });
+      onChange(SignUpState.SelectedPackage.PaymentTabMethods[0])
+      setSelectedPrice(SignUpState.SelectedPackage.PaymentTabMethods[0]);
+        
     }
   }, [SignUpState.SelectedPackage]);
 
+// set default product via query param
   useEffect(() => {
-    if (SignUpState.SelectedPrice.PackageId) {
-      setSelectedPrice(SignUpState.SelectedPrice);
-    }
-  }, [SignUpState.SelectedPrice]);
+    setTimeout(() => {
+      if(packageId && !isDefaultSet){
+        const elem = document.getElementById(packageId);
+        if(elem){
+        isDefaultSet = true
+          elem.click();
+        }
+      }
+    }, 120);
+  }, [SignUpState.SelectedPrice , packageId]);
 
   const onChangePackage = (m) => {
+    setSelectedPrice(m)
     onChange(m);
   };
-  console.log("PackagePrice : ", PackagePrice);
   return (
     <>
       {PackagePrice &&
@@ -49,8 +60,8 @@ export default function TaxView({ onChange }) {
               <li
                 key={i}
                 className={`w-100 p-1 f-20 text-center cursor-pointer border-0 text-base ${
-                  SelectedPrice.ProductId
-                    ? SelectedPrice.ProductId == m.ProductId
+                  SelectedPrice?.ProductId
+                    ? SelectedPrice.ProductId === m.ProductId
                       ? "price-active"
                       : ""
                     : ""
@@ -91,7 +102,7 @@ export default function TaxView({ onChange }) {
                 <span className="d-block d-md-none"></span>
                 {m.PackageDescription}
               </li>
-              {SelectedPrice.ProductId ? (
+              {SelectedPrice?.ProductId ? (
                 SelectedPrice.ProductId == m.ProductId ? (
                   <div className="triangle-down"></div>
                 ) : (

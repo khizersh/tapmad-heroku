@@ -33,7 +33,6 @@ export default function PackageSelectView({ onChange }) {
       SignUpState.SelectedPackage &&
       SignUpState.SelectedPackage.PaymentTabId != null
     ) {
-      console.log("Pakcage is ", SignUpState.SelectedPackage);
       setTimeout(() => {
         dispatch({ type: SIGNUP_RENDER, data: true });
       });

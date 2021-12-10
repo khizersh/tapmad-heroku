@@ -27,7 +27,6 @@ export default memo(function Register(props) {
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;
-      console.log("SignUpState.subscribeResponseCode : ",SignUpState.subscribeResponseCode);
       if (respCode == 1) {
         return (
           <>
@@ -102,12 +101,16 @@ export default memo(function Register(props) {
   // selecting package and product tab by default
   useEffect(() => {
     if (SignUpState.signupRender) {
-      if (tab == 2) {
-        dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[1] });
-      } else if (tab == 1) {
+      if (tab == 1) {
         dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] });
+      } else if (tab == 2) {
+        dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[1] });
       }
     }
+    // dispatch({
+    //   type: UPDATE_PAYMENT_PRICE,
+    //   data: SignUpState.SelectedPackage.PaymentTabMethods[0],
+    // });
   }, [SignUpState.signupRender]);
 
   return (
