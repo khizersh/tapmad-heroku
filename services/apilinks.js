@@ -24,7 +24,7 @@ export const verifyOtp = BASEURL + "api/verifyOTP/V1/en/android";
 export const clearTokens = BASEURLDEVELOPMENT + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
-  BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackageStaging";
+  BASEURLDEVELOPMENT + "api/processPaymentTransactionNewPackage";
 export const setUserPinCode = BASEURLDEVELOPMENT + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURLDEVELOPMENT + "api/verifyUserPinCode";
 export const UserSignUpPromoCode =
@@ -54,7 +54,7 @@ export const UBLCard = BASEURLDEVELOPMENT + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
   BASEURLAPP + "api/initiateEplPaymentTransaction";
 export const initialPaymentTransactionNew =
-  BASEURLDEVELOPMENT + "api/initiatePaymentTransactionNewPackageStaging";
+  BASEURLDEVELOPMENT + "api/initiatePaymentTransactionNewPackage";
 
 export const getSeasonVodByCategoryId =
   BASEURL + "api/getSeasonVodByCategoryId/V1/en/web/";

@@ -10,7 +10,6 @@ export default function TaxView({ onChange }) {
   const [SelectedPrice, setSelectedPrice] = useState(null);
   const router = useRouter();
   const { packageId  } = router.query;
-
   // set all products
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
@@ -34,16 +33,18 @@ export default function TaxView({ onChange }) {
   }, [SignUpState.SelectedPackage]);
 
 // set default product via query param
+console.log("isDefaultSet : ",isDefaultSet);
   useEffect(() => {
     setTimeout(() => {
       if(packageId && !isDefaultSet){
         const elem = document.getElementById(packageId);
+        console.log("elem : ",elem);
         if(elem){
         isDefaultSet = true
           elem.click();
         }
       }
-    }, 120);
+    }, 1200);
   }, [SignUpState.SelectedPrice , packageId]);
 
   const onChangePackage = (m) => {

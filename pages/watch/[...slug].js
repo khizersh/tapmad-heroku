@@ -28,18 +28,22 @@ const watch = (props) => {
   var renderPlayer = shouldRenderPlayer(props);
   console.log("props  in wathc: ", props);
 
+
+  // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
       if (props.data != null) {
-        router.push("/sign-up?subspack=epl");
+        router.push(`/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`);
       } else {
         router.push("/sign-up");
       }
     }
   }, [props.allowUser, url]);
-  // checking token and packages for stream
+  
+
+  // for login user check content package and sent to respective package on change-package page
   useEffect(() => {
-    console.log("props in wathc :", props.data.responseCode);
+    if(props.allowUser){
     if (props.data && props.data.responseCode === 401) {
       swal({
         text: props.data.message,
@@ -67,12 +71,22 @@ const watch = (props) => {
         router.push("/subscribe-to-epl?subspack=epl");
       });
     } else if (props.data && props.data.responseCode === 110) {
-      router.push(`/sign-up?tab=${props.data.Video.PaymentTabId}&paymentId=${props.data.Video.PackageId}`);
-      // router.push(
-      //   { pathname: "/sign-up", query: { tab : props.data.Video.PaymentTabId , packageId : props.data.Video.PackageId  } },
-      //   "/sign-up"
-      // );
+      swal({
+        title: "This content is not available on your current package, to upgrade your package press Upgrade",
+        icon: "warning",
+        buttons: ["Cancel", "Upgrade"],
+        dangerMode: false,
+        
+      })
+      .then((accepted) => {
+        if (accepted) {
+          router.push(`/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`);
+        } 
+      });
+    
     }
+  }
+
   }, [url]);
 
   function shouldRenderPlayer() {
@@ -126,6 +140,7 @@ const watch = (props) => {
   );
 };
 
+// server side rendering
 export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
@@ -143,7 +158,7 @@ export async function getServerSideProps(context) {
   }
   let allowUser = true;
   let body = {
-    Version: "V2",
+    Version: "V1",
     Language: "en",
     Platform: "web",
     ChannelOrVODId: chanelDetail.CleanVideoId,
@@ -173,8 +188,8 @@ export async function getServerSideProps(context) {
       }
     }
   } else {
+    const res = await PlayerService.getVideoData(body, ip);
     if (isAuthentictedServerSide(context.req)) {
-      const res = await PlayerService.getVideoData(body, ip);
       if (res && res.responseCode == 5) {
         // expired subscription
         return {
@@ -197,9 +212,9 @@ export async function getServerSideProps(context) {
         };
       }
     } else {
-      // not logged in
+      // not logged in and redirect to subscription page
       return {
-        props: response(null, chanelDetail, false, seo),
+        props: response(res.data, chanelDetail, false, seo),
       };
     }
   }
