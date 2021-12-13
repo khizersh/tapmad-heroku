@@ -66,10 +66,10 @@ const MyAccountWeb = ({ profileData, allData, userId, signout }) => {
                 timer: 2500,
                 icon: "success",
               });
-              setdeactivated(true);
-              setLoader(false);
               signout();
               router.push("/sign-up");
+              setdeactivated(true);
+              setLoader(false);
             } else if (res.responseCode == 5) {
               swal({
                 title: res.message,
