@@ -5,7 +5,6 @@ import { basicSliderConfig } from "../../services/utils";
 
 const TabSlider = () => {
   const { updateSelectedTab, catchupState } = useContext(CatchupContext);
-  console.log("catchupState: ", catchupState);
   const settings = basicSliderConfig(7, 2);
 
   const onClickTab = (tab) => {

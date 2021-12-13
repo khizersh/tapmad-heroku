@@ -4,79 +4,91 @@ import { useRouter } from "next/router";
 import { Cookie } from "../../services/cookies";
 import { useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
-import { encryptWithAES } from "../../services/utils";
-// import dynamic from "next/dynamic";
 import swal from "sweetalert";
-import { GameContext } from "../../contexts/GameContext";
-// const swal = dynamic(() => import('sweetalert').then((mod) => mod.swal));
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { setLoginViews } from "../../services/auth.service";
+import { SET_VIEW_TO_SHOW } from "../../contexts/auth/AuthReducers";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const { checkUserAuthentication, setLoader, initialState } =
-      useContext(MainContext);
+    const {  setLoader } = useContext(MainContext);
+    const { SignUpState } = useContext(SignUpContext);
+    const { dispatch } = useContext(AuthContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
       setLoader(true);
-      let obj = {
+      const userPin = Cookie.getCookies('UserPin') || SignUpState.UserDetails.UserPin 
+      var obj = {
         Language: "en",
         Platform: "web",
         Version: "V1",
-        MobileNo: initialState.User.MobileNo,
-        OperatorId: initialState.User.OperatorId,
-        UserPassword:
-          initialState.User.Password || Cookie.getCookies("content-token"),
+        MobileNo: SignUpState.UserDetails.MobileNo,
+        OperatorId: SignUpState.UserDetails.Operator,
+        UserPin: userPin,
       };
-
-      let response = await AuthService.signInOrSignUpMobileOperator(
-        obj,
-        userIp,
-        false
-      );
+      if(userPin.length  === 4){
+      const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
-        if (response && response.data && response.data.UserId) {
+        const status = setLoginViews(response, obj);
+        console.log("status 401 : ",status);
+
+        setLoader(false);
+        if (status.code == 1) {
           swal({
             timer: 2000,
             title: "Signed In Successfully",
-            text: "Redirecting you...",
+            text: "Redirecting you..",
             icon: "success",
           });
-          Cookie.setCookies("isAuth", 1);
-          Cookie.setCookies("userId", response.data.UserId);
-          Cookie.setCookies("userCoins", response.response.UserTotalCoins);
-          Cookie.setCookies(
-            "userProfileName",
-            response.response.UserProfile.UserProfileFullName
-          );
-          Cookie.setCookies(
-            "userProfilePicture",
-            response.response.UserProfile.UserProfilePicture
-          );
-          Cookie.setCookies("user_mob", encryptWithAES(obj.MobileNo));
-          LoginTag(obj, response.response);
-          setLoader(false);
-          checkUserAuthentication();
           let backURL = Cookie.getCookies("backUrl") || "/";
           if (backURL == "sign-in") {
             router.push("/");
           } else {
             router.push(backURL);
           }
-          setLoader(false);
-          return null;
-        } else {
-          setLoader(false);
+        } else if (status.code == 34) {
+          dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+        } else if (status.code == 31) {
           swal({
-            title: response.message,
+            timer: 2000,
+            title: "Please enter valid PIN!",
             icon: "error",
-            timer: 3000,
           });
-          return response;
+        } else if (status.code == 401) {
+          console.log("inside 401");
+          swal({
+            title: "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
+            timer: 2500,
+            icon: "warning",
+          }).then(() => {
+            dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+          });
         }
+        else if (status.code == 0) {
+          swal({
+            title: "You are not subscribed user. please subscribe!",
+            timer: 2500,
+            icon: "warning",
+          }).then(() => {
+            router.push("/sign-up");
+          });
+        }
+        
       } catch (err) {
         console.log(err);
       }
+    }else{
+      setLoader(false);
+      swal({
+        title: "Enter 4 digit PIN",
+        timer: 2500,
+        icon: "error",
+      })
     }
+    }
+
     async function verifyPinCode(ip, pin, forgetPin) {
       setLoader(true);
       const pinResponse = await AuthService.verifyPinCode(pin);
@@ -84,7 +96,7 @@ export default function withLogin(Component, data) {
         var loginResp = loginUser(ip);
         loginResp.then((e) => {
           if (e != null && e.responseCode == 401) {
-            forgetPin(initialState);
+            forgetPin(SignUpState);
             setLoader(false);
           }
         });

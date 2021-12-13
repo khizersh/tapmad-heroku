@@ -1,26 +1,30 @@
 import Link from "next/link";
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useCallback, useMemo, memo, useEffect } from "react";
 import swal from "sweetalert";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { actionsRequestContent } from "../../../services/http-service";
-import { tapmadLogo } from "../../../services/imagesLink";
+import { mobileIcon, tapmadLogo } from "../../../services/imagesLink";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import DropdownWithImage from "../sign-up/DropdownWithImage";
+import CombineLoginDesktop from "./combine-login.js/CombineLoginDesktop";
+import CombineLoginMobile from "./combine-login.js/CombineLoginMobile";
 
-function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
-  const {
-    initialState,
-    updateUserNumber,
-    updateUserPassword,
-    updateUserOperator,
-    setLoader,
-  } = React.useContext(MainContext);
+function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
+  const { setLoader } = React.useContext(MainContext);
+  const { AuthState } = React.useContext(AuthContext);
+  const { SignUpState, dispatch } = React.useContext(SignUpContext);
   const [mobileNo, setMobileNo] = React.useState("");
   const [pin, setPin] = React.useState("");
+  const [isMobile, setIsMobile] = React.useState(false);
   const [btnDisabled, setbtnDisabled] = React.useState(true);
+  const [CurrentMethod, setCurrentMethod] = React.useState(null);
+  const [viewsToRender, setViewsToRender] = React.useState(false);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
@@ -31,7 +35,10 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
         setbtnDisabled(true);
       }
       setMobileNo(mobileNum.trim());
-      updateUserNumber(mobileNum.trim());
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { MobileNo: mobileNum.trim() },
+      });
     }
   }
 
@@ -39,42 +46,31 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
     const userPin = e.target.value;
     if (+userPin === +userPin) {
       setPin(userPin);
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { UserPin: userPin },
+      });
     }
   }
-  async function loginUser() {
-    let body = {
-      event: loggingTags.login,
-      action: "login_attempt",
-    };
-    actionsRequestContent(body);
 
+  async function loginUser() {
+    setLoader(true);
+    if (!CurrentMethod) {
+      setLoader(false);
+      return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
+    }
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
-      let body = {
-        Language: "en",
-        MobileNo: mobileNo,
-      };
-      const data = await AuthService.GetCardUser(body);
-      if (data != null) {
-        if (data.data.User) {
-          updateUserNumber(mobileNo);
-          updateUserPassword(data.data.User.UserPassword);
-          Cookie.setCookies("content-token", data.data.User.UserPassword);
-          Cookie.setCookies("userId", data.data.User.UserId);
-          let viewToRendor = loginResponse(data.data);
-          if (viewToRendor == true) {
-            verifyPin(ip, pin, forgetPin);
-            setLoader(false);
-          }
-        }
-      } else {
-        swal({
-          title: "Something went wrong!",
-          timer: 3000,
-          icon: "error",
-        });
-        setLoader(false);
-      }
+
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: {
+          MobileNo: mobileNo,
+          Operator: CurrentMethod.OperatorId,
+          UserPin: pin,
+        },
+      });
+      login(ip);
     } else {
       swal({
         title: "Enter all fields!",
@@ -88,85 +84,67 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip }) {
 
   const forgetClick = () => {
     if (mobileNo.length > 4) {
-      forgetPin(initialState);
+      forgetPin(SignUpState);
     }
   };
 
-  const onChangeNetwork = useCallback(
-    (data) => {
-      updateUserOperator(data.OperatorId);
-    },
-    [updateUserOperator]
-  );
+  const UpdatePaymenthMethod = (operator) => {
+    setCurrentMethod(operator);
+    dispatch({
+      type: UPDATE_USER_DETAILS,
+      data: { Operator: operator.OperatorId },
+    });
+  };
 
-  const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
+  useEffect(() => {
+    setCurrentMethod(AuthState.LoginOperators[0]);
+    if (AuthState?.LoginOperators[0]?.OperatorId) {
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { Operator: AuthState.LoginOperators[0].OperatorId },
+      });
+    }
+  }, [AuthState]);
+
+  useEffect(() => {
+    if (window.innerWidth < 799) {
+      setIsMobile(true);
+    }
+  }, []);
+
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
-      <img src={tapmadLogo} width="200" alt="Tapmad logo" />
-      <h4>Enter your Mobile Number</h4>
-      <p>Please Enter your Mobile Number to login</p>
-      <div className="input-group">
-        {initialState.AuthDetails && (
-          <>
-            {operators && operators.length ? (
-              <DropdownWithImage data={operators} onChange={onChangeNetwork} />
-            ) : null}
-            <input type="hidden" id="CountryMobileCode" value="+92" />
-            <span>
-              <label className="form-control" style={{ fontSize: "14px" }}>
-                {initialState.AuthDetails.MobileCode}
-              </label>
-            </span>
-          </>
-        )}
+      {/* AuthState , UpdatePaymenthMethod , handleNumber , handlePin , btnDisabled
+      , loginUser */}
+      {/* <img src={tapmadLogo} width="200" alt="Tapmad logo" /> */}
+      {isMobile ? (
+        <CombineLoginMobile
+          AuthState={AuthState}
+          UpdatePaymenthMethod={UpdatePaymenthMethod}
+          handleNumber={handleNumber}
+          handlePin={handlePin}
+          btnDisabled={btnDisabled}
+          CurrentMethod={CurrentMethod}
+          mobileNo={mobileNo}
+          pin={pin}
+          loginUser={loginUser}
+          forgetClick={forgetClick}
+        />
+      ) : (
+        <CombineLoginDesktop
+          AuthState={AuthState}
+          UpdatePaymenthMethod={UpdatePaymenthMethod}
+          handleNumber={handleNumber}
+          handlePin={handlePin}
+          btnDisabled={btnDisabled}
+          CurrentMethod={CurrentMethod}
+          mobileNo={mobileNo}
 
-        <input
-          type="text"
-          maxLength="20"
-          minLength="5"
-          className="form-control mb-2"
-          id="mobileNo"
-          placeholder="xxxxxxxxxxx"
-          inputMode="numeric"
-          value={mobileNo}
-          onChange={(e) => handleNumber(e)}
-          autoComplete={'off'}
+          loginUser={loginUser}
+          pin={pin}
+          forgetClick={forgetClick}
         />
-      </div>
-      <div className="form-group">
-        <input
-          type="password"
-          maxLength="4"
-          minLength="4"
-          value={pin}
-          className="text-center form-control"
-          placeholder="Enter your PIN"
-          onChange={handlePin}
-        />
-      </div>
-      <div className="form-group">
-        <button
-          type="button"
-          disabled={btnDisabled ? true : false}
-          className="btn btn-block  req_pin_cde_btn-blue"
-          onClick={async () => await loginUser()}
-        >
-          LOGIN
-        </button>
-        <br />
-        <>
-          <Link href="/sign-up" shallow={true} passHref={true}>
-            <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
-          </Link>
-          <span
-            className="mt-2 mr-2 text-light"
-            onClick={forgetClick}
-            style={{ color: "#fff", cursor: "pointer" }}
-          >
-            | &nbsp;&nbsp;Forgot Passcode?
-          </span>
-        </>
-      </div>
+      )}
     </div>
   );
 }

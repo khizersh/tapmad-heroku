@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DropdownWithImage from "../DropdownWithImage";
 
 const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
@@ -11,33 +11,44 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       onChangeNumber(e);
     }
   };
+
   return (
     <>
       {data && data.length ? (
         <>
           {" "}
-          <DropdownWithImage data={data} onChange={onChangeNetwork} />
-          <span>
+          <DropdownWithImage
+            data={data}
+            onChange={onChangeNetwork}
+            placeHolder="Select Network"
+            width="100%"
+          />
+          {/* <div className="">
             <label className="form-control cntry_cde border-0">
               {mobileCode}
             </label>
-          </span>
+          </div> */}
         </>
       ) : (
         ""
       )}
 
-      <input
-        type="text"
-        maxLength="20"
-        minLength="5"
-        className="form-control"
-        placeholder="3xxxxxxxxxx"
-        inputMode="numeric"
-        autoComplete={'false'}
-        value={num}
-        onChange={(e) => onChange(e)}
-      />
+      <div class="input-group mt-3">
+        <div class="input-group-prepend">
+          <span className="payment-icon border-curve">{mobileCode}</span>
+        </div>
+        <input
+          type="text"
+          maxLength="20"
+          minLength="5"
+          className="form-control ml-2 border-curve"
+          placeholder="3xxxxxxxxxx"
+          inputMode="numeric"
+          autoComplete={"false"}
+          value={num}
+          onChange={(e) => onChange(e)}
+        />
+      </div>
     </>
   );
 };

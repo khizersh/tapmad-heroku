@@ -8,11 +8,12 @@ import {
 } from "../../services/apilinks";
 import requestIp from "request-ip";
 import Head from "next/head";
-import { getSEOData, getSEODataForLiveChannel } from "../../services/seo.service";
+import {
+  getSEOData,
+  getSEODataForLiveChannel,
+} from "../../services/seo.service";
 
 const Syno = (props) => {
-
-  console.log("props : ", props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
@@ -25,13 +26,13 @@ const Syno = (props) => {
         setVideo(props.data.Video);
       }
 
-
       setVideoList(props.data.Sections);
       setMount(true);
     }
   }
 
   useEffect(() => {
+    console.log(props);
     setMount(true);
   }, []);
 
@@ -43,6 +44,10 @@ const Syno = (props) => {
         <meta property="og:title" content={props?.schema?.metaData[0]?.title} />
         <meta
           property="og:description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
+          name="description"
           content={props.schema.metaData[0].description}
         />
         <meta
@@ -64,7 +69,12 @@ const Syno = (props) => {
         />
       </Head>
       <div className="container-fluid">
-        <CategoryDetail video={video} videoList={videoList} syno={true} page={'play'} />
+        <CategoryDetail
+          video={video}
+          videoList={videoList}
+          syno={true}
+          page={"play"}
+        />
       </div>
     </>
   );
@@ -75,13 +85,24 @@ export default Syno;
 export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel } = manipulateUrls(context.query);
   var ip = requestIp.getClientIp(context.req);
+  try {
+    const isGoogleDNS = await isGoogle(ip);
+    if (isGoogleDNS == true) {
+      ip = "39.44.217.70";
+    }
+  } catch (err) {
+    console.log(err);
+  }
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
 
   if (data != null) {
     if (data?.data?.Video[0].IsVideoChannel) {
-      let seo = await getSEODataForLiveChannel(OriginalMovieId, context.resolvedUrl);
+      let seo = await getSEODataForLiveChannel(
+        OriginalMovieId,
+        context.resolvedUrl
+      );
       return { props: { data: data.data, schema: seo } };
     } else {
       let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
@@ -91,7 +112,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data: data,
-      env: process.env.TAPENV
-    }
+      env: process.env.TAPENV,
+    },
   };
 }

@@ -1,4 +1,8 @@
 @import "../theming.scss";
+// global variable
+$tapmadColor: #87c242;
+$darkColor: #333433;
+//  =========
 
 body {
   background: black;
@@ -17,6 +21,16 @@ body {
 .movies-images {
   position: relative;
   z-index: -1;
+}
+
+.text-green {
+  color: $tapmadColor;
+}
+.bg-green {
+  background-color: $tapmadColor !important;
+}
+.bg-dark {
+  background-color: $darkColor !important;
 }
 .slick-next {
   right: 1.125rem;
@@ -288,6 +302,18 @@ body {
   letter-spacing: 2px;
   border-radius: 0 0 0.25rem 0;
   left: 0;
+  top: 0;
+  z-index: 1;
+}
+.live_side2 {
+  position: absolute;
+  background-color: transparent;
+  padding: 2px 10px;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  border-radius: 0 0 0.25rem 0;
+  left: 0.5rem;
   top: 0;
   z-index: 1;
 }
@@ -977,28 +1003,29 @@ label {
   height: 0;
 }
 
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 @media screen and (min-width: 1500px) {
-  
   .tm-upcmng {
     position: relative;
     bottom: 19rem;
     z-index: 10;
     height: 0;
   }
-  
 }
 
 @media screen and (min-width: 1200px) and (max-wdith: 1499px) {
-  
   .tm-upcmng {
     position: relative;
     bottom: 15rem;
     z-index: 10;
     height: 0;
   }
-  
 }
-
 
 @media screen and (max-width: 900px) {
   .home-banner-btn {
@@ -1012,7 +1039,6 @@ label {
     z-index: 10;
     height: 0;
   }
-  
 }
 
 @media screen and (max-width: 570px) {
@@ -1027,7 +1053,7 @@ label {
   .footer_links {
     display: block;
   }
-  
+
   .tm-upcmng {
     position: relative;
     bottom: 130px;
@@ -1045,8 +1071,13 @@ label {
   .width-100 {
     width: auto !important;
   }
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
-
 
 .form-control {
   border-radius: 0px;
@@ -1149,5 +1180,3 @@ label {
 }
 
 /* loader css end*/
-
-

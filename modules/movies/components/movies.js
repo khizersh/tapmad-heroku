@@ -13,6 +13,7 @@ import { GlobalService } from "../../global-service";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Movies({ movies }) {
+  console.log(movies, "MOV");
   var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
@@ -56,10 +57,14 @@ export default function Movies({ movies }) {
         {movies.Banner &&
           movies.Banner.map((e, index) => {
             return (
-              <Link href={e.BannerURL ? e.BannerURL : "/movies"} key={index} passHref>
+              <Link
+                href={e.BannerURL ? e.BannerURL : "/movies"}
+                key={index}
+                passHref
+              >
                 <a>
                   <img
-                    src={e.WebBannerImage}
+                    src={e.TabPosterPath}
                     style={{ width: "100%" }}
                     className="banner-main"
                     alt="Banner"
@@ -69,7 +74,11 @@ export default function Movies({ movies }) {
             );
           })}
       </Slider>{" "}
-      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} name={"Movies"} />
+      <HomepageSlider
+        movies={localMovies.Sections.Movies}
+        ads={false}
+        name={"Movies"}
+      />
       {currentRow !== movies.Sections.totalSections && (
         <ScrollComponent loadMore={fetchNewMovies} />
       )}

@@ -102,7 +102,7 @@ a:focus {
 
 .tm_btng_sidebar_btns a > i {
   font-size: 28px;
-  color: #87c242;
+  color: #87c242 ;
 }
 
 .fa.pull-right {
@@ -146,7 +146,7 @@ a:focus {
 }
 
 .tm_btng_go_Btn {
-  background-color: #87c242;
+  background-color: #87c242 ;
   color: #000;
   font-family: "montserratsemibold";
 }
@@ -179,14 +179,14 @@ a:focus {
   padding: 2px 0;
 }
 .gm_mob_menu li:hover {
-  border-bottom: 3px solid #87c242 !important;
+  border-bottom: 3px solid #87c242  !important;
 }
 
 .border-bottom-game {
-  border-bottom: 3px solid #87c242 !important;
+  border-bottom: 3px solid #87c242  !important;
 }
 .color-green{
-  color: #87c242 !important;
+  color: #87c242  !important;
 }
 
 a.text-light:focus,

@@ -5,16 +5,21 @@ import { basicSliderConfig } from "../../../services/utils";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Shows({ shows }) {
+  console.log(shows);
   var bannerSettings = basicSliderConfig(1, 1);
   return (
     <div>
       <Slider {...bannerSettings}>
         {shows.Banner.map((e, index) => {
           return (
-            <Link href={e.BannerURL ? e.BannerURL : "/shows"} key={index} passHref>
+            <Link
+              href={e.BannerURL ? e.BannerURL : "/shows"}
+              key={index}
+              passHref
+            >
               <a>
                 <img
-                  src={e.WebBannerImage}
+                  src={e.TabPosterPath}
                   style={{ width: "100%" }}
                   alt="Banner"
                 />
@@ -23,7 +28,11 @@ export default function Shows({ shows }) {
           );
         })}
       </Slider>
-      <HomepageSlider movies={shows.Sections.Shows} ads={false} name={"Shows"} />
+      <HomepageSlider
+        movies={shows.Sections.Shows}
+        ads={false}
+        name={"Shows"}
+      />
     </div>
   );
 }

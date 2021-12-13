@@ -13,36 +13,39 @@ import SimCardForm from "../modules/auth/sign-up/payment-info-components/SimCard
 import { useRouter } from "next/router";
 import PromoCodeLayout from "../modules/promo-code/PromoCodeLayout";
 import { isAuthentictedUser } from "../services/utils";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
+import { UPDATE_USER_DETAILS } from "../contexts/auth/SignUpReducer";
 const promoCode = () => {
   const router = useRouter();
   const [promoCode, setPromoCode] = useState("");
   const [number, setNumber] = useState([]);
+  const [operator, setOperator] = useState(null);
   const { authState, updateSelectedOperator } = useContext(Authcontext);
-  const { updateUserOperator, initialState, setLoader, updateUserNumber } =
-    useContext(MainContext);
-
+  const { setLoader } = useContext(MainContext);
+  const { dispatch, SignUpState } = useContext(SignUpContext);
 
   useEffect(() => {
     const isAuthenticated = isAuthentictedUser();
     if (isAuthenticated) {
-      router.push('/')
+      router.push("/");
     }
-  }, [])
+  }, []);
   const handleNumber = (e) => {
     let num = e.target.value;
     if (+num === +num) {
       setNumber(num);
-      updateUserNumber(num);
+      // dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
     }
   };
 
-  const onChangeNetwork = useCallback(
-    (data) => {
-      updateUserOperator(data.OperatorId);
-      updateSelectedOperator(data);
-    },
-    [updateSelectedOperator]
-  );
+  const onChangeNetwork = useCallback((data) => {
+    setOperator(data.OperatorId);
+    // updateSelectedOperator(data);
+    // dispatch({
+    //   type: UPDATE_USER_DETAILS,
+    //   data: { Operator: data.OperatorId },
+    // });
+  }, []);
 
   const onChangePromo = (e) => {
     setPromoCode(e.target.value);
@@ -56,7 +59,7 @@ const promoCode = () => {
         icon: "error",
       });
     }
-    if (!initialState.User.OperatorId) {
+    if (!operator) {
       return swal({
         title: "Select operator!",
         timer: 2000,
@@ -68,10 +71,11 @@ const promoCode = () => {
       Version: "V1",
       Language: "en",
       Platform: "web",
-      MobileNo: initialState.User.MobileNo,
-      OperatorID: initialState.User.OperatorId,
+      MobileNo: number,
+      OperatorID: operator,
       PromoCode: promoCode,
     };
+
     const data = await AuthService.userPromoCode(body);
     if (data && data.responseCode == 1) {
       swal({
@@ -80,7 +84,10 @@ const promoCode = () => {
         icon: "success",
       }).then((res) => {
         router.push(
-          { pathname: "/sign-up", query: { code: "34", number: number } },
+          {
+            pathname: "/sign-up",
+            query: { code: "34", number: number, operator: body.OperatorID },
+          },
           "/sign-up"
         );
       });
@@ -103,7 +110,6 @@ const promoCode = () => {
   };
 
   const operators = useMemo(() => authState.loginOperators);
-
 
   return (
     <div>
@@ -151,7 +157,7 @@ export function getStaticProps() {
   return {
     props: {
       auth: true,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }

@@ -38,7 +38,6 @@ const buyCoinCard = ({ data }) => {
         .then((respCoin) => {
           if (respCoin && respCoin.responseCode == "10") {
             setLoader(false);
-            console.log("respCoin: ", respCoin);
             Cookie.setCookies("userCoins", respCoin.data.UserTotalCoins);
             updateUserCoin(respCoin.data.UserTotalCoins);
             return swal({

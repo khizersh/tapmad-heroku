@@ -25,7 +25,7 @@ export default function PSLChat({ channel }) {
   const router = useRouter();
   const [chatRoom, setChatRooms] = useState([]);
   const [chats, setChats] = useState({});
-  const database = FireBase.database();
+  const [database, setDatabase] = useState(null)
   const [room, setRoom] = useState(1);
   const textMessage = useRef();
   const [modalShow, setModalShow] = useState(false);
@@ -53,19 +53,13 @@ export default function PSLChat({ channel }) {
         header.style.top = "unset";
       }
     });
+    console.log("var msg: ", msg);
     if (msg) {
       textMessage.current.value = msg;
     }
-    textMessage.current.addEventListener('keyup', function (e) {
-      if (e.key === 'Enter' || e.keyCode === 13) {
-        // Do something
-        sendMessage();
-      }
-    });
     return () => {
       window.removeEventListener("scroll", scrollCallBack);
     };
-
   }, []);
 
   useEffect(() => {
@@ -105,10 +99,10 @@ export default function PSLChat({ channel }) {
     }
   }
   function selectRoom(e) {
-    removeListenerOfNonActiveChat(database, channel.VideoEntityId, room);
+    removeListenerOfNonActiveChat(database, room);
     let roomId = e;
     setRoom(roomId);
-    getSingleRoomChat(database, channel.VideoEntityId, roomId, (list) => {
+    getSingleRoomChat(database, roomId, (list) => {
       setChats(list);
     });
   }

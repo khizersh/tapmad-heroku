@@ -19,41 +19,28 @@ import {
   getSEOData,
   getSEODataForLiveChannel,
 } from "../../services/seo.service";
+import isGoogle from "../../services/google-dns-lookup";
 
 const watch = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
+  console.log("props  in wathc: ", props);
 
   useEffect(() => {
-    console.log(props);
     if (!props.allowUser) {
       if (props.data != null) {
         router.push("/sign-up?subspack=epl");
       } else {
         router.push("/sign-up");
       }
-    } else {
-      if (props.data.responseCode != "401" && props.data.responseCode != '8') {
-        let cId = props.data.Video.VideoEntityId
-          ? props.data.Video.VideoEntityId
-          : "";
-        let cName = props.data.Video.VideoName
-          ? props.data.Video.VideoName
-          : "";
-        let body = {
-          event: "view",
-          contentId: cId,
-          contentName: cName,
-        };
-        actionsRequestContent(body);
-      }
     }
   }, [props.allowUser, url]);
-
+  // checking token and packages for stream
   useEffect(() => {
-    if (props.data && props.data.responseCode == 401) {
+    console.log("props in wathc :", props.data.responseCode);
+    if (props.data && props.data.responseCode === 401) {
       swal({
         text: props.data.message,
         timer: 3000,
@@ -70,9 +57,8 @@ const watch = (props) => {
           setisAuthenticateFalse();
           router.push("/");
         });
-        
       });
-    } else if (props.data && props.data.responseCode == 8) {
+    } else if (props.data && props.data.responseCode === 8) {
       swal({
         text: props.data.message,
         timer: 3000,
@@ -80,15 +66,24 @@ const watch = (props) => {
       }).then((res) => {
         router.push("/subscribe-to-epl?subspack=epl");
       });
+    } else if (props.data && props.data.responseCode === 110) {
+      router.push(`/sign-up?tab=${props.data.Video.PaymentTabId}&paymentId=${props.data.Video.PackageId}`);
+      // router.push(
+      //   { pathname: "/sign-up", query: { tab : props.data.Video.PaymentTabId , packageId : props.data.Video.PackageId  } },
+      //   "/sign-up"
+      // );
     }
   }, [url]);
+
   function shouldRenderPlayer() {
     if (props.data && props.data.responseCode == 8) {
       return false;
     } else if (props.data && props.data.responseCode == 401) {
       return false;
+    } else if (props.data && props.data.responseCode == 110) {
+      return false;
     } else {
-      return true
+      return true;
     }
   }
   return (
@@ -99,6 +94,10 @@ const watch = (props) => {
         <meta property="og:title" content={props.schema.metaData[0].title} />
         <meta
           property="og:description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
+          name="description"
           content={props.schema.metaData[0].description}
         />
         <meta
@@ -133,6 +132,14 @@ export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
+  }
+  try {
+    const isGoogleDNS = await isGoogle(ip);
+    if (isGoogleDNS == true) {
+      ip = "39.44.217.70";
+    }
+  } catch (err) {
+    console.log(err);
   }
   let allowUser = true;
   let body = {
@@ -174,11 +181,16 @@ export async function getServerSideProps(context) {
           props: response(res.data, chanelDetail, false, seo),
         };
       } else if (res && res.responseCode == 401) {
+        // logging out
         return {
           props: response(res.data, chanelDetail, true, seo),
         };
-      }
-      else {
+      } else if (res && res.responseCode == 110) {
+        // send to change package screen with auto package selected
+        return {
+          props: response(res.data, chanelDetail, true, seo),
+        };
+      } else {
         // authenticated
         return {
           props: response(res.data, chanelDetail, true, seo),
@@ -201,6 +213,6 @@ const response = (data, channel, allowUser, seo) => {
     channel,
     allowUser,
     schema: seo,
-    env: process.env.TAPENV
+    env: process.env.TAPENV,
   };
 };

@@ -1,0 +1,188 @@
+:root{
+  --signup_background_color : #1a1a1a;
+}
+
+
+.close-round {
+  padding: 10px 10px 10px 10px;
+  border-radius: 50%;
+  background-color: #f83636;
+}
+
+.close-round a {
+  font-size: 20px;
+  color: #fff !important;
+}
+
+.color-red {
+  color: #f83636;
+}
+.visible {
+  transition: all 0.3s;
+  opacity: 1;
+}
+
+.opacity-0 {
+  transition: all 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.select-network {
+  font-weight: 100 !important;
+  text-align: center;
+  margin-bottom: 2.5rem !important;
+}
+.component-title {
+  font-weight: 100;
+  text-align: center;
+}
+
+.text-grey {
+  /* color: #dee4ea; */
+  color: #d0d4d7;
+}
+.center-div {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.custom-bg {
+  padding: 20px;
+  margin-top: 5rem;
+  border-radius: 20px;
+  background-color: #1a1a1a;
+}
+.custom-bg-signup {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: var(--signup_background_color);
+}
+
+.custom-bg-signup button{
+  width: 50%;
+  text-align: center;
+}
+/* custom checkbox start */
+
+/* Hide the browser's default checkbox */
+.container-term input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+
+
+/* On mouse-over, add a grey background color */
+.container-term:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a white background */
+.container-term input:checked ~ .checkmark {
+  background-color: #fff;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  color: black;
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-term input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-term .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 8px;
+  height: 15px;
+  border: 1px solid #87c242 ;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* custom checkbox end */
+
+.modal-component {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+.TC-Modal {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: transparent;
+}
+
+.modal-component::-webkit-scrollbar,
+.TC-Modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-component::-webkit-scrollbar-track,
+.TC-Modal::-webkit-scrollbar-track {
+  background-color: #d9d9d9 !important;
+  border-radius: 8px;
+}
+
+.modal-component::-webkit-scrollbar-thumb,
+.TC-Modal::-webkit-scrollbar-thumb {
+  background-color: #87c242  !important;
+  border-radius: 8px;
+}
+
+.border-round {
+  border-radius: 5px !important;
+}
+
+.custom-input {
+  background: #f1f1f1;
+  height: 35px;
+  padding: 10px 16px;
+  box-shadow: none;
+  /* font-weight: bold; */
+  color: black;
+}
+
+/* .login-div{
+  padding-top: 30%;
+} */
+
+@media only screen and (max-width: 799px) {
+  .custom-bg-signup button{
+    width: 100%;
+    text-align: center;
+  }
+  .operators {
+    width: 126% !important;
+    position: relative;
+    left: -20px;
+  }
+  .center-div {
+    width: 70%;
+    margin: 0 auto;
+  }
+}

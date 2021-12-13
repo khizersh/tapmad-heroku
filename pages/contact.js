@@ -22,7 +22,7 @@ export default function Contact(params) {
               Phone: 021-35155511
               <br />
               Email:{" "}
-              <a href="mailto:info@pitelevision.com">
+              <a href="mailto:customerservice@tapmad.com">
                 customerservice@tapmad.com
               </a>
             </p>

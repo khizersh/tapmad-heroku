@@ -7,53 +7,51 @@ import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import { on } from "../../../public/static/js/linkers";
 import { SignUpTag } from "../../../services/gtm";
+import GeneralModal from "../../../components/GeneralModal";
+import TermsAndCondition from "./TermsAndCondition";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { handleBody, handleRegisterPayload } from "./authHelper";
+import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 
-export default function SubscribeButton() {
+export default function SubscribeButton({ creditCardType }) {
   const router = useRouter();
-
-  const { initialState, setLoader, updateUserPassword } =
-    useContext(MainContext);
-
-  const { authState, updateResponseCode } = useContext(Authcontext);
+  const { setLoader } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const [formReady, setFormReady] = useState(false);
-  useEffect(() => {
-    on("tokenSuccess", async (event) => {
-      if (formReady) {
-        await submitCardDetails(event)
-      }
-    })
-  }, [formReady])
+  const [isMobile, setIsMobile] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [checkbox, setCheckbox] = useState(false);
 
-  function handleBody() {
-    return {
-      Version: "V1",
-      Language: "en",
-      Platform: "web",
-      // ProductId: 1214,
-      ProductId: authState.selectedPackageId,
-      MobileNo: initialState.User.MobileNo,
-      OperatorId: initialState.User.OperatorId,
-      cnic: initialState.User.Cnic,
-      Email: initialState.User.Email,
-      FullName: initialState.User.FullName,
-    };
-  }
-  function updateApiData(status) {
-    Cookie.setCookies("userId", status.data.User.UserId);
-    updateUserPassword(status.data.User.UserPassword);
-    updateResponseCode(status.code);
+  useEffect(async () => {
+    if (creditCardType) {
+      on("tokenSuccess", async (event) => {
+        if (formReady) {
+          await submitCardDetails(event);
+        }
+      });
+    }
+  }, [formReady === true]);
+
+  function updateApiData(code, newUser = false) {
+    dispatch({
+      type: UPDATE_SUBSCRIBE_RESPONSE,
+      data: { code: code, newUser: newUser },
+    });
   }
   async function submitCardDetails(event) {
-    var details = handleBody();
-    details = { ...details, Token: event.token };
-    delete details.cnic;
-    console.log(details);
-    const response = await AuthService.creditCardOrder(details);
+    var details = handleBody(SignUpState);
+    if (creditCardType) {
+      details = { ...details, Token: event.token };
+      checkouPayment(response, details);
+    } else {
+      delete details.cnic;
+      const response = await AuthService.creditCardOrder(details);
+      UBLPayment(response);
+    }
     setLoader(false);
-    // checkouPayment(response);
-    UBLPayment(response);
   }
-  function checkouPayment(response) {
+
+  function checkouPayment(response, details) {
     if (response.data.responseCode == 1 || response.data.responseCode == 4) {
       SignUpTag(details, response.data);
       swal({
@@ -63,7 +61,7 @@ export default function SubscribeButton() {
       }).then(() => {
         router.push(`/sign-up?code=34&number=${details.MobileNo}`);
       });
-      return
+      return;
     } else if (response.data.responseCode == 4) {
       swal({
         timer: 3000,
@@ -73,7 +71,10 @@ export default function SubscribeButton() {
       }).then((e) => {
         router.push("/sign-in");
       });
-    } else if (response.data.Response && response.data.Response.responseCode == 2) {
+    } else if (
+      response.data.Response &&
+      response.data.Response.responseCode == 2
+    ) {
       window.location.href = response.data.User.redirectUrl;
     } else {
       swal({
@@ -83,14 +84,14 @@ export default function SubscribeButton() {
         buttons: true,
       }).then((e) => {
         window.location.reload();
-      })
+      });
       return 0;
     }
   }
   function UBLPayment(response) {
     if (response.data.Response.responseCode == 1) {
       window.location.href = response.data.CardPaymentUrl;
-      return
+      return;
     } else if (response.data.Response.responseCode == 4) {
       swal({
         timer: 3000,
@@ -100,7 +101,7 @@ export default function SubscribeButton() {
       }).then((e) => {
         router.push("/sign-in");
       });
-    } else if (response.data.Response && response.data.Response.responseCode == 2) {
+    } else if (response.data.Response.responseCode == 2) {
       window.location.href = response.data.CardPaymentUrl;
     } else {
       swal({
@@ -110,34 +111,14 @@ export default function SubscribeButton() {
         buttons: true,
       }).then((e) => {
         window.location.reload();
-      })
+      });
       return 0;
     }
   }
   async function SubscribeUser() {
     setLoader(true);
-    if (
-      authState &&
-      authState.selectedPaymentMethod &&
-      authState.selectedPackageId
-    ) {
-      var details = {};
-      if (authState.selectedPaymentMethod.PaymentType == 1) {
-        details = handleBody();
-        delete details.cnic;
-      }
-      if (authState.selectedPaymentMethod.PaymentType == 2) {
-        details = handleBody();
-        delete details.cnic;
-        // delete details.ProductId;
-      }
-      if (authState.selectedPaymentMethod.PaymentType == 3) {
-        details = handleBody();
-        delete details.cnic;
-      }
-      if (authState.selectedPaymentMethod.PaymentType == 4) {
-        details = handleBody();
-      }
+    if (SignUpState?.SelectedPrice?.ProductId) {
+      var details = handleRegisterPayload(SignUpState);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
@@ -147,18 +128,9 @@ export default function SubscribeButton() {
           buttons: false,
         });
       }
-
-      if (details.ProductId == 1265 || details.ProductId == 1360) {
-        var status = await AuthService.checkEPLUser(initialState.User.MobileNo);
-        console.log(status);
-      } else {
-        var status = await AuthService.checkUser(initialState.User.MobileNo);
-      }
-
-      if (authState.selectedPaymentMethod.PaymentType == 2) {
+      if (SignUpState.SelectedMethod.PaymentId == 2) {
         // for credit card specific only
-
-        if (!initialState.User.Email || !initialState.User.FullName) {
+        if (!details.Email || !details.FullName) {
           setLoader(false);
           return swal({
             timer: 3000,
@@ -167,115 +139,126 @@ export default function SubscribeButton() {
             buttons: false,
           });
         }
-        if (status.code == 0) {
-          // Uncomment to open checkout
-          // Frames.submitCard();
-          // setFormReady(true);
-
-          submitCardDetails({ Token: '' })
-          // updateApiData(status);
-          return
+        if (creditCardType) {
+          Frames.submitCard();
+          setFormReady(true);
         } else {
-          swal({
-            timer: 2000,
-            text: status.message,
-            icon: "info",
-            buttons: false,
-          });
-          setLoader(false);
-          updateApiData(status);
+          submitCardDetails();
         }
       } else {
+        // for other payment methods
         if (!details.OperatorId) {
-          swal({
+          setLoader(false);
+          return swal({
             timer: 3000,
             text: "Please select operator",
             icon: "info",
             buttons: false,
           });
-          setLoader(false);
         }
-        // for other payment methods
-        var data;
-        if (status.code == 0) {
-          updateApiData(status);
-          data = await AuthService.initialTransaction(details);
-          setLoader(false);
-          if (data != null) {
-            if (data.responseCode == 11) {
-              updateUserPassword(data.data.User.UserPassword);
+
+        var data = await AuthService.initialTransaction(details);
+        setLoader(false);
+        if (data != null) {
+          if (data.responseCode == 0) {
+            swal({ title: data.message, icon: "error", timer: 3000 });
+          } else if (data.responseCode == 11) {
+            //user already subscribed checking PIN SET
+            if (data.data.User.IsPinSet) {
               swal({
                 timer: 3000,
-                text: "You are already subscribed user, please enter your PIN for login",
+                title: "You are already subscribed!",
+                text: "Enter your PIN for login",
                 icon: "info",
                 buttons: false,
               });
               Cookie.setCookies("userId", data.data.User.UserId);
-              updateResponseCode(data.responseCode);
-            } else if (data.responseCode == 0) {
-              swal({
-                title: data.message,
-                icon: "error",
-                timer: 3000,
-              });
-            } else if (data.responseCode == 1) {
-              swal({
-                title: "OTP code send successfully, please enter your code!",
-                icon: "success",
-              });
-              // setting responseCode and new user true for payment process
-              updateResponseCode(data.responseCode, true);
-            } else if (data.responseCode == 6) {
-              if (status.data.User.IsPinSet) {
-                swal({
-                  title: data.message,
-                  icon: "success",
-                  timer: 3000,
-                }).then((e) => {
-                  router.push("/");
-                })
-              } else {
-                updateResponseCode(34, true);
-              }
-            } else if (data.responseCode == 13) {
-              swal({
-                title: data.message,
-                icon: "error",
+              dispatch({
+                type: UPDATE_SUBSCRIBE_RESPONSE,
+                data: { code: 11, newUser: false },
               });
             } else {
               swal({
-                title: data.message,
-                icon: "error",
+                timer: 3000,
+                title: "You are already subscribed!",
+                text: "Set your PIN for login",
+                icon: "info",
+              });
+              dispatch({
+                type: UPDATE_SUBSCRIBE_RESPONSE,
+                data: { code: 34, newUser: false },
               });
             }
-          } else {
+          } else if (data.responseCode == 1) {
+            // setting responseCode and new user true for payment process
             swal({
-              title: "Something went wrong!",
-              icon: "error",
+              title: "OTP code send successfully, please enter your code!",
+              icon: "success",
             });
-            setLoader(false);
+            dispatch({
+              type: UPDATE_SUBSCRIBE_RESPONSE,
+              data: { code: data.responseCode, newUser: true },
+            });
+          } else if (data.responseCode == 6) {
+            swal({ title: data.message, icon: "success", timer: 3000 }).then(
+              (e) => {
+                router.push("/");
+              }
+            );
+          } else {
+            swal({ title: data.message, icon: "error" });
           }
         } else {
-          swal({
-            timer: 2000,
-            text: status.message,
-            icon: "info",
-            buttons: false,
-          });
+          swal({ title: "Something went wrong!", icon: "error" });
           setLoader(false);
-          updateApiData(status);
         }
       }
     }
   }
+
+  function onClickTerm() {
+    setOpen(true);
+  }
+  function onClickCheckbox() {
+    setCheckbox(!checkbox);
+  }
+
+  useEffect(() => {
+  if(window.innerWidth < 799){
+    setIsMobile(true)
+  }
+  }, [])
   return (
-    <div>
-      <button
-        className="btn pymnt_pge_sbscrbe_btn bg-green"
-        onClick={SubscribeUser}
-      >
-        Subscribe
-      </button>
-    </div>
+    <>
+      <div className="w-100">
+        <GeneralModal
+          component={TermsAndCondition}
+          title="Test Modal"
+          open={open}
+          toggle={() => setOpen(!open)}
+        />
+        <div className="form-check  my-3 termdiv">
+          <label className="container-term float-left">
+            <input type="checkbox" onClick={onClickCheckbox} />I agree to
+            Tapmad's <span onClick={onClickTerm}>term and condition</span>
+            <span className="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div className={`w-100  ${isMobile ? "" : "d-flex justify-content-around" }`}>
+        <button
+          className={`btn subscribe-btn bg-green ${
+            checkbox ? "visible" : "opacity-0"
+          }`}
+          onClick={SubscribeUser}
+        >
+          Subscribe Now
+        </button>
+       
+        <a className="text-red mt-4 d-block">
+          <u>Upgrade Plan</u>{" "}
+        </a>
+      </div>
+    </>
   );
 }

@@ -1,6 +1,4 @@
 import React from "react";
-import { withAuth } from "../components/withAuth";
-
 import Game from "../modules/game/components";
 
 function Games() {

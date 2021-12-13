@@ -1,16 +1,18 @@
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import Router from "next/router";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useEffect } from "react";
 import Loader from "../components/Loader";
 import AuthProvider from "../contexts/AuthContext";
+import AuthProviderNew from "../contexts/auth/AuthContext";
 import CatchupProvider from "../contexts/CatchupContext";
 import GameProvider from "../contexts/GameContext";
+import { useRouter } from "next/router";
 import MainProvider, { MainContext } from "../contexts/MainContext";
 import "../styles/globals.scss";
 import "../modules/auth/auth.css";
 import "../components/App/Header.css";
 import "../modules/catchup/catchup.css";
+import "../modules/profile-component/profile-component.css";
 import "../modules/category/css/card-hor.style.css";
 import "../modules/dashboard/dashboard.style.css";
 import "../modules/home/sliderCard.css";
@@ -20,29 +22,47 @@ import "../modules/news/news.style.css";
 import "../modules/player-shop/player-shop.css";
 import "../modules/promo-code/promo-code.css";
 import "../modules/samsungtv/samsung.css";
+import "../components/component-styles/newSignup.css";
 import "../modules/search/search.css";
+import "../components/component-styles/component.css";
 import { addScriptCodeInDom, setUrlToCookies } from "../services/utils";
 import "../styles/game.css";
+import "../modules/my-account/myaccounttest.css";
 import "../styles/globals.css";
 import { UserSessions } from "../services/gtm";
+import SignUpProvider from "../contexts/auth/SignUpContext";
+import loadable from "@loadable/component";
+import BuyCoinModal from "../modules/game/components/BuyCoinModal";
+import ProfileProvider from "../contexts/profile/ProfileContext";
+import { checkUserIdAndToken } from "../services/auth.service";
 
-
-const DashboardLayout = dynamic(() => import("../modules/dashboard/DashboardLayout"));
-const Skeleton = dynamic(() => import("../components/MainSkeleton"));
-const Header = dynamic(() => import("../components/App/Header"));
-const Footer = dynamic(() => import("../components/Footer"));
+const DashboardLayout = loadable(() =>
+  import("../modules/dashboard/DashboardLayout")
+);
+const Skeleton = loadable(() => import("../components/MainSkeleton"));
+const Header = loadable(() => import("../components/App/Header"));
+const Footer = loadable(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
-
+  const router = useRouter();
   useLayoutEffect(() => {
     UserSessions();
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PJ4M57N');`)
-  }, [])
-  // Hello
+    })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
+  }, []);
+
+  useEffect(() => {
+    if (pageProps.protected) {
+      let check = checkUserIdAndToken();
+      if (!check.valid) {
+        router.push(check.url);
+      }
+    }
+  }, [pageProps.protected]);
+
   return (
     <>
       <Head>
@@ -53,17 +73,30 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
           href="//d1s7wg2ne64q87.cloudfront.net/web/images/favicon-32x32.png"
         />
-        <title>Watch Live TV - Movies, Sports, Drama, Live EPL Stream - Tapmad TV.</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Tapmad TV",
+              "alternateName": "Tapmad",
+              "url": "https://www.tapmad.com/",
+              "logo": "https://play-lh.googleusercontent.com/i8xVImpStVCQULwvGtfVkjQmdVLRMuTRfCC47CTaN_naZhk0wdwzplve7mloN0Z1iRM=s180-rw",
+              "sameAs": [
+                "https://www.facebook.com/TapmadTV/",
+                "https://twitter.com/tapmadtv",
+                "https://www.instagram.com/tapmad.entertainment/",
+                "https://www.youtube.com/channel/UCPHOf3lVS8bUSwR1h55EO6g",
+                "https://pk.linkedin.com/company/tapmad-tv"
+              ]
+            }
+            ),
+          }}
         />
-        <meta name="description" content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com" />
-        <meta
-          name="keywords"
-          content="live tv channel, live tv, live sports, watch free cricket, subscribe to tapmad, live EPL streaming, watch epl, premier league live streaming, pakistani tv channels, watch live tv free, watch live news, watch full hd movies online"
-        />
-        {pageProps.env == 'staging' ? <meta name="robots" content="noindex" /> : null}
+        {pageProps.env == "staging" ? (
+          <meta name="robots" content="noindex" />
+        ) : null}
 
         {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
 
@@ -82,10 +115,9 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         ></link>
-
-        <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
       </Head>
       <>
+
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"
@@ -106,9 +138,17 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <MainProvider>
               <AuthProvider>
-                <NoSideBarSkeleton>
-                  <Component {...pageProps} />
-                </NoSideBarSkeleton>
+                <AuthProviderNew>
+                  <SignUpProvider>
+                    <GameProvider>
+                      <ProfileProvider>
+                        <NoSideBarSkeleton>
+                          <Component {...pageProps} />
+                        </NoSideBarSkeleton>
+                      </ProfileProvider>
+                    </GameProvider>
+                  </SignUpProvider>
+                </AuthProviderNew>
               </AuthProvider>
             </MainProvider>
           )
@@ -116,15 +156,19 @@ function MyApp({ Component, pageProps }) {
           <>
             <MainProvider>
               <AuthProvider>
-                <CatchupProvider>
-                  <GameProvider>
-                    <Skeleton>
-                      <Header />
-                      <Component {...pageProps} />
-                      <Footer />
-                    </Skeleton>
-                  </GameProvider>
-                </CatchupProvider>
+                <AuthProviderNew>
+                  <SignUpProvider>
+                    <CatchupProvider>
+                      <GameProvider>
+                        <Skeleton {...pageProps}>
+                          <Header />
+                          <Component {...pageProps} />
+                          <Footer />
+                        </Skeleton>
+                      </GameProvider>
+                    </CatchupProvider>
+                  </SignUpProvider>
+                </AuthProviderNew>
               </AuthProvider>
             </MainProvider>
           </>
@@ -153,6 +197,7 @@ export const NoSideBarSkeleton = ({ children }) => {
   };
   return (
     <div>
+      <BuyCoinModal />
       {initialState.loading ? <Loader /> : null}
       {children}
     </div>

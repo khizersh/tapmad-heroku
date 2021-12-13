@@ -1,46 +1,117 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Authcontext } from "../../../contexts/AuthContext";
-import paymentMethod from "./PaymentMethod";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { useRouter } from "next/router";
 
+
+var isDefaultSet = false;
 export default function TaxView({ onChange }) {
-  const { authState, updateSelectedPackageId } = useContext(Authcontext);
+  const {  SignUpState } = useContext(SignUpContext);
+  const [PackagePrice, setPackagePrice] = useState([]);
+  const [SelectedPrice, setSelectedPrice] = useState(null);
+  const router = useRouter();
+  const { packageId  } = router.query;
 
-  const [packageId, setPackageId] = useState(null);
-
+  // set all products
   useEffect(() => {
-    if (authState.selectedPaymentMethod) {
-      updateSelectedPackageId(
-        authState.selectedPaymentMethod.Packages[0].ProductId,
-        authState.selectedPaymentMethod.Packages[0].PackagePrice,
-        authState.selectedPaymentMethod.Packages[0].PackageName
-      );
-      // setPackageId(authState.selectedPaymentMethod.Packages[0].ProductId);
+    if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
+      let array = SignUpState.SelectedPackage.PaymentTabMethods.map((m) => {
+        let finalArray = [];
+        let pkgArray = m.PackageName?.split(" ");
+        finalArray.push(pkgArray[0]);
+        if (pkgArray.length > 1) {
+          finalArray.push(pkgArray.slice(1).join(" "));
+        }
+        return {
+          ...m,
+          PackageNameArray: finalArray,
+        };
+      });
+      setPackagePrice(array);
+      onChange(SignUpState.SelectedPackage.PaymentTabMethods[0])
+      setSelectedPrice(SignUpState.SelectedPackage.PaymentTabMethods[0]);
+        
     }
+  }, [SignUpState.SelectedPackage]);
 
-  }, [authState.selectedPaymentMethod]);
+// set default product via query param
+  useEffect(() => {
+    setTimeout(() => {
+      if(packageId && !isDefaultSet){
+        const elem = document.getElementById(packageId);
+        if(elem){
+        isDefaultSet = true
+          elem.click();
+        }
+      }
+    }, 120);
+  }, [SignUpState.SelectedPrice , packageId]);
 
-  const onChangePackage = (id, amount, name) => {
-    onChange({ id: id, amount: amount, name: name })
+  const onChangePackage = (m) => {
+    setSelectedPrice(m)
+    onChange(m);
   };
-
   return (
     <>
-      {authState.selectedPaymentMethod &&
-        authState.selectedPaymentMethod.Packages.length > 0 &&
-        authState.selectedPaymentMethod.Packages.map((m, i) => {
+      {PackagePrice &&
+        PackagePrice.length > 0 &&
+        PackagePrice.map((m, i) => {
           return (
-            <li
-              key={i}
-              className={`list-group-item w-100 p-1 text-center list-group-item-action border-0 text-muted ${authState.selectedPackageId ? (authState.selectedPackageId == m.ProductId ? "pr_active" : "") : ""
+            <div className="w-100">
+              <li
+                key={i}
+                className={`w-100 p-1 f-20 text-center cursor-pointer border-0 text-base ${
+                  SelectedPrice?.ProductId
+                    ? SelectedPrice.ProductId === m.ProductId
+                      ? "price-active"
+                      : ""
+                    : ""
                 }`}
-              onClick={() =>
-                onChangePackage(m.ProductId, m.PackagePrice, m.PackageName)
-              }
-            >
-              <span className="font-weight-bold">{m.PackagePrice}</span>
-              <span className="d-block d-md-none"></span>
-              {m.PackageDescription}
-            </li>
+                id={m.PackageId}
+                onClick={() => onChangePackage(m)}
+              >
+                {m.PackageNameArray?.length > 1 ? (
+                  <>
+                    <div className="font-weight-600 line-1 text-left font-17">
+                      {m.PackageNameArray[0]}
+                    </div>
+                    <div className="font-weight-bold line-1 text-left">
+                      {m.PackageNameArray[1]}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span className="font-weight-bold text-left line-2">
+                      {m.PackageName}
+                    </span>
+                  </>
+                )}
+                <div className="d-flex justify-content-center mt-10px">
+                  <div className="text-white per-month mt-2">
+                    {m.PackagePrices[0]}
+                  </div>
+                  <div className="f-40 font-weight-bold text-white">
+                    {m.PackagePrices[1]}
+                  </div>
+                  <div className="text-white  monthly">
+                    <span className="d-block">
+                      {m.PackagePrices[2].split(" ")[0]}
+                    </span>
+                    {m.PackagePrices[2].split(" ").slice(1).join(" ")}
+                  </div>
+                </div>
+                <span className="d-block d-md-none"></span>
+                {m.PackageDescription}
+              </li>
+              {SelectedPrice?.ProductId ? (
+                SelectedPrice.ProductId == m.ProductId ? (
+                  <div className="triangle-down"></div>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
+            </div>
           );
         })}
     </>

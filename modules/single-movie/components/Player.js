@@ -21,6 +21,7 @@ const PSLComponent = dynamic(() =>
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [adDuration, setAdDuration] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
@@ -145,18 +146,19 @@ export default function Player({ movies }) {
     setMovie(movies);
     if (movies.Video && movies.Video.IsVideoChannel) {
       setVideoLink({
-        highQuality: movies.Video.ChannelStreamUrlWHQ,
-        mediumQuality: movies.Video.ChannelStreamUrlWMQ,
-        lowQuality: movies.Video.ChannelStreamUrlWLQ,
+        highQuality: movies.Video.ContentStreamUrlWHQ,
+        mediumQuality: movies.Video.ContentStreamUrlWMQ,
+        lowQuality: movies.Video.ContentStreamUrlWLQ,
       });
     } else {
       setVideoLink({
-        highQuality: movies.Video.VideoStreamUrlHQ,
-        mediumQuality: movies.Video.VideoStreamUrlMQ,
-        lowQuality: movies.Video.VideoStreamUrlLQ,
+        highQuality: movies.Video.ContentStreamUrlHQ,
+        mediumQuality: movies.Video.ContentStreamUrlMQ,
+        lowQuality: movies.Video.ContentStreamUrlLQ,
       });
     }
   }, [movies]);
+
 
   function videoQuartile(movie) {
     return {
@@ -192,7 +194,9 @@ export default function Player({ movies }) {
       window.removeEventListener("scroll", scrollCallBack);
     };
   }, []);
+
   useEffect(() => {
+    setIsMobile(window.screen.width < 639);
     if (movies.Video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
         router.push("/sign-up");
@@ -319,8 +323,7 @@ export default function Player({ movies }) {
               </div>
             </div>
           </div>
-
-          <div className="col-lg-3 text-center pt-5 d-none d-lg-block d-md-block">
+          {!isMobile ? <div className="col-lg-3 text-center pt-5 d-lg-block d-md-block">
             {/* Side Add desktop start*/}
             <div className="d-none d-lg-block d-md-block">
               {ads.allow && ads.rightAd ? (
@@ -422,7 +425,8 @@ export default function Player({ movies }) {
                   : null}
               </div>
             </div>
-          </div>
+          </div> : null}
+
           <div className="m-auto d-block d-sm-none">
             <div>
               {ads.allow && ads.bottomBannerAdMobile ? (
@@ -452,10 +456,7 @@ export default function Player({ movies }) {
                 ) : (
                   ads.bottomBannerAdMobile && (
                     <DFPSlotsProvider dfpNetworkId="28379801">
-                      {console.log(
-                        "ads.bottomBannerAdMobile: ",
-                        ads.bottomBannerAdMobile
-                      )}
+                     
                       <div className="desktop-ads">
                         {ads.bottomBannerAdMobile != "" ? (
                           <AdSlot

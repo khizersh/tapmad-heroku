@@ -1,0 +1,45 @@
+.padding-x-100{
+    padding: 0px 100px;
+}
+
+.padding-left-65px{
+    padding-left: 65px;
+}
+
+.margin-x-auto{
+ margin: 0px auto;   
+}
+.margin-y-auto{
+ margin: auto 0px;   
+}
+
+.border-top-left{
+    border-radius: 10px 0px 0px 0px;
+}
+
+.border-top-right{
+    border-radius: 0px 10px 0px 0px;
+}
+.border-bottom-right{
+    border-radius: 0px 0px 10px 0px;
+}
+.border-bottom-left{
+    border-radius: 0px 0px 0px 10px;
+}
+
+.navbar-position{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.profile-container{
+    position: relative;
+    top: 75px;
+}
+
+.border-50{
+    border-radius: 50%;
+}

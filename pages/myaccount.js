@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { MyAccountService } from "../modules/my-account/myaccount.service";
-import PersonalInfo from "../modules/my-account/PersonalInfo";
-import UserStatus from "../modules/my-account/UserStatus";
 import { Cookie } from "../services/cookies";
+import requestIp from "request-ip";
+import { useRouter } from "next/router";
+import MyAccountMobile from "../modules/profile-component/ProfileMobile";
+import MyAccountWeb from "../modules/profile-component/ProfileWeb";
+import { ProfileContext } from "../contexts/profile/ProfileContext";
+import { PROFILE_DATA } from "../contexts/profile/ProfileReducer";
+import NavbarHOC from "../modules/navbar/NavbarHOC";
 
-const MyAccount = () => {
-
+const MyAccountTrial = ({ signout }) => {
+  const router = useRouter();
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
-  const [formData, setFormData] = useState({
+  const [postFormData, setPostFormData] = useState({
     Version: "V1",
     Language: "en",
     Platform: "web",
     UserId: userId,
   });
+
+  const [isMobile, setIsMobile] = useState(false);
   const [allData, setAllData] = useState(null);
   const [profileData, setProfileData] = useState({
     Version: "V1",
@@ -24,50 +31,109 @@ const MyAccount = () => {
     UserMobileNumebr: "",
     BirthDate: "",
     Email: "",
+    Package: "",
   });
-
+  const { ProfileState, dispatch } = useContext(ProfileContext);
   useEffect(async () => {
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
-      const data = await MyAccountService.getUserData(formData);
+      const data = await MyAccountService.getUserData(postFormData);
+      if (ProfileState) {
+        dispatch({ type: PROFILE_DATA, data: data });
+      }
       if (data != null) {
         if (data.responseCode == 1) {
+          console.log(data);
           setAllData(data.data);
           setProfileData({
             ...profileData,
             UserId: userId,
-            Email: data.data.User.UserEmail,
-            UserMobileNumebr: data.data.UserProfile.UserProfileMobile,
-            FullName: data.data.UserProfile.UserProfileFullName,
-            BirthDate: data.data.UserProfile.UserProfileDOB,
-            ProfilePicture: data.data.UserProfile.UserProfilePicture,
+            Email: data.data.ProfileData.UserEmail || "--",
+            UserMobileNumebr: data.data.ProfileData.UserProfileMobile || "--",
+            FullName: data.data.ProfileData.UserProfileFullName || "--",
+            BirthDate: data.data.ProfileData.UserProfileDOB || "--",
+            ProfilePicture: data.data.ProfileData.UserProfilePicture || "--",
+            Gender: data.data.ProfileData.UserProfileGender || "--",
+            Package: data.data.Package,
           });
         }
       }
     }
+
+    if (window.innerWidth < 799) {
+      setIsMobile(true);
+    }
   }, []);
+
+  const RenderViews = useCallback(
+    function () {
+      if (isMobile) {
+        return <MyAccountMobile profileData={profileData} allData={allData} />;
+      } else {
+        return (
+          <MyAccountWeb
+            profileData={profileData}
+            allData={allData}
+            userId={postFormData.UserId}
+          />
+        );
+      }
+    },
+    [isMobile, profileData]
+  );
+
+  const onClickBack = () => {
+    router.push("/");
+  };
+
+  const clickEditProfile = () => {
+    router.push("/editprofile");
+  };
 
   return (
     <div className="container-fluid">
-      <div className="row">
-        <div className="col-12 col-sm-12 col-md-12 col-lg-3 ">
-          {profileData && <PersonalInfo data={profileData} />}
+      <NavbarHOC>
+        <div>
+          <button
+            className="btn"
+            style={{
+              fontSize: "13px",
+              color: "black",
+            }}
+            onClick={onClickBack}
+          >
+            <img src="/icons/login-back.svg" />
+          </button>
         </div>
-        <div className="col-12 col-sm-12 col-md-12 col-lg-9">
-          {allData && <UserStatus pdata={allData} userId={formData.UserId} />}
+        <div className="margin-y-auto">
+          <button
+            onClick={clickEditProfile}
+            className="btn bg-white rounded-lg py-1 text-green font-13"
+          >
+            Edit Profile
+          </button>
         </div>
+      </NavbarHOC>
+      <div className="profile-container">
+        <RenderViews />
       </div>
     </div>
   );
 };
+export default MyAccountTrial;
 
-export default MyAccount;
-
-export function getStaticProps() {
+export function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
   return {
     props: {
+      noSideBar: true,
       protected: true,
-      env: process.env.TAPENV
+      auth: true,
+      ip: ip,
+      env: process.env.TAPENV,
     },
   };
 }

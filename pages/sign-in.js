@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MainContext } from "../contexts/MainContext";
 import { useRouter } from "next/router";
 import AuthViews from "../modules/auth/login/authViews";
@@ -7,7 +7,7 @@ import requestIp from "request-ip";
 export default function LoginPage(props) {
   const { initialState } = useContext(MainContext);
   const router = useRouter();
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialState.isAuthenticated) {
       router.push("/");
     }
@@ -29,7 +29,7 @@ export function getServerSideProps(context) {
       noSideBar: true,
       auth: true,
       ip: ip,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }

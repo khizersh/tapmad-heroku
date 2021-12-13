@@ -1,11 +1,9 @@
 import Link from "next/link";
-import React, { useContext, useEffect , useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../contexts/MainContext";
 // import "./Header.css";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 // import tapLogo from "../../public/icons/tm-logo.png";
-import { loggingTags } from "../../services/apilinks";
-import { actionsRequestContent } from "../../services/http-service";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 import { AuthService } from "../../modules/auth/auth.service";
 
@@ -16,15 +14,6 @@ function HeaderBasic({ signout }) {
   const onClick = () => {
     setSearch(true);
   };
-
-  const onCLickContent = (event) => {
-    let body = {
-      event: loggingTags.fetch,
-      pageName: event,
-    };
-    actionsRequestContent(body);
-  };
-
 
   useEffect(async () => {
     const country = await AuthService.getGeoInfo();
@@ -46,34 +35,22 @@ function HeaderBasic({ signout }) {
           </div>
           <div className="col-6 col-sm-6 col-md-6 col-lg-6 d-none d-sm-block main_menu">
             <ul className="nav justify-content-center">
-              <li
-                className="nav-item topBarLive"
-                onClick={() => onCLickContent("live")}
-              >
+              <li className="nav-item topBarLive">
                 <Link href="/live" passHref={true} shallow={true}>
                   <a className="nav-link">Live</a>
                 </Link>
               </li>
-              <li
-                className="nav-item topBarMovies"
-                onClick={() => onCLickContent("movies")}
-              >
+              <li className="nav-item topBarMovies">
                 <Link href="/movies" passHref={true} shallow={true}>
                   <a className="nav-link">Movies</a>
                 </Link>
               </li>
-              <li
-                className="nav-item topBarShows"
-                onClick={() => onCLickContent("shows")}
-              >
+              <li className="nav-item topBarShows">
                 <Link href="/shows" passHref={true} shallow={true}>
                   <a className="nav-link">Shows</a>
                 </Link>
               </li>
-              <li
-                className="nav-item topBarShows"
-                onClick={() => onCLickContent("catchup")}
-              >
+              <li className="nav-item topBarShows">
                 <Link href="/catchup" passHref={true} shallow={true}>
                   <a className="nav-link">Catchup</a>
                 </Link>
@@ -92,7 +69,12 @@ function HeaderBasic({ signout }) {
               </li>
               {country && country == "PK" ? (
                 <li className="nav-item">
-                  <Link href="/game" passHref={true} shallow={true}>
+                  <Link
+                    href="/game"
+                    passHref={true}
+                    prefetch={false}
+                    shallow={true}
+                  >
                     <a>
                       <img
                         src={tapmadCoin}
@@ -139,11 +121,7 @@ function HeaderBasic({ signout }) {
                   </a>
                 </li>
               ) : (
-                <li
-                  id="loginAva1"
-                  className="nav-item"
-                  onClick={() => onCLickContent("sign-in")}
-                >
+                <li id="loginAva1" className="nav-item">
                   <Link href="/sign-in">
                     <a className="pull-right d-xs-none hov-green">Sign in</a>
                   </Link>

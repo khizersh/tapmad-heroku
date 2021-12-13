@@ -14,6 +14,9 @@ import {
   getAllowRegions,
   getEPLCardUser,
   UBLCard,
+  SignUpORSignInMobileOperatorTokenByPin,
+  initialPaymentTransactionNew,
+  clearTokens,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -23,17 +26,16 @@ async function setUserPin(pin, username) {
 
   try {
     const userId = Cookie.getCookies("userId");
-    console.log("userId: ", userId);
     let body = {
       Version: "V1",
       Language: "en",
       Platform: "Web",
       UserId: userId,
       UserPinCode: pin,
-      ProfileUserName: username
-    }
+      ProfileUserName: username,
+    };
     if (!username) {
-      delete body.ProfileUserName
+      delete body.ProfileUserName;
     }
 
     resp = await post(setUserPinCode, body);
@@ -69,10 +71,10 @@ async function setNewPin(pin, username) {
     Platform: "Web",
     UserId: userId,
     UserPinCode: pin,
-    ProfileUserName: username
-  }
+    ProfileUserName: username,
+  };
   if (!username) {
-    delete body.ProfileUserName
+    delete body.ProfileUserName;
   }
 
   let resp;
@@ -145,7 +147,6 @@ async function forgetPin(mobile, OperatorId) {
     MobileNo: mobile,
     OperatorId: OperatorId,
   };
-
   let resp;
   try {
     resp = await post(sendOTP, body);
@@ -203,7 +204,7 @@ async function creditCardOrder(body) {
 async function initialTransaction(body) {
   let resp;
   try {
-    resp = await post(initialPaymentTransaction, body);
+    resp = await post(initialPaymentTransactionNew, body);
   } catch (error) {
     resp = null;
   }
@@ -370,6 +371,27 @@ async function GetEPLCardUser(body) {
     return null;
   }
 }
+async function signInOrSignUpMobileOperatorByPin(body, ip) {
+  const resp = await post(SignUpORSignInMobileOperatorTokenByPin, body, ip);
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 async function getAllowRegionsList(body) {
   const data = await get(getAllowRegions);
 
@@ -410,15 +432,12 @@ function validateUser(data) {
 }
 
 async function loginUserFetchApi(body) {
-  let options = {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      "X-Forwarded-For": body.userIp ? body.userIp : "",
-    },
-  };
-  const resp = await post(SignUpORSignInMobileOperatorToken, body, body.userIp);
+  // SignUpORSignInMobileOperatorToken
+  const resp = await post(
+    SignUpORSignInMobileOperatorTokenByPin,
+    body,
+    body.userIp
+  );
 
   if (resp.data && resp.data.Response) {
     return resp.data;
@@ -433,17 +452,21 @@ async function signInOrSignUpMobileOperator(
   withMultiCredentials
 ) {
   let obj = { ...body, userIp: ip };
-  const resp = await post("/api/authentication", obj, ip, withMultiCredentials);
+  const resp = await post(
+    SignUpORSignInMobileOperatorTokenByPin,
+    obj,
+    ip,
+    withMultiCredentials
+  );
   const data = handleResponse(resp);
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);
   }
   return data;
 }
+
 async function clearUserToken(number) {
-  const response = await get(
-    `https://app.tapmad.com/api/ClearAllCache/T${number}`
-  );
+  const response = await get(clearTokens + number);
   return response;
 }
 async function getGeoInfo() {
@@ -473,6 +496,27 @@ const checkUser = async (num) => {
         if (data.data.User) {
           Cookie.setCookies("userId", data.data.User.UserId);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
+          if (data.data.User.IsPinSet) {
+            return { code: 34, message: "Set your pin!", data: data.data };
+          } else {
+            return { code: 0, message: "Go!", data: data.data };
+          }
+        }
+      }
+    } else {
+      return 0;
+    }
+  } catch (error) {}
+};
+const checkUserOld = async (num) => {
+  let body = { Language: "en", MobileNo: num };
+  try {
+    const data = await GetCardUser(body);
+    if (data) {
+      if (data.data) {
+        if (data.data.User) {
+          Cookie.setCookies("userId", data.data.User.UserId);
+          Cookie.setCookies("content-token", data.data.User.UserPassword);
           if (data.data.User.IsSubscribe) {
             if (data.data.User.IsPinSet) {
               return {
@@ -493,8 +537,9 @@ const checkUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) { }
+  } catch (error) {}
 };
+
 const checkEPLUser = async (num) => {
   let body = { Language: "en", MobileNo: num };
   try {
@@ -504,7 +549,6 @@ const checkEPLUser = async (num) => {
         if (data.data.User) {
           Cookie.setCookies("userId", data.data.User.UserId);
           Cookie.setCookies("content-token", data.data.User.UserPassword);
-          console.log("Epl ", data.data.User);
           if (data.data.User.EplSubscribe) {
             if (data.data.User.IsPinSet) {
               return {
@@ -525,8 +569,8 @@ const checkEPLUser = async (num) => {
     } else {
       return 0;
     }
-  } catch (error) { }
-}
+  } catch (error) {}
+};
 export const AuthService = {
   validateUser,
   setUserPin,
@@ -548,5 +592,6 @@ export const AuthService = {
   checkUser,
   clearUserToken,
   getAllowRegionsList,
-  checkEPLUser
+  checkEPLUser,
+  signInOrSignUpMobileOperatorByPin,
 };
