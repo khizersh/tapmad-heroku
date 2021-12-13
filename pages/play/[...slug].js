@@ -12,7 +12,7 @@ import {
   getSEOData,
   getSEODataForLiveChannel,
 } from "../../services/seo.service";
-import isGoogle from "./../../services/google-dns-lookup";
+// import isGoogle from "./../../services/google-dns-lookup";
 const Syno = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
