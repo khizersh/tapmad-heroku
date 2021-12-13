@@ -153,9 +153,11 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       // layout='fill'
                                       alt={"tapmad-" + mov.VideoName}
                                     />
+                                    {/* Crowns for Hompage to be done when backend adds to api  */}
                                     {checkForBoolean(mov.IsVideoChannel) ? (
                                       <div className="row">
                                         <div className="live_side">Live</div>
+
                                         <img
                                           className="col-3 offset-lg-9 offset-9 live_side2"
                                           src={mov.PackageImage}
@@ -165,7 +167,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     ) : checkForBoolean(
                                         mov.IsVideoFree
                                       ) ? null : (
-                                      <div className="live_side">Premim</div>
+                                      <div className="live_side">PRRREE</div>
                                     )}
                                   </div>
                                   <div className="tm-mv-items">
