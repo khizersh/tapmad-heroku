@@ -94,6 +94,8 @@ export async function getServerSideProps(context) {
   //   console.log(err);
   // }
 
+  ip = "39.44.217.70";
+
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
 
