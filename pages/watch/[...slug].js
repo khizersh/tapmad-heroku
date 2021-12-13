@@ -26,7 +26,7 @@ const watch = (props) => {
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
-console.log("props  in wathc: ",props);
+  console.log("props  in wathc: ", props);
 
   useEffect(() => {
     if (!props.allowUser) {
@@ -37,9 +37,9 @@ console.log("props  in wathc: ",props);
       }
     }
   }, [props.allowUser, url]);
-// checking token and packages for stream
+  // checking token and packages for stream
   useEffect(() => {
-    console.log("props in wathc :",props.data.responseCode);
+    console.log("props in wathc :", props.data.responseCode);
     if (props.data && props.data.responseCode === 401) {
       swal({
         text: props.data.message,
@@ -66,12 +66,12 @@ console.log("props  in wathc: ",props);
       }).then((res) => {
         router.push("/subscribe-to-epl?subspack=epl");
       });
-    }
-    else if (props.data && props.data.responseCode === 110) {
-      router.push(
-        { pathname: "/sign-up", query: { tab : props.data.Video.PaymentTabId , packageId : props.data.Video.PackageId  } },
-        "/sign-up"
-      );
+    } else if (props.data && props.data.responseCode === 110) {
+      router.push(`/sign-up?tab=${props.data.Video.PaymentTabId}&paymentId=${props.data.Video.PackageId}`);
+      // router.push(
+      //   { pathname: "/sign-up", query: { tab : props.data.Video.PaymentTabId , packageId : props.data.Video.PackageId  } },
+      //   "/sign-up"
+      // );
     }
   }, [url]);
 
@@ -80,11 +80,10 @@ console.log("props  in wathc: ",props);
       return false;
     } else if (props.data && props.data.responseCode == 401) {
       return false;
-    }
-    else if (props.data && props.data.responseCode == 110) {
+    } else if (props.data && props.data.responseCode == 110) {
       return false;
     } else {
-      return true
+      return true;
     }
   }
   return (
@@ -182,18 +181,16 @@ export async function getServerSideProps(context) {
           props: response(res.data, chanelDetail, false, seo),
         };
       } else if (res && res.responseCode == 401) {
-        // logging out 
+        // logging out
         return {
           props: response(res.data, chanelDetail, true, seo),
         };
-      }
-      else if (res && res.responseCode == 110) {
+      } else if (res && res.responseCode == 110) {
         // send to change package screen with auto package selected
         return {
           props: response(res.data, chanelDetail, true, seo),
         };
-      }
-      else {
+      } else {
         // authenticated
         return {
           props: response(res.data, chanelDetail, true, seo),
@@ -216,6 +213,6 @@ const response = (data, channel, allowUser, seo) => {
     channel,
     allowUser,
     schema: seo,
-    env: process.env.TAPENV
+    env: process.env.TAPENV,
   };
 };

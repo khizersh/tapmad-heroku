@@ -63,7 +63,7 @@ function SetUserPin({ login, ip }) {
     const resp = await AuthService.setUserPin(pin, username);
     if (resp.responseCode == 1) {
       await AuthService.clearUserToken(SignUpState.UserDetails.MobileNo);
-      Cookie.setCookies("userPin", pin);
+      Cookie.setCookies("UserPin", pin);
       dispatch({ type: UPDATE_USER_DETAILS, data: { UserPin: pin } });
       Cookie.setCookies("isAuth", 1);
       swal({
