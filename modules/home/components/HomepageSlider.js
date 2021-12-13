@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
 import {
   basicSliderConfig,
+  checkForBoolean,
   setUrlAccordingToVideoType,
   viewMoreCleanUrls,
 } from "../../../services/utils";
@@ -152,18 +153,20 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       // layout='fill'
                                       alt={"tapmad-" + mov.VideoName}
                                     />
-
-                                    {mov.IsVideoFree ? (
-                                      mov.IsVideoChannel == true ||
-                                      mov.IsVideoChannel == "1" ? (
+                                    {checkForBoolean(mov.IsVideoChannel) ? (
+                                      <div className="row">
                                         <div className="live_side">Live</div>
-                                      ) : null
-                                    ) : (
-                                      <div className="live_side">Premium</div>
+                                        <img
+                                          className="col-3 offset-lg-9 offset-9 live_side2"
+                                          src={mov.PackageImage}
+                                          width={40}
+                                        />
+                                      </div>
+                                    ) : checkForBoolean(
+                                        mov.IsVideoFree
+                                      ) ? null : (
+                                      <div className="live_side">Premim</div>
                                     )}
-                                    <div className={mov.IsVideoFree ? "" : ""}>
-                                      <img src={mov.PackageImage} width={20} />
-                                    </div>
                                   </div>
                                   <div className="tm-mv-items">
                                     <div className="tm-mv-name">
@@ -185,7 +188,6 @@ const HomepageSlider = ({ movies, ads, name }) => {
                       : movieSection &&
                         movieSection.Categories &&
                         movieSection.Categories.map((mov, index) => {
-                          console.log(mov.PackageImage);
                           let slug = setUrlAccordingToVideoType(
                             mov,
                             IsCategory

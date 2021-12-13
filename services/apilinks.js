@@ -39,7 +39,7 @@ export const getNewsDetailBId =
   BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/android/";
 
 export const getShowsWithPagination =
-  BASEURL + "api/getShowsWithPagination/0/5/0/16";
+  BASEURLDEVELOPMENT + "api/getShowsWithPagination/0/5/0/16";
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
   BASEURLDEVELOPMENT + "api/getUserStreamWithPackages";
@@ -60,7 +60,9 @@ export const getSeasonVodByCategoryId =
 export const unsubscribePaymentTransaction =
   BASEURLDEVELOPMENT + "api/unsubscribeUserSubscriptiption";
 export const getMoviesWithPagination = (from, to) => {
-  return BASEURL + `api/getMoviesWithPagination/${from}/${to - from}/0/16`;
+  return (
+    BASEURLDEVELOPMENT + `api/getMoviesWithPagination/${from}/${to - from}/0/16`
+  );
 };
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `${BASEURL}api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
@@ -75,7 +77,7 @@ export const getChannelsWithPagination = (from, to) => {
   );
 };
 export const getMoviesWithPaginationInitial =
-  BASEURL + "api/getMoviesWithPagination/0/5/0/16";
+  BASEURLDEVELOPMENT + "api/getMoviesWithPagination/0/5/0/16";
 export const getChannelWithPaginationInitial =
   BASEURLDEVELOPMENT + "api/getChannelWithPagination/0/5/0/16";
 

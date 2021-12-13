@@ -57,6 +57,7 @@ export default function LiveChannels({ channel }) {
     <div>
       <Slider {...bannerSettings}>
         {channel.Banner.map((e, index) => {
+          console.log(e, "Banner");
           return (
             <Link
               href={e.BannerURL ? e.BannerURL : "/live"}
@@ -65,7 +66,7 @@ export default function LiveChannels({ channel }) {
             >
               <a>
                 <img
-                  src={e.WebBannerImage}
+                  src={e.TabPosterPath}
                   style={{ width: "100%" }}
                   alt="Banner"
                 />

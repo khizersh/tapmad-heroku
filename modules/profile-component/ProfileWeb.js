@@ -112,7 +112,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
           <div>
             <h4>My Profile</h4>
           </div>
-          <div class="ml-3">
+          {/* <div class="ml-3">
             <Link href="/editprofile">
               <button
                 type="button"
@@ -121,7 +121,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
                 Edit Profile
               </button>
             </Link>
-          </div>
+          </div> */}
         </div>
         <div class="row mt-4">
           <div class="col-2 px-0">
