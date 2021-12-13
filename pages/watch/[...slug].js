@@ -20,15 +20,16 @@ import {
   getSEODataForLiveChannel,
 } from "../../services/seo.service";
 import isGoogle from "../../services/google-dns-lookup";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 const watch = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
+  const { SignUpState  } = useContext(SignUpContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
-  console.log("props  in wathc: ", props);
 
-
+  console.log("SignUpState watch : ",props);
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
