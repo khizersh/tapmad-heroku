@@ -57,20 +57,20 @@ export default function Movies({ movies }) {
         {movies.Banner &&
           movies.Banner.map((e, index) => {
             return (
-              <Link
-                href={e.BannerURL ? e.BannerURL : "/movies"}
-                key={index}
-                passHref
-              >
-                <a>
-                  <img
-                    src={e.TabPosterPath}
-                    style={{ width: "100%" }}
-                    className="banner-main"
-                    alt="Banner"
-                  />
-                </a>
-              </Link>
+              // <Link
+              //   href={e.BannerURL ? e.BannerURL : "/movies"}
+              //   key={index}
+              //   passHref
+              // >
+              <a>
+                <img
+                  src={e.TabPosterPath}
+                  style={{ width: "100%" }}
+                  className="banner-main"
+                  alt="Banner"
+                />
+              </a>
+              //</Link>
             );
           })}
       </Slider>{" "}

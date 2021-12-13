@@ -59,19 +59,19 @@ export default function LiveChannels({ channel }) {
         {channel.Banner.map((e, index) => {
           console.log(e, "Banner");
           return (
-            <Link
-              href={e.BannerURL ? e.BannerURL : "/live"}
-              key={index}
-              passHref
-            >
-              <a>
-                <img
-                  src={e.TabPosterPath}
-                  style={{ width: "100%" }}
-                  alt="Banner"
-                />
-              </a>
-            </Link>
+            // <Link
+            //   href={e.BannerURL ? e.BannerURL : "/live"}
+            //   key={index}
+            //   passHref
+            // >
+            <a>
+              <img
+                src={e.TabPosterPath}
+                style={{ height: "50%", width: "100vw", position: "relative" }}
+                alt="Banner"
+              />
+            </a>
+            // </Link>
           );
         })}
       </Slider>

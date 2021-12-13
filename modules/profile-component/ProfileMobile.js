@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {useRouter} from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import {
   awardIcon,
   gamingIcon,
@@ -26,7 +26,7 @@ const MyAccountMobile = ({ profileData, allData }) => {
       setShow({ ...show, [key]: true });
     }
   };
-  const router = useRouter()
+  const router = useRouter();
 
   const clickEditProfile = () => {
     router.push("/change-package");
@@ -35,7 +35,7 @@ const MyAccountMobile = ({ profileData, allData }) => {
   return (
     <div className="p-4 d-sm-none">
       <div className="row">
-        <div className="col-4">
+        <div className="col-4 px-1">
           <img src={userIcon} width="100" alt="User" />
         </div>
         <div className="col-4 pt-3">
@@ -91,7 +91,7 @@ const MyAccountMobile = ({ profileData, allData }) => {
           <div className="row border border-style rounded text-center">
             <div className="col-8 p-0">
               <div className="std_txt mt-1">
-                {profileData && profileData.Package}
+                {allData && allData.PackageDescription[0].PackageName}
               </div>
               <div className="sub-title text-grey">Per month</div>
             </div>

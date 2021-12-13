@@ -12,7 +12,7 @@ import {
   getSEOData,
   getSEODataForLiveChannel,
 } from "../../services/seo.service";
-
+// import isGoogle from "./../../services/google-dns-lookup";
 const Syno = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
@@ -85,14 +85,16 @@ export default Syno;
 export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel } = manipulateUrls(context.query);
   var ip = requestIp.getClientIp(context.req);
-  try {
-    const isGoogleDNS = await isGoogle(ip);
-    if (isGoogleDNS == true) {
-      ip = "39.44.217.70";
-    }
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   const isGoogleDNS = await isGoogle(ip);
+  //   if (isGoogleDNS == true) {
+  //     ip = "39.44.217.70";
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  // }
+
+  ip = "39.44.217.70";
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);

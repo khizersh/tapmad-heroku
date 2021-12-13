@@ -9,6 +9,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
   const [slug, setSlug] = useState(null);
   const router = useRouter();
   useEffect(() => {
+    console.log(router)
     verifyURL(router, videoList[0].SectionName, video.VideoName);
     if (
       videoList.length > 0 &&
@@ -25,8 +26,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
       setSlug(slugPlay);
       ContentViewed(video);
     }
-  }, [video]);
-
+  }, [video, router]);
   return (
     <>
       <div className="row">
@@ -85,12 +85,12 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
       <div className="row mt-3">
         {videoList && videoList.length > 0 && videoList[0].Videos
           ? videoList[0].Videos.map((vid, i) => {
-              let type = "";
-              if (!vid.IsVideoFree) {
-                type = vid.PackageName ? vid.PackageName : "";
-              }
-              return <Card key={i} video={vid} type={type} />;
-            })
+            let type = "";
+            if (!vid.IsVideoFree) {
+              type = vid.PackageName ? vid.PackageName : "";
+            }
+            return <Card key={i} video={vid} type={type} />;
+          })
           : null}
       </div>
     </>

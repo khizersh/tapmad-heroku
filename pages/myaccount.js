@@ -8,6 +8,7 @@ import MyAccountWeb from "../modules/profile-component/ProfileWeb";
 import { ProfileContext } from "../contexts/profile/ProfileContext";
 import { PROFILE_DATA } from "../contexts/profile/ProfileReducer";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
+import withSignout from "../modules/auth/signout/SignoutHOC";
 
 const MyAccountTrial = ({ signout }) => {
   const router = useRouter();
@@ -72,6 +73,7 @@ const MyAccountTrial = ({ signout }) => {
       } else {
         return (
           <MyAccountWeb
+            signout={signout}
             profileData={profileData}
             allData={allData}
             userId={postFormData.UserId}
@@ -120,7 +122,7 @@ const MyAccountTrial = ({ signout }) => {
     </div>
   );
 };
-export default MyAccountTrial;
+export default withSignout(MyAccountTrial);
 
 export function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);

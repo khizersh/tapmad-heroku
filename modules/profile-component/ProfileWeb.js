@@ -22,9 +22,8 @@ import swal from "sweetalert";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
-import { SignOut } from "../../services/gtm";
 
-const MyAccountWeb = ({ profileData, allData, userId }) => {
+const MyAccountWeb = ({ profileData, allData, userId, signout }) => {
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
@@ -69,8 +68,7 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
               });
               setdeactivated(true);
               setLoader(false);
-              SignOut();
-              console.log("HEEE");
+              signout();
               router.push("/sign-up");
             } else if (res.responseCode == 5) {
               swal({
@@ -102,7 +100,6 @@ const MyAccountWeb = ({ profileData, allData, userId }) => {
     };
   };
   const onClickBuy = () => {
-    console.log(updateBuyModal);
     updateBuyModal(true);
   };
   return (

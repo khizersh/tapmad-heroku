@@ -224,10 +224,10 @@ export default function SubscribeButton({ creditCardType }) {
   }
 
   useEffect(() => {
-  if(window.innerWidth < 799){
-    setIsMobile(true)
-  }
-  }, [])
+    if (window.innerWidth < 799) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
     <>
       <div className="w-100">
@@ -245,7 +245,9 @@ export default function SubscribeButton({ creditCardType }) {
           </label>
         </div>
       </div>
-      <div className={`w-100  ${isMobile ? "" : "d-flex justify-content-around" }`}>
+      <div
+        className={`w-100  ${isMobile ? "" : "d-flex justify-content-around"}`}
+      >
         <button
           className={`btn subscribe-btn bg-green ${
             checkbox ? "visible" : "opacity-0"
@@ -254,10 +256,10 @@ export default function SubscribeButton({ creditCardType }) {
         >
           Subscribe Now
         </button>
-       
-        <a className="text-red mt-4 d-block">
+
+        {/* <a className="text-red mt-4 d-block">
           <u>Upgrade Plan</u>{" "}
-        </a>
+        </a> */}
       </div>
     </>
   );
