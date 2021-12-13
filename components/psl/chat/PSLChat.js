@@ -25,7 +25,7 @@ export default function PSLChat({ channel }) {
   const router = useRouter();
   const [chatRoom, setChatRooms] = useState([]);
   const [chats, setChats] = useState({});
-  const [database , setDatabase] = useState(null)
+  const [database, setDatabase] = useState(null)
   const [room, setRoom] = useState(1);
   const textMessage = useRef();
   const [modalShow, setModalShow] = useState(false);
