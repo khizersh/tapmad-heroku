@@ -167,7 +167,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     ) : checkForBoolean(
                                         mov.IsVideoFree
                                       ) ? null : (
-                                      <div className="live_side">PRRREE</div>
+                                      <div className="live_side">Premium</div>
                                     )}
                                   </div>
                                   <div className="tm-mv-items">
