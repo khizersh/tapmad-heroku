@@ -12,7 +12,7 @@ import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 function PaymentInfo({ loggedIn }) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
-
+  console.log(SignUpState, "SIGN");
   const onChangeNetwork = useCallback((data) => {
     updateUserData({ Operator: data.OperatorId });
   }, []);
@@ -75,9 +75,7 @@ function PaymentInfo({ loggedIn }) {
     }
   }, [SignUpState.SelectedMethod]);
 
-  const operators = useMemo(
-    () => SignUpState.SelectedMethod.SimOperators || []
-  );
+  const operators = useMemo(() => SignUpState.LoginOperator || []);
 
   function handleCnic(e) {
     const cnic = e.target.value;

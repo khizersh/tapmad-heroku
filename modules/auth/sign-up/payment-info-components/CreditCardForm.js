@@ -16,6 +16,7 @@ const CreditCardForm = ({
   const [num, setNum] = React.useState("");
 
   useEffect(() => {
+    console.log(data, "DAATAA");
     if (creditCardType) {
       new Checkout("pk_4efbb3d2-00b9-4860-95bf-329b4801644d");
     }
