@@ -90,7 +90,7 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
       event.IsVideoFree ? "1" : "0"
     }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   } else {
-    slug = `${catchup ? "/catchup-watch" : "/play"}/${cleanName}/${
+    slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
       event.IsVideoFree ? "1" : "0"
     }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   }
@@ -262,12 +262,15 @@ function getUserDetails() {
     return { mobile: "", userId: "" };
   }
 }
+<<<<<<< HEAD
 function checkForBoolean(param) {
   if (param === 1 || param === true || param === "1" || param === "true") {
     return true;
   }
   return false;
 }
+=======
+>>>>>>> main
 function SignOutUser() {}
 function addScriptUrlInDom(src) {
   var script = document.createElement("script");
@@ -309,5 +312,8 @@ module.exports = {
   findImageInVODObject,
   log,
   verifyURL,
+<<<<<<< HEAD
   checkForBoolean,
+=======
+>>>>>>> main
 };
