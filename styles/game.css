@@ -33,6 +33,17 @@ a:focus {
   overflow: hidden !important;
 }
 
+/* new layout for psl 2021 */
+.game-header{
+  background-image: url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1639476907web-games-banner.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+  /* end new layout for psl 2021 */
+
+  
 .list-group li {
   list-style-type: none;
 }
