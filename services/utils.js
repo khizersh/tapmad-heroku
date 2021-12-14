@@ -59,18 +59,20 @@ function basicSliderConfig(slidesToShow, mobileView) {
 }
 function verifyURL(url, sectionName, vodName) {
   if (sectionName) {
-    var convertedSectionName = sectionName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    var convertedSectionName = sectionName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-");
   }
   if (vodName) {
     var convertedVodName = vodName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   }
-  var cleanURLName = url.asPath.split('/', 3)[2];
+  var cleanURLName = url.asPath.split("/", 3)[2];
   if (convertedSectionName == cleanURLName) {
     return true;
   } else if (convertedVodName == cleanURLName) {
     return true;
   } else {
-    url.push('../404');
+    url.push("../404");
   }
 }
 function SEOFriendlySlugsForVideo(event, catchup = false) {
@@ -81,13 +83,15 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
     vidChannel = 1;
   }
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = ""
+  let slug = "";
   if (event.IsVideoFree) {
-    slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
-      }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+    slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
+      event.IsVideoFree ? "1" : "0"
+    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   } else {
-    slug = `${catchup ? "/catchup-watch" : "/play"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
-      }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+    slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
+      event.IsVideoFree ? "1" : "0"
+    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   }
   return slug;
 }
@@ -95,16 +99,18 @@ function SEOFriendlySlugsForVideo(event, catchup = false) {
 function SEOFriendlySlugsForWatch(event, catchup = false) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${event.IsVideoFree ? "1" : "0"
-    }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `${catchup ? "/catchup-watch" : "/watch"}/${cleanName}/${
+    event.IsVideoFree ? "1" : "0"
+  }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   return slug;
 }
 
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
-    }`;
+  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+    event.IsVideoChannel ? "1" : "0"
+  }`;
   return slug;
 }
 function viewMoreCleanUrls(sectionName, sectionId, name) {
@@ -122,14 +128,13 @@ function viewMoreCleanUrls(sectionName, sectionId, name) {
 }
 
 function findImageInVODObject(video) {
-
-  if (video.hasOwnProperty('VideoImageThumbnail')) {
+  if (video.hasOwnProperty("VideoImageThumbnail")) {
     return video.VideoImageThumbnail;
-  } else if (video.hasOwnProperty('ChannelTVImage')) {
+  } else if (video.hasOwnProperty("ChannelTVImage")) {
     return video.ChannelTVImage;
-  } else if (video.hasOwnProperty('NewChannelThumbnailPath')) {
+  } else if (video.hasOwnProperty("NewChannelThumbnailPath")) {
     return video.NewChannelThumbnailPath;
-  } else if (video.hasOwnProperty('VideoOnDemandThumb')) {
+  } else if (video.hasOwnProperty("VideoOnDemandThumb")) {
     return video.VideoOnDemandThumb;
   } else {
     return video.NewChannelThumbnailPath;
@@ -160,16 +165,18 @@ function setUrlAccordingToVideoType(movie, type) {
 // catchup
 function SEOFriendlySlugsForCatchupVideo(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
-    }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
 
 function SEOFriendlySlugsForCatchup(event) {
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${event.VideoEntityId
-    }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = `/catchup/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
 
   return slug;
 }
@@ -199,7 +206,12 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
 }
 
 function setUrlToCookies(key, url) {
-  if (!url.includes("/sign-up") && url != "/sign-in" && url != "/myaccount" && url != "/subscribe-to-epl?subspack=epl") {
+  if (
+    !url.includes("/sign-up") &&
+    url != "/sign-in" &&
+    url != "/myaccount" &&
+    url != "/subscribe-to-epl?subspack=epl"
+  ) {
     Cookie.setCookies("backUrl", url);
   }
 }
@@ -207,7 +219,7 @@ function setUrlToCookies(key, url) {
 function isAuthentictedUser() {
   let userId = Cookie.getCookies("userId");
   let isAuth = Cookie.getCookies("isAuth");
-  if ((userId != undefined || userId != 'undefined') && isAuth == 1) {
+  if ((userId != undefined || userId != "undefined") && isAuth == 1) {
     return true;
   } else {
     return false;
@@ -243,7 +255,7 @@ function getUserDetails() {
     return { mobile: "", userId: "" };
   }
 }
-function SignOutUser() { }
+function SignOutUser() {}
 function addScriptUrlInDom(src) {
   var script = document.createElement("script");
   script.type = "text/javascript";
@@ -283,5 +295,5 @@ module.exports = {
   viewMoreCleanUrls,
   findImageInVODObject,
   log,
-  verifyURL
+  verifyURL,
 };
