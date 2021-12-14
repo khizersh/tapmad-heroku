@@ -38,11 +38,11 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
         ""
       )}
 
-      <div class="readOnly-group mt-3">
-        <div class="readOnly-group-prepend">
+      <div class="input-group mt-3">
+        <div class="input-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
-        <readOnly
+        <input
           type="text"
           maxLength="20"
           minLength="5"

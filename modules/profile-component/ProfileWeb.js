@@ -23,7 +23,7 @@ import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
 
-const MyAccountWeb = ({ profileData, allData, userId, signout }) => {
+const MyAccountWeb = ({ profileData, allData,  unSubscribe}) => {
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
@@ -49,57 +49,8 @@ const MyAccountWeb = ({ profileData, allData, userId, signout }) => {
       setPrice(allData.PackageDescription[0].PackagePrice);
     }
   }, [allData]);
-  const unSubscribe = () => {
-    swal({
-      title: "Are you sure?",
-      text: "You want to unsubscribe",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        MyAccountService.unsubcribeUser(body)
-          .then((res) => {
-            if (res.responseCode == 1) {
-              swal({
-                title: res.message,
-                timer: 2500,
-                icon: "success",
-              });
-              signout();
-           
-              setdeactivated(true);
-              setLoader(false);
-              router.push("/sign-up");
-            } else if (res.responseCode == 5) {
-              swal({
-                title: res.message,
-                timer: 2500,
-                icon: "warning",
-              });
-              setLoader(false);
-            } else {
-              swal({
-                title: res.message,
-                timer: 2500,
-                icon: "error",
-              });
-              setLoader(false);
-            }
-          })
-          .catch((e) => {
-            setLoader(false);
-          });
-      }
-    });
-    let body = {
-      Language: "en",
-      Platform: "android",
-      ProductId: allData.PackageDescription[0].PackageProductId,
-      UserId: userId,
-      Version: "V1",
-    };
-  };
+
+ 
   const onClickBuy = () => {
     updateBuyModal(true);
   };
