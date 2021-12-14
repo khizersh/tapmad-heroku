@@ -36,7 +36,13 @@ export default function withSignout(Component, data) {
                     SignOut();
                     Cookie.setCookies("isAuth", 0);
                     setisAuthenticateFalse();
-                    router.push("/");
+                    console.log("window.sendToSignUp : ",window.sendToSignUp);
+                    if(window.sendToSignUp){
+                        window.sendToSignUp = false
+                        router.push("/sign-up");
+                    }else{
+                        router.push("/");
+                    }
                     setLoader(false);
                 });
             } else {

@@ -32,8 +32,6 @@ export default function withLogin(Component, data) {
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);
-        console.log("status 401 : ",status);
-
         setLoader(false);
         if (status.code == 1) {
           swal({
@@ -50,7 +48,9 @@ export default function withLogin(Component, data) {
           }
         } else if (status.code == 34) {
           dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
-        } else if (status.code == 31) {
+        } 
+      
+        else if (status.code == 31) {
           swal({
             timer: 2000,
             title: "Please enter valid PIN!",
@@ -66,9 +66,9 @@ export default function withLogin(Component, data) {
             dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
           });
         }
-        else if (status.code == 0) {
+        else if (status.code == 0 || status.code == 4) {
           swal({
-            title: "You are not subscribed user. please subscribe!",
+            title: "You are not subscribe user please subscribe yourself",
             timer: 2500,
             icon: "warning",
           }).then(() => {

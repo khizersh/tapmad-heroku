@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import DropdownWithImage from "../DropdownWithImage";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
 const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
   const [num, setNum] = React.useState("");
+  const [readOnly, setReadOnly] = React.useState(false);
+
+  const { SignUpState } = useContext(SignUpContext);
 
   const onChange = (e) => {
     const mobileNum = e.target.value;

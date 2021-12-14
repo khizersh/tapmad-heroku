@@ -12,7 +12,6 @@ export async function getAllPaymentPackagesByUserId(userID) {
 }
 
 export function setLoginViews(response, obj) {
-  console.log("response : ",response);
   if (response?.responseCode == 11) {
     if (
       response.data.UserActiveSubscription &&
@@ -34,6 +33,9 @@ export function setLoginViews(response, obj) {
       return { code: 0, view: "sign-up" };
     }
   } else {
+    if (response.responseCode == 4) {
+      return { code: 4, view: "sign-up" };
+    }
     if (response.responseCode == 31) {
       return { code: 31, view: "sign-in" };
     }

@@ -34,7 +34,7 @@ const promoCode = () => {
     let num = e.target.value;
     if (+num === +num) {
       setNumber(num);
-      // dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
+      dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
     }
   };
 

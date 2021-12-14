@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useReducer } from "react";
+import { Cookie } from "../../services/cookies";
 import { AuthContext } from "./AuthContext";
-import { SignUpReducer, UPDATE_ISMOBILE, UPDATE_PACKAGE } from "./SignUpReducer";
+import {
+  SignUpReducer,
+  UPDATE_ISMOBILE,
+  UPDATE_PACKAGE,
+  UPDATE_USER_DETAILS,
+} from "./SignUpReducer";
 
 export const SignUpContext = React.createContext(null);
 
@@ -15,7 +21,7 @@ export default function SignUpProvider({ children }) {
     subscribeResponseCode: null,
     newUser: false,
     isMobile: false,
-    signupRender : false
+    signupRender: false,
   });
 
   // useEffect(() => {
@@ -30,6 +36,10 @@ export default function SignUpProvider({ children }) {
     }
     if (window.innerWidth < 799) {
       dispatch({ type: UPDATE_ISMOBILE, data: true });
+    }
+    const num = Cookie.getCookies("user_mob");
+    if (num) {
+      dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
     }
   }, [AuthState]);
 

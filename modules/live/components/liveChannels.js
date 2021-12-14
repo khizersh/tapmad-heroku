@@ -57,7 +57,6 @@ export default function LiveChannels({ channel }) {
     <div>
       <Slider {...bannerSettings}>
         {channel.Banner.map((e, index) => {
-          console.log(e, "Banner");
           return (
             // <Link
             //   href={e.BannerURL ? e.BannerURL : "/live"}
