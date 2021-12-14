@@ -88,7 +88,7 @@ const MyAccountTrial = ({ signout }) => {
       if (willDelete) {
         MyAccountService.unsubcribeUser(body)
           .then((res) => {
-            setLoader(false)
+  
             if (res.responseCode == 1) {
               window.sendToSignUp =  true
               swal({

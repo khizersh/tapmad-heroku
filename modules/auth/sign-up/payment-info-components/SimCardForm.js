@@ -15,7 +15,6 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       onChangeNumber(e);
     }
   };
-  console.log("SignUpState :dddd ",SignUpState);
 
   return (
     <>

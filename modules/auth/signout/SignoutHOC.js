@@ -16,7 +16,6 @@ export default function withSignout(Component, data) {
         const router = useRouter();
 
         const onSignOut = async () => {
-      
             setLoader(true);
             let data = {
                 UserId: Cookie.getCookies("userId"),
@@ -38,10 +37,12 @@ export default function withSignout(Component, data) {
                     Cookie.setCookies("isAuth", 0);
                     setisAuthenticateFalse();
                     console.log("window.sendToSignUp : ",window.sendToSignUp);
-                    if(!window.sendToSignUp){
+                    if(window.sendToSignUp){
+                        window.sendToSignUp = false
+                        router.push("/sign-up");
+                    }else{
                         router.push("/");
                     }
-                    window.sendToSignUp = false
                     setLoader(false);
                 });
             } else {

@@ -40,11 +40,11 @@ const promoCode = () => {
 
   const onChangeNetwork = useCallback((data) => {
     setOperator(data.OperatorId);
-    updateSelectedOperator(data);
-    dispatch({
-      type: UPDATE_USER_DETAILS,
-      data: { Operator: data.OperatorId },
-    });
+    // updateSelectedOperator(data);
+    // dispatch({
+    //   type: UPDATE_USER_DETAILS,
+    //   data: { Operator: data.OperatorId },
+    // });
   }, []);
 
   const onChangePromo = (e) => {
