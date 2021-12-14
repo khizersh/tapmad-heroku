@@ -48,7 +48,6 @@ const leaderboardComponent = () => {
   const onReadMore = () => {
     setLoader(true);
     let clone = leaderBoard;
-
     getLeaderBoardByLeague(
       gameState.selectedTab.LeagueId,
       gameState.selectedTab.offset + limit
@@ -139,9 +138,9 @@ const leaderboardComponent = () => {
         <div className="col-12 mt-2">
        {/* commented old code paste here */}
           <table
-            className={`table table-striped table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
+            className={`table  table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
           >
-            <thead className="thead-light text-center">
+            <thead className="bg-grey text-center">
               <tr>
                 <th scope="col">Rank</th>
                 <th scope="col">Name</th>
