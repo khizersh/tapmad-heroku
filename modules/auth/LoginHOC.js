@@ -32,8 +32,6 @@ export default function withLogin(Component, data) {
       const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
       try {
         const status = setLoginViews(response, obj);
-        console.log("status 401 : ",status);
-
         setLoader(false);
         if (status.code == 1) {
           swal({

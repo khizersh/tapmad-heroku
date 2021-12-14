@@ -23,7 +23,6 @@ export default memo(function Register(props) {
   const { code, number, payment, operator, tab, packageId } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
-  console.log("SignUpState : ",SignUpState);
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;

@@ -33,6 +33,7 @@ export default function withSignout(Component, data) {
                     icon: "success",
                     buttons: false,
                 }).then((res) => {
+                    console.log("route to sign-up : ",window.location.href);
                     SignOut();
                     Cookie.setCookies("isAuth", 0);
                     setisAuthenticateFalse();

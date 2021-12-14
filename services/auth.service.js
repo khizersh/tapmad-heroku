@@ -12,7 +12,6 @@ export async function getAllPaymentPackagesByUserId(userID) {
 }
 
 export function setLoginViews(response, obj) {
-  console.log("response : ",response);
   if (response?.responseCode == 11) {
     if (
       response.data.UserActiveSubscription &&

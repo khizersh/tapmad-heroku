@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import DropdownWithImage from "../DropdownWithImage";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
 const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
   const [num, setNum] = React.useState("");
+  const [readOnly, setReadOnly] = React.useState(false);
+
+  const { SignUpState } = useContext(SignUpContext);
 
   const onChange = (e) => {
     const mobileNum = e.target.value;
@@ -11,6 +15,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
       onChangeNumber(e);
     }
   };
+  console.log("SignUpState :dddd ",SignUpState);
 
   return (
     <>
@@ -33,11 +38,11 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
         ""
       )}
 
-      <div class="input-group mt-3">
-        <div class="input-group-prepend">
+      <div class="readOnly-group mt-3">
+        <div class="readOnly-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
-        <input
+        <readOnly
           type="text"
           maxLength="20"
           minLength="5"
