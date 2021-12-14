@@ -77,7 +77,7 @@ const MyAccountTrial = ({ signout }) => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      setLoader(true)
+      setLoader(true);
       let body = {
         Language: "en",
         Platform: "android",
@@ -88,9 +88,8 @@ const MyAccountTrial = ({ signout }) => {
       if (willDelete) {
         MyAccountService.unsubcribeUser(body)
           .then((res) => {
-  
             if (res.responseCode == 1) {
-              window.sendToSignUp =  true
+              window.sendToSignUp = true;
               swal({
                 title: res.message,
                 timer: 2500,
@@ -99,7 +98,6 @@ const MyAccountTrial = ({ signout }) => {
               signout();
               setdeactivated(true);
               setLoader(false);
-              router.push("/sign-up");
             } else if (res.responseCode == 5) {
               swal({
                 title: res.message,
@@ -120,15 +118,20 @@ const MyAccountTrial = ({ signout }) => {
             setLoader(false);
           });
       }
-      setLoader(false)
+      setLoader(false);
     });
-  
   };
 
   const RenderViews = useCallback(
     function () {
       if (isMobile) {
-        return <MyAccountMobile profileData={profileData} allData={allData}  unSubscribe={unSubscribe}/>;
+        return (
+          <MyAccountMobile
+            profileData={profileData}
+            allData={allData}
+            unSubscribe={unSubscribe}
+          />
+        );
       } else {
         return (
           <MyAccountWeb
