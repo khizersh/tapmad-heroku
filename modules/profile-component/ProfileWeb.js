@@ -22,23 +22,26 @@ import swal from "sweetalert";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
+import TabsWithIcon from "../../components/TabsWithIcon";
 
 const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
+  const [selected, setSelected] = useState(null);
   const router = useRouter();
   const [imageState, setImageState] = useState({
     pacakge: true,
     game: false,
   });
   const { dispatch, AuthState } = useContext(AuthContext);
-  const onSwitchImage = () => {
-    if (imageState.pacakge == true) {
-      setImageState({ pacakge: false, game: true });
-    } else {
-      setImageState({ pacakge: true, game: false });
-    }
+  const onSwitchImage = (data) => {
+    // if (imageState.pacakge == true) {
+    //   setImageState({ pacakge: false, game: true });
+    // } else {
+    //   setImageState({ pacakge: true, game: false });
+    // }
+    setSelected(data)
   };
   const onClickUpgradePackage = async () => {
     await dispatch({ type: UPDATE_PACKAGE, data: true });
@@ -48,7 +51,25 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
     if (allData) {
       setPrice(allData.PackageDescription[0].PackagePrice);
     }
+    setSelected({
+      title: "My Package",
+      selectedIcon: colorPackage,
+      icon: blackPackage,
+    });
   }, [allData]);
+
+  const data = [
+    {
+      title: "My Package",
+      selectedIcon: colorPackage,
+      icon: blackPackage,
+    },
+    {
+      title: "My Games",
+      selectedIcon: colorGaming,
+      icon: blackGaming,
+    },
+  ];
 
   const onClickBuy = () => {
     updateBuyModal(true);
@@ -139,32 +160,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
           </div>
         </div>
         <div className="col-6">
-          <div class="container-sm rounded-pill row option_div p-3">
-            <div className="m-auto cursor-pointer" onClick={onSwitchImage}>
-              <span style={{ color: imageState.pacakge ? "#87c242 " : "#000" }}>
-                <img
-                  src={imageState.pacakge ? colorPackage : blackPackage}
-                  width="35"
-                  alt="User"
-                  className="pr-3 logo-img"
-                />
-                <strong>My Package</strong>
-              </span>
-              {imageState.pacakge ? <div class="green-bar"></div> : null}
-            </div>
-            <div className="m-auto cursor-pointer" onClick={onSwitchImage}>
-              <span style={{ color: imageState.game ? "#87c242 " : "#000" }}>
-                <img
-                  src={imageState.game ? colorGaming : blackGaming}
-                  width="40"
-                  alt="User"
-                  className="pr-3 logo-img"
-                />
-                <strong>My Games</strong>
-              </span>
-              {imageState.game ? <div class="green-bar"></div> : null}
-            </div>
-          </div>
+          <TabsWithIcon data={data} onChange={onSwitchImage} selected={selected}/>
         </div>
         <div className="col-3 pl-0">
           <div className="mt-2 pt-1">
@@ -176,7 +172,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
         <div className="col-12">
           <div class="package_div">
             <div class="container-fluid col-8 cont_style rounded">
-              <div style={{ display: imageState.pacakge ? "block" : "none" }}>
+              <div style={{ display: selected && selected.title === "My Package" ? "block" : "none" }}>
                 <div className="row px-5 pt-3">
                   <div className="col-6">
                     <span className="font-32 package_style">
@@ -272,7 +268,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                   </div>
                 </div>
               </div>
-              <div style={{ display: imageState.game ? "block" : "none" }}>
+              <div style={{ display:  selected && selected.title === "My Games" ? "block" : "none" }}>
                 <h4 style={{ color: "#37C673" }} className="py-2">
                   My Games
                 </h4>
