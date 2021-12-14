@@ -262,15 +262,12 @@ function getUserDetails() {
     return { mobile: "", userId: "" };
   }
 }
-<<<<<<< HEAD
 function checkForBoolean(param) {
   if (param === 1 || param === true || param === "1" || param === "true") {
     return true;
   }
   return false;
 }
-=======
->>>>>>> main
 function SignOutUser() {}
 function addScriptUrlInDom(src) {
   var script = document.createElement("script");
@@ -312,8 +309,5 @@ module.exports = {
   findImageInVODObject,
   log,
   verifyURL,
-<<<<<<< HEAD
   checkForBoolean,
-=======
->>>>>>> main
 };
