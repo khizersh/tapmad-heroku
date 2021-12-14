@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Checkout from "../../../../public/static/js/checkout";
+import { Cookie } from "../../../../services/cookies";
 import DropdownWithImage from "../DropdownWithImage";
 
 const CreditCardForm = ({
@@ -10,6 +11,7 @@ const CreditCardForm = ({
   onChangeNumber,
   onChangeEmail,
   creditCardType,
+  loggedIn,
 }) => {
   const [num, setNum] = React.useState("");
 
@@ -57,7 +59,8 @@ const CreditCardForm = ({
           className="form-control ml-2 border-curve"
           placeholder="Mobile Number"
           inputMode="numeric"
-          value={num}
+          readOnly={loggedIn ? true : false}
+          value={loggedIn == 1 ? Cookie.getCookies("user_mob") : num}
           onChange={(e) => onChange(e)}
         />
       </div>

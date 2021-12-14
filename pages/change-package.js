@@ -34,11 +34,11 @@ export default function ChangePackage({ props }) {
           </button>
         </div>
         <div className="margin-y-auto">
-          <img src={upgradeIcon} width="25"/>
+          <img src={upgradeIcon} width="25" />
           <span className="pl-2">Upgrade Package</span>
         </div>
       </NavbarHOC>
-      <Register update={true} />
+      <Register update={true} loggedIn={1} />
     </div>
   );
 }

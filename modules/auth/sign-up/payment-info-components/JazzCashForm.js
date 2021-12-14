@@ -1,7 +1,14 @@
 import React from "react";
+import { Cookie } from "../../../../services/cookies";
 import { jazzIcon } from "../../../../services/imagesLink";
 
-const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
+const JazzCashForm = ({
+  mobileCode,
+  onChangeNumber,
+  onChangeCnic,
+  logo,
+  loggedIn,
+}) => {
   const [num, setNum] = React.useState("");
   const [cnic, setCnic] = React.useState("");
 
@@ -29,9 +36,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span className="payment-icon border-curve">
-            {mobileCode}
-          </span>
+          <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
         <input
           type="text"
@@ -40,7 +45,8 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
-          value={num}
+          readOnly={loggedIn ? true : false}
+          value={loggedIn == 1 ? Cookie.getCookies("user_mob") : num}
           onChange={(e) => onChange(e)}
         />
         <input
