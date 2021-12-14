@@ -67,7 +67,7 @@ const MyAccountWeb = ({ profileData, allData, userId, signout }) => {
                 icon: "success",
               });
               signout();
-              router.push("/sign-up");
+              router.push("/");
               setdeactivated(true);
               setLoader(false);
             } else if (res.responseCode == 5) {

@@ -1,8 +1,4 @@
-import React, {
-  useContext,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useContext, useMemo, useCallback } from "react";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
 import SimCardForm from "./payment-info-components/SimCardForm";
@@ -13,16 +9,13 @@ import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 
-function PaymentInfo() {
+function PaymentInfo({ loggedIn }) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
 
-  const onChangeNetwork = useCallback(
-    (data) => {
-      updateUserData({ Operator: data.OperatorId });
-    },
-    []
-  );
+  const onChangeNetwork = useCallback((data) => {
+    updateUserData({ Operator: data.OperatorId });
+  }, []);
   function updateUserData(userData) {
     dispatch({ type: UPDATE_USER_DETAILS, data: userData });
   }
@@ -32,6 +25,7 @@ function PaymentInfo() {
       return (
         <>
           <SimCardForm
+            loggedIn={loggedIn}
             data={operators}
             onChangeNetwork={onChangeNetwork}
             onChangeNumber={handleNumber}
@@ -43,6 +37,7 @@ function PaymentInfo() {
       return (
         <>
           <CreditCardForm
+            loggedIn={loggedIn}
             data={operators}
             onChangeName={handleFullName}
             onChangeNetwork={onChangeNetwork}
@@ -57,6 +52,7 @@ function PaymentInfo() {
       return (
         <>
           <EasypaisaForm
+            loggedIn={loggedIn}
             methodName={SignUpState.SelectedMethod.PaymentMethodName}
             mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
@@ -67,6 +63,7 @@ function PaymentInfo() {
       return (
         <>
           <JazzCashForm
+            loggedIn={loggedIn}
             mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeCnic={handleCnic}
@@ -74,11 +71,13 @@ function PaymentInfo() {
         </>
       );
     } else {
-      return <></>
+      return <></>;
     }
   }, [SignUpState.SelectedMethod]);
 
-  const operators = useMemo(() => SignUpState.SelectedMethod.SimOperators || []);
+  const operators = useMemo(
+    () => SignUpState.SelectedMethod.SimOperators || []
+  );
 
   function handleCnic(e) {
     const cnic = e.target.value;
@@ -116,7 +115,10 @@ function PaymentInfo() {
             {SignUpState && SignUpState.SelectedMethod && <RenderMethod />}
           </div>
         </div>
-        <SignMessage price={SignUpState.SelectedPrice}   creditCardType={AuthState.CreditCardType} />
+        <SignMessage
+          price={SignUpState.SelectedPrice}
+          creditCardType={AuthState.CreditCardType}
+        />
       </div>
     </div>
   );

@@ -8,10 +8,11 @@ import { SignUpTag } from "../../../services/gtm";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 import withLogin from "../LoginHOC";
+import router from "next/router";
 
-const VerifyOTPComponent = ({ newUser , login }) => {
-  const {  setLoader } = useContext(MainContext);
-  const { SignUpState , dispatch } = useContext(SignUpContext);
+const VerifyOTPComponent = ({ newUser, login, loggedIn }) => {
+  const { setLoader } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const otp = useRef("");
 
   async function verifyOTPPinCode() {
@@ -66,19 +67,29 @@ const VerifyOTPComponent = ({ newUser , login }) => {
           });
           setLoader(false);
         } else if (data.responseCode == 1) {
-          AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then((e) => {
-            swal({
-              timer: 2500,
-              title: data.message,
-              icon: "success",
-            }).then((result) => {
-              if (newUser) {
-             Cookie.setCookies("userId", data.data.User.UserId);
-              }
-              dispatch({type : UPDATE_SUBSCRIBE_RESPONSE , data : {code : 34 , newUser : newUser} })
-              setLoader(false);
-            });
-          });
+          AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then(
+            (e) => {
+              swal({
+                timer: 2500,
+                title: data.message,
+                icon: "success",
+              }).then((result) => {
+                if (newUser) {
+                  Cookie.setCookies("userId", data.data.User.UserId);
+                }
+                if (loggedIn == 1) {
+                  console.log("WORKING");
+                  router.push("/");
+                } else {
+                  dispatch({
+                    type: UPDATE_SUBSCRIBE_RESPONSE,
+                    data: { code: 34, newUser: newUser },
+                  });
+                  setLoader(false);
+                }
+              });
+            }
+          );
         } else {
           swal({
             timer: 3000,
@@ -101,7 +112,9 @@ const VerifyOTPComponent = ({ newUser , login }) => {
     <div className="text-center desktop-size custom-bg-signup">
       <h3 className="component-title">Enter your OTP</h3>
       <div className="py-3">
-        <label className="text-muted center-div">Please enter code provided into 4 digit verification code</label>
+        <label className="text-muted center-div">
+          Please enter code provided into 4 digit verification code
+        </label>
       </div>
       <div className="px-3 pb-4">
         <input
@@ -126,7 +139,6 @@ const VerifyOTPComponent = ({ newUser , login }) => {
     </div>
   );
 };
-
 
 const VerifyOTP = withLogin(VerifyOTPComponent);
 export default VerifyOTP;

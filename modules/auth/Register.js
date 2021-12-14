@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  memo,
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useContext, memo, useCallback, useEffect } from "react";
 import SignUpComponent from "./sign-up/SignUpComponent";
 import SignUpLayout from "./sign-up/SignUpLayout";
 import VerifyOTP from "./sign-up/VerifyOTP";
@@ -23,20 +18,26 @@ export default memo(function Register(props) {
   const { code, number, payment, operator, tab, packageId } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
-  console.log("SignUpState : ",SignUpState);
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;
       if (respCode == 1) {
         return (
           <>
-            <VerifyOTP newUser={SignUpState.newUser ? true : false} />
+            <VerifyOTP
+              newUser={SignUpState.newUser ? true : false}
+              loggedIn={props.loggedIn}
+            />
           </>
         );
       } else if (!respCode) {
         return (
           <>
-            <SignUpComponent tab={tab} packageId={packageId} />
+            <SignUpComponent
+              tab={tab}
+              packageId={packageId}
+              loggedIn={props.loggedIn}
+            />
           </>
         );
       } else if (respCode == 11) {

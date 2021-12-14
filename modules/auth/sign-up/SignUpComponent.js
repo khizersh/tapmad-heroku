@@ -4,26 +4,28 @@ import PaymentMethodComponent from "./PaymentMethod";
 import PaymentInfo from "./PaymentInfo";
 import PackageSelectView from "./packages/PackageSelectView";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
-import { UPDATE_PACKAGE, UPDATE_PAYMENT_PRICE } from "../../../contexts/auth/SignUpReducer";
+import {
+  UPDATE_PACKAGE,
+  UPDATE_PAYMENT_PRICE,
+} from "../../../contexts/auth/SignUpReducer";
 import PaymentMethodDesktop from "./PaymentMethodDesktop";
 
-const SignUpComponent = ({tab , packageId}) => {
-  const [isMobile , setIsMobile] = useState(false)
+const SignUpComponent = ({ tab, packageId, loggedIn }) => {
+  const [isMobile, setIsMobile] = useState(false);
   const { dispatch } = useContext(SignUpContext);
 
   function taxChangeView(PricePoint) {
-    dispatch({ type: UPDATE_PAYMENT_PRICE, data: PricePoint })
+    dispatch({ type: UPDATE_PAYMENT_PRICE, data: PricePoint });
   }
 
   function changeMainPackage(MainPack) {
     dispatch({ type: UPDATE_PACKAGE, data: MainPack });
   }
-useEffect(() => {
-  if(window.innerWidth < 799){
-    setIsMobile(true)
-  }
- 
-}, [])
+  useEffect(() => {
+    if (window.innerWidth < 799) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
     <div className="bit-top">
       <div className="mx-sm-2">
@@ -36,8 +38,11 @@ useEffect(() => {
       </ul>
 
       <div className="m-lg-4 m-xl-4 m-2 m-md-4 rounded bg-dark-cstm">
-        {isMobile ? <PaymentMethodComponent /> : <PaymentMethodDesktop />}
-        
+        {isMobile ? (
+          <PaymentMethodComponent loggedIn={loggedIn} />
+        ) : (
+          <PaymentMethodDesktop loggedIn={loggedIn} />
+        )}
       </div>
     </div>
   );

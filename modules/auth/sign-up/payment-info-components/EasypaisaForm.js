@@ -1,7 +1,14 @@
 import React from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
+import { Cookie } from "../../../../services/cookies";
 
-const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
+const EasypaisaForm = ({
+  methodName,
+  mobileCode,
+  onChangeNumber,
+  logo,
+  loggedIn,
+}) => {
   const [num, setNum] = React.useState("");
 
   const onChange = (e) => {
@@ -24,7 +31,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
-          value={num}
+          readOnly={loggedIn ? true : false}
+          value={loggedIn == 1 ? Cookie.getCookies("user_mob") : num}
           onChange={(e) => onChange(e)}
         />
       </div>
