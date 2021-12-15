@@ -17,6 +17,7 @@ const Syno = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
+  console.log("props : ",props);
 
   if (!mount) {
     if (!video) {
