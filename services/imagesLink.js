@@ -84,4 +84,11 @@ export const userFemaleProfileIcon = "/icons/profileFemale.png";
 export const leftArrow = "/icons/profile/right-arrow.svg";
 export const rightArrow = "/icons/profile/left-arrow.svg";
 
+// game assets...
+
+export const positionOne = "/icons/game/position1.svg";
+export const positionTwo = "/icons/game/position2.svg";
+export const positionThree = "/icons/game/position3.svg";
+
+
 

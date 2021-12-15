@@ -8,6 +8,7 @@ import { MainContext } from "../../../contexts/MainContext";
 import styles from "../game.module.css";
 import { GlobalService } from "../../global-service";
 import TabsWithIcon from "../../../components/TabsWithIcon";
+import LeaderBoardTable from "./leaderBoardTable";
 
 const leaderboardComponent = () => {
   const [tabsData, setTabsData] = useState([]);
@@ -17,13 +18,6 @@ const leaderboardComponent = () => {
   const { gameState, updateSelectedTab } = useContext(GameContext);
   const { setLoader } = React.useContext(MainContext);
 
-  const goldCrown =
-    "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-sil.png";
-  const brownCrown =
-    "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-brw.png";
-  const silverCrown =
-    "//d1s7wg2ne64q87.cloudfront.net/web/images/crown-grey.png";
-  const goldCoin = "//d1s7wg2ne64q87.cloudfront.net/web/images/coins.png";
 
   const onClickTab = (tab) => {
     setLoader(true);
@@ -134,13 +128,14 @@ const leaderboardComponent = () => {
           <TabsWithIcon data={tabsData} onChange={onClickTab} selected={selectedTab} />
         </div>
       </div>
-      <div className={`row ${styles.width}`}>
+      <div className={`row ${styles.width} table-leaderboard`}>
         <div className="col-12 mt-2">
        {/* commented old code paste here */}
-          <table
-            className={`table  table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
+       <LeaderBoardTable leaderBoard={leaderBoard}/>
+          {/* <table
+            className={`table table-striped table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
           >
-            <thead className="bg-grey text-center">
+            <thead className="thead-light text-center">
               <tr>
                 <th scope="col">Rank</th>
                 <th scope="col">Name</th>
@@ -209,7 +204,7 @@ const leaderboardComponent = () => {
                 </tr>
               </tfoot>
             ) : null}
-          </table>
+          </table> */}
         </div>
       </div>
     </div>

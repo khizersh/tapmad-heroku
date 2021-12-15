@@ -59,10 +59,10 @@
   color: #37c673;
   text-align: center;
 }
-table tr:nth-child(odd) td {
+.billing-table tr:nth-child(odd) td {
   background-color: #333433;
 }
-table tr:nth-child(even) td {
+.billing-table tr:nth-child(even) td {
   background-color: #3d3e3d;
 }
 .table_style {

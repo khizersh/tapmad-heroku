@@ -1,0 +1,10 @@
+:root{
+    --game-bg :  #131c1f;
+  }
+  
+  
+
+.table-leaderboard {
+    background-color: var(--game-bg);
+   
+}

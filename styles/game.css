@@ -40,6 +40,9 @@ a:focus {
   background-size: contain;
 }
 
+.justify-space-even{
+  justify-content: space-evenly;
+}
 
   /* end new layout for psl 2021 */
 
