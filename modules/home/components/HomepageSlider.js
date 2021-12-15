@@ -15,6 +15,7 @@ const Slider = dynamic(() => import("react-slick"));
 const HomePageAd = dynamic(() => import("./HomePageAd"), { ssr: false });
 
 const HomepageSlider = ({ movies, ads, name }) => {
+  console.log("show : ",movies);
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
@@ -144,7 +145,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName} 
                                   />*/}
-                                    <Image
+                                  {mov.NewChannelThumbnailPath ?   <Image
                                       src={mov.NewChannelThumbnailPath}
                                       height={304}
                                       width={228}
@@ -152,7 +153,8 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       loading={"eager"}
                                       // layout='fill'
                                       alt={"tapmad-" + mov.VideoName}
-                                    />
+                                    /> : null}
+                                  
                                     {/* Crowns for Hompage to be done when backend adds to api  */}
                                     {checkForBoolean(mov.IsVideoChannel) ? (
                                       <div className="row">
@@ -224,7 +226,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName}
                                   /> */}
-                                    <Image
+                                  {mov.NewCategoryImage ?  <Image
                                       src={mov.NewCategoryImage}
                                       height={304}
                                       width={228}
@@ -232,7 +234,8 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       loading={"eager"}
                                       // layout='fill'
                                       alt={"tapmad-" + mov.VideoName}
-                                    />
+                                    /> : null}
+                                   
                                     {mov.IsVideoFree
                                       ? null
                                       : mov.PackageImage && (

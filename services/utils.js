@@ -141,8 +141,9 @@ function findImageInVODObject(video) {
     return video.NewChannelThumbnailPath;
   }
 }
+// for shows only
 function SEOFriendlySlugsIsCategoryTrue(event) {
-  let prefix = "category";
+  let prefix = "shows";
   let name = event.CategoryName ? event.CategoryName : event.VideoName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
