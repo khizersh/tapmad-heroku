@@ -41,13 +41,14 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
     // } else {
     //   setImageState({ pacakge: true, game: false });
     // }
-    setSelected(data)
+    setSelected(data);
   };
   const onClickUpgradePackage = async () => {
     await dispatch({ type: UPDATE_PACKAGE, data: true });
     router.push("/change-package");
   };
   useEffect(() => {
+    console.log(allData, "AKK");
     if (allData) {
       setPrice(allData.PackageDescription[0].PackagePrice);
     }
@@ -70,7 +71,19 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
       icon: blackGaming,
     },
   ];
-
+  const setPackageStatus = () => {
+    if (allData) {
+      if (allData.PackageDescription[0].IsUpdgradeOrDownGrade == 1) {
+        return "Upgrade Package";
+      }
+      if (allData.PackageDescription[0].IsUpdgradeOrDownGrade == 2) {
+        return "Upgrade/Downgrade Package";
+      }
+      if (allData.PackageDescription[0].IsUpdgradeOrDownGrade == 3) {
+        return "Downgrade Package";
+      }
+    }
+  };
   const onClickBuy = () => {
     updateBuyModal(true);
   };
@@ -160,7 +173,11 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
           </div>
         </div>
         <div className="col-6">
-          <TabsWithIcon data={data} onChange={onSwitchImage} selected={selected}/>
+          <TabsWithIcon
+            data={data}
+            onChange={onSwitchImage}
+            selected={selected}
+          />
         </div>
         <div className="col-3 pl-0">
           <div className="mt-2 pt-1">
@@ -172,7 +189,14 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
         <div className="col-12">
           <div class="package_div">
             <div class="container-fluid col-8 cont_style rounded">
-              <div style={{ display: selected && selected.title === "My Package" ? "block" : "none" }}>
+              <div
+                style={{
+                  display:
+                    selected && selected.title === "My Package"
+                      ? "block"
+                      : "none",
+                }}
+              >
                 <div className="row px-5 pt-3">
                   <div className="col-6">
                     <span className="font-32 package_style">
@@ -252,7 +276,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                           className="btn w-100 px-2  text-light rounded-pill optButtons"
                           onClick={onClickUpgradePackage}
                         >
-                          Upgrade Package
+                          {setPackageStatus()}
                         </button>
                       </div>
                       <div className="col-4 ">
@@ -268,7 +292,14 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                   </div>
                 </div>
               </div>
-              <div style={{ display:  selected && selected.title === "My Games" ? "block" : "none" }}>
+              <div
+                style={{
+                  display:
+                    selected && selected.title === "My Games"
+                      ? "block"
+                      : "none",
+                }}
+              >
                 <h4 style={{ color: "#37C673" }} className="py-2">
                   My Games
                 </h4>
