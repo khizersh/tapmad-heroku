@@ -14,8 +14,8 @@ const GameLayout = ({ children }) => {
   // }, [])
 
   return (
-    <div>
-      {/* <BuyCoinModal /> */}
+    // <div className="game-header">
+    <div >
       {children}
       <BottomNav />
     </div>

@@ -20,6 +20,7 @@ import "../modules/movies/movie.css";
 import "../modules/my-account/myaccount.css";
 import "../modules/news/news.style.css";
 import "../modules/player-shop/player-shop.css";
+import "../modules/game/components/gamestyles.css";
 import "../modules/promo-code/promo-code.css";
 import "../modules/samsungtv/samsung.css";
 import "../components/component-styles/newSignup.css";

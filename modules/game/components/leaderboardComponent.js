@@ -7,25 +7,22 @@ import { GameContext } from "../../../contexts/GameContext";
 import { MainContext } from "../../../contexts/MainContext";
 import styles from "../game.module.css";
 import { GlobalService } from "../../global-service";
+import TabsWithIcon from "../../../components/TabsWithIcon";
+import LeaderBoardTable from "./leaderBoardTable";
 
 const leaderboardComponent = () => {
-  const [data, setData] = useState([]);
+  const [tabsData, setTabsData] = useState([]);
+  const [selectedTab, setSelectedTab] = useState(null);
   const [leaderBoard, setLeaderBoard] = useState([]);
   const [limit, setLimit] = useState(null);
   const { gameState, updateSelectedTab } = useContext(GameContext);
   const { setLoader } = React.useContext(MainContext);
 
-  const goldCrown =
-    "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-sil.png";
-  const brownCrown =
-    "http://d1s7wg2ne64q87.cloudfront.net/web/images/crown-brw.png";
-  const silverCrown =
-    "//d1s7wg2ne64q87.cloudfront.net/web/images/crown-grey.png";
-  const goldCoin = "//d1s7wg2ne64q87.cloudfront.net/web/images/coins.png";
 
   const onClickTab = (tab) => {
     setLoader(true);
     updateSelectedTab({ ...tab, offset: 0 });
+    setSelectedTab(tab)
     getLeaderBoardByLeague(tab.LeagueId, 0)
       .then((lead) => {
         if (lead && lead.responseCode == 1) {
@@ -45,7 +42,6 @@ const leaderboardComponent = () => {
   const onReadMore = () => {
     setLoader(true);
     let clone = leaderBoard;
-
     getLeaderBoardByLeague(
       gameState.selectedTab.LeagueId,
       gameState.selectedTab.offset + limit
@@ -90,7 +86,11 @@ const leaderboardComponent = () => {
   useEffect(() => {
     if (gameState && gameState.tabs.length) {
       setLoader(true);
-      setData(gameState.tabs);
+      const tabArray =  gameState.tabs.map(tab => {
+      return {...tab , title : tab.DisplayName , icon : "" , selectedIcon : ""}
+      })
+      setSelectedTab(tabArray[0])
+      setTabsData(tabArray);
       getLeaderBoardByLeague(gameState.selectedTab.LeagueId, 0)
         .then((lead) => {
           if (lead && lead.responseCode == 1) {
@@ -123,39 +123,16 @@ const leaderboardComponent = () => {
 
   return (
     <div className="container">
-      <div className={`row ${styles.width}`}>
+      <div className="row">
+        <div className="col-6 offset-md-3">
+          <TabsWithIcon data={tabsData} onChange={onClickTab} selected={selectedTab} />
+        </div>
+      </div>
+      <div className={`row ${styles.width} table-leaderboard`}>
         <div className="col-12 mt-2">
-          <div className="">
-            <img
-              // src="//d1s7wg2ne64q87.cloudfront.net/web/images/GamePageBanner.jpg"
-              src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
-              // src="https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630490978Game-GameBanner(660x230)(1).jpg"
-              alt="psl image"
-              width="100%"
-            />
-          </div>
-          <ul
-            className={`list-group list-group-horizontal text-center  mb-2 d-flex`}
-          >
-            {data.length
-              ? data.map((m, i) => (
-                <li
-                  key={i}
-                  onClick={() => onClickTab(m)}
-                  className={`rounded-0 p-0 flex-fill ${styles.bgDark} ${m.LeagueId == gameState.selectedTab.LeagueId
-                    ? styles.active
-                    : ""
-                    }`}
-                >
-                  <div className="nav-link rounded-0 league_tab">
-                    {m.DisplayName}
-                  </div>
-                </li>
-              ))
-              : null}
-          </ul>
-
-          <table
+       {/* commented old code paste here */}
+       <LeaderBoardTable leaderBoard={leaderBoard}/>
+          {/* <table
             className={`table table-striped table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
           >
             <thead className="thead-light text-center">
@@ -227,7 +204,7 @@ const leaderboardComponent = () => {
                 </tr>
               </tfoot>
             ) : null}
-          </table>
+          </table> */}
         </div>
       </div>
     </div>
@@ -235,3 +212,32 @@ const leaderboardComponent = () => {
 };
 
 export default leaderboardComponent;
+
+
+   {/* <div className="">
+            <img
+              src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
+              alt="psl image"
+              width="100%"
+            />
+          </div> */}
+          {/* <ul
+            className={`list-group list-group-horizontal text-center  mb-2 d-flex`}
+          >
+            {data.length
+              ? data.map((m, i) => (
+                <li
+                  key={i}
+                  onClick={() => onClickTab(m)}
+                  className={`rounded-0 p-0 flex-fill ${styles.bgDark} ${m.LeagueId == gameState.selectedTab.LeagueId
+                    ? styles.active
+                    : ""
+                    }`}
+                >
+                  <div className="nav-link rounded-0 league_tab">
+                    {m.DisplayName}
+                  </div>
+                </li>
+              ))
+              : null}
+          </ul> */}

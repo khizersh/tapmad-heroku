@@ -3,7 +3,7 @@ import { tableBackIcon, tableNextIcon } from "../../services/imagesLink";
 
 const BillingTable = ({ subscriptions }) => {
   return (
-    <table class="mt-3 table_style rounded">
+    <table class="mt-3 table_style rounded billing-table">
       <thead>
         <tr>
           <th scope="col" className="border-top-left">Status</th>
