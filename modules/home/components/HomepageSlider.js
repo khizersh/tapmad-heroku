@@ -15,7 +15,6 @@ const Slider = dynamic(() => import("react-slick"));
 const HomePageAd = dynamic(() => import("./HomePageAd"), { ssr: false });
 
 const HomepageSlider = ({ movies, ads, name }) => {
-  console.log("show : ",movies);
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
@@ -107,13 +106,13 @@ const HomepageSlider = ({ movies, ads, name }) => {
                 <div>
                   <Slider {...settings}>
                     {movieSection &&
-                    !movieSection.IsCategories &&
+                    !movieSection.IsCategories  &&
                     movieSection.Videos &&
                     movieSection.Videos.length > 0
                       ? movieSection.Videos.map((mov, index) => {
                           let slug = setUrlAccordingToVideoType(
                             mov,
-                            IsLiveChannel
+                            name == "Shows"  ? IsCategory : IsLiveChannel
                           );
                           return (
                             <Link

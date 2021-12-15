@@ -13,7 +13,6 @@ import { GlobalService } from "../../global-service";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Movies({ movies }) {
-  console.log(movies, "MOV");
   var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(movies);
   const [currentRow, setCurrentRow] = useState(5);
