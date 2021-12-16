@@ -25,6 +25,7 @@ export default function SignUpProvider({ children }) {
     newUser: false,
     isMobile: false,
     signupRender: false,
+    loggedIn: 0,
   });
 
   // useEffect(() => {

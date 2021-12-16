@@ -10,7 +10,7 @@ import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer"
 import withLogin from "../LoginHOC";
 import router from "next/router";
 
-const VerifyOTPComponent = ({ newUser, login, loggedIn }) => {
+const VerifyOTPComponent = ({ newUser, login }) => {
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const otp = useRef("");
@@ -77,8 +77,7 @@ const VerifyOTPComponent = ({ newUser, login, loggedIn }) => {
                 if (newUser) {
                   Cookie.setCookies("userId", data.data.User.UserId);
                 }
-                if (loggedIn == 1) {
-                  console.log("WORKING");
+                if (SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else {
                   dispatch({

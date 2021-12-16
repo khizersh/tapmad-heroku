@@ -6,6 +6,7 @@ export const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
 export const UPDATE_ISMOBILE = "UPDATE_ISMOBILE";
 export const SIGNUP_RENDER = "SIGNUP_RENDER";
 export const LOGIN_OPERATOR = "LOGIN_OPERATOR";
+export const LOGGED_IN = "LOGGED_IN";
 
 export function SignUpReducer(state, action) {
   switch (action.type) {
@@ -19,6 +20,8 @@ export function SignUpReducer(state, action) {
       return { ...state, SelectedMethod: action.data };
     case LOGIN_OPERATOR:
       return { ...state, LoginOperator: action.data };
+    case LOGGED_IN:
+      return { ...state, LoggedIn: action.data };
     case UPDATE_SUBSCRIBE_RESPONSE:
       return {
         ...state,

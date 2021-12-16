@@ -276,7 +276,8 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                           className="btn w-100 px-2  text-light rounded-pill optButtons"
                           onClick={onClickUpgradePackage}
                         >
-                          {setPackageStatus()}
+                          Upgrade Package
+                          {/* {setPackageStatus()} */}
                         </button>
                       </div>
                       <div className="col-4 ">

@@ -6,11 +6,20 @@ import Register from "../modules/auth/Register";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
 import { AuthContext } from "../contexts/auth/AuthContext";
 import { upgradeIcon } from "../services/imagesLink";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
+import { LOGGED_IN } from "../contexts/auth/SignUpReducer";
 
 export default function ChangePackage({ props }) {
   const router = useRouter();
+  const { SignUpState, dispatch } = useContext(SignUpContext);
+
   const { AuthState } = useContext(AuthContext);
-  useEffect(() => {}, [AuthState]);
+  useEffect(() => {
+    dispatch({
+      type: LOGGED_IN,
+      data: 1,
+    });
+  }, [AuthState]);
 
   const onClickBack = () => {
     router.push("/");
@@ -38,7 +47,7 @@ export default function ChangePackage({ props }) {
           <span className="pl-2">Upgrade Package</span>
         </div>
       </NavbarHOC>
-      <Register update={true} loggedIn={1} />
+      <Register update={true} />
     </div>
   );
 }

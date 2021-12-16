@@ -49,7 +49,12 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
           autoComplete={"false"}
-          value={num}
+          value={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
+          defaultValue={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
           onChange={(e) => onChange(e)}
         />
       </div>

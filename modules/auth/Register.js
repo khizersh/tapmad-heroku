@@ -24,20 +24,13 @@ export default memo(function Register(props) {
       if (respCode == 1) {
         return (
           <>
-            <VerifyOTP
-              newUser={SignUpState.newUser ? true : false}
-              loggedIn={props.loggedIn}
-            />
+            <VerifyOTP newUser={SignUpState.newUser ? true : false} />
           </>
         );
       } else if (!respCode) {
         return (
           <>
-            <SignUpComponent
-              tab={tab}
-              packageId={packageId}
-              loggedIn={props.loggedIn}
-            />
+            <SignUpComponent tab={tab} packageId={packageId} />
           </>
         );
       } else if (respCode == 11) {
