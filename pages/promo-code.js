@@ -77,6 +77,8 @@ const promoCode = () => {
     };
 
     const data = await AuthService.userPromoCode(body);
+    console.log(data, "PROM");
+
     if (data && data.responseCode == 1) {
       swal({
         title: data.message,
@@ -99,6 +101,14 @@ const promoCode = () => {
       }).then((result) => {
         router.push("/sign-in");
       });
+    } else if (data.responseCode == 2) {
+      swal({
+        title: data.message,
+        timer: "2500",
+        icon: "warning",
+      }).then(() => {
+        router.push("/sign-in");
+      });
     } else {
       swal({
         title: data.message,
@@ -116,7 +126,7 @@ const promoCode = () => {
       <PromoCodeLayout
         bgImage={"http://d1s7wg2ne64q87.cloudfront.net/web/images/psl-min.jpg"}
       >
-        <div className="form-group mb-0 ">
+        <div className="form-group mb-0">
           <div>
             <div className="">
               <input

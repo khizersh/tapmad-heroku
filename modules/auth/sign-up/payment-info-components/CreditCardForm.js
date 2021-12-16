@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 import Checkout from "../../../../public/static/js/checkout";
 import { Cookie } from "../../../../services/cookies";
 import DropdownWithImage from "../DropdownWithImage";
@@ -11,9 +12,9 @@ const CreditCardForm = ({
   onChangeNumber,
   onChangeEmail,
   creditCardType,
-  loggedIn,
 }) => {
-  const [num, setNum] = React.useState("");
+  const [num, setNum] = useState("");
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   useEffect(() => {
     if (creditCardType) {
@@ -59,8 +60,13 @@ const CreditCardForm = ({
           className="form-control ml-2 border-curve"
           placeholder="Mobile Number"
           inputMode="numeric"
-          readOnly={loggedIn ? true : false}
-          value={loggedIn == 1 ? Cookie.getCookies("user_mob") : num}
+          readOnly={SignUpState.LoggedIn ? true : false}
+          value={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
+          defaultValue={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
           onChange={(e) => onChange(e)}
         />
       </div>

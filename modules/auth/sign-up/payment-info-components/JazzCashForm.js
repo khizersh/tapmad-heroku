@@ -1,16 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 import { Cookie } from "../../../../services/cookies";
 import { jazzIcon } from "../../../../services/imagesLink";
 
-const JazzCashForm = ({
-  mobileCode,
-  onChangeNumber,
-  onChangeCnic,
-  logo,
-  loggedIn,
-}) => {
+const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
   const [num, setNum] = React.useState("");
   const [cnic, setCnic] = React.useState("");
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const onChange = (e) => {
     const mobileNum = e.target.value;
@@ -19,7 +15,6 @@ const JazzCashForm = ({
       onChangeNumber(e);
     }
   };
-
   const onChangeNic = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -27,13 +22,11 @@ const JazzCashForm = ({
       onChangeCnic(e);
     }
   };
+  useEffect(() => {
+    console.log(SignUpState.LoggedIn, "SignUpState.LoggedIn");
+  }, []);
   return (
     <>
-      {/* <div className="payment-icon border-curve text-center w-100 mb-2">
-        <img src={jazzIcon} width="20" alt={"jazzcash"} />{" "}
-        <span className="font-weight">JazzCash</span>
-      </div> */}
-
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
@@ -45,8 +38,13 @@ const JazzCashForm = ({
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
-          readOnly={loggedIn ? true : false}
-          value={loggedIn == 1 ? Cookie.getCookies("user_mob") : num}
+          readOnly={SignUpState.LoggedIn ? true : false}
+          value={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
+          defaultValue={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
           onChange={(e) => onChange(e)}
         />
         <input

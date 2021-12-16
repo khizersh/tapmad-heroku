@@ -1,4 +1,10 @@
-import React, { useContext, useMemo, useCallback } from "react";
+import React, {
+  useContext,
+  useMemo,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
 import SimCardForm from "./payment-info-components/SimCardForm";
@@ -9,23 +15,23 @@ import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 
-function PaymentInfo({ loggedIn }) {
+function PaymentInfo(props) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
-  const { AuthState } = useContext(AuthContext);
 
+  const { AuthState } = useContext(AuthContext);
   const onChangeNetwork = useCallback((data) => {
     updateUserData({ Operator: data.OperatorId });
   }, []);
   function updateUserData(userData) {
     dispatch({ type: UPDATE_USER_DETAILS, data: userData });
   }
+  console.log(props, "PR");
   const RenderMethod = useCallback(() => {
     const PaymentId = SignUpState.SelectedMethod.PaymentId;
     if (PaymentId == 1) {
       return (
         <>
           <SimCardForm
-            loggedIn={loggedIn}
             data={operators}
             onChangeNetwork={onChangeNetwork}
             onChangeNumber={handleNumber}
@@ -37,7 +43,6 @@ function PaymentInfo({ loggedIn }) {
       return (
         <>
           <CreditCardForm
-            loggedIn={loggedIn}
             data={operators}
             onChangeName={handleFullName}
             onChangeNetwork={onChangeNetwork}
@@ -52,7 +57,6 @@ function PaymentInfo({ loggedIn }) {
       return (
         <>
           <EasypaisaForm
-            loggedIn={loggedIn}
             methodName={SignUpState.SelectedMethod.PaymentMethodName}
             mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
@@ -63,7 +67,6 @@ function PaymentInfo({ loggedIn }) {
       return (
         <>
           <JazzCashForm
-            loggedIn={loggedIn}
             mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeCnic={handleCnic}
@@ -75,9 +78,7 @@ function PaymentInfo({ loggedIn }) {
     }
   }, [SignUpState.SelectedMethod]);
 
-  const operators = useMemo(
-    () => SignUpState.SelectedMethod.SimOperators || []
-  );
+  const operators = useMemo(() => SignUpState.LoginOperator || []);
 
   function handleCnic(e) {
     const cnic = e.target.value;
@@ -90,6 +91,7 @@ function PaymentInfo({ loggedIn }) {
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
+    console.log(mobileNum, "mobileNum");
     if (+mobileNum === +mobileNum) {
       if (mobileNum.length > 4) {
         updateUserData({ MobileNo: mobileNum });

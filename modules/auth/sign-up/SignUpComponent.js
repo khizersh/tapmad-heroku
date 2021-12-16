@@ -10,7 +10,7 @@ import {
 } from "../../../contexts/auth/SignUpReducer";
 import PaymentMethodDesktop from "./PaymentMethodDesktop";
 
-const SignUpComponent = ({ tab, packageId, loggedIn }) => {
+const SignUpComponent = ({ tab, packageId }) => {
   const [isMobile, setIsMobile] = useState(false);
   const { dispatch } = useContext(SignUpContext);
 
@@ -38,11 +38,7 @@ const SignUpComponent = ({ tab, packageId, loggedIn }) => {
       </ul>
 
       <div className="m-lg-4 m-xl-4 m-2 m-md-4 rounded bg-dark-cstm">
-        {isMobile ? (
-          <PaymentMethodComponent loggedIn={loggedIn} />
-        ) : (
-          <PaymentMethodDesktop loggedIn={loggedIn} />
-        )}
+        {isMobile ? <PaymentMethodComponent /> : <PaymentMethodDesktop />}
       </div>
     </div>
   );

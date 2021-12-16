@@ -11,7 +11,7 @@ import {
 } from "../../../services/imagesLink";
 import PaymentInfo from "./PaymentInfo";
 
-export default function PaymentMethodDesktop({ loggedIn }) {
+export default function PaymentMethodDesktop() {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [CurrentPackage, setCurrentPackage] = useState({});
   const [CurrentMethod, setCurrentMethod] = useState({});
@@ -133,7 +133,7 @@ export default function PaymentMethodDesktop({ loggedIn }) {
               : null}
           </div>
           <div>
-            <PaymentInfo loggedIn={loggedIn} />
+            <PaymentInfo />
           </div>
         </div>
       </div>

@@ -375,6 +375,7 @@ async function signInOrSignUpMobileOperatorByPin(body, ip) {
   const resp = await post(SignUpORSignInMobileOperatorTokenByPin, body, ip);
   const data = handleResponse(resp);
   if (data != null) {
+    //Handle Response code on login when user is not subscribed
     if (data.responseCode == 1) {
       return {
         data: data,
@@ -414,6 +415,8 @@ async function getAllowRegionsList(body) {
 
 function validateUser(data) {
   var user = data.User;
+  console.log(user, "RREE");
+
   if (user.UserId) {
     Cookie.setCookies("userId", user.UserId);
     if (user.IsSubscribe) {
@@ -459,6 +462,7 @@ async function signInOrSignUpMobileOperator(
     withMultiCredentials
   );
   const data = handleResponse(resp);
+
   if (data && data.data.jwtToken) {
     Cookie.setCookies("content-token", data.data.jwtToken);
   }

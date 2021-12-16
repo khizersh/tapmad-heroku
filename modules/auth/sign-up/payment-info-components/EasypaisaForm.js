@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
 import { Cookie } from "../../../../services/cookies";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
-const EasypaisaForm = ({
-  methodName,
-  mobileCode,
-  onChangeNumber,
-  logo,
-  loggedIn,
-}) => {
+const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
   const [num, setNum] = React.useState("");
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const onChange = (e) => {
     const mobileNum = e.target.value;
@@ -31,8 +27,13 @@ const EasypaisaForm = ({
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
-          readOnly={loggedIn ? true : false}
-          value={loggedIn == 1 ? Cookie.getCookies("user_mob") : num}
+          readOnly={SignUpState.LoggedIn ? true : false}
+          value={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
+          defaultValue={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
           onChange={(e) => onChange(e)}
         />
       </div>

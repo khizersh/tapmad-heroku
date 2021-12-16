@@ -30,9 +30,15 @@ export default function AuthProviderNew({ children }) {
     var packages;
     let userId = Cookie.getCookies("userId");
     const pathname = window?.location?.pathname;
-    if (AuthState.UpdatePackage && userId || pathname.includes("change-package")) {
+    if (
+      (AuthState.UpdatePackage && userId) ||
+      pathname.includes("change-package")
+    ) {
       packages = await getAllPaymentPackagesByUserId(userId);
-      dispatch({type: CURRENT_USER_PACKAGE,data: packages.CurrentPackageDescription});
+      dispatch({
+        type: CURRENT_USER_PACKAGE,
+        data: packages.CurrentPackageDescription,
+      });
     } else {
       packages = await getAllPaymentPackages();
     }
