@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 import { Cookie } from "../../../../services/cookies";
 import { jazzIcon } from "../../../../services/imagesLink";
 
 const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
-  const [num, setNum] = React.useState("");
-  const [cnic, setCnic] = React.useState("");
+  const [num, setNum] = useState("");
+  const [cnic, setCnic] = useState("");
   const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const onChange = (e) => {
