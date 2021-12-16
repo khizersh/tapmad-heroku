@@ -8,6 +8,12 @@
 .table-leaderboard {
     background-color: var(--game-bg);
 }
+.border-left-10{
+    border-radius: 10px 0px 0px 10px;
+}
+.border-right-10{
+    border-radius: 0px 10px 10px 0px;
+}
 
 .table-leaderboard th {
     font-size: 14px;
@@ -16,8 +22,17 @@
 .table-leaderboard td {
     font-size: 14px;
     color: #d0d4d7;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: normal;
+}
+.table-leaderboard tbody tr {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid #333433;
 }
 .table-leaderboard thead tr th{
     background-color: var(--thead-bg) !important;
     padding: 20px;
+    font-weight: normal;
 }

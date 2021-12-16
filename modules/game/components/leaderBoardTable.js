@@ -7,7 +7,7 @@ import {
 } from "../../../services/imagesLink";
 import styles from "../game.module.css";
 
-const leaderBoardTable = ({ leaderBoard }) => {
+const leaderBoardTable = ({ leaderBoard , limit , onReadMore}) => {
 
 
   return (
@@ -41,9 +41,9 @@ const leaderBoardTable = ({ leaderBoard }) => {
       <table className={`w-100 P-5 table-leaderboard`}>
         <thead >
           <tr >
-            <th scope="col" className="border-top-left border-bottom-left">Rank</th>
+            <th scope="col" className="border-left-10">Rank</th>
             <th scope="col" className="pl-5">Player Name</th>
-            <th scope="col" className="border-top-right border-bottom-right ">Game won</th>
+            <th scope="col" className="border-right-10 ">Game won</th>
           </tr>
         </thead>
         <tbody>
@@ -51,13 +51,15 @@ const leaderBoardTable = ({ leaderBoard }) => {
             leaderBoard.map((m, i) => (
               <>
                 {i > 2 ? (
+                  <>
                   <tr key={i} className="">
-                    <td> 
+                    <td className="pl-4"> 
                       <span >#{m.Rank}</span>
                     </td>
                     <td className="pl-5"><span><img src={leaderBoardUseIcon} width={30}/></span> {m.FullName}</td>
-                    <td >{m.TotalCoins} </td>
+                    <td className="pl-4">{m.TotalCoins} </td>
                   </tr>
+                  </>
                 ) : null}
               </>
             ))
@@ -67,17 +69,17 @@ const leaderBoardTable = ({ leaderBoard }) => {
             </td>
           )}
         </tbody>
-        {/* {limit ? (
+        {limit ? (
               <tfoot>
                 <tr>
                   <th colSpan="3" className="text-center">
-                    <button className="btn btn-success" onClick={onReadMore}>
+                    <button className="btn subscribe-btn bg-green" onClick={onReadMore}>
                       Load More
                     </button>
                   </th>
                 </tr>
               </tfoot>
-            ) : null} */}
+            ) : null}
       </table>
     </div>
   );

@@ -18,11 +18,10 @@ const leaderboardComponent = () => {
   const { gameState, updateSelectedTab } = useContext(GameContext);
   const { setLoader } = React.useContext(MainContext);
 
-
   const onClickTab = (tab) => {
     setLoader(true);
     updateSelectedTab({ ...tab, offset: 0 });
-    setSelectedTab(tab)
+    setSelectedTab(tab);
     getLeaderBoardByLeague(tab.LeagueId, 0)
       .then((lead) => {
         if (lead && lead.responseCode == 1) {
@@ -86,10 +85,10 @@ const leaderboardComponent = () => {
   useEffect(() => {
     if (gameState && gameState.tabs.length) {
       setLoader(true);
-      const tabArray =  gameState.tabs.map(tab => {
-      return {...tab , title : tab.DisplayName , icon : "" , selectedIcon : ""}
-      })
-      setSelectedTab(tabArray[0])
+      const tabArray = gameState.tabs.map((tab) => {
+        return { ...tab, title: tab.DisplayName, icon: "", selectedIcon: "" };
+      });
+      setSelectedTab(tabArray[0]);
       setTabsData(tabArray);
       getLeaderBoardByLeague(gameState.selectedTab.LeagueId, 0)
         .then((lead) => {
@@ -124,14 +123,23 @@ const leaderboardComponent = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-6 offset-md-3">
-          <TabsWithIcon data={tabsData} onChange={onClickTab} selected={selectedTab} />
+        <div className="col-md-6 offset-md-3 col-sm-12">
+          <TabsWithIcon
+            data={tabsData}
+            onChange={onClickTab}
+            selected={selectedTab}
+          />
         </div>
       </div>
-      <div className={`row ${styles.width} table-leaderboard`}>
+      <div className={`row mt-5 table-leaderboard`}>
         <div className="col-12 mt-2">
-       {/* commented old code paste here */}
-       <LeaderBoardTable leaderBoard={leaderBoard}/>
+          {/* commented old code paste here */}
+          <div className={`row ${styles.width}`}>
+            <div className="col-12">
+
+            <LeaderBoardTable leaderBoard={leaderBoard} limit={limit} onReadMore={onReadMore}/>
+            </div>
+          </div>
           {/* <table
             className={`table table-striped table-dark  ${styles.tm_btng_tble} mb-0 mt-2`}
           >
@@ -213,15 +221,17 @@ const leaderboardComponent = () => {
 
 export default leaderboardComponent;
 
-
-   {/* <div className="">
+{
+  /* <div className="">
             <img
               src="https://d34080pnh6e62j.cloudfront.net/images/banners/GamepageHBLPSL6Banner.jpg"
               alt="psl image"
               width="100%"
             />
-          </div> */}
-          {/* <ul
+          </div> */
+}
+{
+  /* <ul
             className={`list-group list-group-horizontal text-center  mb-2 d-flex`}
           >
             {data.length
@@ -240,4 +250,5 @@ export default leaderboardComponent;
                 </li>
               ))
               : null}
-          </ul> */}
+          </ul> */
+}
