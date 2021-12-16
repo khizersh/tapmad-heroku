@@ -146,7 +146,7 @@ function SEOFriendlySlugsIsCategoryTrue(event) {
   let prefix = "shows";
   let name = event.CategoryName ? event.CategoryName : event.VideoName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
+  let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId || event.VideoCategoryId }`;
   return slug;
 }
 
@@ -284,7 +284,6 @@ function addScriptCodeInDom(src) {
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 function log() {
-  console.log(arguments);
 }
 module.exports = {
   manipulateUrls,

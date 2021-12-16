@@ -81,7 +81,6 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         icon: "error",
       });
     }
-    console.log("API Hit", data);
   };
   if (isSave && isMobile) {
     submitHandeler();

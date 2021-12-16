@@ -7,19 +7,20 @@ import requestIp from "request-ip";
 import Head from "next/head";
 import { getSEODataByCategory } from "../../services/seo.service";
 
-const Category = (props) => {
+const Shows = (props) => {
+  console.log("props in slug shows : ",props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
   if (!mount) {
-    if (!video) {
+    if (!video && props.data.Category) {
       let vid = {
-        VideoName: props.data.CategoryName,
-        VideoDescription: props.data.CategoryDescription,
-        VideoImagePathLarge: props.data.CategoryMobileLargeImage,
-        VideoImagePath: props.data.CategoryMobileSmallImage,
-        VideoEntityId: props.data.VideoEntityId
+        VideoName: props.data.Category.CategoryName,
+        VideoDescription: props.data.Category.CategoryDescription,
+        VideoImagePathLarge: props.data.Category.NewCategoryImage,
+        VideoImagePath: props.data.Category.NewCategoryImage,
+        VideoEntityId: props.data.Category.VideoOnDemandCategoryId
       };
       setVideo(vid);
       setVideoList([{ Videos: props?.data?.Videos }]);
@@ -56,7 +57,7 @@ const Category = (props) => {
   );
 };
 
-export default Category;
+export default Shows;
 
 export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
@@ -65,8 +66,8 @@ export async function getServerSideProps(context) {
   }
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
   const data = await get(getSeasonVodByCategoryId + categoryId, ip);
+  // https://developer.tapmad.com/dev/app/api/getSeasonVodByCategoryId/v1/en/android/983
   let seo = await getSEODataByCategory(categoryId, context.resolvedUrl)
-
   return {
     props: {
       data: { ...data.data, VideoEntityId: categoryId }, schema: seo, env: process.env.TAPENV
