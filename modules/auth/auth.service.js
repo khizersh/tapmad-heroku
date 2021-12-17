@@ -23,7 +23,6 @@ async function setUserPin(pin, username) {
 
   try {
     const userId = Cookie.getCookies("userId");
-    console.log("userId: ", userId);
     let body = {
       Version: "V1",
       Language: "en",
