@@ -8,7 +8,6 @@ import { closeNavBar, setUrlToCookies } from "../services/utils";
 import { Authcontext } from "../contexts/AuthContext";
 
 export default function Skeleton({ children, ip }) {
-  console.log("Ip ", ip);
   const { initialState, setLoader } = React.useContext(MainContext);
   // const { authState } = React.useContext(Authcontext);
 
