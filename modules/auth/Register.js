@@ -33,9 +33,12 @@ export default memo(function Register(props) {
             <SignUpComponent tab={tab} packageId={packageId} />
           </>
         );
-      } else if (respCode == 11) {
-        return <EnterPinToVerify />;
-      } else if (respCode == 34) {
+      }
+      // else if (respCode == 11) {
+      // old view
+      //   return <EnterPinToVerify />;
+      // } 
+      else if (respCode == 34) {
         // Response code 34 is not coming from backend. This is only for frontend logic to display setPinView
         return (
           <>

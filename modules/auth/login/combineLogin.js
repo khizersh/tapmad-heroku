@@ -1,21 +1,19 @@
 import Link from "next/link";
-import React, { useCallback, useMemo, memo, useEffect } from "react";
+import {useRouter} from "next/router";
+import React, {  memo, useEffect } from "react";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 import { MainContext } from "../../../contexts/MainContext";
-import { loggingTags } from "../../../services/apilinks";
-import { Cookie } from "../../../services/cookies";
-import { actionsRequestContent } from "../../../services/http-service";
-import { mobileIcon, tapmadLogo } from "../../../services/imagesLink";
-import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
-import DropdownWithImage from "../sign-up/DropdownWithImage";
 import CombineLoginDesktop from "./combine-login.js/CombineLoginDesktop";
 import CombineLoginMobile from "./combine-login.js/CombineLoginMobile";
 
 function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
+  const router=useRouter()
+  const {number}=router.query
+
   const { setLoader } = React.useContext(MainContext);
   const { AuthState } = React.useContext(AuthContext);
   const { SignUpState, dispatch } = React.useContext(SignUpContext);
@@ -105,11 +103,14 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       });
     }
   }, [AuthState]);
-
   useEffect(() => {
+    if(number){
+      setMobileNo(number)
+    }
     if (window.innerWidth < 799) {
       setIsMobile(true);
     }
+
   }, []);
 
   return (

@@ -173,10 +173,11 @@ export default function SubscribeButton({ creditCardType }) {
                 buttons: false,
               });
               Cookie.setCookies("userId", data.data.User.UserId);
-              dispatch({
-                type: UPDATE_SUBSCRIBE_RESPONSE,
-                data: { code: 11, newUser: false },
-              });
+              // dispatch({   old flow of showing enterpin for subscribed user 
+              //   type: UPDATE_SUBSCRIBE_RESPONSE,
+              //   data: { code: 11, newUser: false },
+              // });
+              router.push(`/sign-in?number=${details.MobileNo}`);
             } else {
               swal({
                 timer: 3000,
