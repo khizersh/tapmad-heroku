@@ -13,6 +13,7 @@ import {
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/SignUpReducer";
 import PaymentMethodDesktop from "./sign-up/PaymentMethodDesktop";
+import LoginPage from "../../pages/sign-in";
 
 export default memo(function Register(props) {
   const router = useRouter();
@@ -35,11 +36,7 @@ export default memo(function Register(props) {
           </>
         );
       } else if (respCode == 11) {
-        return (
-          <div style={{ backgroundColor: "#3b3b3b", borderRadius: "15px" }}>
-            <PaymentMethodDesktop />;
-          </div>
-        );
+        return <EnterPinToVerify />;
       } else if (respCode == 34) {
         // Response code 34 is not coming from backend. This is only for frontend logic to display setPinView
         return (

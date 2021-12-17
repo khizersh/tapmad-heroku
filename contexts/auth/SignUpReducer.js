@@ -7,11 +7,14 @@ export const UPDATE_ISMOBILE = "UPDATE_ISMOBILE";
 export const SIGNUP_RENDER = "SIGNUP_RENDER";
 export const LOGIN_OPERATOR = "LOGIN_OPERATOR";
 export const LOGGED_IN = "LOGGED_IN";
+export const ALREADY_SIGNEDUP_NUM = "ALREADY_SIGNEDUP_NUM";
 
 export function SignUpReducer(state, action) {
   switch (action.type) {
     case UPDATE_PACKAGE:
       return { ...state, SelectedPackage: action.data };
+    case ALREADY_SIGNEDUP_NUM:
+      return { ...state, AlreadySignedUpNum: action.data };
     case UPDATE_PAYMENT_PRICE:
       return { ...state, SelectedPrice: action.data };
     case UPDATE_ISMOBILE:

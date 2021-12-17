@@ -30,9 +30,9 @@
 }
 
 
-/* width */
+/* width whole web scrollbar*/
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 /* Track */

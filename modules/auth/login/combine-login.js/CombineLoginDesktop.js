@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
 const CombineLoginDesktop = ({
   AuthState,
@@ -14,6 +15,8 @@ const CombineLoginDesktop = ({
   pin,
   forgetClick,
 }) => {
+  const { SignUpState, dispatch } = React.useContext(SignUpContext);
+
   return (
     <div className="custom-bg">
       <h3 className="select-network">Select Your Network</h3>
