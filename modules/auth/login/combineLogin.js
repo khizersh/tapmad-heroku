@@ -1,6 +1,6 @@
 import Link from "next/link";
-import {useRouter} from "next/router";
-import React, {  memo, useEffect } from "react";
+import { useRouter } from "next/router";
+import React, { memo, useEffect } from "react";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
@@ -11,8 +11,8 @@ import CombineLoginDesktop from "./combine-login.js/CombineLoginDesktop";
 import CombineLoginMobile from "./combine-login.js/CombineLoginMobile";
 
 function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
-  const router=useRouter()
-  const {number}=router.query
+  const router = useRouter();
+  const { number } = router.query;
 
   const { setLoader } = React.useContext(MainContext);
   const { AuthState } = React.useContext(AuthContext);
@@ -104,17 +104,17 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
     }
   }, [AuthState]);
   useEffect(() => {
-    if(number){
+    if (number) {
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: { MobileNo: number.trim() },
       });
-      setMobileNo(number)
+      setMobileNo(number);
+      setbtnDisabled(false);
     }
     if (window.innerWidth < 799) {
       setIsMobile(true);
     }
-
   }, []);
 
   return (
