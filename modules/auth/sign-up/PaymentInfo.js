@@ -25,7 +25,6 @@ function PaymentInfo(props) {
   function updateUserData(userData) {
     dispatch({ type: UPDATE_USER_DETAILS, data: userData });
   }
-  console.log(props, "PR");
   const RenderMethod = useCallback(() => {
     const PaymentId = SignUpState.SelectedMethod.PaymentId;
     if (PaymentId == 1) {
@@ -91,10 +90,13 @@ function PaymentInfo(props) {
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
-    console.log(mobileNum, "mobileNum");
     if (+mobileNum === +mobileNum) {
       if (mobileNum.length > 4) {
         updateUserData({ MobileNo: mobileNum });
+        dispatch({
+          type: "ALREADY_SIGNEDUP_NUM",
+          data: { FromSignup: 1, number: mobileNum },
+        });
       }
     }
   }

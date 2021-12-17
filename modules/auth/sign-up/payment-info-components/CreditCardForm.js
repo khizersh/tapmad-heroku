@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 import Checkout from "../../../../public/static/js/checkout";
 import { Cookie } from "../../../../services/cookies";

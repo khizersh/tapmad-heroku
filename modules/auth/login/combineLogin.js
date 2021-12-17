@@ -140,7 +140,6 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
           btnDisabled={btnDisabled}
           CurrentMethod={CurrentMethod}
           mobileNo={mobileNo}
-
           loginUser={loginUser}
           pin={pin}
           forgetClick={forgetClick}

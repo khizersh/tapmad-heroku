@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useCallback, useMemo, memo, useContext } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
@@ -15,9 +15,9 @@ function Login({ loginResponse }) {
     updateUserPassword,
     updateUserOperator,
     setLoader,
-  } = React.useContext(MainContext);
-  const [mobileNo, setMobileNo] = React.useState("");
-  const [btnDisabled, setbtnDisabled] = React.useState(true);
+  } = useContext(MainContext);
+  const [mobileNo, setMobileNo] = useState("");
+  const [btnDisabled, setbtnDisabled] = useState(true);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;

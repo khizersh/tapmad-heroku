@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
 import { Cookie } from "../../../../services/cookies";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
 const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
-  const [num, setNum] = React.useState("");
+  const [num, setNum] = useState("");
   const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const onChange = (e) => {

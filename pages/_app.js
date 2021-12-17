@@ -80,19 +80,18 @@ function MyApp({ Component, pageProps }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Tapmad TV",
-              "alternateName": "Tapmad",
-              "url": "https://www.tapmad.com/",
-              "logo": "https://play-lh.googleusercontent.com/i8xVImpStVCQULwvGtfVkjQmdVLRMuTRfCC47CTaN_naZhk0wdwzplve7mloN0Z1iRM=s180-rw",
-              "sameAs": [
+              name: "Tapmad TV",
+              alternateName: "Tapmad",
+              url: "https://www.tapmad.com/",
+              logo: "https://play-lh.googleusercontent.com/i8xVImpStVCQULwvGtfVkjQmdVLRMuTRfCC47CTaN_naZhk0wdwzplve7mloN0Z1iRM=s180-rw",
+              sameAs: [
                 "https://www.facebook.com/TapmadTV/",
                 "https://twitter.com/tapmadtv",
                 "https://www.instagram.com/tapmad.entertainment/",
                 "https://www.youtube.com/channel/UCPHOf3lVS8bUSwR1h55EO6g",
-                "https://pk.linkedin.com/company/tapmad-tv"
-              ]
-            }
-            ),
+                "https://pk.linkedin.com/company/tapmad-tv",
+              ],
+            }),
           }}
         />
         {pageProps.env == "staging" ? (
@@ -118,7 +117,6 @@ function MyApp({ Component, pageProps }) {
         ></link>
       </Head>
       <>
-
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PJ4M57N"

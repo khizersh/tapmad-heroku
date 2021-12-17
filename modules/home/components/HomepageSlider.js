@@ -106,13 +106,13 @@ const HomepageSlider = ({ movies, ads, name }) => {
                 <div>
                   <Slider {...settings}>
                     {movieSection &&
-                    !movieSection.IsCategories  &&
+                    !movieSection.IsCategories &&
                     movieSection.Videos &&
                     movieSection.Videos.length > 0
                       ? movieSection.Videos.map((mov, index) => {
                           let slug = setUrlAccordingToVideoType(
                             mov,
-                            name == "Shows"  ? IsCategory : IsLiveChannel
+                            name == "Shows" ? IsCategory : IsLiveChannel
                           );
                           return (
                             <Link
@@ -144,21 +144,24 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName} 
                                   />*/}
-                                  {mov.NewChannelThumbnailPath ?   <Image
-                                      src={mov.NewChannelThumbnailPath}
-                                      height={304}
-                                      width={228}
-                                      loader={() => mov.NewChannelThumbnailPath}
-                                      loading={"eager"}
-                                      // layout='fill'
-                                      alt={"tapmad-" + mov.VideoName}
-                                    /> : null}
-                                  
+                                    {mov.NewChannelThumbnailPath ? (
+                                      <Image
+                                        src={mov.NewChannelThumbnailPath}
+                                        height={304}
+                                        width={228}
+                                        loader={() =>
+                                          mov.NewChannelThumbnailPath
+                                        }
+                                        loading={"eager"}
+                                        // layout='fill'
+                                        alt={"tapmad-" + mov.VideoName}
+                                      />
+                                    ) : null}
+
                                     {/* Crowns for Hompage to be done when backend adds to api  */}
                                     {checkForBoolean(mov.IsVideoChannel) ? (
                                       <div className="row">
                                         <div className="live_side">Live</div>
-
                                         <img
                                           className="col-3 offset-lg-9 offset-9 live_side2"
                                           src={mov.PackageImage}
@@ -168,7 +171,13 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     ) : checkForBoolean(
                                         mov.IsVideoFree
                                       ) ? null : (
-                                      <div className="live_side">Premium</div>
+                                      <div className="row">
+                                        <img
+                                          className="col-3 offset-lg-9 offset-9 live_side2"
+                                          src={mov.PackageImage}
+                                          width={40}
+                                        />
+                                      </div>
                                     )}
                                   </div>
                                   <div className="tm-mv-items">
@@ -225,20 +234,22 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     style={{ width: "100%" }}
                                     alt={"tapmad-" + mov.VideoName}
                                   /> */}
-                                  {mov.NewCategoryImage ?  <Image
-                                      src={mov.NewCategoryImage}
-                                      height={304}
-                                      width={228}
-                                      loader={() => mov.NewCategoryImage}
-                                      loading={"eager"}
-                                      // layout='fill'
-                                      alt={"tapmad-" + mov.VideoName}
-                                    /> : null}
-                                   
+                                    {mov.NewCategoryImage ? (
+                                      <Image
+                                        src={mov.NewCategoryImage}
+                                        height={304}
+                                        width={228}
+                                        loader={() => mov.NewCategoryImage}
+                                        loading={"eager"}
+                                        // layout='fill'
+                                        alt={"tapmad-" + mov.VideoName}
+                                      />
+                                    ) : null}
+
                                     {mov.IsVideoFree
                                       ? null
                                       : mov.PackageImage && (
-                                          <div className="live_side">
+                                          <div className="live_side3">
                                             {/* {mov.PackageName} */}
                                             <img
                                               src={mov.PackageImage}

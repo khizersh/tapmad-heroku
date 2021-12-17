@@ -25,69 +25,71 @@ import { SignUpContext } from "../../contexts/auth/SignUpContext";
 const watch = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
-  const { SignUpState  } = useContext(SignUpContext);
+  const { SignUpState } = useContext(SignUpContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
 
-  console.log("SignUpState watch : ",props);
+  console.log("SignUpState watch : ", props);
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
       if (props.data != null) {
-        router.push(`/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`);
+        router.push(
+          `/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
+        );
       } else {
         router.push("/sign-up");
       }
     }
   }, [props.allowUser, url]);
-  
 
   // for login user check content package and sent to respective package on change-package page
   useEffect(() => {
-    if(props.allowUser){
-    if (props.data && props.data.responseCode === 401) {
-      swal({
-        text: props.data.message,
-        timer: 3000,
-        icon: "error",
-      }).then((res) => {
+    if (props.allowUser) {
+      if (props.data && props.data.responseCode === 401) {
         swal({
-          title: "You have logged out!",
-          text: "Redirecting you in 2s...",
-          timer: 1900,
-          icon: "success",
-          buttons: false,
+          text: props.data.message,
+          timer: 3000,
+          icon: "error",
         }).then((res) => {
-          Cookie.setCookies("isAuth", 0);
-          setisAuthenticateFalse();
-          router.push("/");
+          swal({
+            title: "You have logged out!",
+            text: "Redirecting you in 2s...",
+            timer: 1900,
+            icon: "success",
+            buttons: false,
+          }).then((res) => {
+            Cookie.setCookies("isAuth", 0);
+            setisAuthenticateFalse();
+            router.push("/");
+          });
         });
-      });
-    } else if (props.data && props.data.responseCode === 8) {
-      swal({
-        text: props.data.message,
-        timer: 3000,
-        icon: "error",
-      }).then((res) => {
-        router.push("/subscribe-to-epl?subspack=epl");
-      });
-    } else if (props.data && props.data.responseCode === 110) {
-      swal({
-        title: "This content is not available on your current package, to upgrade your package press Upgrade",
-        icon: "warning",
-        buttons: ["Cancel", "Upgrade"],
-        dangerMode: false,
-        
-      })
-      .then((accepted) => {
-        if (accepted) {
-          router.push(`/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`);
-        } 
-      });
-    
+      } else if (props.data && props.data.responseCode === 8) {
+        swal({
+          text: props.data.message,
+          timer: 3000,
+          icon: "error",
+        }).then((res) => {
+          router.push("/subscribe-to-epl?subspack=epl");
+        });
+      } else if (props.data && props.data.responseCode === 110) {
+        swal({
+          title:
+            "This content is not available on your current package, to upgrade your package press Upgrade",
+          icon: "warning",
+          buttons: ["Cancel", "Upgrade"],
+          dangerMode: false,
+        }).then((accepted, cancel) => {
+          if (accepted) {
+            router.push(
+              `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
+            );
+          } else {
+            router.push("/");
+          }
+        });
+      }
     }
-  }
-
   }, [url]);
 
   function shouldRenderPlayer() {
@@ -167,7 +169,7 @@ export async function getServerSideProps(context) {
     IsChannel: chanelDetail.isChannel,
     headers: GlobalService.authHeaders(cookies["content-token"]),
   };
-  console.log("body : ",body);
+  console.log("body : ", body);
   var isFree = "1";
   isFree = chanelDetail.isFree;
   if (chanelDetail.isChannel == "1") {

@@ -2,15 +2,15 @@ import React, { useEffect, useState, useContext } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { useRouter } from "next/router";
 
-
 var isDefaultSet = false;
 export default function TaxView({ onChange }) {
-  const {  SignUpState } = useContext(SignUpContext);
+  const { SignUpState } = useContext(SignUpContext);
   const [PackagePrice, setPackagePrice] = useState([]);
   const [SelectedPrice, setSelectedPrice] = useState(null);
   const router = useRouter();
-  const { packageId  } = router.query;
+  const { packageId } = router.query;
   // set all products
+  console.log(SignUpState, "SignUpState");
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map((m) => {
@@ -26,29 +26,28 @@ export default function TaxView({ onChange }) {
         };
       });
       setPackagePrice(array);
-      onChange(SignUpState.SelectedPackage.PaymentTabMethods[0])
+      onChange(SignUpState.SelectedPackage.PaymentTabMethods[0]);
       setSelectedPrice(SignUpState.SelectedPackage.PaymentTabMethods[0]);
-        
     }
   }, [SignUpState.SelectedPackage]);
 
-// set default product via query param
-console.log("isDefaultSet : ",isDefaultSet);
+  // set default product via query param
+  console.log("isDefaultSet : ", isDefaultSet);
   useEffect(() => {
     setTimeout(() => {
-      if(packageId && !isDefaultSet){
+      if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
-        console.log("elem : ",elem);
-        if(elem){
-        isDefaultSet = true
+        console.log("elem : ", elem);
+        if (elem) {
+          isDefaultSet = true;
           elem.click();
         }
       }
     }, 1200);
-  }, [SignUpState.SelectedPrice , packageId]);
+  }, [SignUpState.SelectedPrice, packageId]);
 
   const onChangePackage = (m) => {
-    setSelectedPrice(m)
+    setSelectedPrice(m);
     onChange(m);
   };
   return (

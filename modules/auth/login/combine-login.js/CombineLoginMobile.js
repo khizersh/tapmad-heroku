@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
 const CombineLoginMobile = ({
   AuthState,
@@ -12,8 +13,12 @@ const CombineLoginMobile = ({
   CurrentMethod,
   mobileNo,
   pin,
-  forgetClick
+  forgetClick,
 }) => {
+  const { SignUpState, dispatch } = useContext(SignUpContext);
+  useEffect(() => {
+    console.log(SignUpState, "SignUpState");
+  }, []);
   return (
     <div className="custom-bg">
       <h3 className="select-network">Select Your Network</h3>

@@ -12,6 +12,8 @@ import {
 } from "../../contexts/auth/SignUpReducer";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/SignUpReducer";
+import PaymentMethodDesktop from "./sign-up/PaymentMethodDesktop";
+import LoginPage from "../../pages/sign-in";
 
 export default memo(function Register(props) {
   const router = useRouter();

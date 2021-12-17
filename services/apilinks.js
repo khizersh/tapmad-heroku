@@ -56,9 +56,9 @@ export const initialPaymentTransaction =
 export const initialPaymentTransactionNew =
   BASEURLDEVELOPMENT + "api/initiatePaymentTransactionNewPackage";
 
-  // shows api
+// shows api
 export const getSeasonVodByCategoryId =
-BASEURLDEVELOPMENT + "api/getSeasonVodByCategoryId/V1/en/web/";
+  BASEURLDEVELOPMENT + "api/getSeasonVodByCategoryId/V1/en/web/";
 export const unsubscribePaymentTransaction =
   BASEURLDEVELOPMENT + "api/unsubscribeUserSubscriptiption";
 export const getMoviesWithPagination = (from, to) => {
