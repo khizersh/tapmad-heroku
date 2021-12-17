@@ -12,14 +12,15 @@ import { SET_VIEW_TO_SHOW } from "../../contexts/auth/AuthReducers";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const {  setLoader } = useContext(MainContext);
+    const { setLoader } = useContext(MainContext);
     const { SignUpState } = useContext(SignUpContext);
     const { dispatch } = useContext(AuthContext);
     const router = useRouter();
 
     async function loginUser(userIp) {
       setLoader(true);
-      const userPin = Cookie.getCookies('UserPin') || SignUpState.UserDetails.UserPin 
+      const userPin =
+        Cookie.getCookies("UserPin") || SignUpState.UserDetails.UserPin;
       var obj = {
         Language: "en",
         Platform: "web",
@@ -28,65 +29,67 @@ export default function withLogin(Component, data) {
         OperatorId: SignUpState.UserDetails.Operator,
         UserPin: userPin,
       };
-      if(userPin.length  === 4){
-      const response = await AuthService.signInOrSignUpMobileOperatorByPin( obj , userIp);
-      try {
-        const status = setLoginViews(response, obj);
-        setLoader(false);
-        if (status.code == 1) {
-          swal({
-            timer: 2000,
-            title: "Signed In Successfully",
-            text: "Redirecting you..",
-            icon: "success",
-          });
-          let backURL = Cookie.getCookies("backUrl") || "/";
-          if (backURL == "sign-in") {
-            router.push("/");
-          } else {
-            router.push(backURL);
-          }
-        } else if (status.code == 34) {
-          dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
-        } 
-      
-        else if (status.code == 31) {
-          swal({
-            timer: 2000,
-            title: "Please enter valid PIN!",
-            icon: "error",
-          });
-        } else if (status.code == 401) {
-          console.log("inside 401");
-          swal({
-            title: "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
-            timer: 2500,
-            icon: "warning",
-          }).then(() => {
+      if (userPin.length === 4) {
+        const response = await AuthService.signInOrSignUpMobileOperatorByPin(
+          obj,
+          userIp
+        );
+        try {
+          const status = setLoginViews(response, obj);
+          console.log("status : ", status);
+          setLoader(false);
+          if (status.code == 1) {
+            swal({
+              timer: 2000,
+              title: "Signed In Successfully",
+              text: "Redirecting you..",
+              icon: "success",
+            });
+            let backURL = Cookie.getCookies("backUrl") || "/";
+            console.log("backURL  ... ", backURL);
+            if (backURL.includes("sign-in")) {
+              router.push("/");
+            } else {
+              router.push(backURL);
+            }
+          } else if (status.code == 34) {
             dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
-          });
+          } else if (status.code == 31) {
+            swal({
+              timer: 2000,
+              title: "Please enter valid PIN!",
+              icon: "error",
+            });
+          } else if (status.code == 401) {
+            console.log("inside 401");
+            swal({
+              title:
+                "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
+              timer: 2500,
+              icon: "warning",
+            }).then(() => {
+              dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+            });
+          } else if (status.code == 0 || status.code == 4) {
+            swal({
+              title: "You are not subscribe user please subscribe yourself",
+              timer: 2500,
+              icon: "warning",
+            }).then(() => {
+              router.push("/sign-up");
+            });
+          }
+        } catch (err) {
+          console.log(err);
         }
-        else if (status.code == 0 || status.code == 4) {
-          swal({
-            title: "You are not subscribe user please subscribe yourself",
-            timer: 2500,
-            icon: "warning",
-          }).then(() => {
-            router.push("/sign-up");
-          });
-        }
-        
-      } catch (err) {
-        console.log(err);
+      } else {
+        setLoader(false);
+        swal({
+          title: "Enter 4 digit PIN",
+          timer: 2500,
+          icon: "error",
+        });
       }
-    }else{
-      setLoader(false);
-      swal({
-        title: "Enter 4 digit PIN",
-        timer: 2500,
-        icon: "error",
-      })
-    }
     }
 
     async function verifyPinCode(ip, pin, forgetPin) {

@@ -70,7 +70,10 @@ export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `${BASEURL}api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 export const getFeaturedHomepageWithRE = (from, to) => {
-  return BASEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`;
+  return (
+    BASEURLDEVELOPMENT +
+    `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`
+  );
 };
 export const getChannelsWithPagination = (from, to) => {
   return (
