@@ -105,6 +105,10 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   }, [AuthState]);
   useEffect(() => {
     if(number){
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { MobileNo: number.trim() },
+      });
       setMobileNo(number)
     }
     if (window.innerWidth < 799) {
