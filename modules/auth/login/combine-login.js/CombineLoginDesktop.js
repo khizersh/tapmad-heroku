@@ -16,7 +16,7 @@ const CombineLoginDesktop = ({
   forgetClick,
 }) => {
   const { SignUpState, dispatch } = React.useContext(SignUpContext);
-
+  console.log(SignUpState);
   return (
     <div className="custom-bg">
       <h3 className="select-network">Select Your Network</h3>
@@ -85,7 +85,16 @@ const CombineLoginDesktop = ({
               id="mobileNo"
               placeholder="xxxxxxxxxxx"
               inputMode="numeric"
-              value={mobileNo}
+              value={
+                SignUpState?.AlreadySignedUp?.FromSignup == 1
+                  ? SignUpState?.AlreadySignedUp?.number
+                  : mobileNo
+              }
+              defaultValue={
+                SignUpState?.AlreadySignedUp?.FromSignup == 1
+                  ? SignUpState.AlreadySignedUp.number
+                  : mobileNo
+              }
               onChange={(e) => handleNumber(e)}
               autoComplete={"off"}
             />
