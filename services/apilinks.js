@@ -13,8 +13,9 @@ export const getItemsByKeyword =
 export const getUserByUserId = BASEURLDEVELOPMENT + "api/getUserProfileDetail";
 export const getUserPaymentHistory =
   BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
+  // home page api
 export const getFeaturedHomePage =
-  BASEURLDEVELOPMENT + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
+  BASEURLAPP + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURLDEVELOPMENT + "api/getCardUser";
