@@ -3,7 +3,7 @@ import React from "react";
 const TabsWithIcon = ({ data, onChange  , selected}) => {
   return (
     <>
-      <div class="container-sm rounded-pill row option_div p-3 mt-5">
+      <div class="container-sm rounded-pill row option_div p-3">
         {data.length && selected ? data.map((tab) => (
           <div className="m-auto cursor-pointer" onClick={() => onChange(tab)}>
             <span style={{ color: tab.title == selected.title ? "#87c242 " : "#000" }}>
