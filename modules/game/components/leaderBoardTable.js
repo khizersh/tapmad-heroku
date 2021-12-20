@@ -18,8 +18,12 @@ const leaderBoardTable = ({ leaderBoard, limit, onReadMore }) => {
               <p className="font-11 d-block text-center">
                 {leaderBoard[1].FullName}
               </p>
-              <p className="font-11 d-block text-center" style={{marginTop :'-12px'}}>
-               Won: <span className="text-green">{leaderBoard[1].TotalCoins}</span> 
+              <p
+                className="font-11 d-block text-center"
+                style={{ marginTop: "-12px" }}
+              >
+                Won:{" "}
+                <span className="text-green">{leaderBoard[1].TotalCoins}</span>
               </p>
             </div>
             <div>
@@ -27,8 +31,12 @@ const leaderBoardTable = ({ leaderBoard, limit, onReadMore }) => {
               <p className="font-11 d-block text-center">
                 {leaderBoard[0].FullName}
               </p>
-              <p className="font-11 d-block text-center" style={{marginTop :'-12px'}}>
-              Won <span className="text-green">{leaderBoard[0].TotalCoins}</span> 
+              <p
+                className="font-11 d-block text-center"
+                style={{ marginTop: "-12px" }}
+              >
+                Won{" "}
+                <span className="text-green">{leaderBoard[0].TotalCoins}</span>
               </p>
             </div>
             <div>
@@ -36,8 +44,12 @@ const leaderBoardTable = ({ leaderBoard, limit, onReadMore }) => {
               <p className="font-11 d-block text-center">
                 {leaderBoard[2].FullName}
               </p>{" "}
-              <p className="font-11 d-block text-center" style={{marginTop :'-12px'}}>
-              Won <span className="text-green">{leaderBoard[2].TotalCoins}</span> 
+              <p
+                className="font-11 d-block text-center"
+                style={{ marginTop: "-12px" }}
+              >
+                Won{" "}
+                <span className="text-green">{leaderBoard[2].TotalCoins}</span>
               </p>
             </div>
           </>
@@ -45,63 +57,67 @@ const leaderBoardTable = ({ leaderBoard, limit, onReadMore }) => {
           ""
         )}
       </div>
-      <table className={`w-100 P-5 table-leaderboard`}>
-        <thead>
-          <tr>
-            <th scope="col" className="border-left-10">
-              Rank
-            </th>
-            <th scope="col" className="pl-5">
-              Player Name
-            </th>
-            <th scope="col" className="border-right-10 ">
-              Game won
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaderBoard.length ? (
-            leaderBoard.map((m, i) => (
-              <>
-                {i > 2 ? (
-                  <>
-                    <tr key={i} className="">
-                      <td className="pl-4">
-                        <span>#{m.Rank}</span>
-                      </td>
-                      <td className="pl-5">
-                        <span>
-                          <img src={leaderBoardUseIcon} width={30} />
-                        </span>{" "}
-                        {m.FullName}
-                      </td>
-                      <td className="pl-4">{m.TotalCoins} </td>
-                    </tr>
-                  </>
-                ) : null}
-              </>
-            ))
-          ) : (
-            <td colSpan="3" className="text-center">
-              Record not found
-            </td>
-          )}
-        </tbody>
-        {limit ? (
-          <tfoot>
+      {leaderBoard.length > 3 ? (
+        <table className={`w-100 P-5 table-leaderboard`}>
+          <thead>
             <tr>
-              <th colSpan="3" className="text-center">
-                <button
-                  className="btn subscribe-btn bg-green"
-                  onClick={onReadMore}
-                >
-                  Load More
-                </button>
+              <th scope="col" className="border-left-10">
+                Rank
+              </th>
+              <th scope="col" className="pl-5">
+                Player Name
+              </th>
+              <th scope="col" className="border-right-10 ">
+                Game won
               </th>
             </tr>
-          </tfoot>
-        ) : null}
-      </table>
+          </thead>
+          <tbody>
+            {leaderBoard.length ? (
+              leaderBoard.map((m, i) => (
+                <>
+                  {i > 2 ? (
+                    <>
+                      <tr key={i} className="">
+                        <td className="pl-4">
+                          <span>#{m.Rank}</span>
+                        </td>
+                        <td className="pl-5">
+                          <span>
+                            <img src={leaderBoardUseIcon} width={30} />
+                          </span>{" "}
+                          {m.FullName}
+                        </td>
+                        <td className="pl-4">{m.TotalCoins} </td>
+                      </tr>
+                    </>
+                  ) : null}
+                </>
+              ))
+            ) : (
+              <td colSpan="3" className="text-center">
+                Record not found
+              </td>
+            )}
+          </tbody>
+          {limit ? (
+            <tfoot>
+              <tr>
+                <th colSpan="3" className="text-center">
+                  <button
+                    className="btn subscribe-btn bg-green"
+                    onClick={onReadMore}
+                  >
+                    Load More
+                  </button>
+                </th>
+              </tr>
+            </tfoot>
+          ) : null}
+        </table>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

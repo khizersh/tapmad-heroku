@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 
 const InstallMobileApp = () => {
   const [display, toggle] = useState(true);
@@ -7,10 +8,26 @@ const InstallMobileApp = () => {
     <>
       <style jsx>{`
         .ratingBox {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-color: #000;
+          padding: 15px;
+          z-index: 10
+        }
+        .ratingBox,
+        .rbdtxt {
           display: flex;
           flex-wrap: wrap;
           align-items: center;
           gap: 15px;
+        }
+        .ratingBox {
+        }
+        .rbdtxt {
+          display: flex;
+          flex-wrap: wrap;
         }
       `}</style>
       <div className="ratingBox">
@@ -27,10 +44,10 @@ const InstallMobileApp = () => {
             src="/icons/apple-icon-76x76-dunplab-manifest-25122.png"
             decoding="async"
             loading="lazy"
-            width={76}
-            height={76}
+            width={32}
+            height={32}
           />
-          <div>
+          <div className="rbdtxt">
             <h2>Tapmad</h2>
             <p>4 Millions+ Install</p>
             <div className="ratings">
@@ -41,10 +58,10 @@ const InstallMobileApp = () => {
               <i className="fa fa-star"></i>
             </div>
           </div>
-          <Link href="/">
-            <a>Install</a>
-          </Link>
         </div>
+        <Link href="/">
+          <a>Install</a>
+        </Link>
       </div>
     </>
   ) : (

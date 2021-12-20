@@ -136,15 +136,18 @@ export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
 export const getAllMatches = BASEURLDEVELOPMENT + "api/getMatchDetail";
 export const getMatchBetsByUserId =
   BASEURLDEVELOPMENT + "api/getMatchBetsByUserId";
-export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
+export const getAllLeagues = BASEURLDEVELOPMENT + "api/getAllOnlineLeagues";
 export const getLeaderBoardByLeagueId =
   BASEURLDEVELOPMENT + "api/getLeaderBoardByLeagueId";
 export const getBuyCoinsPackages =
   BASEURLDEVELOPMENT + "api/getBuyCoinsPackages/v1/en/web";
-export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
-export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
-export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";
-export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
+export const makeCoinTransaction =
+  BASEURLDEVELOPMENT + "api/makeCoinsPaymentTransaction";
+export const rewardPredicationCoda =
+  BASEURLDEVELOPMENT + "api/rewardPredicationCoda";
+export const updateRewardStore =
+  BASEURLDEVELOPMENT + "api/updateRewardsStoreTestV2";
+export const getUserChallenges = BASEURLDEVELOPMENT + "api/getUserChallenges";
 
 // get all country
 export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";
