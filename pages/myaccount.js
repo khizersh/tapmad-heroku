@@ -171,12 +171,16 @@ const MyAccountTrial = ({ signout }) => {
           </button>
         </div>
         <div className="margin-y-auto">
-          <button
-            onClick={clickEditProfile}
-            className="btn bg-white rounded-lg py-1 text-green font-13"
-          >
-            Edit Profile
-          </button>
+          {isMobile ? (
+            <button
+              onClick={clickEditProfile}
+              className="btn bg-white rounded-lg py-1 text-green font-13"
+            >
+              Edit Profile
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </NavbarHOC>
       <div className="profile-container">

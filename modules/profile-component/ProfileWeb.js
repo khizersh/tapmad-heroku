@@ -94,7 +94,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
           <div>
             <h4>My Profile</h4>
           </div>
-          {/* <div class="ml-3">
+          <div class="ml-3">
             <Link href="/editprofile">
               <button
                 type="button"
@@ -103,7 +103,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                 Edit Profile
               </button>
             </Link>
-          </div> */}
+          </div>
         </div>
         <div class="row mt-4">
           <div class="col-2 px-0">
@@ -137,7 +137,8 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
               </div>
             </div>
           </div>
-          <div class="col-5 coins-div">
+          {/* buy coins with coins show here */}
+          {/* <div class="col-5 coins-div">
             <div className="row float-right">
               <div className="col-6 text-right pr-1">
                 <img src={coinIcon} width="55" alt="user_back" />
@@ -162,7 +163,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
