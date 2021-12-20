@@ -415,7 +415,6 @@ async function getAllowRegionsList(body) {
 
 function validateUser(data) {
   var user = data.User;
-  console.log(user, "RREE");
 
   if (user.UserId) {
     Cookie.setCookies("userId", user.UserId);

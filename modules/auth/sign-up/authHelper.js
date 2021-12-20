@@ -28,7 +28,7 @@ export function handleBody(SignUpState) {
     Language: "en",
     Platform: "web",
     ProductId: SignUpState?.SelectedPrice?.ProductId,
-    MobileNo: SignUpState.UserDetails.MobileNo,
+    MobileNo: SignUpState.UserDetails.MobileNo || Cookie.getCookies('user_mob'),
     OperatorId: SignUpState.UserDetails.Operator,
     cnic: SignUpState.UserDetails.Cnic,
     Email: SignUpState.UserDetails.Email,

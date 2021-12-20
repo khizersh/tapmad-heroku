@@ -1,7 +1,9 @@
 import { createRoom, deleteRoom, joinRoom } from "../../../services/apilinks";
 import { Cookie } from "../../../services/cookies";
 import { post } from "../../../services/http-service";
-var db = "GroupChat-Dev"
+var db = "GroupChat-Dev";
+
+
 export const getSingleRoomChat = (database, channelID, roomId, cb) => {
     database.ref(`${db}/${channelID}/${roomId}`).limitToLast(100).on("value", (snapshot) => {
         const vals = snapshot.val();
@@ -11,6 +13,8 @@ export const getSingleRoomChat = (database, channelID, roomId, cb) => {
 export const removeListenerOfNonActiveChat = (database, channelID, roomId) => {
     database.ref(`${db}/${channelID}/${roomId}`).off("value");
 }
+
+
 export const sendGroupChatMessage = (database, chatDetails) => {
     const userId = Cookie.getCookies('userId');
     const name = Cookie.getCookies('userProfileName');

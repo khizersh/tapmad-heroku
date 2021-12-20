@@ -299,6 +299,9 @@
     text-transform: uppercase;
   }
 }
+.border-radius-6{
+  border-radius: 6px;
+}
 
 /* Smartphones (landscape) ----------- */
 @media only screen and (min-width: 321px) {

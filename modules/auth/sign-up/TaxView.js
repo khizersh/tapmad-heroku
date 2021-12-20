@@ -32,7 +32,6 @@ export default function TaxView({ onChange }) {
   }, [SignUpState.SelectedPackage]);
 
   // set default product via query param
-  console.log("isDefaultSet : ", isDefaultSet);
   useEffect(() => {
     setTimeout(() => {
       if (packageId && !isDefaultSet) {

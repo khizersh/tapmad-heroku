@@ -9,8 +9,10 @@ import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 import withLogin from "../LoginHOC";
 import router from "next/router";
+import { checkForBoolean } from "../../../services/utils";
 
 const VerifyOTPComponent = ({ newUser, login }) => {
+  console.log("newUser : ",newUser);
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const otp = useRef("");
@@ -43,6 +45,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
             Version: "V1",
           };
           data = await AuthService.paymentProcessTransaction(body);
+          console.log("process ... ",data);
           SignUpTag(body, data.data);
         } catch (e) {
           swal({
@@ -78,6 +81,8 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                   Cookie.setCookies("userId", data.data.User.UserId);
                 }
                 if (SignUpState.LoggedIn == 1) {
+                  router.push("/");
+                } else if(checkForBoolean(data.data?.User?.IsPinSet)){
                   router.push("/");
                 } else {
                   dispatch({
