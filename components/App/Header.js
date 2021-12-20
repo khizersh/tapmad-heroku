@@ -6,6 +6,7 @@ import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 // import tapLogo from "../../public/icons/tm-logo.png";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 import { AuthService } from "../../modules/auth/auth.service";
+// import InstallMobileApp from "../../modules/game/components/InstallMobileApp";
 
 function HeaderBasic({ signout }) {
   const [country, setCountry] = useState("PK");
@@ -24,6 +25,7 @@ function HeaderBasic({ signout }) {
   }, []);
   return (
     <>
+      {/* <InstallMobileApp /> */}
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
