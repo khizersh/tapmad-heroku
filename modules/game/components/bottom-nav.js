@@ -56,25 +56,41 @@ export default function BottomNav() {
 
   return (
     <div className="gm_foo_nav fixed-bottom ng-scope">
+      <style jsx>
+        {`
+        .btmbtn {
+          font-size: 0.9em
+        }
+        `}
+      </style>
       <ul
         className="gm_mob_menu list-group list-group-horizontal d-flex"
         id="footer_nav_a"
       >
         {tabs.length
           ? tabs.map((m, i) => (
-            <Link key={i} href={m.link} className="text-light" target="_self">
-              <li
-                className={`list-group-item ${activeTab && activeTab.id == m.id ? "border-bottom-game" : ""
+              <Link key={i} href={m.link} className="text-light" target="_self">
+                <li
+                  className={`list-group-item ${
+                    activeTab && activeTab.id == m.id
+                      ? "border-bottom-game"
+                      : ""
                   } border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center`}
-                onClick={() => onClickTab(m)}
-              >
-                <a className="text-light" id="g_home" target="_self">
-                  <img src={m.image} width="30" alt="" />{" "}
-                  <span className={`d-block mt-1 mb-0 ${activeTab && activeTab.id == m.id ? "color-green" : ""}`}>{m.title}</span>
-                </a>
-              </li>
-            </Link>
-          ))
+                  onClick={() => onClickTab(m)}
+                >
+                  <a className="text-light" id="g_home" target="_self">
+                    <img src={m.image} width="30" alt="" />{" "}
+                    <span
+                      className={`btmbtn d-block mt-1 mb-0 ${
+                        activeTab && activeTab.id == m.id ? "color-green" : ""
+                      }`}
+                    >
+                      {m.title}
+                    </span>
+                  </a>
+                </li>
+              </Link>
+            ))
           : null}
         {/* <Link href="/game" className="text-light" target="_self">
           <li className="list-group-item border-left-0 border-top-0 btn border-right-0 rounded-0 bg-transparent flex-fill p-1 text-center">

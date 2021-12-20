@@ -160,6 +160,7 @@ function MyApp({ Component, pageProps }) {
                     <CatchupProvider>
                       <GameProvider>
                         <Skeleton {...pageProps}>
+                          <BuyCoinModal />
                           <Header />
                           <Component {...pageProps} />
                           <Footer />
@@ -196,7 +197,6 @@ export const NoSideBarSkeleton = ({ children }) => {
   };
   return (
     <div>
-      <BuyCoinModal />
       {initialState.loading ? <Loader /> : null}
       {children}
     </div>
