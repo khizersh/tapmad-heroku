@@ -198,6 +198,7 @@
   .width {
     width: 100% !important;
     margin: auto;
+    overflow-x: hidden;
   }
 
   .discountImage{

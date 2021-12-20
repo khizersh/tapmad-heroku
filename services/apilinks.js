@@ -13,7 +13,7 @@ export const getItemsByKeyword =
 export const getUserByUserId = BASEURLDEVELOPMENT + "api/getUserProfileDetail";
 export const getUserPaymentHistory =
   BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
-  // home page api
+// home page api
 export const getFeaturedHomePage =
   BASEURLDEVELOPMENT + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
@@ -125,7 +125,7 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 // PSL Chat Bids
 export const getPSLTabs = BASEURLDEVELOPMENT + "api/getAllTabs/v1/en/android";
 export const submitMatchBids =
-BASEURLDEVELOPMENT + "api/updateNewUserEventQuestionAnswers";
+  BASEURLDEVELOPMENT + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
 BASEURLDEVELOPMENT + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
 export const createRoom = BASEURLDEVELOPMENT + "api/createNewChatRoom";
@@ -134,13 +134,14 @@ export const joinRoom = BASEURLDEVELOPMENT + "api/joinChatRoom";
 // PSL bids / game
 export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
 // PSL bids
-export const getAllMatches = BASEURL + "api/getMatchDetail";
-export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
+export const getAllMatches = BASEURLDEVELOPMENT + "api/getMatchDetail";
+export const getMatchBetsByUserId =
+  BASEURLDEVELOPMENT + "api/getMatchBetsByUserId";
 export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
 export const getLeaderBoardByLeagueId =
-  BASEURLAPP + "api/getLeaderBoardByLeagueId";
+  BASEURLDEVELOPMENT + "api/getLeaderBoardByLeagueId";
 export const getBuyCoinsPackages =
-  BASEURL + "api/getBuyCoinsPackages/v1/en/web";
+  BASEURLDEVELOPMENT + "api/getBuyCoinsPackages/v1/en/web";
 export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
 export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
 export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";

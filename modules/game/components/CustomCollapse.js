@@ -12,16 +12,31 @@ const CustomCollapse = ({ data, onChange }) => {
 
   return (
     <Card className={`${styles.bgBlack} mt-1`}>
+      <style jsx>
+        {`
+          .thead-light {
+          }
+          .thead-light th {
+            padding: 7px;
+            font-size: 12px;
+          }
+          .acchd i {
+            font-size: 24px;
+            margin-top: 3px;
+          }
+        `}
+      </style>
       <Accordion.Toggle
         as={Card.Header}
         eventKey={data.id}
         onClick={() => onChangeTab()}
       >
-        <h5 className={`mb-0 text-light ${styles.title}`}>
+        <h5 className={`acchd mb-0 text-light ${styles.title}`}>
           <img src={data.icon} /> {data.title}
           <i
-            className={`fa fa-angle-${arrow ? "up" : "down"
-              } rotate-icon float-right`}
+            className={`fa fa-angle-${
+              arrow ? "up" : "down"
+            } rotate-icon float-right`}
           ></i>
         </h5>
       </Accordion.Toggle>
@@ -37,7 +52,7 @@ const CustomCollapse = ({ data, onChange }) => {
                     <th>Answers</th>
                     <th>Odds</th>
                     <th>Games</th>
-                    <th style={{width:'50%'}}>You can win</th>
+                    <th style={{ width: "50%" }}>You can win</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -15,7 +15,7 @@ const GameLayout = ({ children }) => {
 
   return (
     // <div className="game-header">
-    <div >
+    <div style={{minHeight: "50vh"}}>
       {children}
       <BottomNav />
     </div>
