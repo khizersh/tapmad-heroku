@@ -158,6 +158,7 @@ export default function SubscribeButton({ creditCardType }) {
         }
 
         var data = await AuthService.initialTransaction(details);
+        console.log("data in inititate : ",data);
         setLoader(false);
         if (data != null) {
           if (data.responseCode == 0) {

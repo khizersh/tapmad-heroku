@@ -37,7 +37,7 @@ export default function CreateJoinRoomModalBody({
     if (roomName.current.value.length > 2) {
       var body = {
         Version: "v1",
-        Language: "en",
+        Language: "en", 
         Platform: "android",
         UserId: Cookie.getCookies("userId"),
         ChannelId: channelId,
@@ -58,6 +58,7 @@ export default function CreateJoinRoomModalBody({
         if (data.ChatRooms && data.ChatRooms.length) {
           setNewRoom(data.ChatRooms[data.ChatRooms.length - 1]);
         }
+        console.log("data.ChatRooms .. : ",data);
         mergeRoom(data.ChatRooms);
         setBtnDisable(false)
         setOnLoad(false);

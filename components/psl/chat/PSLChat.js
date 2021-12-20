@@ -31,6 +31,7 @@ export default function PSLChat({ channel }) {
   const [modalShow, setModalShow] = useState(false);
   const [currentRoomOption, setCurrentRoomOption] = useState(0);
 
+  const generalRoomId = 1;
   useEffect(() => {
     const header = document.getElementById("tab-chat");
     const sticky = 100;
@@ -75,6 +76,7 @@ export default function PSLChat({ channel }) {
   }, [database]);
 
   function appendChatRoom(newRoom) {
+    console.log("newRoom : ",newRoom);
     if (Array.isArray(newRoom)) {
       // Delete Room
       setChatRooms(newRoom);
@@ -99,9 +101,10 @@ export default function PSLChat({ channel }) {
   async function getUserAllRooms() {
     userId = Cookie.getCookies("userId");
     const response = await get(getUserRooms(userId, channel.VideoEntityId));
-    if (response.data.Response.responseCode == 1) {
+    console.log("rooms reposne: ",response.data);
+    if (response.data.Response.responseCode == 1 && response.data.ChatRooms ) {
       setChatRooms(response.data.ChatRooms[0].Rooms);
-      selectRoom(1);
+      selectRoom(generalRoomId);
     }
   }
   function selectRoom(e) {

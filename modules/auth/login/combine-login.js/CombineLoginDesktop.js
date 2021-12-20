@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
@@ -42,7 +42,7 @@ const CombineLoginDesktop = ({
                         <img
                           src={m.OperatorImage}
                           alt={m.OperatorName}
-                          className="img-fluid "
+                          className="img-fluid border-radius-6"
                           width="30"
                         />
                         <i

@@ -83,7 +83,6 @@ export default function Player({ movies }) {
   }
 
   useEffect(async () => {
-    console.log(movies.Video);
     verifyURL(router, movies.Video.VideoName);
 
     await getRelatedChannels();
@@ -176,6 +175,7 @@ export default function Player({ movies }) {
       // }
     }
   }
+
   useEffect(() => {
     const header = document.getElementById("player-div1");
     const sticky = header.offsetTop + 100;
@@ -296,9 +296,8 @@ export default function Player({ movies }) {
                 </>
               ) : null}
             </div>
-
             <div className="col-lg-12 p-0">
-              {movie && movie.IsPsl ? (
+              {movie && movie.Video.IsChat ? (
                 <div className="the-shop">
                   {/* <PlayerShop />  */}
                   <PSLComponent channel={movie.Video} />

@@ -29,7 +29,6 @@ const watch = (props) => {
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
 
-  console.log("SignUpState watch : ", props);
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {

@@ -10,6 +10,7 @@ export default memo(function PSLComponent({ channel }) {
     const router = useRouter();
     const [tabs, setTabs] = useState([]);
     const [selectedTab, setSelectedTab] = useState();
+
     useEffect(async () => {
         const tabs = await getPSLTabsService();
         setTabs(tabs.Tabs);
@@ -110,7 +111,8 @@ export default memo(function PSLComponent({ channel }) {
             </div>
             <hr />
             <div>
-                <RenderViews />
+                {/* <RenderViews /> */}
+                 <PSLChat channel={channel} />
             </div>
         </div>
     </>

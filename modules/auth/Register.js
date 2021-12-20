@@ -36,8 +36,8 @@ export default memo(function Register(props) {
           </>
         );
       }
+          // old view
       // else if (respCode == 11) {
-      // old view
       //   return <EnterPinToVerify />;
       // } 
       else if (respCode == 34) {
@@ -106,10 +106,6 @@ export default memo(function Register(props) {
         dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[1] });
       }
     }
-    // dispatch({
-    //   type: UPDATE_PAYMENT_PRICE,
-    //   data: SignUpState.SelectedPackage.PaymentTabMethods[0],
-    // });
   }, [SignUpState.signupRender]);
 
   return (
