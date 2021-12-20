@@ -47,8 +47,8 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
     await dispatch({ type: UPDATE_PACKAGE, data: true });
     router.push("/change-package");
   };
+  
   useEffect(() => {
-    console.log(allData, "AKK");
     if (allData) {
       setPrice(allData.PackageDescription[0].PackagePrice);
     }
