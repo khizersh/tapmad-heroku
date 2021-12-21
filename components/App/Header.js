@@ -23,10 +23,13 @@ function HeaderBasic({ signout }) {
   const onClose = () => {
     Cookie.setCookies("hidePopup", true);
     setHidePopup(true);
+    setTimeout(() => {
+      setHidePopup(false);
+      Cookie.setCookies("hidePopup", false);
+    }, 1.8e6);
   };
 
   useEffect(async () => {
-    console.log(Cookie.getCookies("hidePopup"));
     if (!Cookie.getCookies("hidePopup")) {
       const country = await AuthService.getGeoInfo();
       if (country) {
@@ -35,6 +38,10 @@ function HeaderBasic({ signout }) {
       }
     } else {
       setHidePopup(true);
+      setTimeout(() => {
+        setHidePopup(false);
+        Cookie.setCookies("hidePopup", false);
+      }, 5e3);
     }
   }, []);
 
