@@ -44,7 +44,8 @@ export const getShowsWithPagination =
   BASEURLDEVELOPMENT + "api/getShowsWithPagination/0/5/0/16";
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
-  BASEURLDEVELOPMENT + "api/getUserStreamWithPackages";
+  BASEURLDEVELOPMENT + "api/getUserStreamWithPackagesChannelsChat";
+  
 
 // export const getEventPredicationGameChannel =
 // BASEURLDEVELOPMENT + "api/getEventPredicationGameChannelToken";
@@ -122,13 +123,13 @@ export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
 export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
-export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
+export const getPSLTabs = BASEURLDEVELOPMENT + "api/getAllTabs/v1/en/android";
 export const submitMatchBids =
   BASEURLDEVELOPMENT + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
-  BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
-export const createRoom = BASEURLAPP + "api/createNewChatRoom";
-export const joinRoom = BASEURLAPP + "api/joinChatRoom";
+BASEURLDEVELOPMENT + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+export const createRoom = BASEURLDEVELOPMENT + "api/createNewChatRoom";
+export const joinRoom = BASEURLDEVELOPMENT + "api/joinChatRoom";
 
 // PSL bids / game
 export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";

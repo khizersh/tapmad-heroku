@@ -12,7 +12,6 @@ import router from "next/router";
 import { checkForBoolean } from "../../../services/utils";
 
 const VerifyOTPComponent = ({ newUser, login }) => {
-  console.log("newUser : ",newUser);
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const otp = useRef("");
@@ -38,14 +37,13 @@ const VerifyOTPComponent = ({ newUser, login }) => {
           body = {
             CodeOTP: otp.current.value,
             Language: "en",
-            MobileNo: SignUpState.UserDetails.MobileNo,
+            MobileNo: SignUpState.UserDetails.MobileNo || Cookie.getCookies('user_mob'),
             OperatorId: SignUpState.UserDetails.Operator,
             Platform: "web",
             ProductId: SignUpState.SelectedPrice.ProductId,
             Version: "V1",
           };
           data = await AuthService.paymentProcessTransaction(body);
-          console.log("process ... ",data);
           SignUpTag(body, data.data);
         } catch (e) {
           swal({
@@ -83,7 +81,8 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 if (SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  router.push("/");
+                  const backUrl = Cookie.getCookies('backURL');
+                  router.push(backUrl);
                 } else {
                   dispatch({
                     type: UPDATE_SUBSCRIBE_RESPONSE,
