@@ -93,7 +93,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                       <Link href={viewMoreSlug} passHref={true} shallow={true}>
                         <a>
                           <span
-                            className="badge badge-primary"
+                            className="btn view-more-btn"
                             onClick={() => getMoreSections(movieSection)}
                           >
                             View More
