@@ -163,7 +163,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       <div className="row">
                                         <div className="live_side">Live</div>
                                         <img
-                                          className="col-3 offset-lg-9 offset-9 live_side2"
+                                          className="col-3 offset-lg-9 offset-9 live_side2 crown-img-live"
                                           src={mov.PackageImage}
                                           width={40}
                                         />
@@ -173,7 +173,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                       ) ? null : (
                                       <div className="row">
                                         <img
-                                          className="col-3 offset-lg-9 offset-9 live_side2"
+                                          className="col-3 offset-lg-9 offset-9 live_side2 crown-img-only"
                                           src={mov.PackageImage}
                                           width={40}
                                         />
@@ -249,9 +249,10 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                     {mov.IsVideoFree
                                       ? null
                                       : mov.PackageImage && (
-                                          <div className="live_side3">
+                                          <div className="live_side3 ">
                                             {/* {mov.PackageName} */}
                                             <img
+                                              className="crown-img-only"
                                               src={mov.PackageImage}
                                               width={30}
                                             />
