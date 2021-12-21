@@ -8,15 +8,18 @@ import withSignout from "../../modules/auth/signout/SignoutHOC";
 import { AuthService } from "../../modules/auth/auth.service";
 import InstallMobileApp from "../../modules/game/components/InstallMobileApp";
 import { Cookie } from "../../services/cookies";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 function HeaderBasic({ signout }) {
   const [country, setCountry] = useState("PK");
   const [hidePopup, setHidePopup] = useState(false);
   const { initialState, setSearch } = useContext(MainContext);
+  const { SignUpState } = useContext(SignUpContext);
 
   const onClick = () => {
     setSearch(true);
   };
+
 
   const onClose = () => {
     Cookie.setCookies("hidePopup", true);
@@ -38,7 +41,8 @@ function HeaderBasic({ signout }) {
 
   return (
     <>
-      {!hidePopup ? <InstallMobileApp onClose={onClose} /> : <></>}
+    {}
+      {SignUpState.isMobile && !hidePopup ? <InstallMobileApp onClose={onClose} /> : <></>}
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
