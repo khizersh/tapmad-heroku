@@ -7,8 +7,8 @@ import requestIp from "request-ip";
 import { IsLiveChannel } from "../../services/constants";
 
 export default function ViewMore(props) {
-    console.log("props ", props);
-    return <div className="row">
+    console.log("props in view more ", props);
+    return <div className="row mx-auto">
         {props.data.Sections == null ?
             <div className="col-12"><h3 className="text-center">No data found</h3></div>
             : props.data.Sections.Videos.map((video, i) => {
