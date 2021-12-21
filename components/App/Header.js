@@ -20,7 +20,6 @@ function HeaderBasic({ signout }) {
     setSearch(true);
   };
 
-
   const onClose = () => {
     Cookie.setCookies("hidePopup", true);
     setHidePopup(true);
@@ -41,8 +40,12 @@ function HeaderBasic({ signout }) {
 
   return (
     <>
-    {}
-      {SignUpState.isMobile && !hidePopup ? <InstallMobileApp onClose={onClose} /> : <></>}
+      {}
+      {SignUpState.isMobile && !hidePopup ? (
+        <InstallMobileApp onClose={onClose} />
+      ) : (
+        <></>
+      )}
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">

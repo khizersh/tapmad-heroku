@@ -179,11 +179,18 @@
 .user_img {
   width: "100%";
 }
+.package-box {
+  display: grid;
+  align-content: center;
+  justify-items: end;
+  justify-content: end;
+}
 .std_txt {
-  font-size: 17px;
-  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
   font-family: "okomitomedium";
   margin: 0 auto;
+  line-height: 1  ;
 }
 
 .sub-title {

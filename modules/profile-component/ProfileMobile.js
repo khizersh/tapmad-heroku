@@ -33,29 +33,70 @@ const MyAccountMobile = ({ profileData, allData }) => {
   };
 
   return (
-    <div className="p-4 d-sm-none">
-      <div className="row">
-        <div className="col-4 px-1">
-          <img src={userIcon} width="100" alt="User" />
-        </div>
-        <div className="col-4 pt-3">
+    <div className="d-sm-none">
+      <style jsx>
+        {`
+          dl {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-left: 58px;
+            gap: 15px;
+            margin-bottom: 10px;
+          }
+          dl dt,
+          dl dd {
+            flex: 1;
+          }
+          dl dt {
+            font-weight: 300;
+          }
+          dl dd {
+            margin-bottom: 0;
+          }
+        `}
+      </style>
+      <div className="d-flex align-items-center">
+        <img src={userIcon} width="80" height="80" alt="User" />
+        <div className="flex-grow-1 pl-3">
           <div>Name</div>
           <div>Date of Birth</div>
         </div>
-        <div className="col-4 pt-3">
+        <div className="flex-grow-1 pl-3">
           <div>{profileData && profileData.FullName}</div>
           <div>{profileData && profileData.BirthDate}</div>
         </div>
       </div>
-      <div className="row  mt-3">
-        <div className="col-2">
-          <img src={infoIcon} alt="User" className="mx-1 user_img" />
-        </div>
-        <div className="col-10">
-          <p className="h_style">Personal Info:</p>
-        </div>
+      <div className="d-flex align-items-center mt-3">
+        <img
+          src={infoIcon}
+          alt="User"
+          className="mx-1 user_img"
+          width="33px"
+          height="33px"
+        />
+        <p className="h_style flex-grow-1 pl-3 mb-0">Personal Info:</p>
       </div>
-      <div className="row offset-1">
+      {profileData ? (
+        <>
+          <dl>
+            <dt>Email:</dt>
+            <dd>{profileData.Email}</dd>
+          </dl>
+          <dl>
+            <dt>Mobile:</dt>
+            <dd>{profileData.UserMobileNumebr}</dd>
+          </dl>
+          <dl>
+            <dt>Gender :</dt>
+            <dd>{profileData.Gender}</dd>
+          </dl>
+        </>
+      ) : (
+        <></>
+      )}
+
+      {/* <div className="row offset-1">
         <div className="col ml-3">
           <div className="m-1 fnt">Email:</div>
           <div className="m-1 fnt">Mobile:</div>
@@ -66,9 +107,26 @@ const MyAccountMobile = ({ profileData, allData }) => {
           <div>{profileData && profileData.UserMobileNumebr}</div>
           <div>{profileData && profileData.Gender}</div>
         </div>
+      </div> */}
+
+      <div className="d-flex align-items-center ju mt-3">
+        <img
+          src={packageIcon}
+          alt="Package"
+          className="mx-1 user_img"
+          width="33px"
+          height="33px"
+        />
+        <p className="h_style flex-grow-1 px-3 mb-0">My Package:</p>
+        <img
+          onClick={() => onPressHandeler("package")}
+          src={show.package ? minusIcon : plusIcon}
+          width="20"
+          alt="minus"
+        />
       </div>
 
-      <div className={`row package mt-3`}>
+      {/* <div className={`row package mt-3`}>
         <div className="col-2">
           <img src={packageIcon} width="35" alt="User" className="mx-1" />
         </div>
@@ -84,12 +142,12 @@ const MyAccountMobile = ({ profileData, allData }) => {
             className="mr-4"
           />
         </div>
-      </div>
+      </div> */}
 
-      <div className={` ${show.package ? "row" : "d-none"}`}>
+      <div className={` ${show.package ? "row mx-0 mt-3" : "d-none"}`}>
         <div className="col-6 ">
           <div className="row border border-style rounded text-center">
-            <div className="col-8 p-0">
+            <div className="col-8 p-0 text-right package-box">
               <div className="std_txt mt-1">
                 {allData && allData.PackageDescription[0].PackageName}
               </div>
@@ -100,9 +158,12 @@ const MyAccountMobile = ({ profileData, allData }) => {
             </div>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-6 pr-0">
           <div>
-            <button type="button" class="btn btn-light rounded-pill p-1 w-100">
+            <button
+              type="button"
+              className="btn btn-light rounded-pill p-1 w-100"
+            >
               Billing History
             </button>
           </div>
@@ -117,34 +178,31 @@ const MyAccountMobile = ({ profileData, allData }) => {
           </div>
         </div>
       </div>
-      <div className="row p-3">
-        <Link href="/billingtest">
-          <button
-            type="button"
-            className="w-100 btn btn-primary-outline text-light rounded-pill"
-          >
-            Unsubscribe
-          </button>
-        </Link>
+      <Link href="/billingtest">
+        <button
+          type="button"
+          className="my-3 w-100 btn btn-primary-outline text-light rounded-pill"
+        >
+          Unsubscribe
+        </button>
+      </Link>
+      <div className="d-flex align-items-center mt-2">
+        <img
+          src={gamingIcon}
+          alt="Games"
+          className="mx-1 user_img"
+          width="33px"
+          height="33px"
+        />
+        <p className="h_style flex-grow-1 px-3 mb-0">My Games:</p>
+        <img
+          onClick={() => onPressHandeler("games")}
+          src={show.games ? minusIcon : plusIcon}
+          width="20"
+          alt="minus"
+        />
       </div>
-      <div className="row  mt-3">
-        <div className="col-2">
-          <img src={gamingIcon} width="35" alt="User" className="mx-1" />
-        </div>
-        <div className="col-8">
-          <p className="h_style">My Games:</p>
-        </div>
-        <div className="col-2">
-          <img
-            onClick={() => onPressHandeler("games")}
-            src={show.games ? minusIcon : plusIcon}
-            width="20"
-            alt="minus"
-            className="mr-4"
-          />
-        </div>
-      </div>
-      <div className={` ${show.games ? "row" : "d-none"}`}>
+      <div className={` ${show.games ? "row mx-0 mt-2" : "d-none"}`}>
         <div className="col-6 rounded p-1">
           <div className="block_play">
             <div className="row">
