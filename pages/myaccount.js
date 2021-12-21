@@ -24,6 +24,7 @@ const MyAccountTrial = ({ signout }) => {
   const { setLoader } = useContext(MainContext);
 
   const [isMobile, setIsMobile] = useState(false);
+  const [upgardeBtn, setUpgradeBtn] = useState(false);
   const [allData, setAllData] = useState(null);
   const [profileData, setProfileData] = useState({
     Version: "V1",
@@ -47,7 +48,11 @@ const MyAccountTrial = ({ signout }) => {
       }
       if (data != null) {
         if (data.responseCode == 1) {
-          console.log(data);
+          console.log(data.data.PackageDescription);
+          if(data.data.PackageDescription[0].IsUpdgradeOrDownGrade == 3){
+            setUpgradeBtn(true)
+          }
+          
           setAllData(data.data);
           setProfileData({
             ...profileData,
@@ -130,6 +135,7 @@ const MyAccountTrial = ({ signout }) => {
             profileData={profileData}
             allData={allData}
             unSubscribe={unSubscribe}
+            upgardeBtn={upgardeBtn}
           />
         );
       } else {
@@ -140,6 +146,7 @@ const MyAccountTrial = ({ signout }) => {
             allData={allData}
             userId={postFormData.UserId}
             unSubscribe={unSubscribe}
+            upgardeBtn={upgardeBtn}
           />
         );
       }

@@ -305,17 +305,30 @@ body {
   top: 0;
   z-index: 1;
 }
+
+.crown-img-only{
+  position: relative;
+  top: -5px;
+  left: -2px;
+}
+
+.crown-img-live{
+  position: relative;
+  top: -5px;
+  left: -2px;
+}
 .live_side2 {
   position: absolute;
   background-color: transparent;
-  padding: 2px 10px;
+  padding: 0px;
   color: #fff;
   font-size: 10px;
   letter-spacing: 2px;
   border-radius: 0 0 0.25rem 0;
-  left: 0.5rem;
+  left: 14px;
   top: 0;
   z-index: 1;
+  width: 26px;
 }
 .live_side3 {
   position: absolute;

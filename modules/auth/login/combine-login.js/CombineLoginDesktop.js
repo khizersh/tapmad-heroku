@@ -18,7 +18,7 @@ const CombineLoginDesktop = ({
   const { SignUpState, dispatch } = React.useContext(SignUpContext);
   return (
     <div className="custom-bg">
-      <h3 className="select-network">Select Your Network</h3>
+      <h3 className="select-network">Select your network</h3>
       <div className="d-flex justify-content-center mb-3">
         {AuthState && AuthState.LoginOperators.length
           ? AuthState.LoginOperators.map((m, i) => (
@@ -62,16 +62,13 @@ const CombineLoginDesktop = ({
           : null}
       </div>
       <div>
-        <p className="text-center">
-          <img src={mobileIcon} className="pr-2" /> Enter your Mobile Number to
-          login
+        <p className="text-center text-grey font-14">
+          <img src={mobileIcon} className="pr-2" width={25} /> Enter your Mobile
+          Number to login
         </p>
         <div className="d-flex justify-content-center">
           <div className="mx-2">
-            <label
-              className="border-round custom-input text-dark"
-              style={{ fontSize: "14px" }}
-            >
+            <label className="border-round custom-input text-dark font-14">
               {AuthState?.CountryCode}
             </label>
           </div>
@@ -105,12 +102,12 @@ const CombineLoginDesktop = ({
       <div className="d-flex justify-content-end">
         <div className="mb-3 mx-5 pr-3">
           <Link href="/sign-up" shallow={true} passHref={true}>
-            <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
+            <a className=" mt-2 text-grey font-14">Not Registered? &nbsp;</a>
           </Link>
           <span
-            className="mt-2 mr-2 text-light"
+            className="mt-2 mr-2 text-grey font-14"
             onClick={forgetClick}
-            style={{ color: "#fff", cursor: "pointer" }}
+            style={{ cursor: "pointer" }}
           >
             | &nbsp;&nbsp;Forgot PIN?
           </span>
@@ -120,7 +117,7 @@ const CombineLoginDesktop = ({
         <button
           type="button"
           disabled={btnDisabled ? true : false}
-          className="btn pymnt_pge_sbscrbe_btn width-35 bg-green"
+          className="btn pymnt_pge_sbscrbe_btn width-35 bg-green font-16"
           onClick={loginUser}
         >
           Login Now
