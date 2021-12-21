@@ -8,7 +8,6 @@ import Head from "next/head";
 import { getSEODataByCategory } from "../../services/seo.service";
 
 const Shows = (props) => {
-  console.log("props in slug shows : ",props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
@@ -30,7 +29,6 @@ const Shows = (props) => {
   useEffect(() => {
     setMount(true);
   }, [props]);
-
   return (
     <>
       <Head>
@@ -44,7 +42,7 @@ const Shows = (props) => {
         <meta property="og:url" content={props.schema.url} />
         <meta name="description" content={props.schema.metaData[0].description} />
         <link rel="canonical" href={props.schema.url} />
-        <meta name="robots" content="noindex" />
+        {/* <meta name="robots" content="noindex" /> */}
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(props.schema.Channels ? props.schema.Channels[0] : props.schema.Vod[0]) }}
