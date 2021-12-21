@@ -146,7 +146,7 @@ export default function CreateJoinRoomModalBody({
             <div className="col-12 mt-2">
               <input
                 type="text"
-                className="form-control bg-dark"
+                className="form-control bg-light"
                 ref={roomName}
                 placeholder="Enter Room Name"
               />
@@ -179,7 +179,7 @@ export default function CreateJoinRoomModalBody({
             <div className="col-12 mt-2">
               <input
                 type="text"
-                className="form-control bg-dark"
+                className="form-control bg-light"
                 ref={chatRoomId}
                 maxLength={15}
                 placeholder="Enter Room Id"
