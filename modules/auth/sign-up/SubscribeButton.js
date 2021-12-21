@@ -40,6 +40,7 @@ export default function SubscribeButton({ creditCardType }) {
   }
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
+    console.log("creditCardType : ",creditCardType);
     if (creditCardType) {
       details = { ...details, Token: event.token };
       checkouPayment(response, details);
@@ -89,10 +90,17 @@ export default function SubscribeButton({ creditCardType }) {
     }
   }
   function UBLPayment(response) {
-    if (response.data.Response.responseCode == 1) {
+    console.log("response ubl : ",response);
+    if (response.responseCode == 1) {
       window.location.href = response.data.CardPaymentUrl;
       return;
-    } else if (response.data.Response.responseCode == 4) {
+    } else if (response.responseCode == 4) {
+      // user exist but have subscription , shiuld redirect to given url
+      window.location.href = response.data.CardPaymentUrl;
+      return;
+    } 
+    else if (response.responseCode == 11) {
+      // user exist but have subscription , shiuld redirect to given url
       swal({
         timer: 3000,
         text: response.data.message,
@@ -101,19 +109,18 @@ export default function SubscribeButton({ creditCardType }) {
       }).then((e) => {
         router.push("/sign-in");
       });
-    } else if (response.data.Response.responseCode == 2) {
+    }else if (response.responseCode == 2) {
       window.location.href = response.data.CardPaymentUrl;
     } else {
       swal({
         timer: 3000,
-        text: response.data.message,
-        icon: "info",
+        text: response.message,
+        icon: "error",
         buttons: true,
-      }).then((e) => {
-        window.location.reload();
-      });
+      })
       return 0;
     }
+    setLoader(false);
   }
   async function SubscribeUser() {
     setLoader(true);
@@ -130,6 +137,7 @@ export default function SubscribeButton({ creditCardType }) {
       }
       if (SignUpState.SelectedMethod.PaymentId == 2) {
         // for credit card specific only
+        console.log("for credit card specific only : ");
         if (!details.Email || !details.FullName) {
           setLoader(false);
           return swal({
@@ -140,9 +148,11 @@ export default function SubscribeButton({ creditCardType }) {
           });
         }
         if (creditCardType) {
+          // for checkout
           Frames.submitCard();
           setFormReady(true);
         } else {
+          // for UBL
           submitCardDetails();
         }
       } else {

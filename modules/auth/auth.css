@@ -125,6 +125,11 @@
   background-color: #4d8305 !important;
 }
 
+.max-width-30{
+  max-width: 29px;
+  height: 27px;
+  object-fit: contain;
+}
 /* .login_slct_oprtr .form-control { */
 
 .login_slct_oprtr h3 {
