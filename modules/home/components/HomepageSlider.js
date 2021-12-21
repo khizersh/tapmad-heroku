@@ -96,7 +96,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                             className="btn view-more-btn"
                             onClick={() => getMoreSections(movieSection)}
                           >
-                            View More
+                            View All
                           </span>
                         </a>
                       </Link>
