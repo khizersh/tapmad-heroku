@@ -123,6 +123,8 @@ export default function SubscribeButton({ creditCardType }) {
   }
   async function SubscribeUser() {
     // setLoader(true);
+    if(checkbox){
+
     if (SignUpState?.SelectedPrice?.ProductId) {
       var details = handleRegisterPayload(SignUpState);
       console.log("details : ",details);
@@ -227,6 +229,8 @@ export default function SubscribeButton({ creditCardType }) {
         }
       }
     }
+  }
+
   }
 
   function onClickTerm() {
