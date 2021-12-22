@@ -6,6 +6,7 @@ import { MyAccountService } from "../modules/my-account/myaccount.service";
 import { creditcardIcon, leftArrow, rightArrow } from "../services/imagesLink";
 import BillingTable from "../modules/billing-component/billingtable";
 import NavbarHOC from "../modules/navbar/NavbarHOC";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
 
 const BillingHistory = () => {
   const router = useRouter();
@@ -16,8 +17,9 @@ const BillingHistory = () => {
     Platform: "web",
     UserId: userId,
   });
+  const { SignUpState } = React.useContext(SignUpContext);
+  console.log("SignUpState : ", SignUpState);
   const [subscriptionData, setSubscriptionData] = useState([]);
-  const [dataLimit, setDataLimit] = useState(10);
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
@@ -27,7 +29,6 @@ const BillingHistory = () => {
       const data = await MyAccountService.getUserPaymentHistoryData(form);
       if (data.responseCode === 1) {
         setSubscriptionData(data.data);
-        console.log("data in history : ", data);
         const page = Math.ceil(data.data.Transaction.length / 10);
         let pageArray = [];
         for (let index = 0; index < page; index++) {
@@ -52,148 +53,6 @@ const BillingHistory = () => {
     }
     setCurrentData(obj.Transaction.slice(startingValue, endingValue));
   };
-  const obj = {
-    Transaction: [
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "21sds",
-        UserPaymentPackageName: "dsaasd",
-        UserPaymentMobileNumber: "asa2",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "21sds",
-        UserPaymentPackageName: "dsaasd",
-        UserPaymentMobileNumber: "asa2",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "21sds",
-        UserPaymentPackageName: "dsaasd",
-        UserPaymentMobileNumber: "asa2",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "21sds",
-        UserPaymentPackageName: "dsaasd",
-        UserPaymentMobileNumber: "asa2",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "21sds",
-        UserPaymentPackageName: "dsaasd",
-        UserPaymentMobileNumber: "asa2",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "21sds",
-        UserPaymentPackageName: "dsaasd",
-        UserPaymentMobileNumber: "asa2",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "22222",
-        UserPaymentPackageName: "yxcyxcy",
-        UserPaymentMobileNumber: "weq12",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "22222",
-        UserPaymentPackageName: "yxcyxcy",
-        UserPaymentMobileNumber: "weq12",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "22222",
-        UserPaymentPackageName: "yxcyxcy",
-        UserPaymentMobileNumber: "weq12",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "22222",
-        UserPaymentPackageName: "yxcyxcy",
-        UserPaymentMobileNumber: "weq12",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "22222",
-        UserPaymentPackageName: "yxcyxcy",
-        UserPaymentMobileNumber: "weq12",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-      {
-        UserPaymentStatus: 1,
-        UserPaymentStartDate: "3333",
-        UserPaymentPackageName: "qweqe",
-        UserPaymentMobileNumber: "231sada",
-      },
-    ],
-  };
   const onClickBack = () => {
     router.push("/");
   };
@@ -212,6 +71,12 @@ const BillingHistory = () => {
       onClickPage(currentPage - 1);
     }
   };
+  const onclickBack = () => {
+  const backURL = Cookie.getCookies("backUrl") || "/";
+  router.push(backURL);
+  };
+
+
 
   return (
     <div className="">
@@ -236,10 +101,14 @@ const BillingHistory = () => {
         </div>
       </NavbarHOC>
       <div className="offset-md-1 col-md-10  col-12 ">
-        <div className="row ml-2">
-          <img src={creditcardIcon} width="20" alt="card" className="mr-2" />
-          <text className="table_text">Billing History</text>
-        </div>
+        {SignUpState.isMobile ? null : (
+          <div className="row ml-2 margTop-90">
+            <img src={creditcardIcon} width="20" alt="card" className="mr-2" />
+            <text className="table_text">Billing History</text>
+            <button className="btn back-btn bg-green ml-2 text-white" onClick={onclickBack}>Back</button>
+          </div>
+        )}
+
         <div className="row">
           <div className="col-12">
             <BillingTable subscriptions={subscriptionData.Transaction} />
@@ -279,6 +148,7 @@ export function getServerSideProps(context) {
   return {
     props: {
       noSideBar: true,
+      protected: true,
       auth: true,
       ip: ip,
       env: process.env.TAPENV,

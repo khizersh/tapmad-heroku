@@ -22,9 +22,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
       onChangeCnic(e);
     }
   };
-  useEffect(() => {
-    console.log(SignUpState.LoggedIn, "SignUpState.LoggedIn");
-  }, []);
+ 
   return (
     <>
       <style jsx>

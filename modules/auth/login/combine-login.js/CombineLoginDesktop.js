@@ -15,7 +15,7 @@ const CombineLoginDesktop = ({
   pin,
   forgetClick,
 }) => {
-  const { SignUpState, dispatch } = React.useContext(SignUpContext);
+
   return (
     <div className="custom-bg">
       <h3 className="select-network">Select your network</h3>

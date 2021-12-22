@@ -53,6 +53,7 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
+    console.log("setting operator id register");
     dispatch({
       type: UPDATE_USER_DETAILS,
       data: { MobileNo: number, Operator: operator },
