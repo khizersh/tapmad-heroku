@@ -19,6 +19,7 @@ import {
   sendGroupChatMessage,
 } from "./PSLChat.service";
 import CreateJoinRoomModalBody from "./PSLChatModal";
+import Head from "next/head";
 var userId = "";
 var msg = "";
 export default function PSLChat({ channel }) {
@@ -33,32 +34,34 @@ export default function PSLChat({ channel }) {
 
   const generalRoomId = 1;
   useEffect(() => {
-    const header = document.getElementById("tab-chat");
-    const sticky = 100;
+    // const header = document.getElementById("tab-chat");
+    // const sticky = 100;
+
     const scrollCallBack = window.addEventListener("scroll", () => {
-      const player = document.getElementById("player-div1");
-      if (player) {
-        const playerHeight = player.getBoundingClientRect().height;
-      }
-      if (window.pageYOffset > sticky) {
-        if (window.screen.width < 639) {
-          header.classList.add("margChat");
-          header.style.position = "fixed";
-          header.style.top = Number(playerHeight) + 60 + 75 + "px";
-        } else {
-          header.classList.remove("margChat");
-        }
-      } else {
-        header.classList.remove("margChat");
-        header.style.position = "unset";
-        header.style.top = "unset";
-      }
+      //   const player = document.getElementById("player-div1");
+      //   var playerHeight;
+      //   if (player) {
+      //     playerHeight = player.getBoundingClientRect().height;
+      //   }
+      //   if (window.pageYOffset > sticky) {
+      //     if (window.screen.width < 639) {
+      //       header.classList.add("margChat");
+      //       header.style.position = "fixed";
+      //       header.style.top = Number(playerHeight) + 60 + 75 + "px";
+      //     } else {
+      //       header.classList.remove("margChat");
+      //     }
+      //   } else {
+      //     header.classList.remove("margChat");
+      //     header.style.position = "unset";
+      //     header.style.top = "unset";
+      //   }
     });
     if (msg) {
       textMessage.current.value = msg;
     }
-    textMessage.current.addEventListener('keyup', function (e) {
-      if (e.key === 'Enter' || e.keyCode === 13) {
+    textMessage.current.addEventListener("keyup", function (e) {
+      if (e.key === "Enter" || e.keyCode === 13) {
         // Do something
         sendMessage();
       }
@@ -66,7 +69,6 @@ export default function PSLChat({ channel }) {
     return () => {
       window.removeEventListener("scroll", scrollCallBack);
     };
-
   }, []);
 
   useEffect(() => {
@@ -76,7 +78,7 @@ export default function PSLChat({ channel }) {
   }, [database]);
 
   function appendChatRoom(newRoom) {
-    console.log("newRoom : ",newRoom);
+    console.log("newRoom : ", newRoom);
     if (Array.isArray(newRoom)) {
       // Delete Room
       setChatRooms(newRoom);
@@ -101,8 +103,8 @@ export default function PSLChat({ channel }) {
   async function getUserAllRooms() {
     userId = Cookie.getCookies("userId");
     const response = await get(getUserRooms(userId, channel.VideoEntityId));
-    console.log("rooms reposne: ",response.data);
-    if (response.data.Response.responseCode == 1 && response.data.ChatRooms ) {
+    console.log("rooms reposne: ", response.data);
+    if (response.data.Response.responseCode == 1 && response.data.ChatRooms) {
       setChatRooms(response.data.ChatRooms[0].Rooms);
       selectRoom(generalRoomId);
     }
@@ -217,8 +219,9 @@ export default function PSLChat({ channel }) {
       var chatIndex = chatRoom.find((_room) => _room.ChatRoomId == room);
       let shareText = `${Cookie.getCookies(
         "userProfileName"
-      )} is inviting you to stream ${channel.VideoName} and join the room ${chatIndex.RoomName
-        } on Tapmad! Click the link below to join:
+      )} is inviting you to stream ${channel.VideoName} and join the room ${
+        chatIndex.RoomName
+      } on Tapmad! Click the link below to join:
 Link: ${window.location.href}
 Room ID: ${chatIndex.ChatLink}
 It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to join now!`;
@@ -237,38 +240,49 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
 
   return (
     <div>
+      <Head>
+        <style>
+          {`
+          @media(max-width:640px) {
+            .PSLChat_chatBox__2FhEX {
+              max-height: 200px
+            }
+          }
+        `}
+        </style>
+      </Head>
       <div id="tab-chat" className={pslStyles.tabhight}>
         <ul className={`nav nav-tabs  d-flex ${pslStyles.noBorders}`}>
           {chatRoom.length > 0
             ? chatRoom.map((roomData, index) => {
-              return (
-                <li
-                  className={`nav-item ${pslStyles.chatRoomList}`}
-                  key={index}
-                  onClick={() => selectRoom(roomData.ChatRoomId)}
-                >
-                  <a
-                    className={pslStyles.chatRoomName}
-                    style={{
-                      border:
-                        room == roomData.ChatRoomId
-                          ? null
-                          : "1px solid #66aa33",
-                      backgroundColor:
-                        room == roomData.ChatRoomId ? null : "#231f20",
-                    }}
+                return (
+                  <li
+                    className={`nav-item ${pslStyles.chatRoomList}`}
+                    key={index}
+                    onClick={() => selectRoom(roomData.ChatRoomId)}
                   >
-                    {roomData.RoomName}
-                    {room == roomData.ChatRoomId && room != 1 ? (
-                      <i
-                        className={`fa fa-times ${pslStyles.crossIcon}`}
-                        onClick={() => deleteRoom(roomData)}
-                      ></i>
-                    ) : null}
-                  </a>
-                </li>
-              );
-            })
+                    <a
+                      className={pslStyles.chatRoomName}
+                      style={{
+                        border:
+                          room == roomData.ChatRoomId
+                            ? null
+                            : "1px solid #66aa33",
+                        backgroundColor:
+                          room == roomData.ChatRoomId ? null : "#231f20",
+                      }}
+                    >
+                      {roomData.RoomName}
+                      {room == roomData.ChatRoomId && room != 1 ? (
+                        <i
+                          className={`fa fa-times ${pslStyles.crossIcon}`}
+                          onClick={() => deleteRoom(roomData)}
+                        ></i>
+                      ) : null}
+                    </a>
+                  </li>
+                );
+              })
             : null}
           <li className={pslStyles.plusBtn} onClick={() => setModalShow(true)}>
             <a className={`btn btn-dark btn-sm ${pslStyles.addGroup}`}></a>

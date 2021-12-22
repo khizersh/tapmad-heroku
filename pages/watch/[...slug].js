@@ -105,6 +105,15 @@ const watch = (props) => {
   return (
     <div>
       <Head>
+        <style>
+          {`
+            @media screen and (max-width: 799px) {
+              #footer {
+                display: none
+              }
+            }
+          `}
+        </style>
         <title>{props.schema.metaData[0].title}</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content={props.schema.metaData[0].title} />
