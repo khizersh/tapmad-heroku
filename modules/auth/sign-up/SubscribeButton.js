@@ -12,8 +12,10 @@ import TermsAndCondition from "./TermsAndCondition";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { handleBody, handleRegisterPayload } from "./authHelper";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
+import { checkUserIdAndToken } from "../../../services/auth.service";
+import withLogin from "../LoginHOC";
 
-export default function SubscribeButton({ creditCardType }) {
+ function SubscribeButtonComponent({ creditCardType , login}) {
   const router = useRouter();
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
@@ -40,7 +42,6 @@ export default function SubscribeButton({ creditCardType }) {
   }
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
-    console.log("creditCardType : ",creditCardType);
     if (creditCardType) {
       details = { ...details, Token: event.token };
       checkouPayment(response, details);
@@ -97,8 +98,7 @@ export default function SubscribeButton({ creditCardType }) {
       // user exist but have subscription , shiuld redirect to given url
       window.location.href = response.data.CardPaymentUrl;
       return;
-    } 
-    else if (response.responseCode == 11) {
+    } else if (response.responseCode == 11) {
       // user exist but have subscription , shiuld redirect to given url
       swal({
         timer: 3000,
@@ -108,7 +108,7 @@ export default function SubscribeButton({ creditCardType }) {
       }).then((e) => {
         router.push("/sign-in");
       });
-    }else if (response.responseCode == 2) {
+    } else if (response.responseCode == 2) {
       window.location.href = response.data.CardPaymentUrl;
     } else {
       swal({
@@ -116,121 +116,147 @@ export default function SubscribeButton({ creditCardType }) {
         text: response.message,
         icon: "error",
         buttons: true,
-      })
+      });
       return 0;
     }
     setLoader(false);
   }
   async function SubscribeUser() {
     // setLoader(true);
-    if(checkbox){
-
-    if (SignUpState?.SelectedPrice?.ProductId) {
-      var details = handleRegisterPayload(SignUpState);
-      console.log("details : ",details);
-      if (!details.MobileNo) {
-        setLoader(false);
-        return swal({
-          timer: 3000,
-          text: "Please enter mobile number",
-          icon: "error",
-          buttons: false,
-        });
-      }
-      if (SignUpState.SelectedMethod.PaymentId == 2) {
-        // for credit card specific only
-        console.log("details: ",details);
-        if (!details.Email || !details.FullName || details.OperatorId == 100010)  {
+    if (checkbox) {
+      if (SignUpState?.SelectedPrice?.ProductId) {
+        var details = handleRegisterPayload(SignUpState);
+        if (!details.MobileNo) {
           setLoader(false);
           return swal({
             timer: 3000,
-            text: "Enter all fields",
+            text: "Please enter mobile number",
             icon: "error",
             buttons: false,
           });
         }
-     
-        if (creditCardType) {
-          // for checkout
-          Frames.submitCard();
-          setFormReady(true);
+        if (SignUpState.SelectedMethod.PaymentId == 2) {
+          // for credit card specific only
+          console.log("details: ", details);
+          if (
+            !details.Email ||
+            !details.FullName ||
+            details.OperatorId == 100010
+          ) {
+            setLoader(false);
+            return swal({
+              timer: 3000,
+              text: "Enter all fields",
+              icon: "error",
+              buttons: false,
+            });
+          }
+          if (creditCardType) {
+            // for checkout
+            Frames.submitCard();
+            setFormReady(true);
+          } else {
+            // for UBL
+            submitCardDetails();
+          }
         } else {
-          // for UBL
-          submitCardDetails();
-        }
-      } else {
-        // for other payment methods
-        if (!details.OperatorId) {
+          // for other payment methods
+          if (!details.OperatorId) {
+            setLoader(false);
+            return swal({
+              timer: 3000,
+              text: "Please select operator",
+              icon: "info",
+              buttons: false,
+            });
+          }
+          var data = await AuthService.initialTransaction(details);
+          console.log("data in init : ", data);
           setLoader(false);
-          return swal({
-            timer: 3000,
-            text: "Please select operator",
-            icon: "info",
-            buttons: false,
-          });
-        }
-
-        var data = await AuthService.initialTransaction(details);
-
-        setLoader(false);
-        if (data != null) {
-          if (data.responseCode == 0) {
-            swal({ title: data.message, icon: "error", timer: 3000 });
-          } else if (data.responseCode == 11) {
-            //user already subscribed checking PIN SET
-            if (data.data.User.IsPinSet) {
+          if (data != null) {
+            if (data.responseCode == 0) {
+              swal({ title: data.message, icon: "error", timer: 3000 });
+            } else if (data.responseCode == 11) {
+              //user already subscribed checking PIN SET
+              if (data.data.User.IsPinSet) {
+                swal({
+                  timer: 3000,
+                  title: "You are already subscribed!",
+                  text: "Enter your PIN for login",
+                  icon: "info",
+                  buttons: false,
+                });
+                Cookie.setCookies("userId", data.data.User.UserId);
+                // dispatch({   old flow of showing enterpin for subscribed user
+                //   type: UPDATE_SUBSCRIBE_RESPONSE,
+                //   data: { code: 11, newUser: false },
+                // });
+                router.push(`/sign-in?number=${details.MobileNo}`);
+              } else {
+                swal({
+                  timer: 3000,
+                  title: "You are already subscribed!",
+                  text: "Set your PIN for login",
+                  icon: "info",
+                });
+                dispatch({
+                  type: UPDATE_SUBSCRIBE_RESPONSE,
+                  data: { code: 34, newUser: false },
+                });
+              }
+            } else if (data.responseCode == 1) {
+              // setting responseCode and new user true for payment process
               swal({
-                timer: 3000,
-                title: "You are already subscribed!",
-                text: "Enter your PIN for login",
-                icon: "info",
-                buttons: false,
-              });
-              Cookie.setCookies("userId", data.data.User.UserId);
-              // dispatch({   old flow of showing enterpin for subscribed user 
-              //   type: UPDATE_SUBSCRIBE_RESPONSE,
-              //   data: { code: 11, newUser: false },
-              // });
-              router.push(`/sign-in?number=${details.MobileNo}`);
-            } else {
-              swal({
-                timer: 3000,
-                title: "You are already subscribed!",
-                text: "Set your PIN for login",
-                icon: "info",
+                title: "OTP code send successfully, please enter your code!",
+                icon: "success",
               });
               dispatch({
                 type: UPDATE_SUBSCRIBE_RESPONSE,
-                data: { code: 34, newUser: false },
+                data: { code: data.responseCode, newUser: true },
               });
-            }
-          } else if (data.responseCode == 1) {
-            // setting responseCode and new user true for payment process
-            swal({
-              title: "OTP code send successfully, please enter your code!",
-              icon: "success",
-            });
-            dispatch({
-              type: UPDATE_SUBSCRIBE_RESPONSE,
-              data: { code: data.responseCode, newUser: true },
-            });
-          } else if (data.responseCode == 6) {
-            swal({ title: data.message, icon: "success", timer: 3000 }).then(
-              (e) => {
-                router.push("/");
+            } else if (data.responseCode == 6) {
+              // only for jazz cash , process payment api will not call direct transaction from here
+              const loggedIn = checkUserIdAndToken();
+              if(loggedIn.valid){
+                if (data.data.User.IsPinSet) {
+                  swal({
+                    title: data.message,
+                    icon: "success",
+                    timer: 3000,
+                  }).then((res) => {
+                    let backURL = Cookie.getCookies("backUrl") || "/";
+                    router.push(backURL);
+                  });
+                } else {
+                  dispatch({
+                    type: UPDATE_SUBSCRIBE_RESPONSE,
+                    data: { code: 34, newUser: false },
+                  });
+                }
+              }else{
+                if (data.data.User.IsPinSet) {
+                //  do login 
+                login()
+                } else {
+                  // send to setpin
+                  dispatch({
+                    type: UPDATE_SUBSCRIBE_RESPONSE,
+                    data: { code: 34, newUser: false },
+                  });
+                }
               }
-            );
+             
+              console.log("data in jazz : ", data.data.User.IsPinSet);
+            } else {
+              swal({ title: data.message, icon: "error" });
+            }
           } else {
-            swal({ title: data.message, icon: "error" });
+            swal({ title: "Something went wrong!", icon: "error" });
+            setLoader(false);
           }
-        } else {
-          swal({ title: "Something went wrong!", icon: "error" });
-          setLoader(false);
         }
       }
     }
-  }
-
   }
 
   function onClickTerm() {
@@ -281,3 +307,5 @@ export default function SubscribeButton({ creditCardType }) {
     </>
   );
 }
+const SubscribeButton = withLogin(SubscribeButtonComponent);
+export default SubscribeButton;
