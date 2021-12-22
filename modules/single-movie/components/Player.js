@@ -84,13 +84,10 @@ export default function Player({ movies }) {
 
   useEffect(async () => {
     verifyURL(router, movies.Video.VideoName);
-
     await getRelatedChannels();
-
     const country = await AuthService.getGeoInfo();
     const resp = await DashboardService.getAdData();
     let data;
-
     if (country) {
       if (country.countryCode == "PK") {
         data = PlayerService.checkAds(resp, "local");
@@ -137,8 +134,6 @@ export default function Player({ movies }) {
       }
     }
   }, [router, ads.topMobileAdHieght]);
-
-
   // video links
   useEffect(() => {
     fired = false;
@@ -203,6 +198,8 @@ export default function Player({ movies }) {
       }
     }
   }, [])
+
+
   return (
     <div>
       <div className="container-fluid">

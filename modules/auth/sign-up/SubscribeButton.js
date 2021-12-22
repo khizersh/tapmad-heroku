@@ -90,7 +90,6 @@ export default function SubscribeButton({ creditCardType }) {
     }
   }
   function UBLPayment(response) {
-    console.log("response ubl : ",response);
     if (response.responseCode == 1) {
       window.location.href = response.data.CardPaymentUrl;
       return;
@@ -137,7 +136,6 @@ export default function SubscribeButton({ creditCardType }) {
       }
       if (SignUpState.SelectedMethod.PaymentId == 2) {
         // for credit card specific only
-        console.log("for credit card specific only : ");
         if (!details.Email || !details.FullName) {
           setLoader(false);
           return swal({

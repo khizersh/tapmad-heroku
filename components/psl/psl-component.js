@@ -9,7 +9,7 @@ import styles from "./psl.module.css"
 export default memo(function PSLComponent({ channel }) {
     const router = useRouter();
     const [tabs, setTabs] = useState([]);
-    const [selectedTab, setSelectedTab] = useState();
+    const [selectedTab, setSelectedTab] = useState(null);
 
     useEffect(async () => {
         const tabs = await getPSLTabsService();
@@ -69,7 +69,8 @@ export default memo(function PSLComponent({ channel }) {
         } else {
             return <div></div>;
         }
-    })
+    } )
+
     useEffect(() => {
         var frameObj = document.getElementById('gameFrame');
         var contents = "";
@@ -86,10 +87,12 @@ export default memo(function PSLComponent({ channel }) {
             })
         }
     }, [selectedTab])
+
+    console.log("selectedTab : ",selectedTab , tabs);
     return <>
         <div>
             <div id="tab-btn" >
-                <Tabs
+             <Tabs
                     defaultActiveKey={selectedTab}
                     activeKey={selectedTab}
                     onSelect={(e) => handleSelect(e)}
@@ -107,12 +110,12 @@ export default memo(function PSLComponent({ channel }) {
                             }
                         ></Tab>
                     }) : null}
-                </Tabs>
+                </Tabs> 
+               
             </div>
             <hr />
             <div>
-                {/* <RenderViews /> */}
-                 <PSLChat channel={channel} />
+                <RenderViews />
             </div>
         </div>
     </>

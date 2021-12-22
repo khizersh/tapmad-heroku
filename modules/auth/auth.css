@@ -515,7 +515,7 @@ input[type="radio"] {
   content: "";
   border-radius: 50%;
   display: block;
-  margin: -2px 20px;
+  margin: -2px auto;
 }
 .radio-cstm:after {
   width: 10px;
@@ -525,9 +525,10 @@ input[type="radio"] {
   border-radius: 50%;
   display: block;
   /* margin: -5px 21px; */
-  margin: -6px 20px;
+  margin: -6px auto;
   position: absolute;
-  left: 5px;
+  left: 0;
+  right: 0;
   top: 9px;
   transition: all 0.4s;
 }
