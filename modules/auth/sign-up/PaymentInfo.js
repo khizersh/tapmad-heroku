@@ -113,7 +113,16 @@ function PaymentInfo(props) {
 
   return (
     <div>
-      <div className="pymnt_pge_phne px-lg-3 pb-3 pt-0 mthd_active">
+      <style>
+        {`
+        .mthd_form .form-control,
+        .mthd_form .payment-icon {
+          font-size: 14px;
+          height: 32px;
+        }
+        `}
+      </style>
+      <div className="pymnt_pge_phne px-lg-3 pb-3 pt-0 mthd_active mthd_form">
         <div className="form-group mb-0">
           <div className="">
             {SignUpState && SignUpState.SelectedMethod && <RenderMethod />}

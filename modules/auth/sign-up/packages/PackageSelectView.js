@@ -48,12 +48,24 @@ export default function PackageSelectView({ onChange }) {
         <UpdatePackage currentPackage={currentPackage} />
       ) : (
         <>
+          <style jsx>
+            {`
+              li.pr_active span {
+                color: var(--basecolor);
+              }
+              li span {
+                font-size: 1.5em;
+                text-transform: capitalize;
+                color: black;
+              }
+            `}
+          </style>
           {AuthState.PaymentPackages?.length > 0 &&
             AuthState.PaymentPackages.map((m, i) => {
               return (
                 <li
                   key={i}
-                  className={`w-100 p-1 rounded-sides text-center list-group-item-action  py-3 text-muted package${
+                  className={`w-auto px-4 py-3 rounded-sides text-center list-group-item-action text-muted package${
                     i + 1
                   } ${
                     SignUpState?.SelectedPackage?.PaymentTabId == m.PaymentTabId

@@ -28,12 +28,22 @@ const SignUpComponent = ({ tab, packageId }) => {
   }, []);
   return (
     <div className="bit-top">
-      <div className="mx-sm-2">
+      <style jsx>
+        {`
+          .center-width {
+            width: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+        `}
+      </style>
+      <div className="mx-sm-2 text-center">
         <ul className="list-group-horizontal list-group pymnt_pge_pr_list center-width">
           <PackageSelectView onChange={changeMainPackage} />
         </ul>
       </div>
-      <ul className="list-group-horizontal  center-width-product list-group">
+      <ul className="list-group-horizontal center-width-product list-group">
         <TaxView onChange={taxChangeView} />
       </ul>
 

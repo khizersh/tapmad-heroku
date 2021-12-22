@@ -273,6 +273,18 @@ import withLogin from "../LoginHOC";
   }, []);
   return (
     <>
+      <style jsx>
+        {`
+          .container-term .checkmark {
+            width: 20px;
+            height: 20px;
+          }
+          .container-term .checkmark:after {
+            left: 6px;
+            top: 1px;
+          }
+        `}
+      </style>
       <div className="w-100">
         <GeneralModal
           component={TermsAndCondition}
@@ -281,7 +293,7 @@ import withLogin from "../LoginHOC";
           toggle={() => setOpen(!open)}
         />
         <div className="form-check  my-3 termdiv">
-          <label className="container-term float-left">
+          <label className="container-term float-left pl-2">
             <input type="checkbox" onClick={onClickCheckbox} />I agree to
             Tapmad's <span onClick={onClickTerm}>term and condition</span>
             <span className="checkmark"></span>
