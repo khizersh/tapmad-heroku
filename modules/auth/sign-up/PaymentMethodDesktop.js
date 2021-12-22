@@ -40,10 +40,6 @@ export default function PaymentMethodDesktop() {
     { Image: deviceIcon, Name: "Devices All" },
     { Image: castingIcon, Name: "Casting" },
   ];
-<<<<<<< HEAD
-  console.log("CurrentPackage : ", CurrentPackage);
-=======
->>>>>>> 679e46b84453d3db5107ca10c35bc21324a492c5
   return (
     <div className="container">
       <style jsx>
