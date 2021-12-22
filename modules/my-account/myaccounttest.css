@@ -146,6 +146,15 @@
 .table_text {
   font-size: 31px;
 }
+.margTop-90{
+  margin-top: 90px;
+}
+
+.back-btn{
+  border-radius: 25px 25px 25px 25px;
+  padding: 0px 29px 0px 30px;
+}
+
 .editpr_heading {
   margin-left: 4rem !important;
 }
