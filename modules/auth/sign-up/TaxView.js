@@ -10,7 +10,6 @@ export default function TaxView({ onChange }) {
   const router = useRouter();
   const { packageId } = router.query;
   // set all products
-  console.log(SignUpState, "SignUpState");
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map((m) => {
@@ -36,7 +35,6 @@ export default function TaxView({ onChange }) {
     setTimeout(() => {
       if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
-        console.log("elem : ", elem);
         if (elem) {
           isDefaultSet = true;
           elem.click();

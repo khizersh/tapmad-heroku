@@ -40,7 +40,6 @@ export default function PaymentMethodDesktop() {
     { Image: deviceIcon, Name: "Devices All" },
     { Image: castingIcon, Name: "Casting" },
   ];
-  console.log("CurrentPackage : ",CurrentPackage);
   return (
     <div className="container">
       <div className="row padding-signup-layout">
@@ -51,14 +50,16 @@ export default function PaymentMethodDesktop() {
          <p><img src={m.Image}/></p>
          <p className="text-grey">{m.Name}</p>
            </div>)} */}
-            {CurrentPackage?.DeviceStream?.length ? CurrentPackage.DeviceStream.map((m, ind) => (
-              <div key={ind} className="text-center">
-                <p>
-                  <img src={m.Image} className="max-width-30" />
-                </p>
-                <p className="text-grey">{m.Name}</p>
-              </div>
-            )) :  null}
+            {CurrentPackage?.DeviceStream?.length
+              ? CurrentPackage.DeviceStream.map((m, ind) => (
+                  <div key={ind} className="text-center">
+                    <p>
+                      <img src={m.Image} className="max-width-30" />
+                    </p>
+                    <p className="text-grey">{m.Name}</p>
+                  </div>
+                ))
+              : null}
           </div>
           <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
           <div className="mt-3" style={{ color: "#FC5656" }}>

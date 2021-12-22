@@ -122,9 +122,10 @@ export default function SubscribeButton({ creditCardType }) {
     setLoader(false);
   }
   async function SubscribeUser() {
-    setLoader(true);
+    // setLoader(true);
     if (SignUpState?.SelectedPrice?.ProductId) {
       var details = handleRegisterPayload(SignUpState);
+      console.log("details : ",details);
       if (!details.MobileNo) {
         setLoader(false);
         return swal({
@@ -136,7 +137,8 @@ export default function SubscribeButton({ creditCardType }) {
       }
       if (SignUpState.SelectedMethod.PaymentId == 2) {
         // for credit card specific only
-        if (!details.Email || !details.FullName) {
+        console.log("details: ",details);
+        if (!details.Email || !details.FullName || details.OperatorId == 100010)  {
           setLoader(false);
           return swal({
             timer: 3000,
@@ -145,6 +147,7 @@ export default function SubscribeButton({ creditCardType }) {
             buttons: false,
           });
         }
+     
         if (creditCardType) {
           // for checkout
           Frames.submitCard();
@@ -166,7 +169,7 @@ export default function SubscribeButton({ creditCardType }) {
         }
 
         var data = await AuthService.initialTransaction(details);
-        console.log("data in inititate : ",data);
+
         setLoader(false);
         if (data != null) {
           if (data.responseCode == 0) {

@@ -14,7 +14,7 @@ const CreditCardForm = ({
   creditCardType,
 }) => {
   const [num, setNum] = useState("");
-  const { SignUpState, dispatch } = useContext(SignUpContext);
+  const { SignUpState } = useContext(SignUpContext);
 
   useEffect(() => {
     if (creditCardType) {
