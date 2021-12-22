@@ -12,6 +12,7 @@ import TermsAndCondition from "./TermsAndCondition";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { handleBody, handleRegisterPayload } from "./authHelper";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
+import { checkUserIdAndToken } from "../../../services/auth.service";
 
 export default function SubscribeButton({ creditCardType }) {
   const router = useRouter();
@@ -125,7 +126,6 @@ export default function SubscribeButton({ creditCardType }) {
     if (checkbox) {
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
-        console.log("details : ", details);
         if (!details.MobileNo) {
           setLoader(false);
           return swal({
@@ -151,7 +151,6 @@ export default function SubscribeButton({ creditCardType }) {
               buttons: false,
             });
           }
-
           if (creditCardType) {
             // for checkout
             Frames.submitCard();
@@ -171,8 +170,8 @@ export default function SubscribeButton({ creditCardType }) {
               buttons: false,
             });
           }
-
           var data = await AuthService.initialTransaction(details);
+          console.log("data in init : ", data);
           setLoader(false);
           if (data != null) {
             if (data.responseCode == 0) {
@@ -216,11 +215,38 @@ export default function SubscribeButton({ creditCardType }) {
                 data: { code: data.responseCode, newUser: true },
               });
             } else if (data.responseCode == 6) {
-              swal({ title: data.message, icon: "success", timer: 3000 }).then(
-                (e) => {
-                  router.push("/");
+              // only for jazz cash , process payment api will not call direct transaction from here
+              const loggedIn = checkUserIdAndToken();
+              if (loggedIn.valid) {
+                if (data.data.User.IsPinSet) {
+                  swal({
+                    title: data.message,
+                    icon: "success",
+                    timer: 3000,
+                  }).then((res) => {
+                    let backURL = Cookie.getCookies("backUrl") || "/";
+                    router.push(backURL);
+                  });
+                } else {
+                  dispatch({
+                    type: UPDATE_SUBSCRIBE_RESPONSE,
+                    data: { code: 34, newUser: false },
+                  });
                 }
-              );
+              } else {
+                if (data.data.User.IsPinSet) {
+                  //  do login
+                  // login()
+                } else {
+                  // send to setpin
+                  dispatch({
+                    type: UPDATE_SUBSCRIBE_RESPONSE,
+                    data: { code: 34, newUser: false },
+                  });
+                }
+              }
+
+              console.log("data in jazz : ", data.data.User.IsPinSet);
             } else {
               swal({ title: data.message, icon: "error" });
             }
