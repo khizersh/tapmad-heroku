@@ -40,7 +40,7 @@ export default function SubscribeButton({ creditCardType }) {
   }
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
-    console.log("creditCardType : ",creditCardType);
+    console.log("creditCardType : ", creditCardType);
     if (creditCardType) {
       details = { ...details, Token: event.token };
       checkouPayment(response, details);
@@ -97,8 +97,7 @@ export default function SubscribeButton({ creditCardType }) {
       // user exist but have subscription , shiuld redirect to given url
       window.location.href = response.data.CardPaymentUrl;
       return;
-    } 
-    else if (response.responseCode == 11) {
+    } else if (response.responseCode == 11) {
       // user exist but have subscription , shiuld redirect to given url
       swal({
         timer: 3000,
@@ -108,7 +107,7 @@ export default function SubscribeButton({ creditCardType }) {
       }).then((e) => {
         router.push("/sign-in");
       });
-    }else if (response.responseCode == 2) {
+    } else if (response.responseCode == 2) {
       window.location.href = response.data.CardPaymentUrl;
     } else {
       swal({
@@ -116,7 +115,7 @@ export default function SubscribeButton({ creditCardType }) {
         text: response.message,
         icon: "error",
         buttons: true,
-      })
+      });
       return 0;
     }
     setLoader(false);
@@ -166,7 +165,7 @@ export default function SubscribeButton({ creditCardType }) {
         }
 
         var data = await AuthService.initialTransaction(details);
-        console.log("data in inititate : ",data);
+        console.log("data in inititate : ", data);
         setLoader(false);
         if (data != null) {
           if (data.responseCode == 0) {
@@ -182,7 +181,7 @@ export default function SubscribeButton({ creditCardType }) {
                 buttons: false,
               });
               Cookie.setCookies("userId", data.data.User.UserId);
-              // dispatch({   old flow of showing enterpin for subscribed user 
+              // dispatch({   old flow of showing enterpin for subscribed user
               //   type: UPDATE_SUBSCRIBE_RESPONSE,
               //   data: { code: 11, newUser: false },
               // });
@@ -240,6 +239,18 @@ export default function SubscribeButton({ creditCardType }) {
   }, []);
   return (
     <>
+      <style jsx>
+        {`
+          .container-term .checkmark {
+            width: 20px;
+            height: 20px;
+          }
+          .container-term .checkmark:after {
+            left: 6px;
+            top: 1px;
+          }
+        `}
+      </style>
       <div className="w-100">
         <GeneralModal
           component={TermsAndCondition}
@@ -248,7 +259,7 @@ export default function SubscribeButton({ creditCardType }) {
           toggle={() => setOpen(!open)}
         />
         <div className="form-check  my-3 termdiv">
-          <label className="container-term float-left">
+          <label className="container-term float-left pl-2">
             <input type="checkbox" onClick={onClickCheckbox} />I agree to
             Tapmad's <span onClick={onClickTerm}>term and condition</span>
             <span className="checkmark"></span>

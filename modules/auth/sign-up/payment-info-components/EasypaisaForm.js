@@ -16,7 +16,7 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
   };
   return (
     <>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <div class="input-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>

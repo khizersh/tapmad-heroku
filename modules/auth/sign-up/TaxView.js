@@ -79,7 +79,7 @@ export default function TaxView({ onChange }) {
                   </>
                 ) : (
                   <>
-                    <span className="font-weight-bold text-left line-2">
+                    <span className="font-weight-bold text-left line-2 h3">
                       {m.PackageName}
                     </span>
                   </>
