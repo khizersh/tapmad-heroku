@@ -551,9 +551,10 @@ input[type="radio"] {
     content: "";
     border-radius: 50%;
     display: block;
-    margin: -4px 22px;
+    margin: -4px auto;
     position: absolute;
-    left: 5px;
+    left: 0;
+    left: 0;
     top: 9px;
     transition: all 0.4s;
   }
