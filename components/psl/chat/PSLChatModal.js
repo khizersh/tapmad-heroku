@@ -19,14 +19,12 @@ export default function CreateJoinRoomModalBody({
   const [btnText, setBtnText] = useState("Copy");
 
   async function createRoom() {
-    setBtnDisable(true)
+    setBtnDisable(true);
     setOnLoad(true);
-    if (
-      (roomName.current.value && !roomName.current.value.trim().length > 3) ||
-      roomName.current.value.trim().length > 12
-    ) {
+    const checkName = roomName.current.value.trim();
+    if ((checkName && !checkName.length > 3) || checkName.length > 12) {
       setOnLoad(false);
-      setBtnDisable(false)
+      setBtnDisable(false);
       swal({
         title: "Please enter valid title!",
         icon: "error",
@@ -34,14 +32,14 @@ export default function CreateJoinRoomModalBody({
       });
       return true;
     }
-    if (roomName.current.value.length > 2) {
+    if (checkName.length > 2) {
       var body = {
         Version: "v1",
-        Language: "en", 
+        Language: "en",
         Platform: "android",
         UserId: Cookie.getCookies("userId"),
         ChannelId: channelId,
-        RoomName: roomName.current.value,
+        RoomName: checkName,
       };
       const data = await createAChatRoom(body);
       if (data.Response.responseCode == 2) {
@@ -51,16 +49,16 @@ export default function CreateJoinRoomModalBody({
           allowOutsideClick: false,
           closeOnClickOutside: false,
         });
-        setBtnDisable(false)
+        setBtnDisable(false);
         setOnLoad(false);
       } else if (data.Response.responseCode == 1) {
         setCurrentRoomOption(3);
         if (data.ChatRooms && data.ChatRooms.length) {
           setNewRoom(data.ChatRooms[data.ChatRooms.length - 1]);
         }
-        console.log("data.ChatRooms .. : ",data);
+        console.log("data.ChatRooms .. : ", data);
         mergeRoom(data.ChatRooms);
-        setBtnDisable(false)
+        setBtnDisable(false);
         setOnLoad(false);
       }
     } else {
@@ -70,7 +68,7 @@ export default function CreateJoinRoomModalBody({
         allowOutsideClick: false,
         closeOnClickOutside: false,
       });
-      setBtnDisable(false)
+      setBtnDisable(false);
       setOnLoad(false);
     }
   }
@@ -85,11 +83,10 @@ export default function CreateJoinRoomModalBody({
         ChannelId: channelId,
         ChatLink: chatRoomId.current.value,
       };
-      setBtnDisable(true)
+      setBtnDisable(true);
       const data = await joinAChatRoom(body);
       if (data.UserChatRooms) {
         mergeRoom(data.UserChatRooms[data.UserChatRooms.length - 1]);
-    
       } else {
         swal({
           title: data.Response.message,
@@ -97,7 +94,7 @@ export default function CreateJoinRoomModalBody({
           allowOutsideClick: false,
           closeOnClickOutside: false,
         });
-        setBtnDisable(false)
+        setBtnDisable(false);
       }
     } else {
       swal({
@@ -106,7 +103,7 @@ export default function CreateJoinRoomModalBody({
         allowOutsideClick: false,
         closeOnClickOutside: false,
       });
-      setBtnDisable(false)
+      setBtnDisable(false);
     }
   }
 
