@@ -75,11 +75,11 @@ const CombineLoginDesktop = ({
           <div className="mx-2">
             <input
               type="text"
-              maxLength="20"
-              minLength="5"
+              maxLength="10"
+              minLength="10"
               className="form-control border-round mb-4  custom-input"
               id="mobileNo"
-              placeholder="xxxxxxxxxxx"
+              placeholder="3xxxxxxxxxxx"
               inputMode="numeric"
               value={mobileNo}
               onChange={(e) => handleNumber(e)}

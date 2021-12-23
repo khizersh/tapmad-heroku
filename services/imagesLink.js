@@ -29,6 +29,7 @@ export const jazzIcon =
 
 export const tapmadCoin = "/icons/coint.png";
 export const tapmadNews = "/icons/news-btn.png";
+export const PlaceholderImage = "/icons/Tile_placeholder.jpeg";
 
 export const samsungTvLogo =
   "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1621859275Samsung-smarttv-logo-white.png";
@@ -90,6 +91,3 @@ export const positionOne = "/icons/game/position1.svg";
 export const positionTwo = "/icons/game/position2.svg";
 export const positionThree = "/icons/game/position3.svg";
 export const leaderBoardUseIcon = "/icons/game/leaderboardUserIcon.svg";
-
-
-

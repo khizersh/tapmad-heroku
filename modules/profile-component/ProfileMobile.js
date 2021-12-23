@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
   awardIcon,
+  editUserMale,
   gamingIcon,
   infoIcon,
   minusIcon,
@@ -11,6 +12,7 @@ import {
   priceIcon,
   stadiumIcon,
   trophyIcon,
+  userFemaleProfileIcon,
   userIcon,
 } from "../../services/imagesLink";
 import Link from "next/link";
@@ -35,32 +37,16 @@ const MyAccountMobile = ({ profileData, allData }) => {
   };
 
   return (
-    <div className="d-sm-none">
-      <style jsx>
-        {`
-          dl {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-left: 58px;
-            gap: 15px;
-            margin-bottom: 10px;
-          }
-          dl dt,
-          dl dd {
-            flex: 1;
-          }
-          dl dt {
-            font-weight: 300;
-          }
-          dl dd {
-            margin-bottom: 0;
-          }
-        `}
-      </style>
-      <div className="d-flex align-items-center">
-        <img src={userIcon} width="80" height="80" alt="User" />
-        <div className="flex-grow-1 pl-3">
+    <div className="p-4 d-sm-none">
+      <div className="row">
+        <div className="col-4 px-1">
+          <img
+            src={gender == "Male" ? editUserMale : userFemaleProfileIcon}
+            className={`${isMobile ? "mt-3" : "m-4"} border-50`}
+            width={`${isMobile ? "100" : "150"}`}
+          />
+        </div>
+        <div className="col-4 pt-3">
           <div>Name</div>
           <div>Date of Birth</div>
         </div>

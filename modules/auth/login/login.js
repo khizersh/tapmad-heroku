@@ -97,8 +97,8 @@ function Login({ loginResponse }) {
         )}
         <input
           type="text"
-          maxLength="20"
-          minLength="5"
+          maxLength="10"
+          minLength="10"
           className="form-control"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
