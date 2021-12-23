@@ -86,7 +86,7 @@ const CombineLoginMobile = ({
             minLength="5"
             className="form-control border-round mb-4 ml-3 custom-input"
             id="mobileNo"
-            placeholder="xxxxxxxxxxx"
+            placeholder="3xxxxxxxxxxx"
             inputMode="numeric"
             value={mobileNo}
             onChange={(e) => handleNumber(e)}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
   awardIcon,
+  editUserMale,
   gamingIcon,
   infoIcon,
   minusIcon,
@@ -11,6 +12,7 @@ import {
   priceIcon,
   stadiumIcon,
   trophyIcon,
+  userFemaleProfileIcon,
   userIcon,
 } from "../../services/imagesLink";
 import Link from "next/link";
@@ -36,7 +38,11 @@ const MyAccountMobile = ({ profileData, allData }) => {
     <div className="p-4 d-sm-none">
       <div className="row">
         <div className="col-4 px-1">
-          <img src={userIcon} width="100" alt="User" />
+          <img
+            src={gender == "Male" ? editUserMale : userFemaleProfileIcon}
+            className={`${isMobile ? "mt-3" : "m-4"} border-50`}
+            width={`${isMobile ? "100" : "150"}`}
+          />
         </div>
         <div className="col-4 pt-3">
           <div>Name</div>

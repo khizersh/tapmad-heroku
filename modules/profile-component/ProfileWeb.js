@@ -8,10 +8,12 @@ import {
   colorPackage,
   connectIcon,
   deviceIcon,
+  editUserMale,
   playTrophyIcon,
   qualityIcon,
   stadiumIcon,
   trophyIcon,
+  userFemaleProfileIcon,
   userProfileIcon,
 } from "../../services/imagesLink";
 import { MainContext } from "../../contexts/MainContext";
@@ -48,7 +50,6 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
     router.push("/change-package");
   };
   useEffect(() => {
-    console.log(allData, "AKK");
     if (allData) {
       setPrice(allData.PackageDescription[0].PackagePrice);
     }
@@ -94,7 +95,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
           <div>
             <h4>My Profile</h4>
           </div>
-          {/* <div class="ml-3">
+          <div class="ml-3">
             <Link href="/editprofile">
               <button
                 type="button"
@@ -103,12 +104,20 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                 Edit Profile
               </button>
             </Link>
-          </div> */}
+          </div>
         </div>
         <div class="row mt-4">
           <div class="col-2 px-0">
             <div className="profile-user ">
-              <img src={userProfileIcon} className="profile-img" />
+              <img
+                src={
+                  profileData.Gender == "Male"
+                    ? editUserMale
+                    : userFemaleProfileIcon
+                }
+                className={"m-4 border-50"}
+                width={"150"}
+              />
             </div>
           </div>
           <div class="col-5">
