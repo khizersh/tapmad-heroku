@@ -51,8 +51,8 @@ export default memo(function PSLComponent({ channel }) {
     setSelectedTab(e);
   }
   const RenderViews = useCallback(function () {
-   const [display, toggle] = useState(true);
-   const toggleHandler = () => toggle(!display)
+    const [display, toggle] = useState(true);
+    const toggleHandler = () => toggle(!display);
     if (selectedTab == 1) {
       return (
         <>
@@ -61,7 +61,24 @@ export default memo(function PSLComponent({ channel }) {
               {display ? "Hide" : "Show"} Chats
             </div>
           </div>
-          {display ? <PSLChat channel={channel} /> : <></>}
+          {display ? (
+            <PSLChat channel={channel} />
+          ) : (
+            <>
+              <div className="text-center">
+                <text className="font-weight-bold">
+                  Chat has been minimized
+                </text>
+                &nbsp; &nbsp;
+                <text
+                  onClick={toggleHandler}
+                  className="text-success font-weight-bold"
+                >
+                  View Chat
+                </text>
+              </div>
+            </>
+          )}
         </>
       );
     } else if (selectedTab == 2) {
