@@ -26,7 +26,7 @@ import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
 import TabsWithIcon from "../../components/TabsWithIcon";
 
-const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
+const MyAccountWeb = ({ profileData, allData, unSubscribe , upgardeBtn}) => {
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
@@ -38,17 +38,13 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
   });
   const { dispatch, AuthState } = useContext(AuthContext);
   const onSwitchImage = (data) => {
-    // if (imageState.pacakge == true) {
-    //   setImageState({ pacakge: false, game: true });
-    // } else {
-    //   setImageState({ pacakge: true, game: false });
-    // }
     setSelected(data);
   };
   const onClickUpgradePackage = async () => {
     await dispatch({ type: UPDATE_PACKAGE, data: true });
     router.push("/change-package");
   };
+  
   useEffect(() => {
     if (allData) {
       setPrice(allData.PackageDescription[0].PackagePrice);
@@ -85,6 +81,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
       }
     }
   };
+
   const onClickBuy = () => {
     updateBuyModal(true);
   };
@@ -146,7 +143,8 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
               </div>
             </div>
           </div>
-          <div class="col-5 coins-div">
+          {/* buy coins with coins show here */}
+          {/* <div class="col-5 coins-div">
             <div className="row float-right">
               <div className="col-6 text-right pr-1">
                 <img src={coinIcon} width="55" alt="user_back" />
@@ -171,7 +169,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -282,6 +280,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe }) => {
                       <div className="col-4 ">
                         <button
                           type="button"
+                          disabled={upgardeBtn}
                           className="btn w-100 px-2  text-light rounded-pill optButtons"
                           onClick={onClickUpgradePackage}
                         >

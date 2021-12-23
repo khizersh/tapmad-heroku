@@ -6,24 +6,53 @@ import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
 // import tapLogo from "../../public/icons/tm-logo.png";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 import { AuthService } from "../../modules/auth/auth.service";
+import InstallMobileApp from "../../modules/game/components/InstallMobileApp";
+import { Cookie } from "../../services/cookies";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 function HeaderBasic({ signout }) {
   const [country, setCountry] = useState("PK");
+  const [hidePopup, setHidePopup] = useState(false);
   const { initialState, setSearch } = useContext(MainContext);
+  const { SignUpState } = useContext(SignUpContext);
 
   const onClick = () => {
     setSearch(true);
   };
 
+  const onClose = () => {
+    Cookie.setCookies("hidePopup", true);
+    setHidePopup(true);
+    setTimeout(() => {
+      setHidePopup(false);
+      Cookie.setCookies("hidePopup", false);
+    }, 1.8e6);
+  };
+
   useEffect(async () => {
-    const country = await AuthService.getGeoInfo();
-    if (country) {
-      country.countryCode == "PK";
-      setCountry(country.countryCode);
+    if (!Cookie.getCookies("hidePopup")) {
+      const country = await AuthService.getGeoInfo();
+      if (country) {
+        country.countryCode == "PK";
+        setCountry(country.countryCode);
+      }
+    } else {
+      setHidePopup(true);
+      setTimeout(() => {
+        setHidePopup(false);
+        Cookie.setCookies("hidePopup", false);
+      }, 5e3);
     }
   }, []);
+
   return (
     <>
+      {}
+      {SignUpState.isMobile && !hidePopup ? (
+        <InstallMobileApp onClose={onClose} />
+      ) : (
+        <></>
+      )}
       <div className="container-fluid navbar-light scrolling-navbar tm_top_navi m-0">
         <div className="row">
           <div className="col-6 col-sm-2 col-md-3 col-lg-3">
@@ -45,7 +74,7 @@ function HeaderBasic({ signout }) {
                   <a className="nav-link">Movies</a>
                 </Link>
               </li>
-              <li className="nav-item topBarShows">
+              <li className="nav-item topBarShowhides">
                 <Link href="/shows" passHref={true} shallow={true}>
                   <a className="nav-link">Shows</a>
                 </Link>

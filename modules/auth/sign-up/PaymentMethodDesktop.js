@@ -42,6 +42,19 @@ export default function PaymentMethodDesktop() {
   ];
   return (
     <div className="container">
+      <style jsx>
+        {`
+          .max-width-30 {
+            height: 35px;
+            width: 54px;
+            max-width: 54px;
+          }
+          .sized-image {
+            max-height: 30px;
+            max-width: 100px;
+          }
+        `}
+      </style>
       <div className="row padding-signup-layout">
         <div className="col-5">
           <div className="d-flex justify-content-around">
@@ -50,30 +63,35 @@ export default function PaymentMethodDesktop() {
          <p><img src={m.Image}/></p>
          <p className="text-grey">{m.Name}</p>
            </div>)} */}
-            {imageArray.map((m, ind) => (
-              <div key={ind} className="text-center">
-                <p>
-                  <img src={m.Image} />
-                </p>
-                <p className="text-grey">{m.Name}</p>
-              </div>
-            ))}
+            {CurrentPackage?.DeviceStream?.length
+              ? CurrentPackage.DeviceStream.map((m, ind) => (
+                  <div key={ind} className="text-center">
+                    <p>
+                      <img src={m.Image} className="max-width-30" />
+                    </p>
+                    <p className="text-grey">{m.Name}</p>
+                  </div>
+                ))
+              : null}
           </div>
           <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
-          <div className="mt-3" style={{ color: "#FC5656" }}>
+          <div
+            className="mt-3"
+            style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
+          >
             {CurrentPackage?.HighlightDescription}
           </div>
         </div>
         <div className="col-7 border-dotted-left">
-          <div className="row mt-3">
+          <div className="row">
             <div className="col-12">
-              <h3 className="text-base text-center">Payment Options</h3>
+              <h3 className="text-base text-center line-1">Payment Options</h3>
             </div>
           </div>
-          <div className="row py-3 flex-nowrap padding-x-100">
+          <div className="row py-3 justify-content-center no-gutters px-4">
             {CurrentPackage && CurrentPackage.PaymentMethods
               ? CurrentPackage.PaymentMethods.map((m, i) => (
-                  <div className="col text-center p-0">
+                  <div className="text-center p-0">
                     <div
                       className="btn bg-transparent"
                       style={{ margin: "auto" }}

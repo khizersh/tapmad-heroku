@@ -24,6 +24,7 @@ const MyAccountTrial = ({ signout }) => {
   const { setLoader } = useContext(MainContext);
 
   const [isMobile, setIsMobile] = useState(false);
+  const [upgardeBtn, setUpgradeBtn] = useState(false);
   const [allData, setAllData] = useState(null);
   const [profileData, setProfileData] = useState({
     Version: "V1",
@@ -47,6 +48,14 @@ const MyAccountTrial = ({ signout }) => {
       }
       if (data != null) {
         if (data.responseCode == 1) {
+<<<<<<< HEAD
+=======
+          console.log(data.data.PackageDescription);
+          if(data.data.PackageDescription[0].IsUpdgradeOrDownGrade == 3){
+            setUpgradeBtn(true)
+          }
+          
+>>>>>>> facaef867ae3a0c764a5033dfb58c872e3b471fe
           setAllData(data.data);
           setProfileData({
             ...profileData,
@@ -129,6 +138,7 @@ const MyAccountTrial = ({ signout }) => {
             profileData={profileData}
             allData={allData}
             unSubscribe={unSubscribe}
+            upgardeBtn={upgardeBtn}
           />
         );
       } else {
@@ -139,6 +149,7 @@ const MyAccountTrial = ({ signout }) => {
             allData={allData}
             userId={postFormData.UserId}
             unSubscribe={unSubscribe}
+            upgardeBtn={upgardeBtn}
           />
         );
       }
@@ -170,12 +181,16 @@ const MyAccountTrial = ({ signout }) => {
           </button>
         </div>
         <div className="margin-y-auto">
-          <button
-            onClick={clickEditProfile}
-            className="btn bg-white rounded-lg py-1 text-green font-13"
-          >
-            Edit Profile
-          </button>
+          {isMobile ? (
+            <button
+              onClick={clickEditProfile}
+              className="btn bg-white rounded-lg py-1 text-green font-13"
+            >
+              Edit Profile
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </NavbarHOC>
       <div className="profile-container">

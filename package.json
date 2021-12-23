@@ -9,7 +9,8 @@
     "prod": "export $(cat .env) && TAPENV=production && npm run dev",
     "staging": "export $(cat .env) && TAPENV=staging && next start -p 3000",
     "local": "export $(cat .env) && TAPENV=local && npm run dev",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "lint": "next lint"
   },
   "dependencies": {
     "@loadable/component": "^5.15.0",

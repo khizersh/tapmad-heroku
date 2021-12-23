@@ -13,6 +13,7 @@ export const getItemsByKeyword =
 export const getUserByUserId = BASEURLDEVELOPMENT + "api/getUserProfileDetail";
 export const getUserPaymentHistory =
   BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
+// home page api
 export const getFeaturedHomePage =
   BASEURLDEVELOPMENT + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
@@ -43,7 +44,8 @@ export const getShowsWithPagination =
   BASEURLDEVELOPMENT + "api/getShowsWithPagination/0/5/0/16";
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
-  BASEURLDEVELOPMENT + "api/getUserStreamWithPackages";
+  BASEURLDEVELOPMENT + "api/getUserStreamWithPackagesChannelsChat";
+  
 
 // export const getEventPredicationGameChannel =
 // BASEURLDEVELOPMENT + "api/getEventPredicationGameChannelToken";
@@ -121,28 +123,32 @@ export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
 export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
-export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
+export const getPSLTabs = BASEURLDEVELOPMENT + "api/getAllTabs/v1/en/android";
 export const submitMatchBids =
-  BASEURLAPP + "api/updateNewUserEventQuestionAnswers";
+  BASEURLDEVELOPMENT + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
-  BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
-export const createRoom = BASEURLAPP + "api/createNewChatRoom";
-export const joinRoom = BASEURLAPP + "api/joinChatRoom";
+BASEURLDEVELOPMENT + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+export const createRoom = BASEURLDEVELOPMENT + "api/createNewChatRoom";
+export const joinRoom = BASEURLDEVELOPMENT + "api/joinChatRoom";
 
 // PSL bids / game
-export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
+export const deleteRoom = BASEURLDEVELOPMENT + "api/leaveUserChatRoom";
 // PSL bids
-export const getAllMatches = BASEURL + "api/getMatchDetail";
-export const getMatchBetsByUserId = BASEURL + "api/getMatchBetsByUserId";
-export const getAllLeagues = BASEURL + "api/getAllOnlineLeagues";
+export const getAllMatches = BASEURLDEVELOPMENT + "api/getMatchDetail";
+export const getMatchBetsByUserId =
+  BASEURLDEVELOPMENT + "api/getMatchBetsByUserId";
+export const getAllLeagues = BASEURLDEVELOPMENT + "api/getAllOnlineLeagues";
 export const getLeaderBoardByLeagueId =
-  BASEURLAPP + "api/getLeaderBoardByLeagueId";
+  BASEURLDEVELOPMENT + "api/getLeaderBoardByLeagueId";
 export const getBuyCoinsPackages =
-  BASEURL + "api/getBuyCoinsPackages/v1/en/web";
-export const makeCoinTransaction = BASEURL + "api/makeCoinsPaymentTransaction";
-export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
-export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";
-export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
+  BASEURLDEVELOPMENT + "api/getBuyCoinsPackages/v1/en/web";
+export const makeCoinTransaction =
+  BASEURLDEVELOPMENT + "api/makeCoinsPaymentTransaction";
+export const rewardPredicationCoda =
+  BASEURLDEVELOPMENT + "api/rewardPredicationCoda";
+export const updateRewardStore =
+  BASEURLDEVELOPMENT + "api/updateRewardsStoreTestV2";
+export const getUserChallenges = BASEURLDEVELOPMENT + "api/getUserChallenges";
 
 // get all country
 export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";

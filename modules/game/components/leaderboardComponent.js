@@ -46,6 +46,7 @@ const leaderboardComponent = () => {
       gameState.selectedTab.offset + limit
     )
       .then((lead) => {
+
         if (lead && lead.responseCode == 1) {
           if (lead.data.LeaderBoard.length) {
             let limit = lead.data.Size / lead.data.Limit;
@@ -136,8 +137,11 @@ const leaderboardComponent = () => {
           {/* commented old code paste here */}
           <div className={`row ${styles.width}`}>
             <div className="col-12">
-
-            <LeaderBoardTable leaderBoard={leaderBoard} limit={limit} onReadMore={onReadMore}/>
+              <LeaderBoardTable
+                leaderBoard={leaderBoard}
+                limit={limit}
+                onReadMore={onReadMore}
+              />
             </div>
           </div>
           {/* <table

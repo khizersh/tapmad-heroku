@@ -119,6 +119,9 @@
 .font-16 {
   font-size: 16px !important;
 }
+.font-18 {
+  font-size: 18px !important;
+}
 
 .profile-img {
   width: 60%;
@@ -143,6 +146,15 @@
 .table_text {
   font-size: 31px;
 }
+.margTop-90{
+  margin-top: 90px;
+}
+
+.back-btn{
+  border-radius: 25px 25px 25px 25px;
+  padding: 0px 29px 0px 30px;
+}
+
 .editpr_heading {
   margin-left: 4rem !important;
 }
@@ -179,11 +191,18 @@
 .user_img {
   width: "100%";
 }
+.package-box {
+  display: grid;
+  align-content: center;
+  justify-items: end;
+  justify-content: end;
+}
 .std_txt {
-  font-size: 17px;
-  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
   font-family: "okomitomedium";
   margin: 0 auto;
+  line-height: 1  ;
 }
 
 .sub-title {

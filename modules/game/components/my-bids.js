@@ -10,6 +10,7 @@ const MyBid = ({ type }) => {
   useEffect(() => {
     getMatchBetsByUser()
       .then((res) => {
+        console.log("Data", res);
         if (res && res.Response.responseCode == 1) {
           setData([
             {

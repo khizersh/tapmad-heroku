@@ -22,15 +22,54 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
       onChangeCnic(e);
     }
   };
-  useEffect(() => {
-    console.log(SignUpState.LoggedIn, "SignUpState.LoggedIn");
-  }, []);
+ 
   return (
     <>
+      <style jsx>
+        {`
+          .gridCol {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            flex-basis: 0;
+          }
+        `}
+      </style>
       <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span className="payment-icon border-curve">{mobileCode}</span>
+        <div className="d-flex flex-wrap">
+          <div className="input-group-prepend">
+            <span className="payment-icon border-curve">{mobileCode}</span>
+          </div>
+          <div className="pl-2 flex-grow-1 flex-shrink-1 gridCol">
+            <input
+              type="text"
+              maxLength="20"
+              minLength="5"
+              className="form-control border-curve flex-grow-1 w-100"
+              placeholder="3xxxxxxxxxx"
+              inputMode="numeric"
+              readOnly={SignUpState.LoggedIn ? true : false}
+              value={
+                SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+              }
+              defaultValue={
+                SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+              }
+              onChange={(e) => onChange(e)}
+            />
+            <input
+              type="text"
+              maxLength="6"
+              minLength="6"
+              className="form-control border-curve flex-grow-1 w-100"
+              placeholder="Last 6 digits of your CNIC"
+              inputMode="numeric"
+              value={cnic}
+              onChange={(e) => onChangeNic(e)}
+            />
+          </div>
         </div>
+<<<<<<< HEAD
         <input
           type="text"
           maxLength="10"
@@ -57,6 +96,8 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
           value={cnic}
           onChange={(e) => onChangeNic(e)}
         />
+=======
+>>>>>>> facaef867ae3a0c764a5033dfb58c872e3b471fe
       </div>
     </>
   );

@@ -18,7 +18,7 @@ const BuyCoinModal = () => {
         }
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [gameState.buyModal]);
 
   return (
     <>
