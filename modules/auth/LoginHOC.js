@@ -19,6 +19,7 @@ export default function withLogin(Component, data) {
 
     async function loginUser(userIp) {
       setLoader(true);
+      var status = null;
       const userPin =
         Cookie.getCookies("UserPin") || SignUpState.UserDetails.UserPin;
       var obj = {
@@ -35,8 +36,7 @@ export default function withLogin(Component, data) {
           userIp
         );
         try {
-          const status = setLoginViews(response, obj);
-          console.log("status : ", status);
+          status = setLoginViews(response, obj);
           setLoader(false);
           if (status.code == 1) {
             swal({
@@ -89,6 +89,7 @@ export default function withLogin(Component, data) {
           icon: "error",
         });
       }
+      return status;
     }
 
     async function verifyPinCode(ip, pin, forgetPin) {
