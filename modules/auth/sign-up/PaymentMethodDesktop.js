@@ -113,6 +113,8 @@ export default function PaymentMethodDesktop() {
                         <label
                           className="radio-cstm"
                           htmlFor={m.PaymentMethodName}
+                          style={{ width: "100px" }}
+                          
                         >
                           <div
                             onClick={() => UpdatePaymenthMethod(m)}
