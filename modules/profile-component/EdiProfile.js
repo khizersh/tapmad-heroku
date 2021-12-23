@@ -21,11 +21,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
     DOB: "",
     Mobile: "",
     Gender: "",
-    Email: ""
+    Email: "",
   });
   const router = useRouter();
-  const { redirect } = router.query;
-  const { ProfileState } = useContext(ProfileContext);
 
   useEffect(async () => {
     if (userId) {
@@ -116,9 +114,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
           <div className="row">
             <div className="col-12 text-center">
               <img
-                src={
-                  gender == "Male" ? editUserMale : userFemaleProfileIcon
-                }
+                src={gender == "Male" ? editUserMale : userFemaleProfileIcon}
                 className={`${isMobile ? "mt-3" : "m-4"} border-50`}
                 width={`${isMobile ? "100" : "150"}`}
               />

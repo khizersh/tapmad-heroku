@@ -43,8 +43,8 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
         </div>
         <input
           type="text"
-          maxLength="20"
-          minLength="5"
+          maxLength="10"
+          minLength="10"
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"

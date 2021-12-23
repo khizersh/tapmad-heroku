@@ -48,11 +48,6 @@ const MyAccountTrial = ({ signout }) => {
       }
       if (data != null) {
         if (data.responseCode == 1) {
-          console.log(data.data.PackageDescription);
-          if(data.data.PackageDescription[0].IsUpdgradeOrDownGrade == 3){
-            setUpgradeBtn(true)
-          }
-          
           setAllData(data.data);
           setProfileData({
             ...profileData,

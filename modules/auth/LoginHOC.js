@@ -46,7 +46,6 @@ export default function withLogin(Component, data) {
               icon: "success",
             });
             let backURL = Cookie.getCookies("backUrl") || "/";
-            console.log("backURL  ... ", backURL);
             if (backURL.includes("sign-in")) {
               router.push("/");
             } else {

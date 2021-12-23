@@ -13,8 +13,9 @@ import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { handleBody, handleRegisterPayload } from "./authHelper";
 import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
 import { checkUserIdAndToken } from "../../../services/auth.service";
+import withLogin from "../LoginHOC";
 
-export default function SubscribeButton({ creditCardType }) {
+ function SubscribeButtonComponent({ creditCardType , login}) {
   const router = useRouter();
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
@@ -41,7 +42,6 @@ export default function SubscribeButton({ creditCardType }) {
   }
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
-    console.log("creditCardType : ", creditCardType);
     if (creditCardType) {
       details = { ...details, Token: event.token };
       checkouPayment(response, details);
@@ -217,7 +217,7 @@ export default function SubscribeButton({ creditCardType }) {
             } else if (data.responseCode == 6) {
               // only for jazz cash , process payment api will not call direct transaction from here
               const loggedIn = checkUserIdAndToken();
-              if (loggedIn.valid) {
+              if(loggedIn.valid){
                 if (data.data.User.IsPinSet) {
                   swal({
                     title: data.message,
@@ -233,10 +233,10 @@ export default function SubscribeButton({ creditCardType }) {
                     data: { code: 34, newUser: false },
                   });
                 }
-              } else {
+              }else{
                 if (data.data.User.IsPinSet) {
-                  //  do login
-                  // login()
+                //  do login 
+                login()
                 } else {
                   // send to setpin
                   dispatch({
@@ -245,7 +245,7 @@ export default function SubscribeButton({ creditCardType }) {
                   });
                 }
               }
-
+             
               console.log("data in jazz : ", data.data.User.IsPinSet);
             } else {
               swal({ title: data.message, icon: "error" });
@@ -319,3 +319,5 @@ export default function SubscribeButton({ creditCardType }) {
     </>
   );
 }
+const SubscribeButton = withLogin(SubscribeButtonComponent);
+export default SubscribeButton;
