@@ -22,7 +22,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
       onChangeCnic(e);
     }
   };
- 
+
   return (
     <>
       <style jsx>
@@ -69,35 +69,6 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
             />
           </div>
         </div>
-<<<<<<< HEAD
-        <input
-          type="text"
-          maxLength="10"
-          minLength="10"
-          className="form-control ml-2 border-curve"
-          placeholder="3xxxxxxxxxx"
-          inputMode="numeric"
-          readOnly={SignUpState.LoggedIn ? true : false}
-          value={
-            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
-          }
-          defaultValue={
-            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
-          }
-          onChange={(e) => onChange(e)}
-        />
-        <input
-          type="text"
-          maxLength="6"
-          minLength="6"
-          className="form-control border-curve w-100 mt-3"
-          placeholder="Last 6 digits of your CNIC"
-          inputMode="numeric"
-          value={cnic}
-          onChange={(e) => onChangeNic(e)}
-        />
-=======
->>>>>>> facaef867ae3a0c764a5033dfb58c872e3b471fe
       </div>
     </>
   );

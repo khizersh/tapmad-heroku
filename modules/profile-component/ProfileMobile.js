@@ -17,7 +17,6 @@ import {
 } from "../../services/imagesLink";
 import Link from "next/link";
 
-
 const MyAccountMobile = ({ profileData, allData }) => {
   const [show, setShow] = useState({
     games: false,
@@ -37,18 +36,6 @@ const MyAccountMobile = ({ profileData, allData }) => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="p-4 d-sm-none">
-      <div className="row">
-        <div className="col-4 px-1">
-          <img
-            src={gender == "Male" ? editUserMale : userFemaleProfileIcon}
-            className={`${isMobile ? "mt-3" : "m-4"} border-50`}
-            width={`${isMobile ? "100" : "150"}`}
-          />
-        </div>
-        <div className="col-4 pt-3">
-=======
     <div className="d-sm-none">
       <style jsx>
         {`
@@ -75,7 +62,6 @@ const MyAccountMobile = ({ profileData, allData }) => {
       <div className="d-flex align-items-center">
         <img src={userIcon} width="80" height="80" alt="User" />
         <div className="flex-grow-1 pl-3">
->>>>>>> facaef867ae3a0c764a5033dfb58c872e3b471fe
           <div>Name</div>
           <div>Date of Birth</div>
         </div>

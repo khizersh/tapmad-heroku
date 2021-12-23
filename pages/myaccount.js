@@ -48,14 +48,11 @@ const MyAccountTrial = ({ signout }) => {
       }
       if (data != null) {
         if (data.responseCode == 1) {
-<<<<<<< HEAD
-=======
           console.log(data.data.PackageDescription);
-          if(data.data.PackageDescription[0].IsUpdgradeOrDownGrade == 3){
-            setUpgradeBtn(true)
+          if (data.data.PackageDescription[0].IsUpdgradeOrDownGrade == 3) {
+            setUpgradeBtn(true);
           }
-          
->>>>>>> facaef867ae3a0c764a5033dfb58c872e3b471fe
+
           setAllData(data.data);
           setProfileData({
             ...profileData,
