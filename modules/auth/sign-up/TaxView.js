@@ -16,6 +16,7 @@ export default function TaxView({ onChange }) {
         let finalArray = [];
         let pkgArray = m.PackageName?.split(" ");
         finalArray.push(pkgArray[0]);
+        console.log(finalArray, "Final");
         if (pkgArray.length > 1) {
           finalArray.push(pkgArray.slice(1).join(" "));
         }
