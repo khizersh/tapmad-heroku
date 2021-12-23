@@ -69,7 +69,7 @@ export default function TaxView({ onChange }) {
               >
                 {m.PackageNameArray?.length > 1 ? (
                   <>
-                    <div className="font-weight-600 line-1 text-left font-17">
+                    <div className="font-weight-bold line-1 text-left font-16">
                       {m.PackageNameArray[0]}
                     </div>
                     <div className="font-weight-bold line-1 text-left">
@@ -78,19 +78,22 @@ export default function TaxView({ onChange }) {
                   </>
                 ) : (
                   <>
-                    <span className="font-weight-bold text-left font-17 mt-2 line-1 d-block text-center h3" style={{marginBottom:"12px"}}>
+                    <span
+                      className="font-weight-bold text-left font-17 mt-2 line-1 d-block text-center h3"
+                      style={{ marginBottom: "12px" }}
+                    >
                       {m.PackageName}
                     </span>
                   </>
                 )}
-                <div className="d-flex justify-content-end mt-10px">
-                  <div className="text-white per-month mt-2">
+                <div className="d-flex justify-content-end mt-1">
+                  <div className="text-white per-month">
                     {m.PackagePrices[0]}
                   </div>
-                  <div className="f-40 font-weight-bold text-white">
+                  <div className="f-40 font-weight-bold text-white line-1">
                     {m.PackagePrices[1]}
                   </div>
-                  <div className="text-white  monthly">
+                  <div className="text-white monthly line-1" style={{top: "0"}}>
                     <span className="d-block">
                       {m.PackagePrices[2].split(" ")[0]}
                     </span>
