@@ -78,12 +78,12 @@ export default function TaxView({ onChange }) {
                   </>
                 ) : (
                   <>
-                    <span className="font-weight-bold text-left line-2 h3">
+                    <span className="font-weight-bold text-left font-17 mt-2 line-1 d-block text-center h3" style={{marginBottom:"12px"}}>
                       {m.PackageName}
                     </span>
                   </>
                 )}
-                <div className="d-flex justify-content-center mt-10px">
+                <div className="d-flex justify-content-end mt-10px">
                   <div className="text-white per-month mt-2">
                     {m.PackagePrices[0]}
                   </div>

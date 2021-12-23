@@ -105,7 +105,13 @@ const BillingHistory = () => {
           <div className="row ml-2 margTop-90">
             <img src={creditcardIcon} width="20" alt="card" className="mr-2" />
             <text className="table_text">Billing History</text>
-            <button className="btn back-btn bg-green ml-2 text-white" onClick={onclickBack}>Back</button>
+            <button
+                type="button"
+                className="btn btn-gradient text-light rounded-pill w-100 px-3 font-11"
+                onClick={onclickBack}
+              >
+                Back
+              </button>
           </div>
         )}
 
