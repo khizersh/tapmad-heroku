@@ -82,8 +82,8 @@ const CombineLoginMobile = ({
           </div>
           <input
             type="text"
-            maxLength="20"
-            minLength="5"
+            maxLength="10"
+            minLength="10"
             className="form-control border-round mb-4 ml-3 custom-input"
             id="mobileNo"
             placeholder="3xxxxxxxxxxx"
