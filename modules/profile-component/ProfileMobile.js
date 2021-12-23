@@ -17,7 +17,6 @@ import {
 } from "../../services/imagesLink";
 import Link from "next/link";
 
-
 const MyAccountMobile = ({ profileData, allData }) => {
   const [show, setShow] = useState({
     games: false,
