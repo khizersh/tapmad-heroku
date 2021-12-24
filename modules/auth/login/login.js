@@ -77,6 +77,7 @@ function Login({ loginResponse }) {
     },
     [updateUserOperator]
   );
+
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">

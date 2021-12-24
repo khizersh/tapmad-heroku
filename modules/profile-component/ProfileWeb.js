@@ -8,10 +8,12 @@ import {
   colorPackage,
   connectIcon,
   deviceIcon,
+  editUserMale,
   playTrophyIcon,
   qualityIcon,
   stadiumIcon,
   trophyIcon,
+  userFemaleProfileIcon,
   userProfileIcon,
 } from "../../services/imagesLink";
 import { MainContext } from "../../contexts/MainContext";
@@ -66,6 +68,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
       icon: blackGaming,
     },
   ];
+  //Dynaimc Downgrade/Upgrade
   const setPackageStatus = () => {
     if (allData) {
       if (allData.PackageDescription[0].IsUpdgradeOrDownGrade == 1) {
@@ -148,7 +151,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
               <Link href="/editprofile">
                 <button
                   type="button"
-                  className="btn btn-gradient text-light rounded-pill w-100 px-3 font-11"
+                  className="btn btn_submit text-light rounded-pill w-100 px-3 font-11"
                 >
                   Edit Profile
                 </button>
@@ -158,7 +161,14 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
           <div className="row mt-4 align-items-center">
             <div className="col-md-2 align-self-start">
               <div className="profile-user ">
-                <img src={userProfileIcon} className="profile-img" />
+                <img
+                  src={
+                    allData && allData.ProfileData.UserProfileGender == "Male"
+                      ? editUserMale
+                      : userFemaleProfileIcon
+                  }
+                  className="profile-img"
+                />
               </div>
             </div>
             <div className="col-md-5">
