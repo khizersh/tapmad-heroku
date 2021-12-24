@@ -63,7 +63,7 @@ export default function PSLChat({ channel }) {
     textMessage.current.addEventListener("keyup", function (e) {
       if (e.key === "Enter" || e.keyCode === 13) {
         // Do something
-        sendMessage();
+        // sendMessage();
       }
     });
     return () => {
@@ -138,6 +138,8 @@ export default function PSLChat({ channel }) {
       channelID: channel.VideoEntityId,
       roomID: room,
     };
+    console.log(message.message);
+
     if (message.message.trim() == "") {
       textMessage.current.style.border = "1px solid red";
       setTimeout(() => {
