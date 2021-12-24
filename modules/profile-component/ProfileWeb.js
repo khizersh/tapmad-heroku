@@ -244,7 +244,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
         <div className="row mt-4">
           <div className="col-12">
             <div className="package_div">
-              <div className="container-fluid col-8 cont_style rounded">
+              <div className="container-fluid col-8 cont_style rounded px-4">
                 <div
                   style={{
                     display:
@@ -253,7 +253,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
                         : "none",
                   }}
                 >
-                  <div className="row px-3 pt-3">
+                  <div className="row pt-3">
                     <div className="col-6">
                       <div className="font-32 package_style d-flex flexp-wrap-wrap align-items-center">
                         <img
@@ -375,10 +375,10 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
                         : "none",
                   }}
                 >
-                  <h4 style={{ color: "#37C673" }} className="py-2">
+                  <h4 style={{ color: "#37C673" }} className="pt-3">
                     My Games
                   </h4>
-                  <div className="row px-5 pb-4">
+                  <div className="row pb-4 no-gutters">
                     <div className="col-3 p-1">
                       <div className="block_play">
                         <div className="row">
