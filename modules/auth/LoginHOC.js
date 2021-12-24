@@ -17,80 +17,46 @@ export default function withLogin(Component, data) {
     const { dispatch } = useContext(AuthContext);
     const router = useRouter();
 
-    async function loginUser(userIp) {
-      console.log("signup state : ",SignUpState);
-      // setLoader(true);
-      // var status = null;
-      // const userPin =
-      //   Cookie.getCookies("UserPin") || SignUpState.UserDetails.UserPin;
-      // var obj = {
-      //   Language: "en",
-      //   Platform: "web",
-      //   Version: "V1",
-      //   MobileNo: SignUpState.UserDetails.MobileNo,
-      //   OperatorId: SignUpState.UserDetails.Operator,
-      //   UserPin: userPin,
-      // };
-      // if (userPin.length === 4) {
-      //   const response = await AuthService.signInOrSignUpMobileOperatorByPin(
-      //     obj,
-      //     userIp
-      //   );
-      //   try {
-      //     status = setLoginViews(response, obj);
-      //     setLoader(false);
-      //     if (status.code == 1) {
-      //       swal({
-      //         timer: 2000,
-      //         title: "Signed In Successfully",
-      //         text: "Redirecting you..",
-      //         icon: "success",
-      //       });
-      //       let backURL = Cookie.getCookies("backUrl") || "/";
-      //       if (backURL.includes("sign-in")) {
-      //         router.push("/");
-      //       } else {
-      //         router.push(backURL);
-      //       }
-      //     } else if (status.code == 34) {
-      //       dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
-      //     } else if (status.code == 31) {
-      //       swal({
-      //         timer: 2000,
-      //         title: "Please enter valid PIN!",
-      //         icon: "error",
-      //       });
-      //     } else if (status.code == 401) {
-      //       console.log("inside 401");
-      //       swal({
-      //         title:
-      //           "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
-      //         timer: 2500,
-      //         icon: "warning",
-      //       }).then(() => {
-      //         dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
-      //       });
-      //     } else if (status.code == 0 || status.code == 4) {
-      //       swal({
-      //         title: "You are not subscribe user please subscribe yourself",
-      //         timer: 2500,
-      //         icon: "warning",
-      //       }).then(() => {
-      //         router.push("/sign-up");
-      //       });
-      //     }
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
-      // } else {
-      //   setLoader(false);
-      //   swal({
-      //     title: "Enter 4 digit PIN",
-      //     timer: 2500,
-      //     icon: "error",
-      //   });
-      // }
-      // return status;
+    async function loginUser(userIp, callPinApi = true) {
+      setLoader(true);
+      var status = null;
+      if (callPinApi) {
+        // call api with pin
+        const userPin =
+          Cookie.getCookies("UserPin") || SignUpState.UserDetails.UserPin;
+        var obj = {
+          Language: "en",
+          Platform: "web",
+          Version: "V1",
+          MobileNo: SignUpState.UserDetails.MobileNo,
+          OperatorId: SignUpState.UserDetails.Operator,
+          UserPin: userPin,
+        };
+        if (userPin.length === 4) {
+          status = await callLoginApi(obj, status, userIp , true);
+        } else {
+          setLoader(false);
+          swal({
+            title: "Enter 4 digit PIN",
+            timer: 2500,
+            icon: "error",
+          });
+        }
+      } else {
+        const obj = {
+          Version: "V1",
+          Language: "en",
+          Platform: "android",
+          OperatorId: SignUpState.UserDetails.Operator,
+          MobileNo: SignUpState.UserDetails.MobileNo,
+          UserPassword:
+            SignUpState.UserDetails.UserPassword || Cookie.getCookies("utk"),
+        };
+         // call api without pin
+         status = await callLoginApi(obj, status, userIp , false);
+      }
+      return status;
+
     }
 
     async function verifyPinCode(ip, pin, forgetPin) {
@@ -114,6 +80,66 @@ export default function withLogin(Component, data) {
         Cookie.setCookies("isAuth", 0);
       }
     }
+
+   async function callLoginApi(obj, status, userIp, pinApi) {
+      var response = null;
+      if (pinApi) {
+        response = await AuthService.signInOrSignUpMobileOperatorByPin(
+          obj,
+          userIp
+        );
+      } else {
+        response = await AuthService.signInOrSignUpMobileOperator(obj)
+      }
+      try {
+        status = setLoginViews(response, obj);
+        setLoader(false);
+        if (status.code == 1) {
+          swal({
+            timer: 2000,
+            title: "Signed In Successfully",
+            text: "Redirecting you..",
+            icon: "success",
+          });
+          let backURL = Cookie.getCookies("backUrl") || "/";
+          if (backURL.includes("sign-in") || backURL.includes("verify-user")) {
+            router.push("/");
+          } else {
+            router.push(backURL);
+          }
+        } else if (status.code == 34) {
+          dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+        } else if (status.code == 31) {
+          swal({
+            timer: 2000,
+            title: "Please enter valid PIN!",
+            icon: "error",
+          });
+        } else if (status.code == 401) {
+          swal({
+            title:
+              "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
+            timer: 2500,
+            icon: "warning",
+          }).then(() => {
+            dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+          });
+        } else if (status.code == 0 || status.code == 4) {
+          swal({
+            title: "You are not subscribe user please subscribe yourself",
+            timer: 2500,
+            icon: "warning",
+          }).then(() => {
+            router.push("/sign-up");
+          });
+        }
+        return status;
+      } catch (err) {
+        console.log(err);
+        return status;
+      }
+    }
+
     return <Component login={loginUser} verifyPin={verifyPinCode} {...props} />;
   };
 }

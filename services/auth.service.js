@@ -12,11 +12,13 @@ export async function getAllPaymentPackagesByUserId(userID) {
 }
 
 export function setLoginViews(response, obj) {
+
   if (response?.responseCode == 11) {
     if (
       response.data.UserActiveSubscription &&
       response.data.UserActiveSubscription.length
     ) {
+      console.log("setLoginViews : " , response);
       if (response.data.User.UserId) {
         if (response.data.User.IsPinSet) {
           setCookiesForLogin(response.data);

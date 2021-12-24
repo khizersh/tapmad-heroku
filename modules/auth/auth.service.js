@@ -455,17 +455,34 @@ async function signInOrSignUpMobileOperator(
 ) {
   let obj = { ...body, userIp: ip };
   const resp = await post(
-    SignUpORSignInMobileOperatorTokenByPin,
+    SignUpORSignInMobileOperatorToken,
     obj,
     ip,
     withMultiCredentials
   );
   const data = handleResponse(resp);
-
-  if (data && data.data.jwtToken) {
-    Cookie.setCookies("content-token", data.data.jwtToken);
+  if (data != null) {
+    //Handle Response code on login when user is not subscribed
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
   }
-  return data;
+
+  // if (data && data.data.jwtToken) {
+  //   Cookie.setCookies("content-token", data.data.jwtToken);
+  // }
 }
 
 async function clearUserToken(number) {

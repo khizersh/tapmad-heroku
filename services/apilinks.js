@@ -31,7 +31,7 @@ export const verifyUserPinCode = BASEURLDEVELOPMENT + "api/verifyUserPinCode";
 export const UserSignUpPromoCode =
   BASEURLDEVELOPMENT + "api/UserSignUpPromoCode";
 export const SignUpORSignInMobileOperatorToken =
-  BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
+BASEURLDEVELOPMENT + "api/SignUpORSignInMobileOperatorToken";
 export const SignUpORSignInMobileOperatorTokenByPin =
   BASEURLDEVELOPMENT + "api/SignUpORSignInMobileOperatorTokenByPin";
 export const Logout = BASEURLAPP + "api/logout";

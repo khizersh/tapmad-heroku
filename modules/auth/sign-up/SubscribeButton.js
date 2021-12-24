@@ -11,7 +11,7 @@ import GeneralModal from "../../../components/GeneralModal";
 import TermsAndCondition from "./TermsAndCondition";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { handleBody, handleRegisterPayload } from "./authHelper";
-import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
+import { UPDATE_SUBSCRIBE_RESPONSE, UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 import { checkUserIdAndToken } from "../../../services/auth.service";
 import withLogin from "../LoginHOC";
 
@@ -137,7 +137,6 @@ import withLogin from "../LoginHOC";
         }
         if (SignUpState.SelectedMethod.PaymentId == 2) {
           // for credit card specific only
-          console.log("details: ", details);
           if (
             !details.Email ||
             !details.FullName ||
@@ -171,7 +170,12 @@ import withLogin from "../LoginHOC";
             });
           }
           var data = await AuthService.initialTransaction(details);
-          console.log("data in init : ", data);
+          dispatch({
+            type: UPDATE_USER_DETAILS,
+            data: { UserPassword :  data.data.User.UserPassword},
+          });
+          Cookie.setCookies('utk' , data.data.User.UserPassword)
+          login("" , false)
           setLoader(false);
           if (data != null) {
             if (data.responseCode == 0) {
@@ -235,8 +239,10 @@ import withLogin from "../LoginHOC";
                 }
               }else{
                 if (data.data.User.IsPinSet) {
-                //  do login 
-                login()
+                  console.log("data.data jazz cash : ",data.data);
+                  //  do login for non pin api
+                  Cookie.setCookies('utk' , data.data.User.UserPassword)
+                login("" , false)
                 } else {
                   // send to setpin
                   dispatch({

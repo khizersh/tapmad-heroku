@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import swal from "sweetalert";
 import { MainContext } from "../contexts/MainContext";
-import { AuthService } from "../modules/auth/auth.service";
 import withLogin from "../modules/auth/LoginHOC";
-import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
 import requestIp from "request-ip";
 import { SignUpContext } from "../contexts/auth/SignUpContext";
@@ -16,10 +13,10 @@ function VerifyUser({ login, ip }) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const router = useRouter();
-  const { number, operator, pin } = router.query;
+  const { number, operator } = router.query;
 
   useEffect(() => {
-    if (number && operator && pin) {
+    if (number && operator ) {
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: { MobileNo: number, Operator: operator },
@@ -29,10 +26,11 @@ function VerifyUser({ login, ip }) {
 
   useEffect(async () => {
     if (SignUpState.UserDetails.MobileNo) {
-      // let loginResp = await login(ip);
-      // if (loginResp.code && loginResp.code != 1) {
-      //   router.push(loginResp.view);
-      // }
+      // setting pin api false for login
+      let loginResp = await login(ip , false);
+      if (loginResp.code && loginResp.code != 1) {
+        router.push(loginResp.view);
+      }
       setLoader(false);
     }
   }, [SignUpState.UserDetails.MobileNo]);
