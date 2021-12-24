@@ -58,7 +58,7 @@ export default memo(function PSLComponent({ channel }) {
         <>
           <div className="d-flex justify-content-end text-primary my-2">
             <div role="button" tabIndex={0} onClick={toggleHandler}>
-              {display ? "Hide Chats" : ""}
+              {display ? "Hide" : "Show"}
             </div>
           </div>
           {display ? (
@@ -71,8 +71,9 @@ export default memo(function PSLComponent({ channel }) {
                 </text>
                 &nbsp; &nbsp;
                 <text
+                  role="button"
                   onClick={toggleHandler}
-                  className="text-success font-weight-bold"
+                  className="text-success  font-weight-bold"
                 >
                   View Chat
                 </text>

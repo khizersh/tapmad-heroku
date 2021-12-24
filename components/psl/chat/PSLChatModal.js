@@ -56,7 +56,7 @@ export default function CreateJoinRoomModalBody({
         if (data.ChatRooms && data.ChatRooms.length) {
           setNewRoom(data.ChatRooms[data.ChatRooms.length - 1]);
         }
-        console.log("data.ChatRooms .. : ", data);
+
         mergeRoom(data.ChatRooms);
         setBtnDisable(false);
         setOnLoad(false);
