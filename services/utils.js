@@ -154,7 +154,12 @@ function setUrlAccordingToVideoType(movie, type) {
     if (!movie.IsVideoChannel) {
       slug = SEOFriendlySlugsIsCategoryFalse(movie);
     } else {
-      slug = SEOFriendlySlugsForVideo(movie);
+      // send specific vods to play page e.g laliga
+      if(movie.VideoEntityId == 579 || movie.VideoEntityId == 950){
+        slug = SEOFriendlySlugsIsCategoryFalse(movie);
+      }else{
+        slug = SEOFriendlySlugsForVideo(movie);
+      }
     }
   } else if (type == IsCategory) {
     slug = SEOFriendlySlugsIsCategoryTrue(movie);
