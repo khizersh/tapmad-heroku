@@ -22,17 +22,17 @@ function VerifyUser({ login, ip }) {
     if (number && operator && pin) {
       dispatch({
         type: UPDATE_USER_DETAILS,
-        data: { MobileNo: number, Operator: operator, UserPin: pin },
+        data: { MobileNo: number, Operator: operator },
       });
     }
   }, []);
 
   useEffect(async () => {
     if (SignUpState.UserDetails.MobileNo) {
-      let loginResp = await login(ip);
-      if (loginResp.code && loginResp.code != 1) {
-        router.push(loginResp.view);
-      }
+      // let loginResp = await login(ip);
+      // if (loginResp.code && loginResp.code != 1) {
+      //   router.push(loginResp.view);
+      // }
       setLoader(false);
     }
   }, [SignUpState.UserDetails.MobileNo]);
