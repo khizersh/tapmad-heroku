@@ -17,10 +17,8 @@ export default function withLogin(Component, data) {
     const { dispatch } = useContext(AuthContext);
     const router = useRouter();
 
-    var apiCall = false
+
     async function loginUser(userIp, callPinApi = true) {
-      if(!apiCall){
-        apiCall = true
         setLoader(true);
         var status = null;
         console.log("callPinApi : ",callPinApi);
@@ -61,7 +59,6 @@ export default function withLogin(Component, data) {
         }
         return status;
   
-      }
     
     }
 

@@ -54,7 +54,7 @@ export function checkUserIdAndToken() {
   const isAuth = Cookie.getCookies("isAuth");
   const backurl = Cookie.getCookies("backURL");
   if (token && token.length > 50 && isAuth == 1) {
-    return {valid : true , url  : backurl};
+    return {valid : true , url  : "/"};
   } else {
     return {valid : false , url  : backurl ? backurl : "/"};
   }

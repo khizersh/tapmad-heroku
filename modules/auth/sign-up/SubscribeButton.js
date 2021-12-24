@@ -171,12 +171,6 @@ import withLogin from "../LoginHOC";
             });
           }
           var data = await AuthService.initialTransaction(details);
-          dispatch({
-            type: UPDATE_USER_DETAILS,
-            data: { UserPassword :  data.data.User.UserPassword},
-          });
-          Cookie.setCookies('utk' , data.data.User.UserPassword)
-          login("" , false)
           setLoader(false);
           if (data != null) {
             if (data.responseCode == 0) {
@@ -222,7 +216,7 @@ import withLogin from "../LoginHOC";
             } else if (data.responseCode == 6) {
               // only for jazz cash , process payment api will not call direct transaction from here
               const loggedIn = checkUserIdAndToken();
-              console.log("data.responseCode : ",data.responseCode , data.data.User);
+              console.log("data.responseCode : ",data.responseCode , data.data.User , loggedIn);
               if(loggedIn.valid){
                 if (data.data.User.IsPinSet) {
                   swal({
