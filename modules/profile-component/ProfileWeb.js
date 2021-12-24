@@ -94,7 +94,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
             margin: 0;
           }
           dl + dl {
-            margin-top: 10px;
+            margin-top: 5px;
           }
           dl dt {
             font-weight: 300;
@@ -103,6 +103,8 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
             margin: 0;
           }
           .profile-img {
+            width: 100%;
+            height: auto;
           }
           .package-detail {
             line-height: 1;
@@ -138,9 +140,9 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
       </style>
       <div className="container">
         <div className="profile_div">
-          <div className="row">
+          <div className="d-flex align-items-center line-1">
             <div>
-              <h4>My Profile</h4>
+              <h4 className="mb-0">My Profile</h4>
             </div>
             <div className="ml-3">
               <Link href="/editprofile">
@@ -153,13 +155,13 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
               </Link>
             </div>
           </div>
-          <div className="row mt-4">
-            <div className="col-md-2 px-0">
+          <div className="row mt-4 align-items-center">
+            <div className="col-md-2 align-self-start">
               <div className="profile-user ">
                 <img src={userProfileIcon} className="profile-img" />
               </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-5">
               {profileData ? (
                 <>
                   <dl>
