@@ -42,6 +42,15 @@ export default function PaymentMethod() {
   ];
   return (
     <div className="col-md-12 col-sm-12 pt-2">
+      <style jsx>
+        {`
+          .radio-cstm:after {
+            margin: -6px auto 0;
+            width: 10px;
+            height: 10px;
+          }
+        `}
+      </style>
       <div className="d-flex justify-content-around">
         {imageArray.map((m, ind) => (
           <div key={ind} className="text-center">

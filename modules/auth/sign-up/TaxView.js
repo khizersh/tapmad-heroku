@@ -54,7 +54,20 @@ export default function TaxView({ onChange }) {
         PackagePrice.length > 0 &&
         PackagePrice.map((m, i) => {
           return (
-            <div style={{maxWidth: "33.3333%"}}>
+            <div style={{ maxWidth: "33.3333%" }}>
+              <style jsx>
+                {`
+                  @media (max-width: 480px) {
+                    li {
+                      padding-left: 10px !important;
+                      padding-right: 10px !important;
+                    }
+                    .f-40 {
+                      font-size: 1em;
+                    }
+                  }
+                `}
+              </style>
               <li
                 key={i}
                 className={`w-100 p-1 pb-3 f-20 text-center cursor-pointer border-0 text-base px-3 ${
@@ -93,7 +106,10 @@ export default function TaxView({ onChange }) {
                   <div className="f-40 font-weight-bold text-white line-1">
                     {m.PackagePrices[1]}
                   </div>
-                  <div className="text-white monthly line-1" style={{top: "0"}}>
+                  <div
+                    className="text-white monthly line-1"
+                    style={{ top: "0" }}
+                  >
                     <span className="d-block">
                       {m.PackagePrices[2].split(" ")[0]}
                     </span>

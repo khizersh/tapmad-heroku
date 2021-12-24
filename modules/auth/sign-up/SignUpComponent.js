@@ -30,6 +30,9 @@ const SignUpComponent = ({ tab, packageId }) => {
     <div className="bit-top">
       <style jsx>
         {`
+          .center-width-product {
+            width: 100%;
+          }
           .center-width {
             width: auto;
             display: flex;
