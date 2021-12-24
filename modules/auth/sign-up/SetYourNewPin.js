@@ -6,7 +6,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
-function SetYourNewPinSignUp({ login, ip }) {
+function SetYourNewPinSignUp({ login, ip , showUser }) {
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
@@ -106,6 +106,9 @@ function SetYourNewPinSignUp({ login, ip }) {
         .catch((e) => console.log(e));
     }
   }, [SignUpState.UserDetails.MobileNo]);
+
+
+
 
   return (
     <div className="desktop-size custom-bg-signup">
