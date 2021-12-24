@@ -78,7 +78,6 @@ export default function PSLChat({ channel }) {
   }, [database]);
 
   function appendChatRoom(newRoom) {
-    console.log("newRoom : ", newRoom);
     if (Array.isArray(newRoom)) {
       // Delete Room
       setChatRooms(newRoom);
