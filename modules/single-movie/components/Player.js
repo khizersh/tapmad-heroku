@@ -222,6 +222,11 @@ export default function Player({ movies }) {
             z-index: 9;
             position: sticky !important;
           }
+          .vdobox {
+            position: sticky !important;
+            top: 77px;
+            z-index: 9;
+          }
         }
         `}
         </style>
@@ -230,7 +235,7 @@ export default function Player({ movies }) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-9 vdowrp">
-              <div className="col-12 p-0">
+              <div className="col-12 p-0 vdobox">
                 {/* Top Ad */}
                 {ads.allow ? (
                   <div className="text-center my-3">
