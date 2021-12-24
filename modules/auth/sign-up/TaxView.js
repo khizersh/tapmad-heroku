@@ -54,10 +54,10 @@ export default function TaxView({ onChange }) {
         PackagePrice.length > 0 &&
         PackagePrice.map((m, i) => {
           return (
-            <div className="w-100">
+            <div style={{maxWidth: "33.3333%"}}>
               <li
                 key={i}
-                className={`w-100 p-1 f-20 text-center cursor-pointer border-0 text-base ${
+                className={`w-100 p-1 pb-3 f-20 text-center cursor-pointer border-0 text-base px-3 ${
                   SelectedPrice?.ProductId
                     ? SelectedPrice.ProductId === m.ProductId
                       ? "price-active"

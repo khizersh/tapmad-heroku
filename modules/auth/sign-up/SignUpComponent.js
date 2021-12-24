@@ -43,7 +43,7 @@ const SignUpComponent = ({ tab, packageId }) => {
           <PackageSelectView onChange={changeMainPackage} />
         </ul>
       </div>
-      <ul className="list-group-horizontal center-width-product list-group">
+      <ul className="list-group-horizontal center-width-product list-group justify-content-center">
         <TaxView onChange={taxChangeView} />
       </ul>
 
