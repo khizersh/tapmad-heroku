@@ -227,6 +227,9 @@ export default function Player({ movies }) {
             top: 77px;
             z-index: 9;
           }
+          div.d-sm-none {
+            display: none !important
+          }
         }
         `}
         </style>
@@ -235,8 +238,7 @@ export default function Player({ movies }) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-9 vdowrp">
-              <div className="col-12 p-0 vdobox">
-                {/* Top Ad */}
+               {/* Top Ad */}
                 {ads.allow ? (
                   <div className="text-center my-3">
                     <DFPSlotsProvider dfpNetworkId="28379801">
@@ -263,6 +265,7 @@ export default function Player({ movies }) {
                     </DFPSlotsProvider>
                   </div>
                 ) : null}
+              <div className="col-12 p-0 vdobox">
                 <div
                   id="player-div1"
                   className="player-div"
