@@ -37,7 +37,7 @@ const CombineLoginDesktop = ({
                     <label className="radio-cstm" htmlFor={m.OperatorName}>
                       <div
                         onClick={() => UpdatePaymenthMethod(m)}
-                        className={` mt-3 text-center`}
+                        className={`mt-3 mx-2 text-center`}
                       >
                         <img
                           src={m.OperatorImage}
