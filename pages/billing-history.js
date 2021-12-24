@@ -72,11 +72,9 @@ const BillingHistory = () => {
     }
   };
   const onclickBack = () => {
-  const backURL = Cookie.getCookies("backUrl") || "/";
-  router.push(backURL);
+    const backURL = Cookie.getCookies("backUrl") || "/";
+    router.push(backURL);
   };
-
-
 
   return (
     <div className="">
@@ -102,16 +100,16 @@ const BillingHistory = () => {
       </NavbarHOC>
       <div className="offset-md-1 col-md-10  col-12 ">
         {SignUpState.isMobile ? null : (
-          <div className="row ml-2 margTop-90">
+          <div className="row ml-2 margTop-90 align-items-center">
             <img src={creditcardIcon} width="20" alt="card" className="mr-2" />
             <text className="table_text">Billing History</text>
             <button
-                type="button"
-                className="btn btn-gradient text-light rounded-pill w-100 px-3 font-11"
-                onClick={onclickBack}
-              >
-                Back
-              </button>
+              type="button"
+              className="btn btn_submit text-light rounded-pill d-inline-block mx-3 py-1 px-4 font-14 font-weight-bold"
+              onClick={onclickBack}
+            >
+              Back
+            </button>
           </div>
         )}
 
