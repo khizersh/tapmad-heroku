@@ -17,46 +17,52 @@ export default function withLogin(Component, data) {
     const { dispatch } = useContext(AuthContext);
     const router = useRouter();
 
+    var apiCall = false
     async function loginUser(userIp, callPinApi = true) {
-      setLoader(true);
-      var status = null;
-      if (callPinApi) {
-        // call api with pin
-        const userPin =
-          Cookie.getCookies("UserPin") || SignUpState.UserDetails.UserPin;
-        var obj = {
-          Language: "en",
-          Platform: "web",
-          Version: "V1",
-          MobileNo: SignUpState.UserDetails.MobileNo,
-          OperatorId: SignUpState.UserDetails.Operator,
-          UserPin: userPin,
-        };
-        if (userPin.length === 4) {
-          status = await callLoginApi(obj, status, userIp , true);
+      if(!apiCall){
+        apiCall = true
+        setLoader(true);
+        var status = null;
+        console.log("callPinApi : ",callPinApi);
+        if (callPinApi) {
+          // call api with pin
+          const userPin =
+            Cookie.getCookies("UserPin") || SignUpState.UserDetails.UserPin;
+          var obj = {
+            Language: "en",
+            Platform: "web",
+            Version: "V1",
+            MobileNo: SignUpState.UserDetails.MobileNo,
+            OperatorId: SignUpState.UserDetails.Operator,
+            UserPin: userPin,
+          };
+          if (userPin?.length === 4) {
+            status = await callLoginApi(obj, status, userIp , true);
+          } else {
+            setLoader(false);
+            swal({
+              title: "Enter 4 digit PIN",
+              timer: 2500,
+              icon: "error",
+            });
+          }
         } else {
-          setLoader(false);
-          swal({
-            title: "Enter 4 digit PIN",
-            timer: 2500,
-            icon: "error",
-          });
+          const obj = {
+            Version: "V1",
+            Language: "en",
+            Platform: "android",
+            OperatorId: SignUpState.UserDetails.Operator,
+            MobileNo: SignUpState.UserDetails.MobileNo,
+            UserPassword:
+              SignUpState.UserDetails.UserPassword || Cookie.getCookies("utk"),
+          };
+           // call api without pin
+           status = await callLoginApi(obj, status, userIp , false);
         }
-      } else {
-        const obj = {
-          Version: "V1",
-          Language: "en",
-          Platform: "android",
-          OperatorId: SignUpState.UserDetails.Operator,
-          MobileNo: SignUpState.UserDetails.MobileNo,
-          UserPassword:
-            SignUpState.UserDetails.UserPassword || Cookie.getCookies("utk"),
-        };
-         // call api without pin
-         status = await callLoginApi(obj, status, userIp , false);
+        return status;
+  
       }
-      return status;
-
+    
     }
 
     async function verifyPinCode(ip, pin, forgetPin) {

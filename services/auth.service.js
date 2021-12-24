@@ -18,7 +18,6 @@ export function setLoginViews(response, obj) {
       response.data.UserActiveSubscription &&
       response.data.UserActiveSubscription.length
     ) {
-      console.log("setLoginViews : " , response);
       if (response.data.User.UserId) {
         if (response.data.User.IsPinSet) {
           setCookiesForLogin(response.data);

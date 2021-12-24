@@ -121,8 +121,9 @@ import withLogin from "../LoginHOC";
     }
     setLoader(false);
   }
+  var apiCall = false;
   async function SubscribeUser() {
-    // setLoader(true);
+    setLoader(true);
     if (checkbox) {
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
@@ -221,6 +222,7 @@ import withLogin from "../LoginHOC";
             } else if (data.responseCode == 6) {
               // only for jazz cash , process payment api will not call direct transaction from here
               const loggedIn = checkUserIdAndToken();
+              console.log("data.responseCode : ",data.responseCode , data.data.User);
               if(loggedIn.valid){
                 if (data.data.User.IsPinSet) {
                   swal({
@@ -239,10 +241,10 @@ import withLogin from "../LoginHOC";
                 }
               }else{
                 if (data.data.User.IsPinSet) {
-                  console.log("data.data jazz cash : ",data.data);
                   //  do login for non pin api
+                  console.log("IsPinSet condition ",data.data);
                   Cookie.setCookies('utk' , data.data.User.UserPassword)
-                login("" , false)
+                  login("" , false)
                 } else {
                   // send to setpin
                   dispatch({
@@ -252,7 +254,6 @@ import withLogin from "../LoginHOC";
                 }
               }
              
-              console.log("data in jazz : ", data.data.User.IsPinSet);
             } else {
               swal({ title: data.message, icon: "error" });
             }
