@@ -50,13 +50,25 @@ export default function PackageSelectView({ onChange }) {
         <>
           <style jsx>
             {`
+              li {
+                padding-left: 10px;
+                padding-right: 10px;
+              }
               li.pr_active span {
                 color: var(--basecolor);
               }
               li span {
-                font-size: 1.5em;
                 text-transform: capitalize;
                 color: black;
+              }
+              @media (min-width: 992px) {
+                li {
+                  padding-left: 30px;
+                  padding-right: 30px;
+                }
+                li span {
+                  font-size: 1.5em;
+                }
               }
             `}
           </style>
@@ -65,7 +77,7 @@ export default function PackageSelectView({ onChange }) {
               return (
                 <li
                   key={i}
-                  className={`w-auto px-4 py-3 rounded-sides text-center list-group-item-action text-muted package${
+                  className={`w-auto py-3 rounded-sides text-center list-group-item-action text-muted package${
                     i + 1
                   } ${
                     SignUpState?.SelectedPackage?.PaymentTabId == m.PaymentTabId
