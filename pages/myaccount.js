@@ -159,7 +159,7 @@ const MyAccountTrial = ({ signout }) => {
 
   return (
     <div className="container-fluid">
-      <NavbarHOC>
+      {/* <NavbarHOC>
         <div>
           <button
             className="btn"
@@ -184,7 +184,7 @@ const MyAccountTrial = ({ signout }) => {
             ""
           )}
         </div>
-      </NavbarHOC>
+      </NavbarHOC> */}
       <div className="profile-container">
         <RenderViews />
       </div>
@@ -200,7 +200,7 @@ export function getServerSideProps(context) {
   }
   return {
     props: {
-      noSideBar: true,
+      noSideBar: false,
       protected: true,
       auth: true,
       ip: ip,
