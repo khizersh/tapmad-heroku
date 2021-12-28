@@ -64,8 +64,8 @@ export async function getServerSideProps(context) {
       banner: banner,
       featured: featured,
       ip: ip,
-      env: process.env.TAPENV,
-      prodEnv: process.env.API_ENDPOINT
+      env: process.env.TAPENV || 'production',
+      prodEnv: process.env.API_ENDPOINT || 'http://api.tapmad.com/api/'
     },
   };
 }
