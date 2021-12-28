@@ -15,6 +15,7 @@ const CombineLoginDesktop = ({
   pin,
   forgetClick,
 }) => {
+  console.log("AuthState?.CountryCode : ",AuthState?.CountryCode);
   // const handleKeypress = (e) => {
   //   //it triggers by pressing the enter key
   //   if (e.key === "Enter") {
@@ -89,8 +90,8 @@ const CombineLoginDesktop = ({
             <div className="mx-2">
               <input
                 type="text"
-                maxLength="10"
-                minLength="10"
+                // maxLength="10"
+                // minLength="10"
                 className="form-control border-round mb-4  custom-input"
                 id="mobileNo"
                 placeholder="3xxxxxxxxxxx"
@@ -131,7 +132,7 @@ const CombineLoginDesktop = ({
         <div className="form-group text-center">
           <button
             type="submit"
-            disabled={btnDisabled ? true : false}
+            // disabled={btnDisabled ? true : false}
             className="btn pymnt_pge_sbscrbe_btn width-35 bg-green font-16"
           >
             Login Now

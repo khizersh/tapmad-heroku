@@ -27,6 +27,7 @@ import { GameContext } from "../../contexts/GameContext";
 import TabsWithIcon from "../../components/TabsWithIcon";
 
 const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
+  console.log("upgardeBtn: ",upgardeBtn);
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
@@ -54,7 +55,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
       selectedIcon: colorPackage,
       icon: blackPackage,
     });
-  }, [allData]);
+  }, [allData , upgardeBtn]);
 
   const data = [
     {

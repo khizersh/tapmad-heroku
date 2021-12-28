@@ -52,7 +52,7 @@ const MyAccountTrial = ({ signout }) => {
           setProfileData({
             ...profileData,
             UserId: userId,
-            Email: data.data.ProfileData.UserEmail || "abc@gmail.com",
+            Email: data.data.ProfileData.UserEmail || "--",
             UserMobileNumebr: data.data.ProfileData.UserProfileMobile || "--",
             FullName: data.data.ProfileData.UserProfileFullName || "--",
             BirthDate: data.data.ProfileData.UserProfileDOB || "--",
@@ -60,6 +60,10 @@ const MyAccountTrial = ({ signout }) => {
             Gender: data.data.ProfileData.UserProfileGender || "--",
             Package: data.data.Package,
           });
+          if(data.data.MyPackage === "Premium"){
+            console.log("premiummmmm");
+            setUpgradeBtn(true)
+          }
         }
       }
     }
@@ -146,7 +150,7 @@ const MyAccountTrial = ({ signout }) => {
         );
       }
     },
-    [isMobile, profileData]
+    [isMobile, profileData , upgardeBtn]
   );
 
   const onClickBack = () => {

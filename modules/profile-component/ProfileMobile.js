@@ -17,7 +17,7 @@ import {
 } from "../../services/imagesLink";
 import Link from "next/link";
 
-const MyAccountMobile = ({ profileData, allData }) => {
+const MyAccountMobile = ({ profileData, allData , upgardeBtn }) => {
   const [show, setShow] = useState({
     games: false,
     package: false,
@@ -159,7 +159,7 @@ const MyAccountMobile = ({ profileData, allData }) => {
               type="button"
               className="btn btn-gradient text-light rounded-pill p-1 w-100"
               onClick={clickEditProfile}
-              // disabled={upgardeBtn}
+              disabled={upgardeBtn}
             >
               Update Package
             </button>
