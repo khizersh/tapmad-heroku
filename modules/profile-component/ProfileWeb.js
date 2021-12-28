@@ -167,7 +167,7 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
                       ? editUserMale
                       : userFemaleProfileIcon
                   }
-                  className="profile-img"
+                  className="profile-img  border-50"
                 />
               </div>
             </div>

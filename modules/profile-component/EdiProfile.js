@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../contexts/profile/ProfileContext";
-import {
-  editUserMale,
-  userFemaleProfileIcon,
-  userIcon,
-} from "../../services/imagesLink";
+import { editUserMale, userFemaleProfileIcon } from "../../services/imagesLink";
 import { MyAccountService } from "../my-account/myaccount.service";
 import requestIp from "request-ip";
 import { Cookie } from "../../services/cookies";
