@@ -21,7 +21,6 @@ export default function withLogin(Component, data) {
     async function loginUser(userIp, callPinApi = true) {
         setLoader(true);
         var status = null;
-        console.log("callPinApi : ",callPinApi);
         if (callPinApi) {
           // call api with pin
           const userPin =

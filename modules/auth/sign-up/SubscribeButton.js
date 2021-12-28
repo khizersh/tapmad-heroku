@@ -121,7 +121,6 @@ import withLogin from "../LoginHOC";
     }
     setLoader(false);
   }
-  var apiCall = false;
   async function SubscribeUser() {
     setLoader(true);
     if (checkbox) {
@@ -166,9 +165,21 @@ import withLogin from "../LoginHOC";
             return swal({
               timer: 3000,
               text: "Please select operator",
-              icon: "info",
+              icon: "error",
               buttons: false,
             });
+          }
+          if(SignUpState.SelectedMethod?.PaymentId == 4){
+            if(!details.cnic){
+              setLoader(false);
+              return swal({
+                timer: 3000,
+                text: "Please enter cnic",
+                icon: "info",
+                buttons: false,
+              });
+
+            }
           }
           var data = await AuthService.initialTransaction(details);
           setLoader(false);
