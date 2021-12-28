@@ -18,7 +18,13 @@ export default function CategoryDetail({
   const router = useRouter();
 
   const [dropdown, toggleDropdown] = useState("");
+  const [dropdownDisplay, toggleDropdownDisplay] = useState(false);
   const [filterDropdownData, toggleFilterDropdownData] = useState(null);
+
+  const setSearchResult = (e) => {
+    toggleDropdown(e.target.textContent);
+    toggleFilterDropdownData(null);
+  };
 
   useEffect(() => {
     verifyURL(router, videoList[0].SectionName, video.VideoName);
@@ -55,20 +61,17 @@ export default function CategoryDetail({
   //   }
   // };
 
-  useEffect(async () => {
-    if (dropdown) {
+  const onChangeSearch = (event) => {
+    const schval = event.target.value;
+    toggleDropdown(schval);
+    toggleDropdownDisplay(Boolean(schval.length));
+    if (schval.length) {
       const data = searchResults;
       const filter = data.filter(
         (d) => d.VideoName.toLowerCase().indexOf(dropdown.toLowerCase()) > -1
       );
-      toggleFilterDropdownData(filter);
-    }
-  }, [dropdown]);
-
-  const onChangeSearch = (event) => {
-    toggleDropdown(event.target.value);
-    if (dropdown.length) {
-      console.log(videoList);
+      const results = filter.length ? filter : "empty";
+      toggleFilterDropdownData(results);
     }
   };
 
@@ -90,16 +93,18 @@ export default function CategoryDetail({
             max-width: calc(100% - 30px);
             width: 100%;
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-          }
-          .schrst a {
-            color: black;
-            display: block;
             font-size: 0.9em;
           }
-          .schrst a + a {
+          .schrst div {
+            color: black;
+            display: block;
+            font-weight: 400;
+            line-height: 1.1;
+          }
+          .schrst div + div {
             border-top: solid 1px #dadada;
-            margin-top: 5px;
-            padding-top: 5px;
+            margin-top: 7px;
+            padding-top: 7px;
           }
           @media (min-width: 576px) {
             .schrst {
@@ -166,39 +171,50 @@ export default function CategoryDetail({
         </div>
       </div>
       {/* search box */}
-      {page === 'category' ?  <div className="row my-3 ">
-        <div className="col-12 w-100">
-          <input
-            type="text"
-            className="border-curve form-control width-20p float-right"
-            placeholder="Search..."
-            value={dropdown}
-            onChange={onChangeSearch}
-          />
-          {dropdown ? (
-            <div className="schrst">
-              {filterDropdownData ? (
-                filterDropdownData === "empty" ? (
-                  <p>No search result found!</p>
+      {page === "category" ? (
+        <div className="row my-3 ">
+          <div className="col-12 w-100">
+            <input
+              type="text"
+              className="border-curve form-control width-20p float-right"
+              placeholder="Search..."
+              value={dropdown}
+              onChange={onChangeSearch}
+            />
+            {dropdownDisplay ? (
+              <div className="schrst">
+                {filterDropdownData ? (
+                  filterDropdownData === "empty" ? (
+                    <p className="mb-0">No search result found!</p>
+                  ) : (
+                    filterDropdownData.map((d, k) => {
+                      return (
+                        <div
+                          key={k}
+                          role="button"
+                          tabIndex={0}
+                          onClick={setSearchResult}
+                        >
+                          {d.VideoName}
+                        </div>
+                      );
+                    })
+                  )
                 ) : (
-                  filterDropdownData.map((d, k) => (
-                    <Link href={"/"} key={k}>
-                      <a>{d.VideoName}</a>
-                    </Link>
-                  ))
-                )
-              ) : (
-                <div className="text-center">
-                  <span className="fa fa-spinner fa-spin text-base" />
-                </div>
-              )}
-            </div>
-          ) : (
-            <></>
-          )}
+                  <div className="text-center">
+                    <span className="fa fa-spinner fa-spin text-base" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
-      </div> : ""}
-     
+      ) : (
+        ""
+      )}
+
       <div className="row mt-3">
         {filteredList && filteredList.length > 0 ? (
           filteredList.map((vid, i) => {
