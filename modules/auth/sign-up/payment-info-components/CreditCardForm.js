@@ -24,7 +24,7 @@ const CreditCardForm = ({
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      setNum(mobileNum); 
+      setNum(mobileNum);
       onChangeNumber(e);
     }
   };

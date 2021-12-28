@@ -31,7 +31,7 @@ export const verifyUserPinCode = BASEURLDEVELOPMENT + "api/verifyUserPinCode";
 export const UserSignUpPromoCode =
   BASEURLDEVELOPMENT + "api/UserSignUpPromoCode";
 export const SignUpORSignInMobileOperatorToken =
-BASEURLDEVELOPMENT + "api/SignUpORSignInMobileOperatorToken";
+  BASEURLDEVELOPMENT + "api/SignUpORSignInMobileOperatorToken";
 export const SignUpORSignInMobileOperatorTokenByPin =
   BASEURLDEVELOPMENT + "api/SignUpORSignInMobileOperatorTokenByPin";
 export const Logout = BASEURLAPP + "api/logout";
@@ -45,7 +45,6 @@ export const getShowsWithPagination =
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
   BASEURLDEVELOPMENT + "api/getUserStreamWithPackagesChannelsChat";
-  
 
 // export const getEventPredicationGameChannel =
 // BASEURLDEVELOPMENT + "api/getEventPredicationGameChannelToken";
@@ -60,7 +59,9 @@ export const initialPaymentTransactionNew =
 
 // shows api
 export const getSeasonVodByCategoryId =
-  BASEURLDEVELOPMENT + "api/getSeasonVodByCategoryId/V1/en/web/";
+  BASEURLDEVELOPMENT + "api/getSeasonContentByCategoryId/v1/en/web/";
+// BASEURLDEVELOPMENT + "api/getSeasonVodByCategoryId/V1/en/web/";
+
 export const unsubscribePaymentTransaction =
   BASEURLDEVELOPMENT + "api/unsubscribeUserSubscriptiption";
 export const getMoviesWithPagination = (from, to) => {
@@ -127,7 +128,8 @@ export const getPSLTabs = BASEURLDEVELOPMENT + "api/getAllTabs/v1/en/android";
 export const submitMatchBids =
   BASEURLDEVELOPMENT + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
-BASEURLDEVELOPMENT + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+  BASEURLDEVELOPMENT +
+  `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
 export const createRoom = BASEURLDEVELOPMENT + "api/createNewChatRoom";
 export const joinRoom = BASEURLDEVELOPMENT + "api/joinChatRoom";
 

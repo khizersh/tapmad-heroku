@@ -4,11 +4,21 @@ import Card from "./card/Card";
 import { SEOFriendlySlugsForWatch, verifyURL } from "../../../services/utils";
 import { ContentViewed } from "../../../services/gtm";
 import { useRouter } from "next/router";
+import { get } from "https";
 
-export default function CategoryDetail({ video, videoList, syno, page }) {
+export default function CategoryDetail({
+  video,
+  videoList,
+  syno,
+  page,
+  searchResults,
+}) {
   const [slug, setSlug] = useState(null);
   const [filteredList, setFilteredList] = useState([]);
   const router = useRouter();
+
+  const [dropdown, toggleDropdown] = useState("");
+  const [filterDropdownData, toggleFilterDropdownData] = useState(null);
 
   useEffect(() => {
     verifyURL(router, videoList[0].SectionName, video.VideoName);
@@ -30,22 +40,74 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
     }
   }, [video, router]);
 
+  // Old ChangeSearch Handler
+  // const onChangeSearch = (event) => {
+  //   let searchText = event.target.value?.toLowerCase();
+  //   let filterArray = videoList[0].Videos.filter((vid) =>
+  //     vid.VideoName.toLowerCase().includes(searchText)
+  //   );
+  //   if (!searchText) {
+  //     setFilteredList(videoList[0].Videos);
+  //   } else if (filterArray.length && searchText) {
+  //     setFilteredList(filterArray);
+  //   } else {
+  //     setFilteredList([]);
+  //   }
+  // };
+
+  useEffect(async () => {
+    if (dropdown) {
+      const data = searchResults;
+      const filter = data.filter(
+        (d) => d.VideoName.toLowerCase().indexOf(dropdown.toLowerCase()) > -1
+      );
+      toggleFilterDropdownData(filter);
+    }
+  }, [dropdown]);
+
   const onChangeSearch = (event) => {
-    let searchText = event.target.value?.toLowerCase();
-    let filterArray = videoList[0].Videos.filter((vid) =>
-      vid.VideoName.toLowerCase().includes(searchText)
-    );
-    if (!searchText) {
-      setFilteredList(videoList[0].Videos);
-    } else if (filterArray.length && searchText) {
-      setFilteredList(filterArray);
-    } else {
-      setFilteredList([]);
+    toggleDropdown(event.target.value);
+    if (dropdown.length) {
+      console.log(videoList);
     }
   };
 
   return (
     <>
+      <style jsx>
+        {`
+          .schrst {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            position: absolute;
+            right: 15px;
+            top: 100%;
+            z-index: 1;
+            color: black;
+            max-height: 200px;
+            overflow-y: auto;
+            max-width: calc(100% - 30px);
+            width: 100%;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+          }
+          .schrst a {
+            color: black;
+            display: block;
+            font-size: 0.9em;
+          }
+          .schrst a + a {
+            border-top: solid 1px #dadada;
+            margin-top: 5px;
+            padding-top: 5px;
+          }
+          @media (min-width: 576px) {
+            .schrst {
+              width: 302px;
+            }
+          }
+        `}
+      </style>
       <div className="row">
         <div className="col-12 mt-2">
           <div className="row mr-0">
@@ -106,8 +168,30 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
             type="text"
             className="border-curve form-control width-20p float-right"
             placeholder="Search..."
+            value={dropdown}
             onChange={onChangeSearch}
           />
+          {dropdown ? (
+            <div className="schrst">
+              {filterDropdownData ? (
+                filterDropdownData === "empty" ? (
+                  <p>No search result found!</p>
+                ) : (
+                  filterDropdownData.map((d, k) => (
+                    <Link href={"/"} key={k}>
+                      <a>{d.VideoName}</a>
+                    </Link>
+                  ))
+                )
+              ) : (
+                <div className="text-center">
+                  <span className="fa fa-spinner fa-spin text-base" />
+                </div>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="row mt-3">
