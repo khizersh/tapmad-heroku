@@ -35,10 +35,8 @@ const buyCoinCard = ({ data }) => {
         OperatorId: resp.data.ProfileData.OperatorId,
         TransactionType: 1,
       };
-      console.log("body : ", body);
       makeCoinTransactionData(body)
         .then((respCoin) => {
-          console.log("respCoin", respCoin);
 
           if (respCoin && respCoin.responseCode == "10") {
             setLoader(false);

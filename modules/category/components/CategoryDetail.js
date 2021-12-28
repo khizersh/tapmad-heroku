@@ -67,21 +67,25 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
                         : null}
                     </div>
                     <br />
-                    {/* <div>
-                      {slug && (
-                        <Link
-                          href={slug}
-                          passHref
-                          shallow
-                          className="z-index-play"
-                        >
-                          <a className="btn tm_wishlst_btn">
-                            <i className="fa fa-play rounded-circle pr-2"></i>
-                            Play
-                          </a>
-                        </Link>
-                      )}
-                    </div> */}
+                    {page !== "category" ? (
+                      <div>
+                        {slug && (
+                          <Link
+                            href={slug}
+                            passHref
+                            shallow
+                            className="z-index-play"
+                          >
+                            <a className="btn tm_wishlst_btn">
+                              <i className="fa fa-play rounded-circle pr-2"></i>
+                              Play
+                            </a>
+                          </Link>
+                        )}
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className="col-lg-6 col-md-6 col-12 d-none d-sm-block pr-0 ">
                     {video && video["VideoImagePathLarge"] ? (
@@ -100,7 +104,7 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
         </div>
       </div>
       {/* search box */}
-      <div className="row my-3 ">
+      {page === 'category' ?  <div className="row my-3 ">
         <div className="col-12 w-100">
           <input
             type="text"
@@ -109,7 +113,8 @@ export default function CategoryDetail({ video, videoList, syno, page }) {
             onChange={onChangeSearch}
           />
         </div>
-      </div>
+      </div> : ""}
+     
       <div className="row mt-3">
         {filteredList && filteredList.length > 0 ? (
           filteredList.map((vid, i) => {
