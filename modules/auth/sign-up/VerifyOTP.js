@@ -76,15 +76,18 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 timer: 2500,
                 title: data.message,
                 icon: "success",
-              }).then((result) => {
+              }).then(async (result) => {
                 if (newUser) {
                   Cookie.setCookies("userId", data.data.User.UserId);
                 }
                 if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  const backUrl = '/';
-                  router.push(backUrl);
+                  let loginResp = await login(ip , false);
+                  if (loginResp?.code && loginResp.code != 1) {
+                    router.push(loginResp.view);
+                  }
+                  setLoader(false);
                 } else {
                   dispatch({
                     type: UPDATE_SUBSCRIBE_RESPONSE,
