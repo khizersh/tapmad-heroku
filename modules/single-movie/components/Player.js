@@ -203,7 +203,7 @@ export default function Player({ movies }) {
     setIsMobile(window.screen.width < 639);
     if (movies.Video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
-        router.push("/sign-up");
+        router.push("/sign-up?tab=1&packageId=2");
       }
     }
   }, []);

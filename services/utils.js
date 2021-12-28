@@ -214,7 +214,8 @@ function setUrlToCookies(key, url) {
     !url.includes("/sign-up") &&
     url != "/sign-in" &&
     url != "/myaccount" &&
-    url != "/subscribe-to-epl?subspack=epl"
+    url != "/subscribe-to-epl?subspack=epl" &&
+    url != "/change-package"
   ) {
     Cookie.setCookies("backUrl", url);
   }

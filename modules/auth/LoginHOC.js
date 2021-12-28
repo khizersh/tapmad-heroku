@@ -132,7 +132,7 @@ export default function withLogin(Component, data) {
             timer: 2500,
             icon: "warning",
           }).then(() => {
-            router.push("/sign-up");
+            router.push("/sign-up?tab=1&packageId=2");
           });
         }
         return status;

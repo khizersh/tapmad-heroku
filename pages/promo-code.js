@@ -77,8 +77,6 @@ const promoCode = () => {
     };
 
     const data = await AuthService.userPromoCode(body);
-    console.log(data, "PROM");
-
     if (data && data.responseCode == 1) {
       swal({
         title: data.message,
@@ -87,10 +85,10 @@ const promoCode = () => {
       }).then((res) => {
         router.push(
           {
-            pathname: "/sign-up",
+            pathname: "/sign-up?tab=1&packageId=2",
             query: { code: "34", number: number, operator: body.OperatorID },
           },
-          "/sign-up"
+          "/sign-up?tab=1&packageId=2"
         );
       });
     } else if (data.responseCode == 11) {

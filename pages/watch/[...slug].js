@@ -37,7 +37,7 @@ const watch = (props) => {
           `/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
         );
       } else {
-        router.push("/sign-up");
+        router.push("/sign-up?tab=1&packageId=2");
       }
     }
   }, [props.allowUser, url]);
