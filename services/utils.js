@@ -7,12 +7,14 @@ function manipulateUrls(router) {
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
   let isFree = OriginalMovieId.slice(0, 1);
   let cleanVODId = OriginalMovieId.slice(1, OriginalMovieId.length);
-  return {
+  let obj = {
     isChannel: isChannel,
     OriginalMovieId: OriginalMovieId,
     isFree: isFree,
     CleanVideoId: cleanVODId,
   };
+  console.log("obj : ", obj);
+  return obj;
 }
 
 function manipulateUrlsForCatgeory(router) {
@@ -105,25 +107,14 @@ function SEOFriendlySlugsForWatch(event, catchup = false) {
   return slug;
 }
 
-// function SEOFriendlySlugsIsCategoryFalse(event) {
-//   let prefix = "play";
-//   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-//   let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
-//     event.IsVideoChannel ? "1" : "0"
-//   }`;
-//   return slug;
-// }
-
-
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"
-    }`;
+  let slug = `/${prefix}/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+    event.VideoEntityId
+  }${event.IsVideoChannel ? "1" : "0"}`;
   return slug;
 }
-
-
 
 function viewMoreCleanUrls(sectionName, sectionId, name) {
   var pageId = "";
@@ -167,9 +158,13 @@ function setUrlAccordingToVideoType(movie, type) {
       slug = SEOFriendlySlugsIsCategoryFalse(movie);
     } else {
       // send specific vods to play page e.g laliga
-      if(movie.VideoEntityId == 579 || movie.VideoEntityId == 950 || movie.VideoEntityId == 953 ){
+      if (
+        movie.VideoEntityId == 579 ||
+        movie.VideoEntityId == 950 ||
+        movie.VideoEntityId == 953
+      ) {
         slug = SEOFriendlySlugsIsCategoryFalse(movie);
-      }else{
+      } else {
         slug = SEOFriendlySlugsForVideo(movie);
       }
     }
