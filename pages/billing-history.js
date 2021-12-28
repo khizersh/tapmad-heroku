@@ -78,7 +78,7 @@ const BillingHistory = () => {
 
   return (
     <div className="">
-      <NavbarHOC>
+      {/* <NavbarHOC>
         <div>
           <button
             className="btn"
@@ -97,7 +97,7 @@ const BillingHistory = () => {
             Billing Details
           </a>
         </div>
-      </NavbarHOC>
+      </NavbarHOC> */}
       <div className="offset-md-1 col-md-10  col-12 ">
         {SignUpState.isMobile ? null : (
           <div className="row ml-2 margTop-90 align-items-center">
@@ -151,7 +151,7 @@ export function getServerSideProps(context) {
   }
   return {
     props: {
-      noSideBar: true,
+      noSideBar: false,
       protected: true,
       auth: true,
       ip: ip,

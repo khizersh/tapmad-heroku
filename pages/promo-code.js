@@ -52,6 +52,14 @@ const promoCode = () => {
   };
 
   const onClick = async () => {
+    const mobileNum = number.trim();
+    if (mobileNum.length < 10) {
+      return swal({
+        title: "Invalid Mobile Number",
+        timer: 2000,
+        icon: "error",
+      });
+    }
     if (!promoCode.length) {
       return swal({
         title: "Enter promo code!",

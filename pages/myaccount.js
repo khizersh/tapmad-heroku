@@ -135,6 +135,7 @@ const MyAccountTrial = ({ signout }) => {
             allData={allData}
             unSubscribe={unSubscribe}
             upgardeBtn={upgardeBtn}
+            onClickBack={onClickBack}
           />
         );
       } else {
@@ -204,7 +205,7 @@ export function getServerSideProps(context) {
   }
   return {
     props: {
-      noSideBar: false,
+      noSideBar: true,
       protected: true,
       auth: true,
       ip: ip,
