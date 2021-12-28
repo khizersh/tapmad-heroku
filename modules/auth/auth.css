@@ -533,10 +533,12 @@ input[type="radio"] {
   transition: all 0.4s;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
-  .radio-cstm:before {
+  /*
+    ** Commeted by Ibrahim
+   .radio-cstm:before {
     width: 25px;
     height: 25px;
-  }
+  } */
   .radio-cstm:after {
     width: 13px;
     height: 13px;

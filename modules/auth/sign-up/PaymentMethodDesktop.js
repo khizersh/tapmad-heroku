@@ -55,6 +55,16 @@ export default function PaymentMethodDesktop() {
           }
         `}
       </style>
+      <style>
+        {`
+        .gridCol {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            flex-basis: 0;
+          }
+        `}
+      </style>
       <div className="row padding-signup-layout">
         <div className="col-5">
           <div className="d-flex justify-content-around">
@@ -75,12 +85,13 @@ export default function PaymentMethodDesktop() {
               : null}
           </div>
           <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
-          <div
-            className="mt-3"
-            style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
-          >
-            {CurrentPackage?.HighlightDescription}
-          </div>
+        <div
+          className="mt-3"
+          style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
+          dangerouslySetInnerHTML={{
+            __html: CurrentPackage?.HighlightDescription,
+          }}
+        />
         </div>
         <div className="col-7 border-dotted-left">
           <div className="row">
@@ -114,7 +125,6 @@ export default function PaymentMethodDesktop() {
                           className="radio-cstm"
                           htmlFor={m.PaymentMethodName}
                           style={{ width: "100px" }}
-                          
                         >
                           <div
                             onClick={() => UpdatePaymenthMethod(m)}
