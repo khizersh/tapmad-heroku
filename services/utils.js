@@ -155,7 +155,7 @@ function setUrlAccordingToVideoType(movie, type) {
       slug = SEOFriendlySlugsIsCategoryFalse(movie);
     } else {
       // send specific vods to play page e.g laliga
-      if(movie.VideoEntityId == 579 || movie.VideoEntityId == 950){
+      if(movie.VideoEntityId == 579 || movie.VideoEntityId == 950 || movie.VideoEntityId == 953 ){
         slug = SEOFriendlySlugsIsCategoryFalse(movie);
       }else{
         slug = SEOFriendlySlugsForVideo(movie);
