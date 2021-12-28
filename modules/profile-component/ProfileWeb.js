@@ -473,4 +473,20 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
     </>
   );
 };
+export function getServerSideProps(context) {
+  var ip = requestIp.getClientIp(context.req);
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
+  return {
+    props: {
+      noSideBar: false,
+      protected: true,
+      auth: true,
+      ip: ip,
+      env: process.env.TAPENV,
+    },
+  };
+}
+
 export default MyAccountWeb;
