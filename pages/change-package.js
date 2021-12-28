@@ -29,7 +29,7 @@ export default function ChangePackage({ props }) {
       <Head>
         <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
       </Head>
-      <NavbarHOC>
+      {/* <NavbarHOC>
         <div>
           <button
             className="btn"
@@ -46,7 +46,7 @@ export default function ChangePackage({ props }) {
           <img src={upgradeIcon} width="25" />
           <span className="pl-2">Upgrade Package</span>
         </div>
-      </NavbarHOC>
+      </NavbarHOC> */}
       <Register update={true} />
     </div>
   );
@@ -59,7 +59,7 @@ export function getServerSideProps(context) {
   }
   return {
     props: {
-      noSideBar: true,
+      noSideBar: false,
       protected: true,
       auth: true,
       ip: ip,

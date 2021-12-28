@@ -52,6 +52,14 @@ const promoCode = () => {
   };
 
   const onClick = async () => {
+    const mobileNum = number.trim();
+    if (mobileNum.length < 10) {
+      return swal({
+        title: "Invalid Mobile Number",
+        timer: 2000,
+        icon: "error",
+      });
+    }
     if (!promoCode.length) {
       return swal({
         title: "Enter promo code!",
@@ -77,7 +85,6 @@ const promoCode = () => {
     };
 
     const data = await AuthService.userPromoCode(body);
-    console.log(data, "PROM");
 
     if (data && data.responseCode == 1) {
       swal({

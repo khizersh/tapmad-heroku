@@ -11,11 +11,14 @@ import GeneralModal from "../../../components/GeneralModal";
 import TermsAndCondition from "./TermsAndCondition";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { handleBody, handleRegisterPayload } from "./authHelper";
-import { UPDATE_SUBSCRIBE_RESPONSE, UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
+import {
+  UPDATE_SUBSCRIBE_RESPONSE,
+  UPDATE_USER_DETAILS,
+} from "../../../contexts/auth/SignUpReducer";
 import { checkUserIdAndToken } from "../../../services/auth.service";
 import withLogin from "../LoginHOC";
 
- function SubscribeButtonComponent({ creditCardType , login}) {
+function SubscribeButtonComponent({ creditCardType, login }) {
   const router = useRouter();
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
@@ -127,6 +130,7 @@ import withLogin from "../LoginHOC";
     if (checkbox) {
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
+        const mobileNumber = details.MobileNo.trim();
         if (!details.MobileNo) {
           setLoader(false);
           return swal({
@@ -136,6 +140,16 @@ import withLogin from "../LoginHOC";
             buttons: false,
           });
         }
+        if (mobileNumber.length < 10) {
+          setLoader(false);
+          return swal({
+            timer: 3000,
+            text: "Please enter mobile number",
+            icon: "error",
+            buttons: false,
+          });
+        }
+
         if (SignUpState.SelectedMethod.PaymentId == 2) {
           // for credit card specific only
           if (
@@ -216,8 +230,13 @@ import withLogin from "../LoginHOC";
             } else if (data.responseCode == 6) {
               // only for jazz cash , process payment api will not call direct transaction from here
               const loggedIn = checkUserIdAndToken();
-              console.log("data.responseCode : ",data.responseCode , data.data.User , loggedIn);
-              if(loggedIn.valid){
+              console.log(
+                "data.responseCode : ",
+                data.responseCode,
+                data.data.User,
+                loggedIn
+              );
+              if (loggedIn.valid) {
                 if (data.data.User.IsPinSet) {
                   swal({
                     title: data.message,
@@ -233,12 +252,12 @@ import withLogin from "../LoginHOC";
                     data: { code: 34, newUser: false },
                   });
                 }
-              }else{
+              } else {
                 if (data.data.User.IsPinSet) {
                   //  do login for non pin api
-                  console.log("IsPinSet condition ",data.data);
-                  Cookie.setCookies('utk' , data.data.User.UserPassword)
-                  login("" , false)
+                  console.log("IsPinSet condition ", data.data);
+                  Cookie.setCookies("utk", data.data.User.UserPassword);
+                  login("", false);
                 } else {
                   // send to setpin
                   dispatch({
@@ -247,7 +266,6 @@ import withLogin from "../LoginHOC";
                   });
                 }
               }
-             
             } else {
               swal({ title: data.message, icon: "error" });
             }

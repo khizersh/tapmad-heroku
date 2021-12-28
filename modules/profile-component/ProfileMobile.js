@@ -40,9 +40,13 @@ const MyAccountMobile = ({ profileData, allData }) => {
       <div className="row">
         <div className="col-4 px-1">
           <img
-            src={gender == "Male" ? editUserMale : userFemaleProfileIcon}
-            className={`${isMobile ? "mt-3" : "m-4"} border-50`}
-            width={`${isMobile ? "100" : "150"}`}
+            src={
+              allData && allData.ProfileData.UserProfileGender == "Male"
+                ? editUserMale
+                : userFemaleProfileIcon
+            }
+            className="mt-3 m-4 border-50"
+            width="100"
           />
         </div>
         <div className="col-4 pt-3">

@@ -164,7 +164,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <div className={`${isMobile ? "my-3" : "col-6"}`}>
               <label className="editprofile_lbl">Email:</label>
               <input
-                placeholder="Email"
+                placeholder="abc@gmail.com"
                 className={`${
                   isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
                 }`}

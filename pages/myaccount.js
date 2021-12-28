@@ -52,7 +52,7 @@ const MyAccountTrial = ({ signout }) => {
           setProfileData({
             ...profileData,
             UserId: userId,
-            Email: data.data.ProfileData.UserEmail || "abc@gmail.com",
+            Email: data.data.ProfileData.UserEmail || "--",
             UserMobileNumebr: data.data.ProfileData.UserProfileMobile || "--",
             FullName: data.data.ProfileData.UserProfileFullName || "--",
             BirthDate: data.data.ProfileData.UserProfileDOB || "--",

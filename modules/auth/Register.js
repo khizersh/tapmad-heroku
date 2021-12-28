@@ -36,10 +36,10 @@ export default memo(function Register(props) {
           </>
         );
       }
-          // old view
+      // old view
       // else if (respCode == 11) {
       //   return <EnterPinToVerify />;
-      // } 
+      // }
       else if (respCode == 34) {
         // Response code 34 is not coming from backend. This is only for frontend logic to display setPinView
         return (
@@ -53,7 +53,6 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
-    console.log("setting operator id register");
     dispatch({
       type: UPDATE_USER_DETAILS,
       data: { MobileNo: number, Operator: operator },
