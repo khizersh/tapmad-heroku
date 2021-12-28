@@ -80,10 +80,10 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 if (newUser) {
                   Cookie.setCookies("userId", data.data.User.UserId);
                 }
-                if (SignUpState.LoggedIn == 1) {
+                if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  const backUrl = Cookie.getCookies('backURL');
+                  const backUrl = Cookie.getCookies('backURL') || '/';
                   router.push(backUrl);
                 } else {
                   dispatch({
