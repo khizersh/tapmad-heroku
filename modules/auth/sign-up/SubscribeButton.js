@@ -123,8 +123,8 @@ import withLogin from "../LoginHOC";
   }
 
   async function SubscribeUser() {
-    setLoader(true);
     if (checkbox) {
+      setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
         if (!details.MobileNo) {
