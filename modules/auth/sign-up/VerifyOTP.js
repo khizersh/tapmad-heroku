@@ -83,7 +83,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  const backUrl = Cookie.getCookies('backURL') || '/';
+                  const backUrl = '/';
                   router.push(backUrl);
                 } else {
                   dispatch({
