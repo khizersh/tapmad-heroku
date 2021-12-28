@@ -47,7 +47,7 @@ export function SearchTag(body) {
     }
 }
 export function ContentViewed(video) {
-    console.log("Content Viewed ", video);
+    // console.log("Content Viewed ", video);
     const { mobile, userId } = getUserDetails();
     try {
         dataLayer.push({ event: "content_viewed", Name: video.VideoName, SmallImage: video.VideoImagePath, user_id: userId, "msisdn": mobile, ID: video.VideoEntityId });

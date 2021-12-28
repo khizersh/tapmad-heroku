@@ -107,7 +107,7 @@ const CombineLoginMobile = ({
       </div>
 
       <div className="text-right mb-3">
-        <Link href="/sign-up" shallow={true} passHref={true}>
+        <Link href="/sign-up?tab=1&packageId=2" shallow={true} passHref={true}>
           <a className=" mt-2 text-light">Not Registered? &nbsp;</a>
         </Link>
         <span

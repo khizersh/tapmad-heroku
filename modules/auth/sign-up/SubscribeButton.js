@@ -124,10 +124,10 @@ function SubscribeButtonComponent({ creditCardType, login }) {
     }
     setLoader(false);
   }
-  var apiCall = false;
+
   async function SubscribeUser() {
-    setLoader(true);
     if (checkbox) {
+      setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
         const mobileNumber = details.MobileNo.trim();
@@ -180,9 +180,21 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             return swal({
               timer: 3000,
               text: "Please select operator",
-              icon: "info",
+              icon: "error",
               buttons: false,
             });
+          }
+          if(SignUpState.SelectedMethod?.PaymentId == 4){
+            if(!details.cnic){
+              setLoader(false);
+              return swal({
+                timer: 3000,
+                text: "Please enter cnic",
+                icon: "info",
+                buttons: false,
+              });
+
+            }
           }
           var data = await AuthService.initialTransaction(details);
           setLoader(false);
@@ -289,7 +301,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
     if (window.innerWidth < 799) {
       setIsMobile(true);
     }
-  }, []);
+  }, [checkbox]);
   return (
     <>
       <style jsx>
@@ -324,7 +336,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       >
         <button
           className={`btn subscribe-btn bg-green ${
-            checkbox ? "visible" : "opacity-0"
+            checkbox === true ? "visible" : "opacity-0"
           }`}
           onClick={SubscribeUser}
         >

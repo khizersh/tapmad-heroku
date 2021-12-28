@@ -43,6 +43,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
             ProductId: SignUpState.SelectedPrice.ProductId,
             Version: "V1",
           };
+          console.log("body : ",body);
           data = await AuthService.paymentProcessTransaction(body);
           SignUpTag(body, data.data);
         } catch (e) {
@@ -60,6 +61,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         data = await AuthService.verifyOTP(body);
       }
       if (data != null) {
+        console.log("data verify itp: ",data);
         if (data.responseCode == 0) {
           swal({
             timer: 3000,
@@ -74,15 +76,18 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 timer: 2500,
                 title: data.message,
                 icon: "success",
-              }).then((result) => {
+              }).then(async (result) => {
                 if (newUser) {
                   Cookie.setCookies("userId", data.data.User.UserId);
                 }
-                if (SignUpState.LoggedIn == 1) {
+                if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  const backUrl = Cookie.getCookies('backURL');
-                  router.push(backUrl);
+                  let loginResp = await login(ip , false);
+                  if (loginResp?.code && loginResp.code != 1) {
+                    router.push(loginResp.view);
+                  }
+                  setLoader(false);
                 } else {
                   dispatch({
                     type: UPDATE_SUBSCRIBE_RESPONSE,

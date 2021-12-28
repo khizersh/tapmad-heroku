@@ -49,22 +49,42 @@ export default function PaymentMethod() {
             width: 10px;
             height: 10px;
           }
+          img {
+            max-height: 40px;
+            object-fit: contain;
+          }
+        `}
+      </style>
+      <style>
+        {`
+          .gridCol input + input {
+            margin-top: 1rem;
+            margin-left: -45px;
+            width: calc(100% + 45px) !important;
+          }
+          .m-mt {
+            margin-top: 1rem;
+          }
         `}
       </style>
       <div className="d-flex justify-content-around">
         {imageArray.map((m, ind) => (
           <div key={ind} className="text-center">
             <p>
-              <img src={m.Image} />
+              <img src={m.Image} width={70} />
             </p>
             <p className="text-grey">{m.Name}</p>
           </div>
         ))}
       </div>
       <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
-      <div className="mt-3" style={{ color: "#FC5656" }}>
-        {CurrentPackage?.HighlightDescription}
-      </div>
+      <div
+        className="mt-3"
+        style={{ color: "#FC5656" }}
+        dangerouslySetInnerHTML={{
+          __html: CurrentPackage?.HighlightDescription,
+        }}
+      />
       <div className="row mt-3">
         <div className="col-12">
           <h3 className="text-base">Payment Options</h3>
