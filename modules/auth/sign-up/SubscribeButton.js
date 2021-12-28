@@ -121,6 +121,7 @@ import withLogin from "../LoginHOC";
     }
     setLoader(false);
   }
+
   async function SubscribeUser() {
     setLoader(true);
     if (checkbox) {
@@ -282,7 +283,7 @@ import withLogin from "../LoginHOC";
     if (window.innerWidth < 799) {
       setIsMobile(true);
     }
-  }, []);
+  }, [checkbox]);
   return (
     <>
       <style jsx>
@@ -317,7 +318,7 @@ import withLogin from "../LoginHOC";
       >
         <button
           className={`btn subscribe-btn bg-green ${
-            checkbox ? "visible" : "opacity-0"
+            checkbox === true ? "visible" : "opacity-0"
           }`}
           onClick={SubscribeUser}
         >

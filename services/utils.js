@@ -133,10 +133,10 @@ function findImageInVODObject(video) {
     return video.VideoImageThumbnail;
   } else if (video.hasOwnProperty("ChannelTVImage")) {
     return video.ChannelTVImage;
-  } else if (video.hasOwnProperty("NewChannelThumbnailPath")) {
-    return video.NewChannelThumbnailPath;
   } else if (video.hasOwnProperty("VideoOnDemandThumb")) {
     return video.VideoOnDemandThumb;
+  } else if (video.hasOwnProperty("NewChannelThumbnailPath")) {
+    return video.NewChannelThumbnailPath;
   } else {
     return video.NewChannelThumbnailPath;
   }
@@ -146,7 +146,9 @@ function SEOFriendlySlugsIsCategoryTrue(event) {
   let prefix = "shows";
   let name = event.CategoryName ? event.CategoryName : event.VideoName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId || event.VideoCategoryId }`;
+  let slug = `/${prefix}/${cleanName}/${
+    event.VoDCategoryId || event.VideoCategoryId
+  }`;
   return slug;
 }
 
@@ -283,8 +285,7 @@ function addScriptCodeInDom(src) {
   script.innerHTML = src;
   document.getElementsByTagName("head")[0].appendChild(script);
 }
-function log() {
-}
+function log() {}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,

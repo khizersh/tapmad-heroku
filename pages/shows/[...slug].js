@@ -92,9 +92,6 @@ export async function getServerSideProps(context) {
   }
   let { categoryId } = manipulateUrlsForCatgeory(context.query);
   const data = await get(getSeasonVodByCategoryId + categoryId, ip);
-  // https://developer.tapmad.com/dev/app/api/getSeasonVodByCategoryId/v1/en/android/983
-  // https://developer.tapmad.com/dev/app/api/getSeasonContentByCategoryId/v1/en/web/720
-  // https://developer.tapmad.com/dev/app/api/getSeasonContentByCategoryId/v1/en/web/1569
 
   let seo = await getSEODataByCategory(categoryId, context.resolvedUrl);
   return {
