@@ -24,7 +24,7 @@ const CreditCardForm = ({
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      setNum(mobileNum);
+      setNum(mobileNum); 
       onChangeNumber(e);
     }
   };
@@ -39,7 +39,7 @@ const CreditCardForm = ({
             onChange={(e) => onChangeName(e)}
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 m-mt">
           {data && data.length ? (
             <DropdownWithImage
               data={data}
@@ -73,7 +73,7 @@ const CreditCardForm = ({
             onChange={(e) => onChange(e)}
           />
         </div>
-        <div className="input-group col-md-6">
+        <div className="input-group col-md-6 m-mt">
           <input
             type="email"
             className="form-control w-100 pl-2 border-curve"

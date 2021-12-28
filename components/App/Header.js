@@ -41,7 +41,7 @@ function HeaderBasic({ signout }) {
       setTimeout(() => {
         setHidePopup(false);
         Cookie.setCookies("hidePopup", false);
-      }, 5e3);
+      }, 1.8e6);
     }
   }, []);
 
