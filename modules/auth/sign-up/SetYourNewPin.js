@@ -94,7 +94,6 @@ function SetYourNewPinSignUp({ login, ip }) {
   useEffect(() => {
     if (initialState.User.MobileNo) {
       let num = initialState?.User?.MobileNo;
-      console.log(initialState);
       let body = { Language: "en", MobileNo: num };
       AuthService.GetCardUser(body)
         .then((res) => {
