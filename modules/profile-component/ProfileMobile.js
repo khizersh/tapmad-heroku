@@ -39,7 +39,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
 
   return (
     <div>
-      <NavbarHOC>
+      {/* <NavbarHOC>
         <div>
           <button
             className="btn"
@@ -58,7 +58,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
             Billing Details
           </a>
         </div>
-      </NavbarHOC>
+      </NavbarHOC> */}
       <div className="p-4 d-sm-none">
         <div className="row">
           <div className="col-4 px-1">

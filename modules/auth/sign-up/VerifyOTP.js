@@ -18,7 +18,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
 
   async function verifyOTPPinCode() {
     if (SignUpState && SignUpState.UserDetails) {
-      if (otp.current.value.length < 4) {
+      if (otp.current.value?.trim()?.length < 4) {
         swal({
           timer: 5000,
           title: "Incorrect OTP",

@@ -42,9 +42,8 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
 
   function handlePin(e) {
     const userPin = e.target.value;
-    console.log("userPin : ",userPin);
     if (+userPin === +userPin) {
-      setPin(userPin);
+      setPin(userPin.trim());
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: { UserPin: userPin },
