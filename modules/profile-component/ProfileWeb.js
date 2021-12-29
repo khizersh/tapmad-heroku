@@ -7,6 +7,7 @@ import {
   colorGaming,
   colorPackage,
   connectIcon,
+  creditcardIcon,
   deviceIcon,
   editUserMale,
   playTrophyIcon,
@@ -25,9 +26,9 @@ import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
 import TabsWithIcon from "../../components/TabsWithIcon";
+import NavbarHOC from "../navbar/NavbarHOC";
 
-const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
-  console.log("upgardeBtn: ",upgardeBtn);
+const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn  , onClickBack}) => {
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
@@ -142,6 +143,8 @@ const MyAccountWeb = ({ profileData, allData, unSubscribe, upgardeBtn }) => {
           }
         `}
       </style>
+     
+
       <div className="container">
         <div className="profile_div">
           <div className="d-flex align-items-center line-1">

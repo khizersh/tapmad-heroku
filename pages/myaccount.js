@@ -205,7 +205,7 @@ export function getServerSideProps(context) {
   }
   return {
     props: {
-      noSideBar: true,
+      noSideBar: false,
       protected: true,
       auth: true,
       ip: ip,

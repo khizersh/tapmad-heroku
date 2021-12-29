@@ -19,7 +19,7 @@ import {
 import Link from "next/link";
 import NavbarHOC from "../navbar/NavbarHOC";
 
-const MyAccountMobile = ({ profileData, allData, onClickBack }) => {
+const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => {
   const [show, setShow] = useState({
     games: false,
     package: false,
