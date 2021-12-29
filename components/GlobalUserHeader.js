@@ -14,7 +14,6 @@ const GlobalUserHeader = () => {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const userId = Cookie.getCookies("userId");
 
-  console.log("SignUpState: ",SignUpState);
   useEffect(async () => {
     if (!SignUpState?.UserDetails?.ProfileName && userId) {
       const user = await MyAccountService.getUserData({
@@ -23,7 +22,6 @@ const GlobalUserHeader = () => {
         Platform: "web",
         UserId: userId,
       });
-      console.log("user.data?.ProfileData?.UserProfileFullName: ",user.data?.ProfileData?.UserProfileFullName);
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },
