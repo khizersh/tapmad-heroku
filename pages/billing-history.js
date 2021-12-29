@@ -18,7 +18,6 @@ const BillingHistory = () => {
     UserId: userId,
   });
   const { SignUpState } = React.useContext(SignUpContext);
-  console.log("SignUpState : ", SignUpState);
   const [subscriptionData, setSubscriptionData] = useState([]);
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

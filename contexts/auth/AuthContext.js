@@ -42,10 +42,12 @@ export default function AuthProviderNew({ children }) {
     } else {
       packages = await getAllPaymentPackages();
     }
-    dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
-    dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
-    dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
-    dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
+    if (packages) {
+      dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
+      dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
+      dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
+      dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
+    }
   }, [AuthState.UpdatePackage]);
 
   const data = {

@@ -5,10 +5,10 @@ import { LoginTag } from "./gtm";
 import { get } from "./http-service";
 
 export async function getAllPaymentPackages() {
-  return (await get(PaymentPackages)).data;
+  return (await get(PaymentPackages))?.data;
 }
 export async function getAllPaymentPackagesByUserId(userID) {
-  return (await get(PaymentPackagesByUserId + userID)).data;
+  return (await get(PaymentPackagesByUserId + userID))?.data;
 }
 
 export function setLoginViews(response, obj) {

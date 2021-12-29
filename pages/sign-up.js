@@ -32,6 +32,7 @@ export function getServerSideProps(context) {
     props: {
       noSideBar: true,
       auth: true,
+      userHeader : true,
       ip: ip,
       env: process.env.TAPENV,
     },

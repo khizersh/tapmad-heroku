@@ -15,7 +15,6 @@ const CombineLoginDesktop = ({
   pin,
   forgetClick,
 }) => {
-  console.log("AuthState?.CountryCode : ",AuthState?.CountryCode);
   // const handleKeypress = (e) => {
   //   //it triggers by pressing the enter key
   //   if (e.key === "Enter") {

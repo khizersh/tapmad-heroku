@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+import swal from "sweetalert";
 const {
   actionRequestView,
   actionRequestSignUp,
@@ -6,22 +7,28 @@ const {
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
 
-function get(url, ip) {
+async function get(url, ip) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
+  var response = null;
   try {
     let headers = {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",
     };
-    return axios.get(url, { headers: headers });
+    response = await axios.get(url, { headers: headers });
   } catch (error) {
-    return null;
+    swal({
+      text :'Unable to load data from server, Please try again later.',
+      icon:'error',
+      timer : 5e3
+    })
   }
+  return response;
 }
 
-function post(url, body, ip, credentialAllowed = false) {
+async function post(url, body, ip, credentialAllowed = false) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
@@ -31,14 +38,22 @@ function post(url, body, ip, credentialAllowed = false) {
     ...body.headers,
   };
   delete body.headers;
+  var response = null;
   try {
-    return axios.post(url, body, {
+    response = await  axios.post(url, body, {
       withCredentials: credentialAllowed ? true : false,
       headers,
     });
   } catch (e) {
-    return null;
+    swal({
+      text :'Unable to load data from server, Please try again later.',
+      icon:'error',
+      timer : 5e3
+    })
   }
+  return response;
+  // finally{
+  // }
 }
 
 function put(url, body, ip) {
