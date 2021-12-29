@@ -82,7 +82,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  let loginResp = await login(ip , false);
+                  let loginResp = await login("" , false);
                   if (loginResp?.code && loginResp.code != 1) {
                     router.push(loginResp.view);
                   }
