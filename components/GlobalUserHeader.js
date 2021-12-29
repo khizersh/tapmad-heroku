@@ -13,20 +13,24 @@ const GlobalUserHeader = () => {
   const { initialState } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const userId = Cookie.getCookies("userId");
+
+  console.log("SignUpState: ",SignUpState);
   useEffect(async () => {
-    if (!SignUpState && userId) {
+    if (!SignUpState?.UserDetails?.ProfileName && userId) {
       const user = await MyAccountService.getUserData({
         Version: "V1",
         Language: "en",
         Platform: "web",
         UserId: userId,
       });
+      console.log("user.data?.ProfileData?.UserProfileFullName: ",user.data?.ProfileData?.UserProfileFullName);
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },
       });
     }
-    setUserData(SignUpState.UserDetails.MobileNo);
+    setUserData(SignUpState.UserDetails.ProfileName);
+
   });
   return (
     <NavbarHOC>
