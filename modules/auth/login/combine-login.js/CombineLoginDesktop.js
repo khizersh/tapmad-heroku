@@ -34,6 +34,13 @@ const CombineLoginDesktop = ({
           {AuthState && AuthState.LoginOperators.length
             ? AuthState.LoginOperators.map((m, i) => (
                 <div>
+                  <style jsx>
+                    {`
+                      .radio-cstm {
+                        width: 90px;
+                      }
+                    `}
+                  </style>
                   <div style={{ margin: "auto" }} key={i}>
                     <div className="position-relative">
                       <input
@@ -116,7 +123,11 @@ const CombineLoginDesktop = ({
         </div>
         <div className="d-flex justify-content-end">
           <div className="mb-3 mx-5 pr-3">
-            <Link href="/sign-up?tab=1&packageId=2" shallow={true} passHref={true}>
+            <Link
+              href="/sign-up?tab=1&packageId=2"
+              shallow={true}
+              passHref={true}
+            >
               <a className=" mt-2 text-grey font-14">Not Registered? &nbsp;</a>
             </Link>
             <span

@@ -9,6 +9,7 @@ import { Cookie } from "../services/cookies";
 import { UPDATE_USER_DETAILS } from "../contexts/auth/SignUpReducer";
 
 const GlobalUserHeader = () => {
+  const [userData, setUserData] = useState(null);
   const { initialState } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const userId = Cookie.getCookies("userId");
@@ -25,7 +26,7 @@ const GlobalUserHeader = () => {
         data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },
       });
     }
-    // setUserData(user);
+    setUserData(SignUpState.UserDetails.MobileNo);
   });
   return (
     <NavbarHOC>
@@ -88,7 +89,7 @@ const GlobalUserHeader = () => {
                     width={36}
                     height={36}
                   />
-                  <span className="ml-2">My account</span>
+                  <span className="ml-2">{userData}</span>
                   {/* <i className="fa fa-angle-down ml-2" /> */}
                 </a>
               </Link>
