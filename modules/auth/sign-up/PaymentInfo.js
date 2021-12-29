@@ -82,7 +82,7 @@ function PaymentInfo(props) {
   function handleCnic(e) {
     const cnic = e.target.value;
     if (+cnic === +cnic) {
-      if (cnic.length == 6) {
+      if (cnic?.trim().length == 6) {
         updateUserData({ Cnic: cnic });
       }
     }
@@ -91,7 +91,7 @@ function PaymentInfo(props) {
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      if (mobileNum.length > 4) {
+      if (mobileNum?.trim().length > 4) {
         updateUserData({ MobileNo: mobileNum });
         dispatch({
           type: "ALREADY_SIGNEDUP_NUM",
