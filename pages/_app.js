@@ -36,7 +36,7 @@ import loadable from "@loadable/component";
 import BuyCoinModal from "../modules/game/components/BuyCoinModal";
 import ProfileProvider from "../contexts/profile/ProfileContext";
 import { checkUserIdAndToken } from "../services/auth.service";
-import NavbarHOC from "../modules/navbar/NavbarHOC";
+import GlobalUserHeader from "../components/GlobalUserHeader";
 
 const DashboardLayout = loadable(() =>
   import("../modules/dashboard/DashboardLayout")
@@ -198,34 +198,7 @@ export const NoSideBarSkeleton = ({ children , layout }) => {
   };
   return (
     <div>
-      {layout ?    <NavbarHOC>
-        <div>
-          {/* <button
-            className="btn"
-            style={{
-              fontSize: "13px",
-              color: "black",
-            }}
-            onClick={onClickBack}
-          >
-            <img src="/icons/login-back.svg" />
-          </button> */}
-          Logo
-        </div>
-        <div className="margin-y-auto">
-          {/* {isMobile ? (
-            <button
-              onClick={clickEditProfile}
-              className="btn bg-white rounded-lg py-1 text-green font-13"
-            >
-              Edit Profile
-            </button>
-          ) : (
-            ""
-          )} */}
-          User name
-        </div>
-      </NavbarHOC> : ""}
+      {layout ? <GlobalUserHeader /> : ""}
       {initialState.loading ? <Loader /> : null}
       {children}
     </div>

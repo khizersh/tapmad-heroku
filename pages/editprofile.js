@@ -27,6 +27,13 @@ const EditProfile = () => {
 
   return (
     <div className="container-fluid">
+      <style jsx>
+        {`
+        .profile-container {
+          top: 20px;
+        }
+        `}
+      </style>
       <div className="profile-container">
         <EdiProfileForm isSave={save} isMobile={mobile} />
       </div>
