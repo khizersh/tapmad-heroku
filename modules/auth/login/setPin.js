@@ -9,6 +9,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 
 function SetUserPin({ login, ip }) {
+  const router = useRouter()
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -63,15 +64,17 @@ function SetUserPin({ login, ip }) {
     const resp = await AuthService.setUserPin(pin, username);
     if (resp.responseCode == 1) {
       await AuthService.clearUserToken(SignUpState.UserDetails.MobileNo);
-      Cookie.setCookies("UserPin", pin);
+      // Cookie.setCookies("UserPin", pin);
       dispatch({ type: UPDATE_USER_DETAILS, data: { UserPin: pin } });
-      Cookie.setCookies("isAuth", 1);
+      // Cookie.setCookies("isAuth", 1);
       swal({
         title: resp.message,
         timer: 2000,
         icon: "success",
-      });
-      await login(ip);
+      }).then(result => {
+        window.location.replace(`sign-in?number=${SignUpState.UserDetails.MobileNo}`)
+      })
+      // await login(ip);
     } else if (resp.responseCode == 2) {
       setLoader(false);
       return swal({
