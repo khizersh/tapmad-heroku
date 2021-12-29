@@ -40,9 +40,11 @@ const MyAccountTrial = ({ signout }) => {
   });
   const { ProfileState, dispatch } = useContext(ProfileContext);
   useEffect(async () => {
+    setLoader(true)
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData(postFormData);
+      setLoader(false)
       if (ProfileState) {
         dispatch({ type: PROFILE_DATA, data: data });
       }
@@ -61,11 +63,12 @@ const MyAccountTrial = ({ signout }) => {
             Package: data.data.Package,
           });
           if(data.data.MyPackage === "Premium"){
-            console.log("premiummmmm");
             setUpgradeBtn(true)
           }
         }
       }
+    }else{
+      setLoader(false)
     }
 
     if (window.innerWidth < 799) {
