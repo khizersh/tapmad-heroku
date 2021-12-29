@@ -37,7 +37,7 @@ export default function PackageSelectView({ onChange }) {
         dispatch({ type: SIGNUP_RENDER, data: true });
       });
     }
-  }, [SignUpState?.SelectedPackage?.PaymentTabId]);
+  }, [SignUpState?.SelectedPackage?.PaymentTabId , AuthState.CurrentUserPackage]);
 
   const onChangePackage = (MainPack) => {
     onChange(MainPack);
