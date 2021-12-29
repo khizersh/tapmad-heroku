@@ -10,8 +10,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      setNum(mobileNum);
-      onChangeNumber(e);
+        setNum(mobileNum.trim());
+        onChangeNumber(e);
     }
   };
   return (
