@@ -113,6 +113,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                 src={gender == "Male" ? editUserMale : userFemaleProfileIcon}
                 className={`${isMobile ? "mt-3" : "m-4"} border-50`}
                 width={`${isMobile ? "100" : "150"}`}
+                height={`${isMobile ? "100" : "150"}`}
               />
             </div>
           </div>
@@ -174,11 +175,28 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                 }}
               />
             </div>
-            <div className="col-12">
-              <div className={`${isMobile ? "" : "px-4"}`}>
+            <div className="col-12 mt-3">
+              <style jsx>
+                {`
+                  .radio-cstm {
+                    position: relative;
+                  }
+                  .radio-cstm:after {
+                    width: 10px;
+                    height: 10px;
+                  }
+                  .radio-col {
+                    max-width: 80px;
+                  }
+                `}
+              </style>
+              <div>
                 <label className="editprofile_lbl">Gender:</label>
-                <div className={"row"}>
-                  <div className="col-3" onClick={() => onPressGender("Male")}>
+                <div className={`row ml-1 mt-1`}>
+                  <div
+                    className="col radio-col"
+                    onClick={() => onPressGender("Male")}
+                  >
                     <div className="row">
                       <input
                         type="radio"
@@ -189,7 +207,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                     </div>
                   </div>
                   <div
-                    className="col-3"
+                    className="col radio-col"
                     onClick={() => onPressGender("Female")}
                   >
                     <div className="row">
