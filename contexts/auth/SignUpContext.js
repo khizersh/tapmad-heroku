@@ -29,11 +29,6 @@ export default function SignUpProvider({ children }) {
     signupRender: false,
   });
 
-  // useEffect(() => {
-  //   if (AuthState?.PaymentPackages?.length > 0) {
-  //     dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] });
-  //   }
-  // }, [AuthState]);
 
   useEffect(() => {
     setLoader(true)

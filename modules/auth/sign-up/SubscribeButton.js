@@ -198,6 +198,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           }
           var data = await AuthService.initialTransaction(details);
           setLoader(false);
+          console.log("data in init : ",data);
           if (data != null) {
             if (data.responseCode == 0) {
               swal({ title: data.message, icon: "error", timer: 3000 });
@@ -242,12 +243,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             } else if (data.responseCode == 6) {
               // only for jazz cash , process payment api will not call direct transaction from here
               const loggedIn = checkUserIdAndToken();
-              console.log(
-                "data.responseCode : ",
-                data.responseCode,
-                data.data.User,
-                loggedIn
-              );
+              
               if (loggedIn.valid) {
                 if (data.data.User.IsPinSet) {
                   swal({
