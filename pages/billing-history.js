@@ -71,8 +71,7 @@ const BillingHistory = () => {
     }
   };
   const onclickBack = () => {
-    const backURL = Cookie.getCookies("backUrl") || "/";
-    router.push(backURL);
+    router.push('/myaccount');
   };
 
   return (
