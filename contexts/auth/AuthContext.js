@@ -49,7 +49,7 @@ export default function AuthProviderNew({ children }) {
       dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
       dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
     }
-  }, [AuthState.UpdatePackage , AuthState.callChangePackageApi]);
+  }, [AuthState.UpdatePackage , AuthState.callChangePackageApi === true]);
 
   const data = {
     AuthState,
