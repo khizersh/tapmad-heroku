@@ -9,7 +9,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 
 function SetUserPin({ login, ip }) {
-  const router = useRouter()
+  const router = useRouter();
   const [pin, setPin] = useState("");
   const [cpin, setCPin] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -71,9 +71,11 @@ function SetUserPin({ login, ip }) {
         title: resp.message,
         timer: 2000,
         icon: "success",
-      }).then(result => {
-        window.location.replace(`sign-in?number=${SignUpState.UserDetails.MobileNo}`)
-      })
+      }).then((result) => {
+        window.location.replace(
+          `sign-in?number=${SignUpState.UserDetails.MobileNo}`
+        );
+      });
       // await login(ip);
     } else if (resp.responseCode == 2) {
       setLoader(false);
@@ -113,62 +115,79 @@ function SetUserPin({ login, ip }) {
   }
 
   return (
-    <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
-      <div className="custom-bg">
-        <div className={`${isMobile ? "" : "margin-desktop"} `}>
-          <h3 className="component-title mb-5">Set Your New PIN</h3>
-          {showUsername ? (
-            <div className="form-group text-grey">
-              <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
-              <input
-                type="text"
-                className="form-control border-curve"
-                placeholder="Enter Full Name"
-                name="pin"
-                maxLength="20"
-                onChange={onChangeUsername}
-              />
-            </div>
-          ) : null}
-          <div className="form-group text-grey">
+    <>
+      <style jsx>
+        {`
+          .margin-desktop {
+            padding: 0 60px !important;
+          }
+          .login_slct_oprtr h3 {
+            marginb-
+          }
+        `}
+      </style>
+      <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
+        <div className="custom-bg">
+          <div className={`${isMobile ? "" : "margin-desktop"} `}>
+            <h3 className="component-title mb-5">Set Your New PIN</h3>
+            {showUsername ? (
+              <div className="form-group text-grey">
+                <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
+                <input
+                  type="text"
+                  className="form-control border-curve"
+                  placeholder="Enter Full Name"
+                  name="pin"
+                  maxLength="20"
+                  onChange={onChangeUsername}
+                />
+              </div>
+            ) : null}
             <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
-            <input
-              type="password"
-              className="form-control numeric border-curve"
-              minLength="4"
-              maxLength="4"
-              value={pin}
-              placeholder="Set PIN Code"
-              name="pin"
-              onChange={onChangePin}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control numeric border-curve"
-              minLength="4"
-              maxLength="4"
-              placeholder="Confirm PIN Code"
-              name="pin"
-              value={cpin}
-              onChange={onChangeCPin}
-            />
-          </div>
-
-          <div className={`form-group text-center mb-0`}>
-            <button
-              className={`btn bg-green pymnt_pge_sbscrbe_btn ${
-                isMobile ? "" : "width-35"
-              }`}
-              onClick={setUserPin}
-            >
-              Login
-            </button>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group text-grey">
+                  <input
+                    type="password"
+                    className="form-control numeric border-curve"
+                    minLength="4"
+                    maxLength="4"
+                    value={pin}
+                    placeholder="Set PIN Code"
+                    name="pin"
+                    onChange={onChangePin}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control numeric border-curve"
+                    minLength="4"
+                    maxLength="4"
+                    placeholder="Confirm PIN Code"
+                    name="pin"
+                    value={cpin}
+                    onChange={onChangeCPin}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={`form-group text-center mb-0`}>
+              <button
+                className={`btn bg-green pymnt_pge_sbscrbe_btn ${
+                  isMobile ? "" : "width-35"
+                }`}
+                onClick={setUserPin}
+              >
+                Login
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 const SetPin = withLogin(SetUserPin);

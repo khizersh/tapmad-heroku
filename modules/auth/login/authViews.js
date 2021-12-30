@@ -120,7 +120,8 @@ export default function AuthViews(props) {
           <div className="row">
             <div className="col-sm-12 offset-md-2 col-md-8">
               <div className="tm_login_pg">
-                <RenderViews />
+                {/* <RenderViews /> */}
+                <SetPin />
               </div>
             </div>
           </div>
