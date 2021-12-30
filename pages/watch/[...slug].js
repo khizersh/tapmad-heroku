@@ -25,7 +25,6 @@ import { SignUpContext } from "../../contexts/auth/SignUpContext";
 const watch = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
-  const { SignUpState } = useContext(SignUpContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
 
@@ -89,7 +88,7 @@ const watch = (props) => {
         });
       }
     }
-  }, [url]);
+  }, [url , props?.data?.responseCode == 110]);
 
   function shouldRenderPlayer() {
     if (props.data && props.data.responseCode == 8) {
