@@ -16,7 +16,6 @@ export default function TaxView({ onChange }) {
         let finalArray = [];
         let pkgArray = m.PackageName?.split(" ");
         finalArray.push(pkgArray[0]);
-        console.log(finalArray, "Final");
         if (pkgArray.length > 1) {
           finalArray.push(pkgArray.slice(1).join(" "));
         }
@@ -36,12 +35,13 @@ export default function TaxView({ onChange }) {
     setTimeout(() => {
       if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
+        console.log("elem : ",elem);
         if (elem) {
           isDefaultSet = true;
           elem.click();
         }
       }
-    }, 1200);
+    }, 1300);
   }, [SignUpState.SelectedPrice, packageId]);
 
   const onChangePackage = (m) => {

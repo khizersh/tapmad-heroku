@@ -62,6 +62,7 @@ export default function withLogin(Component, data) {
           UserPassword:
             SignUpState.UserDetails.UserPassword || Cookie.getCookies("utk"),
         };
+        console.log("api call withour pin : ", obj);
         // call api without pin
         status = await callLoginApi(obj, status, userIp, false);
       }

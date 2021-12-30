@@ -36,6 +36,7 @@ import loadable from "@loadable/component";
 import BuyCoinModal from "../modules/game/components/BuyCoinModal";
 import ProfileProvider from "../contexts/profile/ProfileContext";
 import { checkUserIdAndToken } from "../services/auth.service";
+import GlobalUserHeader from "../components/GlobalUserHeader";
 
 const DashboardLayout = loadable(() =>
   import("../modules/dashboard/DashboardLayout")
@@ -141,7 +142,7 @@ function MyApp({ Component, pageProps }) {
                   <SignUpProvider>
                     <GameProvider>
                       <ProfileProvider>
-                        <NoSideBarSkeleton>
+                        <NoSideBarSkeleton layout={pageProps.userHeader}>
                           <Component {...pageProps} />
                         </NoSideBarSkeleton>
                       </ProfileProvider>
@@ -180,7 +181,7 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 
-export const NoSideBarSkeleton = ({ children }) => {
+export const NoSideBarSkeleton = ({ children , layout }) => {
   const { initialState, setLoader } = React.useContext(MainContext);
 
   Router.onRouteChangeStart = (url) => {
@@ -197,6 +198,7 @@ export const NoSideBarSkeleton = ({ children }) => {
   };
   return (
     <div>
+      {layout ? <GlobalUserHeader /> : ""}
       {initialState.loading ? <Loader /> : null}
       {children}
     </div>

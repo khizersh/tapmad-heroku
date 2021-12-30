@@ -91,13 +91,14 @@ const promoCode = () => {
         timer: "2500",
         icon: "success",
       }).then((res) => {
-        router.push(
-          {
-            pathname: "/sign-up?tab=1&packageId=2",
-            query: { code: "34", number: number, operator: body.OperatorID },
-          },
-          "/sign-up?tab=1&packageId=2"
-        );
+        router.push(`/sign-up?code=34&number=${number}&operator=${body.OperatorID}`)
+        // router.push(
+        //   {
+        //     pathname: `/sign-up?code=34&number=${number}&operator=${body.OperatorID}`,
+        //     query: { code: "34", number: number, operator: body.OperatorID },
+        //   },
+        //   "/sign-up"
+        // );
       });
     } else if (data.responseCode == 11) {
       swal({

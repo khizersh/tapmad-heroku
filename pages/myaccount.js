@@ -40,9 +40,11 @@ const MyAccountTrial = ({ signout }) => {
   });
   const { ProfileState, dispatch } = useContext(ProfileContext);
   useEffect(async () => {
+    setLoader(true)
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData(postFormData);
+      setLoader(false)
       if (ProfileState) {
         dispatch({ type: PROFILE_DATA, data: data });
       }
@@ -61,11 +63,12 @@ const MyAccountTrial = ({ signout }) => {
             Package: data.data.Package,
           });
           if(data.data.MyPackage === "Premium"){
-            console.log("premiummmmm");
             setUpgradeBtn(true)
           }
         }
       }
+    }else{
+      setLoader(false)
     }
 
     if (window.innerWidth < 799) {
@@ -164,32 +167,7 @@ const MyAccountTrial = ({ signout }) => {
 
   return (
     <div className="container-fluid">
-      {/* <NavbarHOC>
-        <div>
-          <button
-            className="btn"
-            style={{
-              fontSize: "13px",
-              color: "black",
-            }}
-            onClick={onClickBack}
-          >
-            <img src="/icons/login-back.svg" />
-          </button>
-        </div>
-        <div className="margin-y-auto">
-          {isMobile ? (
-            <button
-              onClick={clickEditProfile}
-              className="btn bg-white rounded-lg py-1 text-green font-13"
-            >
-              Edit Profile
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
-      </NavbarHOC> */}
+   
       <div className="profile-container">
         <RenderViews />
       </div>
@@ -205,8 +183,9 @@ export function getServerSideProps(context) {
   }
   return {
     props: {
-      noSideBar: false,
+      noSideBar: true,
       protected: true,
+      userHeader : true,
       auth: true,
       ip: ip,
       env: process.env.TAPENV,

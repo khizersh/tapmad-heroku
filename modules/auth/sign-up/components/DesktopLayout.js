@@ -15,7 +15,7 @@ const DesktopLayout = ({ children, bgImage }) => {
 
   return (
     <>
-      <div className="bg-green px-5 d-flex justify-content-between">
+      {/* <div className="bg-green px-5 d-flex justify-content-between">
         <div className="pl-4">
           <button className="btn" onClick={onClickBack}>
             <img className="pl-3" src={tapmadLogo} width="130px" />
@@ -33,7 +33,7 @@ const DesktopLayout = ({ children, bgImage }) => {
           </button>
           <span className="btn text-white pl-2 font-weight-light ">Login</span>
         </div>
-      </div>
+      </div> */}
       <div className="grey-background"></div>
       <div className="mt-0 mt-sm-2">
         <div className="container">

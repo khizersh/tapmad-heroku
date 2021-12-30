@@ -10,8 +10,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      setNum(mobileNum);
-      onChangeNumber(e);
+        setNum(mobileNum.trim());
+        onChangeNumber(e);
     }
   };
   return (
@@ -22,8 +22,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
         </div>
         <input
           type="text"
-          maxLength="10"
-          minLength="10"
+          // maxLength="10"
+          // minLength="10"
           className="form-control ml-2 border-curve"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"

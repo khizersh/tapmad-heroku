@@ -18,7 +18,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
 
   async function verifyOTPPinCode() {
     if (SignUpState && SignUpState.UserDetails) {
-      if (otp.current.value.length < 4) {
+      if (otp.current.value?.trim()?.length < 4) {
         swal({
           timer: 5000,
           title: "Incorrect OTP",
@@ -61,7 +61,6 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         data = await AuthService.verifyOTP(body);
       }
       if (data != null) {
-        console.log("data verify itp: ",data);
         if (data.responseCode == 0) {
           swal({
             timer: 3000,
@@ -83,7 +82,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
                 if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
                   router.push("/");
                 } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  let loginResp = await login(ip , false);
+                  let loginResp = await login("" , false);
                   if (loginResp?.code && loginResp.code != 1) {
                     router.push(loginResp.view);
                   }

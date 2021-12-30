@@ -21,6 +21,18 @@ const CombineLoginMobile = ({
   }, []);
   return (
     <div className="custom-bg">
+      <style jsx>
+        {`
+          .radio-cstm {
+            width: 60px
+          }
+          .radio-cstm:after {
+            width: 10px !important;
+            height: 10px !important;
+            top: 7px !important
+          }
+        `}
+      </style>
       <h3 className="select-network">Select Your Network</h3>
       <div className="d-flex justify-content-center mb-3">
         {AuthState && AuthState.LoginOperators.length
