@@ -33,10 +33,10 @@ export default function TaxView({ onChange }) {
   // set default product via query param
   useEffect(() => {
     setTimeout(() => {
-      console.log(packageId , isDefaultSet , "timer");
+      console.log(packageId, isDefaultSet, "timer");
       if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
-        console.log("elem : ",elem);
+        console.log("elem : ", elem);
         if (elem) {
           isDefaultSet = true;
           elem.click();
@@ -55,9 +55,26 @@ export default function TaxView({ onChange }) {
         PackagePrice.length > 0 &&
         PackagePrice.map((m, i) => {
           return (
-            <div style={{ maxWidth: "33.3333%" }}>
+            <div style={{ position: "relative", maxWidth: "33.3333%" }}>
               <style jsx>
                 {`
+                  .package-title {
+                    font-size: 1.5em;
+                  }
+                  li {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                  }
+                  li > span {
+                    font-size: 1.5em;
+                    margin: auto;
+                  }
+                  .triangle-down {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                  }
                   @media (max-width: 480px) {
                     li {
                       padding-left: 10px !important;
@@ -71,7 +88,7 @@ export default function TaxView({ onChange }) {
               </style>
               <li
                 key={i}
-                className={`w-100 p-1 pb-3 f-20 text-center cursor-pointer border-0 text-base px-3 ${
+                className={`w-100 p-2 f-20 text-center cursor-pointer border-0 text-base ${
                   SelectedPrice?.ProductId
                     ? SelectedPrice.ProductId === m.ProductId
                       ? "price-active"
@@ -92,26 +109,23 @@ export default function TaxView({ onChange }) {
                   </>
                 ) : (
                   <>
-                    <span
-                      className="font-weight-bold text-left font-17 mt-2 line-1 d-block text-center h3"
-                      style={{ marginBottom: "12px" }}
-                    >
+                    <span className="font-weight-bold text-left font-17 line-1 d-block text-center h3">
                       {m.PackageName}
                     </span>
                   </>
                 )}
-                <div className="d-flex justify-content-end mt-1">
+                <div className="d-flex justify-content-end align-items-center">
                   <div className="text-white per-month">
                     {m.PackagePrices[0]}
                   </div>
-                  <div className="f-40 font-weight-bold text-white line-1">
+                  <div className="font-weight-bold text-white line-1 package-title">
                     {m.PackagePrices[1]}
                   </div>
                   <div
                     className="text-white monthly line-1"
                     style={{ top: "0" }}
                   >
-                    <span className="d-block">
+                    <span className="d-block line-1">
                       {m.PackagePrices[2].split(" ")[0]}
                     </span>
                     {m.PackagePrices[2].split(" ").slice(1).join(" ")}
