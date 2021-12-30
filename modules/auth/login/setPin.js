@@ -140,14 +140,14 @@ function SetUserPin({ login, ip }) {
                 <input
                   type="text"
                   className="form-control border-curve"
-                  placeholder="Enter Full Name"
+                  placeholder="Please enter full name"
                   name="pin"
                   maxLength="20"
                   onChange={onChangeUsername}
                 />
               </div>
             ) : null}
-            <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
+            <label style={{ fontSize: "14px" }}>Enter your new PIN</label>
             <div className="form-group text-grey">
               <input
                 type="password"
@@ -155,7 +155,7 @@ function SetUserPin({ login, ip }) {
                 minLength="4"
                 maxLength="4"
                 value={pin}
-                placeholder="Set PIN Code"
+                placeholder="Please set passcode as a 4 digit PIN"
                 name="pin"
                 onChange={onChangePin}
               />
@@ -166,7 +166,7 @@ function SetUserPin({ login, ip }) {
                 className="form-control numeric border-curve"
                 minLength="4"
                 maxLength="4"
-                placeholder="Confirm PIN Code"
+                placeholder="Confirm your PIN"
                 name="pin"
                 value={cpin}
                 onChange={onChangeCPin}
@@ -179,7 +179,7 @@ function SetUserPin({ login, ip }) {
                 }`}
                 onClick={setUserPin}
               >
-                Login
+                Save
               </button>
             </div>
           </div>
