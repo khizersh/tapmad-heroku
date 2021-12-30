@@ -148,8 +148,6 @@ function SetUserPin({ login, ip }) {
               </div>
             ) : null}
             <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
-            <div className="row">
-              <div className="col-md-6">
                 <div className="form-group text-grey">
                   <input
                     type="password"
@@ -162,8 +160,6 @@ function SetUserPin({ login, ip }) {
                     onChange={onChangePin}
                   />
                 </div>
-              </div>
-              <div className="col-md-6">
                 <div className="form-group">
                   <input
                     type="password"
@@ -176,7 +172,6 @@ function SetUserPin({ login, ip }) {
                     onChange={onChangeCPin}
                   />
                 </div>
-              </div>
             </div>
             <div className={`form-group text-center mb-0`}>
               <button
