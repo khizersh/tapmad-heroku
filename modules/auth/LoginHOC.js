@@ -62,7 +62,6 @@ export default function withLogin(Component, data) {
           UserPassword:
             SignUpState.UserDetails.UserPassword || Cookie.getCookies("utk"),
         };
-        console.log("api call withour pin : ", obj);
         // call api without pin
         status = await callLoginApi(obj, status, userIp, false);
       }
@@ -142,6 +141,12 @@ export default function withLogin(Component, data) {
           }).then(() => {
             router.push("/sign-up?tab=1&packageId=2");
           });
+        }else if(status.code == 32){
+          swal({
+            title: "No Such User Exist!",
+            icon: "error",
+            timer: 2500,
+          })
         }
         return status;
       } catch (err) {
