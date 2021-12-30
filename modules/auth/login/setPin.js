@@ -118,18 +118,22 @@ function SetUserPin({ login, ip }) {
     <>
       <style jsx>
         {`
-          .margin-desktop {
-            padding: 0 60px !important;
+          @media (min-width: 992px) {
+            .margin-desktop {
+              padding: 0 60px !important;
+            }
           }
-          .login_slct_oprtr h3 {
-            marginb-
+          @media (max-width: 991px) {
+            .margin-desktop {
+              padding: 0 !important;
+            }
           }
         `}
       </style>
       <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
         <div className="custom-bg">
           <div className={`${isMobile ? "" : "margin-desktop"} `}>
-            <h3 className="component-title mb-5">Set Your New PIN</h3>
+            <h3 className="component-title mb-3">Set Your New PIN</h3>
             {showUsername ? (
               <div className="form-group text-grey">
                 <label style={{ fontSize: "14px" }}>Enter your Full Name</label>
