@@ -148,30 +148,29 @@ function SetUserPin({ login, ip }) {
               </div>
             ) : null}
             <label style={{ fontSize: "14px" }}>Set your 4 digit PIN</label>
-                <div className="form-group text-grey">
-                  <input
-                    type="password"
-                    className="form-control numeric border-curve"
-                    minLength="4"
-                    maxLength="4"
-                    value={pin}
-                    placeholder="Set PIN Code"
-                    name="pin"
-                    onChange={onChangePin}
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control numeric border-curve"
-                    minLength="4"
-                    maxLength="4"
-                    placeholder="Confirm PIN Code"
-                    name="pin"
-                    value={cpin}
-                    onChange={onChangeCPin}
-                  />
-                </div>
+            <div className="form-group text-grey">
+              <input
+                type="password"
+                className="form-control numeric border-curve"
+                minLength="4"
+                maxLength="4"
+                value={pin}
+                placeholder="Set PIN Code"
+                name="pin"
+                onChange={onChangePin}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-control numeric border-curve"
+                minLength="4"
+                maxLength="4"
+                placeholder="Confirm PIN Code"
+                name="pin"
+                value={cpin}
+                onChange={onChangeCPin}
+              />
             </div>
             <div className={`form-group text-center mb-0`}>
               <button
