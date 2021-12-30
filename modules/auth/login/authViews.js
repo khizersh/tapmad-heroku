@@ -20,21 +20,21 @@ export default function AuthViews(props) {
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
-    // if (viewToRender == true) {
-    //   return true;
-    // } else {
-    //   if (viewToRender === "sign-up") {
-    //     swal({
-    //       title: "You are not subscribed user. please subscribe!",
-    //       timer: 2500,
-    //       icon: "warning",
-    //     }).then(() => {
-    //       router.push("/sign-up");
-    //     });
-    //   } else {
-    //     setViewToShow(viewToRender);
-    //   }
-    // }
+    if (viewToRender == true) {
+      return true;
+    } else {
+      if (viewToRender === "sign-up") {
+        swal({
+          title: "You are not subscribed user. please subscribe!",
+          timer: 2500,
+          icon: "warning",
+        }).then(() => {
+          router.push("/sign-up");
+        });
+      } else {
+        setViewToShow(viewToRender);
+      }
+    }
   }
 
   async function sendToForgetPin(state) {
@@ -120,8 +120,8 @@ export default function AuthViews(props) {
           <div className="row">
             <div className="col-sm-12 offset-md-2 col-md-8">
               <div className="tm_login_pg">
-                {/* <RenderViews /> */}
-                <SetPin />
+                <RenderViews />
+                {/* <SetPin /> */}
               </div>
             </div>
           </div>
