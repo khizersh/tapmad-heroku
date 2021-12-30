@@ -25,7 +25,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
 
   return (
     <>
-      <div class="input-group mb-3">
+      <div class="input-group">
         <div className="input-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
