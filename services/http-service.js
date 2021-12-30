@@ -37,6 +37,7 @@ async function post(url, body, ip, credentialAllowed = false) {
     "X-Forwarded-For": ip ? ip : "",
     ...body.headers,
   };
+  console.log("body.headers : " , body.headers);
   delete body.headers;
   var response = null;
   try {

@@ -17,7 +17,6 @@ const Syno = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
-  console.log("props : ",props);
 
   if (!mount) {
     if (!video) {
@@ -101,7 +100,7 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
-    if (data?.data?.Video[0].IsVideoChannel) {
+    if (data?.data?.Video.IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(
         OriginalMovieId,
         context.resolvedUrl
@@ -112,6 +111,7 @@ export async function getServerSideProps(context) {
       return { props: { data: data.data, schema: seo } };
     }
   }
+
   return {
     props: {
       data: data,

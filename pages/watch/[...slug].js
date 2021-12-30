@@ -27,7 +27,6 @@ const watch = (props) => {
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
-
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
@@ -151,6 +150,7 @@ const watch = (props) => {
 };
 
 // server side rendering
+var body = null;
 export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
@@ -167,14 +167,15 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
   let allowUser = true;
-  let body = {
+  const header =  GlobalService.authHeaders(cookies["content-token"]);
+   body = {
     Version: "V1",
     Language: "en",
     Platform: "web",
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
-    headers: GlobalService.authHeaders(cookies["content-token"]),
+    headers: header,
   };
   var isFree = "1";
   isFree = chanelDetail.isFree;

@@ -102,7 +102,6 @@ export default function PSLChat({ channel }) {
   async function getUserAllRooms() {
     userId = Cookie.getCookies("userId");
     const response = await get(getUserRooms(userId, channel.VideoEntityId));
-    console.log("rooms reposne: ", response.data);
     if (response.data.Response.responseCode == 1 && response.data.ChatRooms) {
       setChatRooms(response.data.ChatRooms[0].Rooms);
       selectRoom(response.data.ChatRooms[0].Rooms[0].ChatRoomId);

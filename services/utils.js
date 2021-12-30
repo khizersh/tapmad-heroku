@@ -109,11 +109,13 @@ function SEOFriendlySlugsForWatch(event, catchup = false) {
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+  let slug = `/${prefix}/${cleanName}/{${event.IsVideoFree}}/${event.VideoEntityId}${
     event.IsVideoChannel ? "1" : "0"
   }`;
   return slug;
 }
+
+
 function viewMoreCleanUrls(sectionName, sectionId, name) {
   var pageId = "";
   if (name == "Live") {
