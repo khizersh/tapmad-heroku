@@ -42,7 +42,7 @@ export default function TaxView({ onChange }) {
           elem.click();
         }
       }
-    }, 1300);
+    }, 1000);
   }, [SignUpState.SelectedPrice, packageId]);
 
   const onChangePackage = (m) => {
