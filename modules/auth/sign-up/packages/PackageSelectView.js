@@ -16,12 +16,12 @@ export default function PackageSelectView({ onChange }) {
 
   useEffect(() => {
     if (AuthState.PaymentPackages) {
-      var selectedPackage = subspack;
-      if (selectedPackage == "epl") {
-        onChange(AuthState.PaymentPackages[1]);
-      } else if (selectedPackage == "allin1") {
-        onChange(AuthState.PaymentPackages[0]);
-      }
+      // var selectedPackage = subspack;
+      // if (selectedPackage == "epl") {
+      //   onChange(AuthState.PaymentPackages[1]);
+      // } else if (selectedPackage == "allin1") {
+      //   onChange(AuthState.PaymentPackages[0]);
+      // }
       // will remove after epl
 
       renderSignUp(true);

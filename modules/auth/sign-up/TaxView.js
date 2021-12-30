@@ -35,12 +35,13 @@ export default function TaxView({ onChange }) {
     setTimeout(() => {
       if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
+        console.log("elem : ",elem);
         if (elem) {
           isDefaultSet = true;
           elem.click();
         }
       }
-    }, 1200);
+    }, 1300);
   }, [SignUpState.SelectedPrice, packageId]);
 
   const onChangePackage = (m) => {
