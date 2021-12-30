@@ -33,6 +33,7 @@ export default function TaxView({ onChange }) {
   // set default product via query param
   useEffect(() => {
     setTimeout(() => {
+      console.log(packageId , isDefaultSet , "timer");
       if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
         console.log("elem : ",elem);
