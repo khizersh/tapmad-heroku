@@ -11,6 +11,7 @@ export const getItemsByKeyword =
   BASEURL + "api/searchInAllContent/V1/en/android/";
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
 export const getUserByUserId = BASEURLDEVELOPMENT + "api/getUserProfileDetail";
+export const getShowsSearch = BASEURLDEVELOPMENT + "api/getShowsSearch";
 export const getUserPaymentHistory =
   BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
 // home page api

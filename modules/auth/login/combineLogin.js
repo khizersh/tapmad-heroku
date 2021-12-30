@@ -54,18 +54,18 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
 
   async function loginUser() {
     setLoader(true);
-    if (!CurrentMethod) {
-      setLoader(false);
-      return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
+    if(AuthState.CountryCode ==  '+92' && !CurrentMethod){
+        setLoader(false);
+        return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
     }
+
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
-
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: {
           MobileNo: mobileNo,
-          Operator: CurrentMethod.OperatorId,
+          Operator: CurrentMethod?.OperatorId,
           UserPin: pin,
         },
       });
