@@ -105,7 +105,7 @@ export default function PSLChat({ channel }) {
     console.log("rooms reposne: ", response.data);
     if (response.data.Response.responseCode == 1 && response.data.ChatRooms) {
       setChatRooms(response.data.ChatRooms[0].Rooms);
-      selectRoom(generalRoomId);
+      selectRoom(response.data.ChatRooms[0].Rooms[0].ChatRoomId);
     }
   }
   function selectRoom(e) {

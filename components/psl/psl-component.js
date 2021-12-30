@@ -124,7 +124,6 @@ export default memo(function PSLComponent({ channel }) {
     }
   }, [selectedTab]);
 
-  console.log("selectedTab : ", selectedTab, tabs);
   return (
     <>
       <div>
