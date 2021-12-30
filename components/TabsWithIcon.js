@@ -49,13 +49,13 @@ const TabsWithIcon = ({ data, onChange, selected }) => {
                     ""
                   )}
 
-                  <strong>{tab.title}</strong>
+                  <strong className={`${tab.title == selected.title ? "text-green" : ""} `}>{tab.title}</strong>
                 </span>
                 {tab.title == selected.title ? (
                   <div class="green-bar"></div>
                 ) : null}
               </div>
-            ))
+            ))/icons/colorPackage.svg
           : null}
       </div>
     </>

@@ -291,9 +291,9 @@ const MyAccountWeb = ({
                               {price && price[0]}
                             </text>
                             &nbsp;
-                            <strong className="font-32">
+                            <text className="font-32 font-weight-600">
                               {price && price[1]}
-                            </strong>
+                            </text>
                             &nbsp;
                             <text className="font-16 package-duration">
                               {price && price[2]}

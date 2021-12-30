@@ -140,7 +140,7 @@
   font-size: 32px !important;
 }
 .package_style {
-  color: #37c673;
+  color: #87c242 !important;
   font-weight: 650;
 }
 .table_text {
@@ -163,6 +163,8 @@
   background-color: #87c242 !important;
   color: white;
 }
+
+
 .text {
   font-size: 12px;
   flex-direction: column;
