@@ -24,6 +24,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   const [CurrentMethod, setCurrentMethod] = React.useState(null);
   const [viewsToRender, setViewsToRender] = React.useState(false);
 
+
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -46,7 +47,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       setPin(userPin.trim());
       dispatch({
         type: UPDATE_USER_DETAILS,
-        data: { UserPin: userPin },
+        data: { UserPin: userPin.trim() },
       });
     }
   }
@@ -81,7 +82,17 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   }
 
   const forgetClick = () => {
-    if (mobileNo.length > 4) {
+    if (AuthState.CountryCode == "+92") {
+      if (mobileNo?.trim().length == 10) {
+        forgetPin(SignUpState);
+      } else {
+       return swal({
+          title: "Please insert valid mobile number",
+          icon: "error",
+          timer: 3e3,
+        });
+      }
+    } else {
       forgetPin(SignUpState);
     }
   };

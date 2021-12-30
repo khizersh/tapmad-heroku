@@ -24,13 +24,13 @@ export default function AuthProviderNew({ children }) {
     CreditCardType: null,
     UpdatePackage: false,
     CurrentUserPackage: null,
+    callChangePackageApi : false
   });
 
   useEffect(async () => {
     var packages;
     let userId = Cookie.getCookies("userId");
     const pathname = window?.location?.pathname;
-    console.log("pathname : ",pathname);
     if (
       (AuthState.UpdatePackage && userId) ||
       pathname.includes("change-package")
@@ -49,7 +49,7 @@ export default function AuthProviderNew({ children }) {
       dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
       dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
     }
-  }, [AuthState.UpdatePackage]);
+  }, [AuthState.UpdatePackage , AuthState.callChangePackageApi === true]);
 
   const data = {
     AuthState,

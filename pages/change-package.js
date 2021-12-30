@@ -8,18 +8,21 @@ import { AuthContext } from "../contexts/auth/AuthContext";
 import { upgradeIcon } from "../services/imagesLink";
 import { SignUpContext } from "../contexts/auth/SignUpContext";
 import { LOGGED_IN } from "../contexts/auth/SignUpReducer";
+import { CALL_CHANGE_PACKAGE_API } from "../contexts/auth/AuthReducers";
 
 export default function ChangePackage({ props }) {
   const router = useRouter();
-  const { SignUpState, dispatch } = useContext(SignUpContext);
+  const {  dispatch } = useContext(SignUpContext);
+  const {  dispatch : dispatchSignin  } = useContext(AuthContext);
 
-  const { AuthState } = useContext(AuthContext);
   useEffect(() => {
     dispatch({
       type: LOGGED_IN,
       data: 1,
     });
-  }, [AuthState]);
+    console.log("dispatch change pkg ");
+    dispatchSignin({type : CALL_CHANGE_PACKAGE_API , data : true})
+  }, []);
 
   const onClickBack = () => {
     router.push("/");

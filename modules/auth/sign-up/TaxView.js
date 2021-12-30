@@ -2,11 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { useRouter } from "next/router";
 
-var isDefaultSet = false;
+// let isDefaultSet = false;
 export default function TaxView({ onChange }) {
   const { SignUpState } = useContext(SignUpContext);
   const [PackagePrice, setPackagePrice] = useState([]);
   const [SelectedPrice, setSelectedPrice] = useState(null);
+  const [isDefaultSet, setIsDefaultSet] = useState(false);
   const router = useRouter();
   const { packageId } = router.query;
   // set all products
@@ -36,13 +37,12 @@ export default function TaxView({ onChange }) {
       console.log(packageId, isDefaultSet, "timer");
       if (packageId && !isDefaultSet) {
         const elem = document.getElementById(packageId);
-        console.log("elem : ", elem);
         if (elem) {
-          isDefaultSet = true;
+          setIsDefaultSet(true);
           elem.click();
         }
       }
-    }, 1300);
+    }, 1000);
   }, [SignUpState.SelectedPrice, packageId]);
 
   const onChangePackage = (m) => {
