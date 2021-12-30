@@ -5,6 +5,7 @@ export const SET_COUNTRY_CODE = "SET_COUNTRY_CODE";
 export const SET_LOGIN_OPERATORS = "SET_LOGIN_OPERATORS";
 export const SET_VIEW_TO_SHOW = "SET_VIEW_TO_SHOW";
 export const CREDIT_CARD_TYPE = "CREDIT_CARD_TYPE";
+export const CALL_CHANGE_PACKAGE_API = "CALL_CHANGE_PACKAGE_API";
 
 export function AuthReducer(state, action) {
   switch (action.type) {
@@ -22,5 +23,7 @@ export function AuthReducer(state, action) {
       return { ...state, CurrentUserPackage: action.data };
     case UPDATE_PACKAGE:
       return { ...state, UpdatePackage: action.data };
+    case CALL_CHANGE_PACKAGE_API:
+      return { ...state, callChangePackageApi: action.data };
   }
 }

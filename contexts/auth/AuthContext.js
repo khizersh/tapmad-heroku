@@ -24,6 +24,7 @@ export default function AuthProviderNew({ children }) {
     CreditCardType: null,
     UpdatePackage: false,
     CurrentUserPackage: null,
+    callChangePackageApi : false
   });
 
   useEffect(async () => {

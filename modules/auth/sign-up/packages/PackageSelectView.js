@@ -42,6 +42,7 @@ export default function PackageSelectView({ onChange }) {
   const onChangePackage = (MainPack) => {
     onChange(MainPack);
   };
+  console.log("currentPackage : ",currentPackage);
   return (
     <>
       {currentPackage ? (
