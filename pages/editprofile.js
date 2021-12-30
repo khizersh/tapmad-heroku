@@ -36,8 +36,6 @@ const EditProfile = () => {
           }
           `}
         </style>
-      </Head>
-      <div className="container-fluid">
         <style jsx>
           {`
             .profile-container {
@@ -45,6 +43,8 @@ const EditProfile = () => {
             }
           `}
         </style>
+      </Head>
+      <div className="container-fluid">
         <div className="profile-container">
           <EdiProfileForm isSave={save} isMobile={mobile} />
         </div>
