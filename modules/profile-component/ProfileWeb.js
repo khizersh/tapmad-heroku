@@ -3,6 +3,7 @@ import {
   awardIcon,
   blackGaming,
   blackPackage,
+  castingIcon,
   coinIcon,
   colorGaming,
   colorPackage,
@@ -38,6 +39,7 @@ const MyAccountWeb = ({
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
   const [price, setPrice] = useState(null);
+  const [packageStreams, setPackageStreams] = useState([]);
   const [selected, setSelected] = useState(null);
   const router = useRouter();
   const [imageState, setImageState] = useState({
@@ -56,7 +58,28 @@ const MyAccountWeb = ({
   useEffect(() => {
     if (allData) {
       setPrice(allData.PackageDescription[0].PackagePrice);
+      let arrayStreams = [];
+      if (allData.PackageDescription[0].PackageStream) {
+        arrayStreams.push({
+          icon: qualityIcon,
+          text: allData.PackageDescription[0].PackageStream,
+        });
+      }
+      if (allData.PackageDescription[0].PackageDevices) {
+        arrayStreams.push({
+          icon: deviceIcon,
+          text: allData.PackageDescription[0].PackageDevices,
+        });
+      }
+      if (allData.PackageDescription[0].IsCasting) {
+        arrayStreams.push({
+          icon: castingIcon,
+          text: "Casting",
+        });
+      }
+      setPackageStreams(arrayStreams);
     }
+
     setSelected({
       title: "My Package",
       selectedIcon: colorPackage,
@@ -306,48 +329,24 @@ const MyAccountWeb = ({
                           allData.PackageDescription[0].ContentDescription}
                       </text>
                     </div>
-                    <div className="container col-2 package-feature">
-                      <div className="text-center">
-                        <img
-                          src={qualityIcon}
-                          width="30"
-                          height="30"
-                          alt="Quality"
-                        />
-                        <text className="">
-                          {allData &&
-                            allData.PackageDescription[0].PackageStream}
-                        </text>
-                      </div>
-                    </div>
-                    <div className="container col-2 package-feature">
-                      <div className="text-center">
-                        <img
-                          src={deviceIcon}
-                          width="30"
-                          height="30"
-                          alt="Device"
-                        />
-                        <text>Devices</text>
-                        {allData &&
-                          allData.PackageDescription[0].PackageDevices}
-                      </div>
-                    </div>
-                    <div className="container col-2 package-feature">
-                      <div className="text-center">
-                        <img
-                          src={connectIcon}
-                          width="30"
-                          height="30"
-                          alt="Connect"
-                        />
-                        <text>
-                          {allData && allData.PackageDescription[0].IsCasting
-                            ? "Casting"
-                            : "No Casting"}
-                        </text>
-                      </div>
-                    </div>
+                    {packageStreams.length
+                      ? packageStreams.map((stream, ind) => (
+                          <div
+                            key={ind}
+                            className="container col-2 package-feature"
+                          >
+                            <div className="text-center">
+                              <img
+                                src={stream.icon}
+                                width="30"
+                                height="30"
+                                alt="Quality"
+                              />
+                              <text className="">{stream.text}</text>
+                            </div>
+                          </div>
+                        ))
+                      : null}
                   </div>
                   <div className="row mt-3 pb-3">
                     <div className="offset-1 col-10">

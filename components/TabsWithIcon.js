@@ -55,7 +55,7 @@ const TabsWithIcon = ({ data, onChange, selected }) => {
                   <div class="green-bar"></div>
                 ) : null}
               </div>
-            ))/icons/colorPackage.svg
+            ))
           : null}
       </div>
     </>

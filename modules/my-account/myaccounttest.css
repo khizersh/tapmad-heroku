@@ -21,14 +21,15 @@
   background-color: #1d211f;
   font-size: 14px;
 }
-.optButtons:focus {
+.optButtons:hover {
   font-size: 14px;
   font-family: "okomitomedium";
-  background: transparent
+  background-color: #87c242;
+  /* background: transparent
     linear-gradient(96deg, var(--primary-37c673) 0%, #109f69 100%) 0% 0%
     no-repeat padding-box;
   background: transparent linear-gradient(96deg, #37c673 0%, #109f69 100%) 0% 0%
-    no-repeat padding-box;
+    no-repeat padding-box; */
   color: #fff;
 }
 .package_div {
@@ -56,7 +57,7 @@
 .table_style th {
   background-color: #484948;
   padding: 10px;
-  color: #37c673;
+  color: #87c242;
   text-align: center;
 }
 .billing-table tr:nth-child(odd) td {
@@ -257,7 +258,7 @@
   .table_style th {
     background-color: #484948;
     padding: 10px;
-    color: #37c673;
+    color: #87c242;
     text-align: center;
     font-size: 13px;
   }
