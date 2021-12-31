@@ -91,7 +91,7 @@ const CombineLoginDesktop = ({
           </p>
           <div className="d-flex justify-content-center">
             <div className="mx-2">
-              <label className="border-round custom-input text-dark font-14 line-1">
+              <label className="border-round custom-input text-dark font-14 line-1 px-2">
                 {AuthState?.CountryCode}
               </label>
             </div>
@@ -147,7 +147,7 @@ const CombineLoginDesktop = ({
             // disabled={btnDisabled ? true : false}
             className="btn pymnt_pge_sbscrbe_btn width-35 bg-green font-16"
           >
-            Login Now
+            Login
           </button>
 
           <br />
