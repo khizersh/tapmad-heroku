@@ -198,7 +198,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           }
           var data = await AuthService.initialTransaction(details);
           setLoader(false);
-          console.log("data in init : ",data);
           if (data != null) {
             if (data.responseCode == 0) {
               swal({ title: data.message, icon: "error", timer: 3000 });

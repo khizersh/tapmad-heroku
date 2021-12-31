@@ -393,7 +393,7 @@ const MyAccountWeb = ({
                         : "none",
                   }}
                 >
-                  <h4 style={{ color: "#37C673" }} className="pt-3">
+                  <h4 className="pt-3 text-green">
                     My Games
                   </h4>
                   <div className="row pb-4 no-gutters">
