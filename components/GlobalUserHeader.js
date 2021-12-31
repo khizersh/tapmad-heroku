@@ -28,7 +28,6 @@ const GlobalUserHeader = () => {
       });
     }
     setUserData(SignUpState.UserDetails.ProfileName);
-
   });
   return (
     <NavbarHOC>
@@ -56,7 +55,7 @@ const GlobalUserHeader = () => {
       <div className="container d-flex flex-wrap align-items-center justify-content-between">
         <Link href="/">
           <a title="Tapmad">
-            <Image src="/icons/logo_white.png" width={168} height={56} />
+            <Image src="/icons/logo_white.png" width={114} height={38} />
           </a>
         </Link>
         {/* <button
