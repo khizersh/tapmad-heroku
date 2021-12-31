@@ -4,7 +4,9 @@ import Card from "./card/Card";
 import { SEOFriendlySlugsForWatch, verifyURL } from "../../../services/utils";
 import { ContentViewed } from "../../../services/gtm";
 import { useRouter } from "next/router";
-import { get } from "https";
+import { post } from "../../../services/http-service";
+import Debounce from "../../../services/Debounce";
+import { getShowsSearch } from "../../../services/apilinks";
 
 export default function CategoryDetail({
   video,
@@ -18,15 +20,19 @@ export default function CategoryDetail({
   const router = useRouter();
 
   const [dropdown, toggleDropdown] = useState("");
-  const [dropdownDisplay, toggleDropdownDisplay] = useState(false);
-  const [filterDropdownData, toggleFilterDropdownData] = useState(null);
+  const [loader, setLoader] = useState(false);
+
+  // const [dropdownDisplay, toggleDropdownDisplay] = useState(false);
+  // const [filterDropdownData, toggleFilterDropdownData] = useState(null);
 
   const setSearchResult = (e) => {
     toggleDropdown(e.target.textContent);
     toggleFilterDropdownData(null);
   };
 
-  useEffect(() => {
+  const debounceValue = Debounce(dropdown, 800);
+
+  useEffect(async () => {
     verifyURL(router, videoList[0].SectionName, video.VideoName);
     if (
       videoList.length > 0 &&
@@ -46,6 +52,27 @@ export default function CategoryDetail({
     }
   }, [video, router]);
 
+  useEffect(async () => {
+    setLoader(true);
+    if (debounceValue) {
+      post(getShowsSearch, {
+        Version: "v1",
+        Language: "en",
+        Platform: "web",
+        CategoryId: video.VideoEntityId,
+        SearchName: debounceValue,
+      }).then((data) => {
+        setFilteredList(data.data.SearchResult);
+        setLoader(false);
+        // toggleDropdownDisplay(true);
+      });
+    }
+    if (!dropdown.length) {
+      setFilteredList(videoList[0].Videos);
+      setLoader(false);
+    }
+  }, [debounceValue]);
+
   // Old ChangeSearch Handler
   // const onChangeSearch = (event) => {
   //   let searchText = event.target.value?.toLowerCase();
@@ -64,15 +91,6 @@ export default function CategoryDetail({
   const onChangeSearch = (event) => {
     const schval = event.target.value;
     toggleDropdown(schval);
-    toggleDropdownDisplay(Boolean(schval.length));
-    if (schval.length) {
-      const data = searchResults;
-      const filter = data.filter(
-        (d) => d.VideoName.toLowerCase().indexOf(dropdown.toLowerCase()) > -1
-      );
-      const results = filter.length ? filter : "empty";
-      toggleFilterDropdownData(results);
-    }
   };
 
   return (
@@ -181,7 +199,7 @@ export default function CategoryDetail({
               value={dropdown}
               onChange={onChangeSearch}
             />
-            {dropdownDisplay ? (
+            {/* {dropdownDisplay ? (
               <div className="schrst">
                 {filterDropdownData ? (
                   filterDropdownData === "empty" ? (
@@ -208,26 +226,32 @@ export default function CategoryDetail({
               </div>
             ) : (
               <></>
-            )}
+            )} */}
           </div>
         </div>
       ) : (
         ""
       )}
 
-      <div className="row mt-3">
-        {filteredList && filteredList.length > 0 ? (
-          filteredList.map((vid, i) => {
+      {loader ? (
+        <div className="text-center mt-3">
+          <div className="loader-5 center">
+            <span></span>
+          </div>
+        </div>
+      ) : filteredList && filteredList.length > 0 ? (
+        <div className="row mt-3">
+          {filteredList.map((vid, i) => {
             let type = "";
             if (!vid.IsVideoFree) {
               type = vid.PackageName ? vid.PackageName : "";
             }
             return <Card key={i} video={vid} type={type} />;
-          })
-        ) : (
-          <p className="text-center">No record found!</p>
-        )}
-      </div>
+          })}
+        </div>
+      ) : (
+        <p className="text-center mt-3">No record found!</p>
+      )}
     </>
   );
 }
