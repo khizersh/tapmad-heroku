@@ -14,7 +14,7 @@ import {
 } from "../../services/seo.service";
 // import isGoogle from "./../../services/google-dns-lookup";
 const Syno = (props) => {
-  console.log("props in play : ",props);
+  console.log("props in play : ", props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
@@ -107,10 +107,10 @@ export async function getServerSideProps(context) {
         OriginalMovieId,
         context.resolvedUrl
       );
-      return { props: { data: data.data, schema: seo } };
+      return { props: { data: data.data, schema: seo, url  , ip} };
     } else {
       let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
-      return { props: { data: data.data, schema: seo } };
+      return { props: { data: data.data, schema: seo, url , ip} };
     }
   }
 
@@ -118,6 +118,7 @@ export async function getServerSideProps(context) {
     props: {
       data: data,
       env: process.env.TAPENV,
+      url,
     },
   };
 }
