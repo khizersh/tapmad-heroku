@@ -15,8 +15,9 @@ export const getShowsSearch = BASEURLDEVELOPMENT + "api/getShowsSearch";
 export const getUserPaymentHistory =
   BASEURLDEVELOPMENT + "api/getUserPaymentHistory";
 // home page api
+
 export const getFeaturedHomePage =
-  BASEURLDEVELOPMENT + "api/getFeaturedHomePageWithRE/5/0/5/0/100";
+  BASEURLDEVELOPMENT + "api/getHomeFeaturedPageWithRE/5/0/5/0/100";
 export const getFeaturedBannerDetail = BASEURL + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURL + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURLDEVELOPMENT + "api/getCardUser";
@@ -39,10 +40,10 @@ export const Logout = BASEURLAPP + "api/logout";
 
 export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/android";
 export const getNewsDetailBId =
-  BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/android/";
-
+BASEURLDEVELOPMENT + "api/getTnnNewsDetailByNewsID/v1/en/android/";
+  
 export const getShowsWithPagination =
-  BASEURLDEVELOPMENT + "api/getShowsWithPagination/0/5/0/16";
+  BASEURLDEVELOPMENT + "api/getAllShowsWithPagination/0/5/0/16";
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
   BASEURLDEVELOPMENT + "api/getUserStreamWithPackagesChannelsChat";
@@ -67,11 +68,11 @@ export const unsubscribePaymentTransaction =
   BASEURLDEVELOPMENT + "api/unsubscribeUserSubscriptiption";
 export const getMoviesWithPagination = (from, to) => {
   return (
-    BASEURLDEVELOPMENT + `api/getMoviesWithPagination/${from}/${to - from}/0/16`
+    BASEURLDEVELOPMENT + `api/getAllMoviesWithPagination/${from}/${to - from}/0/16`
   );
 };
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
-  return `${BASEURLDEVELOPMENT}api/getRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
+  return `${BASEURLDEVELOPMENT}api/getAllRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 export const getFeaturedHomepageWithRE = (from, to) => {
   return (
@@ -82,13 +83,14 @@ export const getFeaturedHomepageWithRE = (from, to) => {
 export const getChannelsWithPagination = (from, to) => {
   return (
     BASEURLDEVELOPMENT +
-    `api/getChannelWithPagination/${from}/${to - from}/0/16`
+    `api/getAllChannelWithPagination/${from}/${to - from}/0/16`
   );
 };
+
 export const getMoviesWithPaginationInitial =
-  BASEURLDEVELOPMENT + "api/getMoviesWithPagination/0/5/0/16";
+  BASEURLDEVELOPMENT + "api/getAllMoviesWithPagination/0/5/0/16";
 export const getChannelWithPaginationInitial =
-  BASEURLDEVELOPMENT + "api/getChannelWithPagination/0/5/0/16";
+  BASEURLDEVELOPMENT + "api/getAllChannelWithPagination/0/5/0/16";
 
 // catchup
 
@@ -158,7 +160,7 @@ export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";
 
 export const viewMoreContent = (from, to, sectionId, pageId) =>
 BASEURLDEVELOPMENT +
-  `api/getMoreContentWithPagination/${from}/${to}/${sectionId}/${pageId}`;
+  `api/getExtraContentWithPagination/${from}/${to}/${sectionId}/${pageId}`;
 
 export const loggingTags = {
   search: "search",
