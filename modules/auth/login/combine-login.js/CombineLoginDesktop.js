@@ -90,11 +90,11 @@ const CombineLoginDesktop = ({
           </p>
           <div className="d-flex justify-content-center">
             <div className="mx-2">
-              <label className="border-round custom-input text-dark font-14">
+              <label className="border-round custom-input text-dark font-14 line-1">
                 {AuthState?.CountryCode}
               </label>
             </div>
-            <div className="mx-2">
+            <div className="mx-2 flex-grow-1 flex-shrink-1">
               <input
                 type="text"
                 // maxLength="10"
@@ -108,7 +108,7 @@ const CombineLoginDesktop = ({
                 autoComplete={"off"}
               />
             </div>
-            <div className="mx-2">
+            <div className="mx-2 flex-grow-1 flex-shrink-1">
               <input
                 type="password"
                 maxLength="4"
@@ -140,7 +140,7 @@ const CombineLoginDesktop = ({
             </span>
           </div>
         </div>
-        <div className="form-group text-center">
+        <div className="form-group text-center flex-grow-1">
           <button
             type="submit"
             // disabled={btnDisabled ? true : false}
