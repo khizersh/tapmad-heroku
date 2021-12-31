@@ -157,7 +157,7 @@ export const getUserChallenges = BASEURLDEVELOPMENT + "api/getUserChallenges";
 export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";
 
 export const viewMoreContent = (from, to, sectionId, pageId) =>
-  BASEURLAPP +
+BASEURLDEVELOPMENT +
   `api/getMoreContentWithPagination/${from}/${to}/${sectionId}/${pageId}`;
 
 export const loggingTags = {
