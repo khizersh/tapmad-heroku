@@ -121,6 +121,7 @@ export default function MainProvider({ children }) {
       var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
+    Cookie.removeCookie('content-token')
     dispatch({ type: "SET_AUTHENTICATION", data: false });
   }
   function setLoader(bool) {

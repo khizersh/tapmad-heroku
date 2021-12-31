@@ -14,9 +14,8 @@ function convertInArray(obj) {
   return obj;
 }
 function authHeaders(token = null) {
-  console.log("token : ",token);
   return {
-    Authorization: token || Cookie.getCookies("content-token")
+    Authorization: token || Cookie.getCookies("content-token") || ""
   };
 }
 function customizingData(parentarray) {

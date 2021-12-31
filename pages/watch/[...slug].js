@@ -145,13 +145,14 @@ const watch = (props) => {
         <Player movies={props.data} />
       )}
       {props.data && props.data.responseCode == 401 && <></>}
-    </div>
+    </div> 
   );
 };
 
 // server side rendering
-var body = null;
+
 export async function getServerSideProps(context) {
+
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
   var ip = requestIp.getClientIp(context.req);
@@ -168,7 +169,7 @@ export async function getServerSideProps(context) {
   }
   let allowUser = true;
   const header =  GlobalService.authHeaders(cookies["content-token"]);
-   body = {
+  var body = {
     Version: "V1",
     Language: "en",
     Platform: "web",
@@ -204,28 +205,28 @@ export async function getServerSideProps(context) {
       if (res && res.responseCode == 5) {
         // expired subscription
         return {
-          props: response(res.data, chanelDetail, false, seo),
+          props: response(res?.data, chanelDetail, false, seo),
         };
       } else if (res && res.responseCode == 401) {
         // logging out
         return {
-          props: response(res.data, chanelDetail, true, seo),
+          props: response(res?.data, chanelDetail, true, seo),
         };
       } else if (res && res.responseCode == 110) {
         // send to change package screen with auto package selected
         return {
-          props: response(res.data, chanelDetail, true, seo),
+          props: response(res?.data, chanelDetail, true, seo),
         };
       } else {
         // authenticated
         return {
-          props: response(res.data, chanelDetail, true, seo),
+          props: response(res?.data, chanelDetail, true, seo),
         };
       }
     } else {
       // not logged in and redirect to subscription page
       return {
-        props: response(res.data, chanelDetail, false, seo),
+        props: response(res?.data, chanelDetail, false, seo),
       };
     }
   }

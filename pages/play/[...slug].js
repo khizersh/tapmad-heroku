@@ -14,6 +14,7 @@ import {
 } from "../../services/seo.service";
 // import isGoogle from "./../../services/google-dns-lookup";
 const Syno = (props) => {
+  console.log("props in play : ",props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
@@ -32,7 +33,6 @@ const Syno = (props) => {
   }
 
   useEffect(() => {
-    console.log(props);
     setMount(true);
   }, []);
 
@@ -100,7 +100,7 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
-    if (data?.data?.Video.IsVideoChannel) {
+    if (data?.data?.Video?.IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(
         OriginalMovieId,
         context.resolvedUrl
