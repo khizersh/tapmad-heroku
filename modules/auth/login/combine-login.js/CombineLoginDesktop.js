@@ -63,7 +63,8 @@ const CombineLoginDesktop = ({
                             src={m.OperatorImage}
                             alt={m.OperatorName}
                             className="img-fluid border-radius-6"
-                            width="30"
+                            width="60"
+                            height="60"
                           />
                           <i
                             // className={`text-center text-muted d-block mbl-13px  ${
