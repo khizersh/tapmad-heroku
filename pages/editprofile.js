@@ -32,19 +32,19 @@ const EditProfile = () => {
         <style>
           {`
           #footer {
-            margin-top: 60px;
           }
-          `}
-        </style>
-        <style jsx>
-          {`
-            .profile-container {
-              top: 20px;
-            }
           `}
         </style>
       </Head>
       <div className="container-fluid">
+        <style jsx>
+          {`
+            .profile-container {
+              top: 0;
+              padding: 20px 0;
+            }
+          `}
+        </style>
         <div className="profile-container">
           <EdiProfileForm isSave={save} isMobile={mobile} />
         </div>
