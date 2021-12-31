@@ -90,6 +90,20 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
     setLoader(false);
   };
 
+  function onChangePin(e) {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setPin(mobileNum.trim());
+    }
+  }
+  function onChangeConfirmPin(e) {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setConfirmPin(mobileNum.trim());
+    }
+  }
+
+
   useEffect(() => {
     if (SignUpState.UserDetails.MobileNo) {
       let num = SignUpState.UserDetails.MobileNo;
@@ -147,7 +161,8 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
           placeholder={"Set PIN code"}
           minLength={4}
           maxLength={4}
-          onChange={(e) => setPin(e.target.value)}
+          value={pin}
+          onChange={onChangePin}
         />
       </div>
       <div className="px-3 pb-3">
@@ -157,7 +172,8 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
           placeholder={"Confirm PIN code"}
           minLength={4}
           maxLength={4}
-          onChange={(e) => setConfirmPin(e.target.value)}
+          value={confirmPin}
+          onChange={onChangeConfirmPin}
         />
       </div>
       <div className="text-center px-3">
