@@ -37,7 +37,6 @@ const buyCoinCard = ({ data }) => {
       };
       makeCoinTransactionData(body)
         .then((respCoin) => {
-
           if (respCoin && respCoin.responseCode == "10") {
             setLoader(false);
             Cookie.setCookies("userCoins", respCoin.data.UserTotalCoins);
