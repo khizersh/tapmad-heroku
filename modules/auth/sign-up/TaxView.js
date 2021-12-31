@@ -88,7 +88,7 @@ export default function TaxView({ onChange }) {
               </style>
               <li
                 key={i}
-                className={`w-100 p-2 f-20 text-center cursor-pointer border-0 text-base ${
+                className={`w-100 py-2 px-4 f-20 text-center cursor-pointer border-0 text-base ${
                   SelectedPrice?.ProductId
                     ? SelectedPrice.ProductId === m.ProductId
                       ? "price-active"
