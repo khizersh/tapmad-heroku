@@ -94,7 +94,9 @@ export async function getServerSideProps(context) {
   //   console.log(err);
   // }
 
-  ip = "39.44.217.70";
+  if (process.env.TAPENV == "local") {
+    ip = "39.44.217.70";
+  }
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
@@ -115,7 +117,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data: data,
-      env: process.env.TAPENV,
+      env: process.env.TAPENV
     },
   };
 }
