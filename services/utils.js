@@ -109,7 +109,7 @@ function SEOFriendlySlugsForWatch(event, catchup = false) {
 function SEOFriendlySlugsIsCategoryFalse(event) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/{${event.IsVideoFree}}/${event.VideoEntityId}${
+  let slug = `/${prefix}/${cleanName}/${event.IsVideoFree ? 1 : 0}${event.VideoEntityId}${
     event.IsVideoChannel ? "1" : "0"
   }`;
   return slug;

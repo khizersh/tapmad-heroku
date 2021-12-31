@@ -83,7 +83,7 @@ const Syno = (props) => {
 export default Syno;
 
 export async function getServerSideProps(context) {
-  let { OriginalMovieId, isChannel } = manipulateUrls(context.query);
+  let { OriginalMovieId, isChannel , CleanVideoId} = manipulateUrls(context.query);
   var ip = requestIp.getClientIp(context.req);
   // try {
   //   const isGoogleDNS = await isGoogle(ip);
@@ -98,7 +98,7 @@ export async function getServerSideProps(context) {
     ip = "39.44.217.70";
   }
 
-  let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
+  let url = getRelatedChannelsOrVODs(CleanVideoId, isChannel);
   const data = await get(url, ip);
 
   if (data != null) {
