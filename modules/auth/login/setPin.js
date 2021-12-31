@@ -118,9 +118,14 @@ function SetUserPin({ login, ip }) {
     <>
       <style jsx>
         {`
+
+
           @media (min-width: 992px) {
             .margin-desktop {
               padding: 0 60px !important;
+            }
+            .form-group{
+              margin: 1rem 8rem;
             }
           }
           @media (max-width: 991px) {
@@ -147,8 +152,8 @@ function SetUserPin({ login, ip }) {
                 />
               </div>
             ) : null}
-            <label style={{ fontSize: "14px" }}>Enter your new PIN</label>
             <div className="form-group text-grey">
+            <label style={{ fontSize: "14px" }}>Enter your new PIN</label>
               <input
                 type="password"
                 className="form-control numeric border-curve"
@@ -161,6 +166,7 @@ function SetUserPin({ login, ip }) {
               />
             </div>
             <div className="form-group">
+            <label style={{ fontSize: "14px" }}>Confirm your PIN</label>
               <input
                 type="password"
                 className="form-control numeric border-curve"
@@ -174,7 +180,7 @@ function SetUserPin({ login, ip }) {
             </div>
             <div className={`form-group text-center mb-0`}>
               <button
-                className={`btn bg-green pymnt_pge_sbscrbe_btn ${
+                className={`btn bg-green pymnt_pge_sbscrbe_btn font-16 ${
                   isMobile ? "" : "width-35"
                 }`}
                 onClick={setUserPin}

@@ -67,10 +67,10 @@ export default function ForgetPin({ updateView }) {
       <div className="custom-bg">
         <div className={`${isMobile ? "" : "margin-desktop"} `}>
           <div className="mb-3">
-            <h3 className="component-title">Enter Your OTP</h3>
-            <p className="text-center text-grey center-div">
+            <h3 className="component-title text-grey">Enter Your OTP</h3>
+            {/* <p className="text-center text-grey center-div">
               Please enter the code provided into 4 digit verfiication code
-            </p>
+            </p> */}
           </div>
           <div className="form-group">
             <input
@@ -85,7 +85,7 @@ export default function ForgetPin({ updateView }) {
           <div className={`form-group text-center`} style={{ marginBottom: "10px" }}>
             <button
               type="button"
-              className={`btn bg-green pymnt_pge_sbscrbe_btn ${
+              className={`btn bg-green pymnt_pge_sbscrbe_btn font-16 ${
                 isMobile ? "" : "width-35"
               }`}
               onClick={async () => await verifyOTP()}
