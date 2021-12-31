@@ -43,7 +43,6 @@ const VerifyOTPComponent = ({ newUser, login }) => {
             ProductId: SignUpState.SelectedPrice.ProductId,
             Version: "V1",
           };
-          console.log("body : ",body);
           data = await AuthService.paymentProcessTransaction(body);
           SignUpTag(body, data.data);
         } catch (e) {
@@ -117,27 +116,41 @@ const VerifyOTPComponent = ({ newUser, login }) => {
   }
   return (
     <div className="text-center desktop-size custom-bg-signup">
-      <h3 className="component-title">Enter your OTP</h3>
-      <div className="py-3">
+      <h3 className="component-title mb-4 text-grey">Enter Your OTP</h3>
+      {/* <div className="py-3">
         <label className="text-muted center-div">
           Please enter code provided into 4 digit verification code
         </label>
-      </div>
-      <div className="px-3 pb-4">
+      </div> */}
+       <style jsx>
+        {`
+
+
+          @media (min-width: 992px) {
+        
+            .form-group{
+              margin: 1rem 8rem;
+            }
+          }
+        
+        `}
+      </style>
+      <div className="form-group pb-2">
         <input
           type="text"
-          placeholder="Enter OTP"
-          className="form-control border-curve"
+          placeholder="Enter Your OTP"
+          className="form-control border-curve "
           ref={otp}
           maxLength="4"
           minLength="4"
           inputMode="numeric"
         />
       </div>
-      <div className="px-3 pb-4">
+      <div className="px-3 ">
         <button
           type="button"
-          className="btn btn-primary pymnt_pge_sbscrbe_btn"
+          className="btn btn-primary pymnt_pge_sbscrbe_btn font-16"
+          style={{width: '36%'}} 
           onClick={verifyOTPPinCode}
         >
           Verify OTP
