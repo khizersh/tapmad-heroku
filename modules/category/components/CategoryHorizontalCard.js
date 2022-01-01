@@ -2,8 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 
-const CategoryHorizontalCard = ({ video, type , slug }) => {
-
+const CategoryHorizontalCard = ({ video, type, slug }) => {
   return (
     <>
       <Link href={slug} passHref={true} shallow={true}>

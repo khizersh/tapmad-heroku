@@ -1018,6 +1018,21 @@ label {
   font-family: inherit;
 }
 
+.desktop-ads iframe,
+.desktops-ads iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+@media(max-width: 570px) {
+  .home-banner-btn {
+    top: -22px;
+    .tm_wishlst_btn_active {
+      display: inline-block
+    }
+  }
+}
+
 .tm_wishlst_btn_active:hover {
   transition: 0.3 ease;
   color: white !important;

@@ -238,33 +238,33 @@ export default function Player({ movies }) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-9 vdowrp">
-               {/* Top Ad */}
-                {ads.allow ? (
-                  <div className="text-center my-3">
-                    <DFPSlotsProvider dfpNetworkId="28379801">
-                      {ads.topAdDesktop && (
-                        <div className="desktop-ads d-none d-lg-block d-md-block">
-                          <AdSlot
-                            sizes={[[728, 90]]}
-                            adUnit={ads.topAdDesktop}
-                            onSlotIsViewable={(dfpEventData) => AdImpression()}
-                          />
-                        </div>
-                      )}
-                      {ads.topAdMobile && ads.topMobileAdWidth && (
-                        <div className="desktops-ads text-center d-lg-none d-md-none">
-                          <AdSlot
-                            sizes={[
-                              [ads.topMobileAdWidth, ads.topMobileAdHieght],
-                            ]}
-                            adUnit={ads.topAdMobile}
-                            onSlotIsViewable={(dfpEventData) => AdImpression()}
-                          />
-                        </div>
-                      )}
-                    </DFPSlotsProvider>
-                  </div>
-                ) : null}
+              {/* Top Ad */}
+              {ads.allow ? (
+                <div className="text-center my-3">
+                  <DFPSlotsProvider dfpNetworkId="28379801">
+                    {ads.topAdDesktop && (
+                      <div className="desktop-ads d-none d-lg-block d-md-block">
+                        <AdSlot
+                          sizes={[[728, 90]]}
+                          adUnit={ads.topAdDesktop}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    )}
+                    {ads.topAdMobile && ads.topMobileAdWidth && (
+                      <div className="desktops-ads text-center d-lg-none d-md-none">
+                        <AdSlot
+                          sizes={[
+                            [ads.topMobileAdWidth, ads.topMobileAdHieght],
+                          ]}
+                          adUnit={ads.topAdMobile}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    )}
+                  </DFPSlotsProvider>
+                </div>
+              ) : null}
               <div className="col-12 p-0 vdobox">
                 <div
                   id="player-div1"
@@ -358,7 +358,7 @@ export default function Player({ movies }) {
               </div>
             </div>
             {!isMobile ? (
-              <div className="col-lg-3 text-center pt-5 d-lg-block d-md-block">
+              <div className="col-lg-3 text-center pt-3 d-lg-block d-md-block">
                 {/* Side Add desktop start*/}
                 <div className="d-none d-lg-block d-md-block">
                   {ads.allow && ads.rightAd ? (

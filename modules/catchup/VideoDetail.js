@@ -17,7 +17,7 @@ export default function VideoDetail({ video, videoList }) {
   }, [video, videoList]);
 
   return (
-    <>
+    <div className="container-fluid">
       <div className="row">
         <div className="col-12 mt-2">
           <div className="row mr-0">
@@ -76,6 +76,6 @@ export default function VideoDetail({ video, videoList }) {
           })
           : null}
       </div>
-    </>
+    </div>
   );
 }

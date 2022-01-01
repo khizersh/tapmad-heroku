@@ -240,7 +240,7 @@ export default function CategoryDetail({
           </div>
         </div>
       ) : filteredList && filteredList.length > 0 ? (
-        <div className="row mt-3">
+        <div className="row mt-3" style={{marginLeft: "5px", marginRight: "5px"}}>
           {filteredList.map((vid, i) => {
             let type = "";
             if (!vid.IsVideoFree) {

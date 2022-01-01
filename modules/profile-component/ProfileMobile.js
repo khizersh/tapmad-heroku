@@ -39,6 +39,19 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
 
   return (
     <div>
+      <style jsx>
+        {`
+        .user_img {
+          margin: 0 !important;
+        }
+        dl {
+          margin-bottom: 5px;
+        }
+        dl dd {
+          margin-bottom: 0;
+        }
+        `}
+      </style>
       {/* <NavbarHOC>
         <div>
           <button
@@ -59,20 +72,20 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
           </a>
         </div>
       </NavbarHOC> */}
-      <div className="p-4 d-sm-none">
-        <div className="row">
-          <div className="col-4 px-1">
+      <div className="d-sm-none">
+        <div className="row align-items-center">
+          <div className="col-4">
             <img
               src={
                 allData && allData.ProfileData.UserProfileGender == "Male"
                   ? editUserMale
                   : userFemaleProfileIcon
               }
-              className="mt-3 m-4 border-50"
+              className="border-50 img-fluid"
               width="100"
             />
           </div>
-          <div className="col-4 pt-3">
+          <div className="col-4">
             <div>Name</div>
             <div>Date of Birth</div>
           </div>
@@ -81,7 +94,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
             <div>{profileData && profileData.BirthDate}</div>
           </div>
         </div>
-        <div className="d-flex align-items-center mt-3">
+        <div className="d-flex align-items-center mt-3 mb-2">
           <img
             src={infoIcon}
             alt="User"
@@ -191,26 +204,6 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
                 Update Package
               </button>
             </div>
-          </div>
-        </div>
-        <div className="col-6 pr-0">
-          <div>
-            <button
-              type="button"
-              className="btn btn-light rounded-pill p-1 w-100"
-            >
-              Billing History
-            </button>
-          </div>
-          <div className="mt-1">
-            <button
-              type="button"
-              className="btn btn-gradient text-light rounded-pill p-1 w-100"
-              onClick={clickEditProfile}
-              disabled={upgardeBtn}
-            >
-              Update Package
-            </button>
           </div>
         </div>
         <div className={` ${show.games ? "row mx-0 mt-2" : "d-none"}`}>
