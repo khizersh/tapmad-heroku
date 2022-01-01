@@ -55,9 +55,12 @@ export default function TaxView({ onChange }) {
         PackagePrice.length > 0 &&
         PackagePrice.map((m, i) => {
           return (
-            <div style={{ position: "relative", maxWidth: "33.3333%" }}>
+            <>
               <style jsx>
                 {`
+                  .btnwrp {
+                    margin-bottom: 10px;
+                  }
                   .package-title {
                     font-size: 1.5em;
                   }
@@ -67,13 +70,22 @@ export default function TaxView({ onChange }) {
                     flex-direction: column;
                   }
                   li > span {
-                    font-size: 1.5em;
                     margin: auto;
                   }
                   .triangle-down {
                     position: absolute;
                     left: 0;
                     right: 0;
+                  }
+                  @media (min-width: 768px) {
+                    li > span {
+                      font-size: 1.5em;
+                    }
+                  }
+                  @media (max-width: 767px) {
+                    .package-name {
+                      font-size: 0.85em;
+                    }
                   }
                   @media (max-width: 480px) {
                     li {
@@ -86,64 +98,69 @@ export default function TaxView({ onChange }) {
                   }
                 `}
               </style>
-              <li
-                key={i}
-                className={`w-100 py-2 px-4 f-20 text-center cursor-pointer border-0 text-base ${
-                  SelectedPrice?.ProductId
-                    ? SelectedPrice.ProductId === m.ProductId
-                      ? "price-active"
-                      : ""
-                    : ""
-                }`}
-                id={m.PackageId}
-                onClick={() => onChangePackage(m)}
+              <div
+                className="btnwrp"
+                style={{ position: "relative", maxWidth: "33.3333%" }}
               >
-                {m.PackageNameArray?.length > 1 ? (
-                  <>
-                    <div className="font-weight-bold line-1 text-left font-16">
-                      {m.PackageNameArray[0]}
+                <li
+                  key={i}
+                  className={`w-100 py-2 px-4 f-20 text-center cursor-pointer border-0 text-base ${
+                    SelectedPrice?.ProductId
+                      ? SelectedPrice.ProductId === m.ProductId
+                        ? "price-active"
+                        : ""
+                      : ""
+                  }`}
+                  id={m.PackageId}
+                  onClick={() => onChangePackage(m)}
+                >
+                  {m.PackageNameArray?.length > 1 ? (
+                    <>
+                      <div className="font-weight-bold line-1 text-left font-16">
+                        {m.PackageNameArray[0]}
+                      </div>
+                      <div className="font-weight-bold line-1 text-left package-name">
+                        {m.PackageNameArray[1]}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-weight-bold text-left font-17 line-1 d-block text-center h3">
+                        {m.PackageName}
+                      </span>
+                    </>
+                  )}
+                  <div className="d-flex justify-content-end align-items-center">
+                    <div className="text-white per-month">
+                      {m.PackagePrices[0]}
                     </div>
-                    <div className="font-weight-bold line-1 text-left">
-                      {m.PackageNameArray[1]}
+                    <div className="font-weight-bold text-white line-1 package-title">
+                      {m.PackagePrices[1]}
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <span className="font-weight-bold text-left font-17 line-1 d-block text-center h3">
-                      {m.PackageName}
-                    </span>
-                  </>
-                )}
-                <div className="d-flex justify-content-end align-items-center">
-                  <div className="text-white per-month">
-                    {m.PackagePrices[0]}
+                    <div
+                      className="text-white monthly line-1"
+                      style={{ top: "0" }}
+                    >
+                      <span className="d-block line-1">
+                        {m.PackagePrices[2].split(" ")[0]}
+                      </span>
+                      {m.PackagePrices[2].split(" ").slice(1).join(" ")}
+                    </div>
                   </div>
-                  <div className="font-weight-bold text-white line-1 package-title">
-                    {m.PackagePrices[1]}
-                  </div>
-                  <div
-                    className="text-white monthly line-1"
-                    style={{ top: "0" }}
-                  >
-                    <span className="d-block line-1">
-                      {m.PackagePrices[2].split(" ")[0]}
-                    </span>
-                    {m.PackagePrices[2].split(" ").slice(1).join(" ")}
-                  </div>
-                </div>
-                <span className="d-block d-md-none"></span>
-                {m.PackageDescription}
-              </li>
-              {SelectedPrice?.ProductId ? (
-                SelectedPrice.ProductId == m.ProductId ? (
-                  <div className="triangle-down"></div>
+                  {/* <span className="d-block d-md-none"></span> */}
+                  {m.PackageDescription}
+                </li>
+                {SelectedPrice?.ProductId ? (
+                  SelectedPrice.ProductId == m.ProductId ? (
+                    <div className="triangle-down"></div>
+                  ) : (
+                    ""
+                  )
                 ) : (
                   ""
-                )
-              ) : (
-                ""
-              )}
-            </div>
+                )}
+              </div>
+            </>
           );
         })}
     </>
