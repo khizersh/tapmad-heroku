@@ -102,8 +102,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
       setConfirmPin(mobileNum.trim());
     }
   }
-
-
   useEffect(() => {
     if (SignUpState.UserDetails.MobileNo) {
       let num = SignUpState.UserDetails.MobileNo;
