@@ -57,7 +57,7 @@ const CreditCardForm = ({
             <span className="payment-icon border-curve">{mobileCode}</span>
           </div>
           <input
-            type="text"
+            type="number"
             maxLength="10"
             minLength="10"
             className="form-control ml-2 border-curve"

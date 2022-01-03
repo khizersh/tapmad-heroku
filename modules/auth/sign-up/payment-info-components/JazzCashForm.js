@@ -31,7 +31,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
         </div>
         <div className="pl-2 flex-grow-1 flex-shrink-1 gridCol">
           <input
-            type="text"
+            type="number"
             maxLength="10"
             minLength="10"
             className="form-control border-curve flex-grow-1 w-100"

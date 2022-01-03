@@ -10,8 +10,8 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-        setNum(mobileNum.trim());
-        onChangeNumber(e);
+      setNum(mobileNum.trim());
+      onChangeNumber(e);
     }
   };
   return (
@@ -35,6 +35,7 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
             SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
           }
           onChange={(e) => onChange(e)}
+          pattern="\d*"
         />
       </div>
       {/* <div className="form-control text-center">
