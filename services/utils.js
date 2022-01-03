@@ -107,12 +107,20 @@ function SEOFriendlySlugsForWatch(event, catchup = false) {
   return slug;
 }
 
-function SEOFriendlySlugsIsCategoryFalse(event) {
+function SEOFriendlySlugsIsCategoryFalse(event, isAppendFreeVideo = false) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
-    event.VideoEntityId
-  }${event.IsVideoChannel ? "1" : "0"}`;
+  let slug = "";
+  if (isAppendFreeVideo) {
+    slug = `/${prefix}/${cleanName}/${event.IsVideoFree ? "1" : "0"}${
+      event.VideoEntityId
+    }${event.IsVideoChannel ? "1" : "0"}`;
+  } else {
+    slug = `/${prefix}/${cleanName}/${event.VideoEntityId}${
+      event.IsVideoChannel ? "1" : "0"
+    }`;
+  }
+  // let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   return slug;
 }
 
@@ -163,7 +171,7 @@ function setUrlAccordingToVideoType(movie, type) {
         movie.VideoEntityId == 950 ||
         movie.VideoEntityId == 953
       ) {
-        slug = SEOFriendlySlugsIsCategoryFalse(movie);
+        slug = SEOFriendlySlugsIsCategoryFalse(movie , true);
       } else {
         slug = SEOFriendlySlugsForVideo(movie);
       }

@@ -16,7 +16,6 @@ import {
 import HomePageAd from "./HomePageAd";
 
 const HomepageSlider = ({ movies, ads, name }) => {
-  console.log("homepage : ",movies);
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
