@@ -130,8 +130,10 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
-        const mobileNumber = details.MobileNo.trim();
-        if (!details.MobileNo) {
+        console.log("details: ",details);
+        const mobileNumber = details.MobileNo;
+        
+        if (!details.MobileNo && !details.MobileNo.length ) {
           setLoader(false);
           return swal({
             timer: 3000,
