@@ -32,6 +32,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       on("tokenSuccess", async (event) => {
         if (formReady) {
           await submitCardDetails(event);
+          console.log("formReady : ",formReady);
         }
       });
     }
@@ -57,9 +58,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   }
 
  async function checkouPayment( details) {
-   console.log("checkout called....");
    const response = await AuthService.creditCardOrderForCheckout(details);
-   console.log("response in checkout payment  : ",response);
     if (response.data.responseCode == 1) {
       SignUpTag(details, response.data);
       swal({
@@ -133,7 +132,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
-        console.log("details", details);
         if (!details.MobileNo) {
           setLoader(false);
           return swal({

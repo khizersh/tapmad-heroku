@@ -15,7 +15,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
-    console.log(SignUpState, "Why Data");
     // setLoader(true);
     if (showUsername) {
       if (username.trim().length < 1) {
@@ -118,8 +117,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
         .catch((e) => console.log(e));
     }
   }, [SignUpState.UserDetails.MobileNo]);
-
-
 
 
   return (

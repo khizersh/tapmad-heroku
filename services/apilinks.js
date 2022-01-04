@@ -142,7 +142,7 @@ export const getBuyCoinsPackages =
 export const makeCoinTransaction = STAGEURL + "api/makeCoinsPaymentTransaction";
 export const rewardPredicationCoda = STAGEURL + "api/rewardPredicationCoda";
 export const updateRewardStore = STAGEURL + "api/updateRewardsStoreTestV2";
-export const getUserChallenges = BASEURLDEVELOPMENT + "api/getUserChallenges";
+export const getUserChallenges = STAGEURL + "api/getUserChallenges";
 
 // get all country
 export const getAllowRegions = STAGEURL + "api/getAllCountries/v1/en/web";
