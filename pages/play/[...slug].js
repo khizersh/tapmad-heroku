@@ -38,7 +38,7 @@ const Syno = (props) => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{props?.schema?.metaData[0]?.title}</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content={props?.schema?.metaData[0]?.title} />
@@ -67,7 +67,7 @@ const Syno = (props) => {
             ),
           }}
         />
-      </Head>
+      </Head> */}
       <div className="container-fluid">
         <CategoryDetail
           video={video}
@@ -86,7 +86,6 @@ export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel, CleanVideoId } = manipulateUrls(
     context.query
   );
-  console.log(OriginalMovieId, "OriginalMovieId");
 
   var ip = requestIp.getClientIp(context.req);
   try {
@@ -106,7 +105,6 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
-    console.log(context.resolvedUrl, "urlDTA");
     if (data?.data?.Video?.IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(
         OriginalMovieId,
