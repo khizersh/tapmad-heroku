@@ -42,7 +42,6 @@ export async function getSEODataForLiveChannel(videoId, url) {
     contentURL: `https://www.tapmad.com${url.split("?")[0]}`,
   };
   let SEOData = await post(SEOLiveChannelData, SEOBody);
-  console.log(SEOData, "SEODATA");
   return SEOData.data.Channels
     ? { ...SEOData.data, url: `https://www.tapmad.com${url.split("?")[0]}` }
     : "";
