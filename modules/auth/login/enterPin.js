@@ -28,7 +28,6 @@ function EnterPin({ forgetPin, login }) {
           var loginResp = login();
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
-              console.log(e);
               forgetPin(initialState);
             }
           })
