@@ -103,10 +103,11 @@ const CombineLoginDesktop = ({
                 className="form-control border-round mb-4  custom-input"
                 id="mobileNo"
                 placeholder="3xxxxxxxxxxx"
-                inputMode="numeric"
                 value={mobileNo}
                 onChange={(e) => handleNumber(e)}
                 autoComplete={"off"}
+                maxLength={10}
+                pattern="\d*"
               />
             </div>
             <div className="mx-2 flex-grow-1 flex-shrink-1">

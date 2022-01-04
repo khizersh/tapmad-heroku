@@ -130,10 +130,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
-        console.log("details: ",details);
-        const mobileNumber = details.MobileNo;
-        
-        if (!details.MobileNo && !details.MobileNo.length ) {
+        console.log("details", details);
+        if (!details.MobileNo) {
           setLoader(false);
           return swal({
             timer: 3000,
@@ -141,15 +139,16 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             icon: "error",
             buttons: false,
           });
-        }
-        if (mobileNumber.length < 10) {
-          setLoader(false);
-          return swal({
-            timer: 3000,
-            text: "Please enter mobile number",
-            icon: "error",
-            buttons: false,
-          });
+        } else {
+          if (details.MobileNo.trim().length < 10) {
+            setLoader(false);
+            return swal({
+              timer: 3000,
+              text: "Please enter the 10 digit mobile number",
+              icon: "error",
+              buttons: false,
+            });
+          }
         }
 
         if (SignUpState.SelectedMethod.PaymentId == 2) {
@@ -186,8 +185,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               buttons: false,
             });
           }
-          if(SignUpState.SelectedMethod?.PaymentId == 4){
-            if(!details.cnic){
+          if (SignUpState.SelectedMethod?.PaymentId == 4) {
+            if (!details.cnic) {
               setLoader(false);
               return swal({
                 timer: 3000,
@@ -195,7 +194,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
                 icon: "info",
                 buttons: false,
               });
-
             }
           }
           var data = await AuthService.initialTransaction(details);
@@ -244,7 +242,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             } else if (data.responseCode == 6) {
               // only for jazz cash , process payment api will not call direct transaction from here
               const loggedIn = checkUserIdAndToken();
-              
+
               if (loggedIn.valid) {
                 if (data.data.User.IsPinSet) {
                   swal({

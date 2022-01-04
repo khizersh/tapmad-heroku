@@ -24,12 +24,12 @@ const CombineLoginMobile = ({
       <style jsx>
         {`
           .radio-cstm {
-            width: 60px
+            width: 60px;
           }
           .radio-cstm:after {
             width: 10px !important;
             height: 10px !important;
-            top: 7px !important
+            top: 7px !important;
           }
         `}
       </style>
@@ -103,6 +103,7 @@ const CombineLoginMobile = ({
             value={mobileNo}
             onChange={(e) => handleNumber(e)}
             autoComplete={"off"}
+            pattern="\d*"
           />
         </div>
         <div className="form-group">

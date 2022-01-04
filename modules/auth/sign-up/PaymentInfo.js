@@ -91,13 +91,14 @@ function PaymentInfo(props) {
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      if (mobileNum?.trim().length > 4) {
-        updateUserData({ MobileNo: mobileNum });
-        dispatch({
-          type: "ALREADY_SIGNEDUP_NUM",
-          data: { FromSignup: 1, number: mobileNum },
-        });
-      }
+      updateUserData({ MobileNo: mobileNum.replace(" ", "") });
+      dispatch({
+        type: "ALREADY_SIGNEDUP_NUM",
+        data: { FromSignup: 1, number: mobileNum },
+      });
+      // } else {
+      //   updateUserData({ MobileNo: mobileNum });
+      // }
     }
   }
 
@@ -120,6 +121,17 @@ function PaymentInfo(props) {
           font-size: 14px;
           height: 32px;
         }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+
         `}
       </style>
       <div className="pymnt_pge_phne px-lg-3 pb-3 pt-0 mthd_active mthd_form">
