@@ -5,7 +5,7 @@ import { get } from "../services/http-service";
 import requestIp from "request-ip";
 import isGoogle from "../services/google-dns-lookup";
 export default function MoviesPage(props) {
-  console.log("props in moviesS : ",props);
+  console.log("props in moviesS : ", props);
   return (
     <div>
       <Head>
@@ -16,7 +16,6 @@ export default function MoviesPage(props) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://wwww.tapmad.com/movies" />
-
       </Head>
       <div>
         <Movies {...props} />
@@ -43,7 +42,7 @@ export async function getServerSideProps(context) {
     props: {
       movies: movies,
       env: process.env.TAPENV,
-      ip: ip
+      ip: ip,
     },
   };
 }

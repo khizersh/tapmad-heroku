@@ -14,7 +14,7 @@ import {
 } from "../../services/seo.service";
 // import isGoogle from "./../../services/google-dns-lookup";
 const Syno = (props) => {
-  console.log("props in play : ",props);
+  console.log("props in play : ", props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
@@ -44,24 +44,24 @@ const Syno = (props) => {
         <meta property="og:title" content={props?.schema?.metaData[0]?.title} />
         <meta
           property="og:description"
-          content={props.schema.metaData[0].description}
+          content={props?.schema?.metaData[0]?.description}
         />
         <meta
           name="description"
-          content={props.schema.metaData[0].description}
+          content={props?.schema?.metaData[0]?.description}
         />
         <meta
           property="og:image"
-          content={props.schema?.metaData[0]?.image.url}
+          content={props?.schema?.metaData[0]?.image?.url}
         />
-        <meta property="og:url" content={props.schema.url} />
-        <link rel="canonical" href={props.schema.url} />
+        <meta property="og:url" content={props?.schema?.url} />
+        <link rel="canonical" href={props?.schema?.url} />
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
-              props.schema.Channels
+              props?.schema?.Channels
                 ? props.schema?.Channels[0]
                 : props.schema?.Vod[0]
             ),
@@ -83,7 +83,11 @@ const Syno = (props) => {
 export default Syno;
 
 export async function getServerSideProps(context) {
-  let { OriginalMovieId, isChannel , CleanVideoId} = manipulateUrls(context.query);
+  let { OriginalMovieId, isChannel, CleanVideoId } = manipulateUrls(
+    context.query
+  );
+  console.log(OriginalMovieId, "OriginalMovieId");
+
   var ip = requestIp.getClientIp(context.req);
   try {
     const isGoogleDNS = await isGoogle(ip);
@@ -102,6 +106,7 @@ export async function getServerSideProps(context) {
   const data = await get(url, ip);
 
   if (data != null) {
+    console.log(context.resolvedUrl, "urlDTA");
     if (data?.data?.Video?.IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(
         OriginalMovieId,
@@ -117,7 +122,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data: data,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }
