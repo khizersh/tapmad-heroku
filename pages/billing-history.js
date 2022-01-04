@@ -38,7 +38,8 @@ const BillingHistory = () => {
       }
     } catch (error) {}
   }, [userId]);
-
+  var initialPoint = 0;
+  var Result;
   const onClickPage = (page) => {
     setCurrentPage(page);
     let startingValue = 0,
@@ -71,7 +72,7 @@ const BillingHistory = () => {
     }
   };
   const onclickBack = () => {
-    router.push('/myaccount');
+    router.push("/myaccount");
   };
 
   return (
