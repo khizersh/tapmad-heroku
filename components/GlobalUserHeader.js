@@ -28,7 +28,7 @@ const GlobalUserHeader = () => {
       });
     }
     setUserData(SignUpState.UserDetails.ProfileName);
-  });
+  }, []);
   return (
     <NavbarHOC>
       <style jsx>

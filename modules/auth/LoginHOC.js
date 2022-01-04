@@ -33,7 +33,7 @@ export default function withLogin(Component, data) {
           UserPin: userPin,
         };
         if (AuthState.CountryCode == "+92") {
-          if (obj?.MobileNo.length != 10) {
+          if (obj?.MobileNo.length != 10 && obj?.MobileNo.length != 11 ) {
             setLoader(false);
             return swal({
               title: "Enter 10 digit number",

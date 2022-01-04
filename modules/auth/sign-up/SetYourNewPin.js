@@ -15,7 +15,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
-    console.log(SignUpState, "Why Data");
     // setLoader(true);
     if (showUsername) {
       if (username.trim().length < 1) {
@@ -102,8 +101,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
       setConfirmPin(mobileNum.trim());
     }
   }
-
-
   useEffect(() => {
     if (SignUpState.UserDetails.MobileNo) {
       let num = SignUpState.UserDetails.MobileNo;
@@ -120,8 +117,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
         .catch((e) => console.log(e));
     }
   }, [SignUpState.UserDetails.MobileNo]);
-
-
 
 
   return (

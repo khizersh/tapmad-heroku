@@ -8,14 +8,14 @@ import isGoogle from "../services/google-dns-lookup";
 // import { UpdateBase } from "../services/apilinks";
 
 export default function Home(props) {
-
-
   return (
     <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <title>Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV</title>
+        <title>
+          Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV
+        </title>
         <meta
           name="description"
           content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
@@ -50,10 +50,12 @@ export async function getServerSideProps(context) {
   }
   let movie, banner, featured;
   var movieList = await HomeService.getFeaturedHomePageData(ip);
-  if (movieList != null) movie = await movieList.data;
-  else movie = {};
+  if (movieList != null) {
+    movie = await movieList.data;
+  } else movie = {};
 
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
+  console.log(bannersList, "BANNER_LIST");
   if (bannersList != null) banner = await bannersList.data;
   else banner = {};
 
@@ -68,7 +70,7 @@ export async function getServerSideProps(context) {
       featured: featured,
       ip: ip,
       env: process.env.TAPENV,
-      prodEnv: process.env.API_ENDPOINT
+      prodEnv: process.env.API_ENDPOINT,
     },
   };
 }

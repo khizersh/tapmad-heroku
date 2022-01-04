@@ -32,6 +32,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       on("tokenSuccess", async (event) => {
         if (formReady) {
           await submitCardDetails(event);
+          console.log("formReady : ",formReady);
         }
       });
     }
@@ -46,8 +47,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
     if (creditCardType) {
-      details = { ...details, Token: event.token };
-      checkouPayment(response, details);
+     details = { ...details, Token: event.token };
+     await checkouPayment(details);
     } else {
       delete details.cnic;
       const response = await AuthService.creditCardOrder(details);
@@ -56,8 +57,9 @@ function SubscribeButtonComponent({ creditCardType, login }) {
     setLoader(false);
   }
 
-  function checkouPayment(response, details) {
-    if (response.data.responseCode == 1 || response.data.responseCode == 4) {
+ async function checkouPayment( details) {
+   const response = await AuthService.creditCardOrderForCheckout(details);
+    if (response.data.responseCode == 1) {
       SignUpTag(details, response.data);
       swal({
         text: "Transaction Successful. Redirecting you",
@@ -130,7 +132,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
-        console.log("details", details);
         if (!details.MobileNo) {
           setLoader(false);
           return swal({

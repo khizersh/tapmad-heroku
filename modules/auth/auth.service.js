@@ -200,6 +200,32 @@ async function creditCardOrder(body) {
     return null;
   }
 }
+async function creditCardOrderForCheckout(body) {
+  let resp;
+  try {
+    resp = await post(creditCard, body);
+  } catch (error) {
+    resp = null;
+  }
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
 
 async function initialTransaction(body) {
   let resp;
@@ -598,6 +624,7 @@ export const AuthService = {
   verifyPinCode,
   forgetPin,
   creditCardOrder,
+  creditCardOrderForCheckout,
   initialTransaction,
   verifyOTP,
   GetCardUser,
