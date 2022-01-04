@@ -19,8 +19,10 @@ const CreditCardForm = ({
   useEffect(() => {
     if (creditCardType) {
       new Checkout("pk_4efbb3d2-00b9-4860-95bf-329b4801644d");
+      
     }
   }, [creditCardType == 1]);
+  
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -84,7 +86,7 @@ const CreditCardForm = ({
         </div>
       </div>
       {creditCardType ? (
-        <div className="one-liner w-100">
+        <div className="one-liner w-100 mt-3">
           <div className="card-frame"></div>
         </div>
       ) : (

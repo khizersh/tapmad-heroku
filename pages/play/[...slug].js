@@ -85,14 +85,14 @@ export default Syno;
 export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel , CleanVideoId} = manipulateUrls(context.query);
   var ip = requestIp.getClientIp(context.req);
-  // try {
-  //   const isGoogleDNS = await isGoogle(ip);
-  //   if (isGoogleDNS == true) {
-  //     ip = "39.44.217.70";
-  //   }
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  try {
+    const isGoogleDNS = await isGoogle(ip);
+    if (isGoogleDNS == true) {
+      ip = "39.44.217.70";
+    }
+  } catch (err) {
+    console.log(err);
+  }
 
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";

@@ -166,7 +166,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               buttons: false,
             });
           }
-          if (creditCardType) {
+          // if (creditCardType) {
+          if (1) {
             // for checkout
             Frames.submitCard();
             setFormReady(true);
