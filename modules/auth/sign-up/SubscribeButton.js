@@ -46,7 +46,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
     if (creditCardType) {
-      details = { ...details, Token: event.token };
+     details = { ...details, Token: event.token };
      await checkouPayment(details);
     } else {
       delete details.cnic;
@@ -57,7 +57,9 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   }
 
  async function checkouPayment( details) {
-   const response = await AuthService.creditCardOrderForCheckout(details)
+   console.log("checkout called....");
+   const response = await AuthService.creditCardOrderForCheckout(details);
+   console.log("response in checkout payment  : ",response);
     if (response.data.responseCode == 1) {
       SignUpTag(details, response.data);
       swal({
