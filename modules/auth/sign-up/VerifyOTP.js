@@ -62,7 +62,6 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         data = await AuthService.verifyOTP(body);
       }
       if (data != null) {
-        console.log("data in verofy otp : ", data);
         if (data.responseCode == 0) {
           swal({
             timer: 3000,

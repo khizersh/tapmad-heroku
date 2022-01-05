@@ -112,6 +112,10 @@ export default function AuthViews(props) {
     }
   }, [AuthState]);
 
+  const onclickBack = () => {
+    dispatch({ type: SET_VIEW_TO_SHOW, data: "sign-in" });
+  };
+
   return (
     <div>
       {/* <div className="bg_dark" style={{ background: `url('${bg}')` }}> */}
@@ -119,6 +123,13 @@ export default function AuthViews(props) {
         <div className="container">
           <div className="row">
             <div className="col-sm-12 offset-md-2 col-md-8">
+              <button
+                type="button"
+                className="btn btn_submit text-light rounded-pill d-inline-block mx-3 py-1 px-4 font-14 back-btn-login"
+                onClick={onclickBack}
+              >
+                Back
+              </button>
               <div className="tm_login_pg">
                 <RenderViews />
               </div>
