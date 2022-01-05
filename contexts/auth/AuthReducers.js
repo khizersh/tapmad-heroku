@@ -6,6 +6,7 @@ export const SET_LOGIN_OPERATORS = "SET_LOGIN_OPERATORS";
 export const SET_VIEW_TO_SHOW = "SET_VIEW_TO_SHOW";
 export const CREDIT_CARD_TYPE = "CREDIT_CARD_TYPE";
 export const CALL_CHANGE_PACKAGE_API = "CALL_CHANGE_PACKAGE_API";
+export const AUTH_CONTEXT_LOADED = "AUTH_CONTEXT_LOADED";
 
 export function AuthReducer(state, action) {
   switch (action.type) {
@@ -25,5 +26,7 @@ export function AuthReducer(state, action) {
       return { ...state, UpdatePackage: action.data };
     case CALL_CHANGE_PACKAGE_API:
       return { ...state, callChangePackageApi: action.data };
+    case AUTH_CONTEXT_LOADED:
+      return { ...state, authContextLoaded: action.data };
   }
 }

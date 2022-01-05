@@ -14,16 +14,9 @@ export default function PackageSelectView({ onChange }) {
   const router = useRouter();
   const { subspack } = router.query;
 
+  console.log("AuthState : ",AuthState);
   useEffect(() => {
     if (AuthState.PaymentPackages) {
-      // var selectedPackage = subspack;
-      // if (selectedPackage == "epl") {
-      //   onChange(AuthState.PaymentPackages[1]);
-      // } else if (selectedPackage == "allin1") {
-      //   onChange(AuthState.PaymentPackages[0]);
-      // }
-      // will remove after epl
-
       renderSignUp(true);
     }
     if (AuthState.CurrentUserPackage) {

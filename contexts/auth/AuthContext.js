@@ -7,6 +7,7 @@ import { Cookie } from "../../services/cookies";
 import { MainContext } from "../MainContext";
 import {
   AuthReducer,
+  AUTH_CONTEXT_LOADED,
   CREDIT_CARD_TYPE,
   CURRENT_USER_PACKAGE,
   SET_ALL_PACKAGES,
@@ -28,6 +29,7 @@ export default function AuthProviderNew({ children }) {
     UpdatePackage: false,
     CurrentUserPackage: null,
     callChangePackageApi: false,
+    authContextLoaded: false,
   });
   useEffect(async () => {
     var packages;
@@ -50,11 +52,10 @@ export default function AuthProviderNew({ children }) {
       dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
       dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
       dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
+      dispatch({ type: AUTH_CONTEXT_LOADED, data: true });
     } else {
-      dispatch({ type: SET_ALL_PACKAGES, data: null });
-      console.log(setLoader, "Set");
-      setLoader(false);
-      console.log(MainContext, "MAIn");
+      dispatch({ type: SET_LOGIN_OPERATORS, data: [] });
+      dispatch({ type: AUTH_CONTEXT_LOADED, data: true });
     }
   }, [AuthState.UpdatePackage, AuthState.callChangePackageApi === true]);
 

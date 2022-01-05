@@ -29,18 +29,14 @@ export default function SignUpProvider({ children }) {
     signupRender: false,
   });
 
+
   useEffect(() => {
-    //Have to SetLoadet Properly
-    setLoader(true);
+    setLoader(true)
     if (AuthState?.PaymentPackages?.length > 0) {
       dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] });
-      setLoader(false);
-    } else {
-      setLoader(false);
     }
     if (AuthState?.LoginOperators?.length > 0) {
       dispatch({ type: LOGIN_OPERATOR, data: AuthState.LoginOperators });
-      setLoader(false);
     }
     if (window.innerWidth < 799) {
       dispatch({ type: UPDATE_ISMOBILE, data: true });
@@ -48,6 +44,9 @@ export default function SignUpProvider({ children }) {
     const num = Cookie.getCookies("user_mob");
     if (num) {
       dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
+    }
+    if (AuthState?.authContextLoaded) {
+      setLoader(false)
     }
   }, [AuthState]);
 
