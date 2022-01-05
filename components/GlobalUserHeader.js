@@ -23,7 +23,6 @@ const GlobalUserHeader = () => {
           Platform: "web",
           UserId: userId,
         });
-        console.log("user in header : ", user);
         dispatch({
           type: UPDATE_USER_DETAILS,
           data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },

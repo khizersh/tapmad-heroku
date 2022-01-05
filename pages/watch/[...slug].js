@@ -40,7 +40,6 @@ const WatchPage = (props) => {
   // for login user check content package and sent to respective package on change-package page
   useEffect(() => {
     if (props.allowUser) {
-      console.log("props.data.responseCode : ", props.data.responseCode);
       if (props.data && props.data.responseCode === 401) {
         swal({
           text: props.data.message,

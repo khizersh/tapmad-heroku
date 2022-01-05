@@ -136,7 +136,6 @@ export default function PSLChat({ channel }) {
       channelID: channel.VideoEntityId,
       roomID: room,
     };
-    console.log(message.message);
 
     if (message.message.trim() == "") {
       textMessage.current.style.border = "1px solid red";
