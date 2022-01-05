@@ -24,6 +24,7 @@ import { SignUpContext } from "../../contexts/auth/SignUpContext";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 
 const WatchPage = (props) => {
+  console.log("props in watch : ",props);
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
