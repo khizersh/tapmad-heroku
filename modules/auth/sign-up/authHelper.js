@@ -9,7 +9,9 @@ export function handleRegisterPayload(SignUpState) {
   }
   if (SignUpState.SelectedMethod.PaymentId == 2) {
     details = handleBody(SignUpState);
+    details.ProductId = 1008;
     delete details.cnic;
+
     // delete details.ProductId;
   }
   if (SignUpState.SelectedMethod.PaymentId == 3) {
@@ -27,8 +29,7 @@ export function handleBody(SignUpState) {
     Version: "V1",
     Language: "en",
     Platform: "web",
-    // ProductId: SignUpState?.SelectedPrice?.ProductId,
-    ProductId: 1008,
+    ProductId: SignUpState?.SelectedPrice?.ProductId,
     MobileNo: SignUpState.UserDetails.MobileNo?.trim() || Cookie.getCookies('user_mob')?.trim(),
     OperatorId: SignUpState.UserDetails.Operator,
     cnic: SignUpState.UserDetails.Cnic?.trim(),
