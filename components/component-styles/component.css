@@ -97,17 +97,17 @@
   background-color: #fff;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
+/* Create the checkmark/indicator (show checked by default) */
 .checkmark:after {
   content: "";
   color: black;
   position: absolute;
-  display: none;
+  display: block;
 }
 
 /* Show the checkmark when checked */
 .container-term input:checked ~ .checkmark:after {
-  display: block;
+  display: none;
 }
 
 /* Style the checkmark/indicator */

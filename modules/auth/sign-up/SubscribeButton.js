@@ -25,7 +25,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   const [formReady, setFormReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
-  const [checkbox, setCheckbox] = useState(false);
+  const [checkbox, setCheckbox] = useState(true);
 
   useEffect(async () => {
     if (creditCardType) {
