@@ -4,6 +4,7 @@ import { transparentBox, upgradeIcon } from "../../../../services/imagesLink";
 const UpdatePackage = ({ currentPackage }) => {
   const splitPrice = currentPackage?.CurrentPackagePrice.split("-");
   const perMonth = splitPrice[2].split(" ");
+  console.log(currentPackage);
   return (
     <>
       <style>
@@ -43,6 +44,11 @@ const UpdatePackage = ({ currentPackage }) => {
               </span>
               <div className="d-flex justify-content-center align-items-center">
                 <div className="text-white per-month line-1">
+                  {currentPackage?.PaymentMethod ? (
+                    <strong>{currentPackage?.PaymentMethod}: </strong>
+                  ) : (
+                    <></>
+                  )}
                   {splitPrice[0]}
                 </div>
                 <div className="font-weight-bold text-white line-1 package-title f-40 px-1">
