@@ -6,7 +6,6 @@ import {
 import { post } from "./http-service";
 
 export async function getSEOData(videoId, url) {
-  console.log("url .. : ",url);
   let SEOBody = {
     Version: "v1",
     Language: "en",

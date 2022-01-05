@@ -52,7 +52,7 @@ export default function Player({ movies }) {
   useEffect(() => {
     if (
       !document.querySelector(".jw-theater-mode") && // if button do not exist
-      screen.width < 992 // if mobile screen
+      screen.width > 992 // if mobile screen
     ) {
       // create new element
       const elem = document.createElement("div");
@@ -62,13 +62,10 @@ export default function Player({ movies }) {
       );
       elem.role = "button";
       elem.tabIndex = "0";
-
       // grab target element reference
       const target = document.querySelectorAll(".jw-settings-sharing")[1];
-
       // insert the element before target element
       target.parentNode.insertBefore(elem, target);
-
       document
         .querySelector(".jw-theater-mode")
         .addEventListener("click", (e) => {
@@ -96,7 +93,7 @@ export default function Player({ movies }) {
           }
         });
     }
-  });
+  },[]);
   // Theater mode <end>
 
   if (!mounted) {
