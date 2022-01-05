@@ -47,6 +47,58 @@ export default function Player({ movies }) {
     rightVideoAd: "",
   });
 
+  // Theater mode <start>
+  useEffect(() => {
+    // <div class="jw-icon jw-icon-inline jw-button-color jw-reset jw-settings-sharing" button="share" role="button" tabindex="0" aria-label="Share" aria-controls="jw-settings-submenu-sharing"><svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-sharing" viewBox="0 0 240 240" focusable="false"><path d="M175,160c-6.9,0.2-13.6,2.6-19,7l-62-39c0.8-2.6,1.2-5.3,1-8c0.2-2.7-0.2-5.4-1-8l62-39c5.4,4.4,12.1,6.8,19,7c16.3,0.3,29.7-12.6,30-28.9c0-0.4,0-0.7,0-1.1c0-16.5-13.5-30-30-30s-30,13.5-30,30c-0.2,2.7,0.2,5.4,1,8L84,97c-5.4-4.4-12.1-6.8-19-7c-16.5,0-30,13.5-30,30s13.5,30,30,30c6.9-0.2,13.6-2.6,19-7l62,39c-0.8,2.6-1.2,5.3-1,8c0,16.5,13.5,30,30,30s30-13.5,30-30S191.6,160,175,160z"></path></svg><div class="jw-reset-text jw-tooltip jw-tooltip-share" dir="auto"><div class="jw-text">Share</div></div></div>
+    if (
+      !document.querySelector(".jw-theater-mode") &&
+      document.querySelector(".jw-settings-sharing")
+    ) {
+      // create new element
+      const elem = document.createElement("div");
+      elem.setAttribute(
+        "class",
+        "jw-theater-mode jw-icon jw-icon-inline jw-button-color fa fa-desktop"
+      );
+      elem.role = "button";
+      elem.tabIndex = "0";
+
+      // grab target element reference
+      const target = document.querySelectorAll(".jw-settings-sharing")[1];
+
+      // insert the element before target element
+      target.parentNode.insertBefore(elem, target);
+
+      document
+        .querySelector(".jw-theater-mode")
+        .addEventListener("click", (e) => {
+          const btn = e.target;
+          if (btn.classList.contains("fa-desktop")) {
+            btn.classList.remove("fa-desktop");
+            btn.classList.add("fa-compress");
+            const vdowrp = document.querySelector(".vdowrp");
+            const vdonxtSib = vdowrp.nextElementSibling;
+            vdowrp.classList.remove("col-lg-9");
+            vdowrp.classList.add("col-lg-12");
+            vdonxtSib.classList.remove("d-md-block");
+            vdonxtSib.classList.remove("d-lg-block");
+            vdonxtSib.classList.add("d-none");
+          } else {
+            btn.classList.add("fa-desktop");
+            btn.classList.remove("fa-compress");
+            const vdowrp = document.querySelector(".vdowrp");
+            const vdonxtSib = vdowrp.nextElementSibling;
+            vdowrp.classList.add("col-lg-9");
+            vdowrp.classList.remove("col-lg-12");
+            vdonxtSib.classList.add("d-md-block");
+            vdonxtSib.classList.add("d-lg-block");
+            vdonxtSib.classList.remove("d-none");
+          }
+        });
+    }
+  });
+  // Theater mode <end>
+
   if (!mounted) {
     if (!movie) {
       setMovie(movies);
