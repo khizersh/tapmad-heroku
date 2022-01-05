@@ -55,7 +55,6 @@ export async function getServerSideProps(context) {
   } else movie = {};
 
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
-  console.log(bannersList, "BANNER_LIST");
   if (bannersList != null) banner = await bannersList.data;
   else banner = {};
 

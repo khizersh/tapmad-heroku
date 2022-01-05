@@ -88,14 +88,14 @@ export async function getServerSideProps(context) {
   );
 
   var ip = requestIp.getClientIp(context.req);
-  try {
-    const isGoogleDNS = await isGoogle(ip);
-    if (isGoogleDNS == true) {
-      ip = "39.44.217.70";
-    }
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   const isGoogleDNS = await isGoogle(ip);
+  //   if (isGoogleDNS == true) {
+  //     ip = "39.44.217.70";
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
@@ -110,8 +110,10 @@ export async function getServerSideProps(context) {
         OriginalMovieId,
         context.resolvedUrl
       );
+      console.log("seooo if: ",seo);
       return { props: { data: data.data, schema: seo } };
     } else {
+      console.log("seooo elseeeee: ",OriginalMovieId , context.resolvedUrl);
       let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
       return { props: { data: data.data, schema: seo } };
     }
