@@ -74,11 +74,11 @@ async function actionsRequestContent(data) {
     userId: userId,
     ...data,
   };
-  try {
-    // await post(loggingRequest, body).then((res) => console.log(res));
-  } catch (error) {
-    console.log(error);
-  }
+  // try {
+  //   // await post(loggingRequest, body).then((res) => console.log(res));
+  // } catch (error) {
+  //   console.log(error);
+  // }
 }
 
 async function actionsRequestView(countryCode, contentId, contentName) {

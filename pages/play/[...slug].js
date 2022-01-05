@@ -14,7 +14,6 @@ import {
 } from "../../services/seo.service";
 // import isGoogle from "./../../services/google-dns-lookup";
 const Syno = (props) => {
-  console.log("props in play : ", props);
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);

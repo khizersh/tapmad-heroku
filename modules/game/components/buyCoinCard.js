@@ -22,7 +22,6 @@ const buyCoinCard = ({ data }) => {
     // setLoader(true);
     const resp = await MyAccountService.getUserData(formData);
     if (resp && resp.responseCode == 1) {
-      // console.log("data", resp);
       let body = {
         Version: "v1",
         Language: "en",

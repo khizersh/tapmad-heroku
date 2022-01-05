@@ -32,7 +32,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       on("tokenSuccess", async (event) => {
         if (formReady) {
           await submitCardDetails(event);
-          console.log("formReady : ",formReady);
         }
       });
     }
@@ -263,7 +262,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               } else {
                 if (data.data.User.IsPinSet) {
                   //  do login for non pin api
-                  console.log("IsPinSet condition ", data.data);
                   Cookie.setCookies("utk", data.data.User.UserPassword);
                   login("", false);
                 } else {

@@ -6,7 +6,6 @@ import {
 import { post } from "./http-service";
 
 export async function getSEOData(videoId, url) {
-  console.log("url .. : ",url);
   let SEOBody = {
     Version: "v1",
     Language: "en",
@@ -14,9 +13,7 @@ export async function getSEOData(videoId, url) {
     VodId: videoId,
     url: `https://www.tapmad.com${url.split("?")[0]}`,
   };
-  console.log("SEOBody : ",SEOBody);
   let SEOData = await post(SEOTvSeriesData, SEOBody);
-  console.log("SEOData : ",SEOData.data);
   return SEOData.data.Vod
     ? { ...SEOData.data, url: `https://www.tapmad.com${url.split("?")[0]}` }
     : "";

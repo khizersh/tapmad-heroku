@@ -24,22 +24,16 @@ import { SignUpContext } from "../../contexts/auth/SignUpContext";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 
 const WatchPage = (props) => {
+  console.log("props in watch : ",props);
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
 
-
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
-      if (props.data != null) {
-        router.push(
-          `/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
-        );
-      } else {
-        router.push("/sign-up?tab=1&packageId=2");
-      }
+      router.push(`/sign-up?tab=1&packageId=2`);
     }
   }, [props.allowUser, url]);
 
@@ -72,8 +66,7 @@ const WatchPage = (props) => {
         }).then((res) => {
           router.push("/subscribe-to-epl?subspack=epl");
         });
-      }
-      else if (props.data && props.data.responseCode === 220) {
+      } else if (props.data && props.data.responseCode === 220) {
         swal({
           text: "Subscription Expired!",
           timer: 3000,
@@ -99,7 +92,7 @@ const WatchPage = (props) => {
         });
       }
     }
-  }, [url , props?.data?.responseCode == 110]);
+  }, [url, props?.data?.responseCode == 110, props?.data?.responseCode == 220]);
 
   function shouldRenderPlayer() {
     if (props.data && props.data.responseCode == 8) {
@@ -108,8 +101,7 @@ const WatchPage = (props) => {
       return false;
     } else if (props.data && props.data.responseCode == 110) {
       return false;
-    }
-    else if (props.data && props.data.responseCode == 220) {
+    } else if (props.data && props.data.responseCode == 220) {
       return false;
     } else {
       return true;
@@ -160,14 +152,13 @@ const WatchPage = (props) => {
         <Player movies={props.data} />
       )}
       {props.data && props.data.responseCode == 401 && <></>}
-    </div> 
+    </div>
   );
 };
 
 // server side rendering
 
 export async function getServerSideProps(context) {
-
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
   var ip = requestIp.getClientIp(context.req);
@@ -183,7 +174,7 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
   let allowUser = true;
-  const watch =  GlobalService.authHeaders(cookies["content-token"]);
+  const watch = GlobalService.authHeaders(cookies["content-token"]);
   var body = {
     Version: "V1",
     Language: "en",
@@ -232,11 +223,10 @@ export async function getServerSideProps(context) {
         return {
           props: response(res?.data, chanelDetail, true, seo),
         };
-      }
-      else if (res && res.responseCode == 220) {
+      } else if (res && res.responseCode == 220) {
         // package expired and login redirect to upgrade
         return {
-          props: response(res?.data, chanelDetail, false, seo),
+          props: response(res?.data, chanelDetail, true, seo),
         };
       } else {
         // authenticated
@@ -255,7 +245,6 @@ export async function getServerSideProps(context) {
 
 const watch = withSignout(WatchPage);
 export default watch;
-
 
 const response = (data, channel, allowUser, seo) => {
   return {

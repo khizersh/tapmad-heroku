@@ -12,7 +12,6 @@ import { getChannelsWithPagination } from "../../../services/apilinks";
 import Link from "next/link";
 
 export default function LiveChannels({ channel }) {
-  console.log("channel : ", channel);
   var bannerSettings = basicSliderConfig(1, 1);
   const [localMovies, setLocalMovies] = useState(channel);
   const [currentRow, setCurrentRow] = useState(5);
@@ -32,8 +31,6 @@ export default function LiveChannels({ channel }) {
       getChannelsWithPagination(rowData.rowFrom, rowData.rowsTo)
     );
     var newMovies = await moviesList.data;
-    console.log("newMovies : ", newMovies);
-    console.log("localMovies :", localMovies);
     if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {
       let modifiedNewMovies = modifyLivePageResponse(newMovies);
       let updatedListOfMovies = pushNewMoviesIntoList(

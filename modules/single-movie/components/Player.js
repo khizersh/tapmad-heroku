@@ -28,7 +28,6 @@ const PSLComponent = dynamic(() =>
 );
 
 export default function Player({ movies }) {
-  console.log("movies : ",movies);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -37,6 +36,7 @@ export default function Player({ movies }) {
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
   const [local, setLocal] = useState(null);
+  const [playerReady, setPlayerReady] = useState(false);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -50,10 +50,14 @@ export default function Player({ movies }) {
 
   // Theater mode <start>
   useEffect(() => {
-    if (
-      !document.querySelector(".jw-theater-mode") && // if button do not exist
-      screen.width < 992 // if mobile screen
-    ) {
+    if (playerReady) {
+      setPlayerReady(true);
+      // if (
+      //   typeof document !== "undefined" &&
+      //   !document.querySelector(".jw-theater-mode") && // if button do not exist
+      //   screen.width > 992 // if mobile screen
+      // )
+
       // create new element
       const elem = document.createElement("div");
       elem.setAttribute(
@@ -67,7 +71,7 @@ export default function Player({ movies }) {
       const target = document.querySelectorAll(".jw-settings-sharing")[1];
 
       // insert the element before target element
-      target.parentNode.insertBefore(elem, target);
+      target && target.parentNode.insertBefore(elem, target);
 
       document
         .querySelector(".jw-theater-mode")
@@ -96,7 +100,7 @@ export default function Player({ movies }) {
           }
         });
     }
-  });
+  }, [playerReady]);
   // Theater mode <end>
 
   if (!mounted) {
@@ -326,6 +330,9 @@ export default function Player({ movies }) {
                   <ReactJWPlayer
                     onTime={(e) => {
                       fivePercentQuartile(e);
+                      if (e.currentTime) {
+                        !playerReady && setPlayerReady(true);
+                      }
                       if (e.currentTime > 3 && !fired) {
                         VideoWatched(movies);
                         fired = true;

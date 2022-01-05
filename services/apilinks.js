@@ -13,8 +13,8 @@ export const getItemsByKeyword =
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
 export const getUserByUserId = STAGEURL + "api/getUserProfileDetail";
 export const getShowsSearch = STAGEURL + "api/getShowsSearch";
-export const getUserPaymentHistory = STAGEURL;
-STAGEURL + "api/getUserPaymentHistory";
+export const getUserPaymentHistory = STAGEURL + "api/getUserPaymentHistory";
+;
 // home page api
 
 export const getFeaturedHomePage =

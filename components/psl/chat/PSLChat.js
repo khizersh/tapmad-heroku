@@ -136,7 +136,6 @@ export default function PSLChat({ channel }) {
       channelID: channel.VideoEntityId,
       roomID: room,
     };
-    console.log(message.message);
 
     if (message.message.trim() == "") {
       textMessage.current.style.border = "1px solid red";
@@ -231,7 +230,6 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
       };
       await navigator
         .share(shareData)
-        .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
     } else {
       alert("Device can not share");

@@ -25,7 +25,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
 
   return (
     <>
-      <div class="input-group">
+      <div className="input-group">
         <div className="input-group-prepend">
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
@@ -41,9 +41,9 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
             value={
               SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
             }
-            defaultValue={
-              SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
-            }
+            // defaultValue={
+            //   SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+            // }
             onChange={(e) => onChange(e)}
           />
           <input

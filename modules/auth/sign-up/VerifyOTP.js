@@ -12,6 +12,7 @@ import router from "next/router";
 import { checkForBoolean } from "../../../services/utils";
 
 const VerifyOTPComponent = ({ newUser, login }) => {
+  console.log("newUser : ", newUser);
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const otp = useRef("");
@@ -37,7 +38,8 @@ const VerifyOTPComponent = ({ newUser, login }) => {
           body = {
             CodeOTP: otp.current.value,
             Language: "en",
-            MobileNo: SignUpState.UserDetails.MobileNo || Cookie.getCookies('user_mob'),
+            MobileNo:
+              SignUpState.UserDetails.MobileNo || Cookie.getCookies("user_mob"),
             OperatorId: SignUpState.UserDetails.Operator,
             Platform: "web",
             ProductId: SignUpState.SelectedPrice.ProductId,
@@ -60,6 +62,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         data = await AuthService.verifyOTP(body);
       }
       if (data != null) {
+        console.log("data in verofy otp : ", data);
         if (data.responseCode == 0) {
           swal({
             timer: 3000,
@@ -68,34 +71,34 @@ const VerifyOTPComponent = ({ newUser, login }) => {
           });
           setLoader(false);
         } else if (data.responseCode == 1) {
-          AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then(
-            (e) => {
-              swal({
-                timer: 2500,
-                title: data.message,
-                icon: "success",
-              }).then(async (result) => {
-                if (newUser) {
-                  Cookie.setCookies("userId", data.data.User.UserId);
-                }
-                if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
-                  router.push("/");
-                } else if(checkForBoolean(data.data?.User?.IsPinSet)){
-                  let loginResp = await login("" , false);
+          if (newUser) {
+            Cookie.setCookies("userId", data.data.User.UserId);
+          }
+          if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
+            router.push("/");
+          } else if (checkForBoolean(data.data?.User?.IsPinSet)) {
+            AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then(
+              (e) => {
+                swal({
+                  timer: 2500,
+                  title: data.message,
+                  icon: "success",
+                }).then(async (result) => {
+                  let loginResp = await login("", false);
                   if (loginResp?.code && loginResp.code != 1) {
                     router.push(loginResp.view);
                   }
                   setLoader(false);
-                } else {
-                  dispatch({
-                    type: UPDATE_SUBSCRIBE_RESPONSE,
-                    data: { code: 34, newUser: newUser },
-                  });
-                  setLoader(false);
-                }
-              });
-            }
-          );
+                });
+              }
+            );
+          } else {
+            dispatch({
+              type: UPDATE_SUBSCRIBE_RESPONSE,
+              data: { code: 34, newUser: newUser },
+            });
+            setLoader(false);
+          }
         } else {
           swal({
             timer: 3000,
@@ -122,17 +125,13 @@ const VerifyOTPComponent = ({ newUser, login }) => {
           Please enter code provided into 4 digit verification code
         </label>
       </div> */}
-       <style jsx>
+      <style jsx>
         {`
-
-
           @media (min-width: 992px) {
-        
-            .form-group{
+            .form-group {
               margin: 1rem 8rem;
             }
           }
-        
         `}
       </style>
       <div className="form-group pb-2">
@@ -150,7 +149,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         <button
           type="button"
           className="btn btn-primary pymnt_pge_sbscrbe_btn font-16"
-          style={{width: '36%'}} 
+          style={{ width: "36%" }}
           onClick={verifyOTPPinCode}
         >
           Verify OTP

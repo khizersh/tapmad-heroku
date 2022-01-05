@@ -18,7 +18,6 @@ export default function Movies({ movies }) {
   const [currentRow, setCurrentRow] = useState(5);
 
   async function fetchNewMovies() {
-    console.log(localMovies, "Locoa");
     if (currentRow == movies.Sections.totalSections) {
       return;
     }

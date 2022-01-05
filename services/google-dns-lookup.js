@@ -3,8 +3,6 @@ const dns = require('dns')
 function isGoogle(ip) {
     return new Promise((resolve, reject) => {
         dns.reverse(ip, (err, domains) => {
-
-            console.log("domains : ",ip);
             if (err) {
                 return reject(err)
             }
