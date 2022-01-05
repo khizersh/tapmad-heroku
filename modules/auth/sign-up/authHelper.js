@@ -9,7 +9,6 @@ export function handleRegisterPayload(SignUpState) {
   }
   if (SignUpState.SelectedMethod.PaymentId == 2) {
     details = handleBody(SignUpState);
-    details.ProductId = 1008;
     delete details.cnic;
 
     // delete details.ProductId;
