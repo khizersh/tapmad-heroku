@@ -28,7 +28,6 @@ const PSLComponent = dynamic(() =>
 );
 
 export default function Player({ movies }) {
-  console.log("movies : ", movies);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -37,6 +36,7 @@ export default function Player({ movies }) {
   const [movie, setMovie] = useState(null);
   const [videoLink, setVideoLink] = useState(null);
   const [local, setLocal] = useState(null);
+  const [playerReady, setPlayerReady] = useState(false);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -50,55 +50,57 @@ export default function Player({ movies }) {
 
   // Theater mode <start>
   useEffect(() => {
-    document.addEventListener("readystatechange", () => {
-      if (
-        !document.querySelector(".jw-theater-mode") && // if button do not exist
-        screen.width > 992 // if mobile screen
-      ) {
-        // create new element
-        const elem = document.createElement("div");
-        elem.setAttribute(
-          "class",
-          "jw-theater-mode jw-icon jw-icon-inline jw-button-color fa fa-desktop"
-        );
-        elem.role = "button";
-        elem.tabIndex = "0";
+    if (playerReady) {
+      setPlayerReady(true);
+      // if (
+      //   typeof document !== "undefined" &&
+      //   !document.querySelector(".jw-theater-mode") && // if button do not exist
+      //   screen.width > 992 // if mobile screen
+      // )
 
-        // grab target element reference
-        const target = document.querySelectorAll(".jw-settings-sharing")[1];
+      // create new element
+      const elem = document.createElement("div");
+      elem.setAttribute(
+        "class",
+        "jw-theater-mode jw-icon jw-icon-inline jw-button-color fa fa-desktop"
+      );
+      elem.role = "button";
+      elem.tabIndex = "0";
 
-        // insert the element before target element
-        target.parentNode.insertBefore(elem, target);
+      // grab target element reference
+      const target = document.querySelectorAll(".jw-settings-sharing")[1];
 
-        document
-          .querySelector(".jw-theater-mode")
-          .addEventListener("click", (e) => {
-            const btn = e.target;
-            if (btn.classList.contains("fa-desktop")) {
-              btn.classList.remove("fa-desktop");
-              btn.classList.add("fa-compress");
-              const vdowrp = document.querySelector(".vdowrp");
-              const vdonxtSib = vdowrp.nextElementSibling;
-              vdowrp.classList.remove("col-lg-9");
-              vdowrp.classList.add("col-lg-12");
-              vdonxtSib.classList.remove("d-md-block");
-              vdonxtSib.classList.remove("d-lg-block");
-              vdonxtSib.classList.add("d-none");
-            } else {
-              btn.classList.add("fa-desktop");
-              btn.classList.remove("fa-compress");
-              const vdowrp = document.querySelector(".vdowrp");
-              const vdonxtSib = vdowrp.nextElementSibling;
-              vdowrp.classList.add("col-lg-9");
-              vdowrp.classList.remove("col-lg-12");
-              vdonxtSib.classList.add("d-md-block");
-              vdonxtSib.classList.add("d-lg-block");
-              vdonxtSib.classList.remove("d-none");
-            }
-          });
-      }
-    });
-  }, []);
+      // insert the element before target element
+      target && target.parentNode.insertBefore(elem, target);
+
+      document
+        .querySelector(".jw-theater-mode")
+        .addEventListener("click", (e) => {
+          const btn = e.target;
+          if (btn.classList.contains("fa-desktop")) {
+            btn.classList.remove("fa-desktop");
+            btn.classList.add("fa-compress");
+            const vdowrp = document.querySelector(".vdowrp");
+            const vdonxtSib = vdowrp.nextElementSibling;
+            vdowrp.classList.remove("col-lg-9");
+            vdowrp.classList.add("col-lg-12");
+            vdonxtSib.classList.remove("d-md-block");
+            vdonxtSib.classList.remove("d-lg-block");
+            vdonxtSib.classList.add("d-none");
+          } else {
+            btn.classList.add("fa-desktop");
+            btn.classList.remove("fa-compress");
+            const vdowrp = document.querySelector(".vdowrp");
+            const vdonxtSib = vdowrp.nextElementSibling;
+            vdowrp.classList.add("col-lg-9");
+            vdowrp.classList.remove("col-lg-12");
+            vdonxtSib.classList.add("d-md-block");
+            vdonxtSib.classList.add("d-lg-block");
+            vdonxtSib.classList.remove("d-none");
+          }
+        });
+    }
+  }, [playerReady]);
   // Theater mode <end>
 
   if (!mounted) {
@@ -328,6 +330,9 @@ export default function Player({ movies }) {
                   <ReactJWPlayer
                     onTime={(e) => {
                       fivePercentQuartile(e);
+                      if (e.currentTime) {
+                        !playerReady && setPlayerReady(true);
+                      }
                       if (e.currentTime > 3 && !fired) {
                         VideoWatched(movies);
                         fired = true;

@@ -230,7 +230,6 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
       };
       await navigator
         .share(shareData)
-        .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
     } else {
       alert("Device can not share");

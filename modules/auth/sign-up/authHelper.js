@@ -2,7 +2,6 @@ import { Cookie } from "../../../services/cookies";
 import { encryptWithAES } from "../../../services/utils";
 
 export function handleRegisterPayload(SignUpState) {
-  console.log("SignUpState : ",SignUpState);
   var details = {};
   if (SignUpState.SelectedMethod.PaymentId == 1) {
     details = handleBody(SignUpState);

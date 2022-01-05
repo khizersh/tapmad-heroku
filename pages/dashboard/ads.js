@@ -69,7 +69,6 @@ export default function ads() {
       const resp = DashboardService.customizeData(data);
 
       setData(resp);
- console.log("width: ", resp[0].topAdMobileSize.trim().split(',')[0]); 
       setLocal({ ...local, ...resp[0] });
       setInternational({ ...international, ...resp[1] });
     }
@@ -80,7 +79,6 @@ export default function ads() {
     let array = [];
     array.push(local);
     array.push(international);
-    console.log("array: ", array);
     const resp = await DashboardService.editAdDetails(array);
     if (resp && resp.data && resp.data.statusCode == 200) {
       swal({ title: "Update succesfully!", timer: 3000, icon: "success" });

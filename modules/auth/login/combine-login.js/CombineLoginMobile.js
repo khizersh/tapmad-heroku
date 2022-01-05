@@ -16,9 +16,6 @@ const CombineLoginMobile = ({
   forgetClick,
 }) => {
   const { SignUpState, dispatch } = useContext(SignUpContext);
-  useEffect(() => {
-    console.log(SignUpState, "SignUpState");
-  }, []);
   return (
     <div className="custom-bg">
       <style jsx>

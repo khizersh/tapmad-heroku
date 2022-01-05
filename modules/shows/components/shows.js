@@ -5,7 +5,6 @@ import { basicSliderConfig } from "../../../services/utils";
 import HomepageSlider from "../../home/components/HomepageSlider";
 
 export default function Shows({ shows }) {
-  console.log("shows ... : ", shows);
   var bannerSettings = basicSliderConfig(1, 1);
   return (
     <div>

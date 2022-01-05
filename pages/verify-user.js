@@ -28,7 +28,6 @@ function VerifyUser({ login, ip }) {
     if (SignUpState.UserDetails.MobileNo) {
       // setting pin api false for login
       let loginResp = await login(ip , false);
-      console.log("loginResp : ",loginResp);
       if (loginResp?.code && loginResp.code != 1) {
         router.push(loginResp.view);
       }
