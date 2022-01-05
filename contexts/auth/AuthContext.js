@@ -54,7 +54,6 @@ export default function AuthProviderNew({ children }) {
       dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
       dispatch({ type: AUTH_CONTEXT_LOADED, data: true });
     } else {
-      dispatch({ type: SET_LOGIN_OPERATORS, data: [] });
       dispatch({ type: AUTH_CONTEXT_LOADED, data: true });
     }
   }, [AuthState.UpdatePackage, AuthState.callChangePackageApi === true]);
