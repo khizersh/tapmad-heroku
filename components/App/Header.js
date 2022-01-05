@@ -16,6 +16,8 @@ function HeaderBasic({ signout }) {
   const { initialState, setSearch } = useContext(MainContext);
   const { SignUpState } = useContext(SignUpContext);
 
+  console.log("initialState : ",initialState);
+
   const onClick = () => {
     setSearch(true);
   };
