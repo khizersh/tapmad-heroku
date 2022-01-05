@@ -15,20 +15,23 @@ const GlobalUserHeader = () => {
   const userId = Cookie.getCookies("userId");
 
   useEffect(async () => {
-    if (!SignUpState?.UserDetails?.ProfileName && userId) {
-      const user = await MyAccountService.getUserData({
-        Version: "V1",
-        Language: "en",
-        Platform: "web",
-        UserId: userId,
-      });
-      dispatch({
-        type: UPDATE_USER_DETAILS,
-        data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },
-      });
+    if (!userData) {
+      if (!SignUpState?.UserDetails?.ProfileName && userId) {
+        const user = await MyAccountService.getUserData({
+          Version: "V1",
+          Language: "en",
+          Platform: "web",
+          UserId: userId,
+        });
+        console.log("user in header : ", user);
+        dispatch({
+          type: UPDATE_USER_DETAILS,
+          data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },
+        });
+      }
+      setUserData(SignUpState.UserDetails.ProfileName);
     }
-    setUserData(SignUpState.UserDetails.ProfileName);
-  }, []);
+  }, [SignUpState.UserDetails.ProfileName]);
   return (
     <NavbarHOC>
       <style jsx>
