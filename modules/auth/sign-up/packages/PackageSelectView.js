@@ -14,7 +14,7 @@ export default function PackageSelectView({ onChange }) {
   const router = useRouter();
   const { subspack } = router.query;
 
-  console.log("AuthState : ",AuthState);
+  
   useEffect(() => {
     if (AuthState.PaymentPackages) {
       renderSignUp(true);
