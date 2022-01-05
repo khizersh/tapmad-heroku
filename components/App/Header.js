@@ -125,7 +125,7 @@ function HeaderBasic({ signout }) {
 
               <li className="nav-item">
                 <Link href="/news" passHref={true} shallow={true}>
-                  <a ariaLabel={"news"}>
+                  <a aria-label={"news"}>
                     <img
                       src={tapmadNews}
                       style={{

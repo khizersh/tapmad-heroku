@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { IsCategory, IsLiveChannel } from "../../../services/constants";
 import {
   basicSliderConfig,
@@ -73,7 +73,6 @@ const HomepageSlider = ({ movies, ads, name }) => {
       .catch((e) => console.log(e));
   }, []);
   return (
-    //  className="mt-lg-5 pt-lg-5 pt-md-5 mt-md-5 pt-5"
     <div>
       {movies &&
         movies.length > 0 &&
@@ -84,7 +83,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
             name
           );
           return (
-            <>
+            <Fragment key={row}>
               <div className="col-12 p-lg-1 p-0" key={row}>
                 <div className="d-flex justify-content-between align-items-center">
                   <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
@@ -292,7 +291,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                     ) : null
                   )
                 : null}
-            </>
+            </Fragment>
           );
         })}
     </div>
