@@ -21,12 +21,15 @@ import {
 } from "../../services/seo.service";
 import isGoogle from "../../services/google-dns-lookup";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
+import withSignout from "../../modules/auth/signout/SignoutHOC";
 
-const watch = (props) => {
+const WatchPage = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
+
+
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
@@ -69,6 +72,15 @@ const watch = (props) => {
         }).then((res) => {
           router.push("/subscribe-to-epl?subspack=epl");
         });
+      }
+      else if (props.data && props.data.responseCode === 220) {
+        swal({
+          text: "Subscription Expired!",
+          timer: 3000,
+          icon: "error",
+        }).then((res) => {
+          props.signout();
+        });
       } else if (props.data && props.data.responseCode === 110) {
         swal({
           title:
@@ -95,6 +107,9 @@ const watch = (props) => {
     } else if (props.data && props.data.responseCode == 401) {
       return false;
     } else if (props.data && props.data.responseCode == 110) {
+      return false;
+    }
+    else if (props.data && props.data.responseCode == 220) {
       return false;
     } else {
       return true;
@@ -168,7 +183,7 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
   let allowUser = true;
-  const header =  GlobalService.authHeaders(cookies["content-token"]);
+  const watch =  GlobalService.authHeaders(cookies["content-token"]);
   var body = {
     Version: "V1",
     Language: "en",
@@ -176,7 +191,7 @@ export async function getServerSideProps(context) {
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
-    headers: header,
+    headers: watch,
   };
   var isFree = "1";
   isFree = chanelDetail.isFree;
@@ -217,6 +232,12 @@ export async function getServerSideProps(context) {
         return {
           props: response(res?.data, chanelDetail, true, seo),
         };
+      }
+      else if (res && res.responseCode == 220) {
+        // package expired and login redirect to upgrade
+        return {
+          props: response(res?.data, chanelDetail, false, seo),
+        };
       } else {
         // authenticated
         return {
@@ -232,7 +253,9 @@ export async function getServerSideProps(context) {
   }
 }
 
+const watch = withSignout(WatchPage);
 export default watch;
+
 
 const response = (data, channel, allowUser, seo) => {
   return {

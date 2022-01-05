@@ -5,7 +5,6 @@ import { get } from "../services/http-service";
 import requestIp from "request-ip";
 import isGoogle from "../services/google-dns-lookup";
 export default function MoviesPage(props) {
-  console.log("props in moviesS : ", props);
   return (
     <div>
       <Head>
