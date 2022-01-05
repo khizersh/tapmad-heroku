@@ -28,6 +28,7 @@ const PSLComponent = dynamic(() =>
 );
 
 export default function Player({ movies }) {
+  console.log("movies : ",movies);
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
