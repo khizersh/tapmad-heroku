@@ -1,9 +1,10 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import {
   getAllPaymentPackages,
   getAllPaymentPackagesByUserId,
 } from "../../services/auth.service";
 import { Cookie } from "../../services/cookies";
+import { MainContext } from "../MainContext";
 import {
   AuthReducer,
   CREDIT_CARD_TYPE,
@@ -16,6 +17,8 @@ import {
 export const AuthContext = React.createContext(null);
 
 export default function AuthProviderNew({ children }) {
+  const { setLoader } = useContext(MainContext);
+
   const [AuthState, dispatch] = useReducer(AuthReducer, {
     PaymentPackages: [],
     LoginOperators: [],
@@ -24,9 +27,8 @@ export default function AuthProviderNew({ children }) {
     CreditCardType: null,
     UpdatePackage: false,
     CurrentUserPackage: null,
-    callChangePackageApi : false
+    callChangePackageApi: false,
   });
-
   useEffect(async () => {
     var packages;
     let userId = Cookie.getCookies("userId");
@@ -43,13 +45,18 @@ export default function AuthProviderNew({ children }) {
     } else {
       packages = await getAllPaymentPackages();
     }
-    if (packages) {
+    if (packages.Response.responseCode != 0) {
       dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
       dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
       dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });
       dispatch({ type: CREDIT_CARD_TYPE, data: packages.CreditCardType });
+    } else {
+      dispatch({ type: SET_ALL_PACKAGES, data: null });
+      console.log(setLoader, "Set");
+      setLoader(false);
+      console.log(MainContext, "MAIn");
     }
-  }, [AuthState.UpdatePackage , AuthState.callChangePackageApi === true]);
+  }, [AuthState.UpdatePackage, AuthState.callChangePackageApi === true]);
 
   const data = {
     AuthState,

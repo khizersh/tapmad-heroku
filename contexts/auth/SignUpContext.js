@@ -29,16 +29,18 @@ export default function SignUpProvider({ children }) {
     signupRender: false,
   });
 
-
   useEffect(() => {
-    setLoader(true)
+    //Have to SetLoadet Properly
+    setLoader(true);
     if (AuthState?.PaymentPackages?.length > 0) {
       dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] });
-      setLoader(false)
+      setLoader(false);
+    } else {
+      setLoader(false);
     }
     if (AuthState?.LoginOperators?.length > 0) {
       dispatch({ type: LOGIN_OPERATOR, data: AuthState.LoginOperators });
-      setLoader(false)
+      setLoader(false);
     }
     if (window.innerWidth < 799) {
       dispatch({ type: UPDATE_ISMOBILE, data: true });
