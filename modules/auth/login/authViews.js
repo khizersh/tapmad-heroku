@@ -113,7 +113,11 @@ export default function AuthViews(props) {
   }, [AuthState]);
 
   const onclickBack = () => {
-    dispatch({ type: SET_VIEW_TO_SHOW, data: "sign-in" });
+    if (AuthState.ViewToShow == "sign-in") {
+      router.push("/");
+    } else {
+      dispatch({ type: SET_VIEW_TO_SHOW, data: "sign-in" });
+    }
   };
 
   return (
