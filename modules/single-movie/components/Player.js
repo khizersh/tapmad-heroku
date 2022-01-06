@@ -210,7 +210,6 @@ export default function Player({ movies }) {
         setAdsApiCalled(true);
       }, 400);
     }
-    console.log("adsss. ", ads);
   }, [router, adsApiCalled]);
   // video links
   useEffect(() => {
@@ -547,7 +546,7 @@ export default function Player({ movies }) {
                   ) : null}
 
                   {/* side 3rd ad */}
-                  <div className="mt-3">
+                  <div className="mt-3 d-sm-none d-md-block">
                     <DFPSlotsProvider dfpNetworkId="28379801">
                       <div className="desktop-ads">
                         <AdSlot
@@ -559,6 +558,7 @@ export default function Player({ movies }) {
                     </DFPSlotsProvider>
                   </div>
                   {/* side 3rd ad end*/}
+
                   {ads.allow && isAutoPlay && ads.rightVideoAd ? (
                     ads.rightVideoAd.includes("http") ? (
                       <div style={{ marginTop: "65px" }}>

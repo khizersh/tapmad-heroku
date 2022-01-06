@@ -122,6 +122,7 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
 export const getPSLTabs = STAGEURL + "api/getAllTabs/v1/en/android";
+export const getPSLTabsForWeb = STAGEURL + "api/getAllWebChatTabs/v1/en/web";
 export const submitMatchBids =
   STAGEURL + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>

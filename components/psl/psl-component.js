@@ -29,17 +29,7 @@ export default memo(function PSLComponent({ channel }) {
   useEffect(async () => {
     const tabs = await getPSLTabsService();
     await getRelatedChannels();
-    setTabs([
-      ...tabs.Tabs,
-      {
-        TabIcon:
-          "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-        TabIconUnActive:
-          "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/UnactiveChat.png",
-        TabId: 2,
-        TabName: "Related Video",
-      },
-    ]);
+    setTabs(tabs.Tabs);
     setSelectedTab(1);
   }, []);
 
@@ -122,7 +112,7 @@ export default memo(function PSLComponent({ channel }) {
           />
         </>
       );
-    } else if (selectedTab == tabs.length) {
+    } else if (selectedTab == 2) {
       return (
         <div
           className="text-left mt-3 related-video"
@@ -186,7 +176,7 @@ export default memo(function PSLComponent({ channel }) {
                   return (
                     <Tab
                       key={index}
-                      eventKey={tab.TabId}
+                      eventKey={tab.ChatOrder}
                       tabClassName={"tshop-tabs"}
                       title={
                         <div>
