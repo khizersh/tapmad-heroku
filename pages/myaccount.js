@@ -40,11 +40,11 @@ const MyAccountTrial = ({ signout }) => {
   });
   const { ProfileState, dispatch } = useContext(ProfileContext);
   useEffect(async () => {
-    setLoader(true)
+    setLoader(true);
     if (userId) {
       setUserId(Cookie.getCookies("userId"));
       const data = await MyAccountService.getUserData(postFormData);
-      setLoader(false)
+      setLoader(false);
       if (ProfileState) {
         dispatch({ type: PROFILE_DATA, data: data });
       }
@@ -62,13 +62,15 @@ const MyAccountTrial = ({ signout }) => {
             Gender: data.data.ProfileData.UserProfileGender || "--",
             Package: data.data.Package,
           });
-          if(data.data.MyPackage === "Premium"){
-            setUpgradeBtn(true)
+          if (data.data?.PackageDescription.length) {
+            if (data.data?.PackageDescription[0].IsUpdgradeOrDownGrade == 3) {
+              setUpgradeBtn(true);
+            }
           }
         }
       }
-    }else{
-      setLoader(false)
+    } else {
+      setLoader(false);
     }
 
     if (window.innerWidth < 799) {
@@ -154,7 +156,7 @@ const MyAccountTrial = ({ signout }) => {
         );
       }
     },
-    [isMobile, profileData , upgardeBtn]
+    [isMobile, profileData, upgardeBtn]
   );
 
   const onClickBack = () => {
@@ -167,7 +169,6 @@ const MyAccountTrial = ({ signout }) => {
 
   return (
     <div className="container-fluid">
-   
       <div className="profile-container">
         <RenderViews />
       </div>
@@ -185,7 +186,7 @@ export function getServerSideProps(context) {
     props: {
       noSideBar: true,
       protected: true,
-      userHeader : true,
+      userHeader: true,
       auth: true,
       ip: ip,
       env: process.env.TAPENV,
