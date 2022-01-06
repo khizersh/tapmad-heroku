@@ -294,8 +294,8 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
             Object.keys(chats).map(function (keyName, keyIndex) {
               setTimeout(() => {
                 // document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth' });
-                var target = document.getElementsByClassName("lastDiv")[0];
-                target.parentNode.scrollTop = target.offsetTop;
+                // var target = document.getElementsByClassName("lastDiv")[0];
+                // target.parentNode.scrollTop = target.offsetTop;
               }, 100);
               return (
                 <div className="row" key={keyIndex}>
