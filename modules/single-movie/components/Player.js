@@ -200,6 +200,7 @@ export default function Player({ movies }) {
         setAdDuration(data.videoAdDuration);
       }
     }
+    console.log("ads .. ", ads);
   }, [router, ads.bottomMobileWidth]);
   // video links
   useEffect(() => {
@@ -393,13 +394,13 @@ export default function Player({ movies }) {
                 ) : null}
               </div>
               <div className="col-lg-12 p-0">
-                {movie && movie.Video.IsChat ? (
+                {/* {movie && movie.Video.IsChat ? (
                   <div className="the-shop">
-                    {/* <PlayerShop />  */}
+                    <PlayerShop /> 
                     <PSLComponent channel={movie.Video} />
                     <br />
                   </div>
-                ) : null}
+                ) : null} */}
 
                 {/* Banner bottom Ad */}
 
@@ -562,19 +563,17 @@ export default function Player({ movies }) {
                     </div>
                   ) : (
                     ads.bottomBannerAdMobile && (
+                      
                       <DFPSlotsProvider dfpNetworkId="28379801">
+                        {console.log("bootom mobil..." ,bottomBannerAdMobile)}
                         <div className="desktop-ads">
-                          {ads.bottomBannerAdMobile != "" ? (
-                            <AdSlot
-                              adUnit={ads.bottomBannerAdMobile}
-                              sizes={[[ads.bottomMobileWidth, ads.bottomMobileHeight]]}
-                              onSlotIsViewable={(dfpEventData) =>
-                                AdImpression()
-                              }
-                            />
-                          ) : (
-                            ""
-                          )}
+                          <AdSlot
+                            adUnit={ads.bottomBannerAdMobile}
+                            sizes={[
+                              [ads.bottomMobileWidth, ads.bottomMobileHeight],
+                            ]}
+                            onSlotIsViewable={(dfpEventData) => AdImpression()}
+                          />
                         </div>
                       </DFPSlotsProvider>
                     )
