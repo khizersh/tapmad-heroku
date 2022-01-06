@@ -46,7 +46,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
     if (creditCardType) {
-     details = { ...details, Token: event.token };
+     details = { ...details, Token: event.token , bin : event.bin};
      await checkouPayment(details);
     } else {
       delete details.cnic;
