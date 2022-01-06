@@ -243,7 +243,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
           {`
           @media(max-width:640px) {
             .PSLChat_chatBox__2FhEX {
-              max-height: 200px
+              max-height: 290px
             }
           }
         `}
