@@ -100,13 +100,6 @@ function MyApp({ Component, pageProps }) {
         ) : null}
 
         {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
-
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="https://www.tapmad.com/favicon/favicon-32x32.png"
-        />
         <link
           rel="stylesheet"
           type="text/css"

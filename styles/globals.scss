@@ -1021,7 +1021,7 @@ label {
 .desktop-ads iframe,
 .desktops-ads iframe {
   max-width: 100%;
-  height: auto;
+  // height: auto;
 }
 
 @media(max-width: 570px) {
@@ -1086,6 +1086,7 @@ label {
   .the-shop nav {
     flex-wrap: nowrap;
     overflow-x: scroll;
+    border-top: none;
   }
   .the-shop nav::-webkit-scrollbar {
     width: 0 !important;

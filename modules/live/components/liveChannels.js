@@ -59,7 +59,7 @@ export default function LiveChannels({ channel }) {
             //   key={index}
             //   passHref
             // >
-            <a>
+            <a key={index}>
               <img
                 src={e.TabPosterPath}
                 style={{ height: "50%", width: "100vw", position: "relative" }}

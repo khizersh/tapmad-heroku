@@ -394,29 +394,98 @@ export default function Player({ movies }) {
               <div className="col-lg-12 p-0">
                 {movie && movie.Video ? (
                   <>
-                    <h1 className="mt-3 h5">{movie.Video.VideoName}</h1>
+                    <h1 className="mt-3 mb-0 h5">{movie.Video.VideoName}</h1>
                     {/* <span className="text-secondary">
                     {movie.Video.VideoTotalViews} views
                   </span> */}
-                    <p className="line-clamp" style={{ color: "#aaa" }}>
-                      {movie.Video.VideoDescription}
-                    </p>
+
+                    {/* Mobile Ads */}
+                    {isMobile ? (
+                      <AdSlot
+                        sizes={[[ads.topMobileAdWidth, ads.topMobileAdHieght]]}
+                        adUnit={ads.topAdMobile}
+                        onSlotIsViewable={(dfpEventData) => AdImpression()}
+                      />
+                    ) : (
+                      <></>
+                    )}
+
+                    {/* Show description on desktop and mobile if chat is disabled */}
+                    {!isMobile || !movie?.Video.IsChat ? (
+                      <p className="mt-2 line-clamp" style={{ color: "#aaa" }}>
+                        {movie.Video.VideoDescription}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
                   </>
-                ) : null}
+                ) : (
+                  <></>
+                )}
               </div>
+
               <div className="col-lg-12 p-0">
+                {/* mobile bottom ads */}
+                <div className="mt-2 ml-auto mr-auto">
+                  <div>
+                    {ads.allow && ads.bottomBannerAdMobile ? (
+                      ads.bottomBannerAdMobile.includes("http") ? (
+                        <div style={{ marginTop: "10px" }}>
+                          <ReactJWPlayer
+                            playerId="my-unique-id1"
+                            playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                            isAutoPlay={true}
+                            isMuted={true}
+                            isSkipable={false}
+                            onOneHundredPercent={onRestartAd}
+                            onAdSkipped={onRestartAd}
+                            onAdPlay={() => {
+                              AdImpression();
+                            }}
+                            file={
+                              "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                            }
+                            onAdComplete={onRestartAd}
+                            generatePrerollUrl={() => ads.bottomBannerAdMobile}
+                            customProps={{
+                              controls: true,
+                            }}
+                          />
+                        </div>
+                      ) : ads.bottomBannerAdMobile &&
+                        ads.bottomMobileWidth &&
+                        ads.bottomMobileHeight ? (
+                        <DFPSlotsProvider dfpNetworkId="28379801">
+                          <div className="desktop-ads">
+                            <AdSlot
+                              sizes={[
+                                [ads.bottomMobileWidth, ads.bottomMobileHeight],
+                              ]}
+                              adUnit={ads.bottomBannerAdMobile}
+                              onSlotIsViewable={(dfpEventData) =>
+                                AdImpression()
+                              }
+                            />
+                          </div>
+                        </DFPSlotsProvider>
+                      ) : null
+                    ) : null}
+                  </div>
+                </div>
                 {movie && movie.Video.IsChat ? (
                   <div className="the-shop">
                     {/* <PlayerShop />  */}
                     <PSLComponent channel={movie.Video} />
                     <br />
                   </div>
-                ) : null}
+                ) : (
+                  <></>
+                )}
 
                 {/* Banner bottom Ad */}
 
                 <div>
-                  {ads.allow && ads.bottomBannerAd && (
+                  {ads.allow && ads.bottomBannerAd ? (
                     <DFPSlotsProvider dfpNetworkId="28379801">
                       <div className="desktops-ads text-center d-none d-lg-block d-md-block">
                         <AdSlot
@@ -426,6 +495,8 @@ export default function Player({ movies }) {
                         />
                       </div>
                     </DFPSlotsProvider>
+                  ) : (
+                    <></>
                   )}
                 </div>
               </div>
@@ -545,51 +616,6 @@ export default function Player({ movies }) {
                 </div>
               </div>
             ) : null}
-
-               {/* mobile bottom ads */}
-            <div className="m-auto">
-              <div>
-                {ads.allow && ads.bottomBannerAdMobile ? (
-                  ads.bottomBannerAdMobile.includes("http") ? (
-                    <div style={{ marginTop: "10px" }}>
-                      <ReactJWPlayer
-                        playerId="my-unique-id1"
-                        playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                        isAutoPlay={true}
-                        isMuted={true}
-                        isSkipable={false}
-                        onOneHundredPercent={onRestartAd}
-                        onAdSkipped={onRestartAd}
-                        onAdPlay={() => {
-                          AdImpression();
-                        }}
-                        file={
-                          "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
-                        }
-                        onAdComplete={onRestartAd}
-                        generatePrerollUrl={() => ads.bottomBannerAdMobile}
-                        customProps={{
-                          controls: true,
-                        }}
-                      />
-                    </div>
-                  ) : ads.bottomBannerAdMobile &&
-                    ads.bottomMobileWidth &&
-                    ads.bottomMobileHeight ? (
-                    <DFPSlotsProvider dfpNetworkId="28379801">
-                      <div className="desktop-ads">
-                        <AdSlot
-                          sizes={[[ads.bottomMobileWidth, ads.bottomMobileHeight]]}
-                          adUnit={ads.bottomBannerAdMobile}
-                     
-                          onSlotIsViewable={(dfpEventData) => AdImpression()}
-                        />
-                      </div>
-                    </DFPSlotsProvider>
-                  ) : null
-                ) : null}
-              </div>
-            </div>
           </div>
         </div>
       </div>

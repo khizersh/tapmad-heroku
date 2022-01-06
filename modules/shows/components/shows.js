@@ -16,7 +16,7 @@ export default function Shows({ shows }) {
             //   key={index}
             //   passHref
             // >
-            <a>
+            <a key={index}>
               <img
                 src={e.TabPosterPath}
                 style={{ width: "100%" }}

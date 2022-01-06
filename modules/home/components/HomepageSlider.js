@@ -10,6 +10,7 @@ import {
   viewMoreCleanUrls,
 } from "../../../services/utils";
 import Image from "next/image";
+import axios from "axios";
 
 const Slider = dynamic(() => import("react-slick"));
 const HomePageAd = dynamic(() => import("./HomePageAd"), { ssr: false });
@@ -61,16 +62,24 @@ const HomepageSlider = ({ movies, ads, name }) => {
   }
 
   useEffect(async () => {
+    const cancleFetch = axios.CancelToken;
+    const source = cancleFetch.source();
     const { getHomePageAdsDetail } = (
       await import("../../../modules/auth/auth.service")
     ).AuthService;
-    getHomePageAdsDetail()
+    getHomePageAdsDetail(source.token)
       .then((res) => {
         if (res.data.responseCode == 1) {
           setAdsRow(res.data.data);
+        } else {
+          setAdsRow([]);
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setAdsRow([]);
+      });
+    return () => source.cancel("axios request cancelled");
   }, []);
   return (
     <div>
@@ -151,7 +160,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                                         loader={() =>
                                           mov.NewChannelThumbnailPath
                                         }
-                                        loading={"eager"}
+                                        // loading={"lazy"}
                                         // layout='fill'
                                         alt={"tapmad-" + mov.VideoName}
                                       />

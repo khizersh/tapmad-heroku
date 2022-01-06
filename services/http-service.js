@@ -7,7 +7,7 @@ const {
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
 
-async function get(url, ip) {
+async function get(url, ip, cancelToken = null) {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
@@ -17,13 +17,16 @@ async function get(url, ip) {
       "Content-Type": "application/json",
       "X-Forwarded-For": ip ? ip : "",
     };
-    response = await axios.get(url, { headers: headers });
+    if (cancelToken) {
+      headers.cancelToken = cancelToken;
+    }
+    response = await axios.get(url, { headers });
   } catch (error) {
     swal({
-      text :'Unable to load data from server, Please try again later.',
-      icon:'error',
-      timer : 5e3
-    })
+      text: "Unable to load data from server, Please try again later.",
+      icon: "error",
+      timer: 5e3,
+    });
   }
   return response;
 }
@@ -40,16 +43,16 @@ async function post(url, body, ip, credentialAllowed = false) {
   delete body.headers;
   var response = null;
   try {
-    response = await  axios.post(url, body, {
+    response = await axios.post(url, body, {
       withCredentials: credentialAllowed ? true : false,
       headers,
     });
   } catch (e) {
     swal({
-      text :'Unable to load data from server, Please try again later.',
-      icon:'error',
-      timer : 5e3
-    })
+      text: "Unable to load data from server, Please try again later.",
+      icon: "error",
+      timer: 5e3,
+    });
   }
   return response;
   // finally{
