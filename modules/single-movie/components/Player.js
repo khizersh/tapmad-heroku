@@ -423,7 +423,55 @@ export default function Player({ movies }) {
                   <></>
                 )}
               </div>
+
               <div className="col-lg-12 p-0">
+                {/* mobile bottom ads */}
+                <div className="mt-2 ml-auto mr-auto">
+                  <div>
+                    {ads.allow && ads.bottomBannerAdMobile ? (
+                      ads.bottomBannerAdMobile.includes("http") ? (
+                        <div style={{ marginTop: "10px" }}>
+                          <ReactJWPlayer
+                            playerId="my-unique-id1"
+                            playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                            isAutoPlay={true}
+                            isMuted={true}
+                            isSkipable={false}
+                            onOneHundredPercent={onRestartAd}
+                            onAdSkipped={onRestartAd}
+                            onAdPlay={() => {
+                              AdImpression();
+                            }}
+                            file={
+                              "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                            }
+                            onAdComplete={onRestartAd}
+                            generatePrerollUrl={() => ads.bottomBannerAdMobile}
+                            customProps={{
+                              controls: true,
+                            }}
+                          />
+                        </div>
+                      ) : ads.bottomBannerAdMobile &&
+                        ads.bottomMobileWidth &&
+                        ads.bottomMobileHeight ? (
+                        <DFPSlotsProvider dfpNetworkId="28379801">
+                          <div className="desktop-ads">
+                            <AdSlot
+                              sizes={[
+                                [ads.bottomMobileWidth, ads.bottomMobileHeight],
+                              ]}
+                              adUnit={ads.bottomBannerAdMobile}
+                              onSlotIsViewable={(dfpEventData) =>
+                                AdImpression()
+                              }
+                            />
+                          </div>
+                        </DFPSlotsProvider>
+                      ) : null
+                    ) : null}
+                  </div>
+                </div>
                 {movie && movie.Video.IsChat ? (
                   <div className="the-shop">
                     {/* <PlayerShop />  */}
@@ -568,51 +616,6 @@ export default function Player({ movies }) {
                 </div>
               </div>
             ) : null}
-
-               {/* mobile bottom ads */}
-            <div className="m-auto">
-              <div>
-                {ads.allow && ads.bottomBannerAdMobile ? (
-                  ads.bottomBannerAdMobile.includes("http") ? (
-                    <div style={{ marginTop: "10px" }}>
-                      <ReactJWPlayer
-                        playerId="my-unique-id1"
-                        playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                        isAutoPlay={true}
-                        isMuted={true}
-                        isSkipable={false}
-                        onOneHundredPercent={onRestartAd}
-                        onAdSkipped={onRestartAd}
-                        onAdPlay={() => {
-                          AdImpression();
-                        }}
-                        file={
-                          "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
-                        }
-                        onAdComplete={onRestartAd}
-                        generatePrerollUrl={() => ads.bottomBannerAdMobile}
-                        customProps={{
-                          controls: true,
-                        }}
-                      />
-                    </div>
-                  ) : ads.bottomBannerAdMobile &&
-                    ads.bottomMobileWidth &&
-                    ads.bottomMobileHeight ? (
-                    <DFPSlotsProvider dfpNetworkId="28379801">
-                      <div className="desktop-ads">
-                        <AdSlot
-                          sizes={[[ads.bottomMobileWidth, ads.bottomMobileHeight]]}
-                          adUnit={ads.bottomBannerAdMobile}
-                     
-                          onSlotIsViewable={(dfpEventData) => AdImpression()}
-                        />
-                      </div>
-                    </DFPSlotsProvider>
-                  ) : null
-                ) : null}
-              </div>
-            </div>
           </div>
         </div>
       </div>

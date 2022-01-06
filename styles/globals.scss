@@ -1086,6 +1086,7 @@ label {
   .the-shop nav {
     flex-wrap: nowrap;
     overflow-x: scroll;
+    border-top: none;
   }
   .the-shop nav::-webkit-scrollbar {
     width: 0 !important;
