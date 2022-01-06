@@ -5,15 +5,41 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import { useRouter } from "next/router";
 import styles from "./psl.module.css";
+import { PlayerService } from "../../modules/single-movie/Player.service";
+import { SEOFriendlySlugsForVideo } from "../../services/utils";
+import Link from "next/link";
+import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
 
 export default memo(function PSLComponent({ channel }) {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const [selectedTab, setSelectedTab] = useState(null);
 
+  const [relatedVideo, setRelatedVideos] = useState([]);
+  async function getRelatedChannels() {
+    const res = await PlayerService.getRelatedChannelsOrVODData(
+      channel.VideoEntityId,
+      channel.IsVideoChannel ? 1 : 0
+    );
+    if (res.data && res?.data?.Sections?.length > 0 && res.responseCode == 1) {
+      setRelatedVideos(res.data.Sections[0].Videos);
+    }
+  }
+
   useEffect(async () => {
     const tabs = await getPSLTabsService();
-    setTabs(tabs.Tabs);
+    await getRelatedChannels();
+    setTabs([
+      ...tabs.Tabs,
+      {
+        TabIcon:
+          "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
+        TabIconUnActive:
+          "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/UnactiveChat.png",
+        TabId: 2,
+        TabName: "Related Video",
+      },
+    ]);
     setSelectedTab(1);
   }, []);
 
@@ -82,7 +108,7 @@ export default memo(function PSLComponent({ channel }) {
           )}
         </>
       );
-    } else if (selectedTab == 2) {
+    } else if (selectedTab == tabs.length - 1) {
       // return <MatchBids />;
       return (
         <>
@@ -96,9 +122,31 @@ export default memo(function PSLComponent({ channel }) {
           />
         </>
       );
-    } else if (selectedTab == 3) {
-      router.push("/tapmad-shop");
-      return null;
+    } else if (selectedTab == tabs.length) {
+      return (
+        <div
+          className="text-left mt-3 related-video"
+          style={{ height: "100vh", overflow: "scroll" }}
+        >
+          <h5>Related Videos</h5>
+          <div>
+            {relatedVideo.length
+              ? relatedVideo.map((video, i) => {
+                  let slug = SEOFriendlySlugsForVideo(video);
+                  return (
+                    <>
+                      <Link href={slug} replace={true} shallow={false} key={i}>
+                        <a>
+                          <RelatedProductCard video={video} />
+                        </a>
+                      </Link>
+                    </>
+                  );
+                })
+              : null}
+          </div>
+        </div>
+      );
     } else {
       return <div></div>;
     }

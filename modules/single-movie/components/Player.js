@@ -38,7 +38,7 @@ export default function Player({ movies }) {
   const [local, setLocal] = useState(null);
   const [playerReady, setPlayerReady] = useState(false);
   const [adsApiCalled, setAdsApiCalled] = useState(false);
-  const [relatedVideo, setRelatedVideos] = useState([]);
+  // const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
     topAd: "",
@@ -56,13 +56,13 @@ export default function Player({ movies }) {
     if (playerReady) {
       setPlayerReady(true);
     }
-      // if (
-      //   typeof document !== "undefined" &&
-      //   !document.querySelector(".jw-theater-mode") && // if button do not exist
-      //   screen.width > 992 // if mobile screen
-      // )
+    // if (
+    //   typeof document !== "undefined" &&
+    //   !document.querySelector(".jw-theater-mode") && // if button do not exist
+    //   screen.width > 992 // if mobile screen
+    // )
 
-      // create new element
+    // create new element
     //   const elem = document.createElement("div");
     //   elem.setAttribute(
     //     "class",
@@ -141,20 +141,20 @@ export default function Player({ movies }) {
       fired5percent = true;
     }
   }
-  async function getRelatedChannels() {
-    const res = await PlayerService.getRelatedChannelsOrVODData(
-      movie.Video.VideoEntityId,
-      movie.Video.IsVideoChannel ? 1 : 0
-    );
-    if (res.data && res?.data?.Sections?.length > 0 && res.responseCode == 1) {
-      setRelatedVideos(res.data.Sections[0].Videos);
-    }
-  }
+  // async function getRelatedChannels() {
+  //   const res = await PlayerService.getRelatedChannelsOrVODData(
+  //     movie.Video.VideoEntityId,
+  //     movie.Video.IsVideoChannel ? 1 : 0
+  //   );
+  //   if (res.data && res?.data?.Sections?.length > 0 && res.responseCode == 1) {
+  //     setRelatedVideos(res.data.Sections[0].Videos);
+  //   }
+  // }
 
   // ads and related api call
   useEffect(async () => {
     verifyURL(router, movies.Video.VideoName);
-    await getRelatedChannels();
+    // await getRelatedChannels();
     if (!adsApiCalled) {
       const country = await AuthService.getGeoInfo();
       const resp = await DashboardService.getAdData();
@@ -588,7 +588,7 @@ export default function Player({ movies }) {
                 </div>
                 {/* side add desktop end */}
 
-                <div
+                {/* <div
                   className="text-left mt-3 related-video"
                   style={{ height: "100vh", overflow: "scroll" }}
                 >
@@ -614,7 +614,7 @@ export default function Player({ movies }) {
                         })
                       : null}
                   </div>
-                </div>
+                </div> */}
               </div>
             ) : null}
           </div>
