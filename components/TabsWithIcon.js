@@ -21,12 +21,13 @@ const TabsWithIcon = ({ data, onChange, selected }) => {
           `}
         </style>
       </Head>
-      <div class="container-sm rounded-pill row option_div">
+      <div className="container-sm rounded-pill row option_div">
         {data.length && selected
-          ? data.map((tab) => (
+          ? data.map((tab, k) => (
               <div
                 className="m-auto cursor-pointer"
                 onClick={() => onChange(tab)}
+                key={k}
               >
                 <span
                   style={{
@@ -49,10 +50,16 @@ const TabsWithIcon = ({ data, onChange, selected }) => {
                     ""
                   )}
 
-                  <strong className={`${tab.title == selected.title ? "text-green" : ""} `}>{tab.title}</strong>
+                  <strong
+                    className={`${
+                      tab.title == selected.title ? "text-green" : ""
+                    } `}
+                  >
+                    {tab.title}
+                  </strong>
                 </span>
                 {tab.title == selected.title ? (
-                  <div class="green-bar"></div>
+                  <div className="green-bar"></div>
                 ) : null}
               </div>
             ))

@@ -310,24 +310,24 @@ const MyAccountWeb = ({
                         <div className="package-detail">
                           {allData && allData.MyPackage}
                           <div className="package-price">
-                            <text className="font-16 package-currency">
+                            <span className="font-16 package-currency">
                               {price && price[0]}
-                            </text>
+                            </span>
                             &nbsp;
-                            <text className="font-32 font-weight-600">
+                            <span className="font-32 font-weight-600">
                               {price && price[1]}
-                            </text>
+                            </span>
                             &nbsp;
-                            <text className="font-16 package-duration">
+                            <span className="font-16 package-duration">
                               {price && price[2]}
-                            </text>
+                            </span>
                           </div>
                         </div>
                       </div>
-                      <text className="mb-3 font-13 mt-2 d-block">
+                      <span className="mb-3 font-13 mt-2 d-block">
                         {allData &&
                           allData.PackageDescription[0].ContentDescription}
-                      </text>
+                      </span>
                     </div>
                     {packageStreams.length
                       ? packageStreams.map((stream, ind) => (
@@ -342,7 +342,7 @@ const MyAccountWeb = ({
                                 height="30"
                                 alt="Quality"
                               />
-                              <text className="">{stream.text}</text>
+                              <span className="">{stream.text}</span>
                             </div>
                           </div>
                         ))

@@ -66,17 +66,17 @@ export default memo(function PSLComponent({ channel }) {
           ) : (
             <>
               <div className="text-center">
-                <text className="font-weight-bold">
+                <span className="font-weight-bold">
                   Chat has been minimized
-                </text>
+                </span>
                 &nbsp; &nbsp;
-                <text
+                <span
                   role="button"
                   onClick={toggleHandler}
                   className="text-success  font-weight-bold"
                 >
                   View Chat
-                </text>
+                </span>
               </div>
             </>
           )}

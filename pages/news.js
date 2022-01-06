@@ -86,6 +86,7 @@ const news = ({ news, newsArray }) => {
                   className={`list-item cursor-point text-white`}
                   style={{ borderBottom: `3px solid ${topCategoriesColor[i]}` }}
                   onClick={() => onCLickCategory(m)}
+                  key={i}
                 >
                   <a>{m == "News" ? "Latest" : m} News</a>
                 </li>

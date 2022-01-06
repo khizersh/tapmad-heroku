@@ -21,6 +21,7 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         }
       })
       .catch((e) => console.log(e));
+    return () => setSignIn(true);
   }, [country]);
   return (
     <>

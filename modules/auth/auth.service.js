@@ -264,10 +264,10 @@ async function logoutUser(body) {
   return resp.data;
 }
 
-async function getHomePageAdsDetail() {
+async function getHomePageAdsDetail(cancelToken) {
   let resp;
   try {
-    resp = await get(homepageAds, "", false);
+    resp = await get(homepageAds, "", cancelToken);
   } catch (error) {
     resp = null;
   }
