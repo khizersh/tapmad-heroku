@@ -342,7 +342,7 @@ const MyAccountWeb = ({
                                 height="30"
                                 alt="Quality"
                               />
-                              <span className="">{stream.text}</span>
+                              <p className="">{stream.text}</p>
                             </div>
                           </div>
                         ))
