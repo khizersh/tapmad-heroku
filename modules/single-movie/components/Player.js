@@ -565,7 +565,7 @@ export default function Player({ movies }) {
                     ads.bottomBannerAdMobile && (
                       
                       <DFPSlotsProvider dfpNetworkId="28379801">
-                        {console.log("bootom mobil..." ,bottomBannerAdMobile)}
+                        {console.log("bootom mobil..." ,ads.bottomBannerAdMobile)}
                         <div className="desktop-ads">
                           <AdSlot
                             adUnit={ads.bottomBannerAdMobile}
