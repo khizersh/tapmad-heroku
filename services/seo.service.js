@@ -14,7 +14,7 @@ export async function getSEOData(videoId, url) {
     url: `https://www.tapmad.com${url.split("?")[0]}`,
   };
   let SEOData = await post(SEOTvSeriesData, SEOBody);
-  return SEOData.data.Vod
+  return SEOData?.data?.Vod
     ? { ...SEOData.data, url: `https://www.tapmad.com${url.split("?")[0]}` }
     : "";
 }

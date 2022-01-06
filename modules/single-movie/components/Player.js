@@ -176,8 +176,10 @@ export default function Player({ movies }) {
           rightVideoAd: "",
           bottomBannerAd: data.bottomBannerAd,
           bottomBannerAdMobile: data.bottomBannerAdMobile,
-          topMobileAdHieght: data.topMobileAdHieght,
+          bottomMobileWidth: data.bottomMobileWidth,
           topMobileAdWidth: data.topMobileAdWidth,
+          bottomMobileWidth: data.bottomMobileWidth,
+          bottomMobileHeight: data.bottomMobileHeight,
           videoAdDuration: data.videoAdDuration,
         });
         setAdDuration(data.videoAdDuration);
@@ -191,14 +193,14 @@ export default function Player({ movies }) {
           bottomBannerAd: data.bottomBannerAd,
           rightVideoAd: data.rightVideoAd,
           bottomBannerAdMobile: "",
-          topMobileAdHieght: data.topMobileAdHieght,
-          topMobileAdWidth: data.topMobileAdWidth,
+          bottomMobileWidth: data.bottomMobileWidth,
+          bottomMobileHeight: data.bottomMobileHeight,
           videoAdDuration: data.videoAdDuration,
         });
         setAdDuration(data.videoAdDuration);
       }
     }
-  }, [router, ads.topMobileAdHieght]);
+  }, [router, ads.bottomMobileWidth]);
   // video links
   useEffect(() => {
     fired = false;
@@ -311,7 +313,7 @@ export default function Player({ movies }) {
                       <div className="desktops-ads text-center d-lg-none d-md-none">
                         <AdSlot
                           sizes={[
-                            [ads.topMobileAdWidth, ads.topMobileAdHieght],
+                            [ads.topMobileAdWidth, ads.bottomMobileWidth],
                           ]}
                           adUnit={ads.topAdMobile}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
@@ -588,7 +590,7 @@ export default function Player({ movies }) {
                           {ads.bottomBannerAdMobile != "" ? (
                             <AdSlot
                               adUnit={ads.bottomBannerAdMobile}
-                              sizes={[[300, 250]]}
+                              sizes={[[ads.bottomMobileWidth, ads.bottomMobileHeight]]}
                               onSlotIsViewable={(dfpEventData) =>
                                 AdImpression()
                               }
