@@ -8,13 +8,15 @@ import EnhancedEnterPin from "./enterPin";
 import EnhancedCombineLogin from "./combineLogin";
 import { pslBackground, signinBackground } from "../../../services/imagesLink";
 import { MainContext } from "../../../contexts/MainContext";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { SET_VIEW_TO_SHOW } from "../../../contexts/auth/AuthReducers";
 
 export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
   const router = useRouter();
   const [bg, setBg] = useState(pslBackground);
-
-  const { initialState, setLoader } = useContext(MainContext);
+  const { setLoader } = useContext(MainContext);
+  const { AuthState, dispatch } = useContext(AuthContext);
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
@@ -35,48 +37,57 @@ export default function AuthViews(props) {
     }
   }
 
-  function sendToForgetPin(state) {
-    if (state.countryCode != "PK") {
-      setLoader(true);
-      AuthService.forgetPin(state.User.MobileNo, state.User.OperatorId).then(res => {
-        setLoader(false);
-        if (res && res.responseCode == 1) {
-          swal({
-            title: res.message,
-            icon: "success",
-            timer: 2500
-          })
-        } else {
-          swal({
-            title: res.message,
-            icon: "error",
-            timer: 2500
-          })
-        }
-      }).catch(e => setLoader(false))
-
+  async function sendToForgetPin(state) {
+    setLoader(true);
+    const country = await AuthService.getGeoInfo();
+    if (country.countryCode != "PK") {
+      AuthService.forgetPin(
+        state.UserDetails.MobileNo,
+        state.UserDetails.Operator
+      )
+        .then((res) => {
+          setLoader(false);
+          if (res && res.responseCode == 1) {
+            swal({
+              title: res.message,
+              icon: "success",
+              timer: 2500,
+            });
+          } else {
+            swal({
+              title: res.message,
+              icon: "error",
+              timer: 2500,
+            });
+          }
+        })
+        .catch((e) => setLoader(false));
     } else {
-      setViewToShow("forget-pin");
+      setLoader(false);
+      // setViewToShow("forget-pin");
+      dispatch({ type: SET_VIEW_TO_SHOW, data: "forget-pin" });
     }
   }
 
   const RenderViews = useCallback(() => {
-    if (viewToShow == "enter-pin") {
+    if (AuthState.ViewToShow == "enter-pin") {
       return <EnhancedEnterPin forgetPin={sendToForgetPin} />;
-    } else if (viewToShow == "forget-pin") {
-      if (initialState.countryCode == "PK") {
+    } else if (AuthState.ViewToShow == "forget-pin") {
+      if (AuthState.CountryCode == "+92") {
         return <ForgetPin updateView={setViewToShow} />;
       } else {
-        return <EnhancedCombineLogin
-          forgetPin={sendToForgetPin}
-          loginResponse={processResponse}
-          ip={props.ip}
-        />
+        return (
+          <EnhancedCombineLogin
+            forgetPin={sendToForgetPin}
+            loginResponse={processResponse}
+            ip={props.ip}
+          />
+        );
       }
-    } else if (viewToShow == "set-pin") {
-      // here we will check username and update if anonymous 
+    } else if (AuthState.ViewToShow == "set-pin") {
+      // here we will check username and update if anonymous
       return <SetPin />;
-    } else if (viewToShow == "login") {
+    } else if (AuthState.ViewToShow == "sign-in") {
       return (
         <EnhancedCombineLogin
           forgetPin={sendToForgetPin}
@@ -85,25 +96,29 @@ export default function AuthViews(props) {
         />
       );
       // return <Login loginResponse={processResponse} />;
-    } else if (viewToShow == "send-otp") {
+    } else if (AuthState.ViewToShow == "send-otp") {
       return <ForgetPin updateView={setViewToShow} />;
     }
-  }, [viewToShow]);
+  }, [AuthState.ViewToShow]);
 
   useEffect(() => {
     // if (initialState.countryCode && initialState.countryCode == "PK") {
-    if (
-      initialState &&
-      initialState.AuthDetails &&
-      initialState.AuthDetails.CountryCode
-    ) {
+    if (AuthState && AuthState.CountryCode) {
       setBg(pslBackground);
     } else {
-      if (!initialState.AuthDetails) {
+      if (!AuthState) {
         setBg(signinBackground);
       }
     }
-  }, [initialState.AuthDetails]);
+  }, [AuthState]);
+
+  const onclickBack = () => {
+    if (AuthState.ViewToShow == "sign-in") {
+      router.push("/");
+    } else {
+      dispatch({ type: SET_VIEW_TO_SHOW, data: "sign-in" });
+    }
+  };
 
   return (
     <div>
@@ -111,7 +126,14 @@ export default function AuthViews(props) {
       <div className="bg_dark">
         <div className="container">
           <div className="row">
-            <div className="col-sm-12 col-md-4">
+            <div className="col-sm-12 offset-md-2 col-md-8">
+              <button
+                type="button"
+                className="btn btn_submit text-light rounded-pill d-inline-block mx-3 py-1 px-4 font-14 back-btn-login"
+                onClick={onclickBack}
+              >
+                Back
+              </button>
               <div className="tm_login_pg">
                 <RenderViews />
               </div>

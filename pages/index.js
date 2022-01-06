@@ -8,7 +8,6 @@ import isGoogle from "../services/google-dns-lookup";
 // import { UpdateBase } from "../services/apilinks";
 
 export default function Home(props) {
-
   return (
     <div>
       <Head>
@@ -19,13 +18,17 @@ export default function Home(props) {
         </title>
         <meta
           name="description"
-          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com."
+          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
         />
-        <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
+        <meta
+          name="title"
+          content="Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV"
+        />
         <meta
           name="keywords"
-          content="Watch LIVE TV channels online, watch pakistani tv channels free, watch pakistani tv channels online, watch online live tv channels movies, watch live online tv, watch live tv channels online, watch digital tv channels, Pakistani tv channels online, hd channels, pakistan cricket match, indian movies, indian movies online, pakistani movies, indian drama,  pakistani drama, kids shows, pakistani music, indian music, sports, live cricket, live sports"
+          content="Live tv channel, watch live tv, watch epl in Pakistan, live epl, premier league, english premier league pakistan,  watch pakistani tv channels free, indian movies, watch free indian movies, live sports, live cricket stream"
         />
+        {/* <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script> */}
       </Head>
       <HomePage {...props} />
     </div>
@@ -47,8 +50,9 @@ export async function getServerSideProps(context) {
   }
   let movie, banner, featured;
   var movieList = await HomeService.getFeaturedHomePageData(ip);
-  if (movieList != null) movie = await movieList.data;
-  else movie = {};
+  if (movieList != null) {
+    movie = await movieList.data;
+  } else movie = {};
 
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
@@ -65,7 +69,7 @@ export async function getServerSideProps(context) {
       featured: featured,
       ip: ip,
       env: process.env.TAPENV || 'production',
-      prodEnv: process.env.API_ENDPOINT || 'http://api.tapmad.com/api/'
+      prodEnv: process.env.API_ENDPOINT || 'http://app.tapmad.com/api/'
     },
   };
 }

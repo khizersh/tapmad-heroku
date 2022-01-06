@@ -20,3 +20,15 @@
   transition: all 0.3s;
   color: #87c242;
 }
+
+.view-more-btn {
+  border-radius: 29px;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.view-more-btn:hover {
+  color: white;
+}

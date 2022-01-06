@@ -48,7 +48,13 @@ const AllGameHeader = ({ func, data }) => {
       <div className="col-12 text-center">
         {selected && (
           <>
-            <img src={selected.header} width="100%" alt="" height="300" />
+            <img
+              src={selected.header}
+              width="100%"
+              alt=""
+              height="300"
+              style={{ objectFit: "contain" }}
+            />
           </>
         )}
       </div>

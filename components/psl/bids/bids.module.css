@@ -34,7 +34,7 @@
   padding: 2px;
 }
 .cricle {
-  background: #87c242;
+  background: #87c242 ;
   border-radius: 50%;
   padding: 4px;
   text-align: center;
@@ -168,7 +168,7 @@ input.count:focus {
   height: 24px;
   font: 20px;
   border-radius: 2px;
-  background-color: #87c242;
+  background-color: #87c242 ;
   float: right;
   border: 0px;
 }

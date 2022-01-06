@@ -22,7 +22,7 @@ export default function LiveChannels({ channel }) {
   }, []);
 
   async function fetchNewMovies() {
-    if (currentRow == channel.totalSections) {
+    if (currentRow == channel.Sections.totalSections) {
       return;
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
@@ -31,15 +31,13 @@ export default function LiveChannels({ channel }) {
       getChannelsWithPagination(rowData.rowFrom, rowData.rowsTo)
     );
     var newMovies = await moviesList.data;
-    if (
-      localMovies.Sections.Channels &&
-      localMovies.Sections.Channels.length > 0
-    ) {
+    if (localMovies.Sections.Movies && localMovies.Sections.Movies.length > 0) {
       let modifiedNewMovies = modifyLivePageResponse(newMovies);
       let updatedListOfMovies = pushNewMoviesIntoList(
         localMovies,
         modifiedNewMovies
       );
+
       setLocalMovies(updatedListOfMovies);
     }
   }
@@ -52,26 +50,36 @@ export default function LiveChannels({ channel }) {
     };
   }
   return (
-    <div>
+    <>
       <Slider {...bannerSettings}>
         {channel.Banner.map((e, index) => {
           return (
-            <Link href={e.BannerURL ? e.BannerURL : "/live"} key={index} passHref>
-              <a>
-                <img
-                  src={e.WebBannerImage}
-                  style={{ width: "100%" }}
-                  alt="Banner"
-                />
-              </a>
-            </Link>
+            // <Link
+            //   href={e.BannerURL ? e.BannerURL : "/live"}
+            //   key={index}
+            //   passHref
+            // >
+            <a key={index}>
+              <img
+                src={e.TabPosterPath}
+                style={{ height: "50%", width: "100vw", position: "relative" }}
+                alt="Banner"
+              />
+            </a>
+            // </Link>
           );
         })}
       </Slider>
-      <HomepageSlider movies={localMovies.Sections.Movies} ads={false} name={"Live"} />
-      {currentRow !== localMovies.Sections.totalSections && (
-        <ScrollComponent loadMore={fetchNewMovies} />
-      )}
-    </div>
+      <div className="container-fluid">
+        <HomepageSlider
+          movies={localMovies.Sections.Movies}
+          ads={false}
+          name={"Live"}
+        />
+        {currentRow !== localMovies.Sections.totalSections && (
+          <ScrollComponent loadMore={fetchNewMovies} />
+        )}
+      </div>
+    </>
   );
 }

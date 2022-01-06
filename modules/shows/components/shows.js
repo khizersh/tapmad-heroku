@@ -11,19 +11,29 @@ export default function Shows({ shows }) {
       <Slider {...bannerSettings}>
         {shows.Banner.map((e, index) => {
           return (
-            <Link href={e.BannerURL ? e.BannerURL : "/shows"} key={index} passHref>
-              <a>
-                <img
-                  src={e.WebBannerImage}
-                  style={{ width: "100%" }}
-                  alt="Banner"
-                />
-              </a>
-            </Link>
+            // <Link
+            //   href={e.BannerURL ? e.BannerURL : "/shows"}
+            //   key={index}
+            //   passHref
+            // >
+            <a key={index}>
+              <img
+                src={e.TabPosterPath}
+                style={{ width: "100%" }}
+                alt="Banner"
+              />
+            </a>
+            // </Link>
           );
         })}
       </Slider>
-      <HomepageSlider movies={shows.Sections.Shows} ads={false} name={"Shows"}/>
+      <div className="container-fluid">
+        <HomepageSlider
+          movies={shows.Sections.Shows}
+          ads={false}
+          name={"Shows"}
+        />
+      </div>
     </div>
   );
 }

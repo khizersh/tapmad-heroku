@@ -15,7 +15,6 @@ export default function MoviesPage(props) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://wwww.tapmad.com/movies" />
-
       </Head>
       <div>
         <Movies {...props} />
@@ -41,7 +40,8 @@ export async function getServerSideProps(context) {
   return {
     props: {
       movies: movies,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
+      ip: ip,
     },
   };
 }

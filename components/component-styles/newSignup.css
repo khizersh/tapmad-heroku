@@ -1,0 +1,104 @@
+.grey-background {
+  background: #3b3b3b;
+  height: 210px;
+}
+
+.bit-top {
+  position: relative;
+  bottom: 2.5rem;
+}
+
+.btn-login {
+  background-color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  padding: 0px 5px;
+}
+
+.mt-10px{
+  margin-top: -10px;
+}
+
+.rounded-lg{
+  border-radius: 1.25rem !important;
+}
+.bg-green-light{
+  background-color: rgb(55, 198, 115 , 0.2);
+}
+
+.margin-desktop{
+  padding: 0 160px!important;
+}
+
+.width-35{
+  width: 35% !important;
+}
+.text-red{
+  color: #fc5656;
+}
+
+.subscribe-btn{
+  margin-top: 10px;
+  width: 50%;
+  border-radius: 23px;
+  font-size: 20px;
+  color: white;
+}
+
+.desktop-size{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.padding-signup-layout{
+  padding: 20px 20px 20px 20px;
+}
+.center-width{
+    margin: 0 auto;
+    width: 45%;
+}
+
+.border-dotted-left{
+  border-left: 1px solid grey;
+  border-left-style: dotted;
+}
+.center-width-product{
+    margin: 18px auto 0 !important;
+    width: 40%;
+}
+
+@media only screen and (max-width: 799px) {
+  .bit-top {
+    position: relative;
+    bottom: 4rem;
+  }
+
+  .desktop-size{
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .mx-sm-2 {
+    margin: 0 10px;
+  }
+  .center-width{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.subscribe-btn{
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 23px;
+  font-size: 20px;
+  color: white;
+}
+
+.center-width-product{
+    margin: 0 auto !important;
+    width: 100%;
+    margin-top: 35px !important;
+}
+
+}

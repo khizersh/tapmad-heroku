@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, createRef } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { actionsRequestContent, get } from "../../services/http-service";
 import ItemCard from "./ItemCard";
@@ -14,6 +14,7 @@ const Search = (props) => {
   const [isSearched, setisSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchedItem, setSearchedItem] = useState([]);
+  const inputSearch = createRef();
 
   const debouncedSearchKeyWord = Debounce(keyword, 800);
 
@@ -24,6 +25,10 @@ const Search = (props) => {
   const onChange = (e) => {
     setKeyword(e.target.value);
   };
+
+  useEffect(() => {
+    inputSearch?.current?.focus();
+  }, [inputSearch]);
 
   useEffect(async () => {
     if (debouncedSearchKeyWord) {
@@ -102,6 +107,7 @@ const Search = (props) => {
             onChange={onChange}
             className="form-control float-right ml-2 width search-input"
             placeholder="Start Searching..."
+            ref={inputSearch}
           />
         </div>
       </div>

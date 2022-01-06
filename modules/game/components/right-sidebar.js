@@ -12,7 +12,7 @@ import { basicSliderConfig } from "../../../services/utils";
 import styles from "../game.module.css";
 import { CenteredModal } from "../../../components/Modal";
 import VoucherBuyModal from "./VoucherBuyModal";
-import {  userProfile , logo } from "../../../services/imagesLink";
+import { userProfile, logo } from "../../../services/imagesLink";
 
 const RightSidebar = ({ shop }) => {
   const setting = basicSliderConfig(2, 2);
@@ -37,7 +37,6 @@ const RightSidebar = ({ shop }) => {
     updateVoucher(body)
       .then((res) => {
         setLoader(false);
-        console.log(res);
         if (res && res.responseCode == 6) {
           swal({
             title: res.message,
@@ -45,7 +44,6 @@ const RightSidebar = ({ shop }) => {
           });
         } else if (res && res.responseCode == 1) {
           if (res.data.IsPopup) {
-            console.log(res);
             setVoucherModal(true);
             setVoucherModalData(res.data);
           } else {

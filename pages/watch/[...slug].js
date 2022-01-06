@@ -20,86 +20,113 @@ import {
   getSEODataForLiveChannel,
 } from "../../services/seo.service";
 import isGoogle from "../../services/google-dns-lookup";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
+import withSignout from "../../modules/auth/signout/SignoutHOC";
 
-const watch = (props) => {
+const WatchPage = (props) => {
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
 
+  // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
-    console.log(props);
     if (!props.allowUser) {
-      if (props.data != null) {
-        router.push("/sign-up?subspack=epl");
-      } else {
-        router.push("/sign-up");
-      }
-    } else {
-      if (props.data.responseCode != "401" && props.data.responseCode != '8') {
-        let cId = props.data.Video.VideoEntityId
-          ? props.data.Video.VideoEntityId
-          : "";
-        let cName = props.data.Video.VideoName
-          ? props.data.Video.VideoName
-          : "";
-        let body = {
-          event: "view",
-          contentId: cId,
-          contentName: cName,
-        };
-        actionsRequestContent(body);
-      }
+      router.push(`/sign-up?tab=1&packageId=2`);
     }
   }, [props.allowUser, url]);
 
+  // for login user check content package and sent to respective package on change-package page
   useEffect(() => {
-    if (props.data && props.data.responseCode == 401) {
-      swal({
-        text: props.data.message,
-        timer: 3000,
-        icon: "error",
-      }).then((res) => {
+    if (props.allowUser) {
+      if (props.data && props.data.responseCode === 401) {
         swal({
-          title: "You have logged out!",
-          text: "Redirecting you in 2s...",
-          timer: 1900,
-          icon: "success",
-          buttons: false,
+          text: props.data.message,
+          timer: 3000,
+          icon: "error",
         }).then((res) => {
-          Cookie.setCookies("isAuth", 0);
-          setisAuthenticateFalse();
-          router.push("/");
+          swal({
+            title: "You have logged out!",
+            text: "Redirecting you in 2s...",
+            timer: 1900,
+            icon: "success",
+            buttons: false,
+          }).then((res) => {
+            Cookie.setCookies("isAuth", 0);
+            setisAuthenticateFalse();
+            router.push("/");
+          });
         });
-
-      });
-    } else if (props.data && props.data.responseCode == 8) {
-      swal({
-        text: props.data.message,
-        timer: 3000,
-        icon: "error",
-      }).then((res) => {
-        router.push("/subscribe-to-epl?subspack=epl");
-      });
+      } else if (props.data && props.data.responseCode === 8) {
+        swal({
+          text: props.data.message,
+          timer: 3000,
+          icon: "error",
+        }).then((res) => {
+          router.push("/subscribe-to-epl?subspack=epl");
+        });
+      } else if (props.data && props.data.responseCode === 220) {
+        swal({
+          text: "Subscription Expired!",
+          timer: 3000,
+          icon: "error",
+        }).then((res) => {
+          props.signout();
+        });
+      } else if (props.data && props.data.responseCode === 110) {
+        swal({
+          title:
+            "This content is not available on your current package, to upgrade your package press Upgrade",
+          icon: "warning",
+          buttons: ["Cancel", "Upgrade"],
+          dangerMode: false,
+        }).then((accepted, cancel) => {
+          if (accepted) {
+            router.push(
+              `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
+            );
+          } else {
+            router.push("/");
+          }
+        });
+      }
     }
-  }, [url]);
+  }, [url, props?.data?.responseCode == 110, props?.data?.responseCode == 220]);
+
   function shouldRenderPlayer() {
     if (props.data && props.data.responseCode == 8) {
       return false;
     } else if (props.data && props.data.responseCode == 401) {
       return false;
+    } else if (props.data && props.data.responseCode == 110) {
+      return false;
+    } else if (props.data && props.data.responseCode == 220) {
+      return false;
     } else {
-      return true
+      return true;
     }
   }
   return (
     <div>
       <Head>
+        <style>
+          {`
+            @media screen and (max-width: 799px) {
+              #footer {
+                display: none
+              }
+            }
+          `}
+        </style>
         <title>{props.schema.metaData[0].title}</title>
         <meta property="og:type" content="article" />
         <meta property="og:title" content={props.schema.metaData[0].title} />
         <meta
           property="og:description"
+          content={props.schema.metaData[0].description}
+        />
+        <meta
+          name="description"
           content={props.schema.metaData[0].description}
         />
         <meta
@@ -128,6 +155,8 @@ const watch = (props) => {
   );
 };
 
+// server side rendering
+
 export async function getServerSideProps(context) {
   const chanelDetail = manipulateUrls(context.query);
   const cookies = Cookie.parseCookies(context.req);
@@ -144,14 +173,15 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
   let allowUser = true;
-  let body = {
-    Version: "V2",
+  const watch = GlobalService.authHeaders(cookies["content-token"]);
+  var body = {
+    Version: "V1",
     Language: "en",
     Platform: "web",
     ChannelOrVODId: chanelDetail.CleanVideoId,
     UserId: cookies.userId ? cookies.userId : "0",
     IsChannel: chanelDetail.isChannel,
-    headers: GlobalService.authHeaders(cookies["content-token"]),
+    headers: watch,
   };
   var isFree = "1";
   isFree = chanelDetail.isFree;
@@ -175,33 +205,44 @@ export async function getServerSideProps(context) {
       }
     }
   } else {
+    const res = await PlayerService.getVideoData(body, ip);
     if (isAuthentictedServerSide(context.req)) {
-      const res = await PlayerService.getVideoData(body, ip);
       if (res && res.responseCode == 5) {
         // expired subscription
         return {
-          props: response(res.data, chanelDetail, false, seo),
+          props: response(res?.data, chanelDetail, false, seo),
         };
       } else if (res && res.responseCode == 401) {
+        // logging out
         return {
-          props: response(res.data, chanelDetail, true, seo),
+          props: response(res?.data, chanelDetail, true, seo),
         };
-      }
-      else {
+      } else if (res && res.responseCode == 110) {
+        // send to change package screen with auto package selected
+        return {
+          props: response(res?.data, chanelDetail, true, seo),
+        };
+      } else if (res && res.responseCode == 220) {
+        // package expired and login redirect to upgrade
+        return {
+          props: response(res?.data, chanelDetail, true, seo),
+        };
+      } else {
         // authenticated
         return {
-          props: response(res.data, chanelDetail, true, seo),
+          props: response(res?.data, chanelDetail, true, seo),
         };
       }
     } else {
-      // not logged in
+      // not logged in and redirect to subscription page
       return {
-        props: response(null, chanelDetail, false, seo),
+        props: response(res?.data, chanelDetail, false, seo),
       };
     }
   }
 }
 
+const watch = withSignout(WatchPage);
 export default watch;
 
 const response = (data, channel, allowUser, seo) => {
@@ -210,6 +251,6 @@ const response = (data, channel, allowUser, seo) => {
     channel,
     allowUser,
     schema: seo,
-    env: process.env.TAPENV
+    env: process.env.TAPENV,
   };
 };

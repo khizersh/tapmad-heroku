@@ -1,11 +1,9 @@
-import React,{useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import BottomNav from "./bottom-nav";
 import BuyCoinModal from "./BuyCoinModal";
 
 const GameLayout = ({ children }) => {
-
-  const [show , setShow] = useState(true)
-
+  const [show, setShow] = useState(true);
 
   // useEffect(() => {
   //   if(window.innerWidth <= 800){
@@ -14,11 +12,10 @@ const GameLayout = ({ children }) => {
   //     }
   //   }
   // }, [])
-  
- 
+
   return (
-    <div>
-      <BuyCoinModal />
+    // <div className="game-header">
+    <div style={{minHeight: "50vh"}}>
       {children}
       <BottomNav />
     </div>

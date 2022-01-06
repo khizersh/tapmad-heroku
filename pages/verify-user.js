@@ -1,76 +1,41 @@
 import React, { useState, useEffect, useContext } from "react";
-import swal from "sweetalert";
 import { MainContext } from "../contexts/MainContext";
-import { AuthService } from "../modules/auth/auth.service";
 import withLogin from "../modules/auth/LoginHOC";
-import { Cookie } from "../services/cookies";
 import { useRouter } from "next/router";
 import requestIp from "request-ip";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
+import {
+  UPDATE_USER_DETAILS,
+} from "../contexts/auth/SignUpReducer";
 
 function VerifyUser({ login, ip }) {
-  const {
-    initialState,
-    updateUserNumber,
-    updateUserPassword,
-    updateUserOperator,
-    setLoader,
-  } = useContext(MainContext);
+  const { setLoader } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const router = useRouter();
-
-  useEffect(async () => {
-    setLoader(true);
-    let userNumber = Cookie.getCookies("unum");
-    const data = await AuthService.checkUser(userNumber);
-    if (data && data.code == 11) {
-      let userOperator = Cookie.getCookies("uop");
-      if (userOperator && userNumber) {
-        updateUserOperator(userOperator);
-        updateUserPassword(data.data.User.UserPassword);
-        updateUserNumber(userNumber);
-      }
-      setLoader(false);
-    } else if (data.code == 0) {
-      swal({
-        title: "Please sign up!",
-        timer: 2500,
-        icon: "warning",
-      }).then((r) => router.push("/sign-up"));
-    } else if (data.code == 34) {
-      swal({
-        title: "Please sign in!",
-        timer: 2500,
-        icon: "warning",
-      }).then((r) => router.push("/sign-in"));
-    }
-    setLoader(false);
-  }, []);
-
+  const { number, operator } = router.query;
 
   useEffect(() => {
-    let userNumber = Cookie.getCookies("unum");
-    if (initialState.User.Password) {
-      console.log("userNumber Inside condition: ", userNumber);
-      let loginResp = login(ip);
+    if (number && operator ) {
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { MobileNo: number, Operator: operator },
+      });
+    }
+  }, []);
+
+  useEffect(async () => {
+    if (SignUpState.UserDetails.MobileNo) {
+      // setting pin api false for login
+      let loginResp = await login(ip , false);
+      if (loginResp?.code && loginResp.code != 1) {
+        router.push(loginResp.view);
+      }
       setLoader(false);
     }
-  }, [initialState.User.MobileNo])
+  }, [SignUpState.UserDetails.MobileNo]);
   return <div></div>;
 }
-
-// loginResp.then((e) => {
-//   if (e != null && e.responseCode == 401) {
-//     AuthService.forgetPin(userNumber, userOperator).then((res) => {
-//       router.push(
-//         {
-//           pathname: "/sign-up",
-//           query: { code: "1", number: userNumber },
-//         },
-//         "/sign-up"
-//       );
-//     });
-//   }
-// });
 
 const EnhancedEnterPin = withLogin(VerifyUser);
 export default EnhancedEnterPin;
@@ -84,7 +49,7 @@ export function getServerSideProps(context) {
     props: {
       noSideBar: true,
       ip: ip,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }

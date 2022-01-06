@@ -1,8 +1,6 @@
 import React from "react";
 import LeftSidebar from "./left-sidebar";
-import GameMain from "./game-main";
 import RightSideBar from "./right-sidebar";
-import BottomNav from "./bottom-nav";
 import GameLayout from "./GameLayout";
 import MatchBids from "../../../components/psl/bids/MatchBids";
 

@@ -10,7 +10,6 @@ import { handleResponse } from "../../../services/http-service";
 async function getFeaturedHomePageData(ip) {
   const resp = await get(getFeaturedHomePage, ip);
   const data = handleResponse(resp);
-
   if (data != null) {
     if (data.responseCode == 1) {
       return {
@@ -33,6 +32,7 @@ async function getFeaturedHomePageData(ip) {
 async function getFeaturedBannerDetailData(ip) {
   const resp = await get(getFeaturedBannerDetail, ip);
   const data = handleResponse(resp);
+
   if (data != null) {
     if (data.responseCode == 1) {
       return {
@@ -55,6 +55,7 @@ async function getFeaturedBannerDetailData(ip) {
 async function getWebTabBannersData(ip) {
   const resp = await get(getWebTabBanners, ip);
   const data = handleResponse(resp);
+
   if (data != null) {
     if (data.responseCode == 1) {
       return {

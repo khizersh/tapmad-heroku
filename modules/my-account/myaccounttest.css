@@ -1,0 +1,268 @@
+@font-face {
+  font-family: "okomitomedium";
+  src: url("../../public/fonts/okomito-medium-webfont.woff") format("woff2"),
+    url("../../public/fonts/okomito-medium-webfont.woff2") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.h_style {
+  color: "#fff";
+  font-size: 20px;
+
+  font-family: "okomitomedium";
+}
+.parent_webdiv {
+  height: 100vh;
+}
+.profile_div {
+  /* height: 40vh; */
+}
+.optButtons {
+  background-color: #1d211f;
+  font-size: 14px;
+}
+.optButtons:hover {
+  font-size: 14px;
+  font-family: "okomitomedium";
+  background-color: #87c242;
+  /* background: transparent
+    linear-gradient(96deg, var(--primary-37c673) 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
+  background: transparent linear-gradient(96deg, #37c673 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box; */
+  color: #fff;
+}
+.package_div {
+  height: 60vh;
+}
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: #ccc;
+}
+.Stan_container {
+  position: relative;
+  left: 5rem;
+}
+.option_div {
+  background-color: #fff;
+  width: auto;
+}
+.cont_style {
+  background-color: #3b3b3b;
+}
+.table_style tr td {
+  font-size: 13px;
+  text-align: center;
+}
+.table_style th {
+  background-color: #484948;
+  padding: 10px;
+  color: #87c242;
+  text-align: center;
+}
+.billing-table tr:nth-child(odd) td {
+  background-color: #333433;
+}
+.billing-table tr:nth-child(even) td {
+  background-color: #3d3e3d;
+}
+.table_style {
+  width: 100%;
+}
+.pagination {
+  display: inline-block;
+  width: 100%;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.pagination-btn {
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+.editprofile_lbl {
+  font-size: 14px;
+}
+.mob_editProfile {
+  background-color: #131c1f;
+  border-radius: 8px;
+}
+.desk_editProfile {
+  background-color: #333433;
+}
+.desk_editProfile input {
+  background-color: #fff;
+  border: 0px solid #707070;
+}
+.desk_editProfile input::placeholder {
+  color: #898d8f;
+}
+.mob_editProfile input {
+  background-color: #fff;
+  border: 1px solid #707070;
+  font-size: 14px;
+}
+.mob_editProfile input::placeholder {
+  color: #707070;
+}
+.pagination a {
+  color: red;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.font-14 {
+  font-size: 14px !important;
+}
+.font-16 {
+  font-size: 16px !important;
+}
+.font-18 {
+  font-size: 18px !important;
+}
+
+.profile-img {
+  width: 60%;
+}
+
+.font-11 {
+  font-size: 11px !important;
+}
+.font-13 {
+  font-size: 13px !important;
+}
+.font-20 {
+  font-size: 20px;
+}
+.font-32 {
+  font-size: 32px !important;
+}
+.package_style {
+  color: #87c242 !important;
+  font-weight: 650;
+}
+.table_text {
+  font-size: 31px;
+}
+.margTop-90{
+  margin-top: 90px;
+}
+
+.back-btn{
+  border-radius: 25px 25px 25px 25px;
+  padding: 0px 29px 0px 30px;
+}
+
+.editpr_heading {
+  margin-left: 4rem !important;
+}
+
+.btn_submit {
+  background-color: #87c242 !important;
+  color: white;
+}
+
+
+.text {
+  font-size: 12px;
+  flex-direction: column;
+  display: flex;
+  padding: 4px;
+}
+.btn-light {
+  font-family: "okomitomedium";
+  font-size: 14px;
+}
+.btn-gradient {
+  font-size: 14px;
+  font-family: "okomitomedium";
+  background: transparent
+    linear-gradient(96deg, var(--primary-#37c673) 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
+  background: transparent linear-gradient(96deg, #37c673 0%, #109f69 100%) 0% 0%
+    no-repeat padding-box;
+  color: #fff;
+}
+.border-style {
+  border-color: #37c673 !important;
+  border-radius: 1rem !important;
+  height: 4rem;
+}
+.user_img {
+  width: "100%";
+}
+.package-box {
+  display: grid;
+  align-content: center;
+  justify-items: end;
+  justify-content: end;
+}
+.std_txt {
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "okomitomedium";
+  margin: 0 auto;
+  line-height: 1  ;
+}
+
+.sub-title {
+  position: relative;
+  font-size: 13px;
+}
+.pm_txt {
+  font-size: 12px;
+  position: relative;
+  bottom: 1.5rem;
+  right: 0rem;
+  float: right;
+}
+.rs_style {
+  background-color: #37c673;
+  width: fit-content;
+  padding: 5px;
+}
+.mygame_text {
+  font-family: "okomitomedium";
+  font-size: 16px;
+}
+.mygame_num {
+  font-family: "okomitomedium";
+  font-size: 20px;
+}
+.block_play,
+.block_won,
+.block_lost,
+.block_rank {
+  border-radius: 12px !important;
+}
+.block_play {
+  background-color: #bf5db7;
+}
+.block_won {
+  background-color: #ffa700;
+}
+.block_lost {
+  background-color: #fe4646;
+}
+.block_rank {
+  background-color: #37c673;
+}
+
+.table_style td {
+  color: #d0d4d7;
+}
+@media only screen and (max-width: 799px) {
+  .table_style th {
+    background-color: #484948;
+    padding: 10px;
+    color: #87c242;
+    text-align: center;
+    font-size: 13px;
+  }
+  .table_style td {
+    font-size: 13px;
+  }
+}

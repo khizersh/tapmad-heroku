@@ -1,36 +1,28 @@
 import React, { useContext, useRef } from "react";
 import { MainContext } from "../../../contexts/MainContext";
-import { Cookie } from "../../../services/cookies";
-import { actionsRequestContent } from "../../../services/http-service";
-import {
-  loggingTags,
-  sendOTP,
-  verifyUserPinCode,
-} from "../../../services/apilinks";
 import swal from "sweetalert";
-import { Authcontext } from "../../../contexts/AuthContext";
-import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { UPDATE_SUBSCRIBE_RESPONSE } from "../../../contexts/auth/SignUpReducer";
+import { Cookie } from "../../../services/cookies";
 
 const EnterPinToVerifyUser = ({ login }) => {
-  const router = useRouter();
-  const { checkUserAuthentication, setLoader, initialState } = useContext(
-    MainContext
-  );
-  const { updateResponseCode, authState } = useContext(Authcontext);
+  const { setLoader } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const pinCode = useRef("");
 
   async function forgetPin() {
     setLoader(true);
-    let mobileNo = initialState.User.MobileNo,
-      opId = initialState.User.OperatorId;
-
+    let mobileNo = SignUpState.UserDetails?.MobileNo,
+      opId = SignUpState.UserDetails?.Operator;
     const data = await AuthService.forgetPin(mobileNo, opId);
-
     if (data != null) {
       if (data.responseCode == 1) {
-        updateResponseCode(data.responseCode);
+        dispatch({
+          type: UPDATE_SUBSCRIBE_RESPONSE,
+          data: { code: data.responseCode, newUser: false },
+        });
       } else {
         swal({
           timer: 3000,
@@ -51,27 +43,17 @@ const EnterPinToVerifyUser = ({ login }) => {
   }
 
   async function verifyPinCode() {
-    if (pinCode.current.value.length == 4) {
+    if (pinCode.current.value?.trim().length == 4) {
       setLoader(true);
       const data = await AuthService.verifyPinCode(pinCode.current.value);
       if (data != null) {
         if (data.responseCode == 1) {
           // logging start
-          if (authState && authState.selectedPackageId) {
-            let body = {
-              event: loggingTags.signup,
-              amount: authState.selectedPackageAmount,
-              operatorName: authState.selectedPackageName,
-              mobileNumber: initialState.User.MobileNo,
-            };
-            actionsRequestContent(body);
-          }
           var loginResp = login();
           loginResp.then((e) => {
             if (e != null && e.responseCode == 401) {
-              console.log(e);
               forgetPin()
-                .then((re) => { })
+                // .then((re) => {})
                 .catch((e) => console.log(e));
             }
           });
@@ -100,7 +82,7 @@ const EnterPinToVerifyUser = ({ login }) => {
   }
   return (
     <>
-      <div>
+      <div className="desktop-size custom-bg-signup">
         <div className="py-3">
           <div className="text-center">
             <small className="text-dark">Enter your four digit PIN</small>
@@ -109,8 +91,8 @@ const EnterPinToVerifyUser = ({ login }) => {
         <div className="p-3">
           <input
             type="password"
-            className="form-control"
-            placeholder="Enter your PIN"
+            className="form-control border-curve"
+            placeholder="Enter PIN"
             maxLength={4}
             minLength={4}
             ref={pinCode}
@@ -119,7 +101,8 @@ const EnterPinToVerifyUser = ({ login }) => {
         <div className="text-center py-2">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary pymnt_pge_sbscrbe_btn"
+            style={{ width: "50%" }}
             onClick={verifyPinCode}
           >
             Verify PIN

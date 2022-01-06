@@ -1,19 +1,54 @@
-
-:root{
-  --mobile:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg');
-  --desktop:url('https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg');
+:root {
+  --mobile: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg");
+  --desktop: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg");
+  --basecolor: #87c242 ;
+}
+.text-base {
+  color: var(--basecolor);
+}
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid var(--basecolor);
+  margin: auto;
 }
 
+.back-btn-login{
+  position: relative;
+  bottom: -60px !important;
+}
 .bg_dark {
   /* background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg"); */
   background: var(--desktop);
   background-size: cover;
+  height: 100vh;
   background-blend-mode: multiply;
 }
-
+.bg-dark-cstm {
+  /* background-color: #262626; */
+  background-color: #3b3b3b;
+}
 .tm_login_pg {
   display: table;
   width: 100%;
+}
+
+.border-curve {
+  border-radius: 5px !important;
+}
+
+.text-box {
+  background-color: white;
+}
+
+.payment-icon {
+  background-color: white;
+  color: black;
+  padding: 7px;
+  display: flex;
+  align-items: center;
 }
 
 .login_slct_oprtr {
@@ -53,33 +88,34 @@
 }
 
 .pymnt_pge_pr_list li > span {
-  font-size: 1.4vw;
-  color: #87c242;
+  font-size: 14px;
   text-transform: uppercase;
 }
 .pymnt_pge_pr_list li {
   font-size: 14px;
-  color: #fff;
-  border-radius: 0 !important;
-  background-color: #222;
+  color: #000;
+  border-radius: 0;
+  background-color: #fff;
   cursor: pointer;
   transition: 0.3s;
+  opacity: 1;
 }
-
 .pr_active {
-  background-color: #fff !important;
-  color: #000 !important;
-  background-image: url(//d1s7wg2ne64q87.cloudfront.net/web/images/payment/check.png);
   background-position: 100% -15px;
   background-size: 5rem;
   background-repeat: no-repeat;
+  /* border-bottom: 5px solid var(--basecolor); */
 }
-.list-group-item-action:focus,
-.list-group-item-action:hover {
-  z-index: 1;
-  color: black !important;
-  text-decoration: none;
-  background-color: #f8f9fa;
+
+.green-bar {
+  border-bottom: 4px solid var(--basecolor);
+  position: relative;
+  bottom: -16px;
+  margin: 0 auto;
+  width: 70%;
+}
+.pr_active span {
+  color: var(--basecolor);
 }
 
 .req_pin_cde_btn:hover {
@@ -94,22 +130,17 @@
   background-color: #4d8305 !important;
 }
 
-.login_slct_oprtr .form-control {
-  border-left: 1px solid #ccc !important;
-  border-radius: 0;
-  border: 0;
-  background: #f1f1f1;
-  height: 45px;
-  padding: 13px 6px;
-  box-shadow: none;
-  font-weight: bold;
-  /* margin-top: -2% */
+.max-width-30{
+  max-width: 29px;
+  height: 27px;
+  object-fit: contain;
 }
-
+/* .login_slct_oprtr .form-control { */
+/* 
 .login_slct_oprtr h3 {
   font-weight: bold;
   margin-bottom: 5px;
-}
+} */
 
 .login_slct_oprtr p {
   margin-bottom: 20px;
@@ -136,7 +167,8 @@
   transition: 0.3s;
 }
 
-.form-control {
+/* .form-control { */
+.custom-input {
   font-size: 14px;
 }
 
@@ -149,11 +181,39 @@
 }
 
 .clr-green {
-  color: #87c242;
+  color: #87c242 ;
 }
 .bg-green {
-  background-color: #87c242;
+  background-color: #87c242 ;
   border-radius: 0;
+}
+
+.checkbox-term {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px !important;
+}
+
+/* term and condition checkbox */
+.container-term {
+  display: block;
+  padding-left: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #878787;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container-term span {
+  text-decoration: underline;
+}
+
+.pymnt_pge_sbscrbe_btn {
+  width: 100%;
+  border-radius: 23px;
+  font-size: 20px;
+  color: white;
 }
 .text-white {
   color: white !important;
@@ -172,7 +232,7 @@
   border-bottom: 1px solid #ddd;
 }
 .width-11rem {
-  width: 11rem;
+  width: 100%;
   cursor: pointer;
 }
 .dropdown-width {
@@ -205,9 +265,6 @@
   cursor: pointer;
 }
 
-.cursor-pointer:hover {
-  background-color: #a9a9a9b0;
-}
 .font-weight {
   font-weight: 700;
 }
@@ -225,12 +282,10 @@
   }
 
   .pr_active {
-    background-color: #fff !important;
-    color: #000 !important;
-    background-image: url(//d1s7wg2ne64q87.cloudfront.net/web/images/payment/check.png);
     background-position: 100% -15px;
-    background-size: 4rem !important;
+    background-size: 5rem;
     background-repeat: no-repeat;
+    /* border-bottom: 5px solid var(--basecolor); */
   }
   .mbl-13px {
     font-size: 13px;
@@ -249,10 +304,13 @@
     overflow-y: hidden;
   }
   .pymnt_pge_pr_list li > span {
-    font-size: 4vw;
-    color: #87c242;
+    font-size: 3.5vw;
+    color: #87c242 ;
     text-transform: uppercase;
   }
+}
+.border-radius-6{
+  border-radius: 6px;
 }
 
 /* Smartphones (landscape) ----------- */
@@ -286,8 +344,8 @@
     overflow-y: hidden;
   }
   .pymnt_pge_pr_list li > span {
-    font-size: 4vw;
-    color: #87c242;
+    font-size: 3.5vw;
+    color: #87c242 ;
     text-transform: uppercase;
   }
   .bg_dark {
@@ -310,7 +368,34 @@
     background-blend-mode: multiply;
   }
 }
+.f-40 {
+  font-size: 32px;
+}
+.per-month {
+  font-size: 12px;
+  text-align: left;
+}
+.monthly {
+  font-size: 12px;
+  text-align: left;
+  line-height: 5px;
+  position: relative;
+  left: 3px;
+  top: 18px;
+}
 
+.line-1 {
+  line-height: 1;
+}
+.line-2 {
+  line-height: 2;
+}
+.font-17 {
+  font-size: 20px;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
 /* iPhone 5 (portrait)----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
   .bg_dark,
@@ -323,30 +408,51 @@
     background-size: cover;
     background-blend-mode: multiply;
   }
-}
+  .f-40 {
+    font-size: 30px;
+  }
+  .per-month {
+    font-size: 10px;
+  }
+  .monthly {
+    font-size: 12px;
+    text-align: left;
+    line-height: 9px;
+    position: relative;
+    left: 3px;
+    top: 7px;
+  }
 
+  .green-bar {
+    border: 3px solid var(--basecolor);
+    position: relative;
+    margin: 0 auto;
+    width: 70%;
+  }
+}
+.sized-image {
+  height: 50px;
+  object-fit: contain;
+}
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
   .bg_dark {
-    margin-left: -4%;
+    /* margin-left: -4%; */
   }
 }
 
 /* Large screens ----------- */
 @media only screen and (min-width: 1824px) {
   .bg_dark {
-    margin-left: -4%;
+    /* margin-left: -4%; */
   }
 }
-
-
-
 
 /* Checkout CSS */
 
 .one-liner {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .card-frame {
@@ -355,31 +461,122 @@
   width: 100%;
   margin-bottom: 8px;
   height: 40px;
-  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.2)
+  box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.2);
 }
 
 .card-frame.frame--rendered {
-  opacity: 1
+  opacity: 1;
 }
 
 .card-frame.frame--rendered.frame--focus {
-  border: solid 1px #13395E;
-  box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15)
+  border: solid 1px #13395e;
+  box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15);
 }
-
+.f-20 {
+  font-size: 20px;
+}
+.price-active {
+  background: var(--basecolor);
+  color: white;
+  border-radius: 10px;
+}
+.price-active span {
+  color: white;
+}
 .card-frame.frame--rendered.frame--invalid {
-  border: solid 1px #D96830;
-  box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15)
+  border: solid 1px #d96830;
+  box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15);
 }
-
 
 @media screen and (min-width: 31rem) {
   .one-liner {
-      flex-direction: row
+    flex-direction: row;
   }
 
   .card-frame {
-      width: 100%;
-      margin-bottom: 0
+    width: 100%;
+    margin-bottom: 0;
   }
 }
+
+.rounded-sides:first-child {
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
+}
+.rounded-sides:last-child {
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
+}
+
+/* Custom CSS for Radio Buttons Start*/
+
+input[type="radio"] {
+  display: none;
+}
+.radio-cstm:before {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  content: "";
+  border-radius: 50%;
+  display: block;
+  margin: -2px auto;
+}
+.radio-cstm:after {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 255, 255);
+  content: "";
+  border-radius: 50%;
+  display: block;
+  /* margin: -5px 21px; */
+  margin: -6px auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 9px;
+  transition: all 0.4s;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+  /*
+    ** Commeted by Ibrahim
+   .radio-cstm:before {
+    width: 25px;
+    height: 25px;
+  } */
+  .radio-cstm:after {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  .radio-cstm:after {
+    width: 11px;
+    height: 11px;
+    background-color: rgb(255, 255, 255);
+    content: "";
+    border-radius: 50%;
+    display: block;
+    margin: -4px auto;
+    position: absolute;
+    left: 0;
+    left: 0;
+    top: 9px;
+    transition: all 0.4s;
+  }
+}
+input[type="radio"]:checked + .radio-cstm::after {
+  background-color: rgba(135, 194, 66, 1);
+}
+input[type="radio"]:checked + .radio-cstm::before {
+  border: 3px solid rgba(135, 194, 66, 1);
+}
+.radio-cstm {
+  cursor: pointer;
+  font-weight: bold;
+}
+.radio-cstm:nth-last-child(1) {
+  padding-right: 0px;
+}
+/* Custom CSS for Radio Buttons End*/

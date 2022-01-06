@@ -1,5 +1,6 @@
-const { IsLiveChannel, IsSyno, IsCategory } = require("./constants");
+const { IsLiveChannel, IsCategory } = require("./constants");
 const { Cookie } = require("./cookies");
+// const CryptoJS = require("crypto-js");
 
 function manipulateUrls(router) {
   var movieId = [...router.slug].pop();
@@ -106,7 +107,6 @@ function SEOFriendlySlugsForWatch(event, catchup = false) {
   }${event.VideoEntityId}${event.IsVideoChannel ? "1" : "0"}`;
   return slug;
 }
-
 function SEOFriendlySlugsIsCategoryFalse(event, isAppendFreeVideo = false) {
   let prefix = "play";
   let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -120,9 +120,11 @@ function SEOFriendlySlugsIsCategoryFalse(event, isAppendFreeVideo = false) {
       event.IsVideoChannel ? "1" : "0"
     }`;
   }
-  // let cleanName = event.VideoName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   return slug;
 }
+
+
+
 
 function viewMoreCleanUrls(sectionName, sectionId, name) {
   var pageId = "";
@@ -143,19 +145,22 @@ function findImageInVODObject(video) {
     return video.VideoImageThumbnail;
   } else if (video.hasOwnProperty("ChannelTVImage")) {
     return video.ChannelTVImage;
-  } else if (video.hasOwnProperty("NewChannelThumbnailPath")) {
-    return video.NewChannelThumbnailPath;
   } else if (video.hasOwnProperty("VideoOnDemandThumb")) {
     return video.VideoOnDemandThumb;
+  } else if (video.hasOwnProperty("NewChannelThumbnailPath")) {
+    return video.NewChannelThumbnailPath;
   } else {
     return video.NewChannelThumbnailPath;
   }
 }
+// for shows only
 function SEOFriendlySlugsIsCategoryTrue(event) {
-  let prefix = "category";
+  let prefix = "shows";
   let name = event.CategoryName ? event.CategoryName : event.VideoName;
   let cleanName = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  let slug = `/${prefix}/${cleanName}/${event.VoDCategoryId}`;
+  let slug = `/${prefix}/${cleanName}/${
+    event.VoDCategoryId || event.VideoCategoryId
+  }`;
   return slug;
 }
 
@@ -230,7 +235,8 @@ function setUrlToCookies(key, url) {
     !url.includes("/sign-up") &&
     url != "/sign-in" &&
     url != "/myaccount" &&
-    url != "/subscribe-to-epl?subspack=epl"
+    url != "/subscribe-to-epl?subspack=epl" &&
+    url != "/change-package"
   ) {
     Cookie.setCookies("backUrl", url);
   }
@@ -260,11 +266,17 @@ function closeNavBar() {
   document.getElementsByClassName("menu")[0].classList.remove("active-nav");
 }
 const encryptWithAES = (text) => {
-  return text;
+  const passphrase = "My Secret Passphrase";
+  // return CryptoJS.AES.encrypt(text, passphrase).toString();
+  return "";
 };
 //The Function Below To Decrypt Text
 const decryptWithAES = (ciphertext) => {
-  return ciphertext;
+  // const passphrase = "My Secret Passphrase";
+  // const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
+  // const originalText = bytes.toString(CryptoJS.enc.Utf8);
+  // return originalText;
+  return "";
 };
 function getUserDetails() {
   var mobile = Cookie.getCookies("user_mob");
@@ -274,6 +286,12 @@ function getUserDetails() {
   } else {
     return { mobile: "", userId: "" };
   }
+}
+function checkForBoolean(param) {
+  if (param === 1 || param === true || param === "1" || param === "true") {
+    return true;
+  }
+  return false;
 }
 function SignOutUser() {}
 function addScriptUrlInDom(src) {
@@ -289,9 +307,7 @@ function addScriptCodeInDom(src) {
   script.innerHTML = src;
   document.getElementsByTagName("head")[0].appendChild(script);
 }
-function log() {
-  console.log(arguments);
-}
+function log() {}
 module.exports = {
   manipulateUrls,
   basicSliderConfig,
@@ -316,4 +332,5 @@ module.exports = {
   findImageInVODObject,
   log,
   verifyURL,
+  checkForBoolean,
 };
