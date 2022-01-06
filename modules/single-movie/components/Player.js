@@ -546,7 +546,7 @@ export default function Player({ movies }) {
                   ) : null}
 
                   {/* side 3rd ad */}
-                  <div className="mt-3 d-sm-none d-md-block">
+                  {/* <div className="mt-3 d-sm-none d-md-block">
                     <DFPSlotsProvider dfpNetworkId="28379801">
                       <div className="desktop-ads">
                         <AdSlot
@@ -556,7 +556,7 @@ export default function Player({ movies }) {
                         />
                       </div>
                     </DFPSlotsProvider>
-                  </div>
+                  </div> */}
                   {/* side 3rd ad end*/}
 
                   {ads.allow && isAutoPlay && ads.rightVideoAd ? (
