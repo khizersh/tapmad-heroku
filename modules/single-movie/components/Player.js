@@ -56,13 +56,13 @@ export default function Player({ movies }) {
     if (playerReady) {
       setPlayerReady(true);
     }
-      // if (
-      //   typeof document !== "undefined" &&
-      //   !document.querySelector(".jw-theater-mode") && // if button do not exist
-      //   screen.width > 992 // if mobile screen
-      // )
+    // if (
+    //   typeof document !== "undefined" &&
+    //   !document.querySelector(".jw-theater-mode") && // if button do not exist
+    //   screen.width > 992 // if mobile screen
+    // )
 
-      // create new element
+    // create new element
     //   const elem = document.createElement("div");
     //   elem.setAttribute(
     //     "class",
@@ -314,7 +314,7 @@ export default function Player({ movies }) {
                     {ads.topAdDesktop && (
                       <div className="desktop-ads d-none d-lg-block d-md-block">
                         <AdSlot
-                          sizes={[[728, 90]]}
+                          sizes={[[970, 250]]}
                           adUnit={ads.topAdDesktop}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
                         />
@@ -485,7 +485,7 @@ export default function Player({ movies }) {
 
                 {/* Banner bottom Ad */}
 
-                <div>
+                {/* <div>
                   {ads.allow && ads.bottomBannerAd ? (
                     <DFPSlotsProvider dfpNetworkId="28379801">
                       <div className="desktops-ads text-center d-none d-lg-block d-md-block">
@@ -499,7 +499,8 @@ export default function Player({ movies }) {
                   ) : (
                     <></>
                   )}
-                </div>
+                </div> */}
+                {/* Banner bottom Ad end*/}
               </div>
             </div>
             {!isMobile ? (
@@ -545,6 +546,19 @@ export default function Player({ movies }) {
                     )
                   ) : null}
 
+                  {/* side 3rd ad */}
+                  <div className="mt-3">
+                    <DFPSlotsProvider dfpNetworkId="28379801">
+                      <div className="desktop-ads">
+                        <AdSlot
+                          sizes={[[320, 50]]}
+                          adUnit={"MobileBannerFeatured"}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    </DFPSlotsProvider>
+                  </div>
+                  {/* side 3rd ad end*/}
                   {ads.allow && isAutoPlay && ads.rightVideoAd ? (
                     ads.rightVideoAd.includes("http") ? (
                       <div style={{ marginTop: "65px" }}>
