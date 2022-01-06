@@ -380,15 +380,34 @@ export default function Player({ movies }) {
               <div className="col-lg-12 p-0">
                 {movie && movie.Video ? (
                   <>
-                    <h1 className="mt-3 h5">{movie.Video.VideoName}</h1>
+                    <h1 className="mt-3 mb-0 h5">{movie.Video.VideoName}</h1>
                     {/* <span className="text-secondary">
                     {movie.Video.VideoTotalViews} views
                   </span> */}
-                    <p className="line-clamp" style={{ color: "#aaa" }}>
-                      {movie.Video.VideoDescription}
-                    </p>
+
+                    {/* Mobile Ads */}
+                    {isMobile ? (
+                      <AdSlot
+                        sizes={[[ads.topMobileAdWidth, ads.topMobileAdHieght]]}
+                        adUnit={ads.topAdMobile}
+                        onSlotIsViewable={(dfpEventData) => AdImpression()}
+                      />
+                    ) : (
+                      <></>
+                    )}
+
+                    {/* Show description on desktop and mobile if chat is disabled */}
+                    {!isMobile || !movie?.Video.IsChat ? (
+                      <p className="mt-2 line-clamp" style={{ color: "#aaa" }}>
+                        {movie.Video.VideoDescription}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
                   </>
-                ) : null}
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="col-lg-12 p-0">
                 {movie && movie.Video.IsChat ? (
@@ -397,12 +416,14 @@ export default function Player({ movies }) {
                     <PSLComponent channel={movie.Video} />
                     <br />
                   </div>
-                ) : null}
+                ) : (
+                  <></>
+                )}
 
                 {/* Banner bottom Ad */}
 
                 <div>
-                  {ads.allow && ads.bottomBannerAd && (
+                  {ads.allow && ads.bottomBannerAd ? (
                     <DFPSlotsProvider dfpNetworkId="28379801">
                       <div className="desktops-ads text-center d-none d-lg-block d-md-block">
                         <AdSlot
@@ -412,6 +433,8 @@ export default function Player({ movies }) {
                         />
                       </div>
                     </DFPSlotsProvider>
+                  ) : (
+                    <></>
                   )}
                 </div>
               </div>
