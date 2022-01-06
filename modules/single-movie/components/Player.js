@@ -37,6 +37,7 @@ export default function Player({ movies }) {
   const [videoLink, setVideoLink] = useState(null);
   const [local, setLocal] = useState(null);
   const [playerReady, setPlayerReady] = useState(false);
+  const [adsApiCalled, setAdsApiCalled] = useState(false);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -46,6 +47,8 @@ export default function Player({ movies }) {
     bottomBannerAd: "",
     bottomBannerAdMobile: "",
     rightVideoAd: "",
+    bottomMobileWidth: "",
+    bottomMobileHeight: "",
   });
 
   // Theater mode <start>
@@ -147,60 +150,67 @@ export default function Player({ movies }) {
     }
   }
 
+  // ads and related api call
   useEffect(async () => {
     verifyURL(router, movies.Video.VideoName);
     await getRelatedChannels();
-    const country = await AuthService.getGeoInfo();
-    const resp = await DashboardService.getAdData();
-    let data;
-    if (country) {
-      if (country.countryCode == "PK") {
+    if (!adsApiCalled) {
+      const country = await AuthService.getGeoInfo();
+      const resp = await DashboardService.getAdData();
+      let data;
+      if (country) {
+        if (country.countryCode == "PK") {
+          data = PlayerService.checkAds(resp, "local");
+          setLocal(true);
+        } else {
+          data = PlayerService.checkAds(resp, "international");
+          setLocal(false);
+        }
+      } else {
         data = PlayerService.checkAds(resp, "local");
         setLocal(true);
-      } else {
-        data = PlayerService.checkAds(resp, "international");
-        setLocal(false);
       }
-    } else {
-      data = PlayerService.checkAds(resp, "local");
-      setLocal(true);
-    }
-    if (data != null) {
-      if (window.screen.width < 800) {
-        setAds({
-          allow: data.allow,
-          onVideo: data.onVideo,
-          topAdDesktop: data.topAdDesktop,
-          topAdMobile: data.topAdMobile,
-          rightAd: "",
-          rightVideoAd: "",
-          bottomBannerAd: data.bottomBannerAd,
-          bottomBannerAdMobile: data.bottomBannerAdMobile,
-          bottomMobileWidth: data.bottomMobileWidth,
-          topMobileAdWidth: data.topMobileAdWidth,
-          bottomMobileWidth: data.bottomMobileWidth,
-          bottomMobileHeight: data.bottomMobileHeight,
-          videoAdDuration: data.videoAdDuration,
-        });
-        setAdDuration(data.videoAdDuration);
-      } else {
-        setAds({
-          allow: data.allow,
-          onVideo: data.onVideo,
-          topAdDesktop: data.topAdDesktop,
-          topAdMobile: data.topAdMobile,
-          rightAd: data.rightAd,
-          bottomBannerAd: data.bottomBannerAd,
-          rightVideoAd: data.rightVideoAd,
-          bottomBannerAdMobile: "",
-          bottomMobileWidth: data.bottomMobileWidth,
-          bottomMobileHeight: data.bottomMobileHeight,
-          videoAdDuration: data.videoAdDuration,
-        });
-        setAdDuration(data.videoAdDuration);
+      if (data != null) {
+        if (window.screen.width < 800) {
+          setAds({
+            allow: data.allow,
+            onVideo: data.onVideo,
+            topAdDesktop: data.topAdDesktop,
+            topAdMobile: data.topAdMobile,
+            rightAd: "",
+            rightVideoAd: "",
+            bottomBannerAd: data.bottomBannerAd,
+            bottomBannerAdMobile: data.bottomBannerAdMobile,
+            topMobileAdHieght: data.topMobileAdHieght,
+            topMobileAdWidth: data.topMobileAdWidth,
+            bottomMobileWidth: data.bottomMobileWidth,
+            bottomMobileHeight: data.bottomMobileHeight,
+            videoAdDuration: data.videoAdDuration,
+          });
+          setAdDuration(data.videoAdDuration);
+        } else {
+          setAds({
+            allow: data.allow,
+            onVideo: data.onVideo,
+            topAdDesktop: data.topAdDesktop,
+            topAdMobile: data.topAdMobile,
+            rightAd: data.rightAd,
+            bottomBannerAd: data.bottomBannerAd,
+            rightVideoAd: data.rightVideoAd,
+            bottomBannerAdMobile: "",
+            bottomMobileWidth: data.bottomMobileWidth,
+            bottomMobileHeight: data.bottomMobileHeight,
+            videoAdDuration: data.videoAdDuration,
+          });
+          setAdDuration(data.videoAdDuration);
+        }
       }
+      setTimeout(() => {
+        setAdsApiCalled(true);
+      }, 400);
     }
-  }, [router, ads.bottomMobileWidth]);
+    console.log("adsss. ", ads);
+  }, [router, adsApiCalled]);
   // video links
   useEffect(() => {
     fired = false;
@@ -309,17 +319,19 @@ export default function Player({ movies }) {
                         />
                       </div>
                     )}
-                    {ads.topAdMobile && ads.topMobileAdWidth && (
+                    {ads.topAdMobile &&
+                    ads.topMobileAdWidth &&
+                    ads.topMobileAdHieght ? (
                       <div className="desktops-ads text-center d-lg-none d-md-none">
                         <AdSlot
                           sizes={[
-                            [ads.topMobileAdWidth, ads.bottomMobileWidth],
+                            [ads.topMobileAdWidth, ads.topMobileAdHieght],
                           ]}
                           adUnit={ads.topAdMobile}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
                         />
                       </div>
-                    )}
+                    ) : null}
                   </DFPSlotsProvider>
                 </div>
               ) : null}
@@ -557,7 +569,8 @@ export default function Player({ movies }) {
               </div>
             ) : null}
 
-            <div className="m-auto d-block d-sm-none">
+               {/* mobile bottom ads */}
+            <div className="m-auto">
               <div>
                 {ads.allow && ads.bottomBannerAdMobile ? (
                   ads.bottomBannerAdMobile.includes("http") ? (
@@ -583,25 +596,20 @@ export default function Player({ movies }) {
                         }}
                       />
                     </div>
-                  ) : (
-                    ads.bottomBannerAdMobile && (
-                      <DFPSlotsProvider dfpNetworkId="28379801">
-                        <div className="desktop-ads">
-                          {ads.bottomBannerAdMobile != "" ? (
-                            <AdSlot
-                              adUnit={ads.bottomBannerAdMobile}
-                              sizes={[[ads.bottomMobileWidth, ads.bottomMobileHeight]]}
-                              onSlotIsViewable={(dfpEventData) =>
-                                AdImpression()
-                              }
-                            />
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </DFPSlotsProvider>
-                    )
-                  )
+                  ) : ads.bottomBannerAdMobile &&
+                    ads.bottomMobileWidth &&
+                    ads.bottomMobileHeight ? (
+                    <DFPSlotsProvider dfpNetworkId="28379801">
+                      <div className="desktop-ads">
+                        <AdSlot
+                          sizes={[[ads.bottomMobileWidth, ads.bottomMobileHeight]]}
+                          adUnit={ads.bottomBannerAdMobile}
+                     
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    </DFPSlotsProvider>
+                  ) : null
                 ) : null}
               </div>
             </div>

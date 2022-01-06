@@ -12,7 +12,6 @@ import router from "next/router";
 import { checkForBoolean } from "../../../services/utils";
 
 const VerifyOTPComponent = ({ newUser, login }) => {
-  console.log("newUser : ", newUser);
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const otp = useRef("");
@@ -74,7 +73,13 @@ const VerifyOTPComponent = ({ newUser, login }) => {
             Cookie.setCookies("userId", data.data.User.UserId);
           }
           if (SignUpState.LoggedIn && SignUpState.LoggedIn == 1) {
-            router.push("/");
+            swal({
+              timer: 2500,
+              title: data.message,
+              icon: "success",
+            }).then((res) => {
+              router.push("/");
+            });
           } else if (checkForBoolean(data.data?.User?.IsPinSet)) {
             AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then(
               (e) => {
