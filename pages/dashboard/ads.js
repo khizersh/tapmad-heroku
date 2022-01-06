@@ -18,6 +18,8 @@ export default function ads() {
       rightAd: "",
       bottomBannerAd: "",
       bottomBannerAdMobile: "",
+      bottomBannerAdMobileHeight:"",
+      bottomBannerAdMobileWeight:"",
       videoAdDuration: 200000,
       allow: true,
     },
@@ -31,6 +33,8 @@ export default function ads() {
       rightAd: "",
       bottomBannerAd: "",
       bottomBannerAdMobile: "",
+      bottomBannerAdMobileHeight:"",
+      bottomBannerAdMobileWeight:"",
       videoAdDuration: 200000,
       allow: true,
     },
@@ -45,6 +49,7 @@ export default function ads() {
     rightAd: "",
     bottomBannerAd: "",
     bottomBannerAdMobile: "",
+    bottomBannerAdMobileSize:"",
     videoAdDuration: 2000,
     allow: true,
   });
@@ -58,6 +63,7 @@ export default function ads() {
     rightAd: "",
     bottomBannerAd: "",
     bottomBannerAdMobile: "",
+    bottomBannerAdMobileSize:"",
     videoAdDuration: 2000,
     allow: true,
   });
@@ -263,6 +269,25 @@ export default function ads() {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
               <div className="form-group">
+                <label>Bottom Ad Mobile Size</label>
+                <input
+                  type="text"
+                  name="bottomBannerAdMobileSize"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  value={local.bottomBannerAdMobileSize}
+                  aria-describedby="emailHelp"
+                  onChange={onChangeLocal}
+                  placeholder="Enter Bottom Banner Ad Mobile"
+                />
+
+                <small id="emailHelp" className="form-text text-muted">
+                  Ad unit for bottom banner ad for mobile
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
                 <label>Video Ad Duration</label>
                 <input
                   type="number"
@@ -443,6 +468,25 @@ export default function ads() {
                 />
 
                 <small className="form-text text-muted">
+                  Ad unit for bottom banner ad for mobile
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label>Bottom Ad Mobile Size</label>
+                <input
+                  type="text"
+                  name="bottomBannerAdMobileSize"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  value={international.bottomBannerAdMobileSize}
+                  aria-describedby="emailHelp"
+                  onChange={onChangeInternatioanl}
+                  placeholder="Enter Bottom Banner Ad Mobile"
+                />
+
+                <small id="emailHelp" className="form-text text-muted">
                   Ad unit for bottom banner ad for mobile
                 </small>
               </div>
