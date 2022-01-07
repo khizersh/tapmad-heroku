@@ -1,6 +1,5 @@
 export var BASEURL = "https://api.tapmad.com/";
-export const BASEURLAPP = "https://stag-backend.tapmad.com/app/";
-// export const BASEURLAPP = "https://app.tapmad.com/";
+export const BASEURLAPP = "https://app.tapmad.com/";
 const BASEPAYMENTURL = "https://payments.tapmad.com/";
 const BASEURLDEVELOPMENT = "https://developer.tapmad.com/dev/app/";
 const STAGEURL = "https://stag-backend.tapmad.com/app/";
