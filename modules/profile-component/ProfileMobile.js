@@ -19,7 +19,13 @@ import {
 import Link from "next/link";
 import NavbarHOC from "../navbar/NavbarHOC";
 
-const MyAccountMobile = ({ profileData, allData, onClickBack, upgardeBtn }) => {
+const MyAccountMobile = ({
+  profileData,
+  allData,
+  onClickBack,
+  upgardeBtn,
+  unSubscribe,
+}) => {
   const [show, setShow] = useState({
     games: false,
     package: false,
@@ -55,7 +61,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack, upgardeBtn }) => {
             margin-top: 5px;
           }
           dl dt {
-            font-weight: 400
+            font-weight: 400;
           }
           dl dt,
           dl dd {
@@ -220,11 +226,20 @@ const MyAccountMobile = ({ profileData, allData, onClickBack, upgardeBtn }) => {
                 type="button"
                 className="btn btn-gradient text-light rounded-pill p-1 w-100"
                 onClick={clickEditProfile}
-                // disabled={upgardeBtn}
+                disabled={upgardeBtn}
               >
                 Update Package
               </button>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 mt-3">
+            <a>
+              <span className="btn view-more-btn w-100 font-14" onClick={unSubscribe}>
+                Unsubscribe
+              </span>
+            </a>
           </div>
         </div>
         <div className={` ${show.games ? "row mx-0 mt-2" : "d-none"}`}>
