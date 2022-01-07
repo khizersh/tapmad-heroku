@@ -18,7 +18,13 @@ const watch = (props) => {
   const [related, setRelated] = useState([]);
   useEffect(() => {
     if (!props.allowUser) {
-      router.push("/sign-up?tab=1&packageId=2");
+      if (props.data?.Video?.PaymentTabId) {
+        router.push(
+          `/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
+        );
+      } else {
+        router.push("/sign-up?tab=1&packageId=1");
+      }
     } else {
       if (catchupState && catchupState.relatedContent.length) {
         setRelated(catchupState.relatedContent);
@@ -34,6 +40,8 @@ const watch = (props) => {
       actionsRequestContent(body);
     }
   }, [props.allowUser]);
+
+
 
   return (
     <div>
@@ -101,6 +109,6 @@ const response = (video, videoList, channel, allowUser) => {
     videoList,
     channel,
     allowUser,
-    env: process.env.TAPENV
+    env: process.env.TAPENV,
   };
 };
