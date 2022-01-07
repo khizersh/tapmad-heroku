@@ -194,7 +194,11 @@ export default memo(function PSLComponent({ channel }) {
                       eventKey={tab.ChatOrder}
                       tabClassName={"tshop-tabs"}
                       title={
-                        <div>
+                        <div
+                          className={`${
+                            tab.ChatOrder == 2 ? styles.margTop27 : ""
+                          }`}
+                        >
                           {tab.ChatOrder != 2 ? (
                             <img
                               src={tab.TabIconUnActive}
