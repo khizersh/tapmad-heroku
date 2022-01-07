@@ -8,10 +8,10 @@ const TapmadShop = () => {
     <GameLayout>
       <div className="container">
         <div className="row mt-2">
-          <div class="col">
-            <div class={`${styles.bgBlackNoHover} ${styles.border} pl-2`}>
+          <div className="col">
+            <div className={`${styles.bgBlackNoHover} ${styles.border} pl-2`}>
               <h5>Tapmad Shop</h5>
-              <span class="text-white">
+              <span className="text-white">
                 Khush khabri ab tapmad par kharido PUBG, BIGO, Tinder k Vouchers
                 or bohat kuch
               </span>
