@@ -472,15 +472,16 @@ export default function Player({ movies }) {
                     ) : null}
                   </div>
                 </div>
-                {movie && movie.Video.IsChat ? (
-                  <div className="the-shop">
+                {movie?.Video ? <PSLComponent channel={movie.Video} /> : null}
+                {/* {movie && movie.Video.IsChat ? (
+                  <div className="the-shop"> */}
                     {/* <PlayerShop />  */}
-                    <PSLComponent channel={movie.Video} />
-                    <br />
+                  
+                    {/* <br />
                   </div>
                 ) : (
                   <></>
-                )}
+                )} */}
 
                 {/* Banner bottom Ad */}
 

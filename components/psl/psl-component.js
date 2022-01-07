@@ -27,10 +27,26 @@ export default memo(function PSLComponent({ channel }) {
   }
 
   useEffect(async () => {
-    const tabs = await getPSLTabsService();
-    await getRelatedChannels();
-    setTabs(tabs.Tabs);
-    setSelectedTab(1);
+    if (channel.IsChat) {
+      const tabs = await getPSLTabsService();
+      await getRelatedChannels();
+      setTabs(tabs.Tabs);
+      setSelectedTab(1);
+    } else {
+      await getRelatedChannels();
+      setTabs([
+        {
+          ChatOrder: "2",
+          TabIcon:
+            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
+          TabIconUnActive:
+            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/UnactiveChat.png",
+          TabId: 4,
+          TabName: "Related",
+        },
+      ]);
+      setSelectedTab(2);
+    }
   }, []);
 
   useEffect(() => {
