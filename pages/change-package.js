@@ -20,7 +20,7 @@ export default function ChangePackage({ props }) {
       type: LOGGED_IN,
       data: 1,
     });
-    console.log("dispatch change pkg ");
+
     dispatchSignin({type : CALL_CHANGE_PACKAGE_API , data : true})
   }, []);
 

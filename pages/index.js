@@ -8,7 +8,7 @@ import isGoogle from "../services/google-dns-lookup";
 // import { UpdateBase } from "../services/apilinks";
 
 export default function Home(props) {
-  console.log("home : ",props);
+
   return (
     <div>
       <Head>
