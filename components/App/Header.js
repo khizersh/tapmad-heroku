@@ -26,7 +26,7 @@ function HeaderBasic({ signout }) {
     setTimeout(() => {
       setHidePopup(false);
       Cookie.setCookies("hidePopup", false);
-    }, 1.8e6);
+    }, 1.8e9);
   };
 
   useEffect(async () => {
@@ -41,13 +41,12 @@ function HeaderBasic({ signout }) {
       setTimeout(() => {
         setHidePopup(false);
         Cookie.setCookies("hidePopup", false);
-      }, 1.8e6);
+      }, 1.8e9);
     }
   }, []);
 
   return (
     <>
-      {}
       {SignUpState.isMobile && !hidePopup ? (
         <InstallMobileApp onClose={onClose} />
       ) : (

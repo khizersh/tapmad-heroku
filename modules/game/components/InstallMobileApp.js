@@ -99,8 +99,14 @@ const InstallMobileApp = ({ onClose }) => {
           </div>
         </div>
       </div>
-      <Link href="/">
-        <a className="btn btn-primary text-white">Install</a>
+      <Link href="http://onelink.to/4um89n" passHref={true}>
+        <a
+          className="btn btn-primary text-white"
+          target="_blank"
+          rel="nofollow"
+        >
+          Install
+        </a>
       </Link>
     </div>
   );
