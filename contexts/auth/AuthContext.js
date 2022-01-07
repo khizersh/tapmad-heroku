@@ -40,6 +40,7 @@ export default function AuthProviderNew({ children }) {
       pathname.includes("change-package")
     ) {
       packages = await getAllPaymentPackagesByUserId(userId);
+      console.log("packages : ",packages);
       dispatch({
         type: CURRENT_USER_PACKAGE,
         data: packages.CurrentPackageDescription,
@@ -47,7 +48,7 @@ export default function AuthProviderNew({ children }) {
     } else {
       packages = await getAllPaymentPackages();
     }
-    if (packages.Response.responseCode != 0) {
+    if (packages.Response.responseCode == 1) {
       dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
       dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
       dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });

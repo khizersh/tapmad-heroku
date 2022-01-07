@@ -10,15 +10,19 @@ export default function TaxView({ onChange }) {
   const [isDefaultSet, setIsDefaultSet] = useState(false);
   const router = useRouter();
   const { packageId } = router.query;
+
+  console.log("SignUpState : ", SignUpState);
   // set all products
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {
       let array = SignUpState.SelectedPackage.PaymentTabMethods.map((m) => {
         let finalArray = [];
         let pkgArray = m.PackageName?.split(" ");
-        finalArray.push(pkgArray[0]);
-        if (pkgArray.length > 1) {
-          finalArray.push(pkgArray.slice(1).join(" "));
+        if (pkgArray) {
+          finalArray.push(pkgArray[0]);
+          if (pkgArray.length > 1) {
+            finalArray.push(pkgArray.slice(1).join(" "));
+          }
         }
         return {
           ...m,
@@ -131,19 +135,19 @@ export default function TaxView({ onChange }) {
                   )}
                   <div className="d-flex justify-content-end align-items-center">
                     <div className="text-white per-month">
-                      {m.PackagePrices[0]}
+                      {m.PackagePrices[0] && m.PackagePrices[0]}
                     </div>
                     <div className="font-weight-bold text-white line-1 package-title">
-                      {m.PackagePrices[1]}
+                      {m.PackagePrices[0] && m.PackagePrices[1]}
                     </div>
                     <div
                       className="text-white monthly line-1"
                       style={{ top: "0" }}
                     >
                       <span className="d-block line-1">
-                        {m.PackagePrices[2].split(" ")[0]}
+                        {m.PackagePrices[2] && m.PackagePrices[2].split(" ")[0]}
                       </span>
-                      {m.PackagePrices[2].split(" ").slice(1).join(" ")}
+                      {m.PackagePrices[2] && m.PackagePrices[2].split(" ").slice(1).join(" ")}
                     </div>
                   </div>
                   {/* <span className="d-block d-md-none"></span> */}
