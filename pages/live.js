@@ -6,6 +6,7 @@ import { getChannelWithPaginationInitial } from "../services/apilinks";
 import isGoogle from "../services/google-dns-lookup";
 
 export default function Live(props) {
+  console.log("props live ",props);
   return (
     <>
       <Head>
