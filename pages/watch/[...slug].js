@@ -24,6 +24,7 @@ import { SignUpContext } from "../../contexts/auth/SignUpContext";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 
 const WatchPage = (props) => {
+  console.log("props in watch : ",props);
   const router = useRouter();
   const { setisAuthenticateFalse } = useContext(MainContext);
   const [url, setUrl] = useState(null);
@@ -32,7 +33,7 @@ const WatchPage = (props) => {
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
-      router.push(`/sign-up?tab=1&packageId=2`);
+      router.push(`/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`);
     }
   }, [props.allowUser, url]);
 
