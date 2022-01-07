@@ -25,11 +25,11 @@ export default function Skeleton({ children, ip }) {
     setLoader(false);
   };
 
-  useEffect(() => { }, [initialState.isSearch]);
+  useEffect(() => {}, [initialState.isSearch]);
 
   return (
     <div className="pages_header">
-      {initialState.loading ? <Loader /> : null}
+      {initialState.loading ? <Loader /> : <></>}
       {initialState.isSearch ? (
         <Search ip={ip} />
       ) : (
