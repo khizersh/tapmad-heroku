@@ -7,15 +7,16 @@ import NotAuthenticatedSidebar from "./NotAuthenticatedSidebar";
 import { actionsRequestContent } from "../services/http-service";
 import { tapmadLogo } from "../services/imagesLink";
 import { AuthService } from "../modules/auth/auth.service";
+import { useRouter } from "next/router";
 
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
   const [countries, setCountries] = useState([]);
+  const router = useRouter();
   function toggleNavbar() {
-    document
-      .getElementsByClassName("nav-toggle")[0]
-      .classList.toggle("openNav");
-    document.getElementsByClassName("menu")[0].classList.toggle("active-nav");
+    document.querySelector(".nav-toggle").classList.toggle("openNav");
+    document.querySelector(".menu").classList.toggle("active-nav");
+    onMouseLeave(); // Remove hover class
   }
   const { initialState, setSearch } = React.useContext(MainContext);
 
@@ -30,6 +31,19 @@ export default function SideBar() {
     };
     actionsRequestContent(body);
   };
+
+  const onMouseHover = () => {
+    document.querySelector(".menu:not(.hover-nav)")?.classList.add("hover-nav");
+  };
+
+  const onMouseLeave = () => {
+    document.querySelector(".menu.hover-nav")?.classList.remove("hover-nav");
+  };
+
+  useEffect(() => {
+    document.querySelector(".menu.active-nav")?.classList.remove("active-nav");
+    document.querySelector(".menu.hover-nav")?.classList.remove("hover-nav");
+  }, [router]);
   useEffect(() => {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
@@ -37,14 +51,18 @@ export default function SideBar() {
 
     AuthService.getAllowRegionsList()
       .then((res) => {
-        if(res.responseCode == 1){
-          setCountries(res.data)
+        if (res.responseCode == 1) {
+          setCountries(res.data);
         }
       })
       .catch((e) => console.log(e));
   }, [initialState.isAuthenticated]);
   return (
-    <div className="primary-nav">
+    <div
+      className="primary-nav"
+      onMouseEnter={onMouseHover}
+      onMouseLeave={onMouseLeave}
+    >
       <button
         className="hamburger hamburger-icon open-panel nav-toggle"
         onClick={toggleNavbar}
@@ -116,9 +134,15 @@ export default function SideBar() {
             </li>
             {/* conditional menu */}
             {isAuth ? (
-              <AuthenticatedSidebar onClick={onCLickContent} country={countries}/>
+              <AuthenticatedSidebar
+                onClick={onCLickContent}
+                country={countries}
+              />
             ) : (
-              <NotAuthenticatedSidebar onClick={onCLickContent} country={countries}/>
+              <NotAuthenticatedSidebar
+                onClick={onCLickContent}
+                country={countries}
+              />
             )}
 
             <li onClick={() => onCLickContent("search")}>
