@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 
-const CategoryHorizontalCard = ({ video, type, slug, packageImage }) => {
+const CategoryHorizontalCard = ({ video, type, slug }) => {
   return (
     <>
       <style jsx>
@@ -32,7 +32,7 @@ const CategoryHorizontalCard = ({ video, type, slug, packageImage }) => {
                 alt={video.VideoName}
                 width="130px"
               />
-              {packageImage ? (
+              {/* {packageImage ? (
                 <img
                   src={packageImage}
                   alt="Package"
@@ -42,7 +42,7 @@ const CategoryHorizontalCard = ({ video, type, slug, packageImage }) => {
                 />
               ) : (
                 <></>
-              )}
+              )} */}
             </div>
             <div>
               <div className="card-desc-div">

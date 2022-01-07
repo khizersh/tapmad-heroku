@@ -13,7 +13,6 @@ export default function CategoryDetail({
   videoList,
   syno,
   page,
-  packageImage,
   searchResults,
 }) {
   const [slug, setSlug] = useState(null);
@@ -255,7 +254,6 @@ export default function CategoryDetail({
                 key={i}
                 video={vid}
                 type={type}
-                packageImage={packageImage}
               />
             );
             // return <Card key={i} video={vid} type={type} />;
