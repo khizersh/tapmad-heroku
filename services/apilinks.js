@@ -5,97 +5,97 @@ const BASEURLDEVELOPMENT = "https://developer.tapmad.com/dev/app/";
 const STAGEURL = "https://stag-backend.tapmad.com/app/";
 
 export const EPLPaymentUrl =
-  BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
+  STAGEURL + "api/getAllPaymentMethods/V1/en/android";
 export const getAllPackages =
-  BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web";
+  STAGEURL + "api/getAllPaymentMethodsPackages/V1/en/web";
 export const getItemsByKeyword =
-  BASEURLAPP + "api/searchInAllContent/V1/en/android/";
+  STAGEURL + "api/searchInAllContent/V1/en/android/";
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
-export const getUserByUserId = BASEURLAPP + "api/getUserProfileDetail";
-export const getShowsSearch = BASEURLAPP + "api/getShowsSearch";
-export const getUserPaymentHistory = BASEURLAPP + "api/getUserPaymentHistory";
+export const getUserByUserId = STAGEURL + "api/getUserProfileDetail";
+export const getShowsSearch = STAGEURL + "api/getShowsSearch";
+export const getUserPaymentHistory = STAGEURL + "api/getUserPaymentHistory";
 ;
 // home page api
 
 export const getFeaturedHomePage =
-  BASEURLAPP + "api/getHomeFeaturedPageWithRE/5/0/5/0/100";
-export const getFeaturedBannerDetail = BASEURLAPP + "api/getFeaturedBannerDetail";
-export const getWebTabBanners = BASEURLAPP + "api/getWebTabBanners/V1/en/Web";
-export const getCardUser = BASEURLAPP + "api/getCardUser";
-export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
-export const sendOTP = BASEURLAPP + "api/sendOTP/V1/en/web";
-export const verifyOtp = BASEURLAPP + "api/verifyOTP/V1/en/android";
-export const clearTokens = BASEURLAPP + "api/ClearAllCache/T";
-// export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
+  STAGEURL + "api/getHomeFeaturedPageWithRE/5/0/5/0/100";
+export const getFeaturedBannerDetail = STAGEURL + "api/getFeaturedBannerDetail";
+export const getWebTabBanners = STAGEURL + "api/getWebTabBanners/V1/en/Web";
+export const getCardUser = STAGEURL + "api/getCardUser";
+export const getEPLCardUser = STAGEURL + "api/getEplCardUser";
+export const sendOTP = STAGEURL + "api/sendOTP/V1/en/web";
+export const verifyOtp = STAGEURL + "api/verifyOTP/V1/en/android";
+export const clearTokens = STAGEURL + "api/ClearAllCache/T";
+// export const paymentProcess = STAGEURL + "api/processEplPaymentTransaction";
 export const paymentProcess =
-  BASEURLAPP + "api/processPaymentTransactionNewPackage";
-export const setUserPinCode = BASEURLAPP + "api/setUserPinCode";
-export const verifyUserPinCode = BASEURLAPP + "api/verifyUserPinCode";
-export const UserSignUpPromoCode = BASEURLAPP + "api/UserSignUpPromoCode";
+  STAGEURL + "api/processPaymentTransactionNewPackage";
+export const setUserPinCode = STAGEURL + "api/setUserPinCode";
+export const verifyUserPinCode = STAGEURL + "api/verifyUserPinCode";
+export const UserSignUpPromoCode = STAGEURL + "api/UserSignUpPromoCode";
 export const SignUpORSignInMobileOperatorToken =
-  BASEURLAPP + "api/SignUpORSignInMobileOperatorToken";
+  STAGEURL + "api/SignUpORSignInMobileOperatorToken";
 export const SignUpORSignInMobileOperatorTokenByPin =
-  BASEURLAPP + "api/SignUpORSignInMobileOperatorTokenByPin";
-export const Logout = BASEURLAPP + "api/logout";
+  STAGEURL + "api/SignUpORSignInMobileOperatorTokenByPin";
+export const Logout = STAGEURL + "api/logout";
 
-export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/android";
+export const getAllNews = STAGEURL + "api/getAllTnnNews/v1/en/android";
 export const getNewsDetailBId =
-  BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/android/";
+  STAGEURL + "api/getTnnNewsDetailByNewsID/v1/en/android/";
 
 export const getShowsWithPagination =
-  BASEURLAPP + "api/getAllShowsWithPagination/0/5/0/16";
+  STAGEURL + "api/getAllShowsWithPagination/0/5/0/16";
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
-  BASEURLAPP + "api/getUserStreamWithPackagesChannelsChat";
+  STAGEURL + "api/getUserStreamWithPackagesChannelsChat";
 
 // export const getEventPredicationGameChannel =
 // BASEURLDEVELOPMENT + "api/getEventPredicationGameChannelToken";
 
-export const updateUserProfile = BASEURLAPP + "api/updateUserProfile";
-export const creditCard = BASEURLAPP + "api/makeCheckOutPayment";
-export const UBLCard = BASEURLAPP + "api/CardUserOrderTest";
+export const updateUserProfile = STAGEURL + "api/updateUserProfile";
+export const creditCard = STAGEURL + "api/makeCheckOutPayment";
+export const UBLCard = STAGEURL + "api/CardUserOrderTest";
 export const initialPaymentTransaction =
-  BASEURLAPP + "api/initiateEplPaymentTransaction";
+  STAGEURL + "api/initiateEplPaymentTransaction";
 export const initialPaymentTransactionNew =
-  BASEURLAPP + "api/initiatePaymentTransactionNewPackage";
+  STAGEURL + "api/initiatePaymentTransactionNewPackage";
 
 // shows api
 export const getSeasonVodByCategoryId =
-  BASEURLAPP + "api/getSeasonContentByCategoryId/v1/en/web/";
+  STAGEURL + "api/getSeasonContentByCategoryId/v1/en/web/";
 // BASEURLDEVELOPMENT + "api/getSeasonVodByCategoryId/V1/en/web/";
 
 export const unsubscribePaymentTransaction =
-  BASEURLAPP + "api/unsubscribeUserSubscriptiption";
+  STAGEURL + "api/unsubscribeUserSubscriptiption";
 export const getMoviesWithPagination = (from, to) => {
-  return BASEURLAPP + `api/getAllMoviesWithPagination/${from}/${to - from}/0/16`;
+  return STAGEURL + `api/getAllMoviesWithPagination/${from}/${to - from}/0/16`;
 };
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
-  return `${BASEURLAPP}api/getAllRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
+  return `${STAGEURL}api/getAllRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
 export const getFeaturedHomepageWithRE = (from, to) => {
   return (
-    BASEURLAPP + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`
+    STAGEURL + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`
   );
 };
 export const getChannelsWithPagination = (from, to) => {
-  return BASEURLAPP + `api/getAllChannelWithPagination/${from}/${to - from}/0/16`;
+  return STAGEURL + `api/getAllChannelWithPagination/${from}/${to - from}/0/16`;
 };
 
 export const getMoviesWithPaginationInitial =
-  BASEURLAPP + "api/getAllMoviesWithPagination/0/5/0/16";
+  STAGEURL + "api/getAllMoviesWithPagination/0/5/0/16";
 export const getChannelWithPaginationInitial =
-  BASEURLAPP + "api/getAllChannelWithPagination/0/5/0/16";
+  STAGEURL + "api/getAllChannelWithPagination/0/5/0/16";
 
 // catchup
 
-export const getCatchupTv = BASEURLAPP + "api/getCatchupTV/V1/en/web";
-export const getCatchupVideoData = BASEURLAPP + "api/getCatchupTVURL/V1/en/web/";
+export const getCatchupTv = STAGEURL + "api/getCatchupTV/V1/en/web";
+export const getCatchupVideoData = STAGEURL + "api/getCatchupTVURL/V1/en/web/";
 
 // SEO settings
 
-export const SEOTvSeriesData = BASEURLAPP + "api/getSeoTvSeriesData";
-export const SEOTvShowsByCategory = BASEURLAPP + "api/getSeoTvShowsByCategoryId";
-export const SEOLiveChannelData = BASEURLAPP + "api/getSeoLiveChannelsData";
+export const SEOTvSeriesData = STAGEURL + "api/getSeoTvSeriesData";
+export const SEOTvShowsByCategory = STAGEURL + "api/getSeoTvShowsByCategoryId";
+export const SEOLiveChannelData = STAGEURL + "api/getSeoLiveChannelsData";
 
 // ads setting
 
@@ -121,35 +121,35 @@ export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
 export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
-export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
-export const getPSLTabsForWeb = BASEURLAPP + "api/getAllWebChatTabs/v1/en/web";
+export const getPSLTabs = STAGEURL + "api/getAllTabs/v1/en/android";
+export const getPSLTabsForWeb = STAGEURL + "api/getAllWebChatTabs/v1/en/web";
 export const submitMatchBids =
-  BASEURLAPP + "api/updateNewUserEventQuestionAnswers";
+  STAGEURL + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
-  BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
-export const createRoom = BASEURLAPP + "api/createNewChatRoom";
-export const joinRoom = BASEURLAPP + "api/joinChatRoom";
+  STAGEURL + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+export const createRoom = STAGEURL + "api/createNewChatRoom";
+export const joinRoom = STAGEURL + "api/joinChatRoom";
 
 // PSL bids / game
-export const deleteRoom = BASEURLAPP + "api/leaveUserChatRoom";
+export const deleteRoom = STAGEURL + "api/leaveUserChatRoom";
 // PSL bids
-export const getAllMatches = BASEURLAPP + "api/getMatchDetail";
-export const getMatchBetsByUserId = BASEURLAPP + "api/getMatchBetsByUserId";
-export const getAllLeagues = BASEURLAPP + "api/getAllOnlineLeagues";
+export const getAllMatches = STAGEURL + "api/getMatchDetail";
+export const getMatchBetsByUserId = STAGEURL + "api/getMatchBetsByUserId";
+export const getAllLeagues = STAGEURL + "api/getAllOnlineLeagues";
 export const getLeaderBoardByLeagueId =
-  BASEURLAPP + "api/getLeaderBoardByLeagueId";
+  STAGEURL + "api/getLeaderBoardByLeagueId";
 export const getBuyCoinsPackages =
-  BASEURLAPP + "api/getBuyCoinsPackages/v1/en/web";
-export const makeCoinTransaction = BASEURLAPP + "api/makeCoinsPaymentTransaction";
-export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
-export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";
-export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
+  STAGEURL + "api/getBuyCoinsPackages/v1/en/web";
+export const makeCoinTransaction = STAGEURL + "api/makeCoinsPaymentTransaction";
+export const rewardPredicationCoda = STAGEURL + "api/rewardPredicationCoda";
+export const updateRewardStore = STAGEURL + "api/updateRewardsStoreTestV2";
+export const getUserChallenges = STAGEURL + "api/getUserChallenges";
 
 // get all country
-export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";
+export const getAllowRegions = STAGEURL + "api/getAllCountries/v1/en/web";
 
 export const viewMoreContent = (from, to, sectionId, pageId) =>
-  BASEURLAPP +
+  STAGEURL +
   `api/getExtraContentWithPagination/${from}/${to}/${sectionId}/${pageId}`;
 
 export const loggingTags = {
@@ -163,7 +163,7 @@ export const loggingTags = {
 // New login design apis
 
 export const PaymentPackages =
-  BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
-BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
+  STAGEURL + "api/getPackagePaymentMethods/V1/en/android";
+STAGEURL + "api/getPackagePaymentMethods/V1/en/android";
 export const PaymentPackagesByUserId =
-  BASEURLAPP + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
+  STAGEURL + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
