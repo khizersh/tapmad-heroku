@@ -19,7 +19,7 @@ import {
 import Link from "next/link";
 import NavbarHOC from "../navbar/NavbarHOC";
 
-const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => {
+const MyAccountMobile = ({ profileData, allData, onClickBack, upgardeBtn }) => {
   const [show, setShow] = useState({
     games: false,
     package: false,
@@ -41,15 +41,29 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
     <div>
       <style jsx>
         {`
-        .user_img {
-          margin: 0 !important;
-        }
-        dl {
-          margin-bottom: 5px;
-        }
-        dl dd {
-          margin-bottom: 0;
-        }
+          .user_img {
+            margin: 0 !important;
+          }
+          dl {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+            line-height: 1.2;
+            gap: 0.5rem;
+          }
+          dl + dl {
+            margin-top: 5px;
+          }
+          dl dt {
+            font-weight: 400
+          }
+          dl dt,
+          dl dd {
+            width: calc(50% - 0.5rem);
+          }
+          dl dd {
+            margin-bottom: 0;
+          }
         `}
       </style>
       {/* <NavbarHOC>
@@ -85,14 +99,20 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
               width="100"
             />
           </div>
-          <div className="col-4">
-            <div>Name</div>
-            <div>Date of Birth</div>
-          </div>
-          <div className="flex-grow-1 pl-3">
-            <div>{profileData && profileData.FullName}</div>
-            <div>{profileData && profileData.BirthDate}</div>
-          </div>
+          {profileData ? (
+            <div className="flex-grow-1">
+              <dl>
+                <dt>Name</dt>
+                <dd>{profileData.FullName}</dd>
+              </dl>
+              <dl>
+                <dt>Date of Birth</dt>
+                <dd>{profileData.BirthDate}</dd>
+              </dl>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="d-flex align-items-center mt-3 mb-2">
           <img
@@ -190,7 +210,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
               <button
                 type="button"
                 className="btn btn-light rounded-pill p-1 w-100"
-                onClick={() => router.push('/billing-history')}
+                onClick={() => router.push("/billing-history")}
               >
                 Billing History
               </button>
