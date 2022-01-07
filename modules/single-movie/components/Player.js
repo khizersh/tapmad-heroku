@@ -313,7 +313,7 @@ export default function Player({ movies }) {
                     {ads.topAdDesktop && (
                       <div className="desktop-ads d-none d-lg-block d-md-block">
                         <AdSlot
-                          sizes={[[970, 250]]}
+                          sizes={[[728, 90]]}
                           adUnit={ads.topAdDesktop}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
                         />
@@ -475,9 +475,9 @@ export default function Player({ movies }) {
                 {movie?.Video ? <PSLComponent channel={movie.Video} /> : null}
                 {/* {movie && movie.Video.IsChat ? (
                   <div className="the-shop"> */}
-                    {/* <PlayerShop />  */}
-                  
-                    {/* <br />
+                {/* <PlayerShop />  */}
+
+                {/* <br />
                   </div>
                 ) : (
                   <></>
