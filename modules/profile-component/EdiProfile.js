@@ -56,6 +56,19 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
       Email: editProfile.Email,
       Gender: gender,
     };
+    if (
+      !formData.FullName ||
+      !formData.UserMobileNumebr ||
+      !formData.BirthDate ||
+      !formData.Email ||
+      !formData.Gender
+    ) {
+      return swal({
+        title: "Enter all fields!",
+        timer: 2000,
+        icon: "error",
+      });
+    }
     const data = await MyAccountService.updateUserProfileData(formData);
 
     if (data != null) {

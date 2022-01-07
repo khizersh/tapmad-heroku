@@ -9,7 +9,7 @@ import RelatedProductCard from "../movies/components/RelatedProductCard";
 import PlayerShop from "../player-shop/player-shop";
 import { PlayerService } from "../../modules/single-movie/Player.service";
 import { useRouter } from "next/router";
-import { SEOFriendlySlugsForVideo } from "../../services/utils";
+import { isAuthentictedUser, SEOFriendlySlugsForVideo } from "../../services/utils";
 import { VideoWatched } from "../../services/gtm";
 var fired = false;
 export default function CatchupPlayer({ video, videoList }) {
@@ -19,7 +19,10 @@ export default function CatchupPlayer({ video, videoList }) {
   const [adDuration, setAdDuration] = useState(200000);
   const [mounted, setMounted] = useState(false);
   const [movie, setMovie] = useState(null);
+  const [local, setLocal] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const [videoLink, setVideoLink] = useState(null);
+  const [adsApiCalled, setAdsApiCalled] = useState(false);
   const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -57,40 +60,80 @@ export default function CatchupPlayer({ video, videoList }) {
     }, adDuration * 1000);
   }
 
+  useEffect(() => {
+    setIsMobile(window.screen.width < 639);
+    if (video.IsVideoFree == false) {
+      if (!isAuthentictedUser()) {
+        router.push("/sign-up?tab=1&packageId=2");
+      }
+    }
+  }, []);
+
+
   async function getRelatedChannels() {
     if (videoList && videoList.length) {
       setRelatedVideos(videoList);
     }
   }
-
   useEffect(async () => {
-    await getRelatedChannels();
-    const resp = await DashboardService.getAdData();
-    const country = await AuthService.getGeoInfo();
-    let data;
-
-    if (country) {
-      if (country.countryCode == "PK") {
-        data = PlayerService.checkAds(resp, "local");
+    // verifyURL(router, movies.Video.VideoName);
+    // await getRelatedChannels();
+    if (!adsApiCalled) {
+      const country = await AuthService.getGeoInfo();
+      const resp = await DashboardService.getAdData();
+      let data;
+      if (country) {
+        if (country.countryCode == "PK") {
+          data = PlayerService.checkAds(resp, "local");
+          setLocal(true);
+        } else {
+          data = PlayerService.checkAds(resp, "international");
+          setLocal(false);
+        }
       } else {
-        data = PlayerService.checkAds(resp, "international");
+        data = PlayerService.checkAds(resp, "local");
+        setLocal(true);
       }
-    } else {
-      data = PlayerService.checkAds(resp, "local");
+      if (data != null) {
+        if (window.screen.width < 800) {
+          setAds({
+            allow: data.allow,
+            onVideo: data.onVideo,
+            topAdDesktop: data.topAdDesktop,
+            topAdMobile: data.topAdMobile,
+            rightAd: "",
+            rightVideoAd: "",
+            bottomBannerAd: data.bottomBannerAd,
+            bottomBannerAdMobile: data.bottomBannerAdMobile,
+            topMobileAdHieght: data.topMobileAdHieght,
+            topMobileAdWidth: data.topMobileAdWidth,
+            bottomMobileWidth: data.bottomMobileWidth,
+            bottomMobileHeight: data.bottomMobileHeight,
+            videoAdDuration: data.videoAdDuration,
+          });
+          setAdDuration(data.videoAdDuration);
+        } else {
+          setAds({
+            allow: data.allow,
+            onVideo: data.onVideo,
+            topAdDesktop: data.topAdDesktop,
+            topAdMobile: data.topAdMobile,
+            rightAd: data.rightAd,
+            bottomBannerAd: data.bottomBannerAd,
+            rightVideoAd: data.rightVideoAd,
+            bottomBannerAdMobile: "",
+            bottomMobileWidth: data.bottomMobileWidth,
+            bottomMobileHeight: data.bottomMobileHeight,
+            videoAdDuration: data.videoAdDuration,
+          });
+          setAdDuration(data.videoAdDuration);
+        }
+      }
+      setTimeout(() => {
+        setAdsApiCalled(true);
+      }, 400);
     }
-    if (data != null) {
-      setAdDuration(data.videoAdDuration);
-      setAds({
-        allow: data.allow,
-        onVideo: data.onVideo,
-        topAdDesktop: data.topAdDesktop,
-        topAdMobile: data.topAdMobile,
-        rightAd: data.rightAd,
-        bottomBannerAd: data.bottomBannerAd,
-        rightVideoAd: data.rightVideoAd,
-      });
-    }
-  }, [router, videoList]);
+  }, [router, adsApiCalled]);
 
   useEffect(() => {
     fired = false;
@@ -110,27 +153,49 @@ export default function CatchupPlayer({ video, videoList }) {
     }
   }, [video]);
 
+
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row mt-5">
-          <div className="col-lg-9">
-            <div className="col-12 p-0">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-9 vdowrp">
               {/* Top Ad */}
-              {ads.allow && ads.topAdDesktop && (
+              {ads.allow ? (
                 <div className="text-center my-3">
                   <DFPSlotsProvider dfpNetworkId="28379801">
-                    <div className="desktop-ads d-none d-lg-block d-md-block">
-                      <AdSlot sizes={[[728, 90]]} adUnit={ads.topAdDesktop} />
-                    </div>
-                    <div className="desktops-ads text-center d-lg-none d-md-none">
-                      <AdSlot sizes={[[320, 100]]} adUnit={ads.topAdMobile} />
-                    </div>
+                    {ads.topAdDesktop && (
+                      <div className="desktop-ads d-none d-lg-block d-md-block">
+                        <AdSlot
+                        
+                          sizes={[[728,90]]}
+                          adUnit={ads.topAdDesktop}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    )}
+                    {ads.topAdMobile &&
+                    ads.topMobileAdWidth &&
+                    ads.topMobileAdHieght ? (
+                      <div className="desktops-ads text-center d-lg-none d-md-none">
+                        <AdSlot
+                          sizes={[
+                            [ads.topMobileAdWidth, ads.topMobileAdHieght],
+                          ]}
+                          adUnit={ads.topAdMobile}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    ) : null}
                   </DFPSlotsProvider>
                 </div>
-              )}
-              <div id="player-div2" className="player-div2" style={{ border: "1px solid white" }}>
-                <ReactJWPlayer
+              ) : null}
+              <div className="col-12 p-0 vdobox">
+                <div
+                  id="player-div1"
+                  className="player-div"
+                  style={{ border: "1px solid white" }}
+                >
+                 <ReactJWPlayer
                   onTime={(e) => {
                     if (e.currentTime > 3 && !fired) {
                       VideoWatched({ Video: video });
@@ -168,97 +233,251 @@ export default function CatchupPlayer({ video, videoList }) {
                     ],
                   }}
                 />
+                </div>
+              </div>
+              <div className="col-lg-12 p-0">
+                {movie && movie.Video ? (
+                  <>
+                    <h1 className="mt-3 mb-0 h5">{movie.Video.VideoName}</h1>
+                    {/* <span className="text-secondary">
+                    {movie.Video.VideoTotalViews} views
+                  </span> */}
+
+                    {/* Mobile Ads */}
+                    {isMobile ? (
+                      <AdSlot
+                        sizes={[[ads.topMobileAdWidth, ads.topMobileAdHieght]]}
+                        adUnit={ads.topAdMobile}
+                        onSlotIsViewable={(dfpEventData) => AdImpression()}
+                      />
+                    ) : (
+                      <></>
+                    )}
+
+                    {/* Show description on desktop and mobile if chat is disabled */}
+                    {!isMobile || !movie?.Video.IsChat ? (
+                      <p className="mt-2 line-clamp" style={{ color: "#aaa" }}>
+                        {movie.Video.VideoDescription}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+
+              <div className="col-lg-12 p-0">
+                {/* mobile bottom ads */}
+                <div className="mt-2 ml-auto mr-auto">
+                  <div>
+                    {ads.allow && ads.bottomBannerAdMobile ? (
+                      ads.bottomBannerAdMobile.includes("http") ? (
+                        <div style={{ marginTop: "10px" }}>
+                          <ReactJWPlayer
+                            playerId="my-unique-id1"
+                            playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                            isAutoPlay={true}
+                            isMuted={true}
+                            isSkipable={false}
+                            onOneHundredPercent={onRestartAd}
+                            onAdSkipped={onRestartAd}
+                            onAdPlay={() => {
+                              AdImpression();
+                            }}
+                            file={
+                              "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                            }
+                            onAdComplete={onRestartAd}
+                            generatePrerollUrl={() => ads.bottomBannerAdMobile}
+                            customProps={{
+                              controls: true,
+                            }}
+                          />
+                        </div>
+                      ) : ads.bottomBannerAdMobile &&
+                        ads.bottomMobileWidth &&
+                        ads.bottomMobileHeight ? (
+                        <DFPSlotsProvider dfpNetworkId="28379801">
+                          <div className="desktop-ads">
+                            <AdSlot
+                              sizes={[
+                                [ads.bottomMobileWidth, ads.bottomMobileHeight],
+                              ]}
+                              adUnit={ads.bottomBannerAdMobile}
+                              onSlotIsViewable={(dfpEventData) =>
+                                AdImpression()
+                              }
+                            />
+                          </div>
+                        </DFPSlotsProvider>
+                      ) : null
+                    ) : null}
+                  </div>
+                </div>
+                {movie?.Video ? <PSLComponent channel={movie.Video} /> : null}
+                {/* {movie && movie.Video.IsChat ? (
+                  <div className="the-shop"> */}
+                    {/* <PlayerShop />  */}
+                  
+                    {/* <br />
+                  </div>
+                ) : (
+                  <></>
+                )} */}
+
+                {/* Banner bottom Ad */}
+
+                {/* <div>
+                  {ads.allow && ads.bottomBannerAd ? (
+                    <DFPSlotsProvider dfpNetworkId="28379801">
+                      <div className="desktops-ads text-center d-none d-lg-block d-md-block">
+                        <AdSlot
+                          sizes={[[970, 250]]}
+                          adUnit={ads.bottomBannerAd}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    </DFPSlotsProvider>
+                  ) : (
+                    <></>
+                  )}
+                </div> */}
+                {/* Banner bottom Ad end*/}
               </div>
             </div>
-            <div className="col-lg-12 p-0">
-              {movie ? (
-                <>
-                  <h5 className="mt-3">{movie.VideoName}</h5>
-                  <span className="text-secondary">
-                    {movie.VideoTotalViews} views
-                  </span>
-                  <p style={{ color: "#aaa" }}>{movie.VideoDescription}</p>
-                </>
-              ) : null}
-            </div>
+            {!isMobile ? (
+              <div className="col-lg-3 text-center pt-3 d-lg-block d-md-block">
+                {/* Side Add desktop start*/}
+                <div className="d-none d-lg-block d-md-block">
+                  {ads.allow && ads.rightAd ? (
+                    ads.rightAd.includes("http") ? (
+                      <div style={{ marginTop: "65px" }}>
+                        <ReactJWPlayer
+                          playerId="my-unique-id1"
+                          playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                          isAutoPlay={true}
+                          isMuted={true}
+                          isSkipable={false}
+                          onOneHundredPercent={onRestartAd}
+                          onAdSkipped={onRestartAd}
+                          onAdPlay={() => {
+                            AdImpression();
+                          }}
+                          file={
+                            "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                          }
+                          onAdComplete={onRestartAd}
+                          generatePrerollUrl={() =>
+                            ads.rightAd && ads.allow ? ads.rightAd : ""
+                          }
+                          customProps={{
+                            controls: true,
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <DFPSlotsProvider dfpNetworkId="28379801">
+                        <div className="desktop-ads">
+                          <AdSlot
+                            sizes={[[300, 250]]}
+                            adUnit={ads.rightAd}
+                            onSlotIsViewable={(dfpEventData) => AdImpression()}
+                          />
+                        </div>
+                      </DFPSlotsProvider>
+                    )
+                  ) : null}
 
-            <div className="col-lg-12 p-0">
-              {movie && movie.CookFeed ? (
-                <div className="the-shop">
-                  <PlayerShop />
-                  <br />
+                  {/* side 3rd ad */}
+                  {/* <div className="mt-3 d-sm-none d-md-block">
+                    <DFPSlotsProvider dfpNetworkId="28379801">
+                      <div className="desktop-ads">
+                        <AdSlot
+                          sizes={[[320, 50]]}
+                          adUnit={"MobileBannerFeatured"}
+                          onSlotIsViewable={(dfpEventData) => AdImpression()}
+                        />
+                      </div>
+                    </DFPSlotsProvider>
+                  </div> */}
+                  {/* side 3rd ad end*/}
+
+                  {ads.allow && isAutoPlay && ads.rightVideoAd ? (
+                    ads.rightVideoAd.includes("http") ? (
+                      <div style={{ marginTop: "65px" }}>
+                        <ReactJWPlayer
+                          playerId="my-unique-id1"
+                          playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
+                          isAutoPlay={true}
+                          isMuted={true}
+                          isSkipable={false}
+                          onAdPlay={() => {
+                            AdImpression();
+                          }}
+                          onOneHundredPercent={onRestartAd}
+                          onAdSkipped={onRestartAd}
+                          file={
+                            "https://s3.eu-central-1.amazonaws.com/tapmad.com/web/videos/blank.mp4"
+                          }
+                          onAdComplete={onRestartAd}
+                          generatePrerollUrl={() =>
+                            ads.rightVideoAd && ads.allow
+                              ? ads.rightVideoAd
+                              : ""
+                          }
+                          customProps={{
+                            controls: true,
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <DFPSlotsProvider dfpNetworkId="28379801">
+                        <div className="desktop-ads">
+                          <AdSlot
+                            sizes={[[300, 250]]}
+                            adUnit={ads.rightVideoAd}
+                            onSlotIsViewable={(dfpEventData) => AdImpression()}
+                          />
+                        </div>
+                      </DFPSlotsProvider>
+                    )
+                  ) : null}
                 </div>
-              ) : null}
+                {/* side add desktop end */}
 
-              {/* Banner Add */}
-              {ads.allow && ads.bottomBannerAd && (
-                <DFPSlotsProvider dfpNetworkId="28379801">
-                  <div className="desktops-ads text-center d-none d-lg-block d-md-block">
-                    <AdSlot sizes={[[970, 250]]} adUnit={ads.bottomBannerAd} />
+                {/* <div
+                  className="text-left mt-3 related-video"
+                  style={{ height: "100vh", overflow: "scroll" }}
+                >
+                  <h5>Related Videos</h5>
+                  <div>
+                    {relatedVideo.length
+                      ? relatedVideo.map((video, i) => {
+                          let slug = SEOFriendlySlugsForVideo(video);
+                          return (
+                            <>
+                              <Link
+                                href={slug}
+                                replace={true}
+                                shallow={false}
+                                key={i}
+                              >
+                                <a>
+                                  <RelatedProductCard video={video} />
+                                </a>
+                              </Link>
+                            </>
+                          );
+                        })
+                      : null}
                   </div>
-                </DFPSlotsProvider>
-              )}
-            </div>
-          </div>
-          {/* Side Add */}
-          <div className="col-lg-3 text-center pt-5 ">
-            {ads.allow && ads.rightAd && (
-              <DFPSlotsProvider dfpNetworkId="28379801">
-                <div className="desktop-ads">
-                  <AdSlot sizes={[[300, 250]]} adUnit={ads.rightAd} />
-                </div>
-              </DFPSlotsProvider>
-            )}
-
-            {ads.allow && isAutoPlay && ads.rightVideoAd ? (
-              <div style={{ marginTop: "65px" }}>
-                <ReactJWPlayer
-                  playerId="my-unique-id1"
-                  playerScript="https://cdn.jwplayer.com/libraries/uilg5DFs.js"
-                  isAutoPlay={true}
-                  isMuted={true}
-                  isSkipable={false}
-                  onOneHundredPercent={onRestartAd}
-                  onAdSkipped={onRestartAd}
-                  file={"https://www.tapmad.com/tapmad.mp4"}
-                  onAdComplete={onRestartAd}
-                  generatePrerollUrl={() =>
-                    ads.rightVideoAd && ads.allow ? ads.rightVideoAd : ""
-                  }
-                  customProps={{
-                    controls: true,
-                  }}
-                />
+                </div> */}
               </div>
             ) : null}
-            <div
-              className="text-left mt-3"
-              style={{ height: "100vh", overflow: "scroll" }}
-            >
-              <h5>Related Videos</h5>
-              <div>
-                {relatedVideo.length
-                  ? relatedVideo.map((video, i) => {
-                    let slug = SEOFriendlySlugsForVideo(video, true);
-                    return (
-                      <Link
-                        href={slug}
-                        replace={true}
-                        shallow={false}
-                        key={i}
-                      >
-                        <a>
-                          <RelatedProductCard video={video} />
-                        </a>
-                      </Link>
-                    );
-                  })
-                  : null}
-              </div>
-            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
