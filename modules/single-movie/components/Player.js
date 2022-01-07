@@ -560,7 +560,6 @@ export default function Player({ movies }) {
                     </DFPSlotsProvider>
                   </div>
                   {/* side 3rd ad end*/}
-
                   {ads.allow && isAutoPlay && ads.rightVideoAd ? (
                     ads.rightVideoAd.includes("http") ? (
                       <div style={{ marginTop: "65px" }}>
