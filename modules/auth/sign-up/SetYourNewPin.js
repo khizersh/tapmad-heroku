@@ -60,7 +60,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
       Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
     }
     const response = await AuthService.setNewPin(pin, username);
-
     if (response != null) {
       if (response.responseCode == 0) {
         swal({
@@ -101,6 +100,7 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
       setConfirmPin(mobileNum.trim());
     }
   }
+
   useEffect(() => {
     if (SignUpState.UserDetails.MobileNo) {
       let num = SignUpState.UserDetails.MobileNo;
