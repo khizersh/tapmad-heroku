@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
-import { basicSliderConfig } from "../../../services/utils";
+import { basicSliderConfig, replaceCategoryToShows } from "../../../services/utils";
 
 export default function HomepageFeatured({ featured }) {
   var settings = basicSliderConfig(3, 2);
@@ -11,9 +11,10 @@ export default function HomepageFeatured({ featured }) {
       <h5>Featured</h5>
       <Slider {...settings}>
         {featured.WebBanners.map((e, i) => {
+          let url = replaceCategoryToShows(e.RedirectWebBannerImage); 
           return (
             <div key={i}>
-              <Link href={e.RedirectWebBannerImage} shallow passHref>
+              <Link href={url} shallow passHref>
                 <a>
                   <img
                     src={e.TabPosterPath}
