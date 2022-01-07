@@ -88,7 +88,7 @@ export const getChannelWithPaginationInitial =
 
 // catchup
 
-export const getCatchupTv = STAGEURL + "api/getCatchupTV/V1/en/web";
+export const getCatchupTv = STAGEURL + "api/getCatchupTV/V1/en/android";
 export const getCatchupVideoData = STAGEURL + "api/getCatchupTVURL/V1/en/web/";
 
 // SEO settings

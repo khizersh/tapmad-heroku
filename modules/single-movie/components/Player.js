@@ -267,14 +267,14 @@ export default function Player({ movies }) {
     };
   }, []);
 
-  useEffect(() => {
-    setIsMobile(window.screen.width < 639);
-    if (movies.Video.IsVideoFree == false) {
-      if (!isAuthentictedUser()) {
-        router.push("/sign-up?tab=1&packageId=2");
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   setIsMobile(window.screen.width < 639);
+  //   if (movies.Video.IsVideoFree == false) {
+  //     if (!isAuthentictedUser()) {
+  //       router.push("/sign-up?tab=1&packageId=2");
+  //     }
+  //   }
+  // }, []);
 
   return (
     <>
@@ -313,7 +313,8 @@ export default function Player({ movies }) {
                     {ads.topAdDesktop && (
                       <div className="desktop-ads d-none d-lg-block d-md-block">
                         <AdSlot
-                          sizes={[[970, 250]]}
+                        
+                          sizes={[[728,90]]}
                           adUnit={ads.topAdDesktop}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
                         />

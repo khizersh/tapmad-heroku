@@ -63,7 +63,14 @@ const TabDetails = () => {
                               alt={n.VideoName}
                             />
                             {n.IsVideoFree ? null : (
-                              <div className="live_side">{n.PackageName}</div>
+                              // <div className="live_side">{n.PackageName}</div>
+                              <div className="row">
+                              <img
+                                className="live_side2 crown-img-only"
+                                src={n.PackageImage}
+                                width={40}
+                              />
+                            </div>
                             )}
                           </div>
                         </a>
