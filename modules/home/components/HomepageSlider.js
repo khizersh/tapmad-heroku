@@ -16,6 +16,7 @@ const Slider = dynamic(() => import("react-slick"));
 const HomePageAd = dynamic(() => import("./HomePageAd"), { ssr: false });
 
 const HomepageSlider = ({ movies, ads, name }) => {
+  console.log("slider : ",movies);
   const router = useRouter();
   var settings = basicSliderConfig(8);
   const [clientXonMouseDown, setClientXonMouseDown] = React.useState(null);
