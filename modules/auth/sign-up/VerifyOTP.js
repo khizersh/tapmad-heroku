@@ -78,7 +78,8 @@ const VerifyOTPComponent = ({ newUser, login }) => {
               title: data.message,
               icon: "success",
             }).then((res) => {
-              router.push("/");
+              let backURL = Cookie.getCookies("backUrl") || "/";
+              router.push(backURL);
             });
           } else if (checkForBoolean(data.data?.User?.IsPinSet)) {
             AuthService.clearUserToken(SignUpState.UserDetails?.MobileNo).then(
