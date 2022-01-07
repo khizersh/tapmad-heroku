@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {
       if (pageProps.protected) {
         let check = checkUserIdAndToken();
-        if (check.valid) {
+        if (!check.valid) {
           router.push(check.url);
         }
       }
