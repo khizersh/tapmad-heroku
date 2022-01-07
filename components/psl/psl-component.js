@@ -39,8 +39,7 @@ export default memo(function PSLComponent({ channel }) {
           ChatOrder: "2",
           TabIcon:
             "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-          TabIconUnActive:
-            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/UnactiveChat.png",
+          TabIconUnActive: "",
           TabId: 4,
           TabName: "Related",
         },
@@ -196,11 +195,13 @@ export default memo(function PSLComponent({ channel }) {
                       tabClassName={"tshop-tabs"}
                       title={
                         <div>
-                          <img
-                            src={tab.TabIconUnActive}
-                            width={25}
-                            alt={tab.TabIconUnActive}
-                          />
+                          {tab.ChatOrder != 2 ? (
+                            <img
+                              src={tab.TabIconUnActive}
+                              width={25}
+                              alt={tab.TabIconUnActive}
+                            />
+                          ) : null}
                           <p
                             className={`${
                               selectedTab == tab.TabId
