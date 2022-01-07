@@ -56,13 +56,15 @@ function MyApp({ Component, pageProps }) {
     })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
   }, []);
 
-  useEffect(() => {
-    if (pageProps.protected) {
-      let check = checkUserIdAndToken();
-      if (!check.valid) {
-        router.push(check.url);
+  useEffect(async () => {
+    setTimeout(() => {
+      if (pageProps.protected) {
+        let check = checkUserIdAndToken();
+        if (check.valid) {
+          router.push(check.url);
+        }
       }
-    }
+    }, 1500);
   }, [pageProps.protected]);
 
   return (
@@ -174,7 +176,7 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 
-export const NoSideBarSkeleton = ({ children , layout }) => {
+export const NoSideBarSkeleton = ({ children, layout }) => {
   const { initialState, setLoader } = React.useContext(MainContext);
 
   Router.onRouteChangeStart = (url) => {
