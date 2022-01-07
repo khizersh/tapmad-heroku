@@ -73,6 +73,7 @@ const Syno = (props) => {
           videoList={videoList}
           syno={true}
           page={"play"}
+          packageImage={props.data.Video.PackageImage}
         />
       </div>
     </>

@@ -2,23 +2,47 @@ import Link from "next/link";
 import React from "react";
 import { SEOFriendlySlugsForVideo } from "../../../services/utils";
 
-const CategoryHorizontalCard = ({ video, type, slug }) => {
+const CategoryHorizontalCard = ({ video, type, slug, packageImage }) => {
   return (
     <>
+      <style jsx>
+        {`
+          .package {
+            position: absolute !important;
+            top: 5px;
+            right: 5px;
+            width: 15px !important;
+            height: 15px !important;
+          }
+        `}
+      </style>
       <Link href={slug} passHref={true} shallow={true}>
         <div className="col-12 p-1 d-lg-none d-md-none">
           <div className="d-flex">
             <div>
-              {type && (
+              {type ? (
                 <span className="live_side" style={{ top: 4, left: 4 }}>
                   {type}
                 </span>
+              ) : (
+                <></>
               )}
               <img
                 src={video.VideoImagePath}
                 alt={video.VideoName}
                 width="130px"
               />
+              {packageImage ? (
+                <img
+                  src={packageImage}
+                  alt="Package"
+                  width={30}
+                  height={30}
+                  className="package"
+                />
+              ) : (
+                <></>
+              )}
             </div>
             <div>
               <div className="card-desc-div">
