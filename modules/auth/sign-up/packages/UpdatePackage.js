@@ -4,7 +4,6 @@ import { transparentBox, upgradeIcon } from "../../../../services/imagesLink";
 const UpdatePackage = ({ currentPackage }) => {
   const splitPrice = currentPackage?.CurrentPackagePrice.split("-");
   const perMonth = splitPrice[2].split(" ");
-  console.log(currentPackage);
   return (
     <>
       <style>
