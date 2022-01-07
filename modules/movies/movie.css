@@ -4,12 +4,12 @@
 
 .txt-rel-card:hover {
   transition: all 0.3s;
-  color: #87c242 !important;
+  color: #87c242  !important;
 }
 
 .img-hov:hover ~ .txt-rel-card {
   transition: all 0.3s;
-  color: #87c242 !important;
+  color: #87c242  !important;
 }
 
 /* .banner-main {

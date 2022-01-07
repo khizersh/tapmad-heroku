@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useCallback, useMemo, memo, useContext } from "react";
 import swal from "sweetalert";
 import { MainContext } from "../../../contexts/MainContext";
 import { loggingTags } from "../../../services/apilinks";
@@ -15,9 +15,9 @@ function Login({ loginResponse }) {
     updateUserPassword,
     updateUserOperator,
     setLoader,
-  } = React.useContext(MainContext);
-  const [mobileNo, setMobileNo] = React.useState("");
-  const [btnDisabled, setbtnDisabled] = React.useState(true);
+  } = useContext(MainContext);
+  const [mobileNo, setMobileNo] = useState("");
+  const [btnDisabled, setbtnDisabled] = useState(true);
 
   function handleNumber(e) {
     const mobileNum = e.target.value;
@@ -77,6 +77,7 @@ function Login({ loginResponse }) {
     },
     [updateUserOperator]
   );
+
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
@@ -97,8 +98,8 @@ function Login({ loginResponse }) {
         )}
         <input
           type="text"
-          maxLength="20"
-          minLength="5"
+          maxLength="10"
+          minLength="10"
           className="form-control"
           placeholder="3xxxxxxxxxx"
           inputMode="numeric"
@@ -123,7 +124,7 @@ function Login({ loginResponse }) {
           <span className="mt-2 mr-2 text-muted">
             | &nbsp;&nbsp;Not Registered?
           </span>
-          <Link href="/sign-up" shallow={true} passHref={true}>
+          <Link href="/sign-up?tab=1&packageId=2" shallow={true} passHref={true}>
             <a className="text-light">Sign up</a>
           </Link>
         </>

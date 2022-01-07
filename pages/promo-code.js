@@ -13,42 +13,53 @@ import SimCardForm from "../modules/auth/sign-up/payment-info-components/SimCard
 import { useRouter } from "next/router";
 import PromoCodeLayout from "../modules/promo-code/PromoCodeLayout";
 import { isAuthentictedUser } from "../services/utils";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
+import { UPDATE_USER_DETAILS } from "../contexts/auth/SignUpReducer";
 const promoCode = () => {
   const router = useRouter();
   const [promoCode, setPromoCode] = useState("");
   const [number, setNumber] = useState([]);
+  const [operator, setOperator] = useState(null);
   const { authState, updateSelectedOperator } = useContext(Authcontext);
-  const { updateUserOperator, initialState, setLoader, updateUserNumber } =
-    useContext(MainContext);
-
+  const { setLoader } = useContext(MainContext);
+  const { dispatch, SignUpState } = useContext(SignUpContext);
 
   useEffect(() => {
     const isAuthenticated = isAuthentictedUser();
     if (isAuthenticated) {
-      router.push('/')
+      router.push("/");
     }
-  }, [])
+  }, []);
   const handleNumber = (e) => {
     let num = e.target.value;
     if (+num === +num) {
       setNumber(num);
-      updateUserNumber(num);
+      dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
     }
   };
 
-  const onChangeNetwork = useCallback(
-    (data) => {
-      updateUserOperator(data.OperatorId);
-      updateSelectedOperator(data);
-    },
-    [updateSelectedOperator]
-  );
+  const onChangeNetwork = useCallback((data) => {
+    setOperator(data.OperatorId);
+    // updateSelectedOperator(data);
+    // dispatch({
+    //   type: UPDATE_USER_DETAILS,
+    //   data: { Operator: data.OperatorId },
+    // });
+  }, []);
 
   const onChangePromo = (e) => {
     setPromoCode(e.target.value);
   };
 
   const onClick = async () => {
+    const mobileNum = number.trim();
+    if (mobileNum.length < 10) {
+      return swal({
+        title: "Invalid Mobile Number",
+        timer: 2000,
+        icon: "error",
+      });
+    }
     if (!promoCode.length) {
       return swal({
         title: "Enter promo code!",
@@ -56,7 +67,7 @@ const promoCode = () => {
         icon: "error",
       });
     }
-    if (!initialState.User.OperatorId) {
+    if (!operator) {
       return swal({
         title: "Select operator!",
         timer: 2000,
@@ -68,10 +79,11 @@ const promoCode = () => {
       Version: "V1",
       Language: "en",
       Platform: "web",
-      MobileNo: initialState.User.MobileNo,
-      OperatorID: initialState.User.OperatorId,
+      MobileNo: number,
+      OperatorID: operator,
       PromoCode: promoCode,
     };
+
     const data = await AuthService.userPromoCode(body);
     if (data && data.responseCode == 1) {
       swal({
@@ -79,10 +91,14 @@ const promoCode = () => {
         timer: "2500",
         icon: "success",
       }).then((res) => {
-        router.push(
-          { pathname: "/sign-up", query: { code: "34", number: number } },
-          "/sign-up"
-        );
+        router.push(`/sign-up?code=34&number=${number}&operator=${body.OperatorID}`)
+        // router.push(
+        //   {
+        //     pathname: `/sign-up?code=34&number=${number}&operator=${body.OperatorID}`,
+        //     query: { code: "34", number: number, operator: body.OperatorID },
+        //   },
+        //   "/sign-up"
+        // );
       });
     } else if (data.responseCode == 11) {
       swal({
@@ -90,6 +106,14 @@ const promoCode = () => {
         timer: "2500",
         icon: "warning",
       }).then((result) => {
+        router.push("/sign-in");
+      });
+    } else if (data.responseCode == 2) {
+      swal({
+        title: data.message,
+        timer: "2500",
+        icon: "warning",
+      }).then(() => {
         router.push("/sign-in");
       });
     } else {
@@ -104,13 +128,12 @@ const promoCode = () => {
 
   const operators = useMemo(() => authState.loginOperators);
 
-
   return (
     <div>
       <PromoCodeLayout
         bgImage={"http://d1s7wg2ne64q87.cloudfront.net/web/images/psl-min.jpg"}
       >
-        <div className="form-group mb-0 ">
+        <div className="form-group mb-0">
           <div>
             <div className="">
               <input
@@ -151,7 +174,7 @@ export function getStaticProps() {
   return {
     props: {
       auth: true,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }

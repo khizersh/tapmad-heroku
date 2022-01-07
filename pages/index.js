@@ -5,6 +5,7 @@ import requestIp from "request-ip";
 
 import { HomeService } from "../modules/home/components/home.service";
 import isGoogle from "../services/google-dns-lookup";
+// import { UpdateBase } from "../services/apilinks";
 
 export default function Home(props) {
   return (
@@ -13,24 +14,28 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <title>
-          Watch Live TV - HD Movies, Sports, Live EPL Stream - Tapmad TV
+          Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV
         </title>
         <meta
           name="description"
-          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com."
+          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
+        />
+        <meta
+          name="title"
+          content="Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV"
         />
         <meta
           name="keywords"
           content="Live tv channel, watch live tv, watch epl in Pakistan, live epl, premier league, english premier league pakistan,  watch pakistani tv channels free, indian movies, watch free indian movies, live sports, live cricket stream"
         />
-        <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
-
+        {/* <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script> */}
       </Head>
       <HomePage {...props} />
     </div>
   );
 }
 export async function getServerSideProps(context) {
+  // UpdateBase(process.env.API_ENDPOINT);
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
@@ -43,11 +48,11 @@ export async function getServerSideProps(context) {
   } catch (err) {
     console.log(err);
   }
-  console.log("Env is ", process.env.TAPENV)
   let movie, banner, featured;
   var movieList = await HomeService.getFeaturedHomePageData(ip);
-  if (movieList != null) movie = await movieList.data;
-  else movie = {};
+  if (movieList != null) {
+    movie = await movieList.data;
+  } else movie = {};
 
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
@@ -63,7 +68,8 @@ export async function getServerSideProps(context) {
       banner: banner,
       featured: featured,
       ip: ip,
-      env: process.env.TAPENV
+      env: process.env.TAPENV || 'production',
+      prodEnv: process.env.API_ENDPOINT || 'http://app.tapmad.com/api/'
     },
   };
 }

@@ -1,41 +1,32 @@
 import React, {
-  useState,
   useContext,
-  useEffect,
-  memo,
   useMemo,
   useCallback,
-  useRef,
+  useState,
+  useEffect,
 } from "react";
 import SignMessage from "./SignMessage";
 import { Authcontext } from "../../../contexts/AuthContext";
-import { MainContext } from "../../../contexts/MainContext";
 import SimCardForm from "./payment-info-components/SimCardForm";
 import CreditCardForm from "./payment-info-components/CreditCardForm";
 import EasypaisaForm from "./payment-info-components/EasypaisaForm";
 import JazzCashForm from "./payment-info-components/JazzCashForm";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
 
-function PaymentInfo() {
-  const { authState, updateSelectedOperator } = useContext(Authcontext);
-  const {
-    updateUserOperator,
-    updateUserNumber,
-    updateUserCnic,
-    updateUserFullName,
-    updateUserEmail,
-  } = useContext(MainContext);
+function PaymentInfo(props) {
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
-
-  const onChangeNetwork = useCallback(
-    (data) => {
-      updateUserOperator(data.OperatorId);
-      updateSelectedOperator(data);
-    },
-    [updateSelectedOperator]
-  );
-
+  const { AuthState } = useContext(AuthContext);
+  const onChangeNetwork = useCallback((data) => {
+    updateUserData({ Operator: data.OperatorId });
+  }, []);
+  function updateUserData(userData) {
+    dispatch({ type: UPDATE_USER_DETAILS, data: userData });
+  }
   const RenderMethod = useCallback(() => {
-    const PaymentId = authState.selectedPaymentMethod.PaymentId;
+    const PaymentId = SignUpState.SelectedMethod.PaymentId;
     if (PaymentId == 1) {
       return (
         <>
@@ -43,7 +34,7 @@ function PaymentInfo() {
             data={operators}
             onChangeNetwork={onChangeNetwork}
             onChangeNumber={handleNumber}
-            mobileCode={authState.MobileCode}
+            mobileCode={AuthState.CountryCode}
           />
         </>
       );
@@ -54,9 +45,10 @@ function PaymentInfo() {
             data={operators}
             onChangeName={handleFullName}
             onChangeNetwork={onChangeNetwork}
-            mobileCode={authState.MobileCode}
+            mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeEmail={handleEmail}
+            creditCardType={AuthState.CreditCardType}
           />
         </>
       );
@@ -64,9 +56,8 @@ function PaymentInfo() {
       return (
         <>
           <EasypaisaForm
-            methodName={authState.selectedPaymentMethod.PaymentMethodName}
-            logo={authState.selectedPaymentMethod?.MobileNetworks[0]?.OperatorImage}
-            mobileCode={authState.MobileCode}
+            methodName={SignUpState.SelectedMethod.PaymentMethodName}
+            mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
           />
         </>
@@ -74,26 +65,25 @@ function PaymentInfo() {
     } else if (PaymentId == 4 || PaymentId == 7) {
       return (
         <>
-        <JazzCashForm
-            logo={authState.selectedPaymentMethod?.MobileNetworks[0]?.OperatorImage}
-            mobileCode={authState.MobileCode}
+          <JazzCashForm
+            mobileCode={AuthState.CountryCode}
             onChangeNumber={handleNumber}
             onChangeCnic={handleCnic}
           />
         </>
       );
     } else {
-      return <></>
+      return <></>;
     }
-  }, [authState.selectedPaymentMethod]);
+  }, [SignUpState.SelectedMethod]);
 
-  const operators = useMemo(() => authState.loginOperators);
+  const operators = useMemo(() => SignUpState.LoginOperator || []);
 
   function handleCnic(e) {
     const cnic = e.target.value;
     if (+cnic === +cnic) {
-      if (cnic.length == 6) {
-        updateUserCnic(cnic);
+      if (cnic?.trim().length == 6) {
+        updateUserData({ Cnic: cnic });
       }
     }
   }
@@ -101,33 +91,59 @@ function PaymentInfo() {
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      if (mobileNum.length > 4) {
-        updateUserNumber(mobileNum);
-      }
+      updateUserData({ MobileNo: mobileNum.replace(" ", "") });
+      dispatch({
+        type: "ALREADY_SIGNEDUP_NUM",
+        data: { FromSignup: 1, number: mobileNum },
+      });
+      // } else {
+      //   updateUserData({ MobileNo: mobileNum });
+      // }
     }
   }
 
   function handleFullName(e) {
     const name = e.target.value;
-    updateUserFullName(name);
+    updateUserData({ FullName: name });
   }
 
   function handleEmail(e) {
     const email = e.target.value;
-    updateUserEmail(email);
+    updateUserData({ Email: email });
   }
 
   return (
     <div>
-      <div className="pymnt_pge_phne pr-3 pl-3 pb-3 pt-0 mthd_active">
+      <style>
+        {`
+        .mthd_form .form-control,
+        .mthd_form .payment-icon {
+          font-size: 14px;
+          height: 32px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+
+        `}
+      </style>
+      <div className="pymnt_pge_phne px-lg-3 pb-3 pt-0 mthd_active mthd_form">
         <div className="form-group mb-0">
           <div className="">
-            <div className="input-group ng-scope">
-              {authState && authState.selectedPaymentMethod && <RenderMethod />}
-            </div>
+            {SignUpState && SignUpState.SelectedMethod && <RenderMethod />}
           </div>
         </div>
-        <SignMessage />
+        <SignMessage
+          price={SignUpState.SelectedPrice}
+          creditCardType={AuthState.CreditCardType}
+        />
       </div>
     </div>
   );

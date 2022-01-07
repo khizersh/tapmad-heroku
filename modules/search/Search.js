@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, createRef } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { actionsRequestContent, get } from "../../services/http-service";
 import ItemCard from "./ItemCard";
@@ -8,12 +8,13 @@ import { loggingTags } from "../../services/apilinks";
 import { SearchService } from "./Search.service";
 import { SearchTag } from "../../services/gtm";
 
-const Search = () => {
+const Search = (props) => {
   const { setSearch, setLoader, getCountryCode } = useContext(MainContext);
   const [keyword, setKeyword] = useState("");
   const [isSearched, setisSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchedItem, setSearchedItem] = useState([]);
+  const inputSearch = createRef();
 
   const debouncedSearchKeyWord = Debounce(keyword, 800);
 
@@ -24,6 +25,10 @@ const Search = () => {
   const onChange = (e) => {
     setKeyword(e.target.value);
   };
+
+  useEffect(() => {
+    inputSearch?.current?.focus();
+  }, [inputSearch]);
 
   useEffect(async () => {
     if (debouncedSearchKeyWord) {
@@ -60,7 +65,7 @@ const Search = () => {
   const onClickSearch = async () => {
     setLoader(true);
     if (keyword) {
-      const data = await SearchService.getItemByKeyrwords(keyword);
+      const data = await SearchService.getItemByKeyrwords(keyword, props.ip);
       if (data != null) {
         if (data.responseCode == 1) {
           setSearchedItem(data.data.Videos);
@@ -102,6 +107,7 @@ const Search = () => {
             onChange={onChange}
             className="form-control float-right ml-2 width search-input"
             placeholder="Start Searching..."
+            ref={inputSearch}
           />
         </div>
       </div>

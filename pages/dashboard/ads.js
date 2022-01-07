@@ -18,6 +18,8 @@ export default function ads() {
       rightAd: "",
       bottomBannerAd: "",
       bottomBannerAdMobile: "",
+      bottomBannerAdMobileHeight:"",
+      bottomBannerAdMobileWeight:"",
       videoAdDuration: 200000,
       allow: true,
     },
@@ -31,6 +33,8 @@ export default function ads() {
       rightAd: "",
       bottomBannerAd: "",
       bottomBannerAdMobile: "",
+      bottomBannerAdMobileHeight:"",
+      bottomBannerAdMobileWeight:"",
       videoAdDuration: 200000,
       allow: true,
     },
@@ -45,6 +49,7 @@ export default function ads() {
     rightAd: "",
     bottomBannerAd: "",
     bottomBannerAdMobile: "",
+    bottomBannerAdMobileSize:"",
     videoAdDuration: 2000,
     allow: true,
   });
@@ -58,6 +63,7 @@ export default function ads() {
     rightAd: "",
     bottomBannerAd: "",
     bottomBannerAdMobile: "",
+    bottomBannerAdMobileSize:"",
     videoAdDuration: 2000,
     allow: true,
   });
@@ -69,7 +75,6 @@ export default function ads() {
       const resp = DashboardService.customizeData(data);
 
       setData(resp);
- console.log("width: ", resp[0].topAdMobileSize.trim().split(',')[0]); 
       setLocal({ ...local, ...resp[0] });
       setInternational({ ...international, ...resp[1] });
     }
@@ -80,7 +85,6 @@ export default function ads() {
     let array = [];
     array.push(local);
     array.push(international);
-    console.log("array: ", array);
     const resp = await DashboardService.editAdDetails(array);
     if (resp && resp.data && resp.data.statusCode == 200) {
       swal({ title: "Update succesfully!", timer: 3000, icon: "success" });
@@ -253,6 +257,25 @@ export default function ads() {
                   className="form-control"
                   id="exampleInputEmail1"
                   value={local.bottomBannerAdMobile}
+                  aria-describedby="emailHelp"
+                  onChange={onChangeLocal}
+                  placeholder="Enter Bottom Banner Ad Mobile"
+                />
+
+                <small id="emailHelp" className="form-text text-muted">
+                  Ad unit for bottom banner ad for mobile
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label>Bottom Ad Mobile Size</label>
+                <input
+                  type="text"
+                  name="bottomBannerAdMobileSize"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  value={local.bottomBannerAdMobileSize}
                   aria-describedby="emailHelp"
                   onChange={onChangeLocal}
                   placeholder="Enter Bottom Banner Ad Mobile"
@@ -445,6 +468,25 @@ export default function ads() {
                 />
 
                 <small className="form-text text-muted">
+                  Ad unit for bottom banner ad for mobile
+                </small>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-xm-12">
+              <div className="form-group">
+                <label>Bottom Ad Mobile Size</label>
+                <input
+                  type="text"
+                  name="bottomBannerAdMobileSize"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  value={international.bottomBannerAdMobileSize}
+                  aria-describedby="emailHelp"
+                  onChange={onChangeInternatioanl}
+                  placeholder="Enter Bottom Banner Ad Mobile"
+                />
+
+                <small id="emailHelp" className="form-text text-muted">
                   Ad unit for bottom banner ad for mobile
                 </small>
               </div>

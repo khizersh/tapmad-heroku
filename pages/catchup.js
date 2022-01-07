@@ -4,7 +4,7 @@ import TabSlider from "../modules/catchup/TabSlider";
 
 const catchup = () => {
   return (
-    <div>
+    <div className="container-fluid">
       <TabSlider />
       <TabDetails />
     </div>

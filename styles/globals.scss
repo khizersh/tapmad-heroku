@@ -1,4 +1,8 @@
 @import "../theming.scss";
+// global variable
+$tapmadColor: #87c242;
+$darkColor: #333433;
+//  =========
 
 body {
   background: black;
@@ -17,6 +21,16 @@ body {
 .movies-images {
   position: relative;
   z-index: -1;
+}
+
+.text-green {
+  color: $tapmadColor;
+}
+.bg-green {
+  background-color: $tapmadColor !important;
+}
+.bg-dark {
+  background-color: $darkColor !important;
 }
 .slick-next {
   right: 1.125rem;
@@ -287,10 +301,48 @@ body {
   font-size: 10px;
   letter-spacing: 2px;
   border-radius: 0 0 0.25rem 0;
-  left: 0;
+  right: 0;
   top: 0;
   z-index: 1;
 }
+
+.crown-img-only{
+  position: relative;
+  top: -5px;
+  left: -2px;
+}
+
+.crown-img-live{
+  position: relative;
+  top: -5px;
+  left: -2px;
+}
+.live_side2 {
+  position: absolute;
+  background-color: transparent;
+  padding: 0px;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  border-radius: 0 0 0.25rem 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 26px;
+}
+.live_side3 {
+  position: absolute;
+  background-color: transparent;
+  padding: 2px 0px;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  border-radius: 0 0 0.25rem 0;
+  left: 0rem;
+  top: 0;
+  z-index: 1;
+}
+
 .tm-mv-bx:hover .tm-mv-items {
   opacity: 1 !important;
   transform: scale(1);
@@ -966,6 +1018,21 @@ label {
   font-family: inherit;
 }
 
+.desktop-ads iframe,
+.desktops-ads iframe {
+  max-width: 100%;
+  // height: auto;
+}
+
+@media(max-width: 570px) {
+  .home-banner-btn {
+    top: -22px;
+    .tm_wishlst_btn_active {
+      display: inline-block
+    }
+  }
+}
+
 .tm_wishlst_btn_active:hover {
   transition: 0.3 ease;
   color: white !important;
@@ -977,28 +1044,29 @@ label {
   height: 0;
 }
 
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 @media screen and (min-width: 1500px) {
-  
   .tm-upcmng {
     position: relative;
     bottom: 19rem;
     z-index: 10;
     height: 0;
   }
-  
 }
 
 @media screen and (min-width: 1200px) and (max-wdith: 1499px) {
-  
   .tm-upcmng {
     position: relative;
     bottom: 15rem;
     z-index: 10;
     height: 0;
   }
-  
 }
-
 
 @media screen and (max-width: 900px) {
   .home-banner-btn {
@@ -1012,13 +1080,13 @@ label {
     z-index: 10;
     height: 0;
   }
-  
 }
 
 @media screen and (max-width: 570px) {
   .the-shop nav {
     flex-wrap: nowrap;
     overflow-x: scroll;
+    border-top: none;
   }
   .the-shop nav::-webkit-scrollbar {
     width: 0 !important;
@@ -1027,7 +1095,7 @@ label {
   .footer_links {
     display: block;
   }
-  
+
   .tm-upcmng {
     position: relative;
     bottom: 130px;
@@ -1045,8 +1113,13 @@ label {
   .width-100 {
     width: auto !important;
   }
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
-
 
 .form-control {
   border-radius: 0px;
@@ -1149,5 +1222,3 @@ label {
 }
 
 /* loader css end*/
-
-

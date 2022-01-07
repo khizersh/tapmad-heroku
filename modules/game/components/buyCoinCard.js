@@ -19,7 +19,7 @@ const buyCoinCard = ({ data }) => {
   const { setLoader } = useContext(MainContext);
 
   const onClickBuy = async () => {
-    setLoader(true);
+    // setLoader(true);
     const resp = await MyAccountService.getUserData(formData);
     if (resp && resp.responseCode == 1) {
       let body = {
@@ -30,15 +30,14 @@ const buyCoinCard = ({ data }) => {
         UserId: Cookie.getCookies("userId"),
         ProudctCoins: data.ProudctCoins,
         CoinProductPrice: data.CoinProductPrice,
-        MobileNo: resp.data.UserProfile.UserProfileMobile,
-        OperatorId: resp.data.UserProfile.OperatorId,
+        MobileNo: resp.data.ProfileData.UserProfileMobile,
+        OperatorId: resp.data.ProfileData.OperatorId,
         TransactionType: 1,
       };
       makeCoinTransactionData(body)
         .then((respCoin) => {
           if (respCoin && respCoin.responseCode == "10") {
             setLoader(false);
-            console.log("respCoin: ", respCoin);
             Cookie.setCookies("userCoins", respCoin.data.UserTotalCoins);
             updateUserCoin(respCoin.data.UserTotalCoins);
             return swal({

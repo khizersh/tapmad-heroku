@@ -20,7 +20,7 @@
   transition: linear 0.3s;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 /* .horizontal-card {
@@ -50,7 +50,7 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .synopsis_card:hover .img-square-wrapper > img {
   /* transform: translate3d(-00px, 0, 0); */
@@ -118,7 +118,7 @@
 .synopsis-card-text {
   font-size: 13px;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -142,7 +142,7 @@
   padding: 12px 25px !important;
   font-size: 15px;
   font-weight: bold;
-  background: #87c242 !important;
+  background: #87c242  !important;
   color: #000 !important;
   border: none !important;
   border-radius: 0px;
@@ -190,6 +190,9 @@
 
   .font-14 {
     font-size: 14px !important;
+  }
+  .font-13 {
+    font-size: 13px !important;
   }
 
   .tm_wishlst_btn {

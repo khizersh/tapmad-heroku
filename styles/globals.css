@@ -1,4 +1,7 @@
-
+:root {
+  --green: #87c242 ;
+  --grey: #d0d4d7;
+}
 .loader-btn {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
@@ -24,4 +27,26 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+
+/* width whole web scrollbar*/
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #121117; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #87c242 ;
+  border-radius: 20px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #87c242 ; 
 }

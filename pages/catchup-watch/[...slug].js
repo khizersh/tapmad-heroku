@@ -18,7 +18,7 @@ const watch = (props) => {
   const [related, setRelated] = useState([]);
   useEffect(() => {
     if (!props.allowUser) {
-      router.push("/sign-up");
+      router.push("/sign-up?tab=1&packageId=2");
     } else {
       if (catchupState && catchupState.relatedContent.length) {
         setRelated(catchupState.relatedContent);

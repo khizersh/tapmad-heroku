@@ -20,7 +20,7 @@
 }
 .width {
   width: 55%;
-  margin: auto;
+  margin: 0px auto;
 }
 
 .learnList {
@@ -76,7 +76,7 @@
 }
 
 .active {
-  color: #87c242 !important;
+  color: #87c242  !important;
   border-width: 2px;
   border-color: transparent !important;
   background: white !important;
@@ -104,15 +104,15 @@
   border-bottom: 3px solid #222222;
 }
 .bgDarkGame:active {
-  border-bottom: 3px solid #87c242 !important;
+  border-bottom: 3px solid #87c242  !important;
 }
 
 .bgDarkGame:hover {
-  border-bottom: 3px solid #87c242;
+  border-bottom: 3px solid #87c242 ;
 }
 
 .activeLi{
-  border-bottom: 3px solid #87c242;
+  border-bottom: 3px solid #87c242 ;
 }
 
 
@@ -198,6 +198,7 @@
   .width {
     width: 100% !important;
     margin: auto;
+    overflow-x: hidden;
   }
 
   .discountImage{

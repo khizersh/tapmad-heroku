@@ -1,23 +1,48 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { easyPaisaIcon } from "../../../../services/imagesLink";
+import { Cookie } from "../../../../services/cookies";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
 
-const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber , logo }) => {
-  const [num, setNum] = React.useState("");
+const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber, logo }) => {
+  const [num, setNum] = useState("");
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
-      setNum(mobileNum);
+      setNum(mobileNum.trim());
       onChangeNumber(e);
     }
   };
   return (
     <>
-      <div className="form-control text-center">
-        <img src={logo} width="20" alt={'easypaisa'} />{" "}
-        <span className="font-weight">{methodName}</span>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span className="payment-icon border-curve">{mobileCode}</span>
+        </div>
+        <input
+          type="text"
+          // maxLength="10"
+          // minLength="10"
+          className="form-control ml-2 border-curve"
+          placeholder="3xxxxxxxxxx"
+          inputMode="numeric"
+          readOnly={SignUpState.LoggedIn ? true : false}
+          value={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
+          defaultValue={
+            SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+          }
+          onChange={(e) => onChange(e)}
+          pattern="\d*"
+        />
       </div>
-      <span>
+      {/* <div className="form-control text-center">
+        <img src={easyPaisaIcon} width="20" alt={'easypaisa'} />{" "}
+        <span className="font-weight">{methodName}</span>
+      </div> */}
+      {/* <span>
         <label className="form-control cntry_cde border-0">{mobileCode}</label>
       </span>
 
@@ -30,7 +55,7 @@ const EasypaisaForm = ({ methodName, mobileCode, onChangeNumber , logo }) => {
         inputMode="numeric"
         value={num}
         onChange={(e) => onChange(e)}
-      />
+      /> */}
     </>
   );
 };

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
+import { Cookie } from "../../../../services/cookies";
 import { jazzIcon } from "../../../../services/imagesLink";
 
-const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic , logo }) => {
-  const [num, setNum] = React.useState("");
-  const [cnic, setCnic] = React.useState("");
+const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
+  const [num, setNum] = useState("");
+  const [cnic, setCnic] = useState("");
+  const { SignUpState, dispatch } = useContext(SignUpContext);
 
   const onChange = (e) => {
     const mobileNum = e.target.value;
@@ -12,7 +15,6 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic , logo }) => {
       onChangeNumber(e);
     }
   };
-
   const onChangeNic = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -20,35 +22,42 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic , logo }) => {
       onChangeCnic(e);
     }
   };
+
   return (
     <>
-      <div className="form-control text-center">
-        <img src={logo} width="20" alt={'jazzcash'} />{" "}
-        <span className="font-weight">JazzCash</span>
+      <div className="input-group">
+        <div className="input-group-prepend">
+          <span className="payment-icon border-curve">{mobileCode}</span>
+        </div>
+        <div className="pl-2 flex-grow-1 flex-shrink-1 gridCol">
+          <input
+            type="number"
+            maxLength="10"
+            minLength="10"
+            className="form-control border-curve flex-grow-1 w-100"
+            placeholder="3xxxxxxxxxx"
+            inputMode="numeric"
+            readOnly={SignUpState.LoggedIn ? true : false}
+            value={
+              SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+            }
+            // defaultValue={
+            //   SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
+            // }
+            onChange={(e) => onChange(e)}
+          />
+          <input
+            type="text"
+            maxLength="6"
+            minLength="6"
+            className="form-control border-curve flex-grow-1 w-100"
+            placeholder="Last 6 digits of your CNIC"
+            inputMode="numeric"
+            value={cnic}
+            onChange={(e) => onChangeNic(e)}
+          />
+        </div>
       </div>
-      <span>
-        <label className="form-control cntry_cde border-0">{mobileCode}</label>
-      </span>
-      <input
-        type="text"
-        maxLength="20"
-        minLength="5"
-        className="form-control"
-        placeholder="3xxxxxxxxxx"
-        inputMode="numeric"
-        value={num}
-        onChange={(e) => onChange(e)}
-      />
-      <input
-        type="text"
-        maxLength="6"
-        minLength="6"
-        className="form-control w-100 mb-2 pl-2"
-        placeholder="Last 6 digits of your CNIC"
-        inputMode="numeric"
-        value={cnic}
-        onChange={(e) => onChangeNic(e)}
-      />
     </>
   );
 };

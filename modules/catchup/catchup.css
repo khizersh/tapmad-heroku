@@ -30,6 +30,24 @@
   color: #222;
 }
 
+@media(max-width: 767px) {
+  .dys {
+    padding: 20px;
+    margin-right: 15px;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  .dys:after {
+    content: "\f0d7";
+    top: inherit;
+    bottom: -5px;
+    right: inherit;
+    left: 25px;
+    line-height: 1;
+    z-index: 1;
+  }
+}
+
 .dys h4 {
   font-size: 1.125rem;
   font-weight: bold;
@@ -41,6 +59,8 @@
   height: 154px;
   width: 100%;
   animation-duration: 0.3s;
+  object-fit: cover;
+  object-position: left;
 }
 
 .pos-rel {

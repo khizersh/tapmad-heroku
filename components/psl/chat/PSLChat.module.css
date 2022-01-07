@@ -258,7 +258,7 @@
   }
 
   .all_messages {
-    height: calc(100% - 0px);
+    height: calc(100% - 20px);
     overflow-y: scroll;
     overflow-x: hidden;
   }

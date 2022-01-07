@@ -15,7 +15,7 @@ function convertInArray(obj) {
 }
 function authHeaders(token = null) {
   return {
-    Authorization: Cookie.getCookies("content-token") || token
+    Authorization: token || Cookie.getCookies("content-token") || ""
   };
 }
 function customizingData(parentarray) {

@@ -21,11 +21,12 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         }
       })
       .catch((e) => console.log(e));
+    return () => setSignIn(true);
   }, [country]);
   return (
     <>
       <li className="subs_contain" id="signUpMenu">
-        <a href="/sign-up">Subscribe</a>
+        <a href="/sign-up?tab=1&packageId=2">Subscribe</a>
         <span className="icon">
           <i className="fa fa-user-plus"></i>
         </span>

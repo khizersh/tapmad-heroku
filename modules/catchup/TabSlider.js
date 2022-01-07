@@ -5,7 +5,6 @@ import { basicSliderConfig } from "../../services/utils";
 
 const TabSlider = () => {
   const { updateSelectedTab, catchupState } = useContext(CatchupContext);
-  console.log("catchupState: ",catchupState);
   const settings = basicSliderConfig(7, 2);
 
   const onClickTab = (tab) => {
@@ -14,21 +13,25 @@ const TabSlider = () => {
 
   return (
     <div>
+      <style jsx>
+        {`.slick-slide {padding: 0; }`}
+      </style>
       {catchupState.tabs && catchupState.tabs.length && (
         <Slider {...settings}>
           {catchupState.tabs
             ? catchupState.tabs.map((m, i) => (
-              <div
-                key={i}
-                className={`tab p-3 btn m-2 ${catchupState.selectedTab.TabId == m.TabId
-                    ? "active-tab"
-                    : ""
+                <div
+                  key={i}
+                  className={`tab p-3 btn ${
+                    catchupState.selectedTab.TabId == m.TabId
+                      ? "active-tab"
+                      : ""
                   }`}
-                onClick={() => onClickTab(m)}
-              >
-                <img src={m.TabPosterPath} width="100%" alt={m.TabName} />
-              </div>
-            ))
+                  onClick={() => onClickTab(m)}
+                >
+                  <img src={m.TabPosterPath} width="100%" alt={m.TabName} />
+                </div>
+              ))
             : null}
         </Slider>
       )}

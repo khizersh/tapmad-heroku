@@ -2,22 +2,20 @@ import React, { useContext, useState, useEffect } from "react";
 import { MainContext } from "../../../contexts/MainContext";
 import { Cookie } from "../../../services/cookies";
 import swal from "sweetalert";
-import { useRouter } from "next/router";
 import { AuthService } from "../auth.service";
-import { Authcontext } from "../../../contexts/AuthContext";
 import withLogin from "../LoginHOC";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
-function SetYourNewPinSignUp({ login, ip }) {
-  const router = useRouter();
-  const { initialState, checkUserAuthentication, setLoader } =
-    useContext(MainContext);
-  const { authState } = useContext(Authcontext);
+function SetYourNewPinSignUp({ login, ip , showUser }) {
+  const { setLoader } = useContext(MainContext);
+  const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [username, setUsername] = useState("");
   const [showUsername, setShowUsername] = useState(false);
 
   const onClick = async () => {
+    // setLoader(true);
     if (showUsername) {
       if (username.trim().length < 1) {
         return swal({
@@ -27,10 +25,10 @@ function SetYourNewPinSignUp({ login, ip }) {
         });
       }
     }
-    if (!pin.length) {
+    if (pin.length != 4) {
       return swal({
         timer: 3000,
-        title: "Please set your PIN!",
+        title: "Set 4 digit PIN!",
         icon: "error",
       });
     }
@@ -41,27 +39,26 @@ function SetYourNewPinSignUp({ login, ip }) {
         icon: "error",
       });
     }
-    let obj = {
+    Cookie.setCookies("UserPin", pin);
+    var obj = {
       Language: "en",
       Platform: "web",
       Version: "V1",
-      MobileNo: initialState.User.MobileNo,
-      OperatorId: initialState.User.OperatorId,
-      UserPassword: initialState.User.Password,
+      MobileNo: SignUpState.UserDetails.MobileNo,
+      OperatorId: SignUpState.UserDetails.Operator,
+      UserPassword: "",
     };
-    setLoader(true);
 
-    const status = await AuthService.GetCardUser({
-      MobileNo: initialState.User.MobileNo,
+    setLoader(true);
+    const userStatus = await AuthService.GetCardUser({
+      MobileNo: SignUpState.UserDetails.MobileNo,
       Language: "en",
     });
-
-    if (status && status.data.User) {
-      obj.UserPassword = status.data.User.UserPassword;
-      Cookie.setCookies("userId", status.data.User.UserId);
-      Cookie.setCookies("content-token", status.data.User.UserPassword);
+    if (userStatus && userStatus.data.User) {
+      obj.UserPassword = userStatus.data.User.UserPassword;
+      Cookie.setCookies("userId", userStatus.data.User.UserId);
+      Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
     }
-
     const response = await AuthService.setNewPin(pin, username);
 
     if (response != null) {
@@ -69,13 +66,13 @@ function SetYourNewPinSignUp({ login, ip }) {
         swal({
           timer: 3000,
           title: response.message,
-          icon: "success",
+          icon: "error",
         });
       } else if (response.responseCode == 1) {
-        await AuthService.clearUserToken(initialState.User.MobileNo);
+        await AuthService.clearUserToken(SignUpState.UserDetails.MobileNo);
         await login(ip);
       } else {
-        setLoader(false)
+        setLoader(false);
         return swal({
           timer: 3000,
           title: response.message,
@@ -89,12 +86,24 @@ function SetYourNewPinSignUp({ login, ip }) {
         icon: "error",
       });
     }
+    setLoader(false);
   };
 
+  function onChangePin(e) {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setPin(mobileNum.trim());
+    }
+  }
+  function onChangeConfirmPin(e) {
+    const mobileNum = e.target.value;
+    if (+mobileNum === +mobileNum) {
+      setConfirmPin(mobileNum.trim());
+    }
+  }
   useEffect(() => {
-    if (initialState.User.MobileNo) {
-      let num = initialState?.User?.MobileNo;
-      console.log(initialState);
+    if (SignUpState.UserDetails.MobileNo) {
+      let num = SignUpState.UserDetails.MobileNo;
       let body = { Language: "en", MobileNo: num };
       AuthService.GetCardUser(body)
         .then((res) => {
@@ -107,18 +116,20 @@ function SetYourNewPinSignUp({ login, ip }) {
         })
         .catch((e) => console.log(e));
     }
-  }, [initialState.User.MobileNo]);
+  }, [SignUpState.UserDetails.MobileNo]);
+
 
   return (
-    <div>
+    <div className="desktop-size custom-bg-signup">
+      <h3 className="pb-3 component-title">Set Your New PIN</h3>
       {showUsername ? (
         <>
-          <p className="text-center mt-4">Please enter your Full Name</p>
-          <div className="px-3 pb-2">
+          <p className="mt-4 px-3">Enter your full name</p>
+          <div className="px-3 pb-3">
             <input
               type="text"
               placeholder="Enter Full Name"
-              className="form-control"
+              className="form-control border-curve"
               maxLength="20"
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -126,8 +137,10 @@ function SetYourNewPinSignUp({ login, ip }) {
         </>
       ) : null}
 
-      <p className={`text-center ${showUsername ? "mt-2" : "mt-4"}`}>Please set your 4 digit PIN</p>
-      <div className="px-3 pb-2">
+      <p className={`px-3 ${showUsername ? "mt-3" : "mt-4"}`}>
+        Set your 4 digit PIN
+      </p>
+      {/* <div className="px-3 pb-2">
         <input
           type="text"
           placeholder="Mobile number"
@@ -135,28 +148,30 @@ function SetYourNewPinSignUp({ login, ip }) {
           disabled={true}
           value={initialState.User.MobileNo}
         />
-      </div>
-      <div className="px-3 pb-2">
+      </div> */}
+      <div className="px-3 pb-3">
         <input
           type="text"
-          className="form-control"
+          className="form-control border-curve"
           placeholder={"Set PIN code"}
           minLength={4}
           maxLength={4}
-          onChange={(e) => setPin(e.target.value)}
+          value={pin}
+          onChange={onChangePin}
         />
       </div>
-      <div className="px-3 pb-2">
+      <div className="px-3 pb-3">
         <input
           type="text"
-          className="form-control"
+          className="form-control border-curve"
           placeholder={"Confirm PIN code"}
           minLength={4}
           maxLength={4}
-          onChange={(e) => setConfirmPin(e.target.value)}
+          value={confirmPin}
+          onChange={onChangeConfirmPin}
         />
       </div>
-      <div className="text-center ">
+      <div className="text-center px-3">
         <button
           className="btn pymnt_pge_sbscrbe_btn bg-green mb-4"
           onClick={onClick}

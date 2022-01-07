@@ -4,16 +4,20 @@ import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
 import { isAuthentictedUser } from "../services/utils";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function SignUp(props) {
   const router = useRouter();
   useEffect(() => {
-    if (isAuthentictedUser()) {
-      router.push('/');
-    }
-  }, [])
+    // if (isAuthentictedUser()) {
+    //   router.push("/");
+    // }
+  }, []);
   return (
     <div>
+      <Head>
+        <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+      </Head>
       <Register {...props} />
     </div>
   );
@@ -28,8 +32,9 @@ export function getServerSideProps(context) {
     props: {
       noSideBar: true,
       auth: true,
+      userHeader : true,
       ip: ip,
-      env: process.env.TAPENV
+      env: process.env.TAPENV,
     },
   };
 }
