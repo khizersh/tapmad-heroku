@@ -190,6 +190,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
               <button
                 type="button"
                 className="btn btn-light rounded-pill p-1 w-100"
+                onClick={() => router.push('/billing-history')}
               >
                 Billing History
               </button>
