@@ -27,10 +27,25 @@ export default memo(function PSLComponent({ channel }) {
   }
 
   useEffect(async () => {
-    const tabs = await getPSLTabsService();
-    await getRelatedChannels();
-    setTabs(tabs.Tabs);
-    setSelectedTab(1);
+    if (channel.IsChat) {
+      const tabs = await getPSLTabsService();
+      await getRelatedChannels();
+      setTabs(tabs.Tabs);
+      setSelectedTab(1);
+    } else {
+      await getRelatedChannels();
+      setTabs([
+        {
+          ChatOrder: "2",
+          TabIcon:
+            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
+          TabIconUnActive: "",
+          TabId: 4,
+          TabName: "Related",
+        },
+      ]);
+      setSelectedTab(2);
+    }
   }, []);
 
   useEffect(() => {
@@ -179,12 +194,18 @@ export default memo(function PSLComponent({ channel }) {
                       eventKey={tab.ChatOrder}
                       tabClassName={"tshop-tabs"}
                       title={
-                        <div>
-                          <img
-                            src={tab.TabIconUnActive}
-                            width={25}
-                            alt={tab.TabIconUnActive}
-                          />
+                        <div
+                          className={`${
+                            tab.ChatOrder == 2 ? styles.margTop27 : ""
+                          }`}
+                        >
+                          {tab.ChatOrder != 2 ? (
+                            <img
+                              src={tab.TabIconUnActive}
+                              width={25}
+                              alt={tab.TabIconUnActive}
+                            />
+                          ) : null}
                           <p
                             className={`${
                               selectedTab == tab.TabId
