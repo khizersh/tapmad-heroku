@@ -16,8 +16,6 @@ import {
   userFemaleProfileIcon,
   userIcon,
 } from "../../services/imagesLink";
-import Link from "next/link";
-import NavbarHOC from "../navbar/NavbarHOC";
 
 const MyAccountMobile = ({
   profileData,

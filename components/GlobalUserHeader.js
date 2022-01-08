@@ -7,12 +7,21 @@ import { MyAccountService } from "../modules/my-account/myaccount.service";
 import { SignUpContext } from "../contexts/auth/SignUpContext";
 import { Cookie } from "../services/cookies";
 import { UPDATE_USER_DETAILS } from "../contexts/auth/SignUpReducer";
+import { useRouter } from "next/router";
 
 const GlobalUserHeader = () => {
   const [userData, setUserData] = useState(null);
   const { initialState } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const userId = Cookie.getCookies("userId");
+  const router = useRouter();
+  const [screenSize, setScreenSize] = useState(false);
+
+  console.log(router);
+
+  useEffect(() => {
+    !screenSize && setScreenSize(screen.width);
+  }, []);
 
   useEffect(async () => {
     if (!userData) {
@@ -31,6 +40,7 @@ const GlobalUserHeader = () => {
       setUserData(SignUpState.UserDetails.ProfileName);
     }
   }, [SignUpState.UserDetails.ProfileName]);
+
   return (
     <NavbarHOC>
       <style jsx>
@@ -54,50 +64,63 @@ const GlobalUserHeader = () => {
           }
         `}
       </style>
-      <div className="container d-flex flex-wrap align-items-center justify-content-between">
-        <Link href="/">
-          <a title="Tapmad">
-            <Image src="/icons/logo_white.png" width={114} height={38} />
-          </a>
-        </Link>
-        {/* <button
-            className="btn"
-            style={{
-              fontSize: "13px",
-              color: "black",
-            }}
-            onClick={onClickBack}
-          >
-            <img src="/icons/login-back.svg" />
-          </button> */}
-        <div className="avatarWrapper">
-          <div className="avatar line-1">
-            {!initialState.isAuthenticated ? (
-              <Link href="/sign-in">
-                <a className="text-white d-flex align-items-center">
-                  <Image
-                    src="/icons/avatar-placeholder.svg"
-                    width={36}
-                    height={36}
-                  />
-                  <span className="ml-2">Login</span>
-                  {/* <i className="fa fa-angle-down ml-2" /> */}
-                </a>
-              </Link>
-            ) : (
-              <Link href="/myaccount">
-                <a className="text-white d-flex align-items-center">
-                  <Image
-                    src="/icons/avatar-placeholder.svg"
-                    width={36}
-                    height={36}
-                  />
-                  <span className="ml-2">{userData}</span>
-                  {/* <i className="fa fa-angle-down ml-2" /> */}
-                </a>
-              </Link>
-            )}
-            {/*
+      <div
+        className={`container ${
+          screenSize ? "d-flex" : "d-none"
+        } flex-wrap align-items-center justify-content-between`}
+      >
+        {router.pathname.indexOf("/my-account" > -1) && screenSize < 799 ? (
+          <>
+            <div
+              role="button"
+              className="fa fa-chevron-left text-white h3 my-2"
+              title="Go Back"
+              onClick={() => router.push(Cookie.getCookies("backUrl") || "/")}
+            />
+            <Link href="/editprofile">
+              <a
+                className="btn btn-light text-base rounded-pill line-1 btn-lg"
+                title="Edit Profile"
+              >
+                Edit Profile
+              </a>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href="/">
+              <a title="Tapmad">
+                <Image src="/icons/logo_white.png" width={114} height={38} />
+              </a>
+            </Link>
+            <div className="avatarWrapper">
+              <div className="avatar line-1">
+                {!initialState.isAuthenticated ? (
+                  <Link href="/sign-in">
+                    <a className="text-white d-flex align-items-center">
+                      <Image
+                        src="/icons/avatar-placeholder.svg"
+                        width={36}
+                        height={36}
+                      />
+                      <span className="ml-2">Login</span>
+                      {/* <i className="fa fa-angle-down ml-2" /> */}
+                    </a>
+                  </Link>
+                ) : (
+                  <Link href="/myaccount">
+                    <a className="text-white d-flex align-items-center">
+                      <Image
+                        src="/icons/avatar-placeholder.svg"
+                        width={36}
+                        height={36}
+                      />
+                      <span className="ml-2">{userData}</span>
+                      {/* <i className="fa fa-angle-down ml-2" /> */}
+                    </a>
+                  </Link>
+                )}
+                {/*
             <div className="avatarList">
               <div className="d-flex flex-wrap align-items-center border-bottom border-dark pb-3 mb-3">
                 <Image
@@ -130,8 +153,10 @@ const GlobalUserHeader = () => {
                 </a>
               </Link>
             </div> */}
-          </div>
-        </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </NavbarHOC>
   );
