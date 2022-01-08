@@ -79,7 +79,13 @@ export default function PaymentMethodDesktop() {
                     <p>
                       <img src={m.Image} className="max-width-30" />
                     </p>
-                    <p className="text-grey">{m.Name}</p>
+                    {m.Name == "0" || m.Name == "1" ? (
+                      <p className="text-grey">
+                        {m.Name == "1" ? "Casting available" : "No Casting"}
+                      </p>
+                    ) : (
+                      <p className="text-grey">{m.Name}</p>
+                    )}
                   </div>
                 ))
               : null}

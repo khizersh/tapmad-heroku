@@ -123,9 +123,6 @@ function SEOFriendlySlugsIsCategoryFalse(event, isAppendFreeVideo = false) {
   return slug;
 }
 
-
-
-
 function viewMoreCleanUrls(sectionName, sectionId, name) {
   var pageId = "";
   if (name == "Live") {
@@ -176,7 +173,7 @@ function setUrlAccordingToVideoType(movie, type) {
         movie.VideoEntityId == 950 ||
         movie.VideoEntityId == 953
       ) {
-        slug = SEOFriendlySlugsIsCategoryFalse(movie , true);
+        slug = SEOFriendlySlugsIsCategoryFalse(movie, true);
       } else {
         slug = SEOFriendlySlugsForVideo(movie);
       }
@@ -250,6 +247,12 @@ function isAuthentictedUser() {
   } else {
     return false;
   }
+}
+function replaceCategoryToShows(url) {
+  if (url) {
+    return url.replace("category","shows")
+  }
+  return "";
 }
 
 function isAuthentictedServerSide(req) {
@@ -333,4 +336,5 @@ module.exports = {
   log,
   verifyURL,
   checkForBoolean,
+  replaceCategoryToShows
 };

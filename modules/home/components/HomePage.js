@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HomeService } from "./home.service";
 import dynamic from "next/dynamic";
 import loadable from '@loadable/component'
+import { replaceCategoryToShows } from "../../../services/utils";
 
 const HomepageSlider = loadable(() => import("./HomepageSlider"));
 const HomePageAd = loadable(() => import('./HomePageAd'));
@@ -68,6 +69,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setLocalMovies(modifiedResponse);
   }, []);
 
+  console.log("featured : ",featured);
   return (
     <div>
       <div className="container-fluid p-1">
@@ -83,8 +85,10 @@ export default function HomePage({ movies, banner, featured, ip }) {
             <div className="width-100">
               <div className="col-12">
                 <div className="home-banner-btn">
+            
                   <Link
-                    href={banner?.Video[0]?.bannerRedirectionURL}
+                  
+                    href={replaceCategoryToShows(banner?.Video[0]?.bannerRedirectionURL)}
                     passHref={true}
                     shallow={true}
                   >

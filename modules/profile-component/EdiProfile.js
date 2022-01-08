@@ -12,6 +12,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
+  const [email , setEmail] = useState("")
   const [editProfile, setEditProfile] = useState({
     Name: "",
     DOB: "",
@@ -37,7 +38,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         DOB: data.data.ProfileData.UserProfileDOB,
         Mobile: data.data.ProfileData.UserProfileMobile,
         Gender: data.data.ProfileData.UserProfileGender,
-        Email: "",
+        Email: data.data.ProfileData.UserEmail,
       });
       setGender(data.data.ProfileData.UserProfileGender);
     }
@@ -56,6 +57,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
       Email: editProfile.Email,
       Gender: gender,
     };
+
     if (
       !formData.FullName ||
       !formData.UserMobileNumebr ||

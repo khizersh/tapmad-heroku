@@ -11,7 +11,6 @@ export default function TaxView({ onChange }) {
   const router = useRouter();
   const { packageId } = router.query;
 
-  console.log("SignUpState : ", SignUpState);
   // set all products
   useEffect(() => {
     if (SignUpState?.SelectedPackage?.PaymentTabMethods) {

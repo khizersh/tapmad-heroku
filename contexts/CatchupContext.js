@@ -14,7 +14,6 @@ export default function CatchupProvider({ children }) {
 
   React.useEffect(async () => {
     let data = await CatchupService.getCatchupTvData();
-    console.log("data in cat : ",data);
     var convertedTabs = [];
     data.data.Tabs.forEach(element => {
       if (element.TabName == "Tensports") {
