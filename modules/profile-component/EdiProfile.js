@@ -202,6 +202,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                     max-width: 80px;
                   }
                   @media only screen and (max-width: 799px) {
+                    .radio-cstm:before {
+                      margin-bottom: 6px;z
+                    }
                     .radio-cstm:after {
                       top: 7px;
                     }
