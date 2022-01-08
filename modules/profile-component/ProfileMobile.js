@@ -120,7 +120,7 @@ const MyAccountMobile = ({
             <></>
           )}
         </div>
-        <div className="d-flex align-items-center mt-3 mb-2">
+        <div className="d-flex align-items-center mt-5 mb-2">
           <img
             src={infoIcon}
             alt="User"
@@ -131,7 +131,7 @@ const MyAccountMobile = ({
           <p className="h_style flex-grow-1 pl-3 mb-0">Personal Info:</p>
         </div>
         {profileData ? (
-          <>
+          <div className="ml-5">
             <dl>
               <dt>Email:</dt>
               <dd>{profileData.Email}</dd>
@@ -144,7 +144,7 @@ const MyAccountMobile = ({
               <dt>Gender :</dt>
               <dd>{profileData.Gender}</dd>
             </dl>
-          </>
+          </div>
         ) : (
           <></>
         )}
@@ -162,7 +162,7 @@ const MyAccountMobile = ({
         </div>
       </div> */}
 
-        <div className="d-flex align-items-center ju mt-3">
+        <div className="d-flex align-items-center ju mt-5">
           <img
             src={packageIcon}
             alt="Package"
