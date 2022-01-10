@@ -9,6 +9,7 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Link from "next/link";
 import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
+// import ScoreBoard from "./scoreboard";
 
 export default memo(function PSLComponent({ channel }) {
   const router = useRouter();
@@ -26,11 +27,23 @@ export default memo(function PSLComponent({ channel }) {
     }
   }
 
+  // console.log(tabs);
+
   useEffect(async () => {
     if (channel.IsChat) {
       const tabs = await getPSLTabsService();
       await getRelatedChannels();
-      setTabs(tabs.Tabs);
+      setTabs([
+        ...tabs.Tabs,
+        {
+          ChatOrder: "3",
+          TabIcon:
+            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
+          TabIconUnActive: "",
+          TabId: 3,
+          TabName: "Scoreboard",
+        },
+      ]);
       setSelectedTab(1);
     } else {
       await getRelatedChannels();
@@ -38,10 +51,18 @@ export default memo(function PSLComponent({ channel }) {
         {
           ChatOrder: "2",
           TabIcon:
+        //     "https://d34080pnh6e62j.lcoudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
+        //   TabIconUnActive: "",
+        //   TabId: 2,
+        //   TabName: "Related",
+        // },
+        // {
+        //   ChatOrder: "3",
+        //   TabIcon:
             "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
           TabIconUnActive: "",
-          TabId: 4,
-          TabName: "Related",
+          // TabId: 3,
+          // TabName: "Scoreboard",
         },
       ]);
       setSelectedTab(2);
@@ -82,6 +103,7 @@ export default memo(function PSLComponent({ channel }) {
     setSelectedTab(e);
   }
   const RenderViews = useCallback(function () {
+    //console.log("selectedTab", selectedTab);
     const [display, toggle] = useState(true);
     const toggleHandler = () => toggle(!display);
     if (selectedTab == 1) {
@@ -152,6 +174,8 @@ export default memo(function PSLComponent({ channel }) {
           </div>
         </div>
       );
+    // } else if (selectedTab == 5) {
+    //   <ScoreBoard />;
     } else {
       return <div></div>;
     }
@@ -225,6 +249,7 @@ export default memo(function PSLComponent({ channel }) {
         </div>
         {/* <hr /> */}
         <div>
+          {/* <ScoreBoard /> */}
           <RenderViews />
         </div>
       </div>

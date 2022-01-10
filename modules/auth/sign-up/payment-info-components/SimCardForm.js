@@ -32,6 +32,11 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
               margin-top: 1rem;
             }
           }
+          input[type="number"]::-webkit-inner-spin-button,
+          input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
         `}
       </style>
       <div className="smcwrp">
@@ -59,7 +64,7 @@ const SimCardForm = ({ data, onChangeNetwork, onChangeNumber, mobileCode }) => {
               <span className="payment-icon border-curve">{mobileCode}</span>
             </div>
             <input
-              type="number"
+              type="text"
               maxLength="10"
               minLength="10"
               className="form-control ml-2 border-curve"
