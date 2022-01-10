@@ -17,6 +17,8 @@ export default memo(function PSLComponent({ channel }) {
   const [tabs, setTabs] = useState([]);
   const [selectedTab, setSelectedTab] = useState(null);
 
+  let ScoreBoard;
+
   const [relatedVideo, setRelatedVideos] = useState([]);
   async function getRelatedChannels() {
     const res = await PlayerService.getRelatedChannelsOrVODData(
@@ -30,44 +32,14 @@ export default memo(function PSLComponent({ channel }) {
 
   const { Event_key } = channel;
 
-  // console.log(tabs);
-
   useEffect(async () => {
+    const tabs = await getPSLTabsService();
+    setTabs(tabs.Tabs);
+    await getRelatedChannels();
+    setSelectedTab(1);
     if (channel.IsChat) {
-      const tabs = await getPSLTabsService();
-      await getRelatedChannels();
-      setTabs([
-        ...tabs.Tabs,
-        {
-          ChatOrder: "3",
-          TabIcon:
-            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-          TabIconUnActive: "",
-          TabId: 3,
-          TabName: "Scorecard",
-        },
-      ]);
-      setSelectedTab(1);
     } else {
       await getRelatedChannels();
-      setTabs([
-        {
-          ChatOrder: "2",
-          TabIcon:
-            "https://d34080pnh6e62j.lcoudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-          TabIconUnActive: "",
-          TabId: 2,
-          TabName: "Related",
-        },
-        {
-          ChatOrder: "3",
-          TabIcon:
-            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-          TabIconUnActive: "",
-          TabId: 3,
-          TabName: "Scorecard",
-        },
-      ]);
       setSelectedTab(2);
     }
   }, []);
@@ -109,6 +81,8 @@ export default memo(function PSLComponent({ channel }) {
     //console.log("selectedTab", selectedTab);
     const [display, toggle] = useState(true);
     const toggleHandler = () => toggle(!display);
+
+    // Chat Tab <start>
     if (selectedTab == 1) {
       return (
         <>
@@ -138,7 +112,10 @@ export default memo(function PSLComponent({ channel }) {
           )}
         </>
       );
-    } /* else if (selectedTab == tabs.length - 1) {
+    }
+    // Chat Tab <end>
+
+    /* else if (selectedTab == tabs.length - 1) {
       // return <MatchBids />;
       return (
         <>
@@ -152,7 +129,10 @@ export default memo(function PSLComponent({ channel }) {
           />
         </>
       );
-    } */ else if (selectedTab == 2) {
+    } */
+
+    // Related Videos <start>
+    else if (selectedTab == 2) {
       return (
         <div
           className="text-left mt-3 related-video"
@@ -177,11 +157,19 @@ export default memo(function PSLComponent({ channel }) {
           </div>
         </div>
       );
-    } else if (selectedTab == 3 && Event_key) {
-      const ScoreBoard = loadable(() => import("./scoreboard"));
+    }
+    // Related Videos <end>
+
+    // Scoreboard tab <start>
+    else if (selectedTab == 3 && Event_key) {
+      if (!ScoreBoard) {
+        ScoreBoard = loadable(() => import("./scoreboard"));
+      }
       return <ScoreBoard eventKey={Event_key} />;
-    } else {
-      return <div></div>;
+    }
+    // Scoreboard tab <end>
+    else {
+      return <></>;
     }
   });
 
