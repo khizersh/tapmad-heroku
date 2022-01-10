@@ -6,7 +6,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
-function SetYourNewPinSignUp({ login, ip , showUser }) {
+function SetYourNewPinSignUp({ login, ip, showUser }) {
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
@@ -118,7 +118,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
     }
   }, [SignUpState.UserDetails.MobileNo]);
 
-
   return (
     <div className="desktop-size custom-bg-signup">
       <h3 className="pb-3 component-title">Set Your New PIN</h3>
@@ -153,7 +152,7 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
         <input
           type="text"
           className="form-control border-curve"
-          placeholder={"Set PIN code"}
+          placeholder={"xxxx"}
           minLength={4}
           maxLength={4}
           value={pin}

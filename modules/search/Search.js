@@ -23,7 +23,7 @@ const Search = (props) => {
   };
 
   const onChange = (e) => {
-    setKeyword(e.target.value);
+    setKeyword(e.target.value.trim());
   };
 
   useEffect(() => {
@@ -116,7 +116,13 @@ const Search = (props) => {
         {searchedItem.length > 0 ? (
           searchedItem.map((item, i) => {
             let slug = SEOFriendlySlugsForVideo(item);
-            return <ItemCard item={item} key={i} slug={slug} />;
+            return item.VideoEntityId ? (
+              <ItemCard item={item} key={i} slug={slug} />
+            ) : (
+              <div className="m-auto">
+                <h3>No Record Found</h3>
+              </div>
+            );
           })
         ) : isSearched ? (
           <div className="m-auto">

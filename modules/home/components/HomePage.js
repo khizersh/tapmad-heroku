@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { HomeService } from "./home.service";
 import dynamic from "next/dynamic";
-import loadable from '@loadable/component'
+import loadable from "@loadable/component";
 import { replaceCategoryToShows } from "../../../services/utils";
 
 const HomepageSlider = loadable(() => import("./HomepageSlider"));
-const HomePageAd = loadable(() => import('./HomePageAd'));
+const HomePageAd = loadable(() => import("./HomePageAd"));
 const HomepageFeatured = loadable(() => import("./FeaturedSlider"));
-const ScrollComponent = loadable(() => import("../../../components/scrollComponent"));
+const ScrollComponent = loadable(() =>
+  import("../../../components/scrollComponent")
+);
 
 export default function HomePage({ movies, banner, featured, ip }) {
   const [localMovies, setLocalMovies] = useState(movies);
@@ -17,7 +19,9 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
 
   async function fetchNewMovies() {
-    const { calculateRowsToFetch, pushNewMoviesIntoList } = (await import('../../../services/utils')).default;
+    const { calculateRowsToFetch, pushNewMoviesIntoList } = (
+      await import("../../../services/utils")
+    ).default;
     if (currentRow == movies.totalSections) {
       return;
     }
@@ -25,7 +29,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setCurrentRow(rowData.rowsTo);
 
     try {
-    } catch (error) { }
+    } catch (error) {}
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
       rowData.rowsTo,
@@ -50,26 +54,26 @@ export default function HomePage({ movies, banner, featured, ip }) {
   }
 
   async function checAd() {
-    const { getHomePageAdsDetail } = (await import('../../auth/auth.service')).AuthService;
+    const { getHomePageAdsDetail } = (await import("../../auth/auth.service"))
+      .AuthService;
 
     getHomePageAdsDetail()
       .then((res) => {
         if (res.data.responseCode == 1) {
           let data = res.data.data.filter((m) => m.row == "0")[0];
           if (data) {
-
             setAd(data);
           }
         }
       })
       .catch((e) => console.log(e));
-  };
+  }
   React.useEffect(async () => {
     await checAd();
     setLocalMovies(modifiedResponse);
   }, []);
 
-  console.log("featured : ",featured);
+  console.log("featured : ", featured);
   return (
     <div>
       <div className="container-fluid p-1">
@@ -85,10 +89,10 @@ export default function HomePage({ movies, banner, featured, ip }) {
             <div className="width-100">
               <div className="col-12">
                 <div className="home-banner-btn">
-            
                   <Link
-                  
-                    href={replaceCategoryToShows(banner?.Video[0]?.bannerRedirectionURL)}
+                    href={replaceCategoryToShows(
+                      banner?.Video[0]?.bannerRedirectionURL
+                    )}
                     passHref={true}
                     shallow={true}
                   >
@@ -118,13 +122,19 @@ export default function HomePage({ movies, banner, featured, ip }) {
             )}
             {/* Rendering 2 homepage component for SEO and Users when they scroll */}
             {movies && movies.Sections && !localMovies.Sections.Movies && (
-              <HomepageSlider movies={movies.Sections} ads={true} name={"Homepage"} />
+              <HomepageSlider
+                movies={movies.Sections}
+                ads={true}
+                name={"Homepage"}
+              />
             )}
-            {
-              localMovies.Sections && localMovies.Sections.Movies && (
-                <HomepageSlider movies={localMovies.Sections.Movies} ads={true} name={"Homepage"} />
-              )
-            }
+            {localMovies.Sections && localMovies.Sections.Movies && (
+              <HomepageSlider
+                movies={localMovies.Sections.Movies}
+                ads={true}
+                name={"Homepage"}
+              />
+            )}
             {currentRow !== movies.totalSections && (
               <ScrollComponent loadMore={fetchNewMovies} />
             )}
