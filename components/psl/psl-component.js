@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { Fragment, memo, useCallback, useEffect, useState } from "react";
 import { getPSLTabsService } from "./psl-service";
 import PSLChat from "./chat/PSLChat";
 import Tabs from "react-bootstrap/Tabs";
@@ -162,13 +162,13 @@ export default memo(function PSLComponent({ channel }) {
               ? relatedVideo.map((video, i) => {
                   let slug = SEOFriendlySlugsForVideo(video);
                   return (
-                    <>
+                    <Fragment key={i}>
                       <Link href={slug} replace={true} shallow={false} key={i}>
                         <a>
                           <RelatedProductCard video={video} />
                         </a>
                       </Link>
-                    </>
+                    </Fragment>
                   );
                 })
               : null}

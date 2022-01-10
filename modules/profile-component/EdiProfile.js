@@ -12,7 +12,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
-  const [email , setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const [editProfile, setEditProfile] = useState({
     Name: "",
     DOB: "",
@@ -247,14 +247,14 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             </div>
           </div>
 
-          <div className="p-4 text-center">
-            {isMobile ? (
+          <div className="my-4 text-center">
+            {!isMobile ? (
               ""
             ) : (
               <button
                 onClick={submitHandeler}
                 type="button"
-                class="btn btn_submit rounded-pill px-5 m-auto"
+                class="btn btn-lg btn_submit rounded-pill px-5 m-auto"
               >
                 Save Profile
               </button>
