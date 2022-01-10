@@ -118,6 +118,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
                     movieSection.Videos &&
                     movieSection.Videos.length > 0
                       ? movieSection.Videos.map((mov, index) => {
+                          console.log("mov", mov);
                           let slug = setUrlAccordingToVideoType(
                             mov,
                             name == "Shows" ? IsCategory : IsLiveChannel

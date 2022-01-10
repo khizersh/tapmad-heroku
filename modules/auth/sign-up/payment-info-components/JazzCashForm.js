@@ -31,7 +31,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
         </div>
         <div className="pl-2 flex-grow-1 flex-shrink-1 gridCol">
           <input
-            type="number"
+            type="text"
             maxLength="10"
             minLength="10"
             className="form-control border-curve flex-grow-1 w-100"
@@ -45,6 +45,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
             //   SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
             // }
             onChange={(e) => onChange(e)}
+            pattern="\d*"
           />
           <input
             type="text"
@@ -55,6 +56,7 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
             inputMode="numeric"
             value={cnic}
             onChange={(e) => onChangeNic(e)}
+            pattern="\d*"
           />
         </div>
       </div>
