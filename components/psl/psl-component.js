@@ -9,7 +9,7 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Link from "next/link";
 import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
-import ScoreBoard from "./scoreboard";
+import loadable from "@loadable/component";
 // import ScoreBoard from "./scoreboard";
 
 export default memo(function PSLComponent({ channel }) {
@@ -27,6 +27,8 @@ export default memo(function PSLComponent({ channel }) {
       setRelatedVideos(res.data.Sections[0].Videos);
     }
   }
+
+  const { Event_key } = channel;
 
   // console.log(tabs);
 
@@ -175,8 +177,9 @@ export default memo(function PSLComponent({ channel }) {
           </div>
         </div>
       );
-    } else if (selectedTab == 3) {
-      return <ScoreBoard />;
+    } else if (selectedTab == 3 && Event_key) {
+      const ScoreBoard = loadable(() => import("./scoreboard"));
+      return <ScoreBoard eventKey={Event_key} />;
     } else {
       return <div></div>;
     }
