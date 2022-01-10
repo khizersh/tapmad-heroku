@@ -9,6 +9,7 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Link from "next/link";
 import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
+import ScoreBoard from "./scoreboard";
 // import ScoreBoard from "./scoreboard";
 
 export default memo(function PSLComponent({ channel }) {
@@ -41,7 +42,7 @@ export default memo(function PSLComponent({ channel }) {
             "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
           TabIconUnActive: "",
           TabId: 3,
-          TabName: "Scoreboard",
+          TabName: "Scorecard",
         },
       ]);
       setSelectedTab(1);
@@ -51,18 +52,18 @@ export default memo(function PSLComponent({ channel }) {
         {
           ChatOrder: "2",
           TabIcon:
-        //     "https://d34080pnh6e62j.lcoudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-        //   TabIconUnActive: "",
-        //   TabId: 2,
-        //   TabName: "Related",
-        // },
-        // {
-        //   ChatOrder: "3",
-        //   TabIcon:
+            "https://d34080pnh6e62j.lcoudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
+          TabIconUnActive: "",
+          TabId: 2,
+          TabName: "Related",
+        },
+        {
+          ChatOrder: "3",
+          TabIcon:
             "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
           TabIconUnActive: "",
-          // TabId: 3,
-          // TabName: "Scoreboard",
+          TabId: 3,
+          TabName: "Scorecard",
         },
       ]);
       setSelectedTab(2);
@@ -70,34 +71,34 @@ export default memo(function PSLComponent({ channel }) {
   }, []);
 
   useEffect(() => {
-    // const header = document.getElementById("tab-btn");
-    // const scrollCallBack = window.addEventListener("scroll", () => {
-    //     const player = document.getElementById('player-div1');
-    //     var playerHeight = 0;
-    //     if (player) {
-    //         playerHeight = player.getBoundingClientRect().height;
-    //     } else {
-    //         return;
-    //     }
-    //     const sticky = 100 + 0;
-    //     if (window.pageYOffset > sticky) {
-    //         if (window.screen.width < 639) {
-    //             header.classList.add("sticky-tab");
-    //             header.style.position = "fixed";
-    //             header.style.top = Number(playerHeight) + 58 + "px";
-    //             header.style.marginTop = "0px";
-    //         } else {
-    //             header.classList.remove("sticky-tab");
-    //         }
-    //     } else {
-    //         header.classList.remove("sticky-tab");
-    //         header.style.position = "unset";
-    //         header.style.top = "unset";
-    //     }
-    // });
-    // return () => {
-    //     window.removeEventListener("scroll", scrollCallBack);
-    // };
+    const header = document.getElementById("tab-btn");
+    const scrollCallBack = window.addEventListener("scroll", () => {
+      const player = document.getElementById("player-div1");
+      var playerHeight = 0;
+      if (player) {
+        playerHeight = player.getBoundingClientRect().height;
+      } else {
+        return;
+      }
+      const sticky = 100 + 0;
+      if (window.pageYOffset > sticky) {
+        if (window.screen.width < 639) {
+          header.classList.add("sticky-tab");
+          header.style.position = "fixed";
+          header.style.top = Number(playerHeight) + 58 + "px";
+          header.style.marginTop = "0px";
+        } else {
+          header.classList.remove("sticky-tab");
+        }
+      } else {
+        header.classList.remove("sticky-tab");
+        header.style.position = "unset";
+        header.style.top = "unset";
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", scrollCallBack);
+    };
   }, []);
   function handleSelect(e) {
     setSelectedTab(e);
@@ -135,7 +136,7 @@ export default memo(function PSLComponent({ channel }) {
           )}
         </>
       );
-    } else if (selectedTab == tabs.length - 1) {
+    } /* else if (selectedTab == tabs.length - 1) {
       // return <MatchBids />;
       return (
         <>
@@ -149,7 +150,7 @@ export default memo(function PSLComponent({ channel }) {
           />
         </>
       );
-    } else if (selectedTab == 2) {
+    } */ else if (selectedTab == 2) {
       return (
         <div
           className="text-left mt-3 related-video"
@@ -174,8 +175,8 @@ export default memo(function PSLComponent({ channel }) {
           </div>
         </div>
       );
-    // } else if (selectedTab == 5) {
-    //   <ScoreBoard />;
+    } else if (selectedTab == 3) {
+      return <ScoreBoard />;
     } else {
       return <div></div>;
     }
@@ -249,7 +250,6 @@ export default memo(function PSLComponent({ channel }) {
         </div>
         {/* <hr /> */}
         <div>
-          {/* <ScoreBoard /> */}
           <RenderViews />
         </div>
       </div>
