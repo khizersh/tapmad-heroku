@@ -164,12 +164,20 @@ export default memo(function PSLComponent({ channel }) {
 
     // Schedule tab <start>
     else if (selectedTab == 2) {
-      return <Image src="/schedule.png" className="mt-4" width="1150" height="1438" />;
+      return (
+        <Image
+          src="/schedule.png"
+          className="mt-4"
+          width="1150"
+          height="1438"
+        />
+      );
     }
     // Schedule tab <end>
 
     // Scoreboard tab <start>
-    else if (selectedTab == 5 && Event_key) {
+    // else if (selectedTab == 5 && Event_key) {
+    else if (selectedTab == 4 && !Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
@@ -232,7 +240,7 @@ export default memo(function PSLComponent({ channel }) {
                           ) : null}
                           <p
                             className={`${
-                              selectedTab == tab.TabId
+                              selectedTab == tab.ChatOrder
                                 ? styles.colorGreen
                                 : "text-white"
                             } m-0`}
