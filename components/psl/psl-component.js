@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { Fragment, memo, useCallback, useEffect, useState } from "react";
 import { getPSLTabsService } from "./psl-service";
 import PSLChat from "./chat/PSLChat";
 import Tabs from "react-bootstrap/Tabs";
@@ -9,12 +9,15 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Link from "next/link";
 import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
+import loadable from "@loadable/component";
 // import ScoreBoard from "./scoreboard";
 
 export default memo(function PSLComponent({ channel }) {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const [selectedTab, setSelectedTab] = useState(null);
+
+  let ScoreBoard;
 
   const [relatedVideo, setRelatedVideos] = useState([]);
   async function getRelatedChannels() {
@@ -27,77 +30,49 @@ export default memo(function PSLComponent({ channel }) {
     }
   }
 
-  // console.log(tabs);
+  const { Event_key } = channel;
 
   useEffect(async () => {
+    const tabs = await getPSLTabsService();
+    setTabs(tabs.Tabs);
+    await getRelatedChannels();
+    setSelectedTab(1);
     if (channel.IsChat) {
-      const tabs = await getPSLTabsService();
-      await getRelatedChannels();
-      setTabs([
-        ...tabs.Tabs,
-        {
-          ChatOrder: "3",
-          TabIcon:
-            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-          TabIconUnActive: "",
-          TabId: 3,
-          TabName: "Scoreboard",
-        },
-      ]);
-      setSelectedTab(1);
     } else {
       await getRelatedChannels();
-      setTabs([
-        {
-          ChatOrder: "2",
-          TabIcon:
-        //     "https://d34080pnh6e62j.lcoudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-        //   TabIconUnActive: "",
-        //   TabId: 2,
-        //   TabName: "Related",
-        // },
-        // {
-        //   ChatOrder: "3",
-        //   TabIcon:
-            "https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandPreview/activeChat@3x.png",
-          TabIconUnActive: "",
-          // TabId: 3,
-          // TabName: "Scoreboard",
-        },
-      ]);
       setSelectedTab(2);
     }
   }, []);
 
   useEffect(() => {
-    // const header = document.getElementById("tab-btn");
-    // const scrollCallBack = window.addEventListener("scroll", () => {
-    //     const player = document.getElementById('player-div1');
-    //     var playerHeight = 0;
-    //     if (player) {
-    //         playerHeight = player.getBoundingClientRect().height;
-    //     } else {
-    //         return;
-    //     }
-    //     const sticky = 100 + 0;
-    //     if (window.pageYOffset > sticky) {
-    //         if (window.screen.width < 639) {
-    //             header.classList.add("sticky-tab");
-    //             header.style.position = "fixed";
-    //             header.style.top = Number(playerHeight) + 58 + "px";
-    //             header.style.marginTop = "0px";
-    //         } else {
-    //             header.classList.remove("sticky-tab");
-    //         }
-    //     } else {
-    //         header.classList.remove("sticky-tab");
-    //         header.style.position = "unset";
-    //         header.style.top = "unset";
-    //     }
-    // });
-    // return () => {
-    //     window.removeEventListener("scroll", scrollCallBack);
-    // };
+    const header = document.getElementById("tab-btn");
+    const scrollCallBack = window.addEventListener("scroll", () => {
+      const player = document.getElementById("player-div1");
+      var playerHeight = 0;
+      if (player) {
+        playerHeight = player.getBoundingClientRect().height;
+      } else {
+        return;
+      }
+      const sticky = 100 + 0;
+      if (window.pageYOffset > sticky) {
+        if (window.screen.width < 639) {
+          header.classList.add("sticky-tab");
+          header.style.position = "fixed";
+          header.style.top = Number(playerHeight) + 58 + "px";
+          header.style.marginTop = "0px";
+        } else {
+          header.classList.remove("sticky-tab");
+        }
+      } else {
+        header.classList.remove("sticky-tab");
+        header.style.position = "unset";
+        header.style.top = "unset";
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", scrollCallBack);
+    };
   }, []);
   function handleSelect(e) {
     setSelectedTab(e);
@@ -106,6 +81,8 @@ export default memo(function PSLComponent({ channel }) {
     //console.log("selectedTab", selectedTab);
     const [display, toggle] = useState(true);
     const toggleHandler = () => toggle(!display);
+
+    // Chat Tab <start>
     if (selectedTab == 1) {
       return (
         <>
@@ -135,7 +112,10 @@ export default memo(function PSLComponent({ channel }) {
           )}
         </>
       );
-    } else if (selectedTab == tabs.length - 1) {
+    }
+    // Chat Tab <end>
+
+    /* else if (selectedTab == tabs.length - 1) {
       // return <MatchBids />;
       return (
         <>
@@ -149,7 +129,10 @@ export default memo(function PSLComponent({ channel }) {
           />
         </>
       );
-    } else if (selectedTab == 2) {
+    } */
+
+    // Related Videos <start>
+    else if (selectedTab == 2) {
       return (
         <div
           className="text-left mt-3 related-video"
@@ -161,23 +144,32 @@ export default memo(function PSLComponent({ channel }) {
               ? relatedVideo.map((video, i) => {
                   let slug = SEOFriendlySlugsForVideo(video);
                   return (
-                    <>
+                    <Fragment key={i}>
                       <Link href={slug} replace={true} shallow={false} key={i}>
                         <a>
                           <RelatedProductCard video={video} />
                         </a>
                       </Link>
-                    </>
+                    </Fragment>
                   );
                 })
               : null}
           </div>
         </div>
       );
-    // } else if (selectedTab == 5) {
-    //   <ScoreBoard />;
-    } else {
-      return <div></div>;
+    }
+    // Related Videos <end>
+
+    // Scoreboard tab <start>
+    else if (selectedTab == 3 && Event_key) {
+      if (!ScoreBoard) {
+        ScoreBoard = loadable(() => import("./scoreboard"));
+      }
+      return <ScoreBoard eventKey={Event_key} />;
+    }
+    // Scoreboard tab <end>
+    else {
+      return <></>;
     }
   });
 
@@ -249,7 +241,6 @@ export default memo(function PSLComponent({ channel }) {
         </div>
         {/* <hr /> */}
         <div>
-          {/* <ScoreBoard /> */}
           <RenderViews />
         </div>
       </div>

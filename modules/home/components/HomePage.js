@@ -73,7 +73,6 @@ export default function HomePage({ movies, banner, featured, ip }) {
     setLocalMovies(modifiedResponse);
   }, []);
 
-  console.log("featured : ", featured);
   return (
     <div>
       <div className="container-fluid p-1">
