@@ -10,6 +10,7 @@ import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Link from "next/link";
 import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
 import loadable from "@loadable/component";
+import Image from "next/image";
 // import ScoreBoard from "./scoreboard";
 
 export default memo(function PSLComponent({ channel }) {
@@ -35,6 +36,7 @@ export default memo(function PSLComponent({ channel }) {
   useEffect(async () => {
     const tabs = await getPSLTabsService();
     setTabs(tabs.Tabs);
+    console.log(tabs.Tabs);
     await getRelatedChannels();
     setSelectedTab(1);
     if (channel.IsChat) {
@@ -132,7 +134,7 @@ export default memo(function PSLComponent({ channel }) {
     } */
 
     // Related Videos <start>
-    else if (selectedTab == 2) {
+    else if (selectedTab == 3) {
       return (
         <div
           className="text-left mt-3 related-video"
@@ -160,8 +162,14 @@ export default memo(function PSLComponent({ channel }) {
     }
     // Related Videos <end>
 
+    // Schedule tab <start>
+    else if (selectedTab == 2) {
+      return <Image src="/schedule.png" className="mt-4" width="1150" height="1438" />;
+    }
+    // Schedule tab <end>
+
     // Scoreboard tab <start>
-    else if (selectedTab == 3 && Event_key) {
+    else if (selectedTab == 5 && Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
