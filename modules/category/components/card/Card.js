@@ -7,21 +7,12 @@ import CategoryHorizontalCard from "../CategoryHorizontalCard";
 const Card = ({ video, type, catchup, packageImage }) => {
   // const Card = ({ video, type, catchup }) => {
   let slug = SEOFriendlySlugsForVideo(video, catchup);
+  console.log("video", video);
   return (
     <>
-      <CategoryHorizontalCard
-        video={video}
-        type={type}
-        slug={slug}
-        packageImage={packageImage}
-      />
+      <CategoryHorizontalCard video={video} type={type} slug={slug} />
 
-      <CategoryVerticalCard
-        video={video}
-        type={type}
-        slug={slug}
-        packageImage={packageImage}
-      />
+      <CategoryVerticalCard video={video} type={type} slug={slug} />
     </>
   );
 };

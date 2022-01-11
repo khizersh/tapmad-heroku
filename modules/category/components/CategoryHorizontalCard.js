@@ -32,9 +32,9 @@ const CategoryHorizontalCard = ({ video, type, slug }) => {
                 alt={video.VideoName}
                 width="130px"
               />
-              {/* {packageImage ? (
+              {video.PackageImage ? (
                 <img
-                  src={packageImage}
+                  src={video.PackageImage}
                   alt="Package"
                   width={30}
                   height={30}
@@ -42,7 +42,7 @@ const CategoryHorizontalCard = ({ video, type, slug }) => {
                 />
               ) : (
                 <></>
-              )} */}
+              )}
             </div>
             <div>
               <div className="card-desc-div">
