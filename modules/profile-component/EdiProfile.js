@@ -247,18 +247,14 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             </div>
           </div>
 
-          <div className="my-4 text-center">
-            {!isMobile ? (
-              ""
-            ) : (
-              <button
-                onClick={submitHandeler}
-                type="button"
-                class="btn btn-lg btn_submit rounded-pill px-5 m-auto"
-              >
-                Save Profile
-              </button>
-            )}
+          <div className={`mt-3 mb-4 text-center`}>
+            <button
+              onClick={submitHandeler}
+              type="button"
+              class="btn btn-lg btn_submit rounded-pill px-5 m-auto"
+            >
+              Save Profile
+            </button>
           </div>
         </div>
       </div>
