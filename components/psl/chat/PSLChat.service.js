@@ -15,8 +15,8 @@ export const getSingleRoomChat = (database, channelID, roomId, cb) => {
 };
 export const getLiveScore = (database, matchID, cb) => {
   database
-    .ref(`${score}/${matchID}/LiveMatch`)
-    // .ref(`${score}/111377383/LiveMatch`)
+    // .ref(`${score}/${matchID}/LiveMatch`)
+    .ref(`${score}/111377383/LiveMatch`)
     .on("value", (snapshot) => {
       const vals = snapshot.val();
       cb(vals);
