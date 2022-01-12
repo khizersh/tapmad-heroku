@@ -13,7 +13,7 @@ import loadable from "@loadable/component";
 import Image from "next/image";
 // import ScoreBoard from "./scoreboard";
 
-export default memo(function PSLComponent({ channel }) {
+export default memo(function PSLComponent({ channel, movie }) {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const [selectedTab, setSelectedTab] = useState(null);
@@ -36,7 +36,6 @@ export default memo(function PSLComponent({ channel }) {
   useEffect(async () => {
     const tabs = await getPSLTabsService();
     setTabs(tabs.Tabs);
-    console.log(tabs.Tabs);
     await getRelatedChannels();
     setSelectedTab(1);
     if (channel.IsChat) {
@@ -176,8 +175,8 @@ export default memo(function PSLComponent({ channel }) {
     // Schedule tab <end>
 
     // Scoreboard tab <start>
-    // else if (selectedTab == 5 && Event_key) {
-    else if (selectedTab == 4 && !Event_key) {
+    else if (selectedTab == 4 && Event_key) {
+      // else if (selectedTab == 4 && !Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
@@ -220,37 +219,41 @@ export default memo(function PSLComponent({ channel }) {
           >
             {tabs
               ? tabs.map((tab, index) => {
-                  return (
-                    <Tab
-                      key={index}
-                      eventKey={tab.ChatOrder}
-                      tabClassName={"tshop-tabs"}
-                      title={
-                        <div
-                          className={`${
-                            tab.ChatOrder == 2 ? styles.margTop27 : ""
-                          }`}
-                        >
-                          {tab.ChatOrder != 2 ? (
-                            <img
-                              src={tab.TabIconUnActive}
-                              width={25}
-                              alt={tab.TabIconUnActive}
-                            />
-                          ) : null}
-                          <p
+                  console.log("tab.ChatOrder", tab.ChatOrder);
+                  if (tab.ChatOrder == 4 && !Event_key) {
+                    return <></>;
+                  } else
+                    return (
+                      <Tab
+                        key={index}
+                        eventKey={tab.ChatOrder}
+                        tabClassName={"tshop-tabs"}
+                        title={
+                          <div
                             className={`${
-                              selectedTab == tab.ChatOrder
-                                ? styles.colorGreen
-                                : "text-white"
-                            } m-0`}
+                              tab.ChatOrder == 2 ? styles.margTop27 : ""
+                            }`}
                           >
-                            {tab.TabName}
-                          </p>
-                        </div>
-                      }
-                    ></Tab>
-                  );
+                            {tab.ChatOrder != 2 ? (
+                              <img
+                                src={tab.TabIconUnActive}
+                                width={25}
+                                alt={tab.TabIconUnActive}
+                              />
+                            ) : null}
+                            <p
+                              className={`${
+                                selectedTab == tab.ChatOrder
+                                  ? styles.colorGreen
+                                  : "text-white"
+                              } m-0`}
+                            >
+                              {tab.TabName}
+                            </p>
+                          </div>
+                        }
+                      />
+                    );
                 })
               : null}
           </Tabs>

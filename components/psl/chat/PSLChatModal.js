@@ -22,6 +22,13 @@ export default function CreateJoinRoomModalBody({
     setBtnDisable(true);
     setOnLoad(true);
     const checkName = roomName.current.value.trim();
+    if (checkName.toLowerCase() == "general") {
+      return swal({
+        title: "Room Already Exist",
+        icon: "error",
+        timer: 2500,
+      });
+    }
     if ((checkName && !checkName.length > 3) || checkName.length > 12) {
       setOnLoad(false);
       setBtnDisable(false);

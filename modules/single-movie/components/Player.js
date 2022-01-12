@@ -269,6 +269,7 @@ export default function Player({ movies }) {
 
   useEffect(() => {
     setIsMobile(window.screen.width < 639);
+    console.log(movie, "MOVIE");
   }, []);
 
   return (
