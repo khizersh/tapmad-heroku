@@ -26,7 +26,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
       return;
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
-    console.log(rowData);
+
     setCurrentRow(rowData.rowsTo);
 
     try {

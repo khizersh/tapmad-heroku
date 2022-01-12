@@ -13,7 +13,7 @@ import loadable from "@loadable/component";
 import Image from "next/image";
 // import ScoreBoard from "./scoreboard";
 
-export default memo(function PSLComponent({ channel }) {
+export default memo(function PSLComponent({ channel, movie }) {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const [selectedTab, setSelectedTab] = useState(null);
@@ -36,7 +36,6 @@ export default memo(function PSLComponent({ channel }) {
   useEffect(async () => {
     const tabs = await getPSLTabsService();
     setTabs(tabs.Tabs);
-    console.log(tabs.Tabs);
     await getRelatedChannels();
     setSelectedTab(1);
     if (channel.IsChat) {
@@ -220,7 +219,7 @@ export default memo(function PSLComponent({ channel }) {
           >
             {tabs
               ? tabs.map((tab, index) => {
-                console.log("tab.ChatOrder", tab.ChatOrder);
+                  console.log("tab.ChatOrder", tab.ChatOrder);
                   if (tab.ChatOrder == 4 && !Event_key) {
                     return <></>;
                   } else

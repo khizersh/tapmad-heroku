@@ -395,7 +395,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                 placeholder="Type your message..."
               ></textarea>
             </div>
-            {room != 1 ? (
+            {room != 2 && room != 1 ? (
               <div
                 style={{
                   textAlign: "center",
@@ -407,7 +407,9 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                   <img className={pslStyles.shareIcon} src={shareIcon} />
                 </button>
               </div>
-            ) : null}
+            ) : (
+              <></>
+            )}
 
             <div
               style={{
