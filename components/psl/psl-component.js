@@ -38,10 +38,8 @@ export default memo(function PSLComponent({ channel, movie }) {
     setTabs(tabs.Tabs);
     await getRelatedChannels();
     setSelectedTab(1);
-    if (channel.IsChat) {
-    } else {
-      await getRelatedChannels();
-      setSelectedTab(2);
+    if (!channel.IsChat) {
+      setSelectedTab(3);
     }
   }, []);
 
@@ -84,7 +82,7 @@ export default memo(function PSLComponent({ channel, movie }) {
     const toggleHandler = () => toggle(!display);
 
     // Chat Tab <start>
-    if (selectedTab == 1) {
+    if (selectedTab == 1 && channel.IsChat) {
       return (
         <>
           <div className="d-flex justify-content-end text-primary my-2">
@@ -220,7 +218,11 @@ export default memo(function PSLComponent({ channel, movie }) {
             {tabs
               ? tabs.map((tab, index) => {
                   console.log("tab.ChatOrder", tab.ChatOrder);
-                  if (tab.ChatOrder == 4 && !Event_key) {
+                  if (tab.ChatOrder == 1 && !channel.IsChat) {
+                    return <></>;
+                  } else if (tab.ChatOrder == 2 && !channel.IsChat) {
+                    return <></>;
+                  } else if (tab.ChatOrder == 4 && !Event_key) {
                     return <></>;
                   } else
                     return (
