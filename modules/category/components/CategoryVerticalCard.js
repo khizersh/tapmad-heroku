@@ -23,9 +23,9 @@ const CategoryVerticalCard = ({ video, type, slug }) => {
                 <div className="img-square-wrapper">
                   <img src={video.VideoImagePath} alt={video.VideoName} />
                   {type && <div className="live_side">{type}</div>}
-                  {/* {packageImage ? (
+                  {video.PackageImage ? (
                     <img
-                      src={packageImage}
+                      src={video.PackageImage}
                       alt="Package"
                       width={30}
                       height={30}
@@ -33,7 +33,7 @@ const CategoryVerticalCard = ({ video, type, slug }) => {
                     />
                   ) : (
                     <></>
-                  )} */}
+                  )}
                 </div>
                 <div className="card-body pt-2 pb-1 pl-1 text-light">
                   <i className="fa fa-play play_icon"></i>

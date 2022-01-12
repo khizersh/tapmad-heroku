@@ -12,7 +12,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
-  const [email , setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const [editProfile, setEditProfile] = useState({
     Name: "",
     DOB: "",
@@ -204,6 +204,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                     max-width: 80px;
                   }
                   @media only screen and (max-width: 799px) {
+                    .radio-cstm:before {
+                      margin-bottom: 6px;z
+                    }
                     .radio-cstm:after {
                       top: 7px;
                     }
@@ -244,18 +247,14 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             </div>
           </div>
 
-          <div className="p-4 text-center">
-            {isMobile ? (
-              ""
-            ) : (
-              <button
-                onClick={submitHandeler}
-                type="button"
-                class="btn btn_submit rounded-pill px-5 m-auto"
-              >
-                Save Profile
-              </button>
-            )}
+          <div className={`mt-3 mb-4 text-center`}>
+            <button
+              onClick={submitHandeler}
+              type="button"
+              class="btn btn-lg btn_submit rounded-pill px-5 m-auto"
+            >
+              Save Profile
+            </button>
           </div>
         </div>
       </div>

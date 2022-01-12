@@ -14,12 +14,12 @@ export const getItemsByKeyword =
 export const getUserByUserId = BASEURLAPP + "api/getUserProfileDetail";
 export const getShowsSearch = BASEURLAPP + "api/getShowsSearch";
 export const getUserPaymentHistory = BASEURLAPP + "api/getUserPaymentHistory";
-;
 // home page api
 
 export const getFeaturedHomePage =
   BASEURLAPP + "api/getHomeFeaturedPageWithRE/5/0/5/0/100";
-export const getFeaturedBannerDetail = BASEURLAPP + "api/getFeaturedBannerDetail";
+export const getFeaturedBannerDetail =
+  BASEURLAPP + "api/getFeaturedBannerDetail";
 export const getWebTabBanners = BASEURLAPP + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURLAPP + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
@@ -67,7 +67,9 @@ export const getSeasonVodByCategoryId =
 export const unsubscribePaymentTransaction =
   BASEURLAPP + "api/unsubscribeUserSubscriptiption";
 export const getMoviesWithPagination = (from, to) => {
-  return BASEURLAPP + `api/getAllMoviesWithPagination/${from}/${to - from}/0/16`;
+  return (
+    BASEURLAPP + `api/getAllMoviesWithPagination/${from}/${to - from}/0/16`
+  );
 };
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `${BASEURLAPP}api/getAllRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
@@ -78,7 +80,9 @@ export const getFeaturedHomepageWithRE = (from, to) => {
   );
 };
 export const getChannelsWithPagination = (from, to) => {
-  return BASEURLAPP + `api/getAllChannelWithPagination/${from}/${to - from}/0/16`;
+  return (
+    BASEURLAPP + `api/getAllChannelWithPagination/${from}/${to - from}/0/16`
+  );
 };
 
 export const getMoviesWithPaginationInitial =
@@ -89,12 +93,14 @@ export const getChannelWithPaginationInitial =
 // catchup
 
 export const getCatchupTv = BASEURLAPP + "api/getCatchupTV/V1/en/android";
-export const getCatchupVideoData = BASEURLAPP + "api/getCatchupTVURL/V1/en/web/";
+export const getCatchupVideoData =
+  BASEURLAPP + "api/getCatchupTVURL/V1/en/web/";
 
 // SEO settings
 
 export const SEOTvSeriesData = BASEURLAPP + "api/getSeoTvSeriesData";
-export const SEOTvShowsByCategory = BASEURLAPP + "api/getSeoTvShowsByCategoryId";
+export const SEOTvShowsByCategory =
+  BASEURLAPP + "api/getSeoTvShowsByCategoryId";
 export const SEOLiveChannelData = BASEURLAPP + "api/getSeoLiveChannelsData";
 
 // ads setting
@@ -122,7 +128,8 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
 export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
-export const getPSLTabsForWeb = BASEURLAPP + "api/getAllWebChatTabs/v1/en/web";
+// export const getPSLTabsForWeb = BASEURLAPP + "api/getAllWebChatTabs/v1/en/web";
+export const getPSLTabsForWeb = STAGEURL + "api/getAllNewWebChatTabs/v1/en/web";
 export const submitMatchBids =
   BASEURLAPP + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
@@ -140,7 +147,8 @@ export const getLeaderBoardByLeagueId =
   BASEURLAPP + "api/getLeaderBoardByLeagueId";
 export const getBuyCoinsPackages =
   BASEURLAPP + "api/getBuyCoinsPackages/v1/en/web";
-export const makeCoinTransaction = BASEURLAPP + "api/makeCoinsPaymentTransaction";
+export const makeCoinTransaction =
+  BASEURLAPP + "api/makeCoinsPaymentTransaction";
 export const rewardPredicationCoda = BASEURLAPP + "api/rewardPredicationCoda";
 export const updateRewardStore = BASEURLAPP + "api/updateRewardsStoreTestV2";
 export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";

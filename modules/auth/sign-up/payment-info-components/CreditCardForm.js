@@ -19,10 +19,9 @@ const CreditCardForm = ({
   useEffect(() => {
     if (creditCardType) {
       new Checkout("pk_4efbb3d2-00b9-4860-95bf-329b4801644d");
-      
     }
   }, [creditCardType == 1]);
-  
+
   const onChange = (e) => {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -59,7 +58,7 @@ const CreditCardForm = ({
             <span className="payment-icon border-curve">{mobileCode}</span>
           </div>
           <input
-            type="number"
+            type="text"
             maxLength="10"
             minLength="10"
             className="form-control ml-2 border-curve"
@@ -73,6 +72,7 @@ const CreditCardForm = ({
               SignUpState.LoggedIn == 1 ? Cookie.getCookies("user_mob") : num
             }
             onChange={(e) => onChange(e)}
+            pattern="\d*"
           />
         </div>
         <div className="input-group col-md-6 m-mt">
