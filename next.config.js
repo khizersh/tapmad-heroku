@@ -16,9 +16,9 @@ module.exports = {
 const withCSS = require("@zeit/next-css");
 // const withSCSS = require("@zeit/next-sass");
 const withImages = require("next-images");
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 module.exports = withImages();
 module.exports = withCSS();
 
@@ -36,9 +36,12 @@ module.exports = {
       "images.tapmad.com",
       "images004-a.erosnow.com",
     ],
-    // deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [
+      16, 32, 48, 64, 96, 128, 256, 384, 512, 767, 1024, 1200, 1440, 1600, 1800,
+      1920,
+    ],
   },
-}
+};
 
-module.exports = withBundleAnalyzer({})
+module.exports = withBundleAnalyzer({});

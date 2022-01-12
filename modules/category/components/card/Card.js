@@ -9,19 +9,9 @@ const Card = ({ video, type, catchup, packageImage }) => {
   let slug = SEOFriendlySlugsForVideo(video, catchup);
   return (
     <>
-      <CategoryHorizontalCard
-        video={video}
-        type={type}
-        slug={slug}
-        packageImage={packageImage}
-      />
+      <CategoryHorizontalCard video={video} type={type} slug={slug} />
 
-      <CategoryVerticalCard
-        video={video}
-        type={type}
-        slug={slug}
-        packageImage={packageImage}
-      />
+      <CategoryVerticalCard video={video} type={type} slug={slug} />
     </>
   );
 };
