@@ -32,35 +32,38 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
         </span>
       </li>
       {countryCode && countryCode == "PK" ? (
-        <li
-          className="promoDiv"
-          style={{ display: "list-item" }}
-          onClick={() => onClick("promo_code")}
-        >
-          <Link href="/promo-code" shallow={true} passHref={true}>
-            <a>
-              Promo code
-              <span className="icon">
-                <i className="fa fa-gift"></i>
-              </span>
-            </a>
-          </Link>
-        </li>
-      ) : null}
-
-      {signIn ? (
-        <li className="sign-out">
-          <Link href="/sign-in" shallow={true} passHref={true}>
-            <a>
-              Login
-              <span className="icon">
-                <i className="fa fa-sign-in"></i>
-              </span>
-            </a>
-          </Link>
-        </li>
+        <>
+          <li
+            className="promoDiv"
+            style={{ display: "list-item" }}
+            onClick={() => onClick("promo_code")}
+          >
+            <Link href="/promo-code" shallow={true} passHref={true}>
+              <a>
+                Promo code
+                <span className="icon">
+                  <i className="fa fa-gift"></i>
+                </span>
+              </a>
+            </Link>
+          </li>
+          {signIn ? (
+            <li className="sign-out">
+              <Link href="/sign-in" shallow={true} passHref={true}>
+                <a>
+                  Login
+                  <span className="icon">
+                    <i className="fa fa-sign-in"></i>
+                  </span>
+                </a>
+              </Link>
+            </li>
+          ) : (
+            <></>
+          )}
+        </>
       ) : (
-        ""
+        <></>
       )}
     </>
   );
