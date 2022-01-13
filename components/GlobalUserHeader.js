@@ -17,8 +17,6 @@ const GlobalUserHeader = () => {
   const router = useRouter();
   const [screenSize, setScreenSize] = useState(false);
 
-  console.log(router);
-
   useEffect(() => {
     !screenSize && setScreenSize(screen.width);
   }, []);

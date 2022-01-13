@@ -219,7 +219,6 @@ export default memo(function PSLComponent({ channel, movie }) {
           >
             {tabs
               ? tabs.map((tab, index) => {
-                  console.log("tab.ChatOrder", tab.ChatOrder);
                   if (tab.ChatOrder == 1 && !channel.IsChat) {
                     return <></>;
                   } else if (tab.ChatOrder == 2 && !channel.IsChat) {
