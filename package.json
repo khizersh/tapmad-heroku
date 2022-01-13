@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.15.0",
-    "@next/bundle-analyzer": "^12.0.2",
+    "@next/bundle-analyzer": "^12.0.7",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.21.1",
