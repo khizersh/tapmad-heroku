@@ -139,20 +139,22 @@ export default memo(function PSLComponent({ channel, movie }) {
         >
           <h5>Related Videos</h5>
           <div>
-            {relatedVideo.length
-              ? relatedVideo.map((video, i) => {
-                  let slug = SEOFriendlySlugsForVideo(video);
-                  return (
-                    <Fragment key={i}>
-                      <Link href={slug} replace={true} shallow={false} key={i}>
-                        <a>
-                          <RelatedProductCard video={video} />
-                        </a>
-                      </Link>
-                    </Fragment>
-                  );
-                })
-              : null}
+            {relatedVideo.length ? (
+              relatedVideo.map((video, i) => {
+                let slug = SEOFriendlySlugsForVideo(video);
+                return (
+                  <Fragment key={i}>
+                    <Link href={slug} replace={true} shallow={false} key={i}>
+                      <a>
+                        <RelatedProductCard video={video} />
+                      </a>
+                    </Link>
+                  </Fragment>
+                );
+              })
+            ) : (
+              <p>No Related videos found!</p>
+            )}
           </div>
         </div>
       );
