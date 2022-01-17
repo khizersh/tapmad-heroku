@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
 
 const International = () => {
-  const [screenBg, setScreenBg] = useState(null);
+  const [screenBg, setScreenBg] = useState("desktop");
   useEffect(() => {
-    screen.width < 768 ? setScreenBg("mobile") : setScreenBg("desktop");
+    screen.width < 768 && setScreenBg("mobile");
   }, []);
-  <style jsx>
-    {`
-      .intlbg {
-        background-position: top center;
-        width: 100vw;
-        height: 100vh;
-      }
-    `}
-  </style>;
   return (
-    <section
-        // style={
-        //   screenBg
-        //     ? { backgroundImage: `url('/images/signup/sign-${screenBg}.png)` }
-        //     : ""
-        // }
-      className="intlbg"
-    ></section>
+    <>
+      <style jsx>
+        {`
+          .intlbg {
+            background-position: top center;
+            background-size: 1600px auto;
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 100vh;
+          }
+        `}
+      </style>
+      <section
+        style={{
+          backgroundImage: `url('/images/signup/signup-${screenBg}-bg.png')`,
+        }}
+        className="intlbg"
+      ></section>
+    </>
   );
 };
-
-
 
 export default International;

@@ -1,43 +1,42 @@
-import React, { useEffect, useRef } from "react";
-import AuthProvider from "../contexts/AuthContext";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import SubscribeInternational from "../pages/subscribe-international";
 import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
-import { isAuthentictedUser } from "../services/utils";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { AuthService } from "../modules/auth/auth.service";
 
 export default function SignUp(props) {
+  const [country, setCountry] = useState(null);
   const router = useRouter();
-  // const RenderViews = useCallback(
-  //   function () {
-  //     var respCode = code || SignUpState.subscribeResponseCode;
-  //     if (respCode == 1) {
-  //       return (
-  //         <>
-  //           <VerifyOTP newUser={SignUpState.newUser ? true : false} />
-  //         </>
-  //       );
-  //     } else {
-  //       return (
-  //         <>
-  //           <SignUpComponent tab={tab} packageId={packageId} />
-  //         </>
-  //       );
-  //     }
-  //   },
-  //   [SignUpState.subscribeResponseCode]
-  // );
-  useEffect(() => {
-    // if (isAuthentictedUser()) {
-    //   router.push("/");
-    // }
-  }, []);
+  const RenderViews = useCallback(
+    function () {
+      if (country) {
+        return (
+          <>
+            <SubscribeInternational />
+          </>
+        );
+      } else {
+        return (
+          <>
+            <Register {...props} />
+          </>
+        );
+      }
+    },
+    [country]
+  );
+  useEffect(async () => {
+    const country = await AuthService.getGeoInfo();
+    setCountry(country);
+  }, [country]);
   return (
     <div>
       <Head>
         <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
       </Head>
-      <Register {...props} />
+      <RenderViews />
     </div>
   );
 }
