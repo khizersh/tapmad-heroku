@@ -13,13 +13,13 @@ export default function SignUp(props) {
       if (country == "PK") {
         return (
           <>
-            <Register {...props} />
+            <Register userHeader={true} {...props} />
           </>
         );
       } else {
         return (
           <>
-            <SubscribeInternational />
+            <SubscribeInternational userHeader={false} {...props} />
           </>
         );
       }
@@ -28,6 +28,7 @@ export default function SignUp(props) {
   );
   useEffect(async () => {
     var data = await AuthService.getGeoInfo();
+    console.log(data, "Countrt");
     setCountry(data.countryCode);
   }, [country]);
   return (
@@ -40,20 +41,22 @@ export default function SignUp(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = async (context) => {
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
   var data = await AuthService.getGeoInfo();
+  const country = data.countryCode;
+  console.log("COUNTRY_", country);
 
   return {
     props: {
       noSideBar: true,
       auth: true,
-      userHeader: data.countryCode == "PK" ? true : false,
+      userHeader: country == "PK" ? true : false,
       ip: ip,
       env: process.env.TAPENV,
     },
   };
-}
+};
