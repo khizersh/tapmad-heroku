@@ -8,6 +8,7 @@ import { SignUpContext } from "../contexts/auth/SignUpContext";
 import { Cookie } from "../services/cookies";
 import { UPDATE_USER_DETAILS } from "../contexts/auth/SignUpReducer";
 import { useRouter } from "next/router";
+import { AuthService } from "../modules/auth/auth.service";
 
 const GlobalUserHeader = () => {
   const [userData, setUserData] = useState(null);
@@ -16,8 +17,12 @@ const GlobalUserHeader = () => {
   const userId = Cookie.getCookies("userId");
   const router = useRouter();
   const [screenSize, setScreenSize] = useState(false);
+  const [countryCode, setCountryCode] = useState("PK");
 
-  console.log(router);
+  useEffect(async () => {
+    const country = await AuthService.getGeoInfo();
+    country && setCountryCode(country.countryCode);
+  }, []);
 
   useEffect(() => {
     !screenSize && setScreenSize(screen.width);
@@ -96,7 +101,7 @@ const GlobalUserHeader = () => {
             <div className="avatarWrapper">
               <div className="avatar line-1">
                 {!initialState.isAuthenticated ? (
-                  <Link href="/sign-in">
+                  <Link href={countryCode == "PK" ? "/sign-in" : "/"}>
                     <a className="text-white d-flex align-items-center">
                       <Image
                         src="/icons/avatar-placeholder.svg"

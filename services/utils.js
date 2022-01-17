@@ -14,7 +14,6 @@ function manipulateUrls(router) {
     isFree: isFree,
     CleanVideoId: cleanVODId,
   };
-  console.log("obj : ", obj);
   return obj;
 }
 
