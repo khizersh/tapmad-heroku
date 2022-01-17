@@ -152,7 +152,7 @@ function SetYourNewPinSignUp({ login, ip, showUser }) {
         <input
           type="text"
           className="form-control border-curve"
-          placeholder={"xxxx"}
+          placeholder={"Set PIN Code"}
           minLength={4}
           maxLength={4}
           value={pin}

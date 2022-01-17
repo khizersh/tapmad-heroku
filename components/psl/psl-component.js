@@ -84,6 +84,7 @@ export default memo(function PSLComponent({ channel, movie }) {
     const toggleHandler = () => toggle(!display);
 
     // Chat Tab <start>
+
     if (selectedTab == 1) {
       return (
         <>

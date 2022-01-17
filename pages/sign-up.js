@@ -8,6 +8,25 @@ import Head from "next/head";
 
 export default function SignUp(props) {
   const router = useRouter();
+  // const RenderViews = useCallback(
+  //   function () {
+  //     var respCode = code || SignUpState.subscribeResponseCode;
+  //     if (respCode == 1) {
+  //       return (
+  //         <>
+  //           <VerifyOTP newUser={SignUpState.newUser ? true : false} />
+  //         </>
+  //       );
+  //     } else {
+  //       return (
+  //         <>
+  //           <SignUpComponent tab={tab} packageId={packageId} />
+  //         </>
+  //       );
+  //     }
+  //   },
+  //   [SignUpState.subscribeResponseCode]
+  // );
   useEffect(() => {
     // if (isAuthentictedUser()) {
     //   router.push("/");
@@ -32,7 +51,7 @@ export function getServerSideProps(context) {
     props: {
       noSideBar: true,
       auth: true,
-      userHeader : true,
+      userHeader: true,
       ip: ip,
       env: process.env.TAPENV,
     },
