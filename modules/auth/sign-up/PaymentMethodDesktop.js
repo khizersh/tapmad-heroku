@@ -63,11 +63,21 @@ export default function PaymentMethodDesktop() {
             gap: 8px;
             flex-basis: 0;
           }
+
+          .pdtl-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+          }
+
+          .pdtl-cols div {
+            flex: 1;
+          }
         `}
       </style>
       <div className="row padding-signup-layout">
         <div className="col-5">
-          <div className="d-flex justify-content-around">
+          <div className="pdtl-cols">
             {/* {CurrentPackage?.DeviceStream.map((m,ind) => 
          <div key={ind}>
          <p><img src={m.Image}/></p>
@@ -81,7 +91,7 @@ export default function PaymentMethodDesktop() {
                     </p>
                     {m.Name == "0" || m.Name == "1" ? (
                       <p className="text-grey">
-                        {m.Name == "1" ? "Casting available" : "No Casting"}
+                        {m.Name == "1" ? "Casting" : "No Casting"}
                       </p>
                     ) : (
                       <p className="text-grey">{m.Name}</p>

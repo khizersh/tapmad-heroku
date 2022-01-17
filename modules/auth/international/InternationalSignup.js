@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-const International = () => {
+const InternationalSignUp = ({ globalMobileNo }) => {
   const [screenBg, setScreenBg] = useState("desktop");
-  const [mobileNo, setMobileNo] = useState("");
   const [error, setError] = useState(null);
-  const [nextForm, toggleNextForm] = useState(false);
   const submitHandler = () => {
     let msg = null;
-    switch (mobileNo.length) {
-      case mobileNo.length < 4 || mobileNo.length > 20:
-        msg =
-          "Please enter the valid phone number minimum 4 or maximum 20 digits";
-        break;
-      case 0:
-        msg = "Please enter the mobile number";
-        break;
-    }
-    msg ? setError(msg) : toggleNextForm(true);
+    msg ? setError(msg) : "";
   };
   useEffect(() => {
     screen.width < 768 && setScreenBg("mobile");
@@ -68,12 +57,7 @@ const International = () => {
             type="number"
             name="mobile"
             placeholder="Enter your mobile number"
-            value={mobileNo}
-            onChange={(e) =>
-              e.target.value.length < 21
-                ? setMobileNo(e.target.value)
-                : mobileNo
-            }
+            defaultValue={globalMobileNo}
             width={550}
             className="mw-100 form-control rounded"
             minLength={4}
@@ -104,4 +88,4 @@ const International = () => {
   );
 };
 
-export default International;
+export default InternationalSignUp;

@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import SubscribeInternational from "../pages/subscribe-international";
 import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
-import { useRouter } from "next/router";
 import Head from "next/head";
 import { AuthService } from "../modules/auth/auth.service";
 
@@ -10,19 +8,20 @@ export default function SignUp(props) {
   const [country, setCountry] = useState(null);
   const RenderViews = useCallback(
     function () {
-      if (country == "PK") {
-        return (
-          <>
-            <Register userHeader={true} {...props} />
-          </>
-        );
-      } else {
-        return (
-          <>
-            <SubscribeInternational userHeader={false} {...props} />
-          </>
-        );
-      }
+      return <Register userHeader={true} {...props} />;
+      // if (country == "PK") {
+      //   return (
+      //     <>
+      //       <Register userHeader={true} {...props} />
+      //     </>
+      //   );
+      // } else {
+      //   return (
+      //     <>
+      //       <SubscribeInternational userHeader={false} {...props} />
+      //     </>
+      //   );
+      // }
     },
     [country]
   );

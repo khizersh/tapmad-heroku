@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-const International = () => {
+const International = ({ setGlobalMobileNo }) => {
   const [screenBg, setScreenBg] = useState("desktop");
   const [mobileNo, setMobileNo] = useState("");
   const [error, setError] = useState(null);
-  const [nextForm, toggleNextForm] = useState(false);
   const submitHandler = () => {
     let msg = null;
     switch (mobileNo.length) {
@@ -16,7 +15,7 @@ const International = () => {
         msg = "Please enter the mobile number";
         break;
     }
-    msg ? setError(msg) : toggleNextForm(true);
+    msg ? setError(msg) : setGlobalMobileNo(mobileNo);
   };
   useEffect(() => {
     screen.width < 768 && setScreenBg("mobile");

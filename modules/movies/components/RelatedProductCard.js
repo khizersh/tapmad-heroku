@@ -3,8 +3,29 @@ import React from "react";
 export default function RelatedProductCard({ video }) {
   return (
     <div className="col-12 p-1 img-hov">
+      <style jsx>
+        {`
+        .package-icon {
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          object-fit: contain
+        }
+        `}
+      </style>
       <div className="d-flex">
-        <div className="img-hov">
+        <div className="img-hov position-relative">
+          {video.PackageImage ? (
+            <img
+              src={video.PackageImage}
+              alt="Package"
+              width={20}
+              height={20}
+              className="package-icon"
+            />
+          ) : (
+            <></>
+          )}
           <img src={video.VideoImagePath} alt={video.VideoName} width="130px" />
         </div>
         <div>
@@ -26,5 +47,4 @@ export default function RelatedProductCard({ video }) {
       </div>
     </div>
   );
-};
-
+}
