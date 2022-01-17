@@ -32,7 +32,7 @@ const WatchPage = (props) => {
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
-      if (props.data.Video.PaymentTabId) {
+      if (props?.data?.Video?.PaymentTabId) {
         router.push(
           `/sign-up?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
         );
