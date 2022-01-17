@@ -4,6 +4,7 @@ const International = () => {
   const [screenBg, setScreenBg] = useState("desktop");
   const [mobileNo, setMobileNo] = useState("");
   const [error, setError] = useState(null);
+
   const submitHandler = () => {
     let msg = null;
     switch (mobileNo.length) {
@@ -15,10 +16,6 @@ const International = () => {
         msg = "Please enter the mobile number";
         break;
     }
-    if (msg)
-      setError(msg);
-    else
-      
   };
   useEffect(() => {
     screen.width < 768 && setScreenBg("mobile");

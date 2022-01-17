@@ -1,7 +1,8 @@
 import React from "react";
 import International from "../modules/auth/International";
 
-const SubscribeInternational = () => {
+const SubscribeInternational = (props) => {
+  console.log(props);
   return <International />;
 };
 
