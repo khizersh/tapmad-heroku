@@ -45,15 +45,15 @@ export const getServerSideProps = async (context) => {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  var data = await AuthService.getGeoInfo();
-  const country = data.countryCode;
-  console.log("COUNTRY_", country);
+  // var data = await AuthService.getGeoInfo();
+  // const country = data.countryCode;
+  // console.log("COUNTRY_", country);
 
   return {
     props: {
       noSideBar: true,
       auth: true,
-      userHeader: country == "PK" ? true : false,
+      userHeader: true,
       ip: ip,
       env: process.env.TAPENV,
     },
