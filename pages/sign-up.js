@@ -8,19 +8,18 @@ import { AuthService } from "../modules/auth/auth.service";
 
 export default function SignUp(props) {
   const [country, setCountry] = useState(null);
-  const router = useRouter();
   const RenderViews = useCallback(
     function () {
-      if (country) {
+      if (country == "PK") {
         return (
           <>
-            <SubscribeInternational />
+            <Register {...props} />
           </>
         );
       } else {
         return (
           <>
-            <Register {...props} />
+            <SubscribeInternational />
           </>
         );
       }
@@ -28,8 +27,8 @@ export default function SignUp(props) {
     [country]
   );
   useEffect(async () => {
-    const country = await AuthService.getGeoInfo();
-    setCountry(country);
+    var data = await AuthService.getGeoInfo();
+    setCountry(data.countryCode);
   }, [country]);
   return (
     <div>
@@ -41,16 +40,18 @@ export default function SignUp(props) {
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   var ip = requestIp.getClientIp(context.req);
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
+  var data = await AuthService.getGeoInfo();
+
   return {
     props: {
       noSideBar: true,
       auth: true,
-      userHeader: true,
+      userHeader: data.countryCode == "PK" ? true : false,
       ip: ip,
       env: process.env.TAPENV,
     },
