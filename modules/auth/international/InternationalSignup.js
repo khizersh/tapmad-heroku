@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
+import Checkout from "../../../public/static/js/checkout";
 
 const InternationalSignUp = ({ globalMobileNo }) => {
   const [screenBg, setScreenBg] = useState("desktop");
   const [error, setError] = useState(null);
-  const submitHandler = () => {
-    let msg = null;
-    msg ? setError(msg) : "";
-  };
   useEffect(() => {
+    // Set background image desktop / mobile
     screen.width < 768 && setScreenBg("mobile");
+    // Setting up card payment
+    new Checkout("pk_4efbb3d2-00b9-4860-95bf-329b4801644d");
   }, []);
   return (
     <>
@@ -54,34 +56,76 @@ const InternationalSignUp = ({ globalMobileNo }) => {
           </p>
 
           <input
-            type="number"
-            name="mobile"
-            placeholder="Enter your mobile number"
-            defaultValue={globalMobileNo}
+            type="text"
+            name="fullname"
+            placeholder="Full name"
             width={550}
             className="mw-100 form-control rounded"
             minLength={4}
             maxLength={20}
-            pattern="\d*"
           />
-          {error ? (
-            <p
-              className="bg-warning rounded p-2 mt-3"
-              style={{ color: "black" }}
-            >
-              {error}
-            </p>
-          ) : (
-            <></>
-          )}
-          <button
-            type="submit"
-            name="Submit"
-            className="btn btn-primary mt-4 w-100 text-white text-uppercase font-weight-bold py-2"
-            onClick={submitHandler}
+
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            width={550}
+            className="mw-100 mt-2 form-control rounded"
+            minLength={4}
+            maxLength={20}
+          />
+
+          <div className="row no-gutters">
+            <div className="col-3">
+              <select
+                className="custom-select mt-2"
+                aria-label="Select Country"
+              >
+                <option selected>Select Country</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div className="col-9 pl-2">
+              <input
+                type="number"
+                name="mobile"
+                placeholder="Enter your mobile number"
+                defaultValue={globalMobileNo}
+                width={550}
+                className="mw-100 mt-2 form-control rounded"
+                minLength={4}
+                maxLength={20}
+                disabled={true}
+              />
+            </div>
+          </div>
+
+          <div className="one-liner w-100 mt-2">
+            <div className="card-frame"></div>
+          </div>
+
+          <div
+            className="d-flex flex-wrap-wrap justify-content-center mt-4"
+            style={{ gap: "15px" }}
           >
-            Submit
-          </button>
+            <button
+              type="submit"
+              className="btn btn-primary text-white px-5 py-2"
+              style={{ fontSize: "1.15em" }}
+            >
+              Pay now
+            </button>
+            <Link href="/sign-in">
+              <a
+                className="btn btn-primary text-white px-5 py-2"
+                style={{ fontSize: "1.15em" }}
+              >
+                Login
+              </a>
+            </Link>
+          </div>
         </div>
       </section>
     </>

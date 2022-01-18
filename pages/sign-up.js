@@ -27,7 +27,6 @@ export default function SignUp(props) {
   );
   useEffect(async () => {
     var data = await AuthService.getGeoInfo();
-    console.log(data, "Countrt");
     setCountry(data.countryCode);
   }, [country]);
   return (

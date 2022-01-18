@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const International = ({ setGlobalMobileNo }) => {
+const InternationalMobile = ({ setGlobalMobileNo }) => {
   const [screenBg, setScreenBg] = useState("desktop");
   const [mobileNo, setMobileNo] = useState("");
   const [error, setError] = useState(null);
+  console.log("setGlobalMobileNo", setGlobalMobileNo);
   const submitHandler = () => {
     let msg = null;
     switch (mobileNo.length) {
@@ -78,6 +79,7 @@ const International = ({ setGlobalMobileNo }) => {
             minLength={4}
             maxLength={20}
             pattern="\d*"
+            autoComplete="off"
           />
           {error ? (
             <p
@@ -92,7 +94,7 @@ const International = ({ setGlobalMobileNo }) => {
           <button
             type="submit"
             name="Submit"
-            className="btn btn-primary mt-4 w-100 text-white text-uppercase font-weight-bold py-2"
+            className="btn btn-primary mt-4 w-100 text-white text-uppercase font-weight-bold  px-5 py-2"
             onClick={submitHandler}
           >
             Submit
@@ -103,4 +105,4 @@ const International = ({ setGlobalMobileNo }) => {
   );
 };
 
-export default International;
+export default InternationalMobile;

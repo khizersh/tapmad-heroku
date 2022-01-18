@@ -1,28 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import InternationalMobile from "./InternationalMobile";
+import InternationalSignUp from "./InternationalSignup";
+import Head from "next/head";
 
 const International = () => {
-  const { globalMobileNo, setGlobalMobileNo } = useState(null);
-  useEffect(() => {}, [globalMobileNo]);
-  if (globalMobileNo)
-    return (
-      <>
-        <International
-          userHeader={false}
-          setGlobalMobileNo={setGlobalMobileNo}
-          {...props}
-        />
-      </>
-    );
-  else
-    return (
-      <>
-        <InternationalSignUp
-          userHeader={false}
-          globalMobileNo={globalMobileNo}
-          {...props}
-        />
-      </>
-    );
+  const [globalMobileNo, setGlobalMobileNo] = useState(null);
+
+  return (
+    <>
+      <Head>
+        <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+      </Head>
+      {globalMobileNo ? (
+        <InternationalSignUp globalMobileNo={globalMobileNo} />
+      ) : (
+        <InternationalMobile setGlobalMobileNo={setGlobalMobileNo} />
+      )}
+    </>
+  );
 };
 
 export default International;
