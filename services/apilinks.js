@@ -175,3 +175,5 @@ export const PaymentPackages =
 BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
 export const PaymentPackagesByUserId =
   BASEURLAPP + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
+
+export const isUserSubscribe = STAGEURL + "api/isUserSubscribe";

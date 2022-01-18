@@ -320,7 +320,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
         <div className="form-check  my-3 termdiv">
           <label className="container-term float-left pl-2">
             <input type="checkbox" onClick={onClickCheckbox} />I agree to
-            Tapmad's <span onClick={onClickTerm}>term and condition</span>
+            Tapmad's <span onClick={onClickTerm}>terms and conditions</span>
             <span className="checkmark"></span>
           </label>
         </div>

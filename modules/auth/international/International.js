@@ -9,6 +9,11 @@ const International = () => {
   return (
     <>
       <Head>
+        <link
+          rel="preload"
+          href="https://cdn.checkout.com/js/framesv2.min.js"
+          as="script"
+        />
         <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
       </Head>
       {globalMobileNo ? (

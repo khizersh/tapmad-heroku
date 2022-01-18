@@ -16,6 +16,11 @@ const InternationalSignUp = ({ globalMobileNo }) => {
     <>
       <style jsx>
         {`
+          .form {
+            width: 550px;
+            max-width: 100%;
+            margin: auto;
+          }
           .intlbg {
             background-position: top center;
             background-size: cover;
@@ -37,6 +42,12 @@ const InternationalSignUp = ({ globalMobileNo }) => {
             -webkit-appearance: none;
             margin: 0;
           }
+
+          @media (max-width: 991px) {
+            h1 {
+              font-size: 1.5em;
+            }
+          }
         `}
       </style>
       <section
@@ -45,86 +56,88 @@ const InternationalSignUp = ({ globalMobileNo }) => {
         }}
         className="intlbg container-fluid text-center"
       >
-        <div className="">
+        <div className="mw-100">
           <h1 className="line-1 mb-0">
-            Wait is over! Watch Pakistan's Biggest <br />{" "}
-            <span className="text-base">Cricket Event HBL PSL 7</span>
+            THE WAIT IS OVER! WATCH PAKISTAN's BIGGEST
+            <span className="text-base d-block">CRICKET EVENT HBL PSL 7</span>
           </h1>
           <p className="h4 font-weight-normal mb-3">
             Bring the stadium feel at home.{" "}
             <span className="text-base">#LevelHai</span>
           </p>
 
-          <input
-            type="text"
-            name="fullname"
-            placeholder="Full name"
-            width={550}
-            className="mw-100 form-control rounded"
-            minLength={4}
-            maxLength={20}
-          />
+          <div className="form">
+            <input
+              type="text"
+              name="fullname"
+              placeholder="Full name"
+              width={550}
+              className="mw-100 form-control rounded"
+              minLength={4}
+              maxLength={20}
+            />
 
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            width={550}
-            className="mw-100 mt-2 form-control rounded"
-            minLength={4}
-            maxLength={20}
-          />
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              width={550}
+              className="mw-100 mt-2 form-control rounded"
+              minLength={4}
+              maxLength={20}
+            />
 
-          <div className="row no-gutters">
-            <div className="col-3">
-              <select
-                className="custom-select mt-2"
-                aria-label="Select Country"
-              >
-                <option selected>Select Country</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+            <div className="row no-gutters">
+              <div className="col-3">
+                <select
+                  className="custom-select mt-2"
+                  aria-label="Select Country"
+                >
+                  <option defaultValue="Select Country">Select Country</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div className="col-9 pl-2">
+                <input
+                  type="number"
+                  name="mobile"
+                  placeholder="Enter your mobile number"
+                  defaultValue={globalMobileNo}
+                  width={550}
+                  className="mw-100 mt-2 form-control rounded"
+                  minLength={4}
+                  maxLength={20}
+                  disabled={true}
+                />
+              </div>
             </div>
-            <div className="col-9 pl-2">
-              <input
-                type="number"
-                name="mobile"
-                placeholder="Enter your mobile number"
-                defaultValue={globalMobileNo}
-                width={550}
-                className="mw-100 mt-2 form-control rounded"
-                minLength={4}
-                maxLength={20}
-                disabled={true}
-              />
+
+            <div className="one-liner w-100 mt-2">
+              <div className="card-frame"></div>
             </div>
-          </div>
 
-          <div className="one-liner w-100 mt-2">
-            <div className="card-frame"></div>
-          </div>
-
-          <div
-            className="d-flex flex-wrap-wrap justify-content-center mt-4"
-            style={{ gap: "15px" }}
-          >
-            <button
-              type="submit"
-              className="btn btn-primary text-white px-5 py-2"
-              style={{ fontSize: "1.15em" }}
+            <div
+              className="d-flex flex-wrap-wrap justify-content-center mt-4"
+              style={{ gap: "15px" }}
             >
-              Pay now
-            </button>
-            <Link href="/sign-in">
-              <a
+              <button
+                type="submit"
                 className="btn btn-primary text-white px-5 py-2"
                 style={{ fontSize: "1.15em" }}
               >
-                Login
-              </a>
-            </Link>
+                Pay now
+              </button>
+              <Link href="/sign-in">
+                <a
+                  className="btn btn-primary text-white px-5 py-2"
+                  style={{ fontSize: "1.15em" }}
+                >
+                  Login
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
