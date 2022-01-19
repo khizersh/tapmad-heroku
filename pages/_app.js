@@ -68,7 +68,6 @@ function MyApp({ Component, pageProps }) {
   }, [pageProps.protected]);
 
   return (
-    
     <>
       <Head>
         <meta charSet="utf-8" />

@@ -194,11 +194,7 @@ const MyAccountWeb = ({
             <div className="col-md-2 align-self-start">
               <div className="profile-user ">
                 <img
-                  src={
-                    allData && allData.ProfileData.UserProfileGender == "Male"
-                      ? editUserMale
-                      : userFemaleProfileIcon
-                  }
+                  src={allData && allData.PackageProfleImage}
                   className="profile-img  border-50"
                 />
               </div>
@@ -393,9 +389,7 @@ const MyAccountWeb = ({
                         : "none",
                   }}
                 >
-                  <h4 className="pt-3 text-green">
-                    My Games
-                  </h4>
+                  <h4 className="pt-3 text-green">My Games</h4>
                   <div className="row pb-4 no-gutters">
                     <div className="col-3 p-1">
                       <div className="block_play">

@@ -1,40 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
 import Head from "next/head";
-import { AuthService } from "../modules/auth/auth.service";
 
 export default function SignUp(props) {
-  const [country, setCountry] = useState(null);
-  const RenderViews = useCallback(
-    function () {
-      return <Register userHeader={true} {...props} />;
-      // if (country == "PK") {
-      //   return (
-      //     <>
-      //       <Register userHeader={true} {...props} />
-      //     </>
-      //   );
-      // } else {
-      //   return (
-      //     <>
-      //       <SubscribeInternational userHeader={false} {...props} />
-      //     </>
-      //   );
-      // }
-    },
-    [country]
-  );
-  useEffect(async () => {
-    var data = await AuthService.getGeoInfo();
-    setCountry(data.countryCode);
-  }, [country]);
   return (
     <div>
       <Head>
         <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
       </Head>
-      <RenderViews />
+      <Register userHeader={true} {...props} />
     </div>
   );
 }
@@ -44,9 +19,6 @@ export const getServerSideProps = async (context) => {
   if (process.env.TAPENV == "local") {
     ip = "39.44.217.70";
   }
-  // var data = await AuthService.getGeoInfo();
-  // const country = data.countryCode;
-  // console.log("COUNTRY_", country);
 
   return {
     props: {

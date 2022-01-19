@@ -62,7 +62,6 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
       !formData.FullName ||
       !formData.UserMobileNumebr ||
       !formData.BirthDate ||
-      !formData.Email ||
       !formData.Gender
     ) {
       return swal({
@@ -244,7 +243,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
           </div>
 
           <div className={`mt-3 mb-4 text-center`}>

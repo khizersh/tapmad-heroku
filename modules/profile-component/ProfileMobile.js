@@ -93,15 +93,15 @@ const MyAccountMobile = ({
       <div className="d-sm-none">
         <div className="row align-items-center">
           <div className="col-4">
-            <img
-              src={
-                allData && allData.ProfileData.UserProfileGender == "Male"
-                  ? editUserMale
-                  : userFemaleProfileIcon
-              }
-              className="border-50 img-fluid"
-              width="100"
-            />
+            {allData?.PackageProfleImage ? (
+              <img
+                src={allData?.PackageProfleImage}
+                className="border-50 img-fluid"
+                width="100"
+              />
+            ) : (
+              <></>
+            )}
           </div>
           {profileData ? (
             <div className="flex-grow-1">
@@ -234,7 +234,10 @@ const MyAccountMobile = ({
         <div className="row">
           <div className="col-12 mt-3">
             <a>
-              <span className="btn view-more-btn w-100 font-14" onClick={unSubscribe}>
+              <span
+                className="btn view-more-btn w-100 font-14"
+                onClick={unSubscribe}
+              >
                 Unsubscribe
               </span>
             </a>
