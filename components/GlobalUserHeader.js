@@ -44,6 +44,7 @@ const GlobalUserHeader = () => {
       }
       setUserData(SignUpState.UserDetails.ProfileName);
     }
+    console.log("userData", userData);
   }, [SignUpState.UserDetails.ProfileName]);
 
   return (
@@ -74,7 +75,9 @@ const GlobalUserHeader = () => {
           screenSize ? "d-flex" : "d-none"
         } flex-wrap align-items-center justify-content-between`}
       >
-        {router.pathname.indexOf("/my-account" > -1) && screenSize < 799 ? (
+        {router.pathname.indexOf("/my-account" > -1) &&
+        screenSize < 799 &&
+        userData ? (
           <>
             <div
               role="button"
