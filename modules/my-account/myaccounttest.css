@@ -1,7 +1,9 @@
 @font-face {
   font-family: "okomitomedium";
-  src: url("../../public/fonts/okomito-medium-webfont.woff") format("woff2"),
-    url("../../public/fonts/okomito-medium-webfont.woff2") format("woff");
+  src: url("/fonts/okomito-medium-webfont.woff") format("woff2"),
+    url("/fonts/okomito-medium-webfont.woff2") format("woff");
+  /* src: url("../../public/fonts/okomito-medium-webfont.woff") format("woff2"),
+    url("../../public/fonts/okomito-medium-webfont.woff2") format("woff"); */
   font-weight: normal;
   font-style: normal;
 }
