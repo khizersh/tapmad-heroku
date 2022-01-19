@@ -133,7 +133,7 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <MainProvider>
               <AuthProvider>
-                <AuthProviderNew>
+                <AuthProviderNew> 
                   <SignUpProvider>
                     <GameProvider>
                       <ProfileProvider>
