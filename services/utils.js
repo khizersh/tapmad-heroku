@@ -59,6 +59,8 @@ function basicSliderConfig(slidesToShow, mobileView) {
     ],
   };
 }
+
+
 function verifyURL(url, sectionName, vodName) {
   if (sectionName) {
     var convertedSectionName = sectionName
