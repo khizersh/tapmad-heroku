@@ -42,7 +42,9 @@ export async function getServerSideProps(context) {
   return {
     props: {
       channel: channel,
-      env: process.env.TAPENV,
+      ip: ip,
+      env: process.env.TAPENV || "production",
+      prodEnv: process.env.API_ENDPOINT || "http://app.tapmad.com/api/",
     },
   };
 }
