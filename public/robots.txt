@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /news-detail/*
+
 Disallow: /watch/ep-*
 Disallow: /watch/episode*
 Disallow: /episode*
@@ -22,4 +22,10 @@ Disallow: /my-game
 Disallow: /leaderboard
 Disallow: /all-games
 Disallow: /myaccount
+Disallow: /category/*
+Disallow: /login
+
 Sitemap: https://www.tapmad.com/sitemap.xml
+Sitemap: https://www.tapmad.com/movie-sitemap.xml
+Sitemap: https://www.tapmad.com/live-channel-sitemap.xml
+Sitemap: https://www.tapmad.com/shows-sitemap.xml

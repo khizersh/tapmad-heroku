@@ -1,344 +1,369 @@
-<?xml version="1.0" encoding="utf-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.google.com/schemas/sitemap/0.9" xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.9 http://www.google.com/schemas/sitemap/0.9/sitemap.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<urlset xmlns:ns1="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<url>
 		<loc>https://www.tapmad.com/play/premier-league-live/05791</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/play/laliga-santander-live/09501</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/samaa-news/1101</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/bbc-news/1231</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/aplus/1271</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/aaj-news/1301</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/play-entertainment/1341</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/madina/1361</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/makkah/1371</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
-	</url>
-	<url>
-		<loc>https://www.tapmad.com/watch/dawn-news/1381</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/mehran/1421</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/atv/1431</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/film-world/1451</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
-	</url>
-	<url>
-		<loc>https://www.tapmad.com/watch/pashto-1/1461</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/gnn/1471</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/sindh-tv/1571</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/neo-news/1841</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/al-jazeera/1851</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/sach-tv/1881</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/cartoon-network-english/1891</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/dharti-tv/1911</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/channel-24/1921</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/channel-5/1931</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/city-42/1941</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/kay2/1971</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/khyber-news/1981</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/khyber-entertainment/1991</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/k21-tv/11001</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/metro-one/11011</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/dw-tv/11031</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/baby-tv/11071</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/sindh-news/11091</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/awaz-tv/11101</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/koh-e-noor/11111</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
-	</url>
-	<url>
-		<loc>https://www.tapmad.com/watch/test-new/11281</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/the-magic-radio/11341</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/see-tv/11391</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/aaj-entertainment/11461</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/cartoon-network-urdu/11491</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/voice-of-america/11681</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/vsh-news/11981</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/euro-news/11991</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/hum-tv/12051</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/hum-sitaray/12061</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/hum-masala/12071</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/trt-world/12081</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/tapmad-test-channel/12271</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/animal-planet/12911</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/discovery/12921</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/cnn/12931</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/discovery-kids/13121</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/premier-league-live/05791</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/outdoor-tv/15851</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/da-vinci-kids/15861</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/motor-vision-tv/15871</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/tap-cric/17171</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/92-news/17441</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/eurosport/17861</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/m-1-mma/19451</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/tensports/19461</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 	<url>
 		<loc>https://www.tapmad.com/watch/discover-pakistan/19471</loc>
-		<lastmod>2021-12-25</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.8</priority>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/laliga-santander-live/09501</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/bol-news/19591</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+	</url>
+	<url>
+		<loc>https://www.tapmad.com/watch/bol-entertainment/19601</loc>
+		<lastmod>2022-01-18</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 </urlset>
