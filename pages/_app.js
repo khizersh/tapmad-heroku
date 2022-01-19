@@ -41,7 +41,7 @@ import GlobalUserHeader from "../components/GlobalUserHeader";
 const DashboardLayout = loadable(() =>
   import("../modules/dashboard/DashboardLayout")
 );
-const Skeleton = loadable(() => import("../components/MainSkeleton"));
+import Skeleton from "../components/MainSkeleton";
 const Header = loadable(() => import("../components/App/Header"));
 const Footer = loadable(() => import("../components/Footer"));
 
@@ -133,7 +133,7 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <MainProvider>
               <AuthProvider>
-                <AuthProviderNew>
+                <AuthProviderNew> 
                   <SignUpProvider>
                     <GameProvider>
                       <ProfileProvider>
@@ -148,26 +148,24 @@ function MyApp({ Component, pageProps }) {
             </MainProvider>
           )
         ) : (
-          <>
-            <MainProvider>
-              <AuthProvider>
-                <AuthProviderNew>
-                  <SignUpProvider>
-                    <CatchupProvider>
-                      <GameProvider>
-                        <Skeleton {...pageProps}>
-                          <BuyCoinModal />
-                          <Header />
-                          <Component {...pageProps} />
-                          <Footer />
-                        </Skeleton>
-                      </GameProvider>
-                    </CatchupProvider>
-                  </SignUpProvider>
-                </AuthProviderNew>
-              </AuthProvider>
-            </MainProvider>
-          </>
+          <MainProvider>
+            <AuthProvider>
+              <AuthProviderNew>
+                <SignUpProvider>
+                  <CatchupProvider>
+                    <GameProvider>
+                      <Skeleton {...pageProps}>
+                        <BuyCoinModal />
+                        <Header />
+                        <Component {...pageProps} />
+                        <Footer />
+                      </Skeleton>
+                    </GameProvider>
+                  </CatchupProvider>
+                </SignUpProvider>
+              </AuthProviderNew>
+            </AuthProvider>
+          </MainProvider>
         )}
       </>
     </>
