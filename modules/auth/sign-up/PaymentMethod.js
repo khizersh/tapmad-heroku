@@ -68,14 +68,22 @@ export default function PaymentMethod() {
         `}
       </style>
       <div className="d-flex justify-content-around">
-        {imageArray.map((m, ind) => (
-          <div key={ind} className="text-center">
-            <p>
-              <img src={m.Image} width={70} />
-            </p>
-            <p className="text-grey">{m.Name}</p>
-          </div>
-        ))}
+        {CurrentPackage?.DeviceStream?.length
+          ? CurrentPackage.DeviceStream.map((m, ind) => (
+              <div key={ind} className="text-center">
+                <p>
+                  <img src={m.Image} className="max-width-30" />
+                </p>
+                {m.Name == "0" || m.Name == "1" ? (
+                  <p className="text-grey">
+                    {m.Name == "1" ? "Casting" : "No Casting"}
+                  </p>
+                ) : (
+                  <p className="text-grey">{m.Name}</p>
+                )}
+              </div>
+            ))
+          : null}
       </div>
       <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
       <div
