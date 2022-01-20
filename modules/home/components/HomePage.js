@@ -21,41 +21,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
   const [ad, setAd] = useState(null);
   const modifiedResponse = HomeService.modifyHomePageResponse(movies);
 
-  // async function fetchNewMovies() {
-  //   const { calculateRowsToFetch, pushNewMoviesIntoList } = (
-  //     await import("../../../services/utils")
-  //   ).default;
-  //   if (currentRow == movies.totalSections) {
-  //     return;
-  //   }
-  //   let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
 
-  //   setCurrentRow(rowData.rowsTo);
-
-  //   try {
-  //   } catch (error) {}
-  //   let moviesList = await HomeService.getFeaturedHomepageWithRe(
-  //     rowData.rowFrom,
-  //     rowData.rowsTo,
-  //     ip
-  //   );
-  //   if (moviesList != null) {
-  //     var newMovies = await moviesList.data;
-  //     if (
-  //       localMovies.Sections.Movies &&
-  //       localMovies.Sections.Movies.length > 0
-  //     ) {
-  //       let modifiedNewMovies = HomeService.modifyHomePageResponse(
-  //         newMovies.Tabs[0]
-  //       );
-  //       let updatedListOfMovies = pushNewMoviesIntoList(
-  //         localMovies,
-  //         modifiedNewMovies
-  //       );
-  //       setLocalMovies(updatedListOfMovies);
-  //     }
-  //   }
-  // }
   async function fetchNewMovies() {
     if (currentRow == movies.totalSections) {
       return;

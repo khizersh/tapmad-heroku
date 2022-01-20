@@ -31,6 +31,7 @@ function HeaderBasic({ signout }) {
 
   useEffect(async () => {
     const country = await AuthService.getGeoInfo();
+    console.log(initialState, "initial");
     if (country) {
       country.countryCode == "PK";
       setCountry(country.countryCode);
