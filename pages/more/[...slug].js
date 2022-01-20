@@ -7,6 +7,7 @@ import requestIp from "request-ip";
 import { IsLiveChannel } from "../../services/constants";
 
 export default function ViewMore(props) {
+
     return <div className="row mx-auto">
         {props.data.Sections == null ?
             <div className="col-12"><h3 className="text-center">No data found</h3></div>
@@ -23,7 +24,9 @@ export async function getServerSideProps(context) {
     if (process.env.TAPENV == "local") {
         ip = "39.44.217.70";
     }
-    var response = await get(viewMoreContent(0, 5, slug[1], slug[2]), ip);
+    let url = viewMoreContent(0, 5, slug[1], slug[2]);
+    console.log("url : ",url , ip);
+    var response = await get(url, ip);
     return {
         props: {
             data: response.data, env: process.env.TAPENV

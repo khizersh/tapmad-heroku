@@ -156,7 +156,7 @@ export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
 // get all country
 export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";
 
-export const viewMoreContent = (from, to, sectionId, pageId) =>
+export const viewMoreContent = (from, to, sectionId, pageId ) =>
   BASEURLAPP +
   `api/getExtraContentWithPagination/${from}/${to}/${sectionId}/${pageId}`;
 
