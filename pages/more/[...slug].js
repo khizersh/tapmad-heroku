@@ -8,6 +8,7 @@ import { IsLiveChannel } from "../../services/constants";
 
 export default function ViewMore(props) {
 
+    console.log("props in more : ",props);
     return <div className="row mx-auto">
         {props.data.Sections == null ?
             <div className="col-12"><h3 className="text-center">No data found</h3></div>
