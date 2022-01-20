@@ -67,7 +67,7 @@ export default function MainProvider({ children }) {
         const country = await AuthService.getGeoInfo();
         updateCountryCode(country.countryCode);
         updatePaymentPackage(operators?.data?.PaymentPackages[0]);
-      } 
+      }
     } catch (error) {
       console.log(error);
     }

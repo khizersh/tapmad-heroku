@@ -30,16 +30,23 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
 
   return (
     <>
-      <li className="logouts_contain" onClick={() => onCLickContent("profile")}>
-        <Link href="/myaccount" shallow={true} passHref={true}>
-          <a>
-            User Profile
-            <span className="icon">
-              <i className="fa fa-user-plus"></i>
-            </span>
-          </a>
-        </Link>
-      </li>
+      {initialState?.AuthDetails?.CountryCode == "" ? (
+        <li
+          className="logouts_contain"
+          onClick={() => onCLickContent("profile")}
+        >
+          <Link href="/myaccount" shallow={true} passHref={true}>
+            <a>
+              User Profile
+              <span className="icon">
+                <i className="fa fa-user-plus"></i>
+              </span>
+            </a>
+          </Link>
+        </li>
+      ) : (
+        <></>
+      )}
       {game ? (
         <li
           className="sideBarGame"
