@@ -10,7 +10,7 @@ import isGoogle from "../services/google-dns-lookup";
 export default function Home(props) {
   return (
     <div>
-      {/* <Head>
+      <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <title>
@@ -30,7 +30,7 @@ export default function Home(props) {
         />
         <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
       </Head>
-      <HomePage {...props} /> */}
+      <HomePage {...props} />
     </div>
   );
 }

@@ -36,14 +36,15 @@ import loadable from "@loadable/component";
 import BuyCoinModal from "../modules/game/components/BuyCoinModal";
 import ProfileProvider from "../contexts/profile/ProfileContext";
 import { checkUserIdAndToken } from "../services/auth.service";
+import dynamic from "next/dynamic";
 import GlobalUserHeader from "../components/GlobalUserHeader";
 
-const DashboardLayout = loadable(() =>
+const DashboardLayout = dynamic(() =>
   import("../modules/dashboard/DashboardLayout")
 );
 import Skeleton from "../components/MainSkeleton";
-const Header = loadable(() => import("../components/App/Header"));
-const Footer = loadable(() => import("../components/Footer"));
+const Header = dynamic(() => import("../components/App/Header"));
+const Footer = dynamic(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();

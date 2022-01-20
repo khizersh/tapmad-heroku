@@ -10,7 +10,8 @@
     "staging": "export $(cat .env) && TAPENV=staging && next start -p 3000",
     "local": "export $(cat .env) && TAPENV=local && npm run dev",
     "heroku-postbuild": "npm run build",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@loadable/component": "^5.15.0",
