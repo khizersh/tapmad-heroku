@@ -90,8 +90,10 @@ const CombineLoginDesktop = ({
 
         <div>
           <p className="text-center text-grey font-14">
-            <img src={mobileIcon} className="pr-2" width={25} /> Enter your
-            Mobile Number to login
+            <img src={mobileIcon} className="pr-2" width={25} />{" "}
+            {AuthState && AuthState.LoginOperators.length
+              ? "Enter your Mobile Number to login"
+              : "Enter your mobile number and 4 digit passcode"}
           </p>
           <div className="d-flex justify-content-center">
             {AuthState?.CountryCode ? (
@@ -110,7 +112,11 @@ const CombineLoginDesktop = ({
                 // minLength="10"
                 className="form-control border-round mb-4  custom-input"
                 id="mobileNo"
-                placeholder="3xxxxxxxxxxx"
+                placeholder={
+                  AuthState && AuthState.LoginOperators.length
+                    ? "3xxxxxxxxxxx"
+                    : "Enter your mobile number"
+                }
                 value={mobileNo}
                 onChange={(e) => handleNumber(e)}
                 autoComplete={"off"}
@@ -125,7 +131,11 @@ const CombineLoginDesktop = ({
                 minLength="4"
                 value={pin}
                 className="form-control border-round custom-input"
-                placeholder="Enter your PIN"
+                placeholder={
+                  AuthState && AuthState.LoginOperators.length
+                    ? "Enter your PIN"
+                    : "Enter your 4 digit passcode"
+                }
                 onChange={handlePin}
                 // onKeyPress={handleKeypress}
               />
@@ -146,7 +156,10 @@ const CombineLoginDesktop = ({
               onClick={forgetClick}
               style={{ cursor: "pointer" }}
             >
-              | &nbsp;&nbsp;Forgot PIN?
+              | &nbsp;&nbsp;
+              {AuthState && AuthState.LoginOperators.length
+                ? "Forgot PIN?"
+                : "Reset Passcode"}
             </span>
           </div>
         </div>
