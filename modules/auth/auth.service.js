@@ -519,7 +519,7 @@ async function getGeoInfo() {
   let obj = {};
   const response = await get("https://api.tapmad.com/api/getLoginDetail");
   let data = response.data;
-  console.log(data, "USERINFO");
+
   if (data) {
     obj = {
       countryCode: data.LoginDetail.country,

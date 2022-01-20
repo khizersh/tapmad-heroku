@@ -53,7 +53,6 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
-    console.log(AuthState.PaymentPackages, "AUTH");
     dispatch({
       type: UPDATE_USER_DETAILS,
       data: { MobileNo: number, Operator: operator },
