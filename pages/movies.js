@@ -9,8 +9,7 @@ export default function MoviesPage(props) {
     <div>
       <Head>
         <title>
-          Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
-          Free
+          Watch Full HD Movies Online Free | Latest Movies - Tapmad TV
         </title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />

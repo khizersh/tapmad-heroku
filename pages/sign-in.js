@@ -3,6 +3,7 @@ import { MainContext } from "../contexts/MainContext";
 import { useRouter } from "next/router";
 import AuthViews from "../modules/auth/login/authViews";
 import requestIp from "request-ip";
+import Head from "next/head";
 
 export default function LoginPage(props) {
   const { initialState } = useContext(MainContext);
@@ -14,6 +15,12 @@ export default function LoginPage(props) {
   }, [initialState.isAuthenticated]);
   return (
     <div>
+      <Head>
+        <title>Sign in</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="https://wwww.tapmad.com/sign-in" />
+      </Head>
       <AuthViews {...props} />
     </div>
   );

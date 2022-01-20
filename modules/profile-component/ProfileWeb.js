@@ -93,11 +93,11 @@ const MyAccountWeb = ({
       selectedIcon: colorPackage,
       icon: blackPackage,
     },
-    {
-      title: "My Games",
-      selectedIcon: colorGaming,
-      icon: blackGaming,
-    },
+    // {
+    //   title: "My Games",
+    //   selectedIcon: colorGaming,
+    //   icon: blackGaming,
+    // },
   ];
   //Dynaimc Downgrade/Upgrade
   const setPackageStatus = () => {
@@ -123,7 +123,7 @@ const MyAccountWeb = ({
         {`
           dl {
             display: grid;
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 100px 1fr;
             font-size: 0.9em;
             margin: 0;
           }
@@ -137,7 +137,6 @@ const MyAccountWeb = ({
             margin: 0;
           }
           .profile-img {
-            width: 100%;
             height: auto;
           }
           .package-detail {
@@ -389,6 +388,8 @@ const MyAccountWeb = ({
                         : "none",
                   }}
                 >
+                  {/*
+                      My games to be commented out open after psl
                   <h4 className="pt-3 text-green">My Games</h4>
                   <div className="row pb-4 no-gutters">
                     <div className="col-3 p-1">
@@ -465,7 +466,7 @@ const MyAccountWeb = ({
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

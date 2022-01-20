@@ -44,7 +44,7 @@ const GlobalUserHeader = () => {
       }
       setUserData(SignUpState.UserDetails.ProfileName);
     }
-    console.log("userData", userData);
+
   }, [SignUpState.UserDetails.ProfileName]);
 
   return (
