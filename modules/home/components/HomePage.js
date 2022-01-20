@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import loadable from "@loadable/component";
 import { replaceCategoryToShows } from "../../../services/utils";
 
-const HomepageSlider = loadable(() => import("./HomepageSlider"));
+import HomepageSlider from "./HomepageSlider";
+// const HomepageSlider = loadable(() => import("./HomepageSlider"));
 const HomePageAd = loadable(() => import("./HomePageAd"));
 const HomepageFeatured = loadable(() => import("./FeaturedSlider"));
 const ScrollComponent = loadable(() =>
