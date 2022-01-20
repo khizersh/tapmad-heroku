@@ -225,7 +225,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                         name="radio"
                         checked={gender == "Male" ? true : false}
                       />
-                      <label className="radio-cstm">Male</label>
+                      <label className="radio-cstm font-16">Male</label>
                     </div>
                   </div>
                   <div
@@ -238,7 +238,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                         name="radio"
                         checked={gender == "Female" ? true : false}
                       />
-                      <label className="radio-cstm">Female</label>
+                      <label className="radio-cstm font-16">Female</label>
                     </div>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             <button
               onClick={submitHandeler}
               type="button"
-              class="btn btn-lg btn_submit rounded-pill px-5 m-auto"
+              class="btn btn-lg btn_submit rounded-pill px-5 m-auto font-16"
             >
               Save Profile
             </button>
