@@ -8,7 +8,12 @@ export default function SignUp(props) {
     <div>
       <Head>
         <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+        <title>Sign up</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="https://wwww.tapmad.com/sign-up" />
       </Head>
+
       <Register userHeader={true} {...props} />
     </div>
   );

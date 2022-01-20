@@ -9,8 +9,7 @@ export default function ShowsPage(props) {
     <div>
       <Head>
         <title>
-          Tapmad - Watch LIVE TV Channels Online | Watch Pakistani tv Channels
-          Free
+          Watch Dramas & TV Shows Online | Tapmad TV
         </title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
