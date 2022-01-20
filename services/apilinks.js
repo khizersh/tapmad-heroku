@@ -11,7 +11,7 @@ export const getAllPackages =
 export const getItemsByKeyword =
   BASEURLAPP + "api/searchInAllContent/V1/en/android/";
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
-export const getUserByUserId = STAGEURL + "api/getUserProfileDetail";
+export const getUserByUserId = BASEURLAPP + "api/getUserProfileDetail";
 export const getShowsSearch = BASEURLAPP + "api/getShowsSearch";
 export const getUserPaymentHistory = BASEURLAPP + "api/getUserPaymentHistory";
 // home page api
@@ -24,6 +24,7 @@ export const getWebTabBanners = BASEURLAPP + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURLAPP + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURLAPP + "api/sendOTP/V1/en/web";
+export const sendOTPWithOperator = BASEURLAPP + "api/sendOTPWithOperator/V1/en/android";
 export const verifyOtp = BASEURLAPP + "api/verifyOTP/V1/en/android";
 export const clearTokens = BASEURLAPP + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
@@ -129,7 +130,7 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 // PSL Chat Bids
 export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
 // export const getPSLTabsForWeb = BASEURLAPP + "api/getAllWebChatTabs/v1/en/web";
-export const getPSLTabsForWeb = STAGEURL + "api/getAllNewWebChatTabs/v1/en/web";
+export const getPSLTabsForWeb = BASEURLAPP + "api/getAllNewWebChatTabs/v1/en/web";
 export const submitMatchBids =
   BASEURLAPP + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
@@ -176,4 +177,4 @@ BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
 export const PaymentPackagesByUserId =
   BASEURLAPP + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
 
-export const isUserSubscribe = STAGEURL + "api/isUserSubscribe";
+export const isUserSubscribe = BASEURLAPP + "api/isUserSubscribe";

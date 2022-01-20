@@ -52,15 +52,14 @@ export async function getServerSideProps(context) {
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
   else movie = {};
-
+  
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
   else banner = {};
-
+  
   var featuredContent = await HomeService.getWebTabBannersData(ip);
   if (featuredContent != null) featured = await featuredContent.data;
   else featured = {};
-
   return {
     props: {
       movies: movie.Tabs[0],

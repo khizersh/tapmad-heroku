@@ -17,6 +17,7 @@ import {
   SignUpORSignInMobileOperatorTokenByPin,
   initialPaymentTransactionNew,
   clearTokens,
+  sendOTPWithOperator,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -143,13 +144,13 @@ async function verifyPinCode(pin) {
 }
 
 async function forgetPin(mobile, OperatorId) {
-  let body = {
+  let otpBody = {
     MobileNo: mobile,
-    OperatorId: OperatorId,
+    OperatorId: OperatorId || "",
   };
   let resp;
   try {
-    resp = await post(sendOTP, body);
+    resp = await post(sendOTPWithOperator, otpBody);
   } catch (error) {
     resp = null;
   }
