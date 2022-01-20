@@ -16,6 +16,7 @@ const CombineLoginMobile = ({
   forgetClick,
 }) => {
   const { SignUpState, dispatch } = useContext(SignUpContext);
+
   return (
     <div className="custom-bg">
       <form
@@ -36,7 +37,11 @@ const CombineLoginMobile = ({
             }
           `}
         </style>
-        <h3 className="select-network">Select Your Network</h3>
+        {AuthState && AuthState.LoginOperators.length ? (
+          <h3 className="select-network">Select Your Network</h3>
+        ) : (
+          <></>
+        )}
         <div className="d-flex justify-content-center mb-3">
           {AuthState && AuthState.LoginOperators.length
             ? AuthState.LoginOperators.map((m, i) => (
@@ -85,8 +90,10 @@ const CombineLoginMobile = ({
 
         <div>
           <p>
-            <img src={mobileIcon} className="pr-2" /> Enter your Mobile Number
-            to login
+            <img src={mobileIcon} className="pr-2" />
+            {AuthState && AuthState.LoginOperators.length
+              ? " Enter your Mobile Number to login"
+              : "Enter your mobile number and 4 digit passcode"}
           </p>
           <div className="input-group">
             <div>
@@ -103,7 +110,11 @@ const CombineLoginMobile = ({
               minLength="10"
               className="form-control border-round mb-4 ml-3 custom-input"
               id="mobileNo"
-              placeholder="3xxxxxxxxxxx"
+              placeholder={
+                AuthState && AuthState.LoginOperators.length
+                  ? "3xxxxxxxxxxx"
+                  : "Enter your mobile number"
+              }
               inputMode="numeric"
               value={mobileNo}
               onChange={(e) => handleNumber(e)}
@@ -118,7 +129,11 @@ const CombineLoginMobile = ({
               minLength="4"
               value={pin}
               className="form-control border-round custom-input"
-              placeholder="Enter your PIN"
+              placeholder={
+                AuthState && AuthState.LoginOperators.length
+                  ? "Enter your PIN"
+                  : "Enter your 4 digit passcode"
+              }
               onChange={handlePin}
             />
           </div>
@@ -137,7 +152,10 @@ const CombineLoginMobile = ({
             onClick={forgetClick}
             style={{ color: "#fff", cursor: "pointer" }}
           >
-            | &nbsp;&nbsp;Forgot PIN?
+            | &nbsp;&nbsp;{" "}
+            {AuthState && AuthState.LoginOperators.length
+              ? "Forgot PIN?"
+              : "Reset Passcode"}
           </span>
         </div>
         <div className="form-group">
