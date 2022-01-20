@@ -6,7 +6,7 @@ import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
-function SetYourNewPinSignUp({ login, ip , showUser }) {
+function SetYourNewPinSignUp({ login, ip, showUser }) {
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
@@ -60,7 +60,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
       Cookie.setCookies("content-token", userStatus.data.User.UserPassword);
     }
     const response = await AuthService.setNewPin(pin, username);
-
     if (response != null) {
       if (response.responseCode == 0) {
         swal({
@@ -101,6 +100,7 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
       setConfirmPin(mobileNum.trim());
     }
   }
+
   useEffect(() => {
     if (SignUpState.UserDetails.MobileNo) {
       let num = SignUpState.UserDetails.MobileNo;
@@ -117,7 +117,6 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
         .catch((e) => console.log(e));
     }
   }, [SignUpState.UserDetails.MobileNo]);
-
 
   return (
     <div className="desktop-size custom-bg-signup">
@@ -153,7 +152,7 @@ function SetYourNewPinSignUp({ login, ip , showUser }) {
         <input
           type="text"
           className="form-control border-curve"
-          placeholder={"Set PIN code"}
+          placeholder={"Set PIN Code"}
           minLength={4}
           maxLength={4}
           value={pin}

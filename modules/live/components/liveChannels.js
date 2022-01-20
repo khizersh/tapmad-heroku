@@ -6,10 +6,14 @@ import {
   calculateRowsToFetch,
   pushNewMoviesIntoList,
 } from "../../../services/utils";
-import HomepageSlider from "../../home/components/HomepageSlider";
+import dynamic from "next/dynamic";
+// import HomepageSlider from "../../home/components/HomepageSlider";
 import { get } from "../../../services/http-service";
 import { getChannelsWithPagination } from "../../../services/apilinks";
 import Link from "next/link";
+
+const HomepageSlider = dynamic(() => import("../../home/components/HomepageSlider"))
+
 
 export default function LiveChannels({ channel }) {
   var bannerSettings = basicSliderConfig(1, 1);
@@ -71,6 +75,7 @@ export default function LiveChannels({ channel }) {
         })}
       </Slider>
       <div className="container-fluid">
+        <p className="testing"></p>
         <HomepageSlider
           movies={localMovies.Sections.Movies}
           ads={false}

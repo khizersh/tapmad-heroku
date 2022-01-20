@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import Slider from "react-slick";
 import swal from "sweetalert";
 import {
@@ -148,7 +148,7 @@ const RightSidebar = ({ shop }) => {
       <div>
         {rewards && rewards.length
           ? rewards.map((m, i) => (
-              <>
+              <Fragment key={i}>
                 {" "}
                 <div className={`row mt-2`} key={i}>
                   <div className="col">
@@ -164,7 +164,7 @@ const RightSidebar = ({ shop }) => {
                       <Slider {...setting}>
                         {m.StoreProducts &&
                           m.StoreProducts.map((n, j) => (
-                            <div className="p-2 text-center">
+                            <div className="p-2 text-center" key={j}>
                               <img
                                 onClick={() => onClickVoucher(n)}
                                 src={n.RewardProductImage}
@@ -190,7 +190,7 @@ const RightSidebar = ({ shop }) => {
                     </div>
                   </div>
                 </div>
-              </>
+              </Fragment>
             ))
           : null}
       </div>

@@ -41,7 +41,7 @@ import GlobalUserHeader from "../components/GlobalUserHeader";
 const DashboardLayout = loadable(() =>
   import("../modules/dashboard/DashboardLayout")
 );
-const Skeleton = loadable(() => import("../components/MainSkeleton"));
+import Skeleton from "../components/MainSkeleton";
 const Header = loadable(() => import("../components/App/Header"));
 const Footer = loadable(() => import("../components/Footer"));
 
@@ -56,13 +56,15 @@ function MyApp({ Component, pageProps }) {
     })(window,document,'script','dataLayer','GTM-PJ4M57N');`);
   }, []);
 
-  useEffect(() => {
-    if (pageProps.protected) {
-      let check = checkUserIdAndToken();
-      if (!check.valid) {
-        router.push(check.url);
+  useEffect(async () => {
+    setTimeout(() => {
+      if (pageProps.protected) {
+        let check = checkUserIdAndToken();
+        if (!check.valid) {
+          router.push(check.url);
+        }
       }
-    }
+    }, 1500);
   }, [pageProps.protected]);
 
   return (
@@ -131,7 +133,7 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <MainProvider>
               <AuthProvider>
-                <AuthProviderNew>
+                <AuthProviderNew> 
                   <SignUpProvider>
                     <GameProvider>
                       <ProfileProvider>
@@ -146,26 +148,24 @@ function MyApp({ Component, pageProps }) {
             </MainProvider>
           )
         ) : (
-          <>
-            <MainProvider>
-              <AuthProvider>
-                <AuthProviderNew>
-                  <SignUpProvider>
-                    <CatchupProvider>
-                      <GameProvider>
-                        <Skeleton {...pageProps}>
-                          <BuyCoinModal />
-                          <Header />
-                          <Component {...pageProps} />
-                          <Footer />
-                        </Skeleton>
-                      </GameProvider>
-                    </CatchupProvider>
-                  </SignUpProvider>
-                </AuthProviderNew>
-              </AuthProvider>
-            </MainProvider>
-          </>
+          <MainProvider>
+            <AuthProvider>
+              <AuthProviderNew>
+                <SignUpProvider>
+                  <CatchupProvider>
+                    <GameProvider>
+                      <Skeleton {...pageProps}>
+                        <BuyCoinModal />
+                        <Header />
+                        <Component {...pageProps} />
+                        <Footer />
+                      </Skeleton>
+                    </GameProvider>
+                  </CatchupProvider>
+                </SignUpProvider>
+              </AuthProviderNew>
+            </AuthProvider>
+          </MainProvider>
         )}
       </>
     </>
@@ -174,7 +174,7 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 
-export const NoSideBarSkeleton = ({ children , layout }) => {
+export const NoSideBarSkeleton = ({ children, layout }) => {
   const { initialState, setLoader } = React.useContext(MainContext);
 
   Router.onRouteChangeStart = (url) => {

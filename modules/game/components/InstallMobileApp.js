@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const InstallMobileApp = ({ onClose }) => {
   const rates = [1, 2, 3, 4, 5];
-  const totalRates = 3;
+  const totalRates = 4;
 
   return (
     <div className="ratingBox">
@@ -85,7 +85,7 @@ const InstallMobileApp = ({ onClose }) => {
         />
         <div className="rbdtxt">
           <h2>Tapmad</h2>
-          <p>4 Millions+ Install</p>
+          <p>4 Million+ Installs</p>
           <div className="ratings">
             {rates.map((i) => (
               <i
@@ -99,8 +99,14 @@ const InstallMobileApp = ({ onClose }) => {
           </div>
         </div>
       </div>
-      <Link href="/">
-        <a className="btn btn-primary text-white">Install</a>
+      <Link href="http://onelink.to/4um89n" passHref={true}>
+        <a
+          className="btn btn-primary text-white"
+          target="_blank"
+          rel="nofollow"
+        >
+          Install
+        </a>
       </Link>
     </div>
   );

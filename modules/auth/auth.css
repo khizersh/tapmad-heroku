@@ -372,8 +372,9 @@
   font-size: 32px;
 }
 .per-month {
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
+  margin-right: 3px;
 }
 .monthly {
   font-size: 12px;

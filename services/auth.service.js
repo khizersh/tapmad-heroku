@@ -21,6 +21,7 @@ export function setLoginViews(response, obj) {
         if (response.data.User.IsPinSet) {
           setCookiesForLogin(response.data);
           LoginTag(obj, response.data);
+   
           Cookie.setCookies("user_mob", obj.MobileNo);
           return { code: 1, view: "home" };
         } else {

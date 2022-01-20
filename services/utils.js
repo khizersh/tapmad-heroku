@@ -8,12 +8,13 @@ function manipulateUrls(router) {
   let OriginalMovieId = movieId.substring(0, movieId.length - 1);
   let isFree = OriginalMovieId.slice(0, 1);
   let cleanVODId = OriginalMovieId.slice(1, OriginalMovieId.length);
-  return {
+  let obj = {
     isChannel: isChannel,
     OriginalMovieId: OriginalMovieId,
     isFree: isFree,
     CleanVideoId: cleanVODId,
   };
+  return obj;
 }
 
 function manipulateUrlsForCatgeory(router) {
@@ -58,6 +59,8 @@ function basicSliderConfig(slidesToShow, mobileView) {
     ],
   };
 }
+
+
 function verifyURL(url, sectionName, vodName) {
   if (sectionName) {
     var convertedSectionName = sectionName
@@ -121,9 +124,6 @@ function SEOFriendlySlugsIsCategoryFalse(event, isAppendFreeVideo = false) {
   return slug;
 }
 
-
-
-
 function viewMoreCleanUrls(sectionName, sectionId, name) {
   var pageId = "";
   if (name == "Live") {
@@ -174,7 +174,7 @@ function setUrlAccordingToVideoType(movie, type) {
         movie.VideoEntityId == 950 ||
         movie.VideoEntityId == 953
       ) {
-        slug = SEOFriendlySlugsIsCategoryFalse(movie , true);
+        slug = SEOFriendlySlugsIsCategoryFalse(movie, true);
       } else {
         slug = SEOFriendlySlugsForVideo(movie);
       }
@@ -248,6 +248,12 @@ function isAuthentictedUser() {
   } else {
     return false;
   }
+}
+function replaceCategoryToShows(url) {
+  if (url) {
+    return url.replace("category","shows")
+  }
+  return "";
 }
 
 function isAuthentictedServerSide(req) {
@@ -331,4 +337,5 @@ module.exports = {
   log,
   verifyURL,
   checkForBoolean,
+  replaceCategoryToShows
 };

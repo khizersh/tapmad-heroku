@@ -16,10 +16,14 @@ import {
   userFemaleProfileIcon,
   userIcon,
 } from "../../services/imagesLink";
-import Link from "next/link";
-import NavbarHOC from "../navbar/NavbarHOC";
 
-const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => {
+const MyAccountMobile = ({
+  profileData,
+  allData,
+  onClickBack,
+  upgardeBtn,
+  unSubscribe,
+}) => {
   const [show, setShow] = useState({
     games: false,
     package: false,
@@ -41,15 +45,29 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
     <div>
       <style jsx>
         {`
-        .user_img {
-          margin: 0 !important;
-        }
-        dl {
-          margin-bottom: 5px;
-        }
-        dl dd {
-          margin-bottom: 0;
-        }
+          .user_img {
+            margin: 0 !important;
+          }
+          dl {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+            line-height: 1.2;
+            gap: 0.5rem;
+          }
+          dl + dl {
+            margin-top: 5px;
+          }
+          dl dt {
+            font-weight: 400;
+          }
+          dl dt,
+          dl dd {
+            width: calc(50% - 0.5rem);
+          }
+          dl dd {
+            margin-bottom: 0;
+          }
         `}
       </style>
       {/* <NavbarHOC>
@@ -75,26 +93,32 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
       <div className="d-sm-none">
         <div className="row align-items-center">
           <div className="col-4">
-            <img
-              src={
-                allData && allData.ProfileData.UserProfileGender == "Male"
-                  ? editUserMale
-                  : userFemaleProfileIcon
-              }
-              className="border-50 img-fluid"
-              width="100"
-            />
+            {allData?.PackageProfleImage ? (
+              <img
+                src={allData?.PackageProfleImage}
+                className="border-50 img-fluid"
+                width="100"
+              />
+            ) : (
+              <></>
+            )}
           </div>
-          <div className="col-4">
-            <div>Name</div>
-            <div>Date of Birth</div>
-          </div>
-          <div className="flex-grow-1 pl-3">
-            <div>{profileData && profileData.FullName}</div>
-            <div>{profileData && profileData.BirthDate}</div>
-          </div>
+          {profileData ? (
+            <div className="flex-grow-1">
+              <dl>
+                <dt>Name</dt>
+                <dd>{profileData.FullName}</dd>
+              </dl>
+              <dl>
+                <dt>Date of Birth</dt>
+                <dd>{profileData.BirthDate}</dd>
+              </dl>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-        <div className="d-flex align-items-center mt-3 mb-2">
+        <div className="d-flex align-items-center mt-5 mb-2">
           <img
             src={infoIcon}
             alt="User"
@@ -105,7 +129,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
           <p className="h_style flex-grow-1 pl-3 mb-0">Personal Info:</p>
         </div>
         {profileData ? (
-          <>
+          <div className="ml-5">
             <dl>
               <dt>Email:</dt>
               <dd>{profileData.Email}</dd>
@@ -118,7 +142,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
               <dt>Gender :</dt>
               <dd>{profileData.Gender}</dd>
             </dl>
-          </>
+          </div>
         ) : (
           <></>
         )}
@@ -136,7 +160,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
         </div>
       </div> */}
 
-        <div className="d-flex align-items-center ju mt-3">
+        <div className="d-flex align-items-center ju mt-5">
           <img
             src={packageIcon}
             alt="Package"
@@ -190,6 +214,7 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
               <button
                 type="button"
                 className="btn btn-light rounded-pill p-1 w-100"
+                onClick={() => router.push("/billing-history")}
               >
                 Billing History
               </button>
@@ -199,11 +224,23 @@ const MyAccountMobile = ({ profileData, allData, onClickBack , upgardeBtn }) => 
                 type="button"
                 className="btn btn-gradient text-light rounded-pill p-1 w-100"
                 onClick={clickEditProfile}
-                // disabled={upgardeBtn}
+                disabled={upgardeBtn}
               >
                 Update Package
               </button>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 mt-3">
+            <a>
+              <span
+                className="btn view-more-btn w-100 font-14"
+                onClick={unSubscribe}
+              >
+                Unsubscribe
+              </span>
+            </a>
           </div>
         </div>
         <div className={` ${show.games ? "row mx-0 mt-2" : "d-none"}`}>

@@ -26,28 +26,27 @@ function HeaderBasic({ signout }) {
     setTimeout(() => {
       setHidePopup(false);
       Cookie.setCookies("hidePopup", false);
-    }, 1.8e6);
+    }, 1.8e9);
   };
 
   useEffect(async () => {
-    if (!Cookie.getCookies("hidePopup")) {
-      const country = await AuthService.getGeoInfo();
-      if (country) {
-        country.countryCode == "PK";
-        setCountry(country.countryCode);
-      }
-    } else {
+    const country = await AuthService.getGeoInfo();
+    console.log(initialState, "initial");
+    if (country) {
+      country.countryCode == "PK";
+      setCountry(country.countryCode);
+    }
+    if (Cookie.getCookies("hidePopup")) {
       setHidePopup(true);
       setTimeout(() => {
         setHidePopup(false);
         Cookie.setCookies("hidePopup", false);
-      }, 1.8e6);
+      }, 1.8e9);
     }
   }, []);
 
   return (
     <>
-      {}
       {SignUpState.isMobile && !hidePopup ? (
         <InstallMobileApp onClose={onClose} />
       ) : (
@@ -140,6 +139,7 @@ function HeaderBasic({ signout }) {
                   </a>
                 </Link>
               </li>
+              {/* {country && country == "PK" ? ( */}
               {initialState.isAuthenticated ? (
                 <li id="loginAva2" className="nav-item">
                   <a

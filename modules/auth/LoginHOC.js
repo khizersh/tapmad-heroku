@@ -12,7 +12,7 @@ import { SET_VIEW_TO_SHOW } from "../../contexts/auth/AuthReducers";
 
 export default function withLogin(Component, data) {
   return (props) => {
-    const { setLoader } = useContext(MainContext);
+    const { setLoader, checkUserAuthentication } = useContext(MainContext);
     const { SignUpState } = useContext(SignUpContext);
     const { AuthState, dispatch } = useContext(AuthContext);
     const router = useRouter();
@@ -33,7 +33,7 @@ export default function withLogin(Component, data) {
           UserPin: userPin,
         };
         if (AuthState.CountryCode == "+92") {
-          if (obj?.MobileNo.length != 10 && obj?.MobileNo.length != 11 ) {
+          if (obj?.MobileNo.length != 10 && obj?.MobileNo.length != 11) {
             setLoader(false);
             return swal({
               title: "Enter 10 digit number",
@@ -104,6 +104,7 @@ export default function withLogin(Component, data) {
         status = setLoginViews(response, obj);
         setLoader(false);
         if (status.code == 1) {
+          checkUserAuthentication();
           swal({
             timer: 2000,
             title: "Signed In Successfully",
@@ -141,12 +142,12 @@ export default function withLogin(Component, data) {
           }).then(() => {
             router.push("/sign-up?tab=1&packageId=2");
           });
-        }else if(status.code == 32){
+        } else if (status.code == 32) {
           swal({
             title: "No Such User Exist!",
             icon: "error",
             timer: 2500,
-          })
+          });
         }
         return status;
       } catch (err) {

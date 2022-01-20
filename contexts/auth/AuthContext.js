@@ -47,7 +47,7 @@ export default function AuthProviderNew({ children }) {
     } else {
       packages = await getAllPaymentPackages();
     }
-    if (packages.Response.responseCode != 0) {
+    if (packages.Response.responseCode == 1) {
       dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
       dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
       dispatch({ type: SET_LOGIN_OPERATORS, data: packages.LoginOperators });

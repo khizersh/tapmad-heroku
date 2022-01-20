@@ -16,7 +16,7 @@ const TabSlider = () => {
       <style jsx>
         {`.slick-slide {padding: 0; }`}
       </style>
-      {catchupState.tabs && catchupState.tabs.length && (
+      {catchupState.tabs && catchupState.tabs.length ? (
         <Slider {...settings}>
           {catchupState.tabs
             ? catchupState.tabs.map((m, i) => (
@@ -32,9 +32,9 @@ const TabSlider = () => {
                   <img src={m.TabPosterPath} width="100%" alt={m.TabName} />
                 </div>
               ))
-            : null}
+            : <></>}
         </Slider>
-      )}
+      ) : <></>}
     </div>
   );
 };

@@ -12,6 +12,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
   const [userId, setUserId] = useState(Cookie.getCookies("userId"));
   const [profile, setProfile] = useState(null);
   const [gender, setGender] = useState(null);
+  const [email, setEmail] = useState("");
   const [editProfile, setEditProfile] = useState({
     Name: "",
     DOB: "",
@@ -37,7 +38,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
         DOB: data.data.ProfileData.UserProfileDOB,
         Mobile: data.data.ProfileData.UserProfileMobile,
         Gender: data.data.ProfileData.UserProfileGender,
-        Email: "",
+        Email: data.data.ProfileData.UserEmail,
       });
       setGender(data.data.ProfileData.UserProfileGender);
     }
@@ -56,6 +57,19 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
       Email: editProfile.Email,
       Gender: gender,
     };
+
+    if (
+      !formData.FullName ||
+      !formData.UserMobileNumebr ||
+      !formData.BirthDate ||
+      !formData.Gender
+    ) {
+      return swal({
+        title: "Enter all fields!",
+        timer: 2000,
+        icon: "error",
+      });
+    }
     const data = await MyAccountService.updateUserProfileData(formData);
 
     if (data != null) {
@@ -188,6 +202,14 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                   .radio-col {
                     max-width: 80px;
                   }
+                  @media only screen and (max-width: 799px) {
+                    .radio-cstm:before {
+                      margin-bottom: 6px;z
+                    }
+                    .radio-cstm:after {
+                      top: 7px;
+                    }
+                  }
                 `}
               </style>
               <div>
@@ -224,18 +246,14 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
             </div>
           </div>
 
-          <div className="p-4 text-center">
-            {isMobile ? (
-              ""
-            ) : (
-              <button
-                onClick={submitHandeler}
-                type="button"
-                class="btn btn_submit rounded-pill px-5 m-auto"
-              >
-                Save Profile
-              </button>
-            )}
+          <div className={`mt-3 mb-4 text-center`}>
+            <button
+              onClick={submitHandeler}
+              type="button"
+              class="btn btn-lg btn_submit rounded-pill px-5 m-auto"
+            >
+              Save Profile
+            </button>
           </div>
         </div>
       </div>

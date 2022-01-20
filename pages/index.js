@@ -28,7 +28,7 @@ export default function Home(props) {
           name="keywords"
           content="Live tv channel, watch live tv, watch epl in Pakistan, live epl, premier league, english premier league pakistan,  watch pakistani tv channels free, indian movies, watch free indian movies, live sports, live cricket stream"
         />
-        {/* <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script> */}
+        <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
       </Head>
       <HomePage {...props} />
     </div>
@@ -50,9 +50,8 @@ export async function getServerSideProps(context) {
   }
   let movie, banner, featured;
   var movieList = await HomeService.getFeaturedHomePageData(ip);
-  if (movieList != null) {
-    movie = await movieList.data;
-  } else movie = {};
+  if (movieList != null) movie = await movieList.data;
+  else movie = {};
 
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
@@ -68,8 +67,8 @@ export async function getServerSideProps(context) {
       banner: banner,
       featured: featured,
       ip: ip,
-      env: process.env.TAPENV,
-      prodEnv: process.env.API_ENDPOINT,
+      env: process.env.TAPENV || "production",
+      prodEnv: process.env.API_ENDPOINT || "http://app.tapmad.com/api/",
     },
   };
 }

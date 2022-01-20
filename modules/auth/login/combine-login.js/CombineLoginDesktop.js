@@ -29,7 +29,11 @@ const CombineLoginDesktop = ({
           loginUser();
         }}
       >
-        <h3 className="select-network">Select your network</h3>
+        {AuthState && AuthState.LoginOperators.length ? (
+          <h3 className="select-network">Select your network</h3>
+        ) : (
+          ""
+        )}
         <div className="d-flex justify-content-center mb-3">
           {AuthState && AuthState.LoginOperators.length
             ? AuthState.LoginOperators.map((m, i) => (

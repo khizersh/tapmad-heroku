@@ -240,13 +240,23 @@ export default function CategoryDetail({
           </div>
         </div>
       ) : filteredList && filteredList.length > 0 ? (
-        <div className="row mt-3" style={{marginLeft: "5px", marginRight: "5px"}}>
+        <div
+          className="row mt-3"
+          style={{ marginLeft: "5px", marginRight: "5px" }}
+        >
           {filteredList.map((vid, i) => {
-            let type = "";
+            let type = null;
             if (!vid.IsVideoFree) {
-              type = vid.PackageName ? vid.PackageName : "";
+              type = vid.PackageName ?? null;
             }
-            return <Card key={i} video={vid} type={type} />;
+            return (
+              <Card
+                key={i}
+                video={vid}
+                type={type}
+              />
+            );
+            // return <Card key={i} video={vid} type={type} />;
           })}
         </div>
       ) : (

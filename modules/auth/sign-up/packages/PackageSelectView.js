@@ -14,7 +14,6 @@ export default function PackageSelectView({ onChange }) {
   const router = useRouter();
   const { subspack } = router.query;
 
-  
   useEffect(() => {
     if (AuthState.PaymentPackages) {
       renderSignUp(true);
@@ -30,7 +29,10 @@ export default function PackageSelectView({ onChange }) {
         dispatch({ type: SIGNUP_RENDER, data: true });
       });
     }
-  }, [SignUpState?.SelectedPackage?.PaymentTabId , AuthState.CurrentUserPackage]);
+  }, [
+    SignUpState?.SelectedPackage?.PaymentTabId,
+    AuthState.CurrentUserPackage,
+  ]);
 
   const onChangePackage = (MainPack) => {
     onChange(MainPack);

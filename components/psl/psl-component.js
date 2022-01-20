@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { Fragment, memo, useCallback, useEffect, useState } from "react";
 import { getPSLTabsService } from "./psl-service";
 import PSLChat from "./chat/PSLChat";
 import Tabs from "react-bootstrap/Tabs";
@@ -9,11 +9,16 @@ import { PlayerService } from "../../modules/single-movie/Player.service";
 import { SEOFriendlySlugsForVideo } from "../../services/utils";
 import Link from "next/link";
 import RelatedProductCard from "../../modules/movies/components/RelatedProductCard";
+import loadable from "@loadable/component";
+import Image from "next/image";
+// import ScoreBoard from "./scoreboard";
 
-export default memo(function PSLComponent({ channel }) {
+export default memo(function PSLComponent({ channel, movie }) {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
   const [selectedTab, setSelectedTab] = useState(null);
+
+  let ScoreBoard;
 
   const [relatedVideo, setRelatedVideos] = useState([]);
   async function getRelatedChannels() {
@@ -26,50 +31,58 @@ export default memo(function PSLComponent({ channel }) {
     }
   }
 
+  const { Event_key } = channel;
+
   useEffect(async () => {
     const tabs = await getPSLTabsService();
-    await getRelatedChannels();
     setTabs(tabs.Tabs);
+    await getRelatedChannels();
     setSelectedTab(1);
+    if (!channel.IsChat) {
+      setSelectedTab(3);
+    }
   }, []);
 
   useEffect(() => {
-    // const header = document.getElementById("tab-btn");
-    // const scrollCallBack = window.addEventListener("scroll", () => {
-    //     const player = document.getElementById('player-div1');
-    //     var playerHeight = 0;
-    //     if (player) {
-    //         playerHeight = player.getBoundingClientRect().height;
-    //     } else {
-    //         return;
-    //     }
-    //     const sticky = 100 + 0;
-    //     if (window.pageYOffset > sticky) {
-    //         if (window.screen.width < 639) {
-    //             header.classList.add("sticky-tab");
-    //             header.style.position = "fixed";
-    //             header.style.top = Number(playerHeight) + 58 + "px";
-    //             header.style.marginTop = "0px";
-    //         } else {
-    //             header.classList.remove("sticky-tab");
-    //         }
-    //     } else {
-    //         header.classList.remove("sticky-tab");
-    //         header.style.position = "unset";
-    //         header.style.top = "unset";
-    //     }
-    // });
-    // return () => {
-    //     window.removeEventListener("scroll", scrollCallBack);
-    // };
+    const header = document.getElementById("tab-btn");
+    const scrollCallBack = window.addEventListener("scroll", () => {
+      const player = document.getElementById("player-div1");
+      var playerHeight = 0;
+      if (player) {
+        playerHeight = player.getBoundingClientRect().height;
+      } else {
+        return;
+      }
+      const sticky = 100 + 0;
+      if (window.pageYOffset > sticky) {
+        if (window.screen.width < 639) {
+          header.classList.add("sticky-tab");
+          header.style.position = "fixed";
+          header.style.top = Number(playerHeight) + 58 + "px";
+          header.style.marginTop = "0px";
+        } else {
+          header.classList.remove("sticky-tab");
+        }
+      } else {
+        header.classList.remove("sticky-tab");
+        header.style.position = "unset";
+        header.style.top = "unset";
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", scrollCallBack);
+    };
   }, []);
   function handleSelect(e) {
     setSelectedTab(e);
   }
   const RenderViews = useCallback(function () {
+    //console.log("selectedTab", selectedTab);
     const [display, toggle] = useState(true);
     const toggleHandler = () => toggle(!display);
-    if (selectedTab == 1) {
+
+    // Chat Tab <start>
+    if (selectedTab == 1 && channel.IsChat) {
       return (
         <>
           <div className="d-flex justify-content-end text-primary my-2">
@@ -98,7 +111,10 @@ export default memo(function PSLComponent({ channel }) {
           )}
         </>
       );
-    } else if (selectedTab == tabs.length - 1) {
+    }
+    // Chat Tab <end>
+
+    /* else if (selectedTab == tabs.length - 1) {
       // return <MatchBids />;
       return (
         <>
@@ -112,7 +128,11 @@ export default memo(function PSLComponent({ channel }) {
           />
         </>
       );
-    } else if (selectedTab == 2) {
+    } */
+
+    // Related Videos <start>
+    else if (selectedTab == 3) {
+      console.log()
       return (
         <div
           className="text-left mt-3 related-video"
@@ -120,25 +140,52 @@ export default memo(function PSLComponent({ channel }) {
         >
           <h5>Related Videos</h5>
           <div>
-            {relatedVideo.length
-              ? relatedVideo.map((video, i) => {
-                  let slug = SEOFriendlySlugsForVideo(video);
-                  return (
-                    <>
-                      <Link href={slug} replace={true} shallow={false} key={i}>
-                        <a>
-                          <RelatedProductCard video={video} />
-                        </a>
-                      </Link>
-                    </>
-                  );
-                })
-              : null}
+            {relatedVideo.length ? (
+              relatedVideo.map((video, i) => {
+                let slug = SEOFriendlySlugsForVideo(video);
+                return (
+                  <Fragment key={i}>
+                    <Link href={slug} replace={true} shallow={false} key={i}>
+                      <a>
+                        <RelatedProductCard video={video} />
+                      </a>
+                    </Link>
+                  </Fragment>
+                );
+              })
+            ) : (
+              <p>No Related videos found!</p>
+            )}
           </div>
         </div>
       );
-    } else {
-      return <div></div>;
+    }
+    // Related Videos <end>
+
+    // Schedule tab <start>
+    else if (selectedTab == 2) {
+      return (
+        <Image
+          src="/schedule.png"
+          className="mt-4"
+          width="1150"
+          height="1438"
+        />
+      );
+    }
+    // Schedule tab <end>
+
+    // Scoreboard tab <start>
+    else if (selectedTab == 4 && Event_key) {
+      // else if (selectedTab == 4 && !Event_key) {
+      if (!ScoreBoard) {
+        ScoreBoard = loadable(() => import("./scoreboard"));
+      }
+      return <ScoreBoard eventKey={Event_key} />;
+    }
+    // Scoreboard tab <end>
+    else {
+      return <></>;
     }
   });
 
@@ -173,31 +220,44 @@ export default memo(function PSLComponent({ channel }) {
           >
             {tabs
               ? tabs.map((tab, index) => {
-                  return (
-                    <Tab
-                      key={index}
-                      eventKey={tab.ChatOrder}
-                      tabClassName={"tshop-tabs"}
-                      title={
-                        <div>
-                          <img
-                            src={tab.TabIconUnActive}
-                            width={25}
-                            alt={tab.TabIconUnActive}
-                          />
-                          <p
+                  if (tab.ChatOrder == 1 && !channel.IsChat) {
+                    return <></>;
+                  } else if (tab.ChatOrder == 2 && !channel.IsChat) {
+                    return <></>;
+                  } else if (tab.ChatOrder == 4 && !Event_key) {
+                    return <></>;
+                  } else
+                    return (
+                      <Tab
+                        key={index}
+                        eventKey={tab.ChatOrder}
+                        tabClassName={"tshop-tabs"}
+                        title={
+                          <div
                             className={`${
-                              selectedTab == tab.TabId
-                                ? styles.colorGreen
-                                : "text-white"
-                            } m-0`}
+                              tab.ChatOrder == 2 ? styles.margTop27 : ""
+                            }`}
                           >
-                            {tab.TabName}
-                          </p>
-                        </div>
-                      }
-                    ></Tab>
-                  );
+                            {tab.ChatOrder != 2 ? (
+                              <img
+                                src={tab.TabIconUnActive}
+                                width={25}
+                                alt={tab.TabIconUnActive}
+                              />
+                            ) : null}
+                            <p
+                              className={`${
+                                selectedTab == tab.ChatOrder
+                                  ? styles.colorGreen
+                                  : "text-white"
+                              } m-0`}
+                            >
+                              {tab.TabName}
+                            </p>
+                          </div>
+                        }
+                      />
+                    );
                 })
               : null}
           </Tabs>

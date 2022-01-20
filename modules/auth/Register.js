@@ -61,7 +61,7 @@ export default memo(function Register(props) {
       type: UPDATE_SUBSCRIBE_RESPONSE,
       data: { code: code, newUser: false },
     });
-  }, [code, number]);
+  }, [code, number, AuthState]);
 
   // select payment methods by query param
   useEffect(() => {

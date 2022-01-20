@@ -269,11 +269,6 @@ export default function Player({ movies }) {
 
   useEffect(() => {
     setIsMobile(window.screen.width < 639);
-    if (movies.Video.IsVideoFree == false) {
-      if (!isAuthentictedUser()) {
-        router.push("/sign-up?tab=1&packageId=2");
-      }
-    }
   }, []);
 
   return (
@@ -313,7 +308,7 @@ export default function Player({ movies }) {
                     {ads.topAdDesktop && (
                       <div className="desktop-ads d-none d-lg-block d-md-block">
                         <AdSlot
-                          sizes={[[970, 250]]}
+                          sizes={[[728, 90]]}
                           adUnit={ads.topAdDesktop}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
                         />
@@ -472,15 +467,16 @@ export default function Player({ movies }) {
                     ) : null}
                   </div>
                 </div>
-                {movie && movie.Video.IsChat ? (
-                  <div className="the-shop">
-                    {/* <PlayerShop />  */}
-                    <PSLComponent channel={movie.Video} />
-                    <br />
+                {movie?.Video ? <PSLComponent channel={movie.Video} /> : null}
+                {/* {movie && movie.Video.IsChat ? (
+                  <div className="the-shop"> */}
+                {/* <PlayerShop />  */}
+
+                {/* <br />
                   </div>
                 ) : (
                   <></>
-                )}
+                )} */}
 
                 {/* Banner bottom Ad */}
 
@@ -546,19 +542,18 @@ export default function Player({ movies }) {
                   ) : null}
 
                   {/* side 3rd ad */}
-                  {/* <div className="mt-3 d-sm-none d-md-block">
+                  <div className="mt-3 d-sm-none d-md-block">
                     <DFPSlotsProvider dfpNetworkId="28379801">
                       <div className="desktop-ads">
                         <AdSlot
-                          sizes={[[320, 50]]}
-                          adUnit={"MobileBannerFeatured"}
+                          sizes={[[300, 250]]}
+                          adUnit={"Tapmad_MREC_2_Desktop"}
                           onSlotIsViewable={(dfpEventData) => AdImpression()}
                         />
                       </div>
                     </DFPSlotsProvider>
-                  </div> */}
+                  </div>
                   {/* side 3rd ad end*/}
-
                   {ads.allow && isAutoPlay && ads.rightVideoAd ? (
                     ads.rightVideoAd.includes("http") ? (
                       <div style={{ marginTop: "65px" }}>
