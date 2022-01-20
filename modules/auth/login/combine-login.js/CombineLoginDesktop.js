@@ -96,11 +96,15 @@ const CombineLoginDesktop = ({
               : "Enter your mobile number and 4 digit passcode"}
           </p>
           <div className="d-flex justify-content-center">
-            <div className="mx-2">
-              <label className="border-round custom-input text-dark font-14 line-1 px-2">
-                {AuthState?.CountryCode}
-              </label>
-            </div>
+            {AuthState?.CountryCode ? (
+              <div className="mx-2">
+                <label className="border-round custom-input text-dark font-14 line-1 px-2">
+                  {AuthState?.CountryCode}
+                </label>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="mx-2 flex-grow-1 flex-shrink-1">
               <input
                 type="text"
