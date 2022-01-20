@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* <Head>
+      <Head>
         <meta charSet="utf-8" />
         <link
           rel="icon"
@@ -101,7 +101,7 @@ function MyApp({ Component, pageProps }) {
           <meta name="robots" content="noindex" />
         ) : null}
 
-       <link rel="canonical" href="https://www.tapmad.com" /> 
+        {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
         <link
           rel="stylesheet"
           type="text/css"
@@ -167,7 +167,7 @@ function MyApp({ Component, pageProps }) {
             </AuthProvider>
           </MainProvider>
         )}
-      </> */}
+      </>
     </>
   );
 }
