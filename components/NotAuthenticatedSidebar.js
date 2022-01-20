@@ -4,7 +4,6 @@ import { MainContext } from "../contexts/MainContext";
 import { AuthService } from "../modules/auth/auth.service";
 
 const NotAuthenticatedSidebar = ({ onClick, country }) => {
-  const { initialState } = useContext(MainContext);
   const [countryCode, setCountryCode] = useState(null);
   const [signIn, setSignIn] = useState(true);
 
@@ -47,24 +46,20 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
               </a>
             </Link>
           </li>
-          {signIn ? (
-            <li className="sign-out">
-              <Link href="/sign-in" shallow={true} passHref={true}>
-                <a>
-                  Login
-                  <span className="icon">
-                    <i className="fa fa-sign-in"></i>
-                  </span>
-                </a>
-              </Link>
-            </li>
-          ) : (
-            <></>
-          )}
         </>
       ) : (
         <></>
       )}
+      <li className="sign-out">
+        <Link href="/sign-in" shallow={true} passHref={true}>
+          <a>
+            Login
+            <span className="icon">
+              <i className="fa fa-sign-in"></i>
+            </span>
+          </a>
+        </Link>
+      </li>
     </>
   );
 };
