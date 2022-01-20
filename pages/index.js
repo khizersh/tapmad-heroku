@@ -49,7 +49,6 @@ export async function getServerSideProps(context) {
     console.log(err);
   }
   let movie, banner, featured;
-  console.log("date before : ", new Date());
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
   else movie = {};
@@ -61,7 +60,6 @@ export async function getServerSideProps(context) {
   var featuredContent = await HomeService.getWebTabBannersData(ip);
   if (featuredContent != null) featured = await featuredContent.data;
   else featured = {};
-  console.log("date after : ", new Date());
   return {
     props: {
       movies: movie.Tabs[0],
