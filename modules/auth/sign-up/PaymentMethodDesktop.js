@@ -78,11 +78,6 @@ export default function PaymentMethodDesktop() {
       <div className="row padding-signup-layout">
         <div className="col-5">
           <div className="pdtl-cols">
-            {/* {CurrentPackage?.DeviceStream.map((m,ind) => 
-         <div key={ind}>
-         <p><img src={m.Image}/></p>
-         <p className="text-grey">{m.Name}</p>
-           </div>)} */}
             {CurrentPackage?.DeviceStream?.length
               ? CurrentPackage.DeviceStream.map((m, ind) => (
                   <div key={ind} className="text-center">
