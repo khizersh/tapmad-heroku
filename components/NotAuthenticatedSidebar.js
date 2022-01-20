@@ -21,7 +21,6 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
       .catch((e) => console.log(e));
     return () => setSignIn(true);
   }, [country]);
-  console.log(signIn, "signIn");
   return (
     <>
       <li className="subs_contain" id="signUpMenu">
