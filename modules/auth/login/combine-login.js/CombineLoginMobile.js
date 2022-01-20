@@ -141,7 +141,7 @@ const CombineLoginMobile = ({
 
         <div className="text-right mb-3">
           <Link
-            href="/sign-up?tab=1&packageId=2"
+            href="/sign-up?tab=2&packageId=1"
             shallow={true}
             passHref={true}
           >
