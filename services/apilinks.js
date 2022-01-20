@@ -24,6 +24,7 @@ export const getWebTabBanners = BASEURLAPP + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURLAPP + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURLAPP + "api/sendOTP/V1/en/web";
+export const sendOTPWithOperator = BASEURLAPP + "api/sendOTPWithOperator/V1/en/android";
 export const verifyOtp = BASEURLAPP + "api/verifyOTP/V1/en/android";
 export const clearTokens = BASEURLAPP + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
