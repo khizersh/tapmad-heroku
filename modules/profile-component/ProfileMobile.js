@@ -36,7 +36,7 @@ const MyAccountMobile = ({
     }
   };
   const router = useRouter();
-
+  console.log(allData, "ALLS");
   const clickEditProfile = () => {
     router.push("/change-package");
   };
@@ -70,26 +70,7 @@ const MyAccountMobile = ({
           }
         `}
       </style>
-      {/* <NavbarHOC>
-        <div>
-          <button
-            className="btn"
-            style={{
-              fontSize: "13px",
-              color: "black",
-            }}
-            onClick={onClickBack}
-          >
-            <img src="/icons/login-back.svg" />
-          </button>
-        </div>
-        <div className="margin-y-auto mr-2">
-          <img src={creditcardIcon} width="20" alt="card" className="mr-2" />
-          <a onClick={clickEditProfile} className="text-white">
-            Billing Details
-          </a>
-        </div>
-      </NavbarHOC> */}
+
       <div className="d-sm-none">
         <div className="row align-items-center">
           <div className="col-4">
