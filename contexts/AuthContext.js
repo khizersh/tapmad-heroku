@@ -6,7 +6,7 @@ import { MainContext } from "./MainContext";
 export const Authcontext = React.createContext(null);
 
 export default function AuthProvider({ children }) {
-  const { initialState } = useContext(MainContext);
+  const { initialState, checkUserAuthentication } = useContext(MainContext);
 
   const [authState, setAuthState] = React.useState({
     loginOperators: [],
@@ -49,6 +49,7 @@ export default function AuthProvider({ children }) {
       //   initialState.currentPackage?.PaymentTabMethods[0]?.Packages[0]?.PackageName,
       setAuthState({ ...authState, ...AuthStateWithData });
     }
+    checkUserAuthentication();
   }, [initialState.currentPackage]);
   React.useEffect(() => {
     setAuthState({
