@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
@@ -21,6 +21,10 @@ const CombineLoginDesktop = ({
   //     loginUser();
   //   }
   // };
+  // const [region, setRegion] = useState();
+  // useEffect(() => {
+  //   const country = await AuthService.getGeoInfo();
+  // });
   return (
     <div className="custom-bg">
       <form

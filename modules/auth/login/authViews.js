@@ -14,7 +14,7 @@ import { SET_VIEW_TO_SHOW } from "../../../contexts/auth/AuthReducers";
 export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
   const router = useRouter();
-  const [bg, setBg] = useState(pslBackground);
+  const [bg, setBg] = useState("bg-dark-pk");
   const { setLoader } = useContext(MainContext);
   const { AuthState, dispatch } = useContext(AuthContext);
 
@@ -102,17 +102,14 @@ export default function AuthViews(props) {
   }, [AuthState.ViewToShow]);
 
   useEffect(() => {
-    // if (initialState.countryCode && initialState.countryCode == "PK") {
-      console.log("AuthState.CountryCode : ",AuthState.CountryCode);
     if (AuthState && AuthState.CountryCode?.length) {
       // country pk
-      setBg(signinBackground);
+      setBg("bg-dark-pk");
     } else {
       // country international
-        setBg(pslBackground);
-      
+      setBg("bg-dark-int");
     }
-  }, [AuthState]);
+  }, [AuthState.CountryCode]);
 
   const onclickBack = () => {
     if (AuthState.ViewToShow == "sign-in") {
@@ -124,8 +121,8 @@ export default function AuthViews(props) {
 
   return (
     <div>
-      <div className="bg_dark" style={{ backgroundImage: `url('${bg}')` }}>
-      {/* <div className="bg_dark"> */}
+      <div className={`bg_dark ${bg}`}>
+        {/* <div className="bg_dark"> */}
         <div className="container">
           <div className="row">
             <div className="col-sm-12 offset-md-2 col-md-8">
