@@ -27,7 +27,6 @@ const CombineLoginDesktop = ({
   // useEffect(() => {
   //   const country = await AuthService.getGeoInfo();
   // });
-  console.log(SignUpState?.userCountry?.CountryCode, "SignUpState");
 
   return (
     <div className="custom-bg">
@@ -115,7 +114,7 @@ const CombineLoginDesktop = ({
             )} */}
             <div className="mx-2">
               <label className="border-round custom-input text-dark font-14 line-1 px-2">
-                {SignUpState?.userCountry?.CountryCode || " "}
+                {"+" + SignUpState?.userCountry?.CountryCode || " "}
               </label>
             </div>
             <div className="mx-2 flex-grow-1 flex-shrink-1">
