@@ -29,9 +29,8 @@ export default function SignUpProvider({ children }) {
     signupRender: false,
   });
 
-
   useEffect(() => {
-    setLoader(true)
+    setLoader(true);
     if (AuthState?.PaymentPackages?.length > 0) {
       dispatch({ type: UPDATE_PACKAGE, data: AuthState.PaymentPackages[0] });
     }
@@ -46,7 +45,7 @@ export default function SignUpProvider({ children }) {
       dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
     }
     if (AuthState?.authContextLoaded) {
-      setLoader(false)
+      setLoader(false);
     }
   }, [AuthState]);
 

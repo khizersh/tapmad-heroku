@@ -79,6 +79,7 @@ function Login({ loginResponse }) {
   );
 
   const operators = useMemo(() => initialState?.AuthDetails?.LoginOperators);
+
   return (
     <div className="login_slct_oprtr login_slct_oprtr1 login_slct_oprtr_active">
       <img src={tapmadLogo} width="200" alt="Tapmad logo" />
@@ -124,7 +125,11 @@ function Login({ loginResponse }) {
           <span className="mt-2 mr-2 text-muted">
             | &nbsp;&nbsp;Not Registered?
           </span>
-          <Link href="/sign-up?tab=2&packageId=1" shallow={true} passHref={true}>
+          <Link
+            href="/sign-up?tab=2&packageId=1"
+            shallow={true}
+            passHref={true}
+          >
             <a className="text-light">Sign up</a>
           </Link>
         </>

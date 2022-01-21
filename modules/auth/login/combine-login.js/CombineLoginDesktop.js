@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
@@ -15,6 +15,8 @@ const CombineLoginDesktop = ({
   pin,
   forgetClick,
 }) => {
+  const { SignUpState } = useContext(SignUpContext);
+
   // const handleKeypress = (e) => {
   //   //it triggers by pressing the enter key
   //   if (e.key === "Enter") {
@@ -25,6 +27,8 @@ const CombineLoginDesktop = ({
   // useEffect(() => {
   //   const country = await AuthService.getGeoInfo();
   // });
+  console.log(SignUpState?.userCountry?.CountryCode, "SignUpState");
+
   return (
     <div className="custom-bg">
       <form
@@ -100,7 +104,7 @@ const CombineLoginDesktop = ({
               : "Enter your mobile number and 4 digit passcode"}
           </p>
           <div className="d-flex justify-content-center">
-            {AuthState?.CountryCode ? (
+            {/* {AuthState?.CountryCode ? (
               <div className="mx-2">
                 <label className="border-round custom-input text-dark font-14 line-1 px-2">
                   {AuthState?.CountryCode}
@@ -108,7 +112,12 @@ const CombineLoginDesktop = ({
               </div>
             ) : (
               <></>
-            )}
+            )} */}
+            <div className="mx-2">
+              <label className="border-round custom-input text-dark font-14 line-1 px-2">
+                {SignUpState?.userCountry?.CountryCode || " "}
+              </label>
+            </div>
             <div className="mx-2 flex-grow-1 flex-shrink-1">
               <input
                 type="text"
