@@ -21,7 +21,7 @@
 }
 .bg_dark {
   /* background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg"); */
-  background: var(--desktop);
+  /* background: var(--desktop); */
   background-size: cover;
   height: 100vh;
   background-blend-mode: multiply;
