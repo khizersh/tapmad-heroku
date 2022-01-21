@@ -14,11 +14,11 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <title>
-          Watch Live TV - Movies, Sports, Live EPL Online - Tapmad TV
+          Watch Live TV - Live PSL, Sports, EPL, Movies Online - Tapmad TV
         </title>
         <meta
           name="description"
-          content="Enjoy Live TV channels and watch Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football streaming and cricket update on Tapmad.com"
+          content="Enjoy Live TV channels and watch Live PSL Ad free HD, Live EPL streaming online in Pakistan exclusively on Tapmad TV. Latest sports, top movies, tv shows, live football on Tapmad.com"
         />
         <meta
           name="title"
@@ -26,7 +26,7 @@ export default function Home(props) {
         />
         <meta
           name="keywords"
-          content="Live tv channel, watch live tv, watch epl in Pakistan, live epl, premier league, english premier league pakistan,  watch pakistani tv channels free, indian movies, watch free indian movies, live sports, live cricket stream"
+          content="Live PSL, Live tv channel, watch live tv, watch epl in Pakistan, live epl, premier league, english premier league pakistan,  watch pakistani tv channels free, indian movies, watch free indian movies, live sports, live cricket stream"
         />
         <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
       </Head>

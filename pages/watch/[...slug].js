@@ -86,9 +86,13 @@ const WatchPage = (props) => {
           dangerMode: false,
         }).then((accepted, cancel) => {
           if (accepted) {
-            router.push(
-              `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
-            );
+            if (initialState?.countryCode?.length) {
+              router.push(
+                `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
+              );
+            } else {
+              router.push(`/psl7`);
+            }
           } else {
             router.push("/");
           }
