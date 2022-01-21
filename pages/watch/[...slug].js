@@ -35,7 +35,7 @@ const WatchPage = (props) => {
       if (initialState.countryCode == "") {
         router.push(`/psl7`);
       } else {
-        router.push(`/sign-up?tab=2&packageId=1`);
+        router.push(`/sign-up?tab=2&packageId=4`);
       }
     }
   }, [props.allowUser, url]);

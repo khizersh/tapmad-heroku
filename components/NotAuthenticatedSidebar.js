@@ -15,7 +15,7 @@ const NotAuthenticatedSidebar = ({ onClick }) => {
         <a
           href={
             SignUpState?.userCountry?.ShortName == "PK"
-              ? "/sign-up?tab=2&packageId=1"
+              ? "/sign-up?tab=2&packageId=4"
               : "/psl7"
           }
         >

@@ -159,7 +159,7 @@ const CombineLoginDesktop = ({
             <Link
               href={
                 AuthState && AuthState.LoginOperators.length
-                  ? "/sign-up?tab=2&packageId=1"
+                  ? "/sign-up?tab=2&packageId=4"
                   : "/psl7"
               }
               shallow={true}
