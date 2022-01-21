@@ -24,7 +24,6 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   const [CurrentMethod, setCurrentMethod] = React.useState(null);
   const [viewsToRender, setViewsToRender] = React.useState(false);
 
-
   function handleNumber(e) {
     const mobileNum = e.target.value;
     if (+mobileNum === +mobileNum) {
@@ -54,9 +53,9 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
 
   async function loginUser() {
     setLoader(true);
-    if(AuthState.CountryCode ==  '+92' && !CurrentMethod){
-        setLoader(false);
-        return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
+    if (AuthState.CountryCode == "+92" && !CurrentMethod) {
+      setLoader(false);
+      return swal({ title: "Select Operator!", timer: 2000, icon: "error" });
     }
     if (mobileNo.length > 6 && mobileNo.length < 20 && pin.length == 4) {
       setLoader(true);
@@ -85,14 +84,22 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       if (mobileNo?.trim().length == 10) {
         forgetPin(SignUpState);
       } else {
-       return swal({
+        return swal({
           title: "Please insert valid mobile number",
           icon: "error",
           timer: 3e3,
         });
       }
     } else {
-      forgetPin(SignUpState);
+      if (!mobileNo?.length) {
+        return swal({
+          title: "Please insert valid mobile number",
+          icon: "error",
+          timer: 3e3,
+        });
+      } else {
+        forgetPin(SignUpState);
+      }
     }
   };
 
