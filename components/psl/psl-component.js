@@ -77,7 +77,6 @@ export default memo(function PSLComponent({ channel, movie }) {
     setSelectedTab(e);
   }
   const RenderViews = useCallback(function () {
-    //console.log("selectedTab", selectedTab);
     const [display, toggle] = useState(true);
     const toggleHandler = () => toggle(!display);
 

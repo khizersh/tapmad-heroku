@@ -5,7 +5,7 @@ import { samsungTvLogo, tapmadLogoBgWhite } from "../services/imagesLink";
 const samsungtv = () => {
   const router = useRouter();
   const subscribeUser = () => {
-    router.push('/sign-up?tab=1&packageId=2')
+    router.push('/sign-up?tab=2&packageId=1')
 
   };
   const resetPin = () => {

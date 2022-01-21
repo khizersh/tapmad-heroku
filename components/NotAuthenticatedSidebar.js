@@ -24,7 +24,7 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
   return (
     <>
       <li className="subs_contain" id="signUpMenu">
-        <a href={countryCode == "PK" ? "/sign-up?tab=1&packageId=2" : "/psl7"}>
+        <a href={countryCode == "PK" ? "/sign-up?tab=2&packageId=1" : "/psl7"}>
           Subscribe
         </a>
         <span className="icon">
