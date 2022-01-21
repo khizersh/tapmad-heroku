@@ -7,23 +7,17 @@ import { loggingTags } from "../services/apilinks";
 import { actionsRequestContent } from "../services/http-service";
 
 const AuthenticatedSidebarBasic = ({ signout }) => {
-  const { initialState } = useContext(MainContext);
   const [game, setGame] = useState(false);
   const { SignUpState } = useContext(SignUpContext);
 
   const onCLickContent = (page) => {
-    let body = {
-      event: loggingTags.fetch,
-      pageName: page,
-    };
-    actionsRequestContent(body);
+    // let body = {
+    //   event: loggingTags.fetch,
+    //   pageName: page,
+    // };
+    // actionsRequestContent(body);
   };
 
-  useEffect(() => {
-    if (SignUpState?.userCountry?.ShortName) {
-      setGame(true);
-    }
-  }, [SignUpState?.userCountry]);
   return (
     <>
       {SignUpState?.userCountry?.ShortName != "PK" ? (

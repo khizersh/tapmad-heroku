@@ -9,7 +9,6 @@ const NotAuthenticatedSidebar = ({ onClick }) => {
   const [signIn, setSignIn] = useState(true);
   const { SignUpState } = useContext(SignUpContext);
 
-  console.log("SignUpState : ", SignUpState);
   return (
     <>
       <li className="subs_contain" id="signUpMenu">
