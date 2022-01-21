@@ -6,8 +6,13 @@ const STAGEURL = "https://stag-backend.tapmad.com/app/";
 
 export const EPLPaymentUrl =
   BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
+
 export const getAllPackages =
   BASEURLAPP + "api/getAllPaymentMethodsPackages/V1/en/web";
+
+export const getAllPackagesWithPtcl =
+  STAGEURL + "api/getPaymentMethodWithPtcl/V1/en/web";
+
 export const getItemsByKeyword =
   BASEURLAPP + "api/searchInAllContent/V1/en/android/";
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
@@ -24,7 +29,8 @@ export const getWebTabBanners = BASEURLAPP + "api/getWebTabBanners/V1/en/Web";
 export const getCardUser = BASEURLAPP + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURLAPP + "api/sendOTP/V1/en/web";
-export const sendOTPWithOperator = BASEURLAPP + "api/sendOTPWithOperator/V1/en/android";
+export const sendOTPWithOperator =
+  BASEURLAPP + "api/sendOTPWithOperator/V1/en/android";
 export const verifyOtp = BASEURLAPP + "api/verifyOTP/V1/en/android";
 export const clearTokens = BASEURLAPP + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
@@ -130,7 +136,8 @@ export const loggingRequest = loggingBaseURl + "/analytics";
 // PSL Chat Bids
 export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
 // export const getPSLTabsForWeb = BASEURLAPP + "api/getAllWebChatTabs/v1/en/web";
-export const getPSLTabsForWeb = BASEURLAPP + "api/getAllNewWebChatTabs/v1/en/web";
+export const getPSLTabsForWeb =
+  BASEURLAPP + "api/getAllNewWebChatTabs/v1/en/web";
 export const submitMatchBids =
   BASEURLAPP + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
@@ -157,7 +164,7 @@ export const getUserChallenges = BASEURLAPP + "api/getUserChallenges";
 // get all country
 export const getAllowRegions = BASEURLAPP + "api/getAllCountries/v1/en/web";
 
-export const viewMoreContent = (from, to, sectionId, pageId ) =>
+export const viewMoreContent = (from, to, sectionId, pageId) =>
   BASEURLAPP +
   `api/getExtraContentWithPagination/${from}/${to}/${sectionId}/${pageId}`;
 
@@ -173,7 +180,7 @@ export const loggingTags = {
 
 export const PaymentPackages =
   BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
-BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
+
 export const PaymentPackagesByUserId =
   BASEURLAPP + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
 

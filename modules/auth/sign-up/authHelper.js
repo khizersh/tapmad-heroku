@@ -10,8 +10,6 @@ export function handleRegisterPayload(SignUpState) {
   if (SignUpState.SelectedMethod.PaymentId == 2) {
     details = handleBody(SignUpState);
     delete details.cnic;
-
-    // delete details.ProductId;
   }
   if (SignUpState.SelectedMethod.PaymentId == 3) {
     details = handleBody(SignUpState);
@@ -20,10 +18,14 @@ export function handleRegisterPayload(SignUpState) {
   if (SignUpState.SelectedMethod.PaymentId == 4) {
     details = handleBody(SignUpState);
   }
+  if (SignUpState.SelectedMethod.PaymentId == 5) {
+    details = handleBody(SignUpState);
+  }
   return details;
 }
 
 export function handleBody(SignUpState) {
+  console.log("hanlde body : ",SignUpState);
   return {
     Version: "V1",
     Language: "en",
@@ -34,6 +36,7 @@ export function handleBody(SignUpState) {
     cnic: SignUpState.UserDetails.Cnic?.trim(),
     Email: SignUpState.UserDetails.Email,
     FullName: SignUpState.UserDetails.FullName,
+    PtclNo : SignUpState.UserDetails.Ptcl
   };
 }
 

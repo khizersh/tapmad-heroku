@@ -46,8 +46,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   async function submitCardDetails(event) {
     var details = handleBody(SignUpState);
     if (creditCardType) {
-     details = { ...details, Token: event.token , bin : event.bin};
-     await checkouPayment(details);
+      details = { ...details, Token: event.token, bin: event.bin };
+      await checkouPayment(details);
     } else {
       delete details.cnic;
       const response = await AuthService.creditCardOrder(details);
@@ -56,8 +56,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
     setLoader(false);
   }
 
- async function checkouPayment( details) {
-   const response = await AuthService.creditCardOrderForCheckout(details);
+  async function checkouPayment(details) {
+    const response = await AuthService.creditCardOrderForCheckout(details);
     if (response.data.responseCode == 1) {
       SignUpTag(details, response.data);
       swal({
@@ -191,6 +191,17 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               return swal({
                 timer: 3000,
                 text: "Please enter cnic",
+                icon: "info",
+                buttons: false,
+              });
+            }
+          }
+          if (SignUpState.SelectedMethod?.PaymentId == 5) {
+            if (!details.PtclNo || details.PtclNo.length !== 11) {
+              setLoader(false);
+              return swal({
+                timer: 3000,
+                text: "Please enter PTCL number",
                 icon: "info",
                 buttons: false,
               });
