@@ -27,7 +27,6 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
       setGame(true);
     }
   }, [initialState.AuthDetails, country]);
-  console.log(initialState, "INI");
   return (
     <>
       {initialState?.countryCode == "" ? (

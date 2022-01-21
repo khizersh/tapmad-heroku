@@ -23,7 +23,6 @@ const InternationalMobile = ({ setGlobalMobileNo }) => {
     } else {
       post(isUserSubscribe, { MobileNo: mobileNo })
         .then((res) => {
-          console.log("res", res.data.Response.responseCode);
           if (res.data.Response.responseCode) {
             swal({
               timer: 3000,

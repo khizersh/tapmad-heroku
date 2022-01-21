@@ -50,7 +50,6 @@ const MyAccountTrial = ({ signout }) => {
       }
       if (data != null) {
         if (data.responseCode == 1) {
-          console.log(data.data, "PROFILE");
           setAllData(data.data);
           setProfileData({
             ...profileData,

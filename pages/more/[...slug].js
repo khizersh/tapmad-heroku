@@ -7,7 +7,6 @@ import requestIp from "request-ip";
 import { IsLiveChannel } from "../../services/constants";
 
 export default function ViewMore(props) {
-  console.log("props in more : ", props);
   return (
     <div className="row mx-auto">
       {props.data.Sections == null ? (
@@ -31,7 +30,6 @@ export async function getServerSideProps(context) {
     ip = "39.44.217.70";
   }
   let url = viewMoreContent(0, 5, slug[1], slug[2]);
-  console.log("url : ", url, ip);
   var response = await get(url, ip);
   return {
     props: {

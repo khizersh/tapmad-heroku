@@ -36,7 +36,6 @@ const MyAccountMobile = ({
     }
   };
   const router = useRouter();
-  console.log(allData, "ALLS");
   const clickEditProfile = () => {
     router.push("/change-package");
   };

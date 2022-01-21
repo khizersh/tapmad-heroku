@@ -131,7 +131,7 @@ export default memo(function PSLComponent({ channel, movie }) {
 
     // Related Videos <start>
     else if (selectedTab == 3) {
-      console.log()
+
       return (
         <div
           className="text-left mt-3 related-video"
