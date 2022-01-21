@@ -27,10 +27,12 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
       setGame(true);
     }
   }, [initialState.AuthDetails, country]);
-
+  console.log(initialState, "INI");
   return (
     <>
-      {initialState?.AuthDetails?.CountryCode == "" ? (
+      {initialState?.countryCode == "" ? (
+        <></>
+      ) : (
         <li
           className="logouts_contain"
           onClick={() => onCLickContent("profile")}
@@ -44,8 +46,6 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
             </a>
           </Link>
         </li>
-      ) : (
-        <></>
       )}
       {game ? (
         <li
