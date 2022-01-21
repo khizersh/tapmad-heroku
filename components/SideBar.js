@@ -50,21 +50,6 @@ export default function SideBar() {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
     }
-
-    AuthService.getAllowRegionsList()
-      .then((res) => {
-        const currentCountry = res.currentCountry;
-        console.log("res count: ", res);
-        const result =
-          res.data.find(
-            (countries) => countries.ShortName === currentCountry
-          ) || "XX";
-        dispatch({ type: USER_COUNTRY, data: result });
-        if (res.responseCode == 1) {
-          setCountries(res.data);
-        }
-      })
-      .catch((e) => console.log(e));
   }, [initialState.isAuthenticated]);
   return (
     <div
@@ -143,15 +128,9 @@ export default function SideBar() {
             </li>
             {/* conditional menu */}
             {isAuth ? (
-              <AuthenticatedSidebar
-                onClick={onCLickContent}
-                country={countries}
-              />
+              <AuthenticatedSidebar onClick={onCLickContent} />
             ) : (
-              <NotAuthenticatedSidebar
-                onClick={onCLickContent}
-                country={countries}
-              />
+              <NotAuthenticatedSidebar onClick={onCLickContent} />
             )}
 
             <li onClick={() => onCLickContent("search")}>

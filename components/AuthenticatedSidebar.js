@@ -1,13 +1,15 @@
 import Link from "next/link";
 import React, { useEffect, useState, useContext } from "react";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
 import { MainContext } from "../contexts/MainContext";
 import withSignout from "../modules/auth/signout/SignoutHOC";
 import { loggingTags } from "../services/apilinks";
 import { actionsRequestContent } from "../services/http-service";
 
-const AuthenticatedSidebarBasic = ({ signout, country }) => {
+const AuthenticatedSidebarBasic = ({ signout }) => {
   const { initialState } = useContext(MainContext);
   const [game, setGame] = useState(false);
+  const { SignUpState } = useContext(SignUpContext);
 
   const onCLickContent = (page) => {
     let body = {
@@ -18,18 +20,13 @@ const AuthenticatedSidebarBasic = ({ signout, country }) => {
   };
 
   useEffect(() => {
-    // if (initialState.countryCode && initialState.countryCode == "PK") {
-    if (
-      initialState &&
-      initialState.AuthDetails &&
-      initialState.AuthDetails.CountryCode == "PK"
-    ) {
+    if (SignUpState?.userCountry?.ShortName) {
       setGame(true);
     }
-  }, [initialState.AuthDetails, country]);
+  }, [SignUpState?.userCountry]);
   return (
     <>
-      {initialState?.countryCode == "" ? (
+      {SignUpState?.userCountry?.ShortName != "PK" ? (
         <></>
       ) : (
         <li
