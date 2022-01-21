@@ -49,10 +49,10 @@ const JazzCashForm = ({ mobileCode, onChangeNumber, onChangeCnic, logo }) => {
           />
           <input
             type="text"
-            maxLength="6"
-            minLength="6"
+            maxLength="13"
+            minLength="13"
             className="form-control border-curve flex-grow-1 w-100"
-            placeholder="Last 6 digits of your CNIC"
+            placeholder="Enter 13 digits of your CNIC"
             inputMode="numeric"
             value={cnic}
             onChange={(e) => onChangeNic(e)}
