@@ -103,14 +103,13 @@ export default function AuthViews(props) {
 
   useEffect(() => {
     // if (initialState.countryCode && initialState.countryCode == "PK") {
-      console.log("AuthState.CountryCode : ",AuthState.CountryCode);
+    console.log("AuthState.CountryCode : ", AuthState.CountryCode);
     if (AuthState && AuthState.CountryCode?.length) {
       // country pk
-      setBg(signinBackground);
+      setBg("bg-dark-pk");
     } else {
       // country international
-        setBg(pslBackground);
-      
+      setBg("bg-dark-int");
     }
   }, [AuthState]);
 
@@ -124,8 +123,8 @@ export default function AuthViews(props) {
 
   return (
     <div>
-      <div className="bg_dark" style={{ backgroundImage: `url('${bg}')` }}>
-      {/* <div className="bg_dark"> */}
+      <div className={`bg_dark ${bg}`}>
+        {/* <div className="bg_dark"> */}
         <div className="container">
           <div className="row">
             <div className="col-sm-12 offset-md-2 col-md-8">

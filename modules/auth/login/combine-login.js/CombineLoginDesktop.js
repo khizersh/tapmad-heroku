@@ -21,10 +21,10 @@ const CombineLoginDesktop = ({
   //     loginUser();
   //   }
   // };
-  const [region, setRegion] = useState();
-  useEffect(() => {
-    const country = await AuthService.getGeoInfo();
-  });
+  // const [region, setRegion] = useState();
+  // useEffect(() => {
+  //   const country = await AuthService.getGeoInfo();
+  // });
   return (
     <div className="custom-bg">
       <form
@@ -149,7 +149,7 @@ const CombineLoginDesktop = ({
         <div className="d-flex justify-content-end">
           <div className="mb-3 mx-5 pr-3">
             <Link
-              href="/sign-up?tab=2&packageId=1"
+              href="/sign-up?tab=1&packageId=2"
               shallow={true}
               passHref={true}
             >

@@ -1,6 +1,8 @@
 :root {
   --mobile: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630911889signinmobile.jpg");
   --desktop: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1630488889signin.jpg");
+  --mobile-int: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1642748040front-background-mobile.png");
+  --desktop-int: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1642747467psl7.png");
   --basecolor: #87c242 ;
 }
 .text-base {
@@ -19,9 +21,15 @@
   position: relative;
   bottom: -60px !important;
 }
+.bg-dark-pk {
+  background-image: var(--desktop)
+}
+
+
+.bg-dark-int {
+  background-image: var(--desktop-int)
+}
 .bg_dark {
-  /* background: url("https://d34080pnh6e62j.cloudfront.net/images/VideoOnDemandThumb/1623231058SigninPage-min.jpg"); */
-  /* background: var(--desktop); */
   background-size: cover;
   height: 100vh;
   background-blend-mode: multiply;
@@ -330,9 +338,15 @@
     overflow-y: hidden;
   }
   .bg_dark {
-    background: var(--mobile) !important;
     background-size: cover;
+    background-position: center;
     background-blend-mode: multiply;
+  }
+  .bg-dark-pk {
+    background-image: var(--mobile) !important;
+  }
+  .bg-dark-int {
+    background-image: var(--mobile-int) !important;
   }
 }
 
@@ -349,9 +363,15 @@
     text-transform: uppercase;
   }
   .bg_dark {
-    background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
+    background-position: center;
+  }
+  .bg-dark-pk {
+    background-image: var(--mobile);
+  }
+  .bg-dark-int {
+    background-image: var(--mobile-int);
   }
 }
 
@@ -363,9 +383,15 @@
     overflow-y: hidden;
   }
   .bg_dark {
-    background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
+    background-position: center;
+  }
+  .bg-dark-pk {
+    background-image: var(--mobile);
+  }
+  .bg-dark-int {
+    background-image: var(--mobile-int);
   }
 }
 .f-40 {
@@ -405,9 +431,15 @@
     overflow-y: hidden;
   }
   .bg_dark {
-    background: var(--mobile);
     background-size: cover;
     background-blend-mode: multiply;
+    background-position: center;
+  }
+  .bg-dark-pk {
+    background-image: var(--mobile);
+  }
+  .bg-dark-int {
+    background-image: var(--mobile-int);
   }
   .f-40 {
     font-size: 30px;
