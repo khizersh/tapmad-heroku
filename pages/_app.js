@@ -102,7 +102,7 @@ function MyApp({ Component, pageProps }) {
           <meta name="robots" content="noindex" />
         ) : null}
 
-        {/* <link rel="canonical" href="https://www.tapmad.com" /> */}
+        <link rel="canonical" href="https://www.tapmad.com" />
         <link
           rel="stylesheet"
           type="text/css"

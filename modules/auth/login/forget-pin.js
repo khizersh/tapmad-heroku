@@ -4,7 +4,7 @@ import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { SET_VIEW_TO_SHOW } from "../../../contexts/auth/AuthReducers";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { MainContext } from "../../../contexts/MainContext";
-import { sendOTP } from "../../../services/apilinks";
+import { sendOTP, sendOTPWithOperator } from "../../../services/apilinks";
 import { post } from "../../../services/http-service";
 import { AuthService } from "../auth.service";
 
@@ -20,7 +20,7 @@ export default function ForgetPin({ updateView }) {
       MobileNo: SignUpState.UserDetails.MobileNo,
       OperatorId: SignUpState.UserDetails.Operator,
     };
-    var resp = await post(sendOTP, otpBody);
+    var resp = await post(sendOTPWithOperator, otpBody);
   }, []);
 
   React.useEffect(() => {
@@ -82,7 +82,10 @@ export default function ForgetPin({ updateView }) {
               onChange={(e) => setUserOtp(e.target.value)}
             />
           </div>
-          <div className={`form-group text-center`} style={{ marginBottom: "10px" }}>
+          <div
+            className={`form-group text-center`}
+            style={{ marginBottom: "10px" }}
+          >
             <button
               type="button"
               className={`btn bg-green pymnt_pge_sbscrbe_btn font-16 ${

@@ -141,7 +141,11 @@ const CombineLoginMobile = ({
 
         <div className="text-right mb-3">
           <Link
-            href="/sign-up?tab=1&packageId=2"
+            href={
+              AuthState && AuthState.LoginOperators.length
+                ? "/sign-up?tab=1&packageId=2"
+                : "/psl7"
+            }
             shallow={true}
             passHref={true}
           >

@@ -82,7 +82,7 @@ function PaymentInfo(props) {
   function handleCnic(e) {
     const cnic = e.target.value;
     if (+cnic === +cnic) {
-      if (cnic?.trim().length == 6) {
+      if (cnic?.trim().length == 13) {
         updateUserData({ Cnic: cnic });
       }
     }
