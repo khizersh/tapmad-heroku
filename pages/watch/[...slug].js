@@ -25,14 +25,15 @@ import withSignout from "../../modules/auth/signout/SignoutHOC";
 
 const WatchPage = (props) => {
   const router = useRouter();
-  const { setisAuthenticateFalse, initialState } = useContext(MainContext);
+  const { setisAuthenticateFalse } = useContext(MainContext);
+  const { SignUpState } = useContext(SignUpContext);
   const [url, setUrl] = useState(null);
   var renderPlayer = shouldRenderPlayer(props);
 
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
-      if (initialState.countryCode == "") {
+      if (SignUpState?.userCountry?.ShortName != "PK") {
         router.push(`/psl7`);
       } else {
         router.push(`/sign-up?tab=2&packageId=4`);
@@ -86,7 +87,7 @@ const WatchPage = (props) => {
           dangerMode: false,
         }).then((accepted, cancel) => {
           if (accepted) {
-            if (initialState?.countryCode?.length) {
+            if (SignUpState?.userCountry?.ShortName != "PK") {
               router.push(
                 `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
               );
