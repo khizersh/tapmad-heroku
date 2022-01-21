@@ -140,7 +140,7 @@ export default function withLogin(Component, data) {
             timer: 2500,
             icon: "warning",
           }).then(() => {
-            router.push("/sign-up?tab=1&packageId=2");
+            router.push("/sign-up?tab=2&packageId=1");
           });
         } else if (status.code == 32) {
           swal({

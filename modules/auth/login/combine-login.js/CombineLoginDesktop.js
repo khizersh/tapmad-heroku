@@ -149,11 +149,7 @@ const CombineLoginDesktop = ({
         <div className="d-flex justify-content-end">
           <div className="mb-3 mx-5 pr-3">
             <Link
-              href={
-                AuthState && AuthState.LoginOperators.length
-                  ? "/sign-up?tab=1&packageId=2"
-                  : "/psl7"
-              }
+              href="/sign-up?tab=2&packageId=1"
               shallow={true}
               passHref={true}
             >
