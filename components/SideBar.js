@@ -1,13 +1,15 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { MainContext } from "../contexts/MainContext";
-import { getAllowRegions, loggingTags } from "../services/apilinks";
+import { loggingTags } from "../services/apilinks";
 import AuthenticatedSidebar from "./AuthenticatedSidebar";
 import NotAuthenticatedSidebar from "./NotAuthenticatedSidebar";
 import { actionsRequestContent } from "../services/http-service";
 import { tapmadLogo } from "../services/imagesLink";
 import { AuthService } from "../modules/auth/auth.service";
 import { useRouter } from "next/router";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
+import { USER_COUNTRY } from "../contexts/auth/SignUpReducer";
 
 export default function SideBar() {
   const [isAuth, setIsAuth] = useState(false);
@@ -19,11 +21,11 @@ export default function SideBar() {
     onMouseLeave(); // Remove hover class
   }
   const { initialState, setSearch } = React.useContext(MainContext);
+  const { dispatch } = React.useContext(SignUpContext);
 
   const onClickSearch = () => {
     setSearch(!initialState.isSearch);
   };
-
   const onCLickContent = (page) => {
     let body = {
       event: loggingTags.fetch,
@@ -51,6 +53,13 @@ export default function SideBar() {
 
     AuthService.getAllowRegionsList()
       .then((res) => {
+        const currentCountry = res.currentCountry;
+        console.log("res count: ", res);
+        const result =
+          res.data.find(
+            (countries) => countries.ShortName === currentCountry
+          ) || "XX";
+        dispatch({ type: USER_COUNTRY, data: result });
         if (res.responseCode == 1) {
           setCountries(res.data);
         }

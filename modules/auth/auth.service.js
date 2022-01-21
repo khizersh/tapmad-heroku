@@ -422,10 +422,10 @@ async function signInOrSignUpMobileOperatorByPin(body, ip) {
 }
 async function getAllowRegionsList(body) {
   const data = await get(getAllowRegions);
-
   if (data != null) {
     if (data.data) {
       return {
+        currentCountry: data.data.UserCountry,
         data: data.data.Countries,
         responseCode: data.data.Response.responseCode,
         message: data.data.Response.message,

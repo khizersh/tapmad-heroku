@@ -39,7 +39,6 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       });
     }
   }
-
   function handlePin(e) {
     const userPin = e.target.value;
     if (+userPin === +userPin) {

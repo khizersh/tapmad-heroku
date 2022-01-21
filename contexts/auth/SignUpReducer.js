@@ -7,6 +7,7 @@ export const UPDATE_ISMOBILE = "UPDATE_ISMOBILE";
 export const SIGNUP_RENDER = "SIGNUP_RENDER";
 export const LOGIN_OPERATOR = "LOGIN_OPERATOR";
 export const LOGGED_IN = "LOGGED_IN";
+export const USER_COUNTRY = "USER_COUNTRY";
 export const ALREADY_SIGNEDUP_NUM = "ALREADY_SIGNEDUP_NUM";
 
 export function SignUpReducer(state, action) {
@@ -23,6 +24,8 @@ export function SignUpReducer(state, action) {
       return { ...state, SelectedMethod: action.data };
     case LOGIN_OPERATOR:
       return { ...state, LoginOperator: action.data };
+    case USER_COUNTRY:
+      return { ...state, userCountry: action.data };
     case LOGGED_IN:
       return { ...state, LoggedIn: action.data };
     case UPDATE_SUBSCRIBE_RESPONSE:
