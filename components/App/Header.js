@@ -94,7 +94,9 @@ function HeaderBasic({ signout }) {
                   <i className="fa fa-search hov-green"></i>
                 </a>
               </li>
-              {country && country == "PK" ? (
+
+              {/* Game commented for psl
+               {country && country == "PK" ? (
                 <li className="nav-item">
                   <Link
                     href="/game"
@@ -119,7 +121,7 @@ function HeaderBasic({ signout }) {
                 </li>
               ) : (
                 ""
-              )}
+              )} */}
 
               <li className="nav-item">
                 <Link href="/news" passHref={true} shallow={true}>
