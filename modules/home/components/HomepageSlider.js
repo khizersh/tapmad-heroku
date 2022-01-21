@@ -95,7 +95,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
             <Fragment key={row}>
               <div className="col-12 p-lg-1 p-0" key={row}>
                 <div className="d-flex justify-content-between align-items-center">
-                  <h5 className="ml-2 my-3">{movieSection.SectionName}</h5>
+                  <h2 className="ml-2 my-3 h5">{movieSection.SectionName}</h2>
                   {name != "Homepage" ? (
                     movieSection.Videos.length > 8 ? (
                       <Link href={viewMoreSlug} passHref={true} shallow={true}>

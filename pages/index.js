@@ -30,6 +30,7 @@ export default function Home(props) {
         />
         <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
       </Head>
+      <h1 className="d-none">Live TV, Sports, Movies, VOD Streaming Pakistan</h1>
       <HomePage {...props} />
     </div>
   );
