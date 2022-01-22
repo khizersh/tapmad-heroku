@@ -35,6 +35,7 @@ export default function PaymentMethodDesktop() {
     }
   }, [SignUpState.SelectedMethod]);
 
+
   const imageArray = [
     { Image: qualityIcon, Name: "1080 P" },
     { Image: deviceIcon, Name: "Devices All" },
@@ -155,18 +156,10 @@ export default function PaymentMethodDesktop() {
                               }`}
                               style={{ fontStyle: "normal" }}
                             >
-                              {/* {m.PaymentMethodName} */}
                             </i>
                           </div>
                         </label>
-                        {/* <span>
-                    {CurrentMethod.PaymentOperatorId ==
-                      m.PaymentOperatorId ? (
-                      <i className="fa fa-check-circle clr-green"></i>
-                    ) : (
-                      ""
-                    )}
-                  </span> */}
+                      
                       </div>
                     </div>
                   </div>
