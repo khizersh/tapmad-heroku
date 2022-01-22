@@ -141,22 +141,25 @@ function HeaderBasic({ signout }) {
                 </Link>
               </li>
               {/* {country && country == "PK" ? ( */}
-              {initialState.isAuthenticated ? (
-                <li id="loginAva2" className="nav-item">
-                  <a
-                    onClick={signout}
-                    className="pull-right d-xs-none btn nav-link hov-green"
-                  >
-                    Signout
-                  </a>
-                </li>
-              ) : (
-                <li id="loginAva1" className="nav-item">
-                  <Link href="/sign-in">
-                    <a className="pull-right d-xs-none hov-green">Sign in</a>
-                  </Link>
-                </li>
-              )}
+
+              {SignUpState?.userCountry?.ShortName ? (
+                initialState.isAuthenticated ? (
+                  <li id="loginAva2" className="nav-item">
+                    <a
+                      onClick={signout}
+                      className="pull-right d-xs-none btn nav-link hov-green"
+                    >
+                      Signout
+                    </a>
+                  </li>
+                ) : (
+                  <li id="loginAva1" className="nav-item">
+                    <Link href="/sign-in">
+                      <a className="pull-right d-xs-none hov-green">Sign in</a>
+                    </Link>
+                  </li>
+                )
+              ) : null}
             </ul>
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function SideBar() {
     onMouseLeave(); // Remove hover class
   }
   const { initialState, setSearch } = React.useContext(MainContext);
-  const { dispatch } = React.useContext(SignUpContext);
+  const { SignUpState } = React.useContext(SignUpContext);
 
   const onClickSearch = () => {
     setSearch(!initialState.isSearch);
@@ -127,10 +127,14 @@ export default function SideBar() {
               </Link>
             </li>
             {/* conditional menu */}
-            {isAuth ? (
-              <AuthenticatedSidebar onClick={onCLickContent} />
+            {SignUpState?.userCountry?.ShortName ? (
+              isAuth ? (
+                <AuthenticatedSidebar onClick={onCLickContent} />
+              ) : (
+                <NotAuthenticatedSidebar onClick={onCLickContent} />
+              )
             ) : (
-              <NotAuthenticatedSidebar onClick={onCLickContent} />
+              null
             )}
 
             <li onClick={() => onCLickContent("search")}>

@@ -15,7 +15,9 @@ export const getAllPackagesWithPtcl =
 
 export const getItemsByKeyword =
   BASEURLAPP + "api/searchInAllContent/V1/en/android/";
+
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
+
 export const getUserByUserId = BASEURLAPP + "api/getUserProfileDetail";
 export const getShowsSearch = BASEURLAPP + "api/getShowsSearch";
 export const getUserPaymentHistory = BASEURLAPP + "api/getUserPaymentHistory";

@@ -39,6 +39,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       });
     }
   }
+  
   function handlePin(e) {
     const userPin = e.target.value;
     if (+userPin === +userPin) {
@@ -119,6 +120,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
       });
     }
   }, [AuthState]);
+
   useEffect(() => {
     if (number) {
       dispatch({

@@ -25,7 +25,6 @@ const AuthenticatedSidebarBasic = ({ signout }) => {
       ) : (
         <li
           className="logouts_contain"
-          onClick={() => onCLickContent("profile")}
         >
           <Link href="/myaccount" shallow={true} passHref={true}>
             <a>
@@ -41,7 +40,6 @@ const AuthenticatedSidebarBasic = ({ signout }) => {
         <li
           className="sideBarGame"
           style={{ display: "list-item" }}
-          onClick={() => onCLickContent("game")}
         >
           <Link href="/game" shallow={true} passHref={true}>
             <a>

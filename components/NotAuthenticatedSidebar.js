@@ -25,7 +25,7 @@ const NotAuthenticatedSidebar = ({ onClick }) => {
           <i className="fa fa-user-plus"></i>
         </span>
       </li>
-      {!signIn ? (
+      {SignUpState?.userCountry?.ShortName ? (
         <li className="sign-out">
           <Link href="/sign-in" shallow={true} passHref={true}>
             <a>
