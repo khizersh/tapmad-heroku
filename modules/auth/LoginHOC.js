@@ -140,6 +140,7 @@ export default function withLogin(Component, data) {
           }).then(async (accepted, cancel) => {
             if (accepted) {
               // setting user id and call change package api and send to change package
+              setLoader(true)
               dispatch({ type: CALL_CHANGE_PACKAGE_API, data: true });
               SignUpDispatch({ type: LOGGED_IN, data: true });
               Cookie.setCookies("user_mob", obj.MobileNo);
@@ -147,7 +148,9 @@ export default function withLogin(Component, data) {
               const userData = await AuthService.GetCardUser(body);
               let userId = userData?.data?.User?.UserId || "";
               Cookie.setCookies("userId", userId);
-              router.push("/change-package");
+              setTimeout(() => {
+                router.push("/change-package");
+              }, 1000);
             } else {
               // send to otp
               dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
