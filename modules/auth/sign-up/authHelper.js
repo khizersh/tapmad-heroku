@@ -25,7 +25,6 @@ export function handleRegisterPayload(SignUpState) {
 }
 
 export function handleBody(SignUpState) {
-  console.log("hanlde body : ",SignUpState);
   return {
     Version: "V1",
     Language: "en",
