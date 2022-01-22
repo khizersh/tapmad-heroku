@@ -64,8 +64,11 @@ const Search = (props) => {
 
   const onClickSearch = async () => {
     setLoader(true);
-    if (keyword) {
-      const data = await SearchService.getItemByKeyrwords(keyword, props.ip);
+    if (inputSearch) {
+      const data = await SearchService.getItemByKeyrwords(
+        inputSearch,
+        props.ip
+      );
       if (data != null) {
         if (data.responseCode == 1) {
           setSearchedItem(data.data.Videos);
@@ -74,7 +77,7 @@ const Search = (props) => {
           });
           try {
             SearchTag({
-              term: keyword,
+              term: inputSearch,
               data: data.data.Videos.length,
               result: allVideosName.toString(),
             });
@@ -83,12 +86,23 @@ const Search = (props) => {
           }
         } else {
           setSearchedItem([]);
-          SearchTag({ term: keyword, data: 0, result: "" });
+          SearchTag({ term: inputSearch, data: 0, result: "" });
         }
       }
     }
     setLoader(false);
   };
+
+  useEffect(() => {
+    document
+      .getElementById("searchbox")
+      .addEventListener("keydown", function (event) {
+        if (event.code === "Enter" || event.code === "NumpadEnter") {
+          event.preventDefault();
+          onClickSearch();
+        }
+      });
+  }, []);
 
   return (
     <div className="container-fluid pos-absolute">
@@ -104,9 +118,10 @@ const Search = (props) => {
           </div>
           <input
             type="text"
-            onChange={onChange}
+            // onChange={onChange}
             className="form-control float-right ml-2 width search-input"
             placeholder="Start Searching..."
+            id="searchbox"
             ref={inputSearch}
           />
         </div>

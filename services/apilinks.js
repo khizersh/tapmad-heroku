@@ -180,8 +180,8 @@ export const loggingTags = {
 
 // New login design apis
 
-export const PaymentPackages =
-  BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
+export const PaymentPackages = getAllPackagesWithPtcl;
+  // BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
 
 export const PaymentPackagesByUserId =
   BASEURLAPP + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
