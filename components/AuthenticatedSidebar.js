@@ -20,7 +20,8 @@ const AuthenticatedSidebarBasic = ({ signout }) => {
 
   return (
     <>
-      {SignUpState?.userCountry?.ShortName != "PK" ? (
+      {false ? (
+      // {SignUpState?.userCountry?.ShortName != "PK" ? (
         <></>
       ) : (
         <li

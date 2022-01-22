@@ -10,6 +10,7 @@ import { pslBackground, signinBackground } from "../../../services/imagesLink";
 import { MainContext } from "../../../contexts/MainContext";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { SET_VIEW_TO_SHOW } from "../../../contexts/auth/AuthReducers";
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 
 export default function AuthViews(props) {
   const [viewToShow, setViewToShow] = useState("login");
@@ -17,6 +18,7 @@ export default function AuthViews(props) {
   const [bg, setBg] = useState("bg-dark-pk");
   const { setLoader } = useContext(MainContext);
   const { AuthState, dispatch } = useContext(AuthContext);
+
 
   function processResponse(response) {
     let viewToRender = AuthService.validateUser(response);
@@ -39,8 +41,7 @@ export default function AuthViews(props) {
 
   async function sendToForgetPin(state) {
     setLoader(true);
-    const country = await AuthService.getGeoInfo();
-    if (country.countryCode != "PK") {
+    if (state?.userCountry?.ShortName !== "PK") {
       AuthService.forgetPin(
         state.UserDetails.MobileNo,
         state.UserDetails.Operator
@@ -64,7 +65,6 @@ export default function AuthViews(props) {
         .catch((e) => setLoader(false));
     } else {
       setLoader(false);
-      // setViewToShow("forget-pin");
       dispatch({ type: SET_VIEW_TO_SHOW, data: "forget-pin" });
     }
   }

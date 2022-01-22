@@ -87,7 +87,7 @@ const WatchPage = (props) => {
           dangerMode: false,
         }).then((accepted, cancel) => {
           if (accepted) {
-            if (SignUpState?.userCountry?.ShortName != "PK") {
+            if (SignUpState?.userCountry?.ShortName === "PK") {
               router.push(
                 `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
               );

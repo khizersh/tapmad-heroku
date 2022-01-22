@@ -37,8 +37,10 @@ export default function AuthProviderNew({ children }) {
     const pathname = window?.location?.pathname;
     if (
       (AuthState.UpdatePackage && userId) ||
-      pathname.includes("change-package")
+      pathname.includes("change-package") ||
+      (AuthState.callChangePackageApi && userId)
     ) {
+      console.log("");
       packages = await getAllPaymentPackagesByUserId(userId);
       dispatch({
         type: CURRENT_USER_PACKAGE,
@@ -47,7 +49,7 @@ export default function AuthProviderNew({ children }) {
     } else {
       packages = await getAllPaymentPackages();
     }
-    console.log("packages : ",packages);
+    console.log("packages : ", packages);
     if (packages.Response.responseCode == 1) {
       dispatch({ type: SET_ALL_PACKAGES, data: packages.PaymentPackages });
       dispatch({ type: SET_COUNTRY_CODE, data: packages.MobileCode });
