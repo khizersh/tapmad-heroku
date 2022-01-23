@@ -64,9 +64,9 @@ const Search = (props) => {
 
   const onClickSearch = async () => {
     setLoader(true);
-    if (inputSearch) {
+    if (keyword) {
       const data = await SearchService.getItemByKeyrwords(
-        inputSearch,
+        keyword,
         props.ip
       );
       if (data != null) {
@@ -77,7 +77,7 @@ const Search = (props) => {
           });
           try {
             SearchTag({
-              term: inputSearch,
+              term: keyword,
               data: data.data.Videos.length,
               result: allVideosName.toString(),
             });
@@ -86,7 +86,7 @@ const Search = (props) => {
           }
         } else {
           setSearchedItem([]);
-          SearchTag({ term: inputSearch, data: 0, result: "" });
+          SearchTag({ term: keyword, data: 0, result: "" });
         }
       }
     }
@@ -118,11 +118,11 @@ const Search = (props) => {
           </div>
           <input
             type="text"
-            // onChange={onChange}
+            onChange={onChange}
             className="form-control float-right ml-2 width search-input"
             placeholder="Start Searching..."
             id="searchbox"
-            ref={inputSearch}
+            // ref={inputSearch}
           />
         </div>
       </div>
@@ -141,7 +141,7 @@ const Search = (props) => {
           })
         ) : isSearched ? (
           <div className="m-auto">
-            <h3>No Data Found</h3>
+            <h3>Searching...</h3>
           </div>
         ) : null}
       </div>
