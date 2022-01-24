@@ -4,6 +4,7 @@ const BASEPAYMENTURL = "https://payments.tapmad.com/";
 const BASEURLDEVELOPMENT = "https://developer.tapmad.com/dev/app/";
 const STAGEURL = "https://stag-backend.tapmad.com/app/";
 
+//Tentatively not used to be removed
 export const EPLPaymentUrl =
   BASEURLAPP + "api/getAllPaymentMethods/V1/en/android";
 
@@ -14,7 +15,7 @@ export const getAllPackagesWithPtcl =
   STAGEURL + "api/getPaymentMethodWithPtcl/V1/en/web";
 
 export const getItemsByKeyword =
-  BASEURLAPP + "api/searchInAllContent/V1/en/android/";
+  BASEURLAPP + "api/searchInAllContent/V1/en/web/";
 
 // export const getUserByUserId = BASEURL + "api/CheckUserByUserIdNew";
 
@@ -32,8 +33,8 @@ export const getCardUser = BASEURLAPP + "api/getCardUser";
 export const getEPLCardUser = BASEURLAPP + "api/getEplCardUser";
 export const sendOTP = BASEURLAPP + "api/sendOTP/V1/en/web";
 export const sendOTPWithOperator =
-  BASEURLAPP + "api/sendOTPWithOperator/V1/en/android";
-export const verifyOtp = BASEURLAPP + "api/verifyOTP/V1/en/android";
+  BASEURLAPP + "api/sendOTPWithOperator/V1/en/web";
+export const verifyOtp = BASEURLAPP + "api/verifyOTP/V1/en/web";
 export const clearTokens = BASEURLAPP + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
@@ -47,9 +48,9 @@ export const SignUpORSignInMobileOperatorTokenByPin =
   BASEURLAPP + "api/SignUpORSignInMobileOperatorTokenByPin";
 export const Logout = BASEURLAPP + "api/logout";
 
-export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/android";
+export const getAllNews = BASEURLAPP + "api/getAllTnnNews/v1/en/web";
 export const getNewsDetailBId =
-  BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/android/";
+  BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/web/";
 
 export const getShowsWithPagination =
   BASEURLAPP + "api/getAllShowsWithPagination/0/5/0/16";
@@ -136,14 +137,14 @@ export const actionRequestSignUp = "http://staging.simpaisa.com:1234/signup";
 export const loggingRequest = loggingBaseURl + "/analytics";
 
 // PSL Chat Bids
-export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/android";
+export const getPSLTabs = BASEURLAPP + "api/getAllTabs/v1/en/web";
 // export const getPSLTabsForWeb = BASEURLAPP + "api/getAllWebChatTabs/v1/en/web";
 export const getPSLTabsForWeb =
   BASEURLAPP + "api/getAllNewWebChatTabs/v1/en/web";
 export const submitMatchBids =
   BASEURLAPP + "api/updateNewUserEventQuestionAnswers";
 export const getUserRooms = (userId, channelId) =>
-  BASEURLAPP + `api/getAllChatRoomList/v1/en/android/${userId}/${channelId}`;
+  BASEURLAPP + `api/getAllChatRoomList/v1/en/web/${userId}/${channelId}`;
 export const createRoom = BASEURLAPP + "api/createNewChatRoom";
 export const joinRoom = BASEURLAPP + "api/joinChatRoom";
 
@@ -181,7 +182,7 @@ export const loggingTags = {
 // New login design apis
 
 export const PaymentPackages =
-  BASEURLAPP + "api/getPackagePaymentMethods/V1/en/android";
+  BASEURLAPP + "api/getPackagePaymentMethods/V1/en/web";
 
 export const PaymentPackagesByUserId =
   BASEURLAPP + "api/getPackagePaymentMethodsByUserId/V1/en/android/";
