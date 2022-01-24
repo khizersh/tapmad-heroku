@@ -65,7 +65,10 @@ const Search = (props) => {
   const onClickSearch = async () => {
     setLoader(true);
     if (keyword) {
-      const data = await SearchService.getItemByKeyrwords(keyword, props.ip);
+      const data = await SearchService.getItemByKeyrwords(
+        keyword,
+        props.ip
+      );
       if (data != null) {
         if (data.responseCode == 1) {
           setSearchedItem(data.data.Videos);
@@ -90,6 +93,17 @@ const Search = (props) => {
     setLoader(false);
   };
 
+  useEffect(() => {
+    document
+      .getElementById("searchbox")
+      .addEventListener("keydown", function (event) {
+        if (event.code === "Enter" || event.code === "NumpadEnter") {
+          event.preventDefault();
+          onClickSearch();
+        }
+      });
+  }, []);
+
   return (
     <div className="container-fluid pos-absolute">
       <div className="row no-wrap mb-2 search-header">
@@ -107,7 +121,8 @@ const Search = (props) => {
             onChange={onChange}
             className="form-control float-right ml-2 width search-input"
             placeholder="Start Searching..."
-            ref={inputSearch}
+            id="searchbox"
+            // ref={inputSearch}
           />
         </div>
       </div>
@@ -126,7 +141,7 @@ const Search = (props) => {
           })
         ) : isSearched ? (
           <div className="m-auto">
-            <h3>No Data Found</h3>
+            <h3>Searching...</h3>
           </div>
         ) : null}
       </div>

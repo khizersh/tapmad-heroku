@@ -64,7 +64,7 @@ export default function CatchupPlayer({ video, videoList }) {
     setIsMobile(window.screen.width < 639);
     if (video.IsVideoFree == false) {
       if (!isAuthentictedUser()) {
-        router.push("/sign-up?tab=2&packageId=1");
+        router.push("/sign-up?tab=2&packageId=4");
       }
     }
   }, []);

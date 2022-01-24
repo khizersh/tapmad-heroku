@@ -15,7 +15,7 @@ const CombineLoginMobile = ({
   pin,
   forgetClick,
 }) => {
-  const { SignUpState, dispatch } = useContext(SignUpContext);
+  const { SignUpState } = useContext(SignUpContext);
 
   return (
     <div className="custom-bg">
@@ -101,7 +101,7 @@ const CombineLoginMobile = ({
                 className="form-control border-round custom-input"
                 style={{ fontSize: "14px" }}
               >
-                {AuthState?.CountryCode}
+                {"+" + SignUpState?.userCountry?.CountryCode || " "}
               </label>
             </div>
             <input
@@ -143,7 +143,7 @@ const CombineLoginMobile = ({
           <Link
             href={
               AuthState && AuthState.LoginOperators.length
-                ? "/sign-up?tab=2&packageId=1"
+                ? "/sign-up?tab=2&packageId=4"
                 : "/psl7"
             }
             shallow={true}

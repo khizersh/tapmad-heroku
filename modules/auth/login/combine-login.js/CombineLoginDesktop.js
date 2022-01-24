@@ -114,7 +114,7 @@ const CombineLoginDesktop = ({
             )} */}
             <div className="mx-2">
               <label className="border-round custom-input text-dark font-14 line-1 px-2">
-                {SignUpState?.userCountry?.CountryCode || " "}
+                {"+" + SignUpState?.userCountry?.CountryCode || " "}
               </label>
             </div>
             <div className="mx-2 flex-grow-1 flex-shrink-1">
@@ -159,7 +159,7 @@ const CombineLoginDesktop = ({
             <Link
               href={
                 AuthState && AuthState.LoginOperators.length
-                  ? "/sign-up?tab=2&packageId=1"
+                  ? "/sign-up?tab=2&packageId=4"
                   : "/psl7"
               }
               shallow={true}

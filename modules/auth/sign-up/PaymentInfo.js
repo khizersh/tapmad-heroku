@@ -14,6 +14,7 @@ import JazzCashForm from "./payment-info-components/JazzCashForm";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { UPDATE_USER_DETAILS } from "../../../contexts/auth/SignUpReducer";
+import PtclForm from "./payment-info-components/PtclForm";
 
 function PaymentInfo(props) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
@@ -38,7 +39,7 @@ function PaymentInfo(props) {
           />
         </>
       );
-    } else if (PaymentId == 2 || PaymentId == 5) {
+    } else if (PaymentId == 2) {
       return (
         <>
           <CreditCardForm
@@ -49,6 +50,18 @@ function PaymentInfo(props) {
             onChangeNumber={handleNumber}
             onChangeEmail={handleEmail}
             creditCardType={AuthState.CreditCardType}
+          />
+        </>
+      );
+    } else if (PaymentId == 5) {
+      return (
+        <>
+          {/* for ptcl , setting jazzcash for testing */}
+          <PtclForm
+            mobileCode={AuthState.CountryCode}
+            onChangeNumber={handleNumber}
+            onChangeCnic={handleCnic}
+            hanldePtclNumber={hanldePtclNumber}
           />
         </>
       );
@@ -84,6 +97,15 @@ function PaymentInfo(props) {
     if (+cnic === +cnic) {
       if (cnic?.trim().length == 13) {
         updateUserData({ Cnic: cnic });
+      }
+    }
+  }
+
+  function hanldePtclNumber(e) {
+    const ptcl = e.target.value;
+    if (+ptcl === +ptcl) {
+      if (ptcl?.trim().length == 11) {
+        updateUserData({ Ptcl: ptcl });
       }
     }
   }

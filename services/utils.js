@@ -60,7 +60,6 @@ function basicSliderConfig(slidesToShow, mobileView) {
   };
 }
 
-
 function verifyURL(url, sectionName, vodName) {
   if (sectionName) {
     var convertedSectionName = sectionName
@@ -173,7 +172,7 @@ function setUrlAccordingToVideoType(movie, type) {
         movie.VideoEntityId == 579 ||
         movie.VideoEntityId == 950 ||
         movie.VideoEntityId == 953 ||
-        movie.VideoEntityId == 946 
+        movie.VideoEntityId == 946
       ) {
         slug = SEOFriendlySlugsIsCategoryFalse(movie, true);
       } else {
@@ -235,7 +234,8 @@ function setUrlToCookies(key, url) {
     url != "/sign-in" &&
     url != "/myaccount" &&
     url != "/subscribe-to-epl?subspack=epl" &&
-    url != "/change-package"
+    url != "/change-package" &&
+    url != "/psl7"
   ) {
     Cookie.setCookies("backUrl", url);
   }
@@ -252,7 +252,7 @@ function isAuthentictedUser() {
 }
 function replaceCategoryToShows(url) {
   if (url) {
-    return url.replace("category","shows")
+    return url.replace("category", "shows");
   }
   return "";
 }
@@ -338,5 +338,5 @@ module.exports = {
   log,
   verifyURL,
   checkForBoolean,
-  replaceCategoryToShows
+  replaceCategoryToShows,
 };

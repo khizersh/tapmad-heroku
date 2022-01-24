@@ -8,12 +8,16 @@ import swal from "sweetalert";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { setLoginViews } from "../../services/auth.service";
-import { SET_VIEW_TO_SHOW } from "../../contexts/auth/AuthReducers";
+import {
+  CALL_CHANGE_PACKAGE_API,
+  SET_VIEW_TO_SHOW,
+} from "../../contexts/auth/AuthReducers";
+import { LOGGED_IN } from "../../contexts/auth/SignUpReducer";
 
 export default function withLogin(Component, data) {
   return (props) => {
     const { setLoader, checkUserAuthentication } = useContext(MainContext);
-    const { SignUpState } = useContext(SignUpContext);
+    const { SignUpState, dispatch: SignUpDispatch } = useContext(SignUpContext);
     const { AuthState, dispatch } = useContext(AuthContext);
     const router = useRouter();
 
@@ -126,13 +130,31 @@ export default function withLogin(Component, data) {
             icon: "error",
           });
         } else if (status.code == 401) {
+          // login limit reached
           swal({
             title:
               "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
-            timer: 2500,
             icon: "warning",
-          }).then(() => {
-            dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+            buttons: ["Reset PIN", "Upgrade"],
+            dangerMode: false,
+          }).then(async (accepted, cancel) => {
+            if (accepted) {
+              // setting user id and call change package api and send to change package
+              setLoader(true)
+              dispatch({ type: CALL_CHANGE_PACKAGE_API, data: true });
+              SignUpDispatch({ type: LOGGED_IN, data: true });
+              Cookie.setCookies("user_mob", obj.MobileNo);
+              let body = { Language: "en", MobileNo: obj.MobileNo };
+              const userData = await AuthService.GetCardUser(body);
+              let userId = userData?.data?.User?.UserId || "";
+              Cookie.setCookies("userId", userId);
+              setTimeout(() => {
+                router.push("/change-package");
+              }, 1000);
+            } else {
+              // send to otp
+              dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+            }
           });
         } else if (status.code == 0 || status.code == 4) {
           swal({
@@ -140,7 +162,7 @@ export default function withLogin(Component, data) {
             timer: 2500,
             icon: "warning",
           }).then(() => {
-            router.push("/sign-up?tab=2&packageId=1");
+            router.push("/sign-up?tab=2&packageId=4");
           });
         } else if (status.code == 32) {
           swal({

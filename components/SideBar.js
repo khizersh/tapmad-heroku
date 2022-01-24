@@ -21,7 +21,7 @@ export default function SideBar() {
     onMouseLeave(); // Remove hover class
   }
   const { initialState, setSearch } = React.useContext(MainContext);
-  const { dispatch } = React.useContext(SignUpContext);
+  const { SignUpState } = React.useContext(SignUpContext);
 
   const onClickSearch = () => {
     setSearch(!initialState.isSearch);
@@ -50,20 +50,6 @@ export default function SideBar() {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
     }
-
-    AuthService.getAllowRegionsList()
-      .then((res) => {
-        const currentCountry = res.currentCountry;
-        const result =
-          res.data.find(
-            (countries) => countries.ShortName === currentCountry
-          ) || "XX";
-        dispatch({ type: USER_COUNTRY, data: result });
-        if (res.responseCode == 1) {
-          setCountries(res.data);
-        }
-      })
-      .catch((e) => console.log(e));
   }, [initialState.isAuthenticated]);
   return (
     <div
@@ -141,17 +127,13 @@ export default function SideBar() {
               </Link>
             </li>
             {/* conditional menu */}
-            {isAuth ? (
-              <AuthenticatedSidebar
-                onClick={onCLickContent}
-                country={countries}
-              />
-            ) : (
-              <NotAuthenticatedSidebar
-                onClick={onCLickContent}
-                country={countries}
-              />
-            )}
+            {SignUpState?.userCountry?.ShortName ? (
+              isAuth ? (
+                <AuthenticatedSidebar onClick={onCLickContent} />
+              ) : (
+                <NotAuthenticatedSidebar onClick={onCLickContent} />
+              )
+            ) : null}
 
             <li onClick={() => onCLickContent("search")}>
               <a onClick={onClickSearch} className="search-btn">

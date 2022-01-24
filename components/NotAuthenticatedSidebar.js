@@ -2,36 +2,30 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { MainContext } from "../contexts/MainContext";
 import { AuthService } from "../modules/auth/auth.service";
+import { SignUpContext } from "../contexts/auth/SignUpContext";
 
-const NotAuthenticatedSidebar = ({ onClick, country }) => {
-  const [countryCode, setCountryCode] = useState(null);
+const NotAuthenticatedSidebar = ({ onClick }) => {
+  // const [countryCode, setCountryCode] = useState(null);
   const [signIn, setSignIn] = useState(true);
-  useEffect(() => {
-    AuthService.getGeoInfo()
-      .then((res) => {
-        setCountryCode(res.countryCode);
-        let count = null;
-        count = country.find((m) => m.ShortName == res.countryCode);
-        if (count == null) {
-          setSignIn(false);
-        } else {
-          setSignIn(true);
-        }
-      })
-      .catch((e) => console.log(e));
-    return () => setSignIn(true);
-  }, [country]);
+  const { SignUpState } = useContext(SignUpContext);
+
   return (
     <>
       <li className="subs_contain" id="signUpMenu">
-        <a href={countryCode == "PK" ? "/sign-up?tab=2&packageId=1" : "/psl7"}>
+        <a
+          href={
+            SignUpState?.userCountry?.ShortName == "PK"
+              ? "/sign-up?tab=2&packageId=4"
+              : "/psl7"
+          }
+        >
           Subscribe
         </a>
         <span className="icon">
           <i className="fa fa-user-plus"></i>
         </span>
       </li>
-      {!signIn ? (
+      {SignUpState?.userCountry?.ShortName ? (
         <li className="sign-out">
           <Link href="/sign-in" shallow={true} passHref={true}>
             <a>
@@ -45,7 +39,7 @@ const NotAuthenticatedSidebar = ({ onClick, country }) => {
       ) : (
         <></>
       )}
-      {countryCode && countryCode == "PK" ? (
+      {SignUpState?.userCountry?.ShortName == "PK" ? (
         <>
           <li
             className="promoDiv"

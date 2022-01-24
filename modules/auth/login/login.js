@@ -126,7 +126,7 @@ function Login({ loginResponse }) {
             | &nbsp;&nbsp;Not Registered?
           </span>
           <Link
-            href="/sign-up?tab=2&packageId=1"
+            href="/sign-up?tab=2&packageId=4"
             shallow={true}
             passHref={true}
           >

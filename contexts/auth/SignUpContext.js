@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer } from "react";
+import { AuthService } from "../../modules/auth/auth.service";
 import { Cookie } from "../../services/cookies";
 import { MainContext } from "../MainContext";
 import { AuthContext } from "./AuthContext";
@@ -9,6 +10,7 @@ import {
   UPDATE_USER_DETAILS,
   PAYMENT_OPERATOR,
   LOGIN_OPERATOR,
+  USER_COUNTRY,
 } from "./SignUpReducer";
 
 export const SignUpContext = React.createContext(null);
@@ -48,6 +50,21 @@ export default function SignUpProvider({ children }) {
       setLoader(false);
     }
   }, [AuthState]);
+
+  useEffect(() => {
+    AuthService.getAllowRegionsList()
+      .then((res) => {
+        if (res.responseCode == 1) {
+          const currentCountry = res.currentCountry;
+          const result =
+            res.data.find(
+              (countries) => countries.ShortName === currentCountry
+            ) || "XX";
+          dispatch({ type: USER_COUNTRY, data: result });
+        }
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   const data = {
     dispatch,

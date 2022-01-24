@@ -39,7 +39,7 @@ const GlobalUserHeader = () => {
         });
         dispatch({
           type: UPDATE_USER_DETAILS,
-          data: { ProfileName: user.data?.ProfileData?.UserProfileFullName },
+          data: { ProfileName: user?.data?.ProfileData?.UserProfileFullName },
         });
       }
       setUserData(SignUpState.UserDetails.ProfileName);

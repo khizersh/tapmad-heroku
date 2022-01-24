@@ -518,7 +518,7 @@ async function clearUserToken(number) {
 }
 async function getGeoInfo() {
   let obj = {};
-  const response = await get("https://api.tapmad.com/api/getLoginDetail");
+  const response = await get("https://app.tapmad.com/api/getLoginDetail");
   let data = response.data;
 
   if (data) {
