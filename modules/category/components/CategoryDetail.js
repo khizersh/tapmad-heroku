@@ -245,17 +245,12 @@ export default function CategoryDetail({
           style={{ marginLeft: "5px", marginRight: "5px" }}
         >
           {filteredList.map((vid, i) => {
+            console.log(vid, "CIDE");
             let type = null;
             if (!vid.IsVideoFree) {
               type = vid.PackageName ?? null;
             }
-            return (
-              <Card
-                key={i}
-                video={vid}
-                type={type}
-              />
-            );
+            return <Card key={i} video={vid} type={type} />;
             // return <Card key={i} video={vid} type={type} />;
           })}
         </div>

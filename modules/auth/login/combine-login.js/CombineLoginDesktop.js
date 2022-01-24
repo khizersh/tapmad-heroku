@@ -27,7 +27,6 @@ const CombineLoginDesktop = ({
   // useEffect(() => {
   //   const country = await AuthService.getGeoInfo();
   // });
-  console.log(SignUpState?.userCountry?.CountryCode, "SignUpState");
 
   return (
     <div className="custom-bg">

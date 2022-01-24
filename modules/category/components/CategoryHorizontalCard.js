@@ -32,7 +32,9 @@ const CategoryHorizontalCard = ({ video, type, slug }) => {
                 alt={video.VideoName}
                 width="130px"
               />
-              {video.PackageImage ? (
+              {video.IsVideoFree ? (
+                <></>
+              ) : video.PackageImage ? (
                 <img
                   src={video.PackageImage}
                   alt="Package"

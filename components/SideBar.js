@@ -54,7 +54,6 @@ export default function SideBar() {
     AuthService.getAllowRegionsList()
       .then((res) => {
         const currentCountry = res.currentCountry;
-        console.log("res count: ", res);
         const result =
           res.data.find(
             (countries) => countries.ShortName === currentCountry

@@ -65,18 +65,24 @@ function checkAds(data, type) {
           bottomBannerAdMobile: local.bottomBannerAdMobile
             ? local.bottomBannerAdMobile
             : null,
-          bottomBannerAdHeight: local.bottomBannerAdMobileHeight ? local.bottomBannerAdMobileHeight : null,
-          bottomBannerAdWidth: local.bottomBannerAdMobileWidth ? local.bottomBannerAdMobileWidth : null,
+          bottomBannerAdHeight: local.bottomBannerAdMobileHeight
+            ? local.bottomBannerAdMobileHeight
+            : null,
+          bottomBannerAdWidth: local.bottomBannerAdMobileWidth
+            ? local.bottomBannerAdMobileWidth
+            : null,
           videoAdDuration: local.videoAdDuration ? +local.videoAdDuration : 2,
           topMobileAdWidth: +local.topAdMobileSize.trim().split(",")[0] || 320,
           topMobileAdHieght: +local.topAdMobileSize.trim().split(",")[1] || 100,
-          bottomMobileHeight: +local.bottomBannerAdMobileSize.trim().split(",")[1] || 50,
-          bottomMobileWidth: +local.bottomBannerAdMobileSize.trim().split(",")[0] || 320,
+          bottomMobileHeight:
+            +local.bottomBannerAdMobileSize.trim().split(",")[1] || 50,
+          bottomMobileWidth:
+            +local.bottomBannerAdMobileSize.trim().split(",")[0] || 320,
         };
       } else {
         return null;
       }
-    }    
+    }
   } else {
     const int = data.filter((f) => f.type == "international")[0];
     if (int != null) {
@@ -92,13 +98,19 @@ function checkAds(data, type) {
           bottomBannerAdMobile: int.bottomBannerAdMobile
             ? int.bottomBannerAdMobile
             : null,
-          bottomBannerAdHeight: int.bottomBannerAdMobileHeight ? int.bottomBannerAdMobileHeight : null,
-          bottomBannerAdWidth: int.bottomBannerAdMobileWidth ? int.bottomBannerAdMobileWidth : null,
+          bottomBannerAdHeight: int.bottomBannerAdMobileHeight
+            ? int.bottomBannerAdMobileHeight
+            : null,
+          bottomBannerAdWidth: int.bottomBannerAdMobileWidth
+            ? int.bottomBannerAdMobileWidth
+            : null,
           topMobileAdWidth: +int.topAdMobileSize.trim().split(",")[0] || 320,
           topMobileAdHieght: +int.topAdMobileSize.trim().split(",")[1] || 100,
           videoAdDuration: int.videoAdDuration ? +int.videoAdDuration : 2,
-          bottomMobileHeight: +int.bottomBannerAdMobileSize.trim().split(",")[1] || 50,
-          bottomMobileWidth: +int.bottomBannerAdMobileSize.trim().split(",")[0] || 320,
+          bottomMobileHeight:
+            +int.bottomBannerAdMobileSize.trim().split(",")[1] || 50,
+          bottomMobileWidth:
+            +int.bottomBannerAdMobileSize.trim().split(",")[0] || 320,
         };
       } else {
         return null;
