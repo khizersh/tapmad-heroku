@@ -105,7 +105,7 @@ const WatchPage = (props) => {
           });
         } else {
           swal({
-            title: "This content is not available on your country",
+            title: "This content is not available in your region",
             icon: "warning",
             dangerMode: false,
             timer: 3000,
