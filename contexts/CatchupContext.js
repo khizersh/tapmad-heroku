@@ -15,7 +15,7 @@ export default function CatchupProvider({ children }) {
   React.useEffect(async () => {
     let data = await CatchupService.getCatchupTvData();
     var convertedTabs = [];
-    data.data.Tabs.forEach(element => {
+    data.data.Tabs.forEach((element) => {
       if (element.TabName == "Tensports") {
         convertedTabs.unshift(element);
       } else {

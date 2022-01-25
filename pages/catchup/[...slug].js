@@ -3,13 +3,14 @@ import { manipulateUrls } from "../../services/utils";
 import { CatchupService } from "../../modules/catchup/catchup.service";
 import VideoDetail from "../../modules/catchup/VideoDetail";
 import requestIp from "request-ip";
-import { CatchupContext } from "../../contexts/CatchupContext";
+import CatchupProvider, { CatchupContext } from "../../contexts/CatchupContext";
 
 const CatchupDetail = (props) => {
   const [videoList, setVideoList] = useState([]);
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
-  const { catchupState } = useContext(CatchupContext);
+  const context = useContext(CatchupContext);
+  const catchupState = context ? context.catchupState : null;
 
   if (!mount) {
     if (!video) {
@@ -25,7 +26,7 @@ const CatchupDetail = (props) => {
     setMount(true);
   }, []);
   return (
-    <>
+    <CatchupProvider>
       {/* <Head>
         <script
           type='application/ld+json'
@@ -33,9 +34,9 @@ const CatchupDetail = (props) => {
         />
       </Head> */}
       <div className="container-fluid">
-        {video && <VideoDetail video={video} videoList={videoList} />}
+        {video ? <VideoDetail video={video} videoList={videoList} /> : <></>}
       </div>
-    </>
+    </CatchupProvider>
   );
 };
 
@@ -50,17 +51,21 @@ export async function getServerSideProps(context) {
 
   const data = await CatchupService.getCatchupVideo(CleanVideoId, ip);
 
-  if (data.responseCode == 1) {
+  if (data?.responseCode == 1) {
     return {
       props: {
-        video: data.data.Video, videoList: data.data.Videos, env: process.env.TAPENV
-      }
+        video: data.data.Video,
+        videoList: [],
+        env: process.env.TAPENV,
+      },
     };
   } else {
     return {
       props: {
-        video: null, videoList: [], env: process.env.TAPENV
-      }
+        video: null,
+        videoList: [],
+        env: process.env.TAPENV,
+      },
     };
   }
 }

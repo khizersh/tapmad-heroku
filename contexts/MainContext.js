@@ -58,20 +58,20 @@ export default function MainProvider({ children }) {
     },
   });
 
-  useEffect(async () => {
-    try {
-      var operators = await get(PaymentPackages);
-      if (operators.data.Response.responseCode != 0) {
-        dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
-        checkUserAuthentication();
-        const country = await AuthService.getGeoInfo();
-        updateCountryCode(country.countryCode);
-        updatePaymentPackage(operators?.data?.PaymentPackages[0]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // useEffect(async () => {
+  //   try {
+  //     var operators = await get(PaymentPackages);
+  //     if (operators.data.Response.responseCode != 0) {
+  //       dispatch({ type: "SET_PAYMENT_PACKAGES", data: operators.data });
+  //       checkUserAuthentication();
+  //       const country = await AuthService.getGeoInfo();
+  //       updateCountryCode(country.countryCode);
+  //       updatePaymentPackage(operators?.data?.PaymentPackages[0]);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   function updateCountryCode(code) {
     dispatch({ type: "SET_COUNTRY_CODE", data: code });
