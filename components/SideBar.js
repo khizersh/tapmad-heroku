@@ -52,7 +52,6 @@ export default function SideBar() {
       setIsAuth(initialState.isAuthenticated);
     }
   }, [initialState.isAuthenticated]);
-  console.log("SignUpState?.userCountry?.ShortName  : ",SignUpState);
   return (
     <div
       className="primary-nav"

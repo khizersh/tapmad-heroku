@@ -131,31 +131,47 @@ export default function withLogin(Component, data) {
           });
         } else if (status.code == 401) {
           // login limit reached
-          swal({
-            title:
-              "Oops Looks like you have reached the active login limit. To continue watching on this device, verify your pin and logout of previous devices.",
-            icon: "warning",
-            buttons: ["Reset PIN", "Upgrade"],
-            dangerMode: false,
-          }).then(async (accepted, cancel) => {
-            if (accepted) {
-              // setting user id and call change package api and send to change package
-              setLoader(true);
-              dispatch({ type: CALL_CHANGE_PACKAGE_API, data: true });
-              SignUpDispatch({ type: LOGGED_IN, data: true });
-              Cookie.setCookies("user_mob", obj.MobileNo);
-              let body = { Language: "en", MobileNo: obj.MobileNo };
-              const userData = await AuthService.GetCardUser(body);
-              let userId = userData?.data?.User?.UserId || "";
-              Cookie.setCookies("userId", userId);
-              setTimeout(() => {
-                router.push("/change-package");
-              }, 1000);
-            } else {
-              // send to otp
-              dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
-            }
-          });
+          let body = { Language: "en", MobileNo: obj.MobileNo };
+          const userData = await AuthService.GetCardUser(body);
+          // for premium user
+          if (userData?.data?.User?.IsUpdgradeOrDownGrade == 3) {
+            swal({
+              title:
+                "Oops! Looks like you have reached your active Login Limit, either reset your PIN to logout from all devices or Upgrade your package to get Logins on more devices",
+              icon: "warning",
+              buttons: ["Cancel", "Reset PIN"],
+              dangerMode: false,
+            }).then(async (accepted, cancel) => {
+              if (accepted) {
+                dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+              }
+            });
+          } else {
+            // for normal user
+            swal({
+              title:
+                "Oops! Looks like you have reached your active Login Limit, either reset your PIN to logout from all devices or Upgrade your package to get Logins on more devices",
+              icon: "warning",
+              buttons: ["Reset PIN", "Upgrade"],
+              dangerMode: false,
+            }).then(async (accepted, cancel) => {
+              if (accepted) {
+                // setting user id and call change package api and send to change package
+                setLoader(true);
+                dispatch({ type: CALL_CHANGE_PACKAGE_API, data: true });
+                SignUpDispatch({ type: LOGGED_IN, data: true });
+                Cookie.setCookies("user_mob", obj.MobileNo);
+                let userId = userData?.data?.User?.UserId || "";
+                Cookie.setCookies("userId", userId);
+                setTimeout(() => {
+                  router.push("/change-package");
+                }, 1000);
+              } else {
+                // send to otp
+                dispatch({ type: SET_VIEW_TO_SHOW, data: "send-otp" });
+              }
+            });
+          }
         } else if (status.code == 0 || status.code == 4) {
           swal({
             title: "You are not subscribe user please subscribe yourself",
