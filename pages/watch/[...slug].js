@@ -79,10 +79,7 @@ const WatchPage = (props) => {
           props.signout();
         });
       } else if (props.data && props.data.responseCode === 110) {
-        console.log(
-          "SignUpState?.userCountry?.ShortName ",
-          SignUpState?.userCountry
-        );
+      
         if (SignUpState?.userCountry?.ShortName) {
           swal({
             title:

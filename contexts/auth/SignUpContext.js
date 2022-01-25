@@ -57,7 +57,7 @@ export default function SignUpProvider({ children }) {
         if (res.responseCode == 1) {
           const currentCountry = res.UserCountry;
           const result = res.data.find(
-            (countries) => countries.ShortName === currentCountry
+            (countries) => countries.ShortName == currentCountry
           );
           dispatch({ type: USER_COUNTRY, data: result });
         }

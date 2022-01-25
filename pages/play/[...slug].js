@@ -102,7 +102,6 @@ export async function getServerSideProps(context) {
 
   let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
-  console.log(data, "data");
 
   if (data != null) {
     if (data?.data?.Video?.IsVideoChannel) {

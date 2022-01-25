@@ -46,11 +46,13 @@ export default function SideBar() {
     document.querySelector(".menu.active-nav")?.classList.remove("active-nav");
     document.querySelector(".menu.hover-nav")?.classList.remove("hover-nav");
   }, [router]);
+
   useEffect(() => {
     if (initialState) {
       setIsAuth(initialState.isAuthenticated);
     }
   }, [initialState.isAuthenticated]);
+  console.log("SignUpState?.userCountry?.ShortName  : ",SignUpState);
   return (
     <div
       className="primary-nav"
