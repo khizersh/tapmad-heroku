@@ -140,7 +140,7 @@ export default function withLogin(Component, data) {
           }).then(async (accepted, cancel) => {
             if (accepted) {
               // setting user id and call change package api and send to change package
-              setLoader(true)
+              setLoader(true);
               dispatch({ type: CALL_CHANGE_PACKAGE_API, data: true });
               SignUpDispatch({ type: LOGGED_IN, data: true });
               Cookie.setCookies("user_mob", obj.MobileNo);
@@ -162,7 +162,11 @@ export default function withLogin(Component, data) {
             timer: 2500,
             icon: "warning",
           }).then(() => {
-            router.push("/sign-up?tab=2&packageId=4");
+            if (SignUpState?.userCountry?.ShortName === "PK") {
+              router.push("/sign-up?tab=2&packageId=4");
+            } else {
+              router.push("/psl7");
+            }
           });
         } else if (status.code == 32) {
           swal({

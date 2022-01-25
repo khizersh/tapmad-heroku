@@ -40,7 +40,6 @@ export default function AuthProviderNew({ children }) {
       pathname.includes("change-package") ||
       (AuthState.callChangePackageApi && userId)
     ) {
-      console.log("");
       packages = await getAllPaymentPackagesByUserId(userId);
       dispatch({
         type: CURRENT_USER_PACKAGE,

@@ -79,6 +79,7 @@ const WatchPage = (props) => {
           props.signout();
         });
       } else if (props.data && props.data.responseCode === 110) {
+      
         if (SignUpState?.userCountry?.ShortName) {
           swal({
             title:
@@ -101,7 +102,7 @@ const WatchPage = (props) => {
           });
         } else {
           swal({
-            title: "This content is not available on your country",
+            title: "This content is not available in your region",
             icon: "warning",
             dangerMode: false,
             timer: 3000,

@@ -55,11 +55,10 @@ export default function SignUpProvider({ children }) {
     AuthService.getAllowRegionsList()
       .then((res) => {
         if (res.responseCode == 1) {
-          const currentCountry = res.currentCountry;
-          const result = res.data.find((countries) => {
-            const data = countries.ShortName === currentCountry || "XX";
-            return data;
-          });
+          const currentCountry = res.UserCountry || res.currentCountry;
+          const result = res.data.find(
+            (countries) => countries.ShortName == currentCountry
+          );
           dispatch({ type: USER_COUNTRY, data: result });
         }
       })
