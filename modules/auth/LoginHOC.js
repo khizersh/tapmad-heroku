@@ -11,6 +11,7 @@ import { setLoginViews } from "../../services/auth.service";
 import {
   CALL_CHANGE_PACKAGE_API,
   SET_VIEW_TO_SHOW,
+  UPDATE_PACKAGE
 } from "../../contexts/auth/AuthReducers";
 import { LOGGED_IN } from "../../contexts/auth/SignUpReducer";
 
@@ -159,7 +160,8 @@ export default function withLogin(Component, data) {
                 // setting user id and call change package api and send to change package
                 setLoader(true);
                 dispatch({ type: CALL_CHANGE_PACKAGE_API, data: true });
-                SignUpDispatch({ type: LOGGED_IN, data: true });
+                await SignUpDispatch({ type: LOGGED_IN, data: true });
+                await dispatch({ type: UPDATE_PACKAGE, data: true });
                 Cookie.setCookies("user_mob", obj.MobileNo);
                 let userId = userData?.data?.User?.UserId || "";
                 Cookie.setCookies("userId", userId);
