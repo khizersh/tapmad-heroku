@@ -28,6 +28,7 @@ import { UPDATE_PACKAGE } from "../../contexts/auth/AuthReducers";
 import { GameContext } from "../../contexts/GameContext";
 import TabsWithIcon from "../../components/TabsWithIcon";
 import NavbarHOC from "../navbar/NavbarHOC";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 const MyAccountWeb = ({
   profileData,
@@ -38,6 +39,7 @@ const MyAccountWeb = ({
 }) => {
   const { setLoader } = useContext(MainContext);
   const { updateBuyModal } = useContext(GameContext);
+  const { SignUpState } = useContext(SignUpContext);
   const [price, setPrice] = useState(null);
   const [packageStreams, setPackageStreams] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -121,6 +123,9 @@ const MyAccountWeb = ({
     <>
       <style jsx>
         {`
+        button[disabled] {
+          cursor: not-allowed
+        }
           dl {
             display: grid;
             grid-template-columns: 100px 1fr;
@@ -359,7 +364,7 @@ const MyAccountWeb = ({
                         <div className="col-4 ">
                           <button
                             type="button"
-                            disabled={upgardeBtn}
+                            disabled={upgardeBtn ||  SignUpState?.userCountry?.ShortName !== "PK"}
                             className="btn w-100 px-2  text-light rounded-pill optButtons"
                             onClick={onClickUpgradePackage}
                           >
@@ -372,6 +377,9 @@ const MyAccountWeb = ({
                             type="button"
                             className="btn w-100 px-2  text-light rounded-pill optButtons"
                             onClick={() => unSubscribe()}
+                            disabled={
+                              SignUpState?.userCountry?.ShortName !== "PK"
+                            }
                           >
                             Unsubscribe
                           </button>

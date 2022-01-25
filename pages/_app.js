@@ -134,7 +134,7 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <MainProvider>
               <AuthProvider>
-                <AuthProviderNew> 
+                <AuthProviderNew>
                   <SignUpProvider>
                     <GameProvider>
                       <ProfileProvider>
@@ -153,16 +153,16 @@ function MyApp({ Component, pageProps }) {
             <AuthProvider>
               <AuthProviderNew>
                 <SignUpProvider>
-                  <CatchupProvider>
-                    <GameProvider>
-                      <Skeleton {...pageProps}>
-                        <BuyCoinModal />
-                        <Header />
-                        <Component {...pageProps} />
-                        <Footer />
-                      </Skeleton>
-                    </GameProvider>
-                  </CatchupProvider>
+                  {/* <CatchupProvider> */}
+                  <GameProvider>
+                    <Skeleton {...pageProps}>
+                      <BuyCoinModal />
+                      <Header />
+                      <Component {...pageProps} />
+                      <Footer />
+                    </Skeleton>
+                  </GameProvider>
+                  {/* </CatchupProvider> */}
                 </SignUpProvider>
               </AuthProviderNew>
             </AuthProvider>
