@@ -79,25 +79,34 @@ const WatchPage = (props) => {
           props.signout();
         });
       } else if (props.data && props.data.responseCode === 110) {
-        swal({
-          title:
-            "This content is not available on your current package, to upgrade your package press Upgrade",
-          icon: "warning",
-          buttons: ["Cancel", "Upgrade"],
-          dangerMode: false,
-        }).then((accepted, cancel) => {
-          if (accepted) {
-            if (SignUpState?.userCountry?.ShortName === "PK") {
-              router.push(
-                `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
-              );
+        if (SignUpState?.userCountry?.ShortName) {
+          swal({
+            title:
+              "This content is not available on your current package, to upgrade your package press Upgrade",
+            icon: "warning",
+            buttons: ["Cancel", "Upgrade"],
+            dangerMode: false,
+          }).then((accepted, cancel) => {
+            if (accepted) {
+              if (SignUpState?.userCountry?.ShortName === "PK") {
+                router.push(
+                  `/change-package?tab=${props.data.Video.PaymentTabId}&packageId=${props.data.Video.PackageId}`
+                );
+              } else {
+                router.push(`/psl7`);
+              }
             } else {
-              router.push(`/psl7`);
+              router.push("/");
             }
-          } else {
-            router.push("/");
-          }
-        });
+          });
+        } else {
+          swal({
+            title: "This content is not available on your country",
+            icon: "warning",
+            dangerMode: false,
+            timer: 3000,
+          }).then((rr) => router.push("/"));
+        }
       }
     }
   }, [url, props?.data?.responseCode == 110, props?.data?.responseCode == 220]);

@@ -58,10 +58,8 @@ export default function SignUpProvider({ children }) {
           const currentCountry = res.currentCountry;
           const result = res.data.find((countries) => {
             const data = countries.ShortName === currentCountry || "XX";
-            Cookie.setCookies("allowedReigon", data != "XX" ? 1 : 0);
             return data;
           });
-
           dispatch({ type: USER_COUNTRY, data: result });
         }
       })
