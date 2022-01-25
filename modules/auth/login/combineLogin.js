@@ -152,6 +152,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
           pin={pin}
           loginUser={loginUser}
           forgetClick={forgetClick}
+          setLoader={setLoader}
         />
       ) : (
         <CombineLoginDesktop
@@ -165,6 +166,7 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
           loginUser={loginUser}
           pin={pin}
           forgetClick={forgetClick}
+          setLoader={setLoader}
         />
       )}
     </div>

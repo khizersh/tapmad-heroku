@@ -96,6 +96,7 @@ export default function withLogin(Component, data) {
     }
 
     async function callLoginApi(obj, status, userIp, pinApi) {
+      setLoader(true);
       var response = null;
       if (pinApi) {
         response = await AuthService.signInOrSignUpMobileOperatorByPin(

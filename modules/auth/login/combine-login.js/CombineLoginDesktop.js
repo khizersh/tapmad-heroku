@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
@@ -14,6 +14,7 @@ const CombineLoginDesktop = ({
   mobileNo,
   pin,
   forgetClick,
+  setLoader
 }) => {
   const { SignUpState } = useContext(SignUpContext);
 
@@ -27,13 +28,17 @@ const CombineLoginDesktop = ({
   // useEffect(() => {
   //   const country = await AuthService.getGeoInfo();
   // });
+  const onClickLogin = () => {
+    setLoader(true)
+    loginUser();
+  };
 
   return (
     <div className="custom-bg">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          loginUser();
+          onClickLogin();
         }}
       >
         {AuthState && AuthState.LoginOperators.length ? (
@@ -182,7 +187,7 @@ const CombineLoginDesktop = ({
         <div className="form-group text-center flex-grow-1">
           <button
             type="submit"
-            // disabled={btnDisabled ? true : false}
+            disabled={btnDisabled ? true : false}
             className="btn pymnt_pge_sbscrbe_btn width-35 bg-green font-16"
           >
             Login
