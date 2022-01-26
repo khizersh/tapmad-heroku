@@ -23,13 +23,13 @@ export default function HomePage({ movies, banner, featured, ip }) {
 
 
   async function fetchNewMovies() {
+   
     if (currentRow == movies.totalSections) {
       return;
     }
     let rowData = calculateRowsToFetch(currentRow, modifiedResponse);
     setCurrentRow(rowData.rowsTo);
-    try {
-    } catch (error) {}
+ 
     let moviesList = await HomeService.getFeaturedHomepageWithRe(
       rowData.rowFrom,
       rowData.rowsTo,

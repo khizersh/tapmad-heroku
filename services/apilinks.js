@@ -53,7 +53,7 @@ export const getNewsDetailBId =
   BASEURLAPP + "api/getTnnNewsDetailByNewsID/v1/en/web/";
 
 export const getShowsWithPagination =
-  BASEURLAPP + "api/getAllShowsWithPagination/0/5/0/16";
+  BASEURLAPP + "api/getAllShowsWithPagination/0/7/0/16";
 // player page wali api / movie ka data lany wali
 export const getEventPredicationGameChannel =
   BASEURLAPP + "api/getUserStreamWithPackagesChannelsChat";

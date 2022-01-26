@@ -131,6 +131,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
+        console.log("details : ",details);
         if (!details.MobileNo) {
           setLoader(false);
           return swal({
@@ -190,7 +191,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               setLoader(false);
               return swal({
                 timer: 3000,
-                text: "Please enter cnic",
+                text: "Please enter 13 digit cnic",
                 icon: "info",
                 buttons: false,
               });
