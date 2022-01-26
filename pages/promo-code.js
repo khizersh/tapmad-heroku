@@ -18,7 +18,7 @@ import { UPDATE_USER_DETAILS } from "../contexts/auth/SignUpReducer";
 const promoCode = () => {
   const router = useRouter();
   const [promoCode, setPromoCode] = useState("");
-  const [number, setNumber] = useState([]);
+  const [number, setNumber] = useState("");
   const [operator, setOperator] = useState(null);
   const { authState, updateSelectedOperator } = useContext(Authcontext);
   const { setLoader } = useContext(MainContext);
@@ -52,6 +52,7 @@ const promoCode = () => {
   };
 
   const onClick = async () => {
+  
     const mobileNum = number.trim();
     if (mobileNum.length < 10) {
       return swal({
