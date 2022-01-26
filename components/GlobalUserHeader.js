@@ -44,7 +44,6 @@ const GlobalUserHeader = () => {
       }
       setUserData(SignUpState.UserDetails.ProfileName);
     }
-
   }, [SignUpState.UserDetails.ProfileName]);
 
   return (
@@ -104,7 +103,8 @@ const GlobalUserHeader = () => {
             <div className="avatarWrapper">
               <div className="avatar line-1">
                 {!initialState.isAuthenticated ? (
-                  <Link href={countryCode == "PK" ? "/sign-in" : "/"}>
+                  // <Link href={countryCode == "PK" ? "/sign-in" : "/"}>
+                  <Link href="/sign-in">
                     <a className="text-white d-flex align-items-center">
                       <Image
                         src="/icons/avatar-placeholder.svg"
