@@ -167,6 +167,12 @@
   color: white;
 }
 
+.btn_submit:hover,
+.btn_submit:focus {
+  background-color: #9eda59 !important;
+  color: white;
+}
+
 
 .text {
   font-size: 12px;

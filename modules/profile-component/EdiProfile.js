@@ -164,7 +164,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
               />
             </div>
 
-            <div className={`${isMobile ? "my-3" : "col-6"}`}>
+            <div className={`${isMobile ? "my-3" : "my-3 col-6"}`}>
               <label className="editprofile_lbl">Mobile:</label>
               <input
                 readOnly
@@ -178,7 +178,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                 }}
               />
             </div>
-            <div className={`${isMobile ? "my-3" : "col-6"}`}>
+            <div className={`${isMobile ? "my-3" : "my-3 col-6"}`}>
               <label className="editprofile_lbl">Email:</label>
               <input
                 placeholder="abc@gmail.com"
@@ -196,6 +196,11 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                 {`
                   .radio-cstm {
                     position: relative;
+                    font-weight: 400;
+                    font-size: 14px !important;
+                  }
+                  .radio-cstm:before {
+                    margin-bottom: 5px;
                   }
                   .radio-cstm:after {
                     width: 10px;
@@ -206,7 +211,7 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                   }
                   @media only screen and (max-width: 799px) {
                     .radio-cstm:before {
-                      margin-bottom: 6px;z
+                      margin-bottom: 6px;
                     }
                     .radio-cstm:after {
                       top: 7px;
