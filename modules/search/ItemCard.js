@@ -2,14 +2,14 @@ import Link from "next/link";
 import React from "react";
 import { findImageInVODObject } from "../../services/utils";
 
-const ItemCard = ({ item, slug }) => {
+const ItemCard = ({ item, slug , allowCrown}) => {
   let itemImage = findImageInVODObject(item);
   return (
     <div className="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-       <style jsx>
+      <style jsx>
         {`
-          .live_side2{
-            left:14px;
+          .live_side2 {
+            left: 14px;
           }
         `}
       </style>
@@ -19,11 +19,13 @@ const ItemCard = ({ item, slug }) => {
             <img src={itemImage} className="img-fluid img-responsive" />
           </div>
           <div className="row">
-            <img
-              className="live_side2 crown-img-only"
-              src={item.PackageImage}
-              width={40}
-            />
+            { allowCrown && item.PackageImage ? (
+              <img
+                className="live_side2 crown-img-only"
+                src={item.PackageImage}
+                width={40}
+              />
+            ) : null}
           </div>
           <div className="ripple_txt">
             <h5>

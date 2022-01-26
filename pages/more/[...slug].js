@@ -5,8 +5,10 @@ import { get } from "../../services/http-service";
 import { setUrlAccordingToVideoType } from "../../services/utils";
 import requestIp from "request-ip";
 import { IsLiveChannel } from "../../services/constants";
+import { SignUpContext } from "../../contexts/auth/SignUpContext";
 
 export default function ViewMore(props) {
+  const { SignUpState } = useContext(SignUpContext);
   return (
     <div className="row mx-auto">
       {props.data.Sections == null ? (
@@ -16,7 +18,14 @@ export default function ViewMore(props) {
       ) : (
         props.data.Sections.Videos.map((video, i) => {
           let slug = setUrlAccordingToVideoType(video, IsLiveChannel);
-          return <ItemCard item={video} key={i} slug={slug} />;
+          return (
+            <ItemCard
+              item={video}
+              key={i}
+              slug={slug}
+              allowCrown={SignUpState?.userCountry?.ShortName ? true : false}
+            />
+          );
         })
       )}
     </div>
