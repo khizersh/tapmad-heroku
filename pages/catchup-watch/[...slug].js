@@ -41,13 +41,13 @@ const watch = (props) => {
     }
   }, [props.allowUser]);
 
-
+console.log("props.video : ",props.video);
 
   return (
     <div>
-      {props.allowUser && props.video && (
+      {/* {props.allowUser && props.video && (
         <CatchupPlayer video={props.video} videoList={related} />
-      )}
+      )} */}
     </div>
   );
 };

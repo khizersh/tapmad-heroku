@@ -126,7 +126,7 @@ const promoCode = () => {
     setLoader(false);
   };
 
-  const operators = useMemo(() => authState.loginOperators);
+  const operators = useMemo(() => SignUpState.LoginOperator);
 
   return (
     <div>
@@ -147,7 +147,7 @@ const promoCode = () => {
                 data={operators}
                 onChangeNetwork={onChangeNetwork}
                 onChangeNumber={handleNumber}
-                mobileCode={authState.MobileCode}
+                mobileCode={"+" + SignUpState?.userCountry?.CountryCode}
               />
             </div>
             <div className="text-center pb-2">
