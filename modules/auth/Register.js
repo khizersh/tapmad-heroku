@@ -20,6 +20,8 @@ export default memo(function Register(props) {
   const { code, number, payment, operator, tab, packageId } = router.query;
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
+
+
   const RenderViews = useCallback(
     function () {
       var respCode = code || SignUpState.subscribeResponseCode;
@@ -53,14 +55,16 @@ export default memo(function Register(props) {
   );
 
   useEffect(() => {
-    dispatch({
-      type: UPDATE_USER_DETAILS,
-      data: { MobileNo: number, Operator: operator },
-    });
-    dispatch({
-      type: UPDATE_SUBSCRIBE_RESPONSE,
-      data: { code: code, newUser: false },
-    });
+    if (number && operator) {
+      dispatch({
+        type: UPDATE_USER_DETAILS,
+        data: { MobileNo: number, Operator: operator },
+      });
+      dispatch({
+        type: UPDATE_SUBSCRIBE_RESPONSE,
+        data: { code: code, newUser: false },
+      });
+    }
   }, [code, number, AuthState]);
 
   // select payment methods by query param

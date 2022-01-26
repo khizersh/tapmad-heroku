@@ -139,7 +139,7 @@ export default function withLogin(Component, data) {
           if (userData?.data?.User?.IsUpdgradeOrDownGrade == 3) {
             swal({
               title:
-                "Oops! Looks like you have reached your active Login Limit, either reset your PIN to logout from all devices or Upgrade your package to get Logins on more devices",
+                "Oops! Looks like you have reached your active Login Limit, reset your PIN to logout from all devices",
               icon: "warning",
               buttons: ["Cancel", "Reset PIN"],
               dangerMode: false,
