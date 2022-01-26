@@ -8,13 +8,10 @@ export default function ShowsPage(props) {
   return (
     <div>
       <Head>
-        <title>
-          Watch Dramas & TV Shows Online | Tapmad TV
-        </title>
+        <title>Watch Dramas & TV Shows Online | Tapmad TV</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://wwww.tapmad.com/shows" />
-
       </Head>
       <div>
         <Shows {...props} />
@@ -41,7 +38,7 @@ export async function getServerSideProps(context) {
     props: {
       shows: movies,
       env: process.env.TAPENV,
-      ip
+      ip,
     },
   };
 }

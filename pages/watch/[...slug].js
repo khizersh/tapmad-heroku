@@ -33,13 +33,15 @@ const WatchPage = (props) => {
   // for not login user check content package and sent to respective package on sign-up page
   useEffect(() => {
     if (!props.allowUser) {
-      if (SignUpState?.userCountry?.ShortName != "PK") {
-        router.push(`/psl7`);
-      } else {
-        router.push(`/sign-up?tab=2&packageId=4`);
+      if (SignUpState?.userCountry) {
+        if (SignUpState?.userCountry?.ShortName != "PK") {
+          router.push(`/psl7`);
+        } else {
+          router.push(`/sign-up?tab=2&packageId=4`);
+        }
       }
     }
-  }, [props.allowUser, url]);
+  }, [props.allowUser, url , SignUpState?.userCountry]);
 
   // for login user check content package and sent to respective package on change-package page
   useEffect(() => {

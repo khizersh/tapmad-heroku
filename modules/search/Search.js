@@ -30,20 +30,20 @@ const Search = (props) => {
     inputSearch?.current?.focus();
   }, [inputSearch]);
 
-  // useEffect(async () => {
-  //   if (debouncedSearchKeyWord) {
-  // setisSearched(true);
-  // setLoader(true);
-  // const data = await searchHandler(debouncedSearchKeyWord);
-  // setSearchedItem(data);
-  // setLoader(false);
-  // onClickSearch();
-  // }
-  // else {
-  //   setSearchedItem([]);
-  //   setLoader(false);
-  // }
-  // }, [debouncedSearchKeyWord]);
+  useEffect(async () => {
+    if (debouncedSearchKeyWord) {
+      setisSearched(true);
+      // setLoader(true);
+      // const data = await searchHandler(debouncedSearchKeyWord);
+      // setSearchedItem(data);
+      // setLoader(false);
+      onClickSearch();
+    }
+    // else {
+    //   setSearchedItem([]);
+    //   setLoader(false);
+    // }
+  }, [debouncedSearchKeyWord]);
 
   const searchHandler = async (keyword) => {
     const data = await SearchService.getItemByKeyrwords(keyword);
@@ -66,7 +66,10 @@ const Search = (props) => {
     e.preventDefault();
     setLoader(true);
     if (keyword) {
-      const data = await SearchService.getItemByKeyrwords(keyword, props.ip);
+      const data = await SearchService.getItemByKeyrwords(
+        keyword,
+        props.ip
+      );
       if (data != null) {
         if (data.responseCode == 1) {
           setSearchedItem(data.data.Videos);
