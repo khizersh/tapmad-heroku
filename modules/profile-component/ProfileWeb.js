@@ -324,7 +324,7 @@ const MyAccountWeb = ({
                           </div>
                         </div>
                       </div>
-                      <span className="mb-3 font-13 mt-2 d-block">
+                      <span className="mb-3 font-13 mt-2 d-block text-justify">
                         {allData &&
                           allData.PackageDescription[0].ContentDescription}
                       </span>

@@ -153,7 +153,9 @@ const EdiProfileForm = ({ isSave, isMobile }) => {
                 placeholder="Date of Birth"
                 type="date"
                 className={`${
-                  isMobile ? "col-12 p-2 rounded-pill" : "col-12 py-1 rounded"
+                  isMobile
+                    ? "col-12 p-2 rounded-pill form-control"
+                    : "col-12 py-1 rounded form-control"
                 }`}
                 defaultValue={profile && profile.ProfileData.UserProfileDOB}
                 onChange={(e) => {

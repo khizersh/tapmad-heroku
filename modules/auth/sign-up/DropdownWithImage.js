@@ -23,8 +23,8 @@ function DropdownWithImage({ data, onChange, placeHolder, width }) {
               <img
                 src={
                   isCaretOpen
-                    ? "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-up-b-128.png"
-                    : "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png"
+                    ? "../icons/carot-up.png"
+                    : "../icons/carot-down.png"
                 }
                 width="10"
                 height="10"
@@ -38,8 +38,8 @@ function DropdownWithImage({ data, onChange, placeHolder, width }) {
               <img
                 src={
                   isCaretOpen
-                    ? "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-up-b-128.png"
-                    : "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png"
+                    ? "../icons/carot-up.png"
+                    : "../icons/carot-down.png"
                 }
                 width="10"
                 height="10"
@@ -49,28 +49,27 @@ function DropdownWithImage({ data, onChange, placeHolder, width }) {
           )}
         </div>
         <div
-        className={`overflow-hidden position-absolute mt-1 ${
-          isCaretOpen ? "translate-100" : "translate-0"
-        } `}
-        style={{ zIndex: 100, width: "100%" , left : '0px' }}
-      >
-        <div className={`clr-black`}>
-          {data.length
-            ? data.map((d, i) => (
-                <div
-                  key={i}
-                  onClick={() => onSelectItem(d)}
-                  className="cursor-pointer border-bottom padding-left-bottom"
-                >
-                  <img src={d.OperatorImage} width="20" alt="Operator" />{" "}
-                  <span className="pl-1">{d.OperatorName}</span>
-                </div>
-              ))
-            : null}
+          className={`overflow-hidden position-absolute mt-1 ${
+            isCaretOpen ? "translate-100" : "translate-0"
+          } `}
+          style={{ zIndex: 100, width: "100%", left: "0px" }}
+        >
+          <div className={`clr-black`}>
+            {data.length
+              ? data.map((d, i) => (
+                  <div
+                    key={i}
+                    onClick={() => onSelectItem(d)}
+                    className="cursor-pointer border-bottom padding-left-bottom"
+                  >
+                    <img src={d.OperatorImage} width="20" alt="Operator" />{" "}
+                    <span className="pl-1">{d.OperatorName}</span>
+                  </div>
+                ))
+              : null}
+          </div>
         </div>
       </div>
-      </div>
-     
     </div>
   );
 }
