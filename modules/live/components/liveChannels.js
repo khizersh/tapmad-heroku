@@ -26,8 +26,6 @@ export default function LiveChannels({ channel }) {
     setLocalMovies(modifiedResponse);
   }, []);
 
-  console.log("localMovies", localMovies);
-
   async function fetchNewMovies() {
     if (currentRow == channel.Sections.totalSections) {
       return;
