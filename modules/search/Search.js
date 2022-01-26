@@ -32,7 +32,7 @@ const Search = (props) => {
 
   useEffect(async () => {
     if (debouncedSearchKeyWord) {
-      setisSearched(true);
+      // setisSearched(true);
       // setLoader(true);
       // const data = await searchHandler(debouncedSearchKeyWord);
       // setSearchedItem(data);
@@ -64,6 +64,7 @@ const Search = (props) => {
 
   const onClickSearch = async (e) => {
     e.preventDefault();
+    setisSearched(true)
     setLoader(true);
     if (keyword) {
       const data = await SearchService.getItemByKeyrwords(
