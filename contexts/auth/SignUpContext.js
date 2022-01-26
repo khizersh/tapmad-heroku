@@ -44,6 +44,7 @@ export default function SignUpProvider({ children }) {
     }
     const num = Cookie.getCookies("user_mob");
     if (num) {
+      console.log("num : ",num);
       dispatch({ type: UPDATE_USER_DETAILS, data: { MobileNo: num } });
     }
     if (AuthState?.authContextLoaded) {
