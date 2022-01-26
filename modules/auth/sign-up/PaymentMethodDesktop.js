@@ -35,7 +35,6 @@ export default function PaymentMethodDesktop() {
     }
   }, [SignUpState.SelectedMethod]);
 
-
   const imageArray = [
     { Image: qualityIcon, Name: "1080 P" },
     { Image: deviceIcon, Name: "Devices All" },
@@ -74,6 +73,13 @@ export default function PaymentMethodDesktop() {
           .pdtl-cols div {
             flex: 1;
           }
+          .highlighted-desc b {
+            font-weight: 700;
+            text-align: justify
+          }
+          .highlighted-desc:before {
+            content: "*"
+          }
         `}
       </style>
       <div className="row padding-signup-layout">
@@ -86,19 +92,27 @@ export default function PaymentMethodDesktop() {
                       <img src={m.Image} className="max-width-30" />
                     </p>
                     {m.Name == "0" || m.Name == "1" ? (
-                      <p className="text-grey">
+                      <p className="text-white">
                         {m.Name == "1" ? "Casting" : "No Casting"}
                       </p>
                     ) : (
-                      <p className="text-grey">{m.Name}</p>
+                      <p className="text-white">{m.Name}</p>
                     )}
                   </div>
                 ))
               : null}
           </div>
-          <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
           <div
-            className="mt-3"
+            className="text-white"
+            style={{
+              textAlign: "justify",
+              lineHeight: "1.3",
+            }}
+          >
+            {CurrentPackage?.ContentDescription}
+          </div>
+          <div
+            className="mt-3 highlighted-desc"
             style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
             dangerouslySetInnerHTML={{
               __html: CurrentPackage?.HighlightDescription,
@@ -155,11 +169,9 @@ export default function PaymentMethodDesktop() {
                                   : ""
                               }`}
                               style={{ fontStyle: "normal" }}
-                            >
-                            </i>
+                            ></i>
                           </div>
                         </label>
-                      
                       </div>
                     </div>
                   </div>

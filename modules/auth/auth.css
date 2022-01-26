@@ -36,7 +36,7 @@
 }
 .bg-dark-cstm {
   /* background-color: #262626; */
-  background-color: #3b3b3b;
+  background-color: #131C1F;
 }
 .tm_login_pg {
   display: table;
@@ -52,7 +52,7 @@
 }
 
 .payment-icon {
-  background-color: white;
+  background-color: #ccc;
   color: black;
   padding: 7px;
   display: flex;
@@ -120,7 +120,7 @@
   position: relative;
   bottom: -16px;
   margin: 0 auto;
-  width: 70%;
+  width: 100%;
 }
 .pr_active span {
   color: var(--basecolor);
@@ -255,7 +255,9 @@
 
 .caret-down {
   float: right;
-  margin-top: 5px;
+  margin-top: 0;
+  width: 20px;
+  height: 20px;
 }
 .translate-100 {
   background: white;
@@ -460,7 +462,7 @@
     border: 3px solid var(--basecolor);
     position: relative;
     margin: 0 auto;
-    width: 70%;
+    width: 100%;
   }
 }
 .sized-image {
@@ -532,6 +534,10 @@
   }
 }
 
+.rounded-sides {
+  overflow: hidden
+}
+
 .rounded-sides:first-child {
   border-top-left-radius: 35px;
   border-bottom-left-radius: 35px;
@@ -539,6 +545,10 @@
 .rounded-sides:last-child {
   border-top-right-radius: 35px;
   border-bottom-right-radius: 35px;
+}
+
+.rounded-sides span {
+  line-height: 1;
 }
 
 /* Custom CSS for Radio Buttons Start*/

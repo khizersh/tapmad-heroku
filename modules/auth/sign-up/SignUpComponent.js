@@ -36,8 +36,8 @@ const SignUpComponent = ({ tab, packageId }) => {
           {`
           .grey-background{
             background-image:url(${image}) !important;
-            background-size:cover !important;
-            background-position:0px 52px !important;
+            
+            background-position:center 52px !important;
             background-repeat:no-repeat !important;
           }
           `}

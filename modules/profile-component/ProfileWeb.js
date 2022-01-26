@@ -161,6 +161,9 @@ const MyAccountWeb = ({
           .package-duration {
             width: 50px;
             font-weight: 300;
+            line-height: 0.9;
+            margin-top: 10px;
+        }
           }
           .package-feature {
             margin-top: 3.5rem;
@@ -324,7 +327,7 @@ const MyAccountWeb = ({
                           </div>
                         </div>
                       </div>
-                      <span className="mb-3 font-13 mt-2 d-block">
+                      <span className="mb-3 font-13 mt-2 d-block text-justify">
                         {allData &&
                           allData.PackageDescription[0].ContentDescription}
                       </span>
@@ -364,7 +367,10 @@ const MyAccountWeb = ({
                         <div className="col-4 ">
                           <button
                             type="button"
-                            disabled={upgardeBtn ||  SignUpState?.userCountry?.ShortName !== "PK"}
+                            disabled={
+                              upgardeBtn ||
+                              SignUpState?.userCountry?.ShortName !== "PK"
+                            }
                             className="btn w-100 px-2  text-light rounded-pill optButtons"
                             onClick={onClickUpgradePackage}
                           >

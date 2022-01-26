@@ -56,6 +56,14 @@ export default function PackageSelectView({ onChange }) {
                 text-transform: capitalize;
                 color: black;
               }
+              li:hover,
+              li:focus {
+                background-color: white;  
+              }
+              li:hover span,
+              li:focus span {
+                color: var(--basecolor);
+              }
               @media (min-width: 992px) {
                 li {
                   padding-left: 30px;

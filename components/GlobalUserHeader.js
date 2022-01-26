@@ -84,14 +84,18 @@ const GlobalUserHeader = () => {
               title="Go Back"
               onClick={() => router.push(Cookie.getCookies("backUrl") || "/")}
             />
-            <Link href="/editprofile">
-              <a
-                className="btn btn-light text-base rounded-pill line-1 btn-lg"
-                title="Edit Profile"
-              >
-                Edit Profile
-              </a>
-            </Link>
+            {router.pathname.indexOf("/sign-up" > -1) ? (
+              <></>
+            ) : (
+              <Link href="/editprofile">
+                <a
+                  className="btn btn-light text-base rounded-pill line-1 btn-lg"
+                  title="Edit Profile"
+                >
+                  Edit Profile
+                </a>
+              </Link>
+            )}
           </>
         ) : (
           <>
