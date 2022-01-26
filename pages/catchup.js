@@ -6,7 +6,7 @@ import CatchupProvider from "../contexts/CatchupContext";
 
 const catchup = () => {
   return (
-    <CatchupProvider>
+    // <CatchupProvider>
       <div className="container-fluid">
         <Head>
           <title>Catchup On-Demand TV Shows Online | Tapmad TV</title>
@@ -17,7 +17,7 @@ const catchup = () => {
         <TabSlider />
         <TabDetails />
       </div>
-    </CatchupProvider>
+    // </CatchupProvider>
   );
 };
 

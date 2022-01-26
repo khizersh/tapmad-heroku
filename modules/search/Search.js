@@ -62,7 +62,8 @@ const Search = (props) => {
     }
   };
 
-  const onClickSearch = async () => {
+  const onClickSearch = async (e) => {
+    e.preventDefault();
     setLoader(true);
     if (keyword) {
       const data = await SearchService.getItemByKeyrwords(
@@ -93,21 +94,21 @@ const Search = (props) => {
     setLoader(false);
   };
 
-  useEffect(() => {
-    document
-      .getElementById("searchbox")
-      .addEventListener("keydown", function (event) {
-        if (event.code === "Enter" || event.code === "NumpadEnter") {
-          event.preventDefault();
-          onClickSearch();
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   document
+  //     .getElementById("searchbox")
+  //     .addEventListener("keydown", function (event) {
+  //       if (event.key === "Enter" || event.key === "NumpadEnter") {
+  //         event.preventDefault();
+  //         onClickSearch();
+  //       }
+  //     });
+  // }, []);
 
   return (
     <div className="container-fluid pos-absolute">
       <div className="row no-wrap mb-2 search-header">
-        <div className="col-12 d-flex my-4 mx-auto">
+        <form className="col-12 d-flex my-4 mx-auto" onSubmit={onClickSearch}>
           <div className="mt-2 width-mbl">
             <span className="back-icon" onClick={onClickBack}>
               <i className="fa fa-arrow-left  float-left pt-1 "></i>
@@ -124,7 +125,7 @@ const Search = (props) => {
             id="searchbox"
             // ref={inputSearch}
           />
-        </div>
+        </form>
       </div>
 
       <div className="loop_search row">

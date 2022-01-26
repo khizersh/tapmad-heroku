@@ -16,6 +16,7 @@ const watch = (props) => {
   const router = useRouter();
   const { catchupState } = useContext(CatchupContext);
   const [related, setRelated] = useState([]);
+
   useEffect(() => {
     if (!props.allowUser) {
       if (props.data?.Video?.PaymentTabId) {
@@ -41,13 +42,12 @@ const watch = (props) => {
     }
   }, [props.allowUser]);
 
-console.log("props.video : ",props.video);
 
   return (
     <div>
-      {/* {props.allowUser && props.video && (
+      {props.allowUser && props.video && (
         <CatchupPlayer video={props.video} videoList={related} />
-      )} */}
+      )}
     </div>
   );
 };
@@ -69,6 +69,7 @@ export async function getServerSideProps(context) {
       chanelDetail.CleanVideoId,
       ip
     );
+
 
     if (res != null) {
       return {
@@ -95,7 +96,7 @@ export async function getServerSideProps(context) {
     } else {
       // not logged in
       return {
-        props: response(null, null, chanelDetail, false),
+        props: response(null, [], chanelDetail, false),
       };
     }
   }
@@ -106,7 +107,7 @@ export default watch;
 const response = (video, videoList, channel, allowUser) => {
   return {
     video,
-    videoList,
+    videoList : [],
     channel,
     allowUser,
     env: process.env.TAPENV,
