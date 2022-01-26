@@ -190,7 +190,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               setLoader(false);
               return swal({
                 timer: 3000,
-                text: "Please enter cnic",
+                text: "Please enter 13 digit cnic",
                 icon: "info",
                 buttons: false,
               });

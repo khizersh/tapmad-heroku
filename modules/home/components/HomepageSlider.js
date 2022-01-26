@@ -62,6 +62,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
   }
 
   useEffect(async () => {
+    console.log(movies,'MOBIES');
     const cancleFetch = axios.CancelToken;
     const source = cancleFetch.source();
     const { getHomePageAdsDetail } = (
