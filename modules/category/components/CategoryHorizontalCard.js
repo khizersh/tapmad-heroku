@@ -10,7 +10,7 @@ const CategoryHorizontalCard = ({ video, type, slug }) => {
           .package {
             position: absolute !important;
             top: 5px;
-            right: 5px;
+            left: 5px;
             width: 15px !important;
             height: 15px !important;
           }

@@ -25,6 +25,7 @@ export default function LiveChannels({ channel }) {
     setLocalMovies(modifiedResponse);
   }, []);
 
+  
   async function fetchNewMovies() {
     if (currentRow == channel.Sections.totalSections) {
       return;
@@ -45,6 +46,7 @@ export default function LiveChannels({ channel }) {
       setLocalMovies(updatedListOfMovies);
     }
   }
+  
   function modifyLivePageResponse(movies) {
     return {
       Sections: {
@@ -81,9 +83,9 @@ export default function LiveChannels({ channel }) {
           ads={false}
           name={"Live"}
         />
-        {currentRow !== localMovies.Sections.totalSections && (
+        {currentRow !== localMovies.Sections.totalSections ? (
           <ScrollComponent loadMore={fetchNewMovies} />
-        )}
+        ) : <></>}
       </div>
     </>
   );

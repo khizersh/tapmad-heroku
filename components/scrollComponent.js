@@ -12,8 +12,10 @@ export default function ScrollComponent({ loadMore }) {
     const observer = new IntersectionObserver(handleObserver, options);
 
     if (loader.current) {
+      console.log( observer.observe,'Observer');
       observer.observe(loader.current);
     }
+    console.log(loader,'Loader');
   }, []);
 
   useEffect(() => {
