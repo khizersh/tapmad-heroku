@@ -172,6 +172,8 @@ function setUrlAccordingToVideoType(movie, type) {
         movie.VideoEntityId == 579 ||
         movie.VideoEntityId == 950 ||
         movie.VideoEntityId == 953 ||
+        movie.VideoEntityId == 963 ||
+        movie.VideoEntityId == 964 ||
         movie.VideoEntityId == 946
       ) {
         slug = SEOFriendlySlugsIsCategoryFalse(movie, true);

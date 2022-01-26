@@ -25,7 +25,7 @@
 }
 .optButtons:hover {
   font-size: 14px;
-  font-family: "okomitomedium";
+  /* font-family: "okomitomedium"; */
   background-color: #87c242;
   /* background: transparent
     linear-gradient(96deg, var(--primary-37c673) 0%, #109f69 100%) 0% 0%
@@ -164,6 +164,12 @@
 
 .btn_submit {
   background-color: #87c242 !important;
+  color: white;
+}
+
+.btn_submit:hover,
+.btn_submit:focus {
+  background-color: #9eda59 !important;
   color: white;
 }
 

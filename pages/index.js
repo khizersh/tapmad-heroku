@@ -1,10 +1,11 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import HomePage from "../modules/home/components/HomePage";
 import requestIp from "request-ip";
 
 import { HomeService } from "../modules/home/components/home.service";
 import isGoogle from "../services/google-dns-lookup";
+
 // import { UpdateBase } from "../services/apilinks";
 
 export default function Home(props) {
@@ -12,6 +13,7 @@ export default function Home(props) {
     <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        pre
         <link rel="manifest" href="/manifest.json" />
         <title>
           Watch Live TV - Live PSL, Sports, EPL, Movies Online - Tapmad TV
@@ -30,7 +32,9 @@ export default function Home(props) {
         />
         <script src="https://cdn.jwplayer.com/libraries/TPQRzCL9.js"></script>
       </Head>
-      <h1 className="d-none">Live TV, Sports, Movies, VOD Streaming Pakistan</h1>
+      <h1 className="d-none">
+        Live TV, Sports, Movies, VOD Streaming Pakistan
+      </h1>
       <HomePage {...props} />
     </div>
   );
@@ -53,11 +57,11 @@ export async function getServerSideProps(context) {
   var movieList = await HomeService.getFeaturedHomePageData(ip);
   if (movieList != null) movie = await movieList.data;
   else movie = {};
-  
+
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
   else banner = {};
-  
+
   var featuredContent = await HomeService.getWebTabBannersData(ip);
   if (featuredContent != null) featured = await featuredContent.data;
   else featured = {};
