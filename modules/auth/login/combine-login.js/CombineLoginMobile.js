@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { mobileIcon } from "../../../../services/imagesLink";
 import Link from "next/link";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
+import Head from "next/head";
 
 const CombineLoginMobile = ({
   AuthState,
@@ -19,6 +20,17 @@ const CombineLoginMobile = ({
 
   return (
     <div className="custom-bg">
+      <Head>
+        <style>
+          {`
+          @media (max-width: 800px) {
+            .custom-input {
+              padding: 7px 16px !important;
+            }
+          }
+        `}
+        </style>
+      </Head>
       <form
         onSubmit={(e) => {
           e.preventDefault();

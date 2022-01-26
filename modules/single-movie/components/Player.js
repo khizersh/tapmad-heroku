@@ -287,8 +287,8 @@ export default function Player({ movies }) {
           }
           .vdobox {
             position: sticky !important;
-            top: 77px;
-            z-index: 9;
+            top: 60px;
+            z-index: 20;
           }
           div.d-sm-none {
             display: none !important

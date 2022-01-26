@@ -53,21 +53,21 @@ export default memo(function PSLComponent({ channel, movie }) {
       } else {
         return;
       }
-      const sticky = 100 + 0;
-      if (window.pageYOffset > sticky) {
-        if (window.screen.width < 639) {
-          header.classList.add("sticky-tab");
-          header.style.position = "fixed";
-          header.style.top = Number(playerHeight) + 58 + "px";
-          header.style.marginTop = "0px";
-        } else {
-          header.classList.remove("sticky-tab");
-        }
-      } else {
-        header.classList.remove("sticky-tab");
-        header.style.position = "unset";
-        header.style.top = "unset";
-      }
+      // const sticky = 100 + 0;
+      // if (window.pageYOffset > sticky) {
+      //   if (window.screen.width < 639) {
+      //     header.classList.add("sticky-tab");
+      //     header.style.position = "fixed";
+      //     header.style.top = Number(playerHeight) + 58 + "px";
+      //     header.style.marginTop = "0px";
+      //   } else {
+      //     header.classList.remove("sticky-tab");
+      //   }
+      // } else {
+      //   header.classList.remove("sticky-tab");
+      //   header.style.position = "unset";
+      //   header.style.top = "unset";
+      // }
     });
     return () => {
       window.removeEventListener("scroll", scrollCallBack);
