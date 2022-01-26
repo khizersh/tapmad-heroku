@@ -14,7 +14,7 @@ const CombineLoginDesktop = ({
   mobileNo,
   pin,
   forgetClick,
-  setLoader
+  setLoader,
 }) => {
   const { SignUpState } = useContext(SignUpContext);
 
@@ -29,7 +29,7 @@ const CombineLoginDesktop = ({
   //   const country = await AuthService.getGeoInfo();
   // });
   const onClickLogin = () => {
-    setLoader(true)
+    setLoader(true);
     loginUser();
   };
 
@@ -137,7 +137,7 @@ const CombineLoginDesktop = ({
                 value={mobileNo}
                 onChange={(e) => handleNumber(e)}
                 autoComplete={"off"}
-                maxLength={10}
+                maxLength={AuthState.CountryCode === "+92" ? 10 : 20}
                 pattern="\d*"
               />
             </div>

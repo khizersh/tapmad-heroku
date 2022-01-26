@@ -12,8 +12,9 @@ import { get } from "../../../services/http-service";
 import { getChannelsWithPagination } from "../../../services/apilinks";
 import Link from "next/link";
 
-const HomepageSlider = dynamic(() => import("../../home/components/HomepageSlider"))
-
+const HomepageSlider = dynamic(() =>
+  import("../../home/components/HomepageSlider")
+);
 
 export default function LiveChannels({ channel }) {
   var bannerSettings = basicSliderConfig(1, 1);
@@ -25,7 +26,8 @@ export default function LiveChannels({ channel }) {
     setLocalMovies(modifiedResponse);
   }, []);
 
-  
+  console.log("localMovies", localMovies);
+
   async function fetchNewMovies() {
     if (currentRow == channel.Sections.totalSections) {
       return;
@@ -46,7 +48,7 @@ export default function LiveChannels({ channel }) {
       setLocalMovies(updatedListOfMovies);
     }
   }
-  
+
   function modifyLivePageResponse(movies) {
     return {
       Sections: {
@@ -83,9 +85,12 @@ export default function LiveChannels({ channel }) {
           ads={false}
           name={"Live"}
         />
-        {currentRow !== localMovies.Sections.totalSections ? (
+        {localMovies.Sections.totalSections && currentRow !==
+        localMovies.Sections.totalSections ? (
           <ScrollComponent loadMore={fetchNewMovies} />
-        ) : <></>}
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
