@@ -131,7 +131,6 @@ export default memo(function PSLComponent({ channel, movie }) {
 
     // Related Videos <start>
     else if (selectedTab == 3) {
-
       return (
         <div
           className="text-left mt-3 related-video"
@@ -165,10 +164,10 @@ export default memo(function PSLComponent({ channel, movie }) {
     else if (selectedTab == 2) {
       return (
         <Image
-          src="/schedule.png"
+          src="/schedule-web-min.jpg"
           className="mt-4"
-          width="1150"
-          height="1438"
+          width="1122"
+          height="1597"
         />
       );
     }
