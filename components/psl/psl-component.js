@@ -32,7 +32,7 @@ export default memo(function PSLComponent({ channel, movie }) {
   }
 
   const { Event_key } = channel;
-
+console.log(channel)
   useEffect(async () => {
     const tabs = await getPSLTabsService();
     setTabs(tabs.Tabs);
@@ -174,8 +174,8 @@ export default memo(function PSLComponent({ channel, movie }) {
     // Schedule tab <end>
 
     // Scoreboard tab <start>
-    else if (selectedTab == 4 && Event_key) {
-      // else if (selectedTab == 4 && !Event_key) {
+    // else if (selectedTab == 4 && Event_key) {
+      else if (selectedTab == 4 && !Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
@@ -222,8 +222,8 @@ export default memo(function PSLComponent({ channel, movie }) {
                     return <></>;
                   } else if (tab.ChatOrder == 2 && !channel.IsChat) {
                     return <></>;
-                  } else if (tab.ChatOrder == 4 && !Event_key) {
-                    return <></>;
+                  // } else if (tab.ChatOrder == 4 && !Event_key) {
+                    // return <></>;
                   } else
                     return (
                       <Tab
