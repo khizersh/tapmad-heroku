@@ -28,6 +28,7 @@ export default function PSLChat({ channel }) {
   const [chats, setChats] = useState({});
   const database = FireBase.database();
   const [room, setRoom] = useState(1);
+  const [isGeneralRoom, setIsGeneralRoom] = useState(false);
   const textMessage = useRef();
   const [modalShow, setModalShow] = useState(false);
   const [currentRoomOption, setCurrentRoomOption] = useState(0);
@@ -105,11 +106,17 @@ export default function PSLChat({ channel }) {
     if (response.data.Response.responseCode == 1 && response.data.ChatRooms) {
       setChatRooms(response.data.ChatRooms[0].Rooms);
       selectRoom(response.data.ChatRooms[0].Rooms[0].ChatRoomId);
+      setIsGeneralRoom(true);
     }
   }
   function selectRoom(e) {
     removeListenerOfNonActiveChat(database, channel.VideoEntityId, room);
     let roomId = e;
+    if (chatRoom[0]?.ChatRoomId == roomId) {
+      setIsGeneralRoom(true);
+    } else {
+      setIsGeneralRoom(false);
+    }
     setRoom(roomId);
     getSingleRoomChat(database, channel.VideoEntityId, roomId, (list) => {
       setChats(list);
@@ -267,11 +274,11 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                             ? null
                             : "1px solid #66aa33",
                         backgroundColor:
-                          room == roomData.ChatRoomId ? null : "#231f20",
+                        room == roomData.ChatRoomId ? null : "#231f20",
                       }}
                     >
                       {roomData.RoomName}
-                      {room == roomData.ChatRoomId && room != 1 ? (
+                      {room == roomData.ChatRoomId && !isGeneralRoom ? (
                         <i
                           className={`fa fa-times ${pslStyles.crossIcon}`}
                           onClick={() => deleteRoom(roomData)}
@@ -292,11 +299,11 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
         <div className={pslStyles.all_messages}>
           {chats &&
             Object.keys(chats).map(function (keyName, keyIndex) {
-              setTimeout(() => {
+              // setTimeout(() => {
                 // document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth' });
                 // var target = document.getElementsByClassName("lastDiv")[0];
                 // target.parentNode.scrollTop = target.offsetTop;
-              }, 100);
+              // }, 100);
               return (
                 <div className="row" key={keyIndex}>
                   {chats[keyName].type == 3 && (
@@ -395,7 +402,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                 placeholder="Type your message..."
               ></textarea>
             </div>
-            {room != 2 && room != 1 ? (
+            {!isGeneralRoom ? (
               <div
                 style={{
                   textAlign: "center",
