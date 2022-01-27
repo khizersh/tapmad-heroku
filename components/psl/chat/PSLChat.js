@@ -395,7 +395,8 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                 placeholder="Type your message..."
               ></textarea>
             </div>
-            {room != 2 && room != 1 ? (
+
+            {room != 1 ? (
               <div
                 style={{
                   textAlign: "center",
