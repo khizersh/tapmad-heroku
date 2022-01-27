@@ -8,7 +8,7 @@ export default function HomepageFeatured({ featured }) {
 
   return (
     <div>
-      <h5>Featured</h5>
+      <h5>{featured?.WebBanners?.length ? Featured : null}</h5>
       <Slider {...settings}>
         {featured.WebBanners.map((e, i) => {
           let url = replaceCategoryToShows(e.RedirectWebBannerImage); 
