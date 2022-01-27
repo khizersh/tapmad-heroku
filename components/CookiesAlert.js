@@ -28,6 +28,7 @@ const CookiesAlert = () => {
             font-size: 1.5em;
             line-height: 1;
             margin: 0;
+            font-weight : normal;
           }
           .cookies-popup p {
             margin: 10px 0 15px;
@@ -49,10 +50,9 @@ const CookiesAlert = () => {
         `}
       </style>
       <div className="cookies-popup">
-        <h2>I use cookie</h2>
+        <h2>Use of cookies:</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-          veritatis minima fuga, ipsam veniam recusandae.
+        We use cookies to make your experience better.
         </p>
         <div className="d-flex cookies-popup-btn">
           <button
