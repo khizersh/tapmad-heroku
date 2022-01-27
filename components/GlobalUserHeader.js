@@ -74,7 +74,7 @@ const GlobalUserHeader = () => {
           screenSize ? "d-flex" : "d-none"
         } flex-wrap align-items-center justify-content-between`}
       >
-        {router.pathname.indexOf("/my-account" > -1) &&
+        {router.pathname.indexOf("/myaccount" > -1) &&
         screenSize < 799 &&
         userData ? (
           <>

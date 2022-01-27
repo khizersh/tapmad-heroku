@@ -146,9 +146,9 @@ export default function PSLChat({ channel }) {
 
     if (message.message.trim() == "") {
       textMessage.current.style.border = "1px solid red";
-      setTimeout(() => {
-        textMessage.current.style.border = "0px";
-      }, 2000);
+      // setTimeout(() => {
+      //   textMessage.current.style.border = "0px";
+      // }, 2000);
     } else {
       if (message.message.trim().length > 99) {
         return swal({
@@ -401,6 +401,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                 className={pslStyles.type_msg}
                 ref={textMessage}
                 placeholder="Type your message..."
+                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               ></textarea>
             </div>
             {!isGeneralRoom ? (
