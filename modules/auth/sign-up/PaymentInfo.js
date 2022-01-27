@@ -20,7 +20,6 @@ function PaymentInfo(props) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const { AuthState } = useContext(AuthContext);
   const onChangeNetwork = useCallback((data) => {
-    console.log("log data : ",data);
     updateUserData({ Operator: data.OperatorId });
   }, []);
   function updateUserData(userData) {
