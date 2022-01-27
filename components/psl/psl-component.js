@@ -32,7 +32,7 @@ export default memo(function PSLComponent({ channel, movie }) {
   }
 
   const { Event_key } = channel;
-
+console.log(channel)
   useEffect(async () => {
     const tabs = await getPSLTabsService();
     setTabs(tabs.Tabs);

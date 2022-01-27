@@ -58,6 +58,7 @@ export async function getServerSideProps(context) {
   if (movieList != null) movie = await movieList.data;
   else movie = {};
 
+  const movies = movie && movie.Tabs && movie.Tabs[0];
   var bannersList = await HomeService.getFeaturedBannerDetailData(ip);
   if (bannersList != null) banner = await bannersList.data;
   else banner = {};
@@ -67,7 +68,7 @@ export async function getServerSideProps(context) {
   else featured = {};
   return {
     props: {
-      movies: movie.Tabs[0],
+      movies,
       banner: banner,
       featured: featured,
       ip: ip,

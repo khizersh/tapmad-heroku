@@ -24,7 +24,9 @@ const SignUpComponent = ({ tab, packageId }) => {
     dispatch({ type: UPDATE_PACKAGE, data: MainPack });
   }
   useEffect(() => {
-    setImage(SignUpState?.SelectedPrice?.PackageBannerImageWeb);
+    if (!isMobile) {
+      setImage(SignUpState?.SelectedPrice?.PackageBannerImageWeb);
+    }
     if (window.innerWidth < 799) {
       setIsMobile(true);
     }

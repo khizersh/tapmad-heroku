@@ -118,7 +118,10 @@ const CombineLoginDesktop = ({
               <></>
             )} */}
             <div className="mx-2">
-              <label className="border-round custom-input text-dark font-14 line-1 px-2">
+              <label
+                className="border-round custom-input text-dark font-14 line-1 px-2"
+                style={{ backgroundColor: "#ccc", color: "#555 !important" }}
+              >
                 {"+" + SignUpState?.userCountry?.CountryCode || " "}
               </label>
             </div>
@@ -160,7 +163,7 @@ const CombineLoginDesktop = ({
           </div>
         </div>
         <div className="d-flex justify-content-end">
-          <div className="mb-3 mx-5 pr-3">
+          <div className="mb-3 ml-5">
             <Link
               href={
                 AuthState && AuthState.LoginOperators.length
