@@ -174,8 +174,8 @@ console.log(channel)
     // Schedule tab <end>
 
     // Scoreboard tab <start>
-    // else if (selectedTab == 4 && Event_key) {
-      else if (selectedTab == 4 && !Event_key) {
+    else if (selectedTab == 4 && Event_key) {
+      // else if (selectedTab == 4 && !Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
@@ -222,8 +222,8 @@ console.log(channel)
                     return <></>;
                   } else if (tab.ChatOrder == 2 && !channel.IsChat) {
                     return <></>;
-                  // } else if (tab.ChatOrder == 4 && !Event_key) {
-                    // return <></>;
+                  } else if (tab.ChatOrder == 4 && !Event_key) {
+                    return <></>;
                   } else
                     return (
                       <Tab
