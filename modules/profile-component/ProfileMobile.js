@@ -206,7 +206,7 @@ const MyAccountMobile = ({
                 onClick={clickEditProfile}
                 disabled={upgardeBtn}
               >
-                Update Package
+                Upgrade Package
               </button>
             </div>
           </div>
