@@ -55,7 +55,11 @@ const CookiesAlert = () => {
           veritatis minima fuga, ipsam veniam recusandae.
         </p>
         <div className="d-flex cookies-popup-btn">
-          <button className="btn btn-primary text-white" type="button">
+          <button
+            className="btn btn-primary text-white"
+            type="button"
+            onClick={hideCookies}
+          >
             I understand
           </button>
           <button
