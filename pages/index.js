@@ -64,6 +64,7 @@ export async function getServerSideProps(context) {
   else banner = {};
 
   var featuredContent = await HomeService.getWebTabBannersData(ip);
+  console.log("featuredContent", featuredContent);
   if (featuredContent != null) featured = await featuredContent.data;
   else featured = {};
   return {

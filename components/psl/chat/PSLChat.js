@@ -274,7 +274,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                             ? null
                             : "1px solid #66aa33",
                         backgroundColor:
-                        room == roomData.ChatRoomId ? null : "#231f20",
+                          room == roomData.ChatRoomId ? null : "#231f20",
                       }}
                     >
                       {roomData.RoomName}
@@ -300,9 +300,9 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
           {chats &&
             Object.keys(chats).map(function (keyName, keyIndex) {
               // setTimeout(() => {
-                // document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth' });
-                // var target = document.getElementsByClassName("lastDiv")[0];
-                // target.parentNode.scrollTop = target.offsetTop;
+              // document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth' });
+              // var target = document.getElementsByClassName("lastDiv")[0];
+              // target.parentNode.scrollTop = target.offsetTop;
               // }, 100);
               return (
                 <div className="row" key={keyIndex}>
@@ -318,9 +318,10 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                         <div className={pslStyles.avatar}>
                           <img
                             src={
-                              chats[keyName].userProfile != ""
-                                ? chats[keyName].userProfile
-                                : userProfile
+                              //   chats[keyName].userProfile != ""
+                              //     ? chats[keyName].userProfile
+                              //     : userProfile
+                              userProfile
                             }
                             width="40"
                             style={{ borderRadius: "10px" }}
