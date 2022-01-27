@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useContext } from "react";
 import ItemCard from "../../modules/search/ItemCard";
 import { viewMoreContent } from "../../services/apilinks";
 import { get } from "../../services/http-service";
