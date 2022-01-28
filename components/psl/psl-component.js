@@ -179,13 +179,13 @@ export default memo(function PSLComponent({ channel, movie }) {
     // Schedule tab <end>
 
     // Scoreboard tab <start>
-    else if (selectedTab == 4 && !Event_key) {
-      // else if (selectedTab == 4 && !Event_key) {
+    // else if (selectedTab == 4 && !Event_key) {
+    else if (selectedTab == 4 && Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
-      // return <ScoreBoard eventKey={Event_key} />;
-      return <ScoreBoard eventKey={113322505} />;
+      return <ScoreBoard eventKey={Event_key} />;
+      // return <ScoreBoard eventKey={113322505} />;
     }
     // Scoreboard tab <end>
     else {
