@@ -62,10 +62,12 @@ const HomepageSlider = ({ movies, ads, name }) => {
   }
 
   useEffect(async () => {
+    const cancleFetch = axios.CancelToken;
+    const source = cancleFetch.source();
     const { getHomePageAdsDetail } = (
       await import("../../../modules/auth/auth.service")
     ).AuthService;
-    getHomePageAdsDetail()
+    getHomePageAdsDetail(source.token)
       .then((res) => {
         if (res.data.responseCode == 1) {
           setAdsRow(res.data.data);
@@ -77,9 +79,8 @@ const HomepageSlider = ({ movies, ads, name }) => {
         console.log(e);
         setAdsRow([]);
       });
-    return () => [];
+    return () => source.cancel("axios request cancelled");
   }, []);
-  
   return (
     <div>
       {movies &&
