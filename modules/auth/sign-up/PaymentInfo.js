@@ -140,7 +140,6 @@ function PaymentInfo(props) {
         .mthd_form .form-control,
         .mthd_form .payment-icon {
           font-size: 14px;
-          height: 32px;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
