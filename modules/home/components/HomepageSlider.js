@@ -65,20 +65,18 @@ const HomepageSlider = ({ movies, ads, name }) => {
     const { getHomePageAdsDetail } = (
       await import("../../../modules/auth/auth.service")
     ).AuthService;
-    return () => {
-      getHomePageAdsDetail()
-        .then((res) => {
-          if (res.data.responseCode == 1) {
-            setAdsRow(res.data.data);
-          } else {
-            setAdsRow([]);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
+    getHomePageAdsDetail()
+      .then((res) => {
+        if (res.data.responseCode == 1) {
+          setAdsRow(res.data.data);
+        } else {
           setAdsRow([]);
-        });
-    };
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        setAdsRow([]);
+      });
   }, []);
   return (
     <div>

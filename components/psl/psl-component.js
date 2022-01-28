@@ -32,17 +32,20 @@ export default memo(function PSLComponent({ channel, movie }) {
   }
 
   const { Event_key } = channel;
-  // console.log("Channel", channel);
-  // console.log("Event_key", Event_key);
+
   useEffect(async () => {
     const tabs = await getPSLTabsService();
-    setTabs(tabs.Tabs);
     await getRelatedChannels();
+    setTabs(tabs.Tabs);
     setSelectedTab(1);
     if (!channel.IsChat) {
       setSelectedTab(3);
     }
-    setTimeout(() => location.reload(), 1e5);
+    return () => {
+      setTabs([]);
+      setSelectedTab(null);
+    };
+    // setTimeout(() => location.reload(), 1e5);
   }, []);
 
   useEffect(() => {
