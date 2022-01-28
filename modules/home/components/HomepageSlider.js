@@ -81,6 +81,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
       });
     return () => source.cancel("axios request cancelled");
   }, []);
+  
   return (
     <div>
       {movies &&
