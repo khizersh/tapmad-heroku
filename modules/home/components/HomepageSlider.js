@@ -62,24 +62,23 @@ const HomepageSlider = ({ movies, ads, name }) => {
   }
 
   useEffect(async () => {
-    const cancleFetch = axios.CancelToken;
-    const source = cancleFetch.source();
     const { getHomePageAdsDetail } = (
       await import("../../../modules/auth/auth.service")
     ).AuthService;
-    getHomePageAdsDetail(source.token)
-      .then((res) => {
-        if (res.data.responseCode == 1) {
-          setAdsRow(res.data.data);
-        } else {
+    return () => {
+      getHomePageAdsDetail()
+        .then((res) => {
+          if (res.data.responseCode == 1) {
+            setAdsRow(res.data.data);
+          } else {
+            setAdsRow([]);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
           setAdsRow([]);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-        setAdsRow([]);
-      });
-    return () => source.cancel("axios request cancelled");
+        });
+    };
   }, []);
   return (
     <div>
