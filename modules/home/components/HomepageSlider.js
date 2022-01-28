@@ -79,6 +79,7 @@ const HomepageSlider = ({ movies, ads, name }) => {
       });
     return ()=> setAdsRow([])
   }, []);
+  
   return (
     <div>
       {movies &&
