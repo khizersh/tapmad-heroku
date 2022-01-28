@@ -29,6 +29,9 @@
 .font-meher {
   font-family: "Mehr Nastaliq Web";
 }
+.spacing {
+  letter-spacing: 2px;
+}
 .tm_news_trndng {
   background-color: #121117;
   border: 1px solid #222;
@@ -49,7 +52,7 @@
 }
 
 .border-left {
-  border-left: 3px solid #87c242  !important;
+  border-left: 3px solid #87c242 !important;
 }
 
 .border-bottom-news {

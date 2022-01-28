@@ -229,7 +229,39 @@ function pushNewMoviesIntoList(localMovies, newMovies) {
   };
   return movieClone;
 }
-
+function detectCookie() {
+  if (
+    (navigator.userAgent.indexOf("Opera") ||
+      navigator.userAgent.indexOf("OPR")) != -1
+  ) {
+    return "Opera";
+  } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+    return "Chrome";
+  } else if (navigator.userAgent.indexOf("Safari") != -1) {
+    if (navigator.cookieEnabled) {
+      return;
+    } else {
+      window.location.href = "prefs:root=ACCOUNT_SETTINGS";
+    }
+    return "Safari";
+  } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+    return "Firefox";
+  } else if (
+    navigator.userAgent.indexOf("MSIE") != -1 ||
+    !!document.documentMode == true
+  ) {
+    return "IE";
+  } else {
+    return "Unknown";
+  }
+}
+function langDetect(param) {
+  if (/^[a-zA-Z]/.test(param)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 function setUrlToCookies(key, url) {
   if (
     !url.includes("/sign-up") &&
@@ -332,11 +364,13 @@ module.exports = {
   encryptWithAES,
   decryptWithAES,
   getUserDetails,
+  detectCookie,
   SignOutUser,
   addScriptCodeInDom,
   addScriptUrlInDom,
   viewMoreCleanUrls,
   findImageInVODObject,
+  langDetect,
   log,
   verifyURL,
   checkForBoolean,
