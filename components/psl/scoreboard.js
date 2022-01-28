@@ -58,11 +58,11 @@ class ScoreBoard extends Component {
           `}
         </style>
 
-        <div className="my-3">Google ads</div>
+        {/* <div className="my-3">Google ads</div> */}
 
         {data ? (
           <>
-            <h2 className="font-weight-light mb-0 text-center h5 line-1">
+            <h2 className="font-weight-light mb-0 text-center h5 line-1 mt-3">
               {data.team_1} vs {data.team_2} <br /> {data.CurrentTeamPlaying}{" "}
               <span className="text-base">{data.LiveScore}</span>
             </h2>
