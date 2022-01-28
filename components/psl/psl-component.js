@@ -179,12 +179,13 @@ export default memo(function PSLComponent({ channel, movie }) {
     // Schedule tab <end>
 
     // Scoreboard tab <start>
-    else if (selectedTab == 4 && Event_key) {
+    else if (selectedTab == 4 && !Event_key) {
       // else if (selectedTab == 4 && !Event_key) {
       if (!ScoreBoard) {
         ScoreBoard = loadable(() => import("./scoreboard"));
       }
-      return <ScoreBoard eventKey={Event_key} />;
+      // return <ScoreBoard eventKey={Event_key} />;
+      return <ScoreBoard eventKey={113322505} />;
     }
     // Scoreboard tab <end>
     else {
@@ -227,8 +228,8 @@ export default memo(function PSLComponent({ channel, movie }) {
                     return <></>;
                   } else if (tab.ChatOrder == 2 && !channel.IsChat) {
                     return <></>;
-                  } else if (tab.ChatOrder == 4 && !Event_key) {
-                    return <></>;
+                    // } else if (tab.ChatOrder == 4 && !Event_key) {
+                    //   return <></>;
                   } else
                     return (
                       <Tab

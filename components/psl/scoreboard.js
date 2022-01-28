@@ -4,19 +4,40 @@ import { getLiveScore } from "./chat/PSLChat.service";
 
 class ScoreBoard extends Component {
   state = { data: null };
+
+  // checkData(data) {
+  //   if (Array.isArray(data)) {
+  //     return "array";
+  //   } else {
+  //     return "object";
+  //   }
+  // }
+
   componentDidMount() {
     const database = FireBase.database();
     getLiveScore(database, this.props.eventKey, (data) => {
-      data && this.setState({ data: data[0] });
+      // console.log("data in live : ", data);
+      this.setState({ data: data[0] });
+      // data && this.setState({ data: data[0] });
     });
   }
+
   // Restrict re-render if LiveScore is matched or data assigned
-  shouldComponentUpdate(nextProps, nextState) {
-    if (!this.state?.data) return true;
-    return !this.state.data[0].LiveScore === nextState.data[0].LiveScore;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(this.state);
+  //   if (!this.state?.data) return true;
+  //   console.log("state", this.state.data);
+  //   console.log("nextState", nextState.data);
+  //   const data =
+  //     this.checkData(this.state.data) === "array"
+  //       ? !this.state.data[0].LiveScore === nextState.data[0].LiveScore
+  //       : !this.state.data.LiveScore === nextState.data.LiveScore;
+  //   return data;
+  // }
+
   render() {
     const { data } = this.state;
+    console.log("data", data);
     return (
       <>
         <style jsx>
