@@ -39,6 +39,9 @@ export const clearTokens = BASEURLAPP + "api/ClearAllCache/T";
 // export const paymentProcess = BASEURLAPP + "api/processEplPaymentTransaction";
 export const paymentProcess =
   BASEURLAPP + "api/processPaymentTransactionNewPackage";
+export const jazzCashRecursion =
+  BASEURLAPP + "api/CardUserOrderJazzCash";
+
 export const setUserPinCode = BASEURLAPP + "api/setUserPinCode";
 export const verifyUserPinCode = BASEURLAPP + "api/verifyUserPinCode";
 export const UserSignUpPromoCode = BASEURLAPP + "api/UserSignUpPromoCode";

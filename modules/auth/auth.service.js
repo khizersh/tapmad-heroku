@@ -18,6 +18,7 @@ import {
   initialPaymentTransactionNew,
   clearTokens,
   sendOTPWithOperator,
+  jazzCashRecursion,
 } from "../../services/apilinks";
 import { Cookie } from "../../services/cookies";
 import { handleResponse, post, get } from "../../services/http-service";
@@ -232,6 +233,33 @@ async function initialTransaction(body) {
   let resp;
   try {
     resp = await post(initialPaymentTransactionNew, body);
+  } catch (error) {
+    resp = null;
+  }
+  const data = handleResponse(resp);
+  if (data != null) {
+    if (data.responseCode == 1) {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    } else {
+      return {
+        data: data,
+        responseCode: data.responseCode,
+        message: data.message,
+      };
+    }
+  } else {
+    return null;
+  }
+}
+
+async function initialTransactionJazzCash(body) {
+  let resp;
+  try {
+    resp = await post(jazzCashRecursion, body);
   } catch (error) {
     resp = null;
   }
@@ -642,4 +670,5 @@ export const AuthService = {
   getAllowRegionsList,
   checkEPLUser,
   signInOrSignUpMobileOperatorByPin,
+  initialTransactionJazzCash
 };
