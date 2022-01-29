@@ -24,6 +24,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [formReady, setFormReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const [apiCallDisable, setApiCallDisable] = useState(false);
   const [open, setOpen] = useState(false);
   const [checkbox, setCheckbox] = useState(true);
 
@@ -124,16 +126,18 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       return 0;
     }
     setLoader(false);
+    setDisable(false);
   }
 
   async function SubscribeUser() {
     if (checkbox) {
+      setDisable(true);
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
-       
         if (!details.MobileNo) {
           setLoader(false);
+          setDisable(false);
           return swal({
             timer: 3000,
             text: "Please enter mobile number",
@@ -143,6 +147,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
         } else {
           if (details.MobileNo.trim().length < 10) {
             setLoader(false);
+            setDisable(false);
             return swal({
               timer: 3000,
               text: "Please enter the 10 digit mobile number",
@@ -160,6 +165,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             details.OperatorId == 100010
           ) {
             setLoader(false);
+            setDisable(false);
             return swal({
               timer: 3000,
               text: "Enter all fields",
@@ -179,6 +185,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           // for other payment methods
           if (!details.OperatorId) {
             setLoader(false);
+            setDisable(false);
             return swal({
               timer: 3000,
               text: "Please select operator",
@@ -199,15 +206,22 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           // }
           if (SignUpState.SelectedMethod?.PaymentId == 4) {
             // only fo jazz cash
-            var jazzResponse = await AuthService.initialTransactionJazzCash(
-              details
-            );
-            UBLPayment(jazzResponse);
+            if (!apiCallDisable) {
+              var jazzResponse = await AuthService.initialTransactionJazzCash(
+                details
+              );
+              setApiCallDisable(true);
+              setTimeout(() => {
+                setApiCallDisable(false);
+              }, 15000);
+              UBLPayment(jazzResponse);
+            }
           } else {
             // for easypaisa and dcb
             if (SignUpState.SelectedMethod?.PaymentId == 5) {
               if (!details.PtclNo || details.PtclNo.length !== 11) {
                 setLoader(false);
+                setDisable(false);
                 return swal({
                   timer: 3000,
                   text: "Please enter PTCL number",
@@ -216,84 +230,92 @@ function SubscribeButtonComponent({ creditCardType, login }) {
                 });
               }
             }
-            var data = await AuthService.initialTransaction(details);
-            setLoader(false);
-            if (data != null) {
-              if (data.responseCode == 0) {
-                swal({ title: data.message, icon: "error", timer: 3000 });
-              } else if (data.responseCode == 11) {
-                //user already subscribed checking PIN SET
-                if (data.data.User.IsPinSet) {
+            if (!apiCallDisable) {
+              var data = await AuthService.initialTransaction(details);
+              setApiCallDisable(true);
+              setTimeout(() => {
+                setApiCallDisable(false);
+              }, 15000);
+              setLoader(false);
+              setDisable(false);
+              if (data != null) {
+                if (data.responseCode == 0) {
+                  swal({ title: data.message, icon: "error", timer: 3000 });
+                } else if (data.responseCode == 11) {
+                  //user already subscribed checking PIN SET
+                  if (data.data.User.IsPinSet) {
+                    swal({
+                      timer: 3000,
+                      title: "You are already subscribed!",
+                      text: "Enter your PIN for login",
+                      icon: "info",
+                      buttons: false,
+                    });
+                    Cookie.setCookies("userId", data.data.User.UserId);
+                    router.push(`/sign-in?number=${details.MobileNo}`);
+                  } else {
+                    swal({
+                      timer: 3000,
+                      title: "You are already subscribed!",
+                      text: "Set your PIN for login",
+                      icon: "info",
+                    });
+                    dispatch({
+                      type: UPDATE_SUBSCRIBE_RESPONSE,
+                      data: { code: 34, newUser: false },
+                    });
+                  }
+                } else if (data.responseCode == 1) {
+                  // setting responseCode and new user true for payment process
                   swal({
-                    timer: 3000,
-                    title: "You are already subscribed!",
-                    text: "Enter your PIN for login",
-                    icon: "info",
-                    buttons: false,
-                  });
-                  Cookie.setCookies("userId", data.data.User.UserId);
-                  router.push(`/sign-in?number=${details.MobileNo}`);
-                } else {
-                  swal({
-                    timer: 3000,
-                    title: "You are already subscribed!",
-                    text: "Set your PIN for login",
-                    icon: "info",
+                    title:
+                      "OTP code send successfully, please enter your code!",
+                    icon: "success",
                   });
                   dispatch({
                     type: UPDATE_SUBSCRIBE_RESPONSE,
-                    data: { code: 34, newUser: false },
+                    data: { code: data.responseCode, newUser: true },
                   });
-                }
-              } else if (data.responseCode == 1) {
-                // setting responseCode and new user true for payment process
-                swal({
-                  title: "OTP code send successfully, please enter your code!",
-                  icon: "success",
-                });
-                dispatch({
-                  type: UPDATE_SUBSCRIBE_RESPONSE,
-                  data: { code: data.responseCode, newUser: true },
-                });
-              } else if (data.responseCode == 6) {
-                // only for jazz cash , process payment api will not call direct transaction from here
-                const loggedIn = checkUserIdAndToken();
-
-                if (loggedIn.valid) {
-                  if (data.data.User.IsPinSet) {
-                    swal({
-                      title: data.message,
-                      icon: "success",
-                      timer: 3000,
-                    }).then((res) => {
-                      let backURL = Cookie.getCookies("backUrl") || "/";
-                      router.push(backURL);
-                    });
+                } else if (data.responseCode == 6) {
+                  // only for jazz cash , process payment api will not call direct transaction from here
+                  const loggedIn = checkUserIdAndToken();
+                  if (loggedIn.valid) {
+                    if (data.data.User.IsPinSet) {
+                      swal({
+                        title: data.message,
+                        icon: "success",
+                        timer: 3000,
+                      }).then((res) => {
+                        let backURL = Cookie.getCookies("backUrl") || "/";
+                        router.push(backURL);
+                      });
+                    } else {
+                      dispatch({
+                        type: UPDATE_SUBSCRIBE_RESPONSE,
+                        data: { code: 34, newUser: false },
+                      });
+                    }
                   } else {
-                    dispatch({
-                      type: UPDATE_SUBSCRIBE_RESPONSE,
-                      data: { code: 34, newUser: false },
-                    });
+                    if (data.data.User.IsPinSet) {
+                      //  do login for non pin api
+                      Cookie.setCookies("utk", data.data.User.UserPassword);
+                      login("", false);
+                    } else {
+                      // send to setpin
+                      dispatch({
+                        type: UPDATE_SUBSCRIBE_RESPONSE,
+                        data: { code: 34, newUser: false },
+                      });
+                    }
                   }
                 } else {
-                  if (data.data.User.IsPinSet) {
-                    //  do login for non pin api
-                    Cookie.setCookies("utk", data.data.User.UserPassword);
-                    login("", false);
-                  } else {
-                    // send to setpin
-                    dispatch({
-                      type: UPDATE_SUBSCRIBE_RESPONSE,
-                      data: { code: 34, newUser: false },
-                    });
-                  }
+                  swal({ title: data.message, icon: "error" });
                 }
               } else {
-                swal({ title: data.message, icon: "error" });
+                swal({ title: "Something went wrong!", icon: "error" });
+                setLoader(false);
+                setDisable(false);
               }
-            } else {
-              swal({ title: "Something went wrong!", icon: "error" });
-              setLoader(false);
             }
           }
         }
@@ -350,6 +372,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             checkbox === true ? "visible" : "opacity-0"
           }`}
           onClick={SubscribeUser}
+          disabled={disable}
         >
           Subscribe Now
         </button>
