@@ -16,7 +16,6 @@ class ScoreBoard extends Component {
   componentDidMount() {
     const database = FireBase.database();
     getLiveScore(database, this.props.eventKey, (data) => {
-      // console.log("data in live : ", data);
       this.setState({ data: data[0] });
       // data && this.setState({ data: data[0] });
     });
