@@ -36,7 +36,6 @@ class ScoreBoard extends Component {
 
   render() {
     const { data } = this.state;
-    console.log("data", data);
     return (
       <>
         <style jsx>
