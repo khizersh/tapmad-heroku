@@ -39,6 +39,7 @@ const MyAccountMobile = ({
   const clickEditProfile = () => {
     router.push("/change-package");
   };
+  console.log("allData : ", allData);
 
   return (
     <div>
@@ -66,6 +67,13 @@ const MyAccountMobile = ({
           }
           dl dd {
             margin-bottom: 0;
+          }
+          .dot {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            display: inline-block;
+            font-size : 10px;
           }
         `}
       </style>
@@ -182,10 +190,17 @@ const MyAccountMobile = ({
                 <div className="std_txt mt-1">
                   {allData && allData.PackageDescription[0].PackageName}
                 </div>
-                <div className="sub-title text-grey">Per month</div>
+                <div className="sub-title text-grey">
+                  {allData?.PackageDescription[0]?.PackagePrice[2]}
+                </div>
               </div>
-              <div className="col-4 p-0">
-                <img src={priceIcon} width="45" alt="minus" />
+              <div className="col-4 p-0 mt-2">
+                {/* <img src={priceIcon} width="45" alt="minus" /> */}
+                <div className="dot bg-green">
+                  <span>{allData?.PackageDescription[0]?.PackagePrice[0]}</span>
+                  <br />
+                  <span>{allData?.PackageDescription[0]?.PackagePrice[1]}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -193,7 +208,7 @@ const MyAccountMobile = ({
             <div>
               <button
                 type="button"
-                className="btn btn-light rounded-pill p-1 w-100"
+                className="btn btn-light text-green rounded-pill p-1 w-100"
                 onClick={() => router.push("/billing-history")}
               >
                 Billing History
@@ -202,7 +217,7 @@ const MyAccountMobile = ({
             <div className="mt-1">
               <button
                 type="button"
-                className="btn btn-gradient text-light rounded-pill p-1 w-100"
+                className="btn bg-green text-white rounded-pill p-1 w-100"
                 onClick={clickEditProfile}
                 disabled={upgardeBtn}
               >

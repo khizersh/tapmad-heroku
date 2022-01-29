@@ -36,8 +36,8 @@ export default function HomePage({ movies, banner, featured, ip }) {
     if (moviesList != null) {
       var newMovies = await moviesList.data;
       if (
-        localMovies.Sections.Movies &&
-        localMovies.Sections.Movies.length > 0
+        localMovies?.Sections?.Movies &&
+        localMovies?.Sections?.Movies?.length > 0
       ) {
         let modifiedNewMovies = HomeService.modifyHomePageResponse(
           newMovies.Tabs[0]
@@ -115,7 +115,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
             )}
             {/* Rendering 2 homepage component for SEO and Users when they scroll */}
             <HomepageSlider
-              movies={!localMovies?.Sections.Movies ? movies.Sections : []}
+              movies={!localMovies?.Sections?.Movies ? movies.Sections : []}
               ads={false}
               name={"Homepage"}
             />
@@ -128,7 +128,7 @@ export default function HomePage({ movies, banner, featured, ip }) {
             ) : (
               <span></span>
             )} */}
-            {localMovies.Sections && localMovies.Sections.Movies ? (
+            {localMovies?.Sections && localMovies?.Sections.Movies ? (
               <HomepageSlider
                 movies={localMovies.Sections.Movies}
                 ads={true}
