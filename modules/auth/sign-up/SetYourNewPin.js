@@ -5,12 +5,16 @@ import swal from "sweetalert";
 import { AuthService } from "../auth.service";
 import withLogin from "../LoginHOC";
 import { SignUpContext } from "../../../contexts/auth/SignUpContext";
+import { useRouter } from "next/router";
 
 function SetYourNewPinSignUp({ login, ip, showUser }) {
+  const router = useRouter();
+  const { number } = router.query;
   const { setLoader } = useContext(MainContext);
   const { SignUpState, dispatch } = useContext(SignUpContext);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
+  const [mobile, setMobile] = useState("");
   const [username, setUsername] = useState("");
   const [showUsername, setShowUsername] = useState(false);
 
@@ -44,7 +48,7 @@ function SetYourNewPinSignUp({ login, ip, showUser }) {
       Language: "en",
       Platform: "web",
       Version: "V1",
-      MobileNo: SignUpState.UserDetails.MobileNo,
+      MobileNo: mobile,
       OperatorId: SignUpState.UserDetails.Operator,
       UserPassword: "",
     };
@@ -103,7 +107,14 @@ function SetYourNewPinSignUp({ login, ip, showUser }) {
 
   useEffect(() => {
     if (SignUpState.UserDetails.MobileNo) {
-      let num = SignUpState.UserDetails.MobileNo;
+      var num = "";
+      if (number) {
+        num = number;
+        setMobile(number)
+      } else {
+        num = SignUpState.UserDetails.MobileNo;
+        setMobile(SignUpState.UserDetails.MobileNo)
+      }
       let body = { Language: "en", MobileNo: num };
       AuthService.GetCardUser(body)
         .then((res) => {
