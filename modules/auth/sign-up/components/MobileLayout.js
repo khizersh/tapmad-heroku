@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Cookie } from "../../../../services/cookies";
 import { SignUpContext } from "../../../../contexts/auth/SignUpContext";
+import Head from "next/head"
 
 const MobileLayout = ({ children, bgImage }) => {
   const router = useRouter();
@@ -33,11 +34,32 @@ const MobileLayout = ({ children, bgImage }) => {
   }, [SignUpState]);
   return (
     <div className="mt-0 mt-sm-2">
+      <Head>
+        <style>
+          {`
+        .bit-top {
+          bottom: 0 !important;
+        }
+        html body .green-header {
+          display: none !important
+        }
+        .pymnt_pge_pr_list {
+          margin-top: 1rem !important
+        }
+        .pymnt_pge_bx {
+          padding: 0 1rem;
+        }
+        .selected-box {
+          padding: 0 0.5rem;
+        }
+        `}
+        </style>
+      </Head>
       <div className="container-fluid p-0 p-sm-2 p-md-3 p-lg-3">
         <div className="">
           <div className="col-12 offset-0 col-sm-8 offset-sm-2 col-md-10 offset-md-1 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 p-0">
             <div className="pymnt_pge_bx">
-              <div className="bg-green p-1 d-flex justify-content-between">
+              <div className="bg-green p-1 d-flex justify-content-between green-header">
                 <button
                   className="btn"
                   style={{
@@ -64,7 +86,11 @@ const MobileLayout = ({ children, bgImage }) => {
                   Login
                 </button>
               </div>
-              <img className="w-100 mb-0" alt="sign-up" src={image} />
+              {image ? (
+                <img className="w-100 mb-0" alt="sign-up" src={image} />
+              ) : (
+                <></>
+              )}
               {children}
             </div>
           </div>
