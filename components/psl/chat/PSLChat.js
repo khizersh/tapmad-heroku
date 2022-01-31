@@ -123,7 +123,8 @@ export default function PSLChat({ channel }) {
     });
   }
 
-  function sendMessage() {
+  function sendMessage(e) {
+    e.preventDefault()
     let name = Cookie.getCookies("userProfileName");
     if (!name || name.trim().toLowerCase() == "anonymous") {
       msg = textMessage.current.value;
@@ -146,9 +147,9 @@ export default function PSLChat({ channel }) {
 
     if (message.message.trim() == "") {
       textMessage.current.style.border = "1px solid red";
-      // setTimeout(() => {
-      //   textMessage.current.style.border = "0px";
-      // }, 2000);
+      setTimeout(() => {
+        textMessage.current.style.border = "0px";
+      }, 2000);
     } else {
       if (message.message.trim().length > 99) {
         return swal({
@@ -159,9 +160,9 @@ export default function PSLChat({ channel }) {
       }
       sendGroupChatMessage(database, message);
       textMessage.current.value = "";
-      // setTimeout(() => {
-      //     document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-      // }, 100)
+      setTimeout(() => {
+          document.getElementsByClassName('lastDiv')[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }, 100)
     }
   }
   function formatAMPM(date) {
@@ -401,7 +402,7 @@ It’s going to be intense, don’t miss it. Subscribe to Tapmad or Login to joi
                 className={pslStyles.type_msg}
                 ref={textMessage}
                 placeholder="Type your message..."
-                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                onKeyDown={(e) => e.key === "Enter" && sendMessage(e)}
               ></textarea>
             </div>
             {!isGeneralRoom ? (

@@ -55,7 +55,6 @@ export default memo(function Register(props) {
 
   useEffect(() => {
     if (number) {
-      console.log("number : ",number);
       dispatch({
         type: UPDATE_USER_DETAILS,
         data: { MobileNo: number },
