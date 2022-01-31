@@ -228,8 +228,8 @@ export default memo(function PSLComponent({ channel, movie }) {
                     return <></>;
                   } else if (tab.ChatOrder == 2 && !channel.IsChat) {
                     return <></>;
-                    // } else if (tab.ChatOrder == 4 && !Event_key) {
-                    //   return <></>;
+                    } else if (tab.ChatOrder == 4 && !Event_key) {
+                      return <></>;
                   } else
                     return (
                       <Tab
