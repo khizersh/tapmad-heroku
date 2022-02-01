@@ -18,6 +18,7 @@ const Syno = (props) => {
   const [video, setVideo] = useState(null);
   const [mount, setMount] = useState(false);
 
+  console.log("props : ", props);
   if (!mount) {
     if (!video) {
       if (Array.isArray(props.data.Video)) {
@@ -40,6 +41,11 @@ const Syno = (props) => {
         <Head>
           <title>{props?.schema?.metaData[0]?.title}</title>
           <meta property="og:type" content="article" />
+          {/* disable cache */}
+          <meta http-equiv="cache-control" content="max-age=0" />
+          <meta http-equiv="cache-control" content="no-cache" />
+          <meta http-equiv="pragma" content="no-cache" />
+          {/* disable cache */}
           <meta
             property="og:title"
             content={props?.schema?.metaData[0]?.title}
