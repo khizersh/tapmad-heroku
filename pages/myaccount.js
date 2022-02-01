@@ -169,9 +169,7 @@ const MyAccountTrial = ({ signout }) => {
 
   return (
     <div className="container-fluid">
-      <div className="profile-container">
-        <RenderViews />
-      </div>
+      <div className="profile-container">{allData && <RenderViews />}</div>
     </div>
   );
 };

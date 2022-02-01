@@ -102,7 +102,7 @@ export default function TaxView({ onChange }) {
               </style>
               <div
                 className="btnwrp"
-                style={{ position: "relative", maxWidth: "33.3333%" }}
+                style={{ position: "relative" }}
               >
                 <li
                   key={i}
