@@ -39,7 +39,8 @@ const Syno = (props) => {
     <>
       {props?.schema ? (
         <Head>
-          <title>{props?.schema?.metaData[0]?.title}</title>
+          {/* <title>{props?.schema?.metaData[0]?.title}</title> */}
+          <title>Mian biwi bacho samentttt MBBS</title>
           <meta property="og:type" content="article" />
           {/* disable cache */}
           <meta http-equiv="cache-control" content="max-age=0" />
