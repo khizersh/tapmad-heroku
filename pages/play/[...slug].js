@@ -36,36 +36,42 @@ const Syno = (props) => {
 
   return (
     <>
-      <Head>
-        <title>{props?.schema?.metaData[0]?.title}</title>
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={props?.schema?.metaData[0]?.title} />
-        <meta
-          property="og:description"
-          content={props?.schema?.metaData[0]?.description}
-        />
-        <meta
-          name="description"
-          content={props?.schema?.metaData[0]?.description}
-        />
-        <meta
-          property="og:image"
-          content={props?.schema?.metaData[0]?.image?.url}
-        />
-        <meta property="og:url" content={props?.schema?.url} />
-        <link rel="canonical" href={props?.schema?.url} />
+      {props?.schema ? (
+        <Head>
+          <title>{props?.schema?.metaData[0]?.title}</title>
+          <meta property="og:type" content="article" />
+          <meta
+            property="og:title"
+            content={props?.schema?.metaData[0]?.title}
+          />
+          <meta
+            property="og:description"
+            content={props?.schema?.metaData[0]?.description}
+          />
+          <meta
+            name="description"
+            content={props?.schema?.metaData[0]?.description}
+          />
+          <meta
+            property="og:image"
+            content={props?.schema?.metaData[0]?.image?.url}
+          />
+          <meta property="og:url" content={props?.schema?.url} />
+          <link rel="canonical" href={props?.schema?.url} />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              props?.schema?.Channels
-                ? props.schema?.Channels[0]
-                : props.schema?.Vod[0]
-            ),
-          }}
-        />
-      </Head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(
+                props?.schema?.Channels
+                  ? props.schema?.Channels[0]
+                  : props.schema?.Vod[0]
+              ),
+            }}
+          />
+        </Head>
+      ) : null}
+
       <div className="container-fluid">
         <CategoryDetail
           video={video}
