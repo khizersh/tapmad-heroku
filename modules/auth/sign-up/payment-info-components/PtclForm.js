@@ -24,7 +24,6 @@ const PtclForm = ({
   const onChangePTclNumber = (e) => {
     const ptcl = e.target.value;
     if (+ptcl === +ptcl) {
-      setCnic(ptcl);
       hanldePtclNumber(e);
     }
   };
@@ -60,7 +59,6 @@ const PtclForm = ({
             className="form-control border-curve flex-grow-1 w-100"
             placeholder="Enter your PTCL number"
             inputMode="numeric"
-            value={cnic}
             onChange={(e) => onChangePTclNumber(e)}
             pattern="\d*"
           />

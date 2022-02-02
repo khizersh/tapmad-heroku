@@ -219,7 +219,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           } else {
             // for easypaisa and dcb
             if (SignUpState.SelectedMethod?.PaymentId == 5) {
-              if (!details.PtclNo || details.PtclNo.length > 11) {
+              if (!details.PtclNo) {
                 setLoader(false);
                 setDisable(false);
                 return swal({

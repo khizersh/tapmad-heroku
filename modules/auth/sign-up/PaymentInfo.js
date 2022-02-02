@@ -103,7 +103,7 @@ function PaymentInfo(props) {
   function hanldePtclNumber(e) {
     const ptcl = e.target.value;
     if (+ptcl === +ptcl) {
-      if (ptcl?.trim().length == 11) {
+      if (ptcl?.trim().length > 9) {
         updateUserData({ Ptcl: ptcl });
       }
     }
