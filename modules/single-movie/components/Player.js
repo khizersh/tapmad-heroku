@@ -13,20 +13,14 @@ import {
 } from "../../../services/gtm";
 import dynamic from "next/dynamic";
 import ReactJWPlayer from "react-jw-player";
-import RelatedProductCard from "../../../modules/movies/components/RelatedProductCard";
-import {
-  isAuthentictedUser,
-  SEOFriendlySlugsForVideo,
-  verifyURL,
-} from "../../../services/utils";
-import Link from "next/link";
+import { verifyURL } from "../../../services/utils";
 import Head from "next/head";
 var fired = false;
 var fired5percent = false;
 const PSLComponent = dynamic(() =>
   import("../../../components/psl/psl-component")
 );
-
+import { SignUpContext } from "../../../contexts/auth/SignUpContext";
 export default function Player({ movies }) {
   const router = useRouter();
   const [isAutoPlay, setIsAutoPlay] = useState(true);
@@ -38,6 +32,8 @@ export default function Player({ movies }) {
   const [local, setLocal] = useState(null);
   const [playerReady, setPlayerReady] = useState(false);
   const [adsApiCalled, setAdsApiCalled] = useState(false);
+  const { SignUpState } = useContext(SignUpContext);
+
   // const [relatedVideo, setRelatedVideos] = useState([]);
   const [ads, setAds] = useState({
     allow: false,
@@ -156,11 +152,10 @@ export default function Player({ movies }) {
     verifyURL(router, movies.Video.VideoName);
     // await getRelatedChannels();
     if (!adsApiCalled) {
-      const country = await AuthService.getGeoInfo();
       const resp = await DashboardService.getAdData();
       let data;
-      if (country) {
-        if (country.countryCode == "PK") {
+      if (SignUpState) {
+        if (SignUpState?.userCountry?.ShortName == "PK") {
           data = PlayerService.checkAds(resp, "local");
           setLocal(true);
         } else {
