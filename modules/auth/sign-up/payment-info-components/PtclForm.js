@@ -55,8 +55,8 @@ const PtclForm = ({
           />
           <input
             type="text"
-            maxLength="13"
-            minLength="13"
+            maxLength="11"
+            minLength="10"
             className="form-control border-curve flex-grow-1 w-100"
             placeholder="Enter your PTCL number"
             inputMode="numeric"
