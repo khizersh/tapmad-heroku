@@ -1225,3 +1225,15 @@ label {
 }
 
 /* loader css end*/
+
+// Swal button theme color <start>
+.swal-button {
+  background-color: var(--green);
+  box-shadow: none;
+}
+.swal-button:hover,
+.swal-button:focus {
+  background-color: #b1f168 !important;
+  box-shadow: none;
+}
+// Swal button theme color <end>
