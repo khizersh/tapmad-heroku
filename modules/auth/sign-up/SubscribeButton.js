@@ -126,18 +126,21 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       return 0;
     }
     setLoader(false);
-    setDisable(false);
   }
 
   async function SubscribeUser() {
-    if (checkbox) {
+    if (checkbox && !apiCallDisable) {
+      setApiCallDisable(true);
       setDisable(true);
+      setTimeout(() => {
+        setApiCallDisable(false);
+        setDisable(false);
+      }, 4000);
       setLoader(true);
       if (SignUpState?.SelectedPrice?.ProductId) {
         var details = handleRegisterPayload(SignUpState);
         if (!details.MobileNo) {
           setLoader(false);
-          setDisable(false);
           return swal({
             timer: 3000,
             text: "Please enter mobile number",
@@ -147,7 +150,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
         } else {
           if (details.MobileNo.trim().length < 10) {
             setLoader(false);
-            setDisable(false);
             return swal({
               timer: 3000,
               text: "Please enter the 10 digit mobile number",
@@ -165,7 +167,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             details.OperatorId == 100010
           ) {
             setLoader(false);
-            setDisable(false);
             return swal({
               timer: 3000,
               text: "Enter all fields",
@@ -185,7 +186,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           // for other payment methods
           if (!details.OperatorId) {
             setLoader(false);
-            setDisable(false);
             return swal({
               timer: 3000,
               text: "Please select operator",
@@ -210,10 +210,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               var jazzResponse = await AuthService.initialTransactionJazzCash(
                 details
               );
-              setApiCallDisable(true);
-              setTimeout(() => {
-                setApiCallDisable(false);
-              }, 15000);
+
               UBLPayment(jazzResponse);
             }
           } else {
@@ -221,7 +218,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             if (SignUpState.SelectedMethod?.PaymentId == 5) {
               if (!details.PtclNo) {
                 setLoader(false);
-                setDisable(false);
                 return swal({
                   timer: 3000,
                   text: "Please enter valid PTCL number",
@@ -232,12 +228,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
             }
             if (!apiCallDisable) {
               var data = await AuthService.initialTransaction(details);
-              setApiCallDisable(true);
-              setTimeout(() => {
-                setApiCallDisable(false);
-              }, 15000);
+
               setLoader(false);
-              setDisable(false);
               if (data != null) {
                 if (data.responseCode == 0) {
                   swal({ title: data.message, icon: "error", timer: 3000 });
@@ -314,7 +306,6 @@ function SubscribeButtonComponent({ creditCardType, login }) {
               } else {
                 swal({ title: "Something went wrong!", icon: "error" });
                 setLoader(false);
-                setDisable(false);
               }
             }
           }
