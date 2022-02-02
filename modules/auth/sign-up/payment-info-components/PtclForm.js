@@ -53,19 +53,19 @@ const PtclForm = ({
             onChange={(e) => onChange(e)}
             pattern="\d*"
           />
-          <input
-            type="text"
-            maxLength="13"
-            minLength="13"
-            className="form-control border-curve flex-grow-1 w-100"
-            placeholder="Enter your PTCL number"
-            inputMode="numeric"
-            value={cnic}
-            onChange={(e) => onChangePTclNumber(e)}
-            pattern="\d*"
-          />
         </div>
       </div>
+      <input
+        type="text"
+        maxLength="13"
+        minLength="13"
+        className="form-control border-curve flex-grow-1 w-100 mt-3"
+        placeholder="Enter your PTCL number"
+        inputMode="numeric"
+        value={cnic}
+        onChange={(e) => onChangePTclNumber(e)}
+        pattern="\d*"
+      />
     </>
   );
 };
