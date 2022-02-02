@@ -4,11 +4,6 @@ import {
   UPDATE_PAYMENT_METHOD,
   UPDATE_USER_DETAILS,
 } from "../../../contexts/auth/SignUpReducer";
-import {
-  castingIcon,
-  deviceIcon,
-  qualityIcon,
-} from "../../../services/imagesLink";
 import PaymentInfo from "./PaymentInfo";
 
 export default function PaymentMethodDesktop() {
@@ -35,11 +30,7 @@ export default function PaymentMethodDesktop() {
     }
   }, [SignUpState.SelectedMethod]);
 
-  const imageArray = [
-    { Image: qualityIcon, Name: "1080 P" },
-    { Image: deviceIcon, Name: "Devices All" },
-    { Image: castingIcon, Name: "Casting" },
-  ];
+
   return (
     <div className="container">
       <style jsx>
@@ -111,13 +102,22 @@ export default function PaymentMethodDesktop() {
           >
             {CurrentPackage?.ContentDescription}
           </div>
-          <div
-            className="mt-3 highlighted-desc"
-            style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
-            dangerouslySetInnerHTML={{
-              __html: CurrentPackage?.HighlightDescription,
-            }}
-          />
+          {SignUpState.SelectedMethod.PaymentId == 5 ? (
+            <div
+              className="mt-3 highlighted-desc"
+              style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
+            >
+             {SignUpState?.SelectedMethod?.PaymentMethodDescription}
+            </div>
+          ) : (
+            <div
+              className="mt-3 highlighted-desc"
+              style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
+              dangerouslySetInnerHTML={{
+                __html: CurrentPackage?.HighlightDescription,
+              }}
+            />
+          )}
         </div>
         <div className="col-7 border-dotted-left">
           <div className="row">

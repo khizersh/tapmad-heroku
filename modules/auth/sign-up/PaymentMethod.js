@@ -86,13 +86,31 @@ export default function PaymentMethod() {
           : null}
       </div>
       <div className="text-grey">{CurrentPackage?.ContentDescription}</div>
-      <div
+
+      {SignUpState.SelectedMethod.PaymentId == 5 ? (
+        <div
+          className="mt-3 highlighted-desc"
+          style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
+        >
+          {SignUpState?.SelectedMethod?.PaymentMethodDescription}
+        </div>
+      ) : (
+        <div
+          className="mt-3 highlighted-desc"
+          style={{ color: "#FC5656", fontSize: "0.8em", fontWeight: 300 }}
+          dangerouslySetInnerHTML={{
+            __html: CurrentPackage?.HighlightDescription,
+          }}
+        />
+      )}
+
+      {/* <div
         className="mt-3"
         style={{ color: "#FC5656" }}
         dangerouslySetInnerHTML={{
           __html: CurrentPackage?.HighlightDescription,
         }}
-      />
+      /> */}
       <div className="row mt-3">
         <div className="col-12">
           <h3 className="text-base">Payment Options</h3>

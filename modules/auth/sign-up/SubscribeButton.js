@@ -219,12 +219,12 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           } else {
             // for easypaisa and dcb
             if (SignUpState.SelectedMethod?.PaymentId == 5) {
-              if (!details.PtclNo || details.PtclNo.length !== 11) {
+              if (!details.PtclNo || details.PtclNo.length > 11) {
                 setLoader(false);
                 setDisable(false);
                 return swal({
                   timer: 3000,
-                  text: "Please enter PTCL number",
+                  text: "Please enter valid PTCL number",
                   icon: "info",
                   buttons: false,
                 });
