@@ -1227,12 +1227,12 @@ label {
 /* loader css end*/
 
 // Swal button theme color <start>
-.swal-button {
+.swal-button--confirm {
   background-color: var(--green);
   box-shadow: none;
 }
-.swal-button:hover,
-.swal-button:focus {
+.swal-button--confirm:hover,
+.swal-button--confirm:focus {
   background-color: #b1f168 !important;
   box-shadow: none;
 }
