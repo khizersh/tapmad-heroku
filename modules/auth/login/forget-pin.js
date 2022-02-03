@@ -75,8 +75,8 @@ export default function ForgetPin({ updateView }) {
           <div className="form-group">
             <input
               type="text"
-              maxLength="4"
-              minLength="4"
+              maxLength="6"
+              // minLength="4"
               className="form-control border-curve"
               placeholder="Enter OTP"
               onChange={(e) => setUserOtp(e.target.value)}
