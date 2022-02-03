@@ -85,7 +85,6 @@ export async function getServerSideProps(context) {
   let { OriginalMovieId, isChannel, CleanVideoId } = manipulateUrls(
     context.query
   );
-  // console.log("OriginalMovieId : " , OriginalMovieId , CleanVideoId);
 
   var ip = requestIp.getClientIp(context.req);
   try {
@@ -101,18 +100,18 @@ export async function getServerSideProps(context) {
     ip = "39.44.217.70";
   }
 
-  let url = getRelatedChannelsOrVODs(CleanVideoId, isChannel);
+  let url = getRelatedChannelsOrVODs(OriginalMovieId, isChannel);
   const data = await get(url, ip);
 
   if (data != null) {
     if (data?.data?.Video?.IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(
-        OriginalMovieId,
+        CleanVideoId,
         context.resolvedUrl
       );
       return { props: { data: data.data, schema: seo } };
     } else {
-      let seo = await getSEOData(CleanVideoId, context.resolvedUrl);
+      let seo = await getSEOData(OriginalMovieId, context.resolvedUrl);
       return { props: { data: data.data, schema: seo } };
     }
   }
@@ -121,7 +120,6 @@ export async function getServerSideProps(context) {
     props: {
       data: data,
       env: process.env.TAPENV,
-   
     },
   };
 }
