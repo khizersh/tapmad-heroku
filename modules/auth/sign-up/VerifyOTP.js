@@ -119,9 +119,9 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         });
       }
     }
-
     setLoader(false);
   }
+  
   return (
     <div className="text-center desktop-size custom-bg-signup">
       <h3 className="component-title mb-4 text-grey">Enter Your OTP</h3>
@@ -145,8 +145,8 @@ const VerifyOTPComponent = ({ newUser, login }) => {
           placeholder="Enter Your OTP"
           className="form-control border-curve "
           ref={otp}
-          maxLength="4"
-          minLength="4"
+          maxLength="6"
+          // minLength="4"
           inputMode="numeric"
         />
       </div>
