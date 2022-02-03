@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getLocalStorage, setLocalStorage } from "../services/localstorage";
 
 const CookiesAlert = () => {
   const [displayCookies, setDisplayCookies] = useState(true);
+  const [displayElement, setDisplayElement] = useState("none");
   const hideCookies = () => {
     setDisplayCookies(false);
     setLocalStorage("hideCookiesAlert", 1);
   };
+  
+  useEffect(() => {
+    displayCookies &&  setDisplayElement("block")
+  }, [])
+
   return displayCookies ? (
     <>
       <style jsx>
@@ -23,6 +29,7 @@ const CookiesAlert = () => {
             padding: 20px;
             z-index: 999;
             margin-right: 15px;
+            display: ${displayElement};
           }
           .cookies-popup h2 {
             font-size: 1.5em;
