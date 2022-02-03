@@ -32,10 +32,10 @@ const PtclForm = ({
   return (
     <>
       <div className="input-group">
-        <div className="input-group-prepend">
+        <div className="input-group-prepend" style={{alignSelf: "flex-start"}}>
           <span className="payment-icon border-curve">{mobileCode}</span>
         </div>
-        <div className="pl-2 flex-grow-1 flex-shrink-1 gridCol">
+        <div className="pl-2 flex-grow-1 flex-shrink-1 gridCol gridColPtcl">
           <input
             type="text"
             maxLength="10"
@@ -53,19 +53,19 @@ const PtclForm = ({
             onChange={(e) => onChange(e)}
             pattern="\d*"
           />
+          <input
+            type="text"
+            maxLength="13"
+            minLength="13"
+            className="form-control border-curve flex-grow-1 w-100"
+            placeholder="Enter your PTCL number"
+            inputMode="numeric"
+            value={cnic}
+            onChange={(e) => onChangePTclNumber(e)}
+            pattern="\d*"
+          />
         </div>
       </div>
-      <input
-        type="text"
-        maxLength="13"
-        minLength="13"
-        className="form-control border-curve flex-grow-1 w-100 mt-3"
-        placeholder="Enter your PTCL number"
-        inputMode="numeric"
-        value={cnic}
-        onChange={(e) => onChangePTclNumber(e)}
-        pattern="\d*"
-      />
     </>
   );
 };
