@@ -119,9 +119,12 @@ const VerifyOTPComponent = ({ newUser, login }) => {
         });
       }
     }
+
     setLoader(false);
   }
-  
+  useEffect(() => {
+    console.log(SignUpState.SelectedMethod.PaymentId, "SIGN");
+  }, []);
   return (
     <div className="text-center desktop-size custom-bg-signup">
       <h3 className="component-title mb-4 text-grey">Enter Your OTP</h3>
@@ -145,8 +148,8 @@ const VerifyOTPComponent = ({ newUser, login }) => {
           placeholder="Enter Your OTP"
           className="form-control border-curve "
           ref={otp}
-          maxLength="6"
-          // minLength="4"
+          maxLength={SignUpState.SelectedMethod.PaymentId == 5 ? "6" : "4"}
+          minLength="4"
           inputMode="numeric"
         />
       </div>
