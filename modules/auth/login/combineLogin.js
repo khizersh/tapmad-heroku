@@ -52,6 +52,11 @@ function combineLogin({ loginResponse, forgetPin, verifyPin, ip, login }) {
   }
 
   async function loginUser() {
+    setbtnDisabled(true);
+    setTimeout(() => {
+      setbtnDisabled(false)
+    }, 2000);
+
     setLoader(true);
     if (AuthState.CountryCode == "+92" && !CurrentMethod) {
       setLoader(false);
