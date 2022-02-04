@@ -357,8 +357,8 @@ function SubscribeButtonComponent({ creditCardType, login }) {
           icon: "info",
           buttons: false,
         });
-        Cookie.setCookies("userId", data.data.User.UserId);
-        router.push(`/sign-in?number=${details.MobileNo}`);
+        Cookie.setCookies("userId", data.data?.User?.UserId);
+        router.push(`/sign-in?number=${data?.data?.MobileNo}`);
       } else {
         swal({
           timer: 3000,
