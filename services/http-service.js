@@ -6,6 +6,7 @@ const {
   loggingRequest,
 } = require("./apilinks");
 const { Cookie } = require("./cookies");
+const userIp = "182.187.46.22"
 
 async function get(url, ip, cancelToken = null) {
   if (process.env.TAPENV == "local") {
@@ -15,7 +16,8 @@ async function get(url, ip, cancelToken = null) {
   try {
     let headers = {
       "Content-Type": "application/json",
-      "X-Forwarded-For": ip ? ip : "",
+      "X-Forwarded-For": userIp,
+      // "X-Forwarded-For": ip ? ip : "",
     };
     if (cancelToken) {
       headers.cancelToken = cancelToken;
@@ -37,7 +39,8 @@ async function post(url, body, ip, credentialAllowed = false) {
   }
   let headers = {
     "Content-Type": "application/json",
-    "X-Forwarded-For": ip ? ip : "",
+    "X-Forwarded-For": userIp,
+    // "X-Forwarded-For": ip ? ip : "",
     ...body.headers,
   };
   delete body.headers;

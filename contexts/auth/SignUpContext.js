@@ -29,6 +29,7 @@ export default function SignUpProvider({ children }) {
     newUser: false,
     isMobile: false,
     signupRender: false,
+    showPtclForm: false,
   });
 
   useEffect(() => {

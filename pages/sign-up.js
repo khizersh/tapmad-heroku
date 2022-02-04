@@ -2,8 +2,15 @@ import React from "react";
 import Register from "../modules/auth/Register";
 import requestIp from "request-ip";
 import Head from "next/head";
+import { Cookie } from "../services/cookies";
+import { useEffect } from "react";
 
 export default function SignUp(props) {
+ 
+
+  useEffect(() => {
+    Cookie.setCookies('userIp' , props.ip)
+  },[])
   return (
     <div>
       <Head>

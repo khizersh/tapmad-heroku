@@ -122,9 +122,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
 
     setLoader(false);
   }
-  useEffect(() => {
-    console.log(SignUpState.SelectedMethod.PaymentId, "SIGN");
-  }, []);
+
   return (
     <div className="text-center desktop-size custom-bg-signup">
       <h3 className="component-title mb-4 text-grey">Enter Your OTP</h3>

@@ -9,6 +9,7 @@ export const LOGIN_OPERATOR = "LOGIN_OPERATOR";
 export const LOGGED_IN = "LOGGED_IN";
 export const USER_COUNTRY = "USER_COUNTRY";
 export const ALREADY_SIGNEDUP_NUM = "ALREADY_SIGNEDUP_NUM";
+export const SHOW_PTCL_FORM = "SHOW_PTCL_FORM";
 
 export function SignUpReducer(state, action) {
   switch (action.type) {
@@ -28,6 +29,8 @@ export function SignUpReducer(state, action) {
       return { ...state, userCountry: action.data };
     case LOGGED_IN:
       return { ...state, LoggedIn: action.data };
+    case SHOW_PTCL_FORM:
+      return { ...state, showPtclForm: action.data };
     case UPDATE_SUBSCRIBE_RESPONSE:
       return {
         ...state,
