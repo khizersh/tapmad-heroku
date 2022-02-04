@@ -349,7 +349,7 @@ function SubscribeButtonComponent({ creditCardType, login }) {
       }, 1000);
     } else if (data.responseCode == 11) {
       //user already subscribed checking PIN SET
-      if (data.data.User.IsPinSet) {
+      if (data.data?.User?.IsPinSet) {
         swal({
           timer: 3000,
           title: "You are already subscribed!",
