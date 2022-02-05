@@ -43,6 +43,7 @@ const VerifyOTPComponent = ({ newUser, login }) => {
             Platform: "web",
             ProductId: SignUpState.SelectedPrice.ProductId,
             Version: "V1",
+            PtclNo: SignUpState.UserDetails?.PtclNo || "",
           };
           data = await AuthService.paymentProcessTransaction(body);
           SignUpTag(body, data.data);
