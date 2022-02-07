@@ -9,7 +9,6 @@ import { AuthService } from "../../modules/auth/auth.service";
 import InstallMobileApp from "../../modules/game/components/InstallMobileApp";
 import { Cookie } from "../../services/cookies";
 import { SignUpContext } from "../../contexts/auth/SignUpContext";
-// import { SignUpContext } from "../contexts/auth/SignUpContext";
 
 function HeaderBasic({ signout }) {
   const [country, setCountry] = useState("PK");
