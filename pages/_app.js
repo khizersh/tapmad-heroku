@@ -109,7 +109,6 @@ function MyApp({ Component, pageProps }) {
           <meta name="robots" content="noindex" />
         ) : null}
 
-        <link rel="canonical" href={`https://www.tapmad.com${router.asPath}`} />
         <link
           rel="stylesheet"
           type="text/css"
