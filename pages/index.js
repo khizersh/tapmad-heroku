@@ -13,7 +13,7 @@ export default function Home(props) {
     <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        pre
+        <link rel="canonical" href="https://www.tapmad.com" />
         <link rel="manifest" href="/manifest.json" />
         <title>
           Watch Live TV - Live PSL, Sports, EPL, Movies Online - Tapmad TV

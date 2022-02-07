@@ -48,6 +48,7 @@ const Footer = dynamic(() => import("../components/Footer"));
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
   useLayoutEffect(() => {
     UserSessions();
     addScriptCodeInDom(`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -108,7 +109,6 @@ function MyApp({ Component, pageProps }) {
           <meta name="robots" content="noindex" />
         ) : null}
 
-        <link rel="canonical" href="https://www.tapmad.com" />
         <link
           rel="stylesheet"
           type="text/css"

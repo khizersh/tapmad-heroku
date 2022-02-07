@@ -8,7 +8,7 @@ export default function ShowsPage(props) {
   return (
     <div>
       <Head>
-        <title>Watch Dramas & TV Shows Online | Tapmad TV</title>
+        <title>Watch Dramas &amp; TV Shows Online | Tapmad TV</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://wwww.tapmad.com/shows" />
