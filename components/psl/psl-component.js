@@ -168,12 +168,17 @@ export default memo(function PSLComponent({ channel, movie }) {
     // Schedule tab <start>
     else if (selectedTab == 2) {
       return (
-        <Image
-          src="/schedule-web-min.jpg"
-          className="mt-4"
-          width="1122"
-          height="1597"
-        />
+        <picture className="mt-4 d-block">
+          <source media="(min-width:641px)" srcset="/schedule2.jpg" />
+          <source media="(max-width:640px)" srcset="/schedule2-mobile.jpg" />
+          <img
+            src="/scheule2.jpg"
+            alt="HBL PSL Schedule"
+            width={1200}
+            height={800}
+            className="img-fluid"
+          />
+        </picture>
       );
     }
     // Schedule tab <end>
@@ -228,8 +233,8 @@ export default memo(function PSLComponent({ channel, movie }) {
                     return <></>;
                   } else if (tab.ChatOrder == 2 && !channel.IsChat) {
                     return <></>;
-                    } else if (tab.ChatOrder == 4 && !Event_key) {
-                      return <></>;
+                  } else if (tab.ChatOrder == 4 && !Event_key) {
+                    return <></>;
                   } else
                     return (
                       <Tab

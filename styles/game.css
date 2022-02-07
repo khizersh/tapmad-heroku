@@ -16,7 +16,7 @@ a:focus {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #121117;
+  background: #121117;  
 }
 ::-webkit-scrollbar-thumb {
   background: #222;
