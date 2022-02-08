@@ -91,7 +91,7 @@ export async function getServerSideProps(context) {
   if (data != null) {
     if (data?.data?.Video?.IsVideoChannel) {
       let seo = await getSEODataForLiveChannel(
-        CleanVideoId,
+        OriginalMovieId,
         context.resolvedUrl
       );
       return { props: { data: data.data, schema: seo } };
