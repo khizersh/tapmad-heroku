@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "../../contexts/MainContext";
-// import "./Header.css";
 import { tapmadCoin, tapmadLogo, tapmadNews } from "../../services/imagesLink";
-// import tapLogo from "../../public/icons/tm-logo.png";
 import withSignout from "../../modules/auth/signout/SignoutHOC";
 import { AuthService } from "../../modules/auth/auth.service";
 import InstallMobileApp from "../../modules/game/components/InstallMobileApp";
