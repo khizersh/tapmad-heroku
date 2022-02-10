@@ -21,24 +21,19 @@ export default function CategoryDetail({
 
   const [dropdown, toggleDropdown] = useState("");
   const [loader, setLoader] = useState(false);
+  const [mount, setMount] = useState(false);
 
   // const [dropdownDisplay, toggleDropdownDisplay] = useState(false);
   // const [filterDropdownData, toggleFilterDropdownData] = useState(null);
 
-  const setSearchResult = (e) => {
-    toggleDropdown(e.target.textContent);
-    toggleFilterDropdownData(null);
-  };
-
-  const debounceValue = Debounce(dropdown, 800);
-
-  useEffect(async () => {
-    verifyURL(router, videoList[0].SectionName, video.VideoName);
+  if (!mount) {
+    setMount(true);
     if (
       videoList.length > 0 &&
       videoList[0].Videos &&
       videoList[0].Videos.length > 0
     ) {
+      verifyURL(router, videoList[0].SectionName, video?.VideoName);
       setFilteredList(videoList[0].Videos);
       let vid;
       if (syno) {
@@ -50,7 +45,15 @@ export default function CategoryDetail({
       setSlug(slugPlay);
       ContentViewed(video);
     }
-  }, [video, router]);
+  }
+
+  const setSearchResult = (e) => {
+    toggleDropdown(e.target.textContent);
+    toggleFilterDropdownData(null);
+  };
+
+  const debounceValue = Debounce(dropdown, 800);
+
 
   useEffect(async () => {
     setLoader(true);
@@ -73,6 +76,7 @@ export default function CategoryDetail({
     }
   }, [debounceValue]);
 
+
   // Old ChangeSearch Handler
   // const onChangeSearch = (event) => {
   //   let searchText = event.target.value?.toLowerCase();
@@ -92,6 +96,26 @@ export default function CategoryDetail({
     const schval = event.target.value;
     toggleDropdown(schval);
   };
+
+  // useEffect(async () => {
+  //   verifyURL(router, videoList[0].SectionName, video.VideoName);
+  //   if (
+  //     videoList.length > 0 &&
+  //     videoList[0].Videos &&
+  //     videoList[0].Videos.length > 0
+  //   ) {
+  //     setFilteredList(videoList[0].Videos);
+  //     let vid;
+  //     if (syno) {
+  //       vid = video;
+  //     } else {
+  //       vid = videoList[0].Videos[videoList[0].Videos.length - 1];
+  //     }
+  //     let slugPlay = SEOFriendlySlugsForWatch(vid);
+  //     setSlug(slugPlay);
+  //     ContentViewed(video);
+  //   }
+  // }, [video, router]);
 
   return (
     <>
@@ -233,7 +257,16 @@ export default function CategoryDetail({
         ""
       )}
 
-      {loader ? (
+      {!filteredList.length ? (
+        videoList[0].Videos.map((vid, i) => {
+          let type = null;
+          if (!vid.IsVideoFree) {
+            type = vid.PackageName ?? null;
+          }
+          return <Card key={i} video={vid} type={type} />;
+          // return <Card key={i} video={vid} type={type} />;
+        })
+      ) : loader ? (
         <div className="text-center mt-3">
           <div className="loader-5 center">
             <span></span>
@@ -256,6 +289,7 @@ export default function CategoryDetail({
       ) : (
         <p className="text-center mt-3">No record found!</p>
       )}
+      {/* {} */}
     </>
   );
 }
