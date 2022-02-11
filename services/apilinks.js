@@ -88,9 +88,14 @@ export const getMoviesWithPagination = (from, to) => {
 export const getRelatedChannelsOrVODs = (videoId, vidChannel) => {
   return `${BASEURLAPP}api/getAllRelatedChannelsOrVODs/V1/en/web/${videoId}/${vidChannel}`;
 };
+// export const getFeaturedHomepageWithRE = (from, to) => {
+//   return (
+//     BASEURLAPP + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`
+//   );
+// };
 export const getFeaturedHomepageWithRE = (from, to) => {
   return (
-    BASEURLAPP + `api/getFeaturedHomePageWithRE/5/${from}/${to - from}/0/100`
+    BASEURLAPP + `api/getHomeFeaturedPageWithRE/5/${from}/${to - from}/0/100`
   );
 };
 export const getChannelsWithPagination = (from, to) => {
