@@ -5,7 +5,7 @@ const TermsAndCondition = () => {
     <div>
       <h4>Tapmad Terms and Conditions</h4>
       <p>Last updated: 9 Sep 2021</p>
-      
+
       <p>
         Please read these Terms and Conditions carefully before using the
         https://www.tapmad.com/ website and the Tapmad mobile application
@@ -66,6 +66,13 @@ const TermsAndCondition = () => {
         Terms at any time. If a revision is material we will try to provide at
         least 30 days' notice prior to any new terms taking effect. What
         constitutes a material change will be determined at our sole discretion.
+      </p>
+      <h4>Cancelation</h4>
+      <p>
+        When a user unsubscribes, the subscription will stop from that day.
+        <br />
+        In-case of a user unsubscribing before the next charge, the remaining
+        balance amount will not be refunded.
       </p>
       <h4>Contact Us </h4>
       <p>If you have any questions about these Terms, please contact us</p>
